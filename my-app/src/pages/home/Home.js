@@ -1,7 +1,6 @@
 import React from 'react';
-import logo from '../Logo.webp';
-import fakeZeitung from '../Fakezeitung_Logo.webp'
-import '../App.css';
+import fakeZeitung from '../.././img/Fakezeitung_Logo.webp'
+
 
 const Home = () => {
     return(

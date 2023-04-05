@@ -1,5 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
-import logo from '../Logo.webp'
+import logo from '.././img/Logo.webp'
 import '../App.css';
 const Layout = () => {
   return (
