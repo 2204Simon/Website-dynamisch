@@ -1,3 +1,5 @@
+import '../App.css';
+
 const Blogs = () => {
     return <h1>Blog Articles</h1>;
   };

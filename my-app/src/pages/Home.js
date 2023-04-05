@@ -6,37 +6,6 @@ import '../App.css';
 const Home = () => {
     return(
       <div className="App">
-        <header id="zumSeitenanfang" className="header">
-          <p></p>
-          <div className="Logo">
-            <a href="index.html">
-              <img src={logo} alt="Logo" className="logo" width="100" height="100" />
-            </a>
-          </div>
-          <nav>
-            <div className="navigation">
-              <input type="checkbox" className="toggle-menu" />
-              <div className="hamburger"></div>
-              <ul className="menu">
-                <li>
-                  <a className="active" href="index.html">Home</a>
-                </li>
-                <li>
-                  <a href="Produkte.html">Produkte</a>
-                </li>
-                <li>
-                  <a href="Bestellung.html">Bestellung</a>
-                </li>
-                <li>
-                  <a href="Unsere_Geschichte.html">Unsere Geschichte</a>
-                </li>
-                <li>
-                  <a href="Kontakt.html">Kontakt</a>
-                </li>
-              </ul>
-            </div>
-          </nav>
-        </header>
         <main className='DunklerHintergrund'>
           <div className="Anfangssatz">
             <h2>Stelle dir dein perfektes Frühstück zusammen</h2>
@@ -55,17 +24,6 @@ const Home = () => {
           </div>
          
         </main>
-        <footer>
-            <div className="footer">
-              <a href="#zumSeitenanfang">zum Seitenanfang</a>
-              <a href="Impressum.html">Impressum</a>
-              <a href="Datenschutzerklärung.html">Datenschutzerklärung</a>
-              <div className="footer-content">
-                <p>copyright &copy;2022 delivery breakfast
-                </p>
-              </div>
-            </div>
-          </footer>
       </div>
     );
   }

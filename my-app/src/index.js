@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Blogs from "./pages/Blogs";
 import Contact from "./pages/Contact";
 import NoPage from "./pages/NoPage";
+import './App.css';
 
 export default function App() {
   return (
@@ -12,8 +13,10 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="Produkte.html" element={<Blogs />} />
-          <Route path="contact" element={<Contact />} />
+          <Route path="Produkte" element={<Blogs />} />
+          <Route path="Bestellung" element={<Blogs />} />
+          <Route path="Unsere Geschichte" element={<Blogs />} />
+          <Route path="Kontakt" element={<Blogs />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
