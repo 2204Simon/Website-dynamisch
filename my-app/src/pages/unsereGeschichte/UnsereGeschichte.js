@@ -1,9 +1,7 @@
 import React from "react";
 
-function UnsereGeschiche() {
-    return (
-      <p>Unsere Geschichte</p>
-    );
-  }
-  
-  export default UnsereGeschiche;
+function UnserGeschichte() {
+  return <p>UnserGeschichte</p>;
+}
+
+export default UnserGeschichte;
