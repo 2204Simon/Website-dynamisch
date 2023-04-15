@@ -8,6 +8,7 @@ export const MainContainer = styled.div`
 
   h1 {
     text-align: center;
+    color: #000;
   }
 
   ul {
@@ -21,6 +22,14 @@ export const MainContainer = styled.div`
 
       svg {
         margin-right: 0.5rem;
+      }
+
+      a {
+        color: #aa7d03;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }
@@ -37,11 +46,13 @@ export const ContactContainer = styled.div`
 
   h2 {
     text-align: center;
+    color: #000;
   }
 
   p {
     text-align: center;
     margin-bottom: 1rem;
+    color: #aa7d03;
   }
 
   form {
@@ -54,6 +65,7 @@ export const ContactContainer = styled.div`
 export const FormLabel = styled.label`
   display: block;
   margin-bottom: 1rem;
+  color: #aa7d03;
 `;
 
 export const FormInput = styled.input`
@@ -74,7 +86,7 @@ export const FormTextArea = styled.textarea`
 `;
 
 export const FormButton = styled.button`
-  background-color: #2d9cdb;
+  background-color: #aa7d03;
   color: #fff;
   padding: 0.5rem 1rem;
   border: none;
@@ -89,12 +101,20 @@ export const ContactList = styled.ul`
 `;
 
 export const ContactListItem = styled.li`
-  display: flex;
+  display: center;
   align-items: center;
   margin-bottom: 1rem;
 
   svg {
     margin-right: 0.5rem;
+  }
+
+  a {
+    color: #aa7d03;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
 
@@ -103,6 +123,7 @@ export const MapContainer = styled.div`
   padding-bottom: 56.25%;
   height: 0;
   overflow: hidden;
+  border-radius: 15px;
 
   iframe {
     position: absolute;
@@ -112,7 +133,6 @@ export const MapContainer = styled.div`
     height: 100%;
   }
 `;
-
 function ContactMap(): JSX.Element {
   return (
     <MapContainer>
