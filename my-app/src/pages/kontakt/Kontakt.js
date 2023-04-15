@@ -27,16 +27,16 @@ function Kontakt(): JSX.Element {
     <MainContainer>
       <h1>Kontakt</h1>
       <ContactList>
-        <ContactListItem>
+        <ContactListItem style={{ color: "#aa7d03" }}>
           <Envelope size={24} />{" "}
           <a href="mailto:delivery-breakfast@outlook.de">
             delivery-breakfast@outlook.de
           </a>
         </ContactListItem>
-        <ContactListItem>
+        <ContactListItem style={{ color: "#aa7d03" }}>
           <Phone size={24} /> <a href="tel:+49123456789">0 123 456789</a>
         </ContactListItem>
-        <ContactListItem>
+        <ContactListItem style={{ color: "#aa7d03" }}>
           <MapPin size={24} /> Frühstücksstr. 20, 89518 Frühhausen
         </ContactListItem>
       </ContactList>
