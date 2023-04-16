@@ -21,7 +21,7 @@ export const Image = styled.img`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
-export const Price = styled.span`
+export const Price = styled.p`
   font-size: 28px;
   font-weight: bold;
   margin-right: 16px;

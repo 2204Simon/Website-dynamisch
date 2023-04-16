@@ -42,16 +42,6 @@ const Layout = () => {
         </nav>
       </header>
       <Outlet />
-      <footer>
-        <div className="footer">
-          <a href="#zumSeitenanfang">zum Seitenanfang</a>
-          <a href="Impressum.html">Impressum</a>
-          <a href="Datenschutzerklärung.html">Datenschutzerklärung</a>
-          <div className="footer-content">
-            <p>copyright &copy;2022 delivery breakfast</p>
-          </div>
-        </div>
-      </footer>
     </>
   );
 };
