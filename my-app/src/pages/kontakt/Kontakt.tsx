@@ -1,4 +1,5 @@
 import React, { useState, FormEvent, ChangeEvent } from "react";
+
 import { MapPin, Phone, Envelope } from "phosphor-react";
 import {
   MainContainer,
@@ -62,12 +63,14 @@ function Kontakt(): JSX.Element {
               type="email"
               value={email}
               onChange={handleEmailChange}
+
               required
             />
           </FormLabel>
           <FormLabel>
             Nachricht:
             <FormTextArea value={message} onChange={handleMessageChange} />
+
           </FormLabel>
           <FormButton type="submit">Anmelden</FormButton>
         </form>
