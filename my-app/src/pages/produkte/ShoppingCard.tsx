@@ -10,8 +10,7 @@ import {
   //styles,
 } from "./styles/ShoppingCard.styles";
 import Logo from "../../img/Logo.webp";
-import { BlackButton } from "../general/button";
-import { log } from "console";
+import { BlackColorButton } from "../general/button";
 
 interface ShoppingCardProps {
   image: string;
@@ -72,9 +71,10 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
             onChange={handleQuantityChange}
           />
         </Quantity>
-        <button onClick={() => AddToCart(title, image, price, quantity)}>
-          Zum Warenkorb hinzufügen
-        </button>
+        <BlackColorButton
+          onClick={() => AddToCart(title, image, price, quantity)}
+          caption="Zum Warenkorb hinzufügen"
+        />
       </Details>
     </Container>
   );
