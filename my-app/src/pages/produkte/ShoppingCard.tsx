@@ -7,10 +7,11 @@ import {
   Quantity,
   QuantityInput,
   Title,
-  //styles,
 } from "./styles/ShoppingCard.styles";
 import Logo from "../../img/Logo.webp";
 import { BlackColorButton } from "../general/button";
+
+export let CartArray: TestArray = [];
 
 interface ShoppingCardProps {
   image: string;
@@ -26,7 +27,6 @@ interface TestArrayItem {
 }
 
 type TestArray = TestArrayItem[];
-export const CartArray: TestArray = [];
 
 const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
   const [quantity, setQuantity] = useState<number>(0);
@@ -41,14 +41,13 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
     price: number,
     anzahl: number
   ): void {
-    console.log("string");
+    setQuantity(0);
     CartArray.push({
       anzahl: anzahl,
       preis: price,
       logo: logo,
       produktname: productname,
     });
-    console.log(CartArray);
     // add logic to add item to cart
   }
 
@@ -58,7 +57,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
         {/* <Image src={Logo} alt="Product" /> */}
       </ImageContainer>
       <Details>
-        <h2>{title}</h2>
+        <Title>{title}</Title>
         <Price>Price: {price} €</Price>
         <Quantity>
           <label htmlFor="quantity">Quantity:</label>

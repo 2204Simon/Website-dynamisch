@@ -5,44 +5,44 @@ import {
   SideBarWrapper,
   BestellungsWrapper,
 } from "./stylesBestellung/Bestellung.styles";
-import Logo from "../../img/Logo.webp";
+import { CartArray } from "../produkte/ShoppingCard";
+import React from "react";
 
-// type testArray = [
-//   { anzahl: Number; preis: Number; logo: String; produktname: String }
-// ];
-
-const testArray = [
-  { anzahl: 1, preis: 100, logo: Logo, produktname: "peace out" },
-  { anzahl: 1, preis: 100, logo: Logo, produktname: "pasdf out" },
-  { anzahl: 1, preis: 100, logo: Logo, produktname: "pasdf out" },
-  { anzahl: 1, preis: 100, logo: Logo, produktname: "pasdf out" },
-  { anzahl: 1, preis: 100, logo: Logo, produktname: "pasdf out" },
-  { anzahl: 1, preis: 100, logo: Logo, produktname: "pasdf out" },
-  { anzahl: 1, preis: 100, logo: Logo, produktname: "pasdf out" },
-  { anzahl: 1, preis: 100, logo: Logo, produktname: "pasdf out" },
-  { anzahl: 1, preis: 100, logo: Logo, produktname: "pasdf out" },
-];
-
-function test(): void {
-  console.log("hello World");
-}
 function WarenkorbSeite(): JSX.Element {
+  const [sumPrice, setSumPrice] = React.useState(0);
+  const [copieCardArray, setCopieCardArray] = React.useState(CartArray);
+  React.useEffect(() => {
+    let total = 0;
+    CartArray.forEach(item => {
+      total += item.preis;
+    });
+    setSumPrice(total);
+    console.log("es wird gerendert");
+  }, [copieCardArray.length]);
+
+  const removeItemFromCart = (itemIndex: number) => {
+    const newCartArray = [...copieCardArray];
+    newCartArray.splice(itemIndex, 1);
+    setCopieCardArray(newCartArray);
+    console.log("mew Array", copieCardArray);
+  };
+
   return (
     <WarenkorbWrapper>
       <BestellungsWrapper>
-        {testArray.map((item, index) => (
+        {copieCardArray.map((item, index) => (
           <Warenkorb
             key={index}
             image={item.logo}
             price={item.preis}
-            onRemove={test}
+            onRemove={() => removeItemFromCart(index)}
             productName={item.produktname}
             count={item.anzahl}
           />
         ))}
       </BestellungsWrapper>
       <SideBarWrapper>
-        <SideBarBuy produktAnzahl={5} price={4.99} />
+        <SideBarBuy produktAnzahl={CartArray.length} price={sumPrice} />
       </SideBarWrapper>
     </WarenkorbWrapper>
   );
