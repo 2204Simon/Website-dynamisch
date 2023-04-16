@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from "react";
+import React, { useState, FormEvent, ChangeEvent } from "react";
 import { MapPin, Phone, Envelope } from "phosphor-react";
 import {
   MainContainer,
@@ -21,6 +21,14 @@ function Kontakt(): JSX.Element {
     console.log(`Danke für Ihre Anmeldung, ${email}!`);
     console.log(`Nachricht: ${message}`);
     // Hier könntest du den Code hinzufügen, der das Formular an deinen Server sendet
+  }
+
+  function handleEmailChange(event: ChangeEvent<HTMLInputElement>): void {
+    setEmail(event.target.value);
+  }
+
+  function handleMessageChange(event: ChangeEvent<HTMLTextAreaElement>): void {
+    setMessage(event.target.value);
   }
 
   return (
@@ -53,16 +61,13 @@ function Kontakt(): JSX.Element {
             <FormInput
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleEmailChange}
               required
             />
           </FormLabel>
           <FormLabel>
             Nachricht:
-            <FormTextArea
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-            />
+            <FormTextArea value={message} onChange={handleMessageChange} />
           </FormLabel>
           <FormButton type="submit">Anmelden</FormButton>
         </form>
