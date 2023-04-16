@@ -10,8 +10,8 @@ import {
   FormLabel,
   ContactList,
   ContactListItem,
-  ContactMap,
 } from "./styles/Kontakt.styles";
+import { ContactMap } from "./Map";
 
 function Kontakt(): JSX.Element {
   const [email, setEmail] = useState("");
@@ -63,14 +63,12 @@ function Kontakt(): JSX.Element {
               type="email"
               value={email}
               onChange={handleEmailChange}
-
               required
             />
           </FormLabel>
           <FormLabel>
             Nachricht:
             <FormTextArea value={message} onChange={handleMessageChange} />
-
           </FormLabel>
           <FormButton type="submit">Anmelden</FormButton>
         </form>
