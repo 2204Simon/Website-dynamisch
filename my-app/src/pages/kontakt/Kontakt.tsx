@@ -20,7 +20,7 @@ function Kontakt(): JSX.Element {
     event.preventDefault();
     console.log(`Danke für Ihre Anmeldung, ${email}!`);
     console.log(`Nachricht: ${message}`);
-    // Hier könntest du den Code hinzufügen, der das Formular an deinen Server sendet
+    // Hier könnten wir den Code hinzufügen, der das Formular an Server sendet
   }
 
   return (
