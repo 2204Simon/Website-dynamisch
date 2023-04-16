@@ -7,3 +7,7 @@ export const BlackButton = ({ caption }) => {
 export const OrangeButton = ({ caption }) => {
   return <Button className="white-orange">{caption}</Button>;
 };
+
+export const BlackColorButton = ({ caption }) => {
+  return <Button className="black-color white-orange">{caption}</Button>;
+};

@@ -24,6 +24,10 @@ export const Button = styled.button`
     }
   }
 
+  &.black-color {
+    color: black;
+  }
+
   &:before {
     content: "";
     display: block;
