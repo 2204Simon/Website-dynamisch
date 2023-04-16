@@ -8,21 +8,25 @@ import UnsereGeschichte from "./pages/unsereGeschichte/UnsereGeschichte";
 import NoPage from "./pages/NoPage";
 import Bestellung from "./pages/bestellung/Bestellung";
 import "./App.css";
+import Footer from "./pages/Footer";
 
 export default function App(): JSX.Element {
   return (
     <React.StrictMode>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="Produkte" element={<Produkte />} />
-            <Route path="Bestellung" element={<Bestellung />} />
-            <Route path="Unsere Geschichte" element={<UnsereGeschichte />} />
-            <Route path="Kontakt" element={<Kontakt />} />
-            <Route path="*" element={<NoPage />} />
-          </Route>
-        </Routes>
+        <div id="top">
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="Produkte" element={<Produkte />} />
+              <Route path="Bestellung" element={<Bestellung />} />
+              <Route path="Unsere Geschichte" element={<UnsereGeschichte />} />
+              <Route path="Kontakt" element={<Kontakt />} />
+              <Route path="*" element={<NoPage />} />
+            </Route>
+          </Routes>
+          <Footer />
+        </div>
       </BrowserRouter>
     </React.StrictMode>
   );
