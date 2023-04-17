@@ -27,22 +27,22 @@ function Footer(): JSX.Element {
           </ul>
         </div>
         <div className="social-media">
-          <a href="https://twitter.com">
+          <a href="https://twitter.com/deliverybreak">
             <TwitterLogo size={24} />
           </a>
-          <a href="https://facebook.com">
+          <a href="https://www.facebook.com/profile.php?id=100091669221469&sk=about">
             <FacebookLogo size={24} />
           </a>
           <a href="https://www.instagram.com/delivery_breakfast_">
             <InstagramLogo size={24} />
           </a>
-          <a href="">
+          <a href="https://www.tiktok.com/@delivery_breakfast?is_from_webapp=1&sender_device=pc">
             <TiktokLogo size={24} />
           </a>
-          <a href="">
+          <a href="https://t.snapchat.com/E0HWtcis">
             <SnapchatLogo size={24} />
           </a>
-          <a href="">
+          <a href="https://www.linkedin.com/in/delivery-breakfast-723b46272">
             <LinkedinLogo size={24} />
           </a>
           <li>
