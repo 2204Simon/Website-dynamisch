@@ -1,6 +1,13 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { TwitterLogo, FacebookLogo, InstagramLogo } from "phosphor-react";
+import {
+  TwitterLogo,
+  FacebookLogo,
+  InstagramLogo,
+  TiktokLogo,
+  SnapchatLogo,
+  LinkedinLogo,
+} from "phosphor-react";
 
 function Footer(): JSX.Element {
   return (
@@ -28,6 +35,15 @@ function Footer(): JSX.Element {
           </a>
           <a href="https://www.instagram.com/delivery_breakfast_">
             <InstagramLogo size={24} />
+          </a>
+          <a href="">
+            <TiktokLogo size={24} />
+          </a>
+          <a href="">
+            <SnapchatLogo size={24} />
+          </a>
+          <a href="">
+            <LinkedinLogo size={24} />
           </a>
           <li>
             <Link to="/"> &copy; delivery-breakfast 2023</Link>
