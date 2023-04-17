@@ -10,7 +10,7 @@ import React from "react";
 
 function WarenkorbSeite(): JSX.Element {
   const [sumPrice, setSumPrice] = React.useState(0);
-  const [copieCardArray, setCopieCardArray] = React.useState(CartArray);
+  
   React.useEffect(() => {
     let total = 0;
     CartArray.forEach(item => {
@@ -18,12 +18,12 @@ function WarenkorbSeite(): JSX.Element {
     });
     setSumPrice(total);
     console.log("es wird gerendert");
-  }, [copieCardArray.length]);
+  }, []);
 
   return (
     <WarenkorbWrapper>
       <BestellungsWrapper>
-        {copieCardArray.map((item, index) => (
+        {CartArray.map((item, index) => (
           <Warenkorb
             key={index}
             image={item.logo}
