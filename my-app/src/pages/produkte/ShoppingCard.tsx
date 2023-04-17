@@ -13,6 +13,12 @@ import { BlackColorButton } from "../general/button";
 
 export let CartArray: TestArray = [];
 
+export const removeItemFromCart = (itemIndex: number) => {
+  const newCartArray = [...CartArray];
+  newCartArray.splice(itemIndex, 1);
+  CartArray = newCartArray;
+};
+
 interface ShoppingCardProps {
   image: string;
   title: string;
@@ -42,32 +48,37 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
     anzahl: number
   ): void {
     //setQuantity(0);
-    if (CartArray && CartArray.length === 0) {
-      //Wird nur ausgeführt, wenn Array leer ist.
-      CartArray.push({
-        anzahl: anzahl,
-        preis: price,
-        logo: logo,
-        produktname: productname,
-      });
-      console.log(CartArray);
+    if (quantity === 0) {
+      //PushUp Nachricht: "Bitte geben sie die Anzahl ein!"
+      console.log("Bitte geben sie die Anzahl ein");
     } else {
-      //Wird ausgeführt wenn Array nicht leer ist
-      for (let i = 0; i < CartArray.length; i++) {
-        if (CartArray[i].produktname === productname) {
-          //Wird ausgeführt, wenn Produkt bereits im Warenkorb ist
-          CartArray[i].anzahl = anzahl;
-          console.log(CartArray);
-          return;
+      if (CartArray && CartArray.length === 0) {
+        //Wird nur ausgeführt, wenn Array leer ist.
+        CartArray.push({
+          anzahl: anzahl,
+          preis: price,
+          logo: logo,
+          produktname: productname,
+        });
+        console.log(CartArray);
+      } else {
+        //Wird ausgeführt wenn Array nicht leer ist
+        for (let i = 0; i < CartArray.length; i++) {
+          if (CartArray[i].produktname === productname) {
+            //Wird ausgeführt, wenn Produkt bereits im Warenkorb ist
+            CartArray[i].anzahl = anzahl;
+            console.log(CartArray);
+            return;
+          }
         }
+        CartArray.push({
+          anzahl: anzahl,
+          preis: price,
+          logo: logo,
+          produktname: productname,
+        });
+        console.log(CartArray);
       }
-      CartArray.push({
-        anzahl: anzahl,
-        preis: price,
-        logo: logo,
-        produktname: productname,
-      });
-      console.log(CartArray);
     }
   }
 

@@ -5,7 +5,7 @@ import {
   SideBarWrapper,
   BestellungsWrapper,
 } from "./stylesBestellung/Bestellung.styles";
-import { CartArray } from "../produkte/ShoppingCard";
+import { CartArray, removeItemFromCart } from "../produkte/ShoppingCard";
 import React from "react";
 
 function WarenkorbSeite(): JSX.Element {
@@ -19,13 +19,6 @@ function WarenkorbSeite(): JSX.Element {
     setSumPrice(total);
     console.log("es wird gerendert");
   }, [copieCardArray.length]);
-
-  const removeItemFromCart = (itemIndex: number) => {
-    const newCartArray = [...copieCardArray];
-    newCartArray.splice(itemIndex, 1);
-    setCopieCardArray(newCartArray);
-    console.log("mew Array", copieCardArray);
-  };
 
   return (
     <WarenkorbWrapper>
