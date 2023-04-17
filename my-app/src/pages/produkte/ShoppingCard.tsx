@@ -50,6 +50,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
     //setQuantity(0);
     if (quantity === 0) {
       //PushUp Nachricht: "Bitte geben sie die Anzahl ein!"
+      alert("Bitte geben Sie die Anzahl ein!");
       console.log("Bitte geben sie die Anzahl ein");
     } else {
       if (CartArray && CartArray.length === 0) {
