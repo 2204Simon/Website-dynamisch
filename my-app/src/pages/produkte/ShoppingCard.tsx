@@ -7,6 +7,7 @@ import {
   Quantity,
   QuantityInput,
   Title,
+  Image,
 } from "./styles/ShoppingCard.styles";
 import Logo from "../../img/Logo.webp";
 import { BlackColorButton } from "../general/button";
@@ -19,6 +20,7 @@ export const removeItemFromCart = (itemIndex: number) => {
   const newCartArray = [...CartArray];
   newCartArray.splice(itemIndex, 1);
   CartArray = newCartArray;
+  console.log(CartArray);
 };
 
 interface ShoppingCardProps {
@@ -88,7 +90,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
   return (
     <Container>
       <ImageContainer>
-        {/* <Image src={Logo} alt="Product" /> */}
+        <Image src={image} alt="product" />
       </ImageContainer>
       <Details>
         <Title>{title}</Title>

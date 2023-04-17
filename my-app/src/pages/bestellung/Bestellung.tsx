@@ -10,17 +10,29 @@ import React from "react";
 
 function WarenkorbSeite(): JSX.Element {
   const [sumPrice, setSumPrice] = React.useState(0);
-  
+
   React.useEffect(() => {
     let total = 0;
-    CartArray.forEach(item => {
-      total += item.preis;
-    });
+    if (CartArray && CartArray.length > 0) {
+      CartArray.forEach(item => {
+        total += item.preis * item.anzahl;
+      });
+    }
     setSumPrice(total);
     console.log("es wird gerendert");
   }, []);
 
-  return (
+  const handleRemoveItem = (itemIndex: number) => {
+    removeItemFromCart(itemIndex);
+    setSumPrice(
+      prevPrice =>
+        prevPrice - CartArray[itemIndex]?.preis * CartArray[itemIndex]?.anzahl
+    );
+  };
+
+  return CartArray.length === 0 ? (
+    <h2 style={{ color: "black" }}>Sie haben noch nichts im Warenkorb</h2>
+  ) : (
     <WarenkorbWrapper>
       <BestellungsWrapper>
         {CartArray.map((item, index) => (
@@ -28,7 +40,7 @@ function WarenkorbSeite(): JSX.Element {
             key={index}
             image={item.logo}
             price={item.preis}
-            onRemove={() => removeItemFromCart(index)}
+            onRemove={() => handleRemoveItem(index)} // pass the item index to handleRemoveItem
             productName={item.produktname}
             count={item.anzahl}
           />
