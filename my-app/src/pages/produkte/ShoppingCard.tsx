@@ -10,6 +10,8 @@ import {
 } from "./styles/ShoppingCard.styles";
 import Logo from "../../img/Logo.webp";
 import { BlackColorButton } from "../general/button";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export let CartArray: TestArray = [];
 
@@ -50,36 +52,36 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
     //setQuantity(0);
     if (quantity === 0) {
       //PushUp Nachricht: "Bitte geben sie die Anzahl ein!"
-      alert("Bitte geben Sie die Anzahl ein!");
+      toast.error("Bitte geben Sie die Anzahl ein!", {
+        position: toast.POSITION.TOP_LEFT,
+        autoClose: 2000, // Zeit in Millisekunden, wie lange die Nachricht sichtbar sein soll
+      });
       console.log("Bitte geben sie die Anzahl ein");
     } else {
-      if (CartArray && CartArray.length === 0) {
-        //Wird nur ausgeführt, wenn Array leer ist.
-        CartArray.push({
-          anzahl: anzahl,
-          preis: price,
-          logo: logo,
-          produktname: productname,
-        });
-        console.log(CartArray);
-      } else {
-        //Wird ausgeführt wenn Array nicht leer ist
-        for (let i = 0; i < CartArray.length; i++) {
-          if (CartArray[i].produktname === productname) {
-            //Wird ausgeführt, wenn Produkt bereits im Warenkorb ist
-            CartArray[i].anzahl = anzahl;
-            console.log(CartArray);
-            return;
-          }
+      //Wird ausgeführt wenn Array nicht leer ist
+      for (let i = 0; i < CartArray.length; i++) {
+        if (CartArray[i].produktname === productname) {
+          //Wird ausgeführt, wenn Produkt bereits im Warenkorb ist
+          CartArray[i].anzahl += anzahl;
+          toast.success("Artikel wurde in den Einkaufswagen gelegt!", {
+            position: toast.POSITION.TOP_LEFT,
+            autoClose: 2000, // Zeit in Millisekunden, wie lange die Nachricht sichtbar sein soll
+          });
+          console.log(CartArray);
+          return;
         }
-        CartArray.push({
-          anzahl: anzahl,
-          preis: price,
-          logo: logo,
-          produktname: productname,
-        });
-        console.log(CartArray);
       }
+      CartArray.push({
+        anzahl: anzahl,
+        preis: price,
+        logo: logo,
+        produktname: productname,
+      });
+      toast.info("Artikel wurde in den Einkaufswagen gelegt!", {
+        position: toast.POSITION.TOP_LEFT,
+        autoClose: 2000, // Zeit in Millisekunden, wie lange die Nachricht sichtbar sein soll
+      });
+      console.log(CartArray);
     }
   }
 

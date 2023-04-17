@@ -1,9 +1,12 @@
 import React from "react";
 import ShoppingCard from "./ShoppingCard";
 import Logo from "../../img/Logo.webp";
+import { ToastContainer } from "react-toastify";
+import { PushUp } from "../general/toast.style";
 function Produkt() {
   return (
     <>
+      <ToastContainer />
       <h2 style={{ color: "black" }}>Essen</h2>
       <div style={{ display: "flex", flexWrap: "nowrap" }}>
         <ShoppingCard title={"TestProdukt"} price={5.99} image={Logo} />
