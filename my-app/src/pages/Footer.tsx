@@ -17,9 +17,6 @@ function Footer(): JSX.Element {
             <li>
               <Link to="/impressum">Impressum</Link>
             </li>
-            <li>
-              <Link to="/">&copy; delivery-breakfast 2023</Link>
-            </li>
           </ul>
         </div>
         <div className="social-media">
@@ -32,6 +29,9 @@ function Footer(): JSX.Element {
           <a href="https://www.instagram.com/delivery_breakfast_">
             <InstagramLogo size={24} />
           </a>
+          <li>
+            <Link to="/"> &copy; delivery-breakfast 2023</Link>
+          </li>
         </div>
       </div>
     </footer>
