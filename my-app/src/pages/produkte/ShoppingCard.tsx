@@ -68,6 +68,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
             produktname: productname,
           });
           console.log(CartArray);
+          return;
         }
       }
     }
