@@ -41,14 +41,36 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
     price: number,
     anzahl: number
   ): void {
-    setQuantity(0);
-    CartArray.push({
-      anzahl: anzahl,
-      preis: price,
-      logo: logo,
-      produktname: productname,
-    });
-    // add logic to add item to cart
+    //setQuantity(0);
+    if (CartArray && CartArray.length === 0) {
+      //Wird nur ausgeführt, wenn Array leer ist.
+      CartArray.push({
+        anzahl: anzahl,
+        preis: price,
+        logo: logo,
+        produktname: productname,
+      });
+      console.log(CartArray);
+    } else {
+      //Wird ausgeführt wenn Array nicht leer ist
+      for (let i = 0; i <= CartArray.length; i++) {
+        if (CartArray[i].produktname === productname) {
+          //Wird ausgeführt, wenn Produkt bereits im Warenkorb ist
+          CartArray[i].anzahl = anzahl;
+          console.log(CartArray);
+          return;
+        } else {
+          //Wird ausgeführt, wenn Produkt nicht im Warenkorb ist
+          CartArray.push({
+            anzahl: anzahl,
+            preis: price,
+            logo: logo,
+            produktname: productname,
+          });
+          console.log(CartArray);
+        }
+      }
+    }
   }
 
   return (
