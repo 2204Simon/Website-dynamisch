@@ -33,4 +33,7 @@ export const BestellungsWrapper = styled.div`
   ::-webkit-scrollbar-thumb {
     background: #ccc;
   }
+  @media (max-width: ${mediaQueries.large}) {
+    height: auto;
+  }
 `;
