@@ -7,9 +7,10 @@ export const WarenkorbWrapper = styled.div`
   padding: 10px;
   height: auto;
 
-  @media (max-width: ${mediaQueries.medium}) {
-    flex-direction: column;
+  @media (max-width: ${mediaQueries.large}) {
+    flex-direction: column-reverse;
     height: auto;
+    margin-bottom: 20px;
   }
 `;
 
@@ -31,25 +32,5 @@ export const BestellungsWrapper = styled.div`
 
   ::-webkit-scrollbar-thumb {
     background: #ccc;
-  }
-`;
-
-export const SideBarWrapper = styled.div`
-  flex: 0 1 250px;
-  background-color: ${colors.primarycolor};
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-
-  height: 550px;
-  padding: 20px;
-  color: black;
-
-  @media (max-width: ${mediaQueries.medium}) {
-    flex: 0 1 auto;
-    width: 100%;
-    height: 200px;
-    margin-top: 20px;
   }
 `;

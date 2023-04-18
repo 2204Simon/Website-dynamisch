@@ -2,7 +2,6 @@ import Warenkorb from "./Warenkorb";
 import SideBarBuy from "./SideBarBuy";
 import {
   WarenkorbWrapper,
-  SideBarWrapper,
   BestellungsWrapper,
 } from "./stylesBestellung/Bestellung.styles";
 import { CartArray, removeItemFromCart } from "../produkte/ShoppingCard";
@@ -46,9 +45,8 @@ function WarenkorbSeite(): JSX.Element {
           />
         ))}
       </BestellungsWrapper>
-      <SideBarWrapper>
-        <SideBarBuy produktAnzahl={CartArray.length} price={sumPrice} />
-      </SideBarWrapper>
+
+      <SideBarBuy produktAnzahl={CartArray.length} price={sumPrice} />
     </WarenkorbWrapper>
   );
 }
