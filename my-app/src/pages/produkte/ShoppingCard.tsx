@@ -11,8 +11,9 @@ import {
 } from "./styles/ShoppingCard.styles";
 import Logo from "../../img/Logo.webp";
 import { BlackColorButton } from "../general/button";
-import { toast } from "react-toastify";
+import { Slide, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { SpecialToast } from "../general/toast.style";
 
 export let CartArray: TestArray = [];
 
@@ -53,11 +54,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
   ): void {
     //setQuantity(0);
     if (quantity === 0) {
-      //PushUp Nachricht: "Bitte geben sie die Anzahl ein!"
-      toast.error("Bitte geben Sie die Anzahl ein!", {
-        position: toast.POSITION.TOP_LEFT,
-        autoClose: 2000, // Zeit in Millisekunden, wie lange die Nachricht sichtbar sein soll
-      });
+      SpecialToast.error("Bitte geben sie die Anzahl ein");
       console.log("Bitte geben sie die Anzahl ein");
     } else {
       //Wird ausgeführt wenn Array nicht leer ist

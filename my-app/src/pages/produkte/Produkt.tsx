@@ -1,8 +1,6 @@
 import React from "react";
 import ShoppingCard from "./ShoppingCard";
 import Logo from "../../img/Logo.webp";
-import { ToastContainer } from "react-toastify";
-import { PushUp } from "../general/toast.style";
 import BaguetteAlone from "../../img/Food/BaguetteAlone.webp";
 import BaguetteYellow from "../../img/Food/BaguetteGelb.jpg";
 import Brezel from "../../img/Food/Brezel.webp";
@@ -21,11 +19,11 @@ import Orangensaft from "../../img/Drinks/Orangensaft.jpg";
 import Wasser from "../../img/Drinks/Wasserglas.jpg";
 import Zitronentee from "../../img/Drinks/Zitronentee.jpg";
 import HeißeSchokolade from "../../img/Drinks/heißeSchokolade.jpg";
+import { StyledToastContainer } from "../general/toast.style";
 
 function Produkt() {
   return (
     <>
-      <ToastContainer />
       <h2 style={{ color: "black" }}>Essen</h2>
       <div style={{ display: "flex", flexWrap: "nowrap", overflowX: "scroll" }}>
         <ShoppingCard title={"Baguette"} price={2.99} image={BaguetteAlone} />
@@ -86,6 +84,7 @@ function Produkt() {
         <ShoppingCard title={"Menü3"} price={5.99} image={Logo} />
         <ShoppingCard title={"Menu4"} price={5.99} image={Logo} />
       </div>
+      <StyledToastContainer />
     </>
   );
 }
