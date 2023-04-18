@@ -54,8 +54,8 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
   ): void {
     //setQuantity(0);
     if (quantity === 0) {
-      SpecialToast.error("Bitte geben sie die Anzahl ein");
-      console.log("Bitte geben sie die Anzahl ein");
+      SpecialToast.error("Bitte gebe eine Anzahl ein!");
+      console.log("Bitte gebe eine Anzahl ein!");
     } else {
       //Wird ausgeführt wenn Array nicht leer ist
       for (let i = 0; i < CartArray.length; i++) {
