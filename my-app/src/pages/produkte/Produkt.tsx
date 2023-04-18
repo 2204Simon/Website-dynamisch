@@ -19,7 +19,7 @@ import Orangensaft from "../../img/Drinks/Orangensaft.jpg";
 import Wasser from "../../img/Drinks/Wasserglas.jpg";
 import Zitronentee from "../../img/Drinks/Zitronentee.jpg";
 import HeißeSchokolade from "../../img/Drinks/heißeSchokolade.jpg";
-import { StyledToastContainer } from "../general/toast.style";
+import StyledToastContainer from "../general/toast.style";
 
 function Produkt() {
   return (
