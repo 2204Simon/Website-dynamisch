@@ -58,7 +58,7 @@ function Produkt() {
         <ShoppingCard title={"Espresso"} price={1.99} image={Espresso} />
         <ShoppingCard title={"Kaffee"} price={5.99} image={Kaffee} />
         <ShoppingCard
-          title={"LatteMachiatto"}
+          title={"Latte Machiatto"}
           price={5.99}
           image={LatteMachiatto}
         />
@@ -67,7 +67,7 @@ function Produkt() {
         <ShoppingCard title={"Wasser"} price={5.99} image={Wasser} />
         <ShoppingCard title={"Zitronentee"} price={5.99} image={Zitronentee} />
         <ShoppingCard
-          title={"HeißeSchokolade"}
+          title={"Heiße Schokolade"}
           price={5.99}
           image={HeißeSchokolade}
         />
