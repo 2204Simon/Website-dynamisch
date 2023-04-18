@@ -1,6 +1,8 @@
 import { Outlet, Link } from "react-router-dom";
 import logo from ".././img/Logo.webp";
 import "../App.css";
+import { SignIn } from "phosphor-react";
+
 const Layout = () => {
   return (
     <>
@@ -36,6 +38,11 @@ const Layout = () => {
               </li>
               <li>
                 <Link to="/Kontakt">Kontakt</Link>
+              </li>
+              <li>
+                <Link to="/SignUp">
+                  <SignIn />
+                </Link>
               </li>
             </ul>
           </div>

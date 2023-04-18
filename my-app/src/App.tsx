@@ -9,6 +9,8 @@ import NoPage from "./pages/NoPage";
 import Bestellung from "./pages/bestellung/Bestellung";
 import "./App.css";
 import Footer from "./pages/Footer";
+import LoginForm from "./pages/logIn/LogIn";
+import SignUp from "./pages/logIn/SignUp";
 
 export default function App(): JSX.Element {
   return (
@@ -22,6 +24,8 @@ export default function App(): JSX.Element {
               <Route path="Bestellung" element={<Bestellung />} />
               <Route path="Unsere Geschichte" element={<UnsereGeschichte />} />
               <Route path="Kontakt" element={<Kontakt />} />
+              <Route path="LogIn" element={<LoginForm />} />
+              <Route path="SignUp" element={<SignUp />} />
               <Route path="*" element={<NoPage />} />
             </Route>
           </Routes>
