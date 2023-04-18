@@ -15,5 +15,22 @@ class Chatra extends Component<ChatraProps> {
     return null;
   }
 }
+declare global {
+  interface Window {
+    ChatraSetup: {
+      colors: {
+        buttonText: string;
+        buttonBg: string;
+      };
+    };
+  }
+}
+
+window.ChatraSetup = {
+  colors: {
+    buttonText: "#f0f0f0" /* chat button text color */,
+    buttonBg: "#aa7d03" /* chat button background color */,
+  },
+};
 
 export default Chatra;

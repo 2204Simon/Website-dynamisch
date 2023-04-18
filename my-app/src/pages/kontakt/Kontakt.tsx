@@ -1,5 +1,4 @@
 import React, { useState, FormEvent, ChangeEvent } from "react";
-
 import { MapPin, Phone, Envelope } from "phosphor-react";
 import {
   MainContainer,
@@ -12,6 +11,8 @@ import {
   ContactListItem,
 } from "./styles/Kontakt.styles";
 import { ContactMap } from "./Map";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Kontakt(): JSX.Element {
   const [email, setEmail] = useState("");
@@ -22,6 +23,7 @@ function Kontakt(): JSX.Element {
     console.log(`Danke für Ihre Anmeldung, ${email}!`);
     console.log(`Nachricht: ${message}`);
     // Hier könntest du den Code hinzufügen, der das Formular an deinen Server sendet
+    toast.success("Die Anmeldung zum Newsletter war erfolgreich!");
   }
 
   function handleEmailChange(event: ChangeEvent<HTMLInputElement>): void {
@@ -34,6 +36,7 @@ function Kontakt(): JSX.Element {
 
   return (
     <MainContainer>
+      <ToastContainer />
       <h1>Kontakt</h1>
       <ContactList>
         <ContactListItem style={{ color: "#aa7d03" }}>
