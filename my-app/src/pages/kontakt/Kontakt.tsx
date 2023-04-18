@@ -23,7 +23,7 @@ function Kontakt(): JSX.Element {
     console.log(`Danke für Ihre Anmeldung, ${email}!`);
     console.log(`Nachricht: ${message}`);
     // Hier könntest du den Code hinzufügen, der das Formular an deinen Server sendet
-    toast.success("Das Formular wurde erfolgreich abgeschickt.");
+    toast.success("Die Anmeldung zum Newsletter war erfolgreich!");
   }
 
   function handleEmailChange(event: ChangeEvent<HTMLInputElement>): void {
