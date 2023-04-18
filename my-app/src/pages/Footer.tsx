@@ -22,7 +22,7 @@ function Footer(): JSX.Element {
               <Link to="/datenschutz">Datenschutzerklärung</Link>
             </li>
             <li>
-              <Link to="/impressum">Impressum</Link>
+              <Link to="/Impressum">Impressum</Link>
             </li>
           </ul>
         </div>
