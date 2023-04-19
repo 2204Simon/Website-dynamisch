@@ -5,6 +5,8 @@ import {
   LogoImage,
   SideBarWrapper,
 } from "./stylesBestellung/SideBarBuy.styles";
+import { Button } from "../general/button.styles";
+import { Link } from "react-router-dom";
 
 interface SideBarProps {
   produktAnzahl: number;
@@ -24,7 +26,9 @@ export default function SideBarBuy({
       </div>
       <div>
         <h3>Gesamtpreis: {price}€</h3>
-        <BlackColorButton caption={"Jetzt Kaufen"} />
+        <Button className="white-orange black-color">
+          <Link to="/ContactForm">Jetzt kaufen</Link>
+        </Button>
       </div>
     </SideBarWrapper>
   );

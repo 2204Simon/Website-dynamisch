@@ -11,6 +11,8 @@ import { CartArray, removeItemFromCart } from "../produkte/ShoppingCard";
 import React from "react";
 import { Button } from "../general/button.styles";
 import { ShoppingBag } from "phosphor-react";
+import { Link as RouterLink } from "react-router-dom";
+import Link from "@mui/material/Link";
 
 function WarenkorbSeite(): JSX.Element {
   const [sumPrice, setSumPrice] = React.useState(0);
@@ -38,7 +40,9 @@ function WarenkorbSeite(): JSX.Element {
     <NoOrderContainer>
       <NoOrderTextWrapper>
         <h2 style={{ color: "black" }}>Sie haben nichts im Warenkorb</h2>
-        <Button className="white-orange black-color">Zu den Produkten</Button>
+        <Button className="white-orange black-color">
+          <RouterLink to="/Produkte">Zu den Produkten</RouterLink>
+        </Button>
       </NoOrderTextWrapper>
       <NoOrderShoppingBag />
     </NoOrderContainer>

@@ -6,10 +6,12 @@ import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { AddressBook, Coin, CreditCard } from "phosphor-react";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Link as RouterLink } from "react-router-dom";
+import { Rowing } from "@mui/icons-material";
+import { LoggedIn } from "../../globalVariables/loggedin";
 
 function Copyright(props: any) {
   return (
@@ -22,7 +24,7 @@ function Copyright(props: any) {
   );
 }
 
-export default function SignUp() {
+export default function ContactForm() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -46,10 +48,10 @@ export default function SignUp() {
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: "#aa7d03" }}>
-          <LockOutlinedIcon />
+          <AddressBook />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Bestellformular
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
@@ -63,7 +65,7 @@ export default function SignUp() {
                 autoFocus
                 InputLabelProps={{
                   sx: {
-                    backgroundColor: "white", // Hier den gewünschten Farbcode eintragen
+                    backgroundColor: "white",
                   },
                 }}
               />
@@ -77,7 +79,7 @@ export default function SignUp() {
                 autoComplete="family-name"
                 InputLabelProps={{
                   sx: {
-                    backgroundColor: "white", // Hier den gewünschten Farbcode eintragen
+                    backgroundColor: "white",
                   },
                 }}
               />
@@ -91,35 +93,31 @@ export default function SignUp() {
                 autoComplete="email"
                 InputLabelProps={{
                   sx: {
-                    backgroundColor: "white", // Hier den gewünschten Farbcode eintragen
+                    backgroundColor: "white",
                   },
                 }}
               />
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="new-password"
-                InputLabelProps={{
-                  sx: {
-                    backgroundColor: "white", // Hier den gewünschten Farbcode eintragen
-                  },
-                }}
-              />
+            <Grid item xs={12} alignItems={"center"}>
+              <Avatar sx={{ m: 1, bgcolor: "#aa7d03" }}>
+                <Coin />
+              </Avatar>
+
+              <Grid item>
+                <Link component={RouterLink} to="/LogIn" variant="body2">
+                  PayPal
+                </Link>
+              </Grid>
             </Grid>
           </Grid>
-          <Button type="submit" className="black-color white-orange">
-            Sign Up
-          </Button>
+
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link component={RouterLink} to="/LogIn" variant="body2">
-                Already have an account? Sign in
-              </Link>
+              {LoggedIn ? null : (
+                <Link component={RouterLink} to="/LogIn" variant="body2">
+                  Sign In
+                </Link>
+              )}
             </Grid>
           </Grid>
         </Box>
