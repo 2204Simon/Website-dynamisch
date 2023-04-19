@@ -10,6 +10,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Link as RouterLink } from "react-router-dom";
+import { useLoggedIn } from "../../globalVariables/loggedin";
 
 function Copyright(props: any) {
   return (
@@ -23,6 +24,13 @@ function Copyright(props: any) {
 }
 
 export default function SignUp() {
+  const { changeLoggedIn } = useLoggedIn(); // Verwende den useLoggedIn-Hook, um auf den globalen Zustand zuzugreifen
+
+  function handleClick(): void {
+    console.log("changedlogin");
+    changeLoggedIn();
+  }
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -112,8 +120,14 @@ export default function SignUp() {
               />
             </Grid>
           </Grid>
-          <Button type="submit" className="black-color white-orange">
-            Sign Up
+          <Button
+            type="submit"
+            className="black-color white-orange"
+            onClick={handleClick}
+          >
+            <Link component={RouterLink} to="/LoggedIn" variant="body2">
+              Sign Up
+            </Link>
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
