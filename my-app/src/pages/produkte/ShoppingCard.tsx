@@ -60,7 +60,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
         if (CartArray[i].produktname === productname) {
           //Wird ausgeführt, wenn Produkt bereits im Warenkorb ist
           CartArray[i].anzahl += anzahl;
-          CustomToast.success("Produkt im Einkaufswagen");
+          CustomToast.success("Produkt hinzugefügt");
           console.log(CartArray);
           return;
         }
@@ -71,7 +71,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
         logo: logo,
         produktname: productname,
       });
-      CustomToast.info("Produkt im Einkaufswagen");
+      CustomToast.success("Produkt im Warenkorb");
       console.log(CartArray);
     }
   }

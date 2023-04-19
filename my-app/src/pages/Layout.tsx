@@ -1,9 +1,11 @@
 import { Outlet, Link } from "react-router-dom";
 import logo from ".././img/Logo.webp";
 import "../App.css";
-import { SignIn } from "phosphor-react";
+import { SignIn, User } from "phosphor-react";
+import { useLoggedIn } from "../globalVariables/loggedin";
 
 const Layout = () => {
+  const { loggedIn } = useLoggedIn();
   return (
     <>
       <header id="zumSeitenanfang" className="header">
@@ -40,9 +42,15 @@ const Layout = () => {
                 <Link to="/Kontakt">Kontakt</Link>
               </li>
               <li>
-                <Link to="/SignUp">
-                  <SignIn />
-                </Link>
+                {loggedIn ? (
+                  <Link to="/LoggedIn">
+                    <User />
+                  </Link>
+                ) : (
+                  <Link to="/SignUp">
+                    <SignIn />
+                  </Link>
+                )}
               </li>
             </ul>
           </div>

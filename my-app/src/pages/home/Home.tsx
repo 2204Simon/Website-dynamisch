@@ -1,11 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import fakeZeitung from "../.././img/Fakezeitung_Logo.webp";
 import Chatra from "./Chatra";
 
-const Home = () => {
+const Home = (): JSX.Element => {
+  const [hasScrolled, setHasScrolled] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = (): void => {
+      if (!hasScrolled && window.pageYOffset > 0) {
+        setHasScrolled(true);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return (): void => window.removeEventListener("scroll", handleScroll);
+  }, [hasScrolled]);
+
+  useEffect(() => {
+    setHasScrolled(false);
+  }, [location]);
+
+  {
+    console.log(
+      window.location.href,
+      window.location.href === "http://localhost:3000/"
+    );
+  }
   return (
     <div className="App">
-      <Chatra />
+      {hasScrolled && <Chatra />}
       <main className="DunklerHintergrund">
         <div className="Anfangssatz">
           <h2>Stelle dir dein perfektes Frühstück zusammen</h2>

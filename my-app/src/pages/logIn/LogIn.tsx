@@ -47,7 +47,7 @@ export default function SignIn() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ m: 1, bgcolor: "#aa7d03" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -67,6 +67,11 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              InputLabelProps={{
+                sx: {
+                  backgroundColor: "white", // Hier den gewünschten Farbcode eintragen
+                },
+              }}
             />
             <TextField
               margin="normal"
@@ -76,6 +81,11 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              InputLabelProps={{
+                sx: {
+                  backgroundColor: "white", // Hier den gewünschten Farbcode eintragen
+                },
+              }}
             />
 
             <Button type="submit" className="black-color white-orange">
