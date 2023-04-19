@@ -3,9 +3,14 @@ import SideBarBuy from "./SideBarBuy";
 import {
   WarenkorbWrapper,
   BestellungsWrapper,
+  NoOrderContainer,
+  NoOrderTextWrapper,
+  NoOrderShoppingBag,
 } from "./stylesBestellung/Bestellung.styles";
 import { CartArray, removeItemFromCart } from "../produkte/ShoppingCard";
 import React from "react";
+import { Button } from "../general/button.styles";
+import { ShoppingBag } from "phosphor-react";
 
 function WarenkorbSeite(): JSX.Element {
   const [sumPrice, setSumPrice] = React.useState(0);
@@ -30,7 +35,13 @@ function WarenkorbSeite(): JSX.Element {
   };
 
   return CartArray.length === 0 ? (
-    <h2 style={{ color: "black" }}>Sie haben noch nichts im Warenkorb</h2>
+    <NoOrderContainer>
+      <NoOrderTextWrapper>
+        <h2 style={{ color: "black" }}>Sie haben nichts im Warenkorb</h2>
+        <Button className="white-orange black-color">Zu den Produkten</Button>
+      </NoOrderTextWrapper>
+      <NoOrderShoppingBag />
+    </NoOrderContainer>
   ) : (
     <WarenkorbWrapper>
       <BestellungsWrapper>
