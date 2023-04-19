@@ -9,11 +9,9 @@ import {
   Title,
   Image,
 } from "./styles/ShoppingCard.styles";
-import Logo from "../../img/Logo.webp";
 import { BlackColorButton } from "../general/button";
-import { Slide, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { SpecialToast } from "../general/toast.style";
+import { CustomToast } from "../general/toast.style";
 
 export let CartArray: TestArray = [];
 
@@ -54,7 +52,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
   ): void {
     //setQuantity(0);
     if (quantity === 0) {
-      SpecialToast.error("Bitte gebe eine Anzahl ein!");
+      CustomToast.error("Menge erhöhen");
       console.log("Bitte gebe eine Anzahl ein!");
     } else {
       //Wird ausgeführt wenn Array nicht leer ist
@@ -62,10 +60,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
         if (CartArray[i].produktname === productname) {
           //Wird ausgeführt, wenn Produkt bereits im Warenkorb ist
           CartArray[i].anzahl += anzahl;
-          toast.success("Artikel wurde in den Einkaufswagen gelegt!", {
-            position: toast.POSITION.TOP_LEFT,
-            autoClose: 2000, // Zeit in Millisekunden, wie lange die Nachricht sichtbar sein soll
-          });
+          CustomToast.success("Produkt im Einkaufswagen");
           console.log(CartArray);
           return;
         }
@@ -76,10 +71,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
         logo: logo,
         produktname: productname,
       });
-      toast.info("Artikel wurde in den Einkaufswagen gelegt!", {
-        position: toast.POSITION.TOP_LEFT,
-        autoClose: 2000, // Zeit in Millisekunden, wie lange die Nachricht sichtbar sein soll
-      });
+      CustomToast.info("Produkt im Einkaufswagen");
       console.log(CartArray);
     }
   }

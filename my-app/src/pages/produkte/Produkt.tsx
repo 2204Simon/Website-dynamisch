@@ -19,7 +19,7 @@ import Orangensaft from "../../img/Drinks/Orangensaft.jpg";
 import Wasser from "../../img/Drinks/Wasserglas.jpg";
 import Zitronentee from "../../img/Drinks/Zitronentee.jpg";
 import HeißeSchokolade from "../../img/Drinks/heißeSchokolade.jpg";
-import StyledToastContainer from "../general/toast.style";
+import { ToastContainer } from "react-toastify";
 
 function Produkt() {
   return (
@@ -84,7 +84,7 @@ function Produkt() {
         <ShoppingCard title={"Menü3"} price={5.99} image={Logo} />
         <ShoppingCard title={"Menu4"} price={5.99} image={Logo} />
       </div>
-      <StyledToastContainer />
+      <ToastContainer />
     </>
   );
 }
