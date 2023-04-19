@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Link as RouterLink } from "react-router-dom";
 import { Rowing } from "@mui/icons-material";
-import { LoggedIn } from "../../globalVariables/loggedin";
+import { useLoggedIn } from "../../globalVariables/loggedin";
 
 function Copyright(props: any) {
   return (
@@ -25,6 +25,7 @@ function Copyright(props: any) {
 }
 
 export default function ContactForm() {
+  const { loggedIn } = useLoggedIn();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -113,7 +114,7 @@ export default function ContactForm() {
 
           <Grid container justifyContent="flex-end">
             <Grid item>
-              {LoggedIn ? null : (
+              {loggedIn ? null : (
                 <Link component={RouterLink} to="/LogIn" variant="body2">
                   Sign In
                 </Link>

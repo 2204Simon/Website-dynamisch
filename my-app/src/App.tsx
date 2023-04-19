@@ -12,35 +12,37 @@ import Footer from "./pages/Footer";
 import LoginForm from "./pages/logIn/LogIn";
 import SignUp from "./pages/logIn/SignUp";
 import ContactForm from "./pages/logIn/ContactForm";
-import LogPage from "./pages/loggedIn/LoggedIn";
-import { LoggedIn } from "./globalVariables/loggedin";
+import DeinKonto from "./pages/loggedIn/DeinKonto";
+import { LoggedInProvider } from "./globalVariables/loggedin"; // Import the LoggedInProvider component
 
 export default function App(): JSX.Element {
   return (
     <React.StrictMode>
-      <BrowserRouter>
-        <div id="top">
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} />
-              <Route path="Produkte" element={<Produkte />} />
-              <Route path="Bestellung" element={<Bestellung />} />
-              <Route path="Unsere Geschichte" element={<UnsereGeschichte />} />
-              <Route path="Kontakt" element={<Kontakt />} />
-              <Route path="LogIn" element={<LoginForm />} />
-              <Route path="SignUp" element={<SignUp />} />
-              <Route path="contactForm" element={<ContactForm />} />
-              {LoggedIn ? (
-                <Route path="LoggedIn" element={<LogPage />} />
-              ) : (
+      <LoggedInProvider>
+        {/* Wrap your routes in LoggedInProvider */}
+        <BrowserRouter>
+          <div id="top">
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<Home />} />
+                <Route path="Produkte" element={<Produkte />} />
+                <Route path="Bestellung" element={<Bestellung />} />
+                <Route
+                  path="Unsere Geschichte"
+                  element={<UnsereGeschichte />}
+                />
+                <Route path="Kontakt" element={<Kontakt />} />
+                <Route path="LogIn" element={<LoginForm />} />
+                <Route path="SignUp" element={<SignUp />} />
+                <Route path="contactForm" element={<ContactForm />} />
+                <Route path="LoggedIn" element={<DeinKonto />} />
                 <Route path="*" element={<NoPage />} />
-              )}
-              <Route path="*" element={<NoPage />} />
-            </Route>
-          </Routes>
-          <Footer />
-        </div>
-      </BrowserRouter>
+              </Route>
+            </Routes>
+            <Footer />
+          </div>
+        </BrowserRouter>
+      </LoggedInProvider>
     </React.StrictMode>
   );
 }
