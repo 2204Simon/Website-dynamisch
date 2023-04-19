@@ -19,7 +19,7 @@ function Footer(): JSX.Element {
               <a href="#top">Zum Seitenanfang</a>
             </li>
             <li>
-              <Link to="/datenschutz">Datenschutzerklärung</Link>
+              <Link to="/Datenschutzerklaerung">Datenschutzerklärung</Link>
             </li>
             <li>
               <Link to="/Impressum">Impressum</Link>
