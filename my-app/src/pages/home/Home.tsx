@@ -21,6 +21,12 @@ const Home = (): JSX.Element => {
     setHasScrolled(false);
   }, [location]);
 
+  {
+    console.log(
+      window.location.href,
+      window.location.href === "http://localhost:3000/"
+    );
+  }
   return (
     <div className="App">
       {hasScrolled && <Chatra />}
