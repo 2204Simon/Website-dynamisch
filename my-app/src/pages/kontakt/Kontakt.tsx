@@ -13,6 +13,7 @@ import {
 import { ContactMap } from "./Map";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { CustomToast } from "../general/toast.style";
 
 function Kontakt(): JSX.Element {
   const [email, setEmail] = useState("");
@@ -23,7 +24,7 @@ function Kontakt(): JSX.Element {
     console.log(`Danke für Ihre Anmeldung, ${email}!`);
     console.log(`Nachricht: ${message}`);
     // Hier könntest du den Code hinzufügen, der das Formular an deinen Server sendet
-    toast.success("Die Anmeldung zum Newsletter war erfolgreich!");
+    CustomToast.success("Die Anmeldung zum Newsletter war erfolgreich!");
   }
 
   function handleEmailChange(event: ChangeEvent<HTMLInputElement>): void {
