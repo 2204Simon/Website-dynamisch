@@ -2,5 +2,11 @@
   "dependencies": {
     "phosphor-react": "^1.4.1",
     "react-google-maps": "^9.4.5"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "@types/react-router-dom": "^5.3.3",
+    "typescript": "^5.0.4"
   }
 }

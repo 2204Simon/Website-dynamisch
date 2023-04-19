@@ -83,9 +83,9 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
       </ImageContainer>
       <Details>
         <Title>{title}</Title>
-        <Price>Price: {price} €</Price>
+        <Price>Preis: {price} €</Price>
         <Quantity>
-          <label htmlFor="quantity">Quantity:</label>
+          <label htmlFor="quantity">Menge:</label>
           <QuantityInput
             type="number"
             id="quantity"

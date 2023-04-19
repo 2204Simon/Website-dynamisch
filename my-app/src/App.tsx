@@ -14,6 +14,7 @@ import SignUp from "./pages/logIn/SignUp";
 import ContactForm from "./pages/logIn/ContactForm";
 import DeinKonto from "./pages/loggedIn/DeinKonto";
 import { LoggedInProvider } from "./globalVariables/loggedin"; // Import the LoggedInProvider component
+import Impressum from "./pages/Impressum";
 
 export default function App(): JSX.Element {
   return (
@@ -36,6 +37,7 @@ export default function App(): JSX.Element {
                 <Route path="SignUp" element={<SignUp />} />
                 <Route path="contactForm" element={<ContactForm />} />
                 <Route path="LoggedIn" element={<DeinKonto />} />
+                <Route path="Impressum" element={<Impressum />} />
                 <Route path="*" element={<NoPage />} />
               </Route>
             </Routes>

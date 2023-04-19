@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { colors } from "../general/constants";
 
 interface ChatraProps {}
 
@@ -28,8 +29,8 @@ declare global {
 
 window.ChatraSetup = {
   colors: {
-    buttonText: "#f0f0f0" /* chat button text color */,
-    buttonBg: "#aa7d03" /* chat button background color */,
+    buttonText: colors.white /* chat button text color */,
+    buttonBg: colors.companycolor /* chat button background color */,
   },
 };
 
