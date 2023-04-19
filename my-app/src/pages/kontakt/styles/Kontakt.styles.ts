@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import { colors, mediaQueries } from "../../general/constants";
 export const MainContainer = styled.div`
   margin: 2rem auto;
   max-width: 600px;
@@ -23,7 +23,7 @@ export const MainContainer = styled.div`
       }
 
       a {
-        color: #aa7d03;
+        color: ${colors.companycolor};
         text-decoration: none;
         &:hover {
           text-decoration: underline;
@@ -50,7 +50,7 @@ export const ContactContainer = styled.div`
   p {
     text-align: center;
     margin-bottom: 1rem;
-    color: #aa7d03;
+    color: ${colors.companycolor};
   }
 
   form {
@@ -63,7 +63,7 @@ export const ContactContainer = styled.div`
 export const FormLabel = styled.label`
   display: block;
   margin-bottom: 1rem;
-  color: #aa7d03;
+  color: ${colors.companycolor};
 `;
 
 export const FormInput = styled.input`
@@ -84,7 +84,7 @@ export const FormTextArea = styled.textarea`
 `;
 
 export const FormButton = styled.button`
-  background-color: #aa7d03;
+  background-color: ${colors.companycolor};
   color: #fff;
   padding: 0.5rem 1rem;
   border: none;
@@ -108,7 +108,7 @@ export const ContactListItem = styled.li`
   }
 
   a {
-    color: #aa7d03;
+    color: ${colors.companycolor};
     text-decoration: none;
     &:hover {
       text-decoration: underline;
@@ -133,6 +133,6 @@ export const MapContainer = styled.div`
 `;
 
 export const media = {
-  tablet: "@media(min-width: 768px)",
-  laptop: "@media(min-width: 1024px)",
+  tablet: "@media(min-width: ${mediaQueries.medium})",
+  laptop: "@media(min-width: ${mediaQueries.large})",
 };
