@@ -12,7 +12,7 @@ const StyledToastContainer = styled(ToastContainer)`
 export const CustomToast = {
   error: (message: string) =>
     toast.error(message, {
-      autoClose: 20000,
+      autoClose: 2000,
       closeButton: false,
       hideProgressBar: false,
       closeOnClick: true,
@@ -22,12 +22,12 @@ export const CustomToast = {
       position: "top-left",
       transition: Slide,
       progressClassName: "my-toast-progress-bar",
-      progressStyle: { backgroundColor: "black" },
-      style: { backgroundColor: "#aa7d03", color: "black" },
+      progressStyle: { backgroundColor: "#aa7d03" },
+      style: { backgroundColor: "white", color: "black" },
     }),
   info: (message: string) =>
     toast.info(message, {
-      autoClose: 20000,
+      autoClose: 2000,
       closeButton: false,
       hideProgressBar: false,
       closeOnClick: true,
@@ -35,14 +35,14 @@ export const CustomToast = {
       draggable: true,
       draggablePercent: 60,
       position: "top-left",
-      transition: Bounce,
+      transition: Slide,
       progressClassName: "my-toast-progress-bar",
       progressStyle: { backgroundColor: "#aa7d03" },
-      style: { backgroundColor: "black", color: "white" },
+      style: { backgroundColor: "white", color: "black" },
     }),
   success: (message: string) =>
     toast.success(message, {
-      autoClose: 20000,
+      autoClose: 2000,
       closeButton: false,
       hideProgressBar: false,
       closeOnClick: true,
@@ -50,7 +50,7 @@ export const CustomToast = {
       draggable: true,
       draggablePercent: 60,
       position: "top-left",
-      transition: Flip,
+      transition: Slide,
       progressClassName: "my-toast-progress-bar",
       progressStyle: { backgroundColor: "#aa7d03" },
       style: { backgroundColor: "white", color: "black" },
