@@ -46,7 +46,10 @@ function Footer(): JSX.Element {
             <LinkedinLogo size={24} />
           </a>
           <li>
-            <Link to="/"> &copy; delivery-breakfast 2023</Link>
+            <Link to="/">
+              {" "}
+              &copy; delivery-breakfast {new Date().getFullYear()}
+            </Link>
           </li>
         </div>
       </div>
