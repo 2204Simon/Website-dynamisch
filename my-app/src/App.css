@@ -1,16 +1,5 @@
-/* .App {
-  text-align: center;
-}
-
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-} */
-
-/* *{
-    overflow-x: hidden;
-    overflow-y: hidden;
+/* * {
+  overflow-x: hidden;
 } */
 
 h1 {
@@ -32,7 +21,6 @@ p {
 
 body {
   margin: 0;
-  background-position: center;
   min-height: 1px;
   background-attachment: fixed;
   background-position: center;
@@ -220,7 +208,7 @@ textarea {
   justify-content: center;
   flex-direction: row; /* horizontale Ausrichtung Menülinks */
   align-items: center;
-  z-index: 1; /* Kreuz Burger Menü */
+  z-index: 3; /* Kreuz Burger Menü */
   transition: 0.1s; /* Geschwindigkeit Einschub Burger Menü  */
 }
 
@@ -250,7 +238,7 @@ textarea {
   background: transparent;
   transition: 0.3s;
   margin: auto;
-  overflow-x: hidden !important;
+  overflow-x: hidden;
 }
 
 .navigation {
@@ -266,7 +254,7 @@ textarea {
   background: #aa7d03;
   border-radius: 10px;
   cursor: pointer;
-  z-index: 2;
+  z-index: 4;
   transition: 0.3s;
 }
 
@@ -911,18 +899,16 @@ section:hover .UntenKarte {
   .hamburger,
   .toggle-menu {
     display: block;
+    z-index: 3;
   }
 
   .hamburger {
     right: 40px; /* Ausrichtung 3 Balken */
+    z-index: 3;
   }
   .toggle-menu {
     right: 40px; /* Ausrichtung Checkbox im Hintergrund */
-  }
-
-  .header {
-    padding: 10px 20px;
-    width: 100%;
+    z-index: 3;
   }
 
   .menu {
@@ -937,10 +923,12 @@ section:hover .UntenKarte {
     height: 100%;
     padding-top: 65px;
     border-radius: 25px 0px 0px 25px; /* Ecken abgerundet */
+    z-index: 2;
   }
 
   .menu li {
     width: 100%;
+    z-index: 3;
   }
 
   .menu li a,
@@ -948,6 +936,7 @@ section:hover .UntenKarte {
     padding: 30px;
     font-size: 24px;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.01) inset;
+    z-index: 3;
   }
 
   .parallax footer {
