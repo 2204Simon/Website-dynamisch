@@ -1,7 +1,7 @@
 import { Outlet, Link } from "react-router-dom";
 import logo from ".././img/Logo.webp";
 import "../App.css";
-import { SignIn, User } from "phosphor-react";
+import { SignIn, User, ShoppingCartSimple } from "phosphor-react";
 import { useLoggedIn } from "../globalVariables/loggedin";
 
 const Layout = () => {
@@ -33,13 +33,15 @@ const Layout = () => {
                 <Link to="/Produkte">Produkte</Link>
               </li>
               <li>
-                <Link to="/Bestellung">Bestellung</Link>
-              </li>
-              <li>
                 <Link to="/Unsere Geschichte">Unsere Geschichte</Link>
               </li>
               <li>
                 <Link to="/Kontakt">Kontakt</Link>
+              </li>
+              <li>
+                <Link to="/Bestellung">
+                  <ShoppingCartSimple />
+                </Link>
               </li>
               <li>
                 {loggedIn ? (
