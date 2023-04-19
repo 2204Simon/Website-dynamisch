@@ -1,4 +1,4 @@
-import { ToastContainer, toast } from "react-toastify";
+import { Bounce, Flip, Slide, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
 
@@ -9,10 +9,10 @@ const StyledToastContainer = styled(ToastContainer)`
   }
 `; //Hier passt etwas noch nicht, Größe ändert sich leider nicht von den PushUps
 
-export const SpecialToast = {
+export const CustomToast = {
   error: (message: string) =>
     toast.error(message, {
-      autoClose: 5000,
+      autoClose: 20000,
       closeButton: false,
       hideProgressBar: false,
       closeOnClick: true,
@@ -20,13 +20,14 @@ export const SpecialToast = {
       draggable: true,
       draggablePercent: 60,
       position: "top-left",
+      transition: Slide,
       progressClassName: "my-toast-progress-bar",
       progressStyle: { backgroundColor: "black" },
       style: { backgroundColor: "#aa7d03", color: "black" },
     }),
   info: (message: string) =>
     toast.info(message, {
-      autoClose: 5000,
+      autoClose: 20000,
       closeButton: false,
       hideProgressBar: false,
       closeOnClick: true,
@@ -34,13 +35,14 @@ export const SpecialToast = {
       draggable: true,
       draggablePercent: 60,
       position: "top-left",
+      transition: Bounce,
       progressClassName: "my-toast-progress-bar",
-      progressStyle: { backgroundColor: "black" },
-      style: { backgroundColor: "#aa7d03", color: "black" },
+      progressStyle: { backgroundColor: "#aa7d03" },
+      style: { backgroundColor: "black", color: "white" },
     }),
   success: (message: string) =>
     toast.success(message, {
-      autoClose: 5000,
+      autoClose: 20000,
       closeButton: false,
       hideProgressBar: false,
       closeOnClick: true,
@@ -48,9 +50,10 @@ export const SpecialToast = {
       draggable: true,
       draggablePercent: 60,
       position: "top-left",
+      transition: Flip,
       progressClassName: "my-toast-progress-bar",
-      progressStyle: { backgroundColor: "black" },
-      style: { backgroundColor: "#aa7d03", color: "black" },
+      progressStyle: { backgroundColor: "#aa7d03" },
+      style: { backgroundColor: "white", color: "black" },
     }),
 };
 
