@@ -3,9 +3,15 @@ import logo from ".././img/Logo.webp";
 import "../App.css";
 import { SignIn, User, ShoppingCartSimple } from "phosphor-react";
 import { useLoggedIn } from "../globalVariables/loggedin";
+import Badge from "@mui/material/Badge";
+import { RootState } from "../redux/store";
+import { useSelector } from "react-redux";
 
 const Layout = () => {
   const { loggedIn } = useLoggedIn();
+  const CartArrayLength = useSelector(
+    (state: RootState) => state.cartItems.length
+  );
   return (
     <>
       <header id="zumSeitenanfang" className="header">
@@ -41,6 +47,7 @@ const Layout = () => {
               <li>
                 <Link to="/Bestellung">
                   <ShoppingCartSimple />
+                  <Badge badgeContent={CartArrayLength} color="error" />
                 </Link>
               </li>
               <li>

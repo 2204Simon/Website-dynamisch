@@ -1,3 +1,6 @@
+import { useSelector, useDispatch } from "react-redux";
+import { removeFromCart, RootState, CartItem } from "../../redux/store";
+
 import Warenkorb from "./Warenkorb";
 import SideBarBuy from "./SideBarBuy";
 import {
@@ -7,36 +10,25 @@ import {
   NoOrderTextWrapper,
   NoOrderShoppingBag,
 } from "./stylesBestellung/Bestellung.styles";
-import { CartArray, removeItemFromCart } from "../produkte/ShoppingCard";
-import React from "react";
 import { Button } from "../general/button.styles";
-import { ShoppingBag } from "phosphor-react";
 import { Link as RouterLink } from "react-router-dom";
-import Link from "@mui/material/Link";
-
 function WarenkorbSeite(): JSX.Element {
-  const [sumPrice, setSumPrice] = React.useState(0);
+  // Zugriff auf den Gesamtpreis aus dem Redux-Store
+  const dispatch = useDispatch(); // Zugriff auf die dispatch-Funktion, um Aktionen auszulösen
+  const cartItems = useSelector((state: RootState) => state.cartItems);
 
-  React.useEffect(() => {
-    let total = 0;
-    if (CartArray && CartArray.length > 0) {
-      CartArray.forEach(item => {
-        total += item.preis * item.anzahl;
-      });
-    }
-    setSumPrice(total);
-    console.log("es wird gerendert");
-  }, []);
-
-  const handleRemoveItem = (itemIndex: number) => {
-    removeItemFromCart(itemIndex);
-    setSumPrice(
-      prevPrice =>
-        prevPrice - CartArray[itemIndex]?.preis * CartArray[itemIndex]?.anzahl
-    );
+  const handleRemoveItem = (item: CartItem) => {
+    dispatch(removeFromCart(item)); // Aktion zum Entfernen eines Elements aus dem Warenkorb mit dispatch auslösen
   };
+  const priceCounter = (): number => {
+    let price = 0;
+    cartItems.forEach(item => (price += item.preis * item.anzahl));
+    console.log(price);
+    return parseFloat(price.toFixed(2));
+  };
+  const sumPrice = priceCounter();
 
-  return CartArray.length === 0 ? (
+  return cartItems.length === 0 ? (
     <NoOrderContainer>
       <NoOrderTextWrapper>
         <h2 style={{ color: "black" }}>Sie haben nichts im Warenkorb</h2>
@@ -49,19 +41,19 @@ function WarenkorbSeite(): JSX.Element {
   ) : (
     <WarenkorbWrapper>
       <BestellungsWrapper>
-        {CartArray.map((item, index) => (
+        {cartItems.map((item, index) => (
           <Warenkorb
             key={index}
             image={item.logo}
             price={item.preis}
-            onRemove={() => handleRemoveItem(index)} // pass the item index to handleRemoveItem
+            onRemove={() => handleRemoveItem(item)} // pass the item index to handleRemoveItem
             productName={item.produktname}
             count={item.anzahl}
           />
         ))}
       </BestellungsWrapper>
 
-      <SideBarBuy produktAnzahl={CartArray.length} price={sumPrice} />
+      <SideBarBuy produktAnzahl={cartItems.length} price={sumPrice} />
     </WarenkorbWrapper>
   );
 }

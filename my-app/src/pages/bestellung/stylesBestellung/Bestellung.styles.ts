@@ -15,6 +15,21 @@ export const WarenkorbWrapper = styled.div`
   }
 `;
 
+export const Badge = styled.div`
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: red;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  color: white;
+`;
+
 export const BestellungsWrapper = styled.div`
   flex: 1 1 auto;
   margin-right: 10px;

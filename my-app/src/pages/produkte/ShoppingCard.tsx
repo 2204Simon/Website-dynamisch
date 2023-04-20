@@ -1,4 +1,6 @@
 import React, { useState, ChangeEvent } from "react";
+import { useDispatch } from "react-redux"; // Import der useDispatch-Hook
+import { addToCart } from "../../redux/store"; // Import der addToCart-Action aus deiner Redux-Komponente
 import {
   Container,
   Details,
@@ -12,15 +14,8 @@ import {
 import { BlackColorButton } from "../general/button";
 import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
-
-export let CartArray: TestArray = [];
-
-export const removeItemFromCart = (itemIndex: number) => {
-  const newCartArray = [...CartArray];
-  newCartArray.splice(itemIndex, 1);
-  CartArray = newCartArray;
-  console.log(CartArray);
-};
+import Button from "@mui/material/Button";
+import { Add, Remove } from "@mui/icons-material";
 
 interface ShoppingCardProps {
   image: string;
@@ -28,53 +23,30 @@ interface ShoppingCardProps {
   price: number;
 }
 
-interface TestArrayItem {
-  anzahl: number;
-  preis: number;
-  logo: string;
-  produktname: string;
-}
-
-type TestArray = TestArrayItem[];
-
 const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
   const [quantity, setQuantity] = useState<number>(0);
+  const dispatch = useDispatch(); // Initialisierung der useDispatch-Hook
 
   const handleQuantityChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuantity(Number(event.target.value));
   };
 
-  function AddToCart(
-    productname: string,
-    logo: string,
-    price: number,
-    anzahl: number
-  ): void {
-    //setQuantity(0);
+  const handleAddToCart = () => {
     if (quantity === 0) {
       CustomToast.error("Menge erhöhen");
       console.log("Bitte gebe eine Anzahl ein!");
     } else {
-      //Wird ausgeführt wenn Array nicht leer ist
-      for (let i = 0; i < CartArray.length; i++) {
-        if (CartArray[i].produktname === productname) {
-          //Wird ausgeführt, wenn Produkt bereits im Warenkorb ist
-          CartArray[i].anzahl += anzahl;
-          CustomToast.success("Produkt hinzugefügt");
-          console.log(CartArray);
-          return;
-        }
-      }
-      CartArray.push({
-        anzahl: anzahl,
+      const item = {
+        produktname: title,
+        logo: image,
         preis: price,
-        logo: logo,
-        produktname: productname,
-      });
+        anzahl: quantity,
+      };
+      dispatch(addToCart(item)); // Dispatch der addToCart-Action mit dem erstellten Item
       CustomToast.success("Produkt im Warenkorb");
-      console.log(CartArray);
+      console.log(item);
     }
-  }
+  };
 
   return (
     <Container>
@@ -84,6 +56,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
       <Details>
         <Title>{title}</Title>
         <Price>Preis: {price} €</Price>
+        <Button variant="contained" color="primary" startIcon={<Add />} />
         <Quantity>
           <label htmlFor="quantity">Menge:</label>
           <QuantityInput
@@ -95,8 +68,9 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
             onChange={handleQuantityChange}
           />
         </Quantity>
+        <Button variant="contained" color="primary" startIcon={<Remove />} />
         <BlackColorButton
-          onClick={() => AddToCart(title, image, price, quantity)}
+          onClick={handleAddToCart}
           caption="Zum Warenkorb hinzufügen"
         />
       </Details>
