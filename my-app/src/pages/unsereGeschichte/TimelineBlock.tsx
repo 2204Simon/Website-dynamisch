@@ -6,32 +6,34 @@ import {
   Timeline_year,
   Timeline_image,
   Timeline_header_sentence,
-
+  Details,
+  Image,
 } from "./TimelineBlock.styles";
 import { BlackColorButton } from "../general/button";
-import { Details } from "../produkte/styles/ShoppingCard.styles";
+/*import { Details } from "../produkte/styles/ShoppingCard.styles";*/
 
 
 interface TimelineBlockProperties {
-  timeline_image: string;
+  /*timeline_image: string;
   timeline_year: string;
   timeline_header_sentence: string;
-  timeline_further_information: string;
+  timeline_further_information: string;*/
+  image: string;
 }
 
 
 
-const TimelineBlock: React.FC<TimelineBlockProperties> = ({ timeline_image, timeline_year, timeline_header_sentence, timeline_further_information }) => {
+const TimelineBlock: React.FC<TimelineBlockProperties> = ({ /*timeline_image, timeline_year, timeline_header_sentence, timeline_further_information, */image }) => {
   const [quantity, setQuantity] = useState<number>(0);
 
   const handleQuantityChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuantity(Number(event.target.value));
   };
 
-  return (
+ /* return (
     <Container>
       <ImageContainer>
-        <Timeline_image src={timeline_image} alt="TimelineBlock" />
+        <Image src={image} alt="TimelineBlock" />
       </ImageContainer>
       <Details>
         <Timeline_year>{timeline_year}</Timeline_year>
@@ -42,7 +44,15 @@ const TimelineBlock: React.FC<TimelineBlockProperties> = ({ timeline_image, time
         />
       </Details>
     </Container>
-  );
+  );*/
+
+  return (
+   <Container>
+      <ImageContainer>
+        <Image src={image} alt="TimelineBlock" />
+      </ImageContainer>
+      </Container>
+     );
 };
 
 export default TimelineBlock;

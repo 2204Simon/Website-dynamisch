@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import { colors } from "../../general/constants";
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #fff;
+  background-color: ${colors.white};
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   padding: 1rem;
@@ -39,7 +40,7 @@ export const Title = styled.h2`
   margin: 0;
   font-size: 1.5rem;
   text-align: center;
-  color: black;
+  color: ${colors.black};
 `;
 
 export const Price = styled.p`

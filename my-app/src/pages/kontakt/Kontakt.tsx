@@ -57,9 +57,7 @@ function Kontakt(): JSX.Element {
       <hr />
       <ContactContainer>
         <h2>Newsletter abonnieren</h2>
-        <p>
-          Melden Sie sich für unseren Newsletter an, um Updates zu erhalten:
-        </p>
+        <p>Melde dich für unseren Newsletter an, um Updates zu erhalten:</p>
         <form onSubmit={handleSubmit}>
           <FormLabel>
             E-Mail-Adresse:
