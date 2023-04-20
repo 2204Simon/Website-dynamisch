@@ -1,6 +1,11 @@
 import React, { useState, ChangeEvent } from "react";
 import { useDispatch } from "react-redux"; // Import der useDispatch-Hook
-import { addToCart } from "../../redux/store"; // Import der addToCart-Action aus deiner Redux-Komponente
+import {
+  addToCart,
+  decreaseQuantity,
+  increaseQuantity,
+  CartItem,
+} from "../../redux/store"; // Import der addToCart-Action aus deiner Redux-Komponente
 import {
   Container,
   Details,
@@ -14,8 +19,6 @@ import {
 import { BlackColorButton } from "../general/button";
 import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
-import Button from "@mui/material/Button";
-import { Add, Remove } from "@mui/icons-material";
 
 interface ShoppingCardProps {
   image: string;
@@ -48,6 +51,14 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
     }
   };
 
+  const handlePlus = (item: CartItem) => {
+    decreaseQuantity(item);
+  };
+
+  const handleMinus = (item: CartItem) => {
+    increaseQuantity(item);
+  };
+
   return (
     <Container>
       <ImageContainer>
@@ -56,7 +67,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
       <Details>
         <Title>{title}</Title>
         <Price>Preis: {price} €</Price>
-        <Button variant="contained" color="primary" startIcon={<Add />} />
+
         <Quantity>
           <label htmlFor="quantity">Menge:</label>
           <QuantityInput
@@ -68,7 +79,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
             onChange={handleQuantityChange}
           />
         </Quantity>
-        <Button variant="contained" color="primary" startIcon={<Remove />} />
+
         <BlackColorButton
           onClick={handleAddToCart}
           caption="Zum Warenkorb hinzufügen"
