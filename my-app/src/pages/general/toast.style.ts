@@ -1,6 +1,7 @@
 import { Bounce, Flip, Slide, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
+import { colors } from "./constants";
 
 const StyledToastContainer = styled(ToastContainer)`
   .Toastify__toast-container {
@@ -22,8 +23,8 @@ export const CustomToast = {
       position: "top-left",
       transition: Slide,
       progressClassName: "my-toast-progress-bar",
-      progressStyle: { backgroundColor: "#aa7d03" },
-      style: { backgroundColor: "white", color: "black" },
+      progressStyle: { backgroundColor: colors.companycolor },
+      style: { backgroundColor: colors.white, color: colors.black },
     }),
   info: (message: string) =>
     toast.info(message, {
@@ -37,8 +38,8 @@ export const CustomToast = {
       position: "top-left",
       transition: Slide,
       progressClassName: "my-toast-progress-bar",
-      progressStyle: { backgroundColor: "#aa7d03" },
-      style: { backgroundColor: "white", color: "black" },
+      progressStyle: { backgroundColor: colors.companycolor },
+      style: { backgroundColor: colors.white, color: colors.black },
     }),
   success: (message: string) =>
     toast.success(message, {
@@ -52,8 +53,8 @@ export const CustomToast = {
       position: "top-left",
       transition: Slide,
       progressClassName: "my-toast-progress-bar",
-      progressStyle: { backgroundColor: "#aa7d03" },
-      style: { backgroundColor: "white", color: "black" },
+      progressStyle: { backgroundColor: colors.companycolor },
+      style: { backgroundColor: colors.white, color: colors.black },
     }),
 };
 

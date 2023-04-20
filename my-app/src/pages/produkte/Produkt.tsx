@@ -20,11 +20,12 @@ import Wasser from "../../img/Drinks/Wasserglas.jpg";
 import Zitronentee from "../../img/Drinks/Zitronentee.jpg";
 import HeißeSchokolade from "../../img/Drinks/heißeSchokolade.jpg";
 import { ToastContainer } from "react-toastify";
+import { colors } from "../general/constants";
 
 function Produkt() {
   return (
     <>
-      <h2 style={{ color: "black" }}>Essen</h2>
+      <h2 style={{ color: colors.black }}>Essen</h2>
       <div style={{ display: "flex", flexWrap: "nowrap", overflowX: "scroll" }}>
         <ShoppingCard title={"Baguette"} price={2.99} image={BaguetteAlone} />
         <ShoppingCard
@@ -53,7 +54,7 @@ function Produkt() {
         />
       </div>
 
-      <h2 style={{ color: "black" }}>Getränke</h2>
+      <h2 style={{ color: colors.black }}>Getränke</h2>
       <div style={{ display: "flex", flexWrap: "nowrap", overflowX: "scroll" }}>
         <ShoppingCard title={"Espresso"} price={1.99} image={Espresso} />
         <ShoppingCard title={"Kaffee"} price={5.99} image={Kaffee} />
@@ -73,7 +74,7 @@ function Produkt() {
         />
       </div>
 
-      <h2 style={{ color: "black" }}>Menüs</h2>
+      <h2 style={{ color: colors.black }}>Menüs</h2>
       <div style={{ display: "flex", flexWrap: "nowrap", overflowX: "scroll" }}>
         <ShoppingCard
           title={"Brötchen mit Kaffee"}
