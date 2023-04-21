@@ -26,7 +26,7 @@ export const useLoggedIn = (): LoggedInState => {
 export const LoggedInProvider: React.FC<{ children?: ReactNode }> = ({
   children,
 }) => {
-  const [loggedIn, setLoggedIn] = useState<boolean>(true); // Initialer Wert für den globalen Zustand
+  const [loggedIn, setLoggedIn] = useState<boolean>(false); // Initialer Wert für den globalen Zustand
 
   // Funktion, um den globalen Zustand zu ändern
   const changeLoggedIn = (): void => {

@@ -12,7 +12,6 @@ import {
 import { BlackColorButton } from "../general/button";
 /*import { Details } from "../produkte/styles/ShoppingCard.styles";*/
 
-
 interface TimelineBlockProperties {
   /*timeline_image: string;
   timeline_year: string;
@@ -21,16 +20,16 @@ interface TimelineBlockProperties {
   image: string;
 }
 
-
-
-const TimelineBlock: React.FC<TimelineBlockProperties> = ({ /*timeline_image, timeline_year, timeline_header_sentence, timeline_further_information, */image }) => {
+const TimelineBlock: React.FC<TimelineBlockProperties> = ({
+  /*timeline_image, timeline_year, timeline_header_sentence, timeline_further_information, */ image,
+}) => {
   const [quantity, setQuantity] = useState<number>(0);
 
   const handleQuantityChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuantity(Number(event.target.value));
   };
 
- /* return (
+  /* return (
     <Container>
       <ImageContainer>
         <Image src={image} alt="TimelineBlock" />
@@ -47,12 +46,12 @@ const TimelineBlock: React.FC<TimelineBlockProperties> = ({ /*timeline_image, ti
   );*/
 
   return (
-   <Container>
+    <Container>
       <ImageContainer>
         <Image src={image} alt="TimelineBlock" />
       </ImageContainer>
-      </Container>
-     );
+    </Container>
+  );
 };
 
 export default TimelineBlock;

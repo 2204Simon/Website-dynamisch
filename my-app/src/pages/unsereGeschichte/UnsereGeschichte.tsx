@@ -3,7 +3,6 @@ import TimelineBlock from "./TimelineBlock";
 import history_1 from "../../img/Our_History/history_1.jpg";
 /*import React, { useState } from "react";*/
 
-
 /*function UnsereGeschichte() {
   return (
     <>
@@ -20,9 +19,6 @@ import history_1 from "../../img/Our_History/history_1.jpg";
 )
 };
 */
-
-
-
 
 interface TimelineItemProps {
   date: string;
@@ -60,9 +56,9 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
 const UnsereGeschichte: React.FC = () => {
   return (
     <div className="platzhalter">
-        <section className="timeline-section">
-          <div className="timeline-items">
-            <TimelineItem
+      <section className="timeline-section">
+        <div className="timeline-items">
+          {/* <TimelineItem
               date="2016"
               <TimelineBlock>
               <image></image>
@@ -118,17 +114,12 @@ const UnsereGeschichte: React.FC = () => {
               description="Die drei Geschäftspartner Theodor Wilhelm Schmid, Robert Wunnerlich &amp; Otto Frank gründeten 1892 eine Bäckerei in Hof."
               details="Dies sind weitere Informationen zu dem hinstorischen Punkt."
 
-            />
-          </div>
-        </section>
-      
+            /> */}
+        </div>
+      </section>
     </div>
   );
 };
-
-
-
-
 
 /*type BoxProps = {
   title: string;
@@ -160,6 +151,4 @@ const UnsereGeschichte: React.FC = () => {
 };
 */
 
-
 export default UnsereGeschichte;
-

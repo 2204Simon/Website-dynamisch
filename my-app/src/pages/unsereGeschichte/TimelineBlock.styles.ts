@@ -13,22 +13,13 @@ export const Timeline_year = styled.h2`
   color: black;
 `;
 
-export const Timeline_header_sentence = styled.h3`
-`;
+export const Timeline_header_sentence = styled.h3``;
 
 export const Timeline_further_information = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
-
-
-
-
-
-
-
-
 
 export const Container = styled.div`
   display: flex;
@@ -65,9 +56,6 @@ export const Image = styled.img`
   transition: transform 0.3s ease-in-out;
 `;
 
-
-
-
 export const TimelineSection = styled.section`
   background-color: transparent;
   min-height: 100vh;
@@ -82,9 +70,9 @@ export const TimelineItems = styled.div`
   position: relative;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
-    top: 10px; 
+    top: 10px;
     left: calc(50% - 1px);
     width: 3px;
     height: 100%;
@@ -102,7 +90,7 @@ export const TimelineItem = styled.div`
   }
 
   &:nth-child(odd) {
-    padding-right: calc(50% + 30px); 
+    padding-right: calc(50% + 30px);
     text-align: right;
   }
 
@@ -148,7 +136,7 @@ export const TimelineHeading = styled.h3`
   font-weight: 700;
   line-height: 22px;
   color: #000;
-  margin: 0px 0px 10px;   
+  margin: 0px 0px 10px;
 `;
 
 export const TimelineParagraph = styled.p`
