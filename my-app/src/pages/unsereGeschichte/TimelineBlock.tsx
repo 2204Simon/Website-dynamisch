@@ -23,7 +23,7 @@ interface TimelineBlockProperties {
 
 
 
-const TimelineBlock: React.FC<TimelineBlockProperties> = ({ /*timeline_image, timeline_year, timeline_header_sentence, timeline_further_information, */image }) => {
+const TimelineBlock: React.FC<TimelineBlockProperties> = ({ /*timeline_image, timeline_year, timeline_header_sentence, timeline_further_information, image */}) => {
   const [quantity, setQuantity] = useState<number>(0);
 
   const handleQuantityChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -49,10 +49,10 @@ const TimelineBlock: React.FC<TimelineBlockProperties> = ({ /*timeline_image, ti
   return (
    <Container>
       <ImageContainer>
-        <Image src={image} alt="TimelineBlock" />
+        {/* <Image src={image} alt="TimelineBlock" /> */}
       </ImageContainer>
       </Container>
-     );
+    );
 };
 
 export default TimelineBlock;
