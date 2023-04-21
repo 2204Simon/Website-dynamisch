@@ -165,7 +165,7 @@ textarea {
 /* ########################### Menü ################################## */
 /* ########################################################################## */
 
-.navigation ul li {
+/* .navigation ul li {
   list-style: none;
   display: inline-block;
   margin: 0 20px;
@@ -187,7 +187,7 @@ textarea {
 }
 
 .navigation ul li::after {
-  /* Strich Hover Effekt im Menü */
+  /* Strich Hover Effekt im Menü 
   content: "";
   height: 3px;
   width: 0%;
@@ -199,17 +199,17 @@ textarea {
 }
 
 .navigation ul li:hover::after {
-  /* Strich Effekt anzeigen */
+  /*Strich Effekt anzeigen
   width: 100%;
 }
 
 .menu {
   display: flex;
   justify-content: center;
-  flex-direction: row; /* horizontale Ausrichtung Menülinks */
+  flex-direction: row; /* horizontale Ausrichtung Menülinks 
   align-items: center;
-  z-index: 3; /* Kreuz Burger Menü */
-  transition: 0.1s; /* Geschwindigkeit Einschub Burger Menü  */
+  z-index: 3; /* Kreuz Burger Menü 
+  transition: 0.1s; /* Geschwindigkeit Einschub Burger Menü  
 }
 
 .menu li {
@@ -219,10 +219,10 @@ textarea {
 .menu li a {
   text-decoration: none;
   display: block;
-  padding: 40px 25px;
+  padding: 20px 25px;
   font-size: 18px;
   line-height: 1;
-  transition: 0.3s; /* Bewegung nach oben beim Hover */
+  transition: 0.3s; /* Bewegung nach oben beim Hover 
 }
 
 .menu li a:hover {
@@ -233,7 +233,7 @@ textarea {
 .header {
   position: relative;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background: transparent;
   transition: 0.3s;
@@ -243,11 +243,12 @@ textarea {
 
 .navigation {
   display: flex;
+
   justify-content: space-between;
   align-items: center;
-}
+} */
 
-.hamburger {
+/* .hamburger {
   position: relative;
   width: 30px;
   height: 4px;
@@ -260,7 +261,7 @@ textarea {
 
 .hamburger:before,
 .hamburger:after {
-  content: ""; /* Inhalt, der auf Button stehen könnte */
+  content: ""; /* Inhalt, der auf Button stehen könnte 
   position: absolute;
   height: 4px;
   right: 0;
@@ -270,8 +271,8 @@ textarea {
 }
 
 .hamburger:before {
-  top: -10px; /* Abstand zwischen Striche */
-  width: 30px; /* Länge der Striche */
+  top: -10px; /* Abstand zwischen Striche 
+  width: 30px; /* Länge der Striche 
 }
 
 .hamburger:after {
@@ -306,8 +307,8 @@ textarea {
 
 .navigation input:checked ~ .menu {
   right: 0;
-  box-shadow: -20px 0 40px rgba(0, 0, 0, 0.3); /* Shadow bei ausgefahrenem Burger Menü */
-}
+  box-shadow: -20px 0 40px rgba(0, 0, 0, 0.3); /* Shadow bei ausgefahrenem Burger Menü 
+} */
 /* ########################################################################## */
 /* ########################### Home ################################## */
 /* ########################################################################## */
@@ -895,38 +896,39 @@ section:hover .UntenKarte {
 }
 
 @media screen and (max-width: 1200px) {
-  /*extra Media für Burger Menü*/
+  /*extra Media für Burger Menü
   .hamburger,
   .toggle-menu {
     display: block;
     z-index: 3;
   }
+  */
 
-  .hamburger {
-    right: 40px; /* Ausrichtung 3 Balken */
+  /* .hamburger {
+    right: 40px; /* Ausrichtung 3 Balken 
     z-index: 3;
   }
   .toggle-menu {
-    right: 30px; /* Ausrichtung Checkbox im Hintergrund */
+    right: 30px; /* Ausrichtung Checkbox im Hintergrund 
     z-index: 3;
-  }
+  } */
 
-  .menu {
+  /* .menu {
     justify-content: start;
     flex-direction: column;
     align-items: center;
     position: fixed;
     top: 0;
-    right: -350px; /* wie weit wird Menü eingeschoben */
+    right: -350px; /* wie weit wird Menü eingeschoben 
     background: #fff;
     width: 300px;
     height: 100%;
     padding-top: 65px;
-    border-radius: 25px 0px 0px 25px; /* Ecken abgerundet */
+    border-radius: 25px 0px 0px 25px; /* Ecken abgerundet 
     z-index: 2;
-  }
+  } */
 
-  .menu li {
+  /* .menu li {
     width: 100%;
     z-index: 3;
   }
@@ -937,7 +939,7 @@ section:hover .UntenKarte {
     font-size: 24px;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.01) inset;
     z-index: 3;
-  }
+  } */
 
   .parallax footer {
     padding-bottom: 0px;
@@ -948,10 +950,10 @@ section:hover .UntenKarte {
   }
 }
 
-@media (min-width: 1201px) {
-  /* Hamburger Menü nur in mobiler Ansicht anzeigen */
+/* @media (min-width: 1201px) {
+  /* Hamburger Menü nur in mobiler Ansicht anzeigen 
   .hamburger,
   .toggle-menu {
     display: none;
   }
-}
+} */

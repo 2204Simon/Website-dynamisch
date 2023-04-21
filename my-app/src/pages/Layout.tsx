@@ -29,8 +29,6 @@ const Layout = () => {
         </div>
         <nav>
           <div className="navigation">
-            <input type="checkbox" className="toggle-menu" />
-            <div className="hamburger"></div>
             <ul className="menu">
               <li>
                 <Link to="/">Home</Link>

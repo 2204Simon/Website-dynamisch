@@ -6,13 +6,12 @@ import {
   ClockCounterClockwise,
   AddressBook,
 } from "phosphor-react";
+import "./BottomNavBar.css";
 
 function BottomNavBar(): JSX.Element {
   return (
     <nav>
       <div className="navigation bottom-nav">
-        <input type="checkbox" className="toggle-menu" />
-        <div className="hamburger"></div>
         <ul className="menu">
           <li>
             <Link to="/">
@@ -44,5 +43,4 @@ function BottomNavBar(): JSX.Element {
     </nav>
   );
 }
-
 export default BottomNavBar;
