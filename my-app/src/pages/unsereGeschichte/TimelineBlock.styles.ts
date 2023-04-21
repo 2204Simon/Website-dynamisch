@@ -33,7 +33,7 @@ export const Timeline_further_information = styled.div`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   padding: 1rem;
@@ -92,7 +92,7 @@ export const TimelineItems = styled.div`
   }
 `;
 
-export const TimelineItem = styled.div`
+export const TimelineItemA = styled.div`
   margin-bottom: 40px;
   width: 100%;
   position: relative;
@@ -137,10 +137,10 @@ export const TimelineDate = styled.h4`
 `;
 
 export const TimelineContent = styled.div`
-  background-color: #aa7d03;
+  // background-color: #ffffff;
   padding: 30px;
   border-radius: 15px;
-  border: 2px solid #000;
+  border: 2px solid #aa7d03;
 `;
 
 export const TimelineHeading = styled.h3`
