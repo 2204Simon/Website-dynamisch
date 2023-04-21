@@ -34,7 +34,7 @@ function Produkt() {
       <div style={{ display: "flex", flexWrap: "nowrap", overflowX: "scroll" }}>
         <ShoppingCard title={"Baguette"} price={2.99} image={BaguetteAlone} />
         <ShoppingCard
-          title={"Baguette mit Käse"}
+          title={"Sandwich mit Käse"}
           price={3.59}
           image={BaguetteYellow}
         />
