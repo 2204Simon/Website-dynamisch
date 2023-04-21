@@ -16,6 +16,7 @@ import DeinKonto from "./pages/loggedIn/DeinKonto";
 import { LoggedInProvider } from "./globalVariables/loggedin"; // Import the LoggedInProvider component
 import Impressum from "./pages/Impressum";
 import Datenschutzerklaerung from "./pages/Datenschutzerklaerung";
+import BottomNavBar from "./BottomNavBar";
 
 export default function App(): JSX.Element {
   return (
@@ -46,6 +47,7 @@ export default function App(): JSX.Element {
                 <Route path="*" element={<NoPage />} />
               </Route>
             </Routes>
+            <BottomNavBar /> {/* Add BottomNavBar component */}
             <Footer />
           </div>
         </BrowserRouter>

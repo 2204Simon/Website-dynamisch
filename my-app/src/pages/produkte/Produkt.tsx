@@ -21,6 +21,11 @@ import Zitronentee from "../../img/Drinks/Zitronentee.jpg";
 import HeißeSchokolade from "../../img/Drinks/heißeSchokolade.jpg";
 import { ToastContainer } from "react-toastify";
 import { colors } from "../general/constants";
+import BrotEiTeeUndObst from "../../img/Food/BrotEiTeeUndObst.webp";
+import EigetränkUndEierbrot from "../../img/Food/EigetränkUndEierbrot.webp";
+import KaffeeMitEiUndBrot from "../../img/Food/KaffeeMitEiUndBrot.webp";
+import OSaftMitFrüchtebrot from "../../img/Food/OSaftMitFrüchtebrot.webp";
+import OSaftUndOrangenbrot from "../../img/Food/OSaftUndOrangenbrot.webp";
 
 function Produkt() {
   return (
@@ -81,9 +86,31 @@ function Produkt() {
           price={5.99}
           image={BrötchenMitKaffe}
         />
-        <ShoppingCard title={"Menü2"} price={5.99} image={Logo} />
-        <ShoppingCard title={"Menü3"} price={5.99} image={Logo} />
-        <ShoppingCard title={"Menu4"} price={5.99} image={Logo} />
+        <ShoppingCard
+          title={"Obstmenü"}
+          price={5.99}
+          image={BrotEiTeeUndObst}
+        />
+        <ShoppingCard
+          title={"Eiermenü"}
+          price={5.99}
+          image={EigetränkUndEierbrot}
+        />
+        <ShoppingCard
+          title={"Klassikermenü"}
+          price={5.99}
+          image={KaffeeMitEiUndBrot}
+        />
+        <ShoppingCard
+          title={"Broccolimenü"}
+          price={5.99}
+          image={OSaftMitFrüchtebrot}
+        />
+        <ShoppingCard
+          title={"Orangenmenü"}
+          price={5.99}
+          image={OSaftUndOrangenbrot}
+        />
       </div>
       <ToastContainer />
     </>
