@@ -1,7 +1,7 @@
 import { Outlet, Link } from "react-router-dom";
 import logo from ".././img/Logo.webp";
 import "../App.css";
-import { SignIn, User, ShoppingCartSimple } from "phosphor-react";
+import { SignIn, User, ShoppingCart } from "phosphor-react";
 import { useLoggedIn } from "../globalVariables/loggedin";
 import Badge from "@mui/material/Badge";
 import { RootState } from "../redux/store";
@@ -46,18 +46,18 @@ const Layout = () => {
               </li>
               <li>
                 <Link to="/Bestellung">
-                  <ShoppingCartSimple />
+                  <ShoppingCart weight="fill" />
                   <Badge badgeContent={CartArrayLength} color="error" />
                 </Link>
               </li>
               <li>
                 {loggedIn ? (
                   <Link to="/LoggedIn">
-                    <User />
+                    <User weight="fill" />
                   </Link>
                 ) : (
                   <Link to="/SignUp">
-                    <SignIn />
+                    <SignIn weight="fill" />
                   </Link>
                 )}
               </li>
