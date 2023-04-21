@@ -19,6 +19,8 @@ class Chatra extends Component<ChatraProps> {
 declare global {
   interface Window {
     ChatraSetup: {
+      chatWidth: number;
+      chatHeight: number;
       colors: {
         buttonText: string;
         buttonBg: string;
@@ -28,6 +30,8 @@ declare global {
 }
 
 window.ChatraSetup = {
+  chatWidth: 300,
+  chatHeight: 450,
   colors: {
     buttonText: colors.white /* chat button text color */,
     buttonBg: colors.companycolor /* chat button background color */,
