@@ -907,7 +907,7 @@ section:hover .UntenKarte {
     z-index: 3;
   }
   .toggle-menu {
-    right: 40px; /* Ausrichtung Checkbox im Hintergrund */
+    right: 30px; /* Ausrichtung Checkbox im Hintergrund */
     z-index: 3;
   }
 
