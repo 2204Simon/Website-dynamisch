@@ -6,41 +6,43 @@ import {
   ClockCounterClockwise,
   AddressBook,
 } from "phosphor-react";
-import "./BottomNavBar.css";
+import { BottomNavStyle } from "./BottomNavBar.styles";
 
 function BottomNavBar(): JSX.Element {
   return (
-    <nav>
-      <div className="navigation bottom-nav">
-        <ul className="menu">
-          <li>
-            <Link to="/">
-              <HouseLine size={24} weight="fill" />
-            </Link>
-          </li>
-          <li>
-            <Link to="/Produkte">
-              <ShoppingBagOpen size={24} weight="fill" />
-            </Link>
-          </li>
-          <li>
-            <Link to="/Bestellung">
-              <ShoppingCart size={24} weight="fill" />
-            </Link>
-          </li>
-          <li>
-            <Link to="/Unsere Geschichte">
-              <ClockCounterClockwise size={24} weight="fill" />
-            </Link>
-          </li>
-          <li>
-            <Link to="/Kontakt">
-              <AddressBook size={24} weight="fill" />
-            </Link>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <BottomNavStyle>
+      <nav>
+        <div className="navigation bottom-nav">
+          <ul className="menu">
+            <li>
+              <Link to="/">
+                <HouseLine size={24} weight="fill" />
+              </Link>
+            </li>
+            <li>
+              <Link to="/Produkte">
+                <ShoppingBagOpen size={24} weight="fill" />
+              </Link>
+            </li>
+            <li>
+              <Link to="/Bestellung">
+                <ShoppingCart size={24} weight="fill" />
+              </Link>
+            </li>
+            <li>
+              <Link to="/Unsere Geschichte">
+                <ClockCounterClockwise size={24} weight="fill" />
+              </Link>
+            </li>
+            <li>
+              <Link to="/Kontakt">
+                <AddressBook size={24} weight="fill" />
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </BottomNavStyle>
   );
 }
 export default BottomNavBar;
