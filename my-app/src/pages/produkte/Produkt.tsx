@@ -29,36 +29,70 @@ import OSaftUndOrangenbrot from "../../img/Food/OSaftUndOrangenbrot.webp";
 import ScrollContainer from "./Scroll";
 
 function Produkt() {
+  const showScrollContainer = window.innerWidth >= 1024;
+  const isMaxWidth1234 = window.matchMedia("(max-width: 1234px)").matches;
   return (
     <>
       <h2 style={{ color: colors.black }}>Essen</h2>
-      <ScrollContainer scrollAmount={200}>
-        <ShoppingCard title={"Baguette"} price={2.99} image={BaguetteAlone} />
-        <ShoppingCard
-          title={"Sandwich mit Käse"}
-          price={3.59}
-          image={BaguetteYellow}
-        />
-        <ShoppingCard title={"Brezel"} price={1.49} image={Brezel} />
-        <ShoppingCard title={"Brötchen"} price={1.29} image={Brötchen} />
-        <ShoppingCard title={"Croissant"} price={1.79} image={Croissant} />
-        <ShoppingCard
-          title={"Käsebrötchen"}
-          price={3.79}
-          image={HamburgerBrötchen}
-        />
-        <ShoppingCard title={"Toast"} price={3.59} image={Toast} />
-        <ShoppingCard
-          title={"Belegtes Brötchen"}
-          price={1.79}
-          image={BelegtesBrötchen}
-        />
-        <ShoppingCard
-          title={"Baguette mit Käse"}
-          price={3.59}
-          image={KäseBaguette}
-        />
-      </ScrollContainer>
+      {showScrollContainer && !isMaxWidth1234 ? (
+        <ScrollContainer scrollAmount={200}>
+          <ShoppingCard title={"Baguette"} price={2.99} image={BaguetteAlone} />
+          <ShoppingCard
+            title={"Sandwich mit Käse"}
+            price={3.59}
+            image={BaguetteYellow}
+          />
+          <ShoppingCard title={"Brezel"} price={1.49} image={Brezel} />
+          <ShoppingCard title={"Brötchen"} price={1.29} image={Brötchen} />
+          <ShoppingCard title={"Croissant"} price={1.79} image={Croissant} />
+          <ShoppingCard
+            title={"Käsebrötchen"}
+            price={3.79}
+            image={HamburgerBrötchen}
+          />
+          <ShoppingCard title={"Toast"} price={3.59} image={Toast} />
+          <ShoppingCard
+            title={"Belegtes Brötchen"}
+            price={1.79}
+            image={BelegtesBrötchen}
+          />
+          <ShoppingCard
+            title={"Baguette mit Käse"}
+            price={3.59}
+            image={KäseBaguette}
+          />
+        </ScrollContainer>
+      ) : (
+        <div
+          style={{ display: "flex", flexWrap: "nowrap", overflowX: "scroll" }}
+        >
+          <ShoppingCard title={"Baguette"} price={2.99} image={BaguetteAlone} />
+          <ShoppingCard
+            title={"Sandwich mit Käse"}
+            price={3.59}
+            image={BaguetteYellow}
+          />
+          <ShoppingCard title={"Brezel"} price={1.49} image={Brezel} />
+          <ShoppingCard title={"Brötchen"} price={1.29} image={Brötchen} />
+          <ShoppingCard title={"Croissant"} price={1.79} image={Croissant} />
+          <ShoppingCard
+            title={"Käsebrötchen"}
+            price={3.79}
+            image={HamburgerBrötchen}
+          />
+          <ShoppingCard title={"Toast"} price={3.59} image={Toast} />
+          <ShoppingCard
+            title={"Belegtes Brötchen"}
+            price={1.79}
+            image={BelegtesBrötchen}
+          />
+          <ShoppingCard
+            title={"Baguette mit Käse"}
+            price={3.59}
+            image={KäseBaguette}
+          />
+        </div>
+      )}
 
       <h2 style={{ color: colors.black }}>Getränke</h2>
       <div style={{ display: "flex", flexWrap: "nowrap", overflowX: "scroll" }}>
