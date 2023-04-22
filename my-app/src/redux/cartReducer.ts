@@ -1,4 +1,4 @@
-import { ActionTypes, CartState, CartItem } from "./types"; // Importieren Sie die erforderlichen Typen
+import { ActionTypes, CartState } from "./types"; // Importieren Sie die erforderlichen Typen
 
 const cartReducer = (
   state: CartState = {
