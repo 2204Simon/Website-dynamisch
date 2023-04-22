@@ -1,6 +1,11 @@
-import { ActionTypes, CartState } from "./types"; // Importieren Sie die erforderlichen Typen
+import { ActionTypes, CartState, CartItem } from "./types"; // Importieren Sie die erforderlichen Typen
 
-const cartReducer = (state: CartState = { cartItems: [] }, action: any) => {
+const cartReducer = (
+  state: CartState = {
+    cartItems: [{ logo: "", preis: 2, produktname: "haha", anzahl: 3 }],
+  },
+  action: any
+) => {
   switch (action.type) {
     case ActionTypes.ADD_TO_CART:
       return {
