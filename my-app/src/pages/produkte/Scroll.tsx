@@ -49,12 +49,12 @@ const ScrollContainer: React.FC<ScrollContainerProps> = ({
   const ArrowContainer = styled.div`
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 50px;
     margin-top: 250px;
     padding: 10px;
     display: flex;
     justify-content: space-between;
-    z-index: 0;
+    z-index: 1;
   `;
 
   return (
