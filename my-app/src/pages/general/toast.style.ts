@@ -1,14 +1,6 @@
-import { Bounce, Flip, Slide, ToastContainer, toast } from "react-toastify";
+import { Slide, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import styled from "styled-components";
 import { colors } from "./constants";
-
-const StyledToastContainer = styled(ToastContainer)`
-  .Toastify__toast-container {
-    width: 1200px;
-    height: 1200px;
-  }
-`; //Hier passt etwas noch nicht, Größe ändert sich leider nicht von den PushUps
 
 export const CustomToast = {
   error: (message: string) =>
@@ -57,5 +49,3 @@ export const CustomToast = {
       style: { backgroundColor: colors.white, color: colors.black },
     }),
 };
-
-export default StyledToastContainer;

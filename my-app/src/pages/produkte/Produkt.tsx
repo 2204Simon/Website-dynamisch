@@ -26,12 +26,13 @@ import EigetränkUndEierbrot from "../../img/Food/EigetränkUndEierbrot.webp";
 import KaffeeMitEiUndBrot from "../../img/Food/KaffeeMitEiUndBrot.webp";
 import OSaftMitFrüchtebrot from "../../img/Food/OSaftMitFrüchtebrot.webp";
 import OSaftUndOrangenbrot from "../../img/Food/OSaftUndOrangenbrot.webp";
+import ScrollContainer from "./Scroll";
 
 function Produkt() {
   return (
     <>
       <h2 style={{ color: colors.black }}>Essen</h2>
-      <div style={{ display: "flex", flexWrap: "nowrap", overflowX: "scroll" }}>
+      <ScrollContainer scrollAmount={200}>
         <ShoppingCard title={"Baguette"} price={2.99} image={BaguetteAlone} />
         <ShoppingCard
           title={"Sandwich mit Käse"}
@@ -57,7 +58,7 @@ function Produkt() {
           price={3.59}
           image={KäseBaguette}
         />
-      </div>
+      </ScrollContainer>
 
       <h2 style={{ color: colors.black }}>Getränke</h2>
       <div style={{ display: "flex", flexWrap: "nowrap", overflowX: "scroll" }}>
