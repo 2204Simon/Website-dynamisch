@@ -16,27 +16,27 @@ function BottomNavBar(): JSX.Element {
           <ul className="menu">
             <li>
               <Link to="/">
-                <HouseLine size={24} weight="fill" />
+                <HouseLine size={40} weight="fill" />
               </Link>
             </li>
             <li>
               <Link to="/Produkte">
-                <ShoppingBagOpen size={24} weight="fill" />
+                <ShoppingBagOpen size={40} weight="fill" />
               </Link>
             </li>
             <li>
               <Link to="/Bestellung">
-                <ShoppingCart size={24} weight="fill" />
+                <ShoppingCart size={40} weight="fill" />
               </Link>
             </li>
             <li>
               <Link to="/Unsere Geschichte">
-                <ClockCounterClockwise size={24} weight="fill" />
+                <ClockCounterClockwise size={40} weight="fill" />
               </Link>
             </li>
             <li>
               <Link to="/Kontakt">
-                <AddressBook size={24} weight="fill" />
+                <AddressBook size={40} weight="fill" />
               </Link>
             </li>
           </ul>
