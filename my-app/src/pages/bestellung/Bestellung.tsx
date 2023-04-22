@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart, RootState, CartItem } from "../../redux/store";
 
 import Warenkorb from "./Warenkorb";
 import SideBarBuy from "./SideBarBuy";
@@ -12,10 +11,14 @@ import {
 } from "./stylesBestellung/Bestellung.styles";
 import { Button } from "../general/button.styles";
 import { Link as RouterLink } from "react-router-dom";
+import { CartItem, CartState } from "../../redux/types";
+import { removeFromCart } from "../../redux/action";
 function WarenkorbSeite(): JSX.Element {
   // Zugriff auf den Gesamtpreis aus dem Redux-Store
   const dispatch = useDispatch(); // Zugriff auf die dispatch-Funktion, um Aktionen auszulösen
-  const cartItems = useSelector((state: RootState) => state.cartItems);
+  const cartItems = useSelector(
+    (state: { cart: CartState }) => state.cart.cartItems
+  );
 
   const handleRemoveItem = (item: CartItem) => {
     dispatch(removeFromCart(item)); // Aktion zum Entfernen eines Elements aus dem Warenkorb mit dispatch auslösen

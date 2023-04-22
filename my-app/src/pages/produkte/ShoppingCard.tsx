@@ -1,11 +1,6 @@
 import React, { useState, ChangeEvent } from "react";
 import { useDispatch } from "react-redux"; // Import der useDispatch-Hook
-import {
-  addToCart,
-  decreaseQuantity,
-  increaseQuantity,
-  CartItem,
-} from "../../redux/store"; // Import der addToCart-Action aus deiner Redux-Komponente
+// Import der addToCart-Action aus deiner Redux-Komponente
 import {
   Container,
   Details,
@@ -19,6 +14,12 @@ import {
 import { BlackColorButton } from "../general/button";
 import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
+import {
+  addToCart,
+  decreaseQuantity,
+  increaseQuantity,
+} from "../../redux/action";
+import { CartItem } from "../../redux/types";
 
 interface ShoppingCardProps {
   image: string;
