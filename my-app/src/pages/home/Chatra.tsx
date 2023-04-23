@@ -30,8 +30,8 @@ declare global {
 }
 
 window.ChatraSetup = {
-  chatWidth: 300,
-  chatHeight: 450,
+  chatWidth: 500,
+  chatHeight: 500,
   colors: {
     //if (<style>@media (max-width: 1200px)</style>)  //weiß nicht wie es geht
     //{
