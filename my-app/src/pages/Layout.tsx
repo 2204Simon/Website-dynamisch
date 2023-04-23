@@ -46,14 +46,14 @@ const Layout = () => {
               </li>
               <li>
                 <Link to="/Bestellung">
-                  <ShoppingCart weight="fill" />
+                  <ShoppingCart />
                   <Badge badgeContent={arrayLength} color="error" />
                 </Link>
               </li>
               <li>
                 {loggedIn ? (
                   <Link to="/LoggedIn">
-                    <User weight="fill" />
+                    <User />
                   </Link>
                 ) : (
                   <Link to="/SignUp">
