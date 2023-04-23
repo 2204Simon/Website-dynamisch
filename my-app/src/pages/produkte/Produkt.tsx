@@ -30,11 +30,11 @@ import ScrollContainer from "./Scroll";
 
 function Produkt() {
   const showScrollContainer = window.innerWidth >= 1024;
-  const isMaxWidth1234 = window.matchMedia("(max-width: 1234px)").matches;
+  const isMaxWidth1024 = window.matchMedia("(max-width: 1024px)").matches;
   return (
     <>
       <h2 style={{ color: colors.black }}>Essen</h2>
-      {showScrollContainer && !isMaxWidth1234 ? (
+      {showScrollContainer && !isMaxWidth1024 ? (
         <ScrollContainer scrollAmount={200}>
           <ShoppingCard title={"Baguette"} price={2.99} image={BaguetteAlone} />
           <ShoppingCard

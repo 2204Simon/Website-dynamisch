@@ -6,16 +6,14 @@ export const BottomNavStyle = styled.div`
     position: fixed;
     bottom: 0;
     width: 100%;
-    background-color: white;
+    background-color: black;
     z-index: 1;
   }
 
   .bottom-nav .menu {
     display: flex;
-    justify-content: left;
     align-items: center;
     list-style: none;
-    margin: 0;
     padding: 0;
   }
 
@@ -27,7 +25,7 @@ export const BottomNavStyle = styled.div`
 
   .bottom-nav .menu a {
     display: block;
-    color: ${colors.companycolor};
+    color: white;
     text-decoration: none;
   }
 

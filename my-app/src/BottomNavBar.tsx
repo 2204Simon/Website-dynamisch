@@ -7,6 +7,7 @@ import {
   AddressBook,
 } from "phosphor-react";
 import { BottomNavStyle } from "./BottomNavBar.styles";
+import { colors } from "./pages/general/constants";
 
 function BottomNavBar(): JSX.Element {
   return (
@@ -16,17 +17,17 @@ function BottomNavBar(): JSX.Element {
           <ul className="menu">
             <li>
               <Link to="/" onClick={() => window.scrollTo(0, 0)}>
-                <HouseLine size={40} weight="fill" />
+                <HouseLine size={40} />
               </Link>
             </li>
             <li>
               <Link to="/Produkte" onClick={() => window.scrollTo(0, 0)}>
-                <ShoppingBagOpen size={40} weight="fill" />
+                <ShoppingBagOpen size={40} />
               </Link>
             </li>
             <li>
               <Link to="/Bestellung" onClick={() => window.scrollTo(0, 0)}>
-                <ShoppingCart size={40} weight="fill" />
+                <ShoppingCart size={40} />
               </Link>
             </li>
             <li>
@@ -34,13 +35,22 @@ function BottomNavBar(): JSX.Element {
                 to="/Unsere Geschichte"
                 onClick={() => window.scrollTo(0, 0)}
               >
-                <ClockCounterClockwise size={40} weight="fill" />
+                <ClockCounterClockwise size={40} />
               </Link>
             </li>
             <li>
               <Link to="/Kontakt" onClick={() => window.scrollTo(0, 0)}>
-                <AddressBook size={40} weight="fill" />
+                <AddressBook size={40} />
               </Link>
+            </li>
+            <li>
+              <AddressBook
+                size={40}
+                style={{
+                  color: "black",
+                  background: "black",
+                }}
+              />
             </li>
           </ul>
         </div>

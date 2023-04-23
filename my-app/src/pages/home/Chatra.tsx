@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { colors } from "../general/constants";
 
 interface ChatraProps {}
@@ -33,8 +33,16 @@ window.ChatraSetup = {
   chatWidth: 300,
   chatHeight: 450,
   colors: {
-    buttonText: colors.white /* chat button text color */,
+    //if (<style>@media (max-width: 1200px)</style>)  //weiß nicht wie es geht
+    //{
+    buttonText: colors.black /* chat button text color */,
     buttonBg: colors.companycolor /* chat button background color */,
+    //}
+    /* else
+    {
+      buttonText: colors.white /* chat button text color ,
+      buttonBg: colors.companycolor /* chat button background color ,
+    } */
   },
 };
 
