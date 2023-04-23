@@ -36,8 +36,8 @@ window.ChatraSetup = {
   chatHeight: 500,
   buttonSize: 50,
   colors: {
-    buttonText: colors.black,
-    buttonBg: colors.companycolor,
+    buttonText: colors.companycolor,
+    buttonBg: colors.black,
   },
 };
 
