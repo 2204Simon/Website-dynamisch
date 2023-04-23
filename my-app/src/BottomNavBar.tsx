@@ -43,15 +43,6 @@ function BottomNavBar(): JSX.Element {
                 <AddressBook size={40} />
               </Link>
             </li>
-            <li>
-              <AddressBook
-                size={40}
-                style={{
-                  color: "black",
-                  background: "black",
-                }}
-              />
-            </li>
           </ul>
         </div>
       </nav>

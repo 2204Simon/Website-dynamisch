@@ -1,11 +1,15 @@
 import styled from "styled-components";
 import { colors } from "./pages/general/constants";
+
 export const BottomNavStyle = styled.div`
   .bottom-nav {
-    display: none;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
     position: fixed;
     bottom: 0;
     width: 100%;
+    height: 75px;
     background-color: black;
     z-index: 1;
   }
@@ -13,25 +17,39 @@ export const BottomNavStyle = styled.div`
   .bottom-nav .menu {
     display: flex;
     align-items: center;
+    justify-content: space-around;
     list-style: none;
+    margin: 0;
     padding: 0;
+    width: 100%;
+    height: 100%;
   }
 
   .bottom-nav .menu li {
-    font-size: 1.2rem;
-    padding: 0.5rem;
+    flex-grow: 1;
     text-align: center;
+    padding: 0;
+    margin: 0;
   }
 
   .bottom-nav .menu a {
-    display: block;
-    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: ${colors.companycolor};
     text-decoration: none;
   }
 
   @media (max-width: 1200px) {
+    .bottom-nav .menu {
+      justify-content: flex-end;
+      padding-right: 100px; //Ausrichtung Icons wegen Chatbot
+    }
+  }
+  @media (min-width: 1200px) {
     .bottom-nav {
-      display: block;
+      display: none;
     }
   }
 `;

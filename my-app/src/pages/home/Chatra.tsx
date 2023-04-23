@@ -16,11 +16,13 @@ class Chatra extends Component<ChatraProps> {
     return null;
   }
 }
+
 declare global {
   interface Window {
     ChatraSetup: {
       chatWidth: number;
       chatHeight: number;
+      buttonSize: number;
       colors: {
         buttonText: string;
         buttonBg: string;
@@ -32,17 +34,10 @@ declare global {
 window.ChatraSetup = {
   chatWidth: 500,
   chatHeight: 500,
+  buttonSize: 50,
   colors: {
-    //if (<style>@media (max-width: 1200px)</style>)  //weiß nicht wie es geht
-    //{
-    buttonText: colors.black /* chat button text color */,
-    buttonBg: colors.companycolor /* chat button background color */,
-    //}
-    /* else
-    {
-      buttonText: colors.white /* chat button text color ,
-      buttonBg: colors.companycolor /* chat button background color ,
-    } */
+    buttonText: colors.black,
+    buttonBg: colors.companycolor,
   },
 };
 
