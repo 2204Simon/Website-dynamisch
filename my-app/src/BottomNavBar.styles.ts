@@ -9,7 +9,7 @@ export const BottomNavStyle = styled.div`
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 80px;
+    height: 85px;
     background-color: ${colors.companycolor};
     z-index: 1;
   }
@@ -30,6 +30,7 @@ export const BottomNavStyle = styled.div`
     text-align: center;
     padding: 0;
     margin: 0;
+    height: 50px;
   }
 
   .bottom-nav .menu a {
