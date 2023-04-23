@@ -18,22 +18,22 @@ function BottomNavBar(): JSX.Element {
           <ul className="menu">
             <li>
               <Link to="/" onClick={() => window.scrollTo(0, 0)}>
-                <HouseLine size={40} />
+                <HouseLine size={30} />
               </Link>
             </li>
             <li>
               <Link to="/Produkte" onClick={() => window.scrollTo(0, 0)}>
-                <ShoppingBagOpen size={40} />
+                <ShoppingBagOpen size={30} />
               </Link>
             </li>
             <li>
               <Link to="/Bestellung" onClick={() => window.scrollTo(0, 0)}>
-                <ShoppingCart size={40} />
+                <ShoppingCart size={30} />
               </Link>
             </li>
             <li>
               <Link to="/LoggedIn" onClick={() => window.scrollTo(0, 0)}>
-                <User size={40} />
+                <User size={30} />
               </Link>
             </li>
           </ul>
