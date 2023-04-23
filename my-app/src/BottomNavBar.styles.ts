@@ -9,8 +9,8 @@ export const BottomNavStyle = styled.div`
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 75px;
-    background-color: black;
+    height: 80px;
+    background-color: ${colors.companycolor};
     z-index: 1;
   }
 
@@ -37,7 +37,7 @@ export const BottomNavStyle = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: ${colors.companycolor};
+    color: black;
     text-decoration: none;
   }
 

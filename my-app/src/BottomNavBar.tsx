@@ -5,6 +5,7 @@ import {
   ShoppingCart,
   ClockCounterClockwise,
   AddressBook,
+  User,
 } from "phosphor-react";
 import { BottomNavStyle } from "./BottomNavBar.styles";
 import { colors } from "./pages/general/constants";
@@ -31,16 +32,8 @@ function BottomNavBar(): JSX.Element {
               </Link>
             </li>
             <li>
-              <Link
-                to="/Unsere Geschichte"
-                onClick={() => window.scrollTo(0, 0)}
-              >
-                <ClockCounterClockwise size={40} />
-              </Link>
-            </li>
-            <li>
-              <Link to="/Kontakt" onClick={() => window.scrollTo(0, 0)}>
-                <AddressBook size={40} />
+              <Link to="/LoggedIn" onClick={() => window.scrollTo(0, 0)}>
+                <User size={40} />
               </Link>
             </li>
           </ul>
