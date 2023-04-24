@@ -8,7 +8,7 @@ import {
   SnapchatLogo,
   LinkedinLogo,
 } from "phosphor-react";
-import { colors } from "./general/constants";
+import { GeneralstyledLink, colors } from "./general/constants";
 import { FooterContainer, FooterLinks, SocialMedia } from "./Footer.styles";
 
 function Footer(): JSX.Element {
@@ -64,17 +64,20 @@ function Footer(): JSX.Element {
             <a href="#top">Nach oben</a>
           </li>
           <li>
-            <Link
+            <GeneralstyledLink
               to="/Datenschutzerklaerung"
               onClick={() => window.scrollTo(0, 0)}
             >
               Datenschutz
-            </Link>
+            </GeneralstyledLink>
           </li>
           <li>
-            <Link to="/Impressum" onClick={() => window.scrollTo(0, 0)}>
+            <GeneralstyledLink
+              to="/Impressum"
+              onClick={() => window.scrollTo(0, 0)}
+            >
               Impressum
-            </Link>
+            </GeneralstyledLink>
           </li>
         </ul>
       </FooterLinks>

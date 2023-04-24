@@ -25,10 +25,7 @@ export const FooterLinks = styled.div`
     margin: 0;
     flex-direction: row;
     justify-content: center;
-    @media (min-width: 380px) {
-      {
-         display:flex; 
-       }
+    
 
     li {
       margin: 0 10px;
@@ -38,7 +35,10 @@ export const FooterLinks = styled.div`
         padding: 10px;
         color: ${colors.white};
       }
-    }
+    }@media (min-width: 380px) {
+      {
+         display:flex; 
+       }
   }
 `;
 
