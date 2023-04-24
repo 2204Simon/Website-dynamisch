@@ -64,10 +64,17 @@ function Footer(): JSX.Element {
             <a href="#top">Nach oben</a>
           </li>
           <li>
-            <Link to="/Datenschutzerklaerung">Datenschutz</Link>
+            <Link
+              to="/Datenschutzerklaerung"
+              onClick={() => window.scrollTo(0, 0)}
+            >
+              Datenschutz
+            </Link>
           </li>
           <li>
-            <Link to="/Impressum">Impressum</Link>
+            <Link to="/Impressum" onClick={() => window.scrollTo(0, 0)}>
+              Impressum
+            </Link>
           </li>
         </ul>
       </FooterLinks>
