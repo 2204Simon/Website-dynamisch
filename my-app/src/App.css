@@ -707,7 +707,7 @@ section:hover .UntenKarte {
 /* ########################################################################## */
 /* ########################### Unsere Geschichte ################################## */
 /* ########################################################################## */
-
+/* 
 .timeline-section {
   background-color: transparent;
   min-height: 100vh;
@@ -763,8 +763,8 @@ section:hover .UntenKarte {
 
 #timeline-first-dot {
   top: 8px;
-}
-
+} */
+/* 
 .timeline-date {
   font-size: 25px;
   font-weight: 800;
@@ -796,8 +796,8 @@ section:hover .UntenKarte {
   font-weight: 500;
   line-height: 22px;
   color: #000;
-  margin: 16px 0px 0px 0px;
-}
+  margin: 16px 0px 0px 0px; 
+}*/
 /* ########################################################################## */
 /* ########################### mobiles Media Responsive ########################################### */
 /* ########################################################################## */
@@ -836,26 +836,6 @@ section:hover .UntenKarte {
     text-align: center;
     align-items: center;
     justify-content: center;
-  }
-}
-
-@media (max-width: 800px) {
-  .timeline-items::before {
-    left: 7px;
-  }
-
-  .timeline-item:nth-child(odd) {
-    padding-right: 0;
-    text-align: left;
-  }
-
-  .timeline-item:nth-child(odd),
-  .timeline-item:nth-child(even) {
-    padding-left: 37px;
-  }
-
-  .timeline-dot {
-    left: 0px;
   }
 }
 
