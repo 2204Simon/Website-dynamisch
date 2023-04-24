@@ -14,7 +14,7 @@ export const FooterContainer = styled.footer`
   overflow: hidden;
   @media (max-width: 1200px) {
    {
-      margin-bottom: 70px;
+      margin-bottom: 69px;
     }
 `;
 
@@ -23,9 +23,12 @@ export const FooterLinks = styled.div`
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
     flex-direction: row;
     justify-content: center;
+    @media (min-width: 380px) {
+      {
+         display:flex; 
+       }
 
     li {
       margin: 0 10px;
