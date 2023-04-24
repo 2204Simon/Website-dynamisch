@@ -12,6 +12,10 @@ export const FooterContainer = styled.footer`
   color: ${colors.black};
   text-align: center;
   overflow: hidden;
+  @media (max-width: 1200px) {
+   {
+      margin-bottom: 70px;
+    }
 `;
 
 export const FooterLinks = styled.div`
