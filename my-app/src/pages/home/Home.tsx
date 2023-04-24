@@ -4,7 +4,7 @@ import fakeZeitung from "../.././img/Fakezeitung_Logo.webp";
 import Chatra from "./Chatra";
 
 const Home = (): JSX.Element => {
-  const [hasScrolled, setHasScrolled] = useState(false);
+  /* const [hasScrolled, setHasScrolled] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -26,10 +26,10 @@ const Home = (): JSX.Element => {
       window.location.href,
       window.location.href === "http://localhost:3000/"
     );
-  }
+  }*/
   return (
     <div className="App">
-      {hasScrolled && <Chatra />}
+      {/*hasScrolled* &&*/ <Chatra />}
       <main className="DunklerHintergrund">
         <div className="Anfangssatz">
           <h2>Stelle dir dein perfektes Frühstück zusammen</h2>
