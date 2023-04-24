@@ -45,12 +45,6 @@ export const SocialMedia = styled.div`
 
     svg {
       color: #fff;
-      transition: all 0.2s ease-in-out;
-
-      &:hover {
-        transform: scale(1.2);
-        color: #aa7d03;
-      }
     }
   }
 `;
