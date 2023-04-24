@@ -42,7 +42,7 @@ body {
   background-repeat: no-repeat;
 }
 
-button {
+/*button {
   width: 200px;
   padding: 15px 0;
   text-align: center;
@@ -76,7 +76,7 @@ button:hover span {
 button:hover {
   border: none;
 }
-
+*/
 main {
   height: 100vh;
   overflow-x: hidden;
@@ -804,13 +804,13 @@ section:hover .BildKarte { */
 
 @media screen and (max-width: 600px) {
   /* für schmalles Design (Handy unterschied Tablet */
-  .MenusToOrder {
+  /*.MenusToOrder {
     width: 80%;
-    padding: 1px; /* sonst ist es im small design nicht mittig div block Menü 100% aber Bestellformular nur 80%, Wegen display: block; */
+    padding: 1px; /* sonst ist es im small design nicht mittig div block Menü 100% aber Bestellformular nur 80%, Wegen display: block; 
   }
 
   .Bestellformular label {
-    display: block; /* damit es sich untereinander anordnet benutzt die ganze breite ordnet sich nicht nebeneinader an wie in inline-block*/
+    display: block; /* damit es sich untereinander anordnet benutzt die ganze breite ordnet sich nicht nebeneinader an wie in inline-block
     text-align: center;
     padding: 10px;
     width: auto;
@@ -821,7 +821,7 @@ section:hover .BildKarte { */
     margin: auto;
     top: 0px;
     bottom: 0px;
-  }
+  }*/
 
   .parallax {
     transform-style: preserve-3d;
@@ -864,16 +864,16 @@ section:hover .BildKarte { */
     max-width: 350px;
   }*/
 
-  .Bestellformular {
-    width: 80%; /* größere div Box bessere Ansicht bei Tablet Größe*/
+  /*.Bestellformular {
+    width: 80%; /* größere div Box bessere Ansicht bei Tablet Größe
   }
 
   .Adressformular {
     width: 80%;
-  }
+  }*/
 }
 
-@media screen and (max-width: 1200px) {
+/*@media screen and (max-width: 1200px) {
   /*extra Media für Burger Menü
   .hamburger,
   .toggle-menu {
@@ -882,7 +882,7 @@ section:hover .BildKarte { */
   }
   */
 
-  /* .hamburger {
+/* .hamburger {
     right: 40px; /* Ausrichtung 3 Balken 
     z-index: 3;
   }
@@ -891,7 +891,7 @@ section:hover .BildKarte { */
     z-index: 3;
   } */
 
-  /* .menu {
+/* .menu {
     justify-content: start;
     flex-direction: column;
     align-items: center;
@@ -906,7 +906,7 @@ section:hover .BildKarte { */
     z-index: 2;
   } */
 
-  /* .menu li {
+/* .menu li {
     width: 100%;
     z-index: 3;
   }
@@ -919,7 +919,7 @@ section:hover .BildKarte { */
     z-index: 3;
   } */
 
-  .parallax footer {
+/* .parallax footer {
     padding-bottom: 0px;
   }
 
