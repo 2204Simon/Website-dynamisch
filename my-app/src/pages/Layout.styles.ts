@@ -13,6 +13,9 @@ export const Header = styled.header`
   background-color: ${colors.companycolor};
   font-family: Arial, sans-serif;
   padding: 16px;
+  @media (max-width: 1200px) {
+    display: none;
+  }
 `;
 
 export const Logo = styled.div``;
