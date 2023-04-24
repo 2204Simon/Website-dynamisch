@@ -38,7 +38,7 @@ function Produkt() {
         <ScrollContainer scrollAmount={200}>
           <ShoppingCard title={"Baguette"} price={2.99} image={BaguetteAlone} />
           <ShoppingCard
-            title={"Sandwich mit Käse"}
+            title={"Käsebaguette"}
             price={3.59}
             image={BaguetteYellow}
           />
@@ -46,13 +46,13 @@ function Produkt() {
           <ShoppingCard title={"Brötchen"} price={1.29} image={Brötchen} />
           <ShoppingCard title={"Croissant"} price={1.79} image={Croissant} />
           <ShoppingCard
-            title={"Käsebrötchen"}
+            title={"DB Fresh Chicken"}
             price={3.79}
             image={HamburgerBrötchen}
           />
           <ShoppingCard title={"Toast"} price={3.59} image={Toast} />
           <ShoppingCard
-            title={"Belegtes Brötchen"}
+            title={"Toast mit Käse"}
             price={1.79}
             image={BelegtesBrötchen}
           />
@@ -68,7 +68,7 @@ function Produkt() {
         >
           <ShoppingCard title={"Baguette"} price={2.99} image={BaguetteAlone} />
           <ShoppingCard
-            title={"Sandwich mit Käse"}
+            title={"Käasebaguette"}
             price={3.59}
             image={BaguetteYellow}
           />
@@ -76,13 +76,13 @@ function Produkt() {
           <ShoppingCard title={"Brötchen"} price={1.29} image={Brötchen} />
           <ShoppingCard title={"Croissant"} price={1.79} image={Croissant} />
           <ShoppingCard
-            title={"Käsebrötchen"}
+            title={"DB Fresh Chicken"}
             price={3.79}
             image={HamburgerBrötchen}
           />
           <ShoppingCard title={"Toast"} price={3.59} image={Toast} />
           <ShoppingCard
-            title={"Belegtes Brötchen"}
+            title={"Toast mit Käse"}
             price={1.79}
             image={BelegtesBrötchen}
           />
@@ -172,12 +172,12 @@ function Produkt() {
             image={EigetränkUndEierbrot}
           />
           <ShoppingCard
-            title={"Klassikermenü"}
+            title={"klassische Menü"}
             price={5.99}
             image={KaffeeMitEiUndBrot}
           />
           <ShoppingCard
-            title={"Broccolimenü"}
+            title={"Veggiemenü"}
             price={5.99}
             image={OSaftMitFrüchtebrot}
           />
@@ -207,12 +207,12 @@ function Produkt() {
             image={EigetränkUndEierbrot}
           />
           <ShoppingCard
-            title={"Klassikermenü"}
+            title={"klassische Menü"}
             price={5.99}
             image={KaffeeMitEiUndBrot}
           />
           <ShoppingCard
-            title={"Broccolimenü"}
+            title={"Veggiemenü"}
             price={5.99}
             image={OSaftMitFrüchtebrot}
           />
