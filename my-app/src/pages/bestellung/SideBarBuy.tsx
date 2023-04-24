@@ -22,7 +22,7 @@ export default function SideBarBuy({
       <div>
         <LogoImage src={Logo} alt="Logo" />
         <h2>Ihr Einkauf</h2>
-        <h4>Sie haben {produktAnzahl} Produkte in ihrem Warenkorb</h4>
+        <h4>Du hast {produktAnzahl} Produkte in deinem Warenkorb</h4>
       </div>
       <div>
         <h3>Gesamtpreis: {price}€</h3>
