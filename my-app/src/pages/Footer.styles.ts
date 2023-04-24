@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "./general/constants";
+import { colors, mediaQueries } from "./general/constants";
 
 export const FooterContainer = styled.footer`
   bottom: 0;
@@ -12,7 +12,7 @@ export const FooterContainer = styled.footer`
   color: ${colors.black};
   text-align: center;
   overflow: hidden;
-  @media (max-width: 1200px) {
+  @media (max-width: ${mediaQueries.large}) {
    {
       margin-bottom: 69px;
     }
