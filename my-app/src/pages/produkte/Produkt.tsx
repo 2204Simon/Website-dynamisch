@@ -33,9 +33,18 @@ function Produkt() {
   const isMaxWidth1024 = window.matchMedia("(max-width: 1024px)").matches;
   return (
     <>
-      <h2 style={{ color: colors.black }}>Essen</h2>
+      <h2
+        style={{
+          color: colors.companycolor,
+          fontWeight: "bold",
+          paddingLeft: 30,
+          fontSize: 30,
+        }}
+      >
+        Unsere Speisen:
+      </h2>
       {showScrollContainer && !isMaxWidth1024 ? (
-        <ScrollContainer scrollAmount={200}>
+        <ScrollContainer scrollAmount={300}>
           <ShoppingCard title={"Baguette"} price={2.99} image={BaguetteAlone} />
           <ShoppingCard
             title={"Käsebaguette"}
@@ -94,9 +103,18 @@ function Produkt() {
         </div>
       )}
 
-      <h2 style={{ color: colors.black }}>Getränke</h2>
+      <h2
+        style={{
+          color: colors.companycolor,
+          fontWeight: "bold",
+          paddingLeft: 30,
+          fontSize: 30,
+        }}
+      >
+        Unsere Getränke:
+      </h2>
       {showScrollContainer && !isMaxWidth1024 ? (
-        <ScrollContainer scrollAmount={200}>
+        <ScrollContainer scrollAmount={300}>
           <ShoppingCard title={"Espresso"} price={1.99} image={Espresso} />
           <ShoppingCard title={"Kaffee"} price={5.99} image={Kaffee} />
           <ShoppingCard
@@ -153,9 +171,18 @@ function Produkt() {
         </div>
       )}
 
-      <h2 style={{ color: colors.black }}>Menüs</h2>
+      <h2
+        style={{
+          color: colors.companycolor,
+          fontWeight: "bold",
+          paddingLeft: 30,
+          fontSize: 30,
+        }}
+      >
+        Unsere Menüs:
+      </h2>
       {showScrollContainer && !isMaxWidth1024 ? (
-        <ScrollContainer scrollAmount={200}>
+        <ScrollContainer scrollAmount={300}>
           <ShoppingCard
             title={"Brötchen mit Kaffee"}
             price={5.99}
