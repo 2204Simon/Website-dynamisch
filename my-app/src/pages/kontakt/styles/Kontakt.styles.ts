@@ -8,7 +8,7 @@ export const MainContainer = styled.div`
 
   h1 {
     text-align: center;
-    color: #000;
+    color: ${colors.black};
   }
 
   ul {
@@ -35,7 +35,7 @@ export const MainContainer = styled.div`
   hr {
     margin: 2rem 0;
     border: none;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid ${colors.primarycolor};
   }
 `;
 
@@ -44,7 +44,7 @@ export const ContactContainer = styled.div`
 
   h2 {
     text-align: center;
-    color: #000;
+    color: ${colors.black};
   }
 
   p {
@@ -68,7 +68,7 @@ export const FormLabel = styled.label`
 
 export const FormInput = styled.input`
   padding: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid ${colors.companycolor};
   border-radius: 4px;
   font-size: 1rem;
   width: 100%;
@@ -76,7 +76,7 @@ export const FormInput = styled.input`
 
 export const FormTextArea = styled.textarea`
   padding: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid ${colors.companycolor};
   border-radius: 4px;
   font-size: 1rem;
   width: 100%;
@@ -85,7 +85,7 @@ export const FormTextArea = styled.textarea`
 
 export const FormButton = styled.button`
   background-color: ${colors.companycolor};
-  color: #fff;
+  color: ${colors.white};
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 4px;

@@ -10,7 +10,7 @@ export const BottomNavStyle = styled.div`
     bottom: 0;
     width: 100%;
     height: 70px;
-    background-color: black;
+    background-color: ${colors.black};
     z-index: 1;
   }
 

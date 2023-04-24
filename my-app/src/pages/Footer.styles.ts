@@ -9,7 +9,7 @@ export const FooterContainer = styled.footer`
   height: auto;
   width: 100%;
   padding-top: 40px;
-  color: #000;
+  color: ${colors.black};
   text-align: center;
   overflow: hidden;
 `;
@@ -29,7 +29,7 @@ export const FooterLinks = styled.div`
       a {
         text-decoration: none;
         padding: 10px;
-        color: #fff;
+        color: ${colors.white};
       }
     }
   }
@@ -44,7 +44,7 @@ export const SocialMedia = styled.div`
     margin: 0 10px;
 
     svg {
-      color: #fff;
+      color: ${colors.white};
     }
   }
 `;
