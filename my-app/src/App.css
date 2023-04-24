@@ -87,32 +87,32 @@ main {
 .platzhalter {
   padding: 5% 0 5% 0;
 }
-
+/*
 textarea {
-  resize: none; /*Textbox Größe Fix */
+  resize: none; /*Textbox Größe Fix 
   background-color: #fff;
   border: 2px solid #000;
   border-radius: 5px;
   color: #aa7d03;
   padding: 12px;
   overflow: hidden;
-  font-family: sans-serif; /* Textarea hat per default Serifen */
+  font-family: sans-serif; /* Textarea hat per default Serifen 
   font-size: 16px;
 }
 
 ::placeholder {
-  /* Platzhalter in den Eingabefeldern */
+  /* Platzhalter in den Eingabefeldern 
   color: #aa7d03;
-  opacity: 1; /* Firefox */
+  opacity: 1; /* Firefox 
 }
 
 :-ms-input-placeholder {
-  /* Internet Explorer 10-11 */
+  /* Internet Explorer 10-11 
   color: #aa7d03;
 }
 
 ::-ms-input-placeholder {
-  /* Microsoft Edge */
+  /* Microsoft Edge 
   color: #aa7d03;
 }
 
@@ -126,12 +126,12 @@ textarea {
   color: rgb(255, 255, 255);
   z-index: 0;
 }
-
+*/
 .footer {
   bottom: 0;
   left: 0;
   right: 0;
-  background: #000;
+  background: black;
   height: auto;
   width: 100%;
   padding-top: 40px;
@@ -141,14 +141,12 @@ textarea {
 }
 
 .footer a {
-  /* wirkt auf Impressum, Datenschutzerklärung und zum Seitenanfang */
   text-decoration: none;
   padding: 10px;
   color: #fff;
 }
 
 .footer-content {
-  /* wirkt auf Copyright Angabe */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -865,11 +863,11 @@ section:hover .UntenKarte {
   .section h1 {
     font-size: 8rem;
   }
-
+  /*
   .contact-info {
     display: flex;
     justify-content: center;
-    flex-direction: column; /* mobile Ausrichtung vertikal */
+    flex-direction: column; /* mobile Ausrichtung vertikal 
     padding: 100px 65px;
   }
 
@@ -884,7 +882,7 @@ section:hover .UntenKarte {
 
   .contact-formular {
     max-width: 350px;
-  }
+  }*/
 
   .Bestellformular {
     width: 80%; /* größere div Box bessere Ansicht bei Tablet Größe*/
