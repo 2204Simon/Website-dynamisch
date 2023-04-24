@@ -22,15 +22,16 @@ const StyledBurgerIcon = styled(MenuIcon)`
 `;
 
 const StyledMenu = styled.div<{ open: boolean }>`
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   width: 200px;
   padding: 16px;
   background-color: ${colors.companycolor}; /* Ändere die Hintergrundfarbe an die gewünschte Farbe */
-  z-index: 1;
+  z-index: 4;
   transition: transform 0.3s ease-in-out;
   transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
+  visibility: ${({ open }) => (open ? "visible" : "hidden")};
 `;
 
 const StyledCloseIcon = styled(CloseIcon)`
