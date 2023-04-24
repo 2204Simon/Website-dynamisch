@@ -25,6 +25,7 @@ const Layout = () => {
   return (
     <>
       <Header id="zumSeitenanfang">
+        <p></p>
         <Logo>
           <a href="/">
             <StyledImg src={logo} alt="Logo" />
@@ -56,7 +57,7 @@ const Layout = () => {
               </StyledLink>
             ) : (
               <StyledLink to="/SignUp">
-                <SignIn weight="fill" />
+                <SignIn />
               </StyledLink>
             )}
           </MenuItem>

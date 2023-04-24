@@ -4,12 +4,15 @@ import { colors } from "./general/constants";
 
 export const Header = styled.header`
   display: flex;
+  font-size: 1rem;
+  letter-spacing: 1;
+  line-height: 1,
+  font-weight: 400;
   justify-content: space-around;
   align-items: center;
   background-color: ${colors.companycolor};
   font-family: Arial, sans-serif;
   padding: 16px;
-  width: 100vw;
 `;
 
 export const Logo = styled.div``;
@@ -45,15 +48,22 @@ export const StyledLink = styled(Link)`
   &:hover {
     color: ${colors.white};
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1); /* Hinzufügen eines weißen Box-Shadows */
-
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1); /* Hinzufügen eines weißen Box-Shadows */
     &::before {
       content: "";
+      box-sizing: inherit;
       position: absolute;
-      bottom: -2px; /* Unterstreichung unter dem Text */
+      display: block;
+      bottom: -2px;
       left: 0;
       right: 0;
-      height: 2px; /* Höhe der Unterstreichung */
+      height: 2px;
       background-color: ${colors.white};
+      pointer-events: none; /* Hinzufügen von pointer-events: none, um das Hüpfen des Burger-Menüs zu verhindern */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1); /* Hinzufügen eines weißen Box-Shadows */
+    }
+    &::after {
+      box-sizing: inherit;
     }
   }
 `;
