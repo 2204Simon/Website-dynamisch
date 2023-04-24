@@ -77,7 +77,7 @@ function Produkt() {
         >
           <ShoppingCard title={"Baguette"} price={2.99} image={BaguetteAlone} />
           <ShoppingCard
-            title={"Käasebaguette"}
+            title={"Käsebaguette"}
             price={3.59}
             image={BaguetteYellow}
           />
