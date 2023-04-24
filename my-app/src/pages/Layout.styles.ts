@@ -43,15 +43,14 @@ export const MenuItem = styled.li`
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
-  color: ${colors.white};
+  color: ${colors.white}; /* Ändere die Textfarbe an die gewünschte Farbe */
   margin-right: 16px;
   position: relative;
-  width: 100%; /* Breite auf 100% setzen */
+  width: 100%;
 
   &:hover {
-    color: ${colors.white};
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1); /* Hinzufügen eines weißen Box-Shadows */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1); /* Hinzufügen eines weißen Box-Shadows */
+    color: ${colors.white}; /* Ändere die Textfarbe des Hover-Effekts an die gewünschte Farbe */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1);
     &::before {
       content: "";
       box-sizing: inherit;
@@ -61,9 +60,9 @@ export const StyledLink = styled(Link)`
       left: 0;
       right: 0;
       height: 2px;
-      background-color: ${colors.white};
-      pointer-events: none; /* Hinzufügen von pointer-events: none, um das Hüpfen des Burger-Menüs zu verhindern */
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1); /* Hinzufügen eines weißen Box-Shadows */
+      background-color: ${colors.white}; /* Ändere die Farbe des Hover-Effekts an die gewünschte Farbe */
+      pointer-events: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1);
     }
     &::after {
       box-sizing: inherit;
