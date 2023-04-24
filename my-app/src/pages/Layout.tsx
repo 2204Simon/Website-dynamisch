@@ -7,6 +7,7 @@ import Badge from "@mui/material/Badge";
 
 import { useSelector } from "react-redux";
 import { CartState } from "../redux/types";
+import Chatra from "./home/Chatra";
 
 const Layout = () => {
   const { loggedIn } = useLoggedIn();
@@ -64,6 +65,7 @@ const Layout = () => {
             </ul>
           </div>
         </nav>
+        <Chatra />
       </header>
       <Outlet />
     </>
