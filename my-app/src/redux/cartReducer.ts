@@ -2,7 +2,7 @@ import { ActionTypes, CartState } from "./types"; // Importieren Sie die erforde
 
 const cartReducer = (
   state: CartState = {
-    cartItems: [{ logo: "", preis: 2, produktname: "haha", anzahl: 3 }],
+    cartItems: [],
   },
   action: any
 ) => {

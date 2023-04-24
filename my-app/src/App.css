@@ -413,21 +413,21 @@ textarea {
 /* ########################### Produkte ################################## */
 /* ########################################################################## */
 
-.bereich {
-  /*einzelne Produktkarte besteht aus einem großem div-bereich und ObenKarte, Bildkarte, Untenkarte. */
-  width: 279px; /*Breite */
-  height: 390px; /*Höhe */
-  border: 2px black solid; /*Grenze/Rand mit Dicke und Farbe */
-  padding: 0px; /*Innenabstand zu Rand */
-  margin: 18px; /*Außenabstand zu Rand */
+/* .bereich {
+  
+  width: 279px; 
+  height: 390px; /*Höhe 
+  border: 2px black solid; /*Grenze/Rand mit Dicke und Farbe 
+  padding: 0px; /*Innenabstand zu Rand 
+  margin: 18px; /*Außenabstand zu Rand 
   margin-bottom: 19px;
   display: inline-block;
   vertical-align: top;
   border-radius: 5px;
   background-color: #aa7d03;
-}
+} */
 
-.ObenKarte {
+/* .ObenKarte {
   height: 45px;
   color: #aa7d03;
   margin: 0px;
@@ -458,10 +458,10 @@ textarea {
 
 .PreisWeiß {
   color: white;
-}
+} */
 
-.BuE2 {
-  /*Div Box um den Bestellknopf bei Produkte*/
+/* .BuE2 {
+  /*Div Box um den Bestellknopf bei Produkte
   background-color: #aa7d03;
   width: 300px;
   margin-left: auto;
@@ -472,10 +472,10 @@ textarea {
   height: 100px;
   padding-top: 100px;
   font-weight: bolder;
-}
-
+} */
+/* 
 .content10 {
-  /*Div Box für Bestellknopf*/
+  /*Div Box für Bestellknopf
   width: 100%;
   transform: translateY(-50%);
   text-align: center;
@@ -485,10 +485,10 @@ textarea {
 .SafariFix {
   height: 100%;
   width: 100%;
-}
+} */
 
-section:hover .ObenKarte {
-  /*Hover Effekt Produkte*/
+/* section:hover .ObenKarte {
+  /*Hover Effekt Produkte
   transform: scale(1.1);
   z-index: 1;
   border-top: 2px solid black;
@@ -499,20 +499,20 @@ section:hover .ObenKarte {
   border-top-right-radius: 5px;
 }
 
-section:hover .BildKarte {
-  /*Hover Effekt Produkte*/
+section:hover .BildKarte { */
+/* /*Hover Effekt Produkte
   transform: scale(1.1);
   z-index: 1;
   border-left: 2px solid black;
   border-right: 2px solid black;
   overflow: hidden;
   position: relative;
-  height: 200px;
-  background-color: black; /*Notlösung, um den 1 Pixelfehler zu beheben, linker/rechter Rand ist je nach Internetbrowser um 1px breiter oder gleich */
-}
+  height: 200px; */
+/* background-color: black; /*Notlösung, um den 1 Pixelfehler zu beheben, linker/rechter Rand ist je nach Internetbrowser um 1px breiter oder gleich 
+} */
 
-section:hover .UntenKarte {
-  /*Hover Effekt Produkte*/
+/* section:hover .UntenKarte {
+  /*Hover Effekt Produkte
   transform: scale(1.1);
   border-bottom: 2px solid black;
   border-left: 2px solid black;
@@ -541,13 +541,13 @@ section:hover .UntenKarte {
 #overflowTh {
   overflow: auto;
   text-align: center;
-}
+} */
 
 /* ########################################################################## */
 /* ########################### Bestellungen ######################################## */
 /* ########################################################################## */
 
-.Bestellungsseite {
+/* .Bestellungsseite {
   width: 100%;
   transform-style: preserve-3d;
   height: 100%;
@@ -702,7 +702,7 @@ section:hover .UntenKarte {
 
 .buttonposition {
   text-align: center;
-}
+} */
 
 /* ########################################################################## */
 /* ########################### Unsere Geschichte ################################## */
