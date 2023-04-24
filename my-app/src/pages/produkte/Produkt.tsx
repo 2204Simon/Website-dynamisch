@@ -95,58 +95,134 @@ function Produkt() {
       )}
 
       <h2 style={{ color: colors.black }}>Getränke</h2>
-      <div style={{ display: "flex", flexWrap: "nowrap", overflowX: "scroll" }}>
-        <ShoppingCard title={"Espresso"} price={1.99} image={Espresso} />
-        <ShoppingCard title={"Kaffee"} price={5.99} image={Kaffee} />
-        <ShoppingCard
-          title={"Latte Machiatto"}
-          price={5.99}
-          image={LatteMachiatto}
-        />
-        <ShoppingCard title={"Orangensaft"} price={5.99} image={Orangensaft} />
-        <ShoppingCard title={"Früchtetee"} price={5.99} image={Früchtetee} />
-        <ShoppingCard title={"Wasser"} price={5.99} image={Wasser} />
-        <ShoppingCard title={"Zitronentee"} price={5.99} image={Zitronentee} />
-        <ShoppingCard
-          title={"Heiße Schokolade"}
-          price={5.99}
-          image={HeißeSchokolade}
-        />
-      </div>
+      {showScrollContainer && !isMaxWidth1024 ? (
+        <ScrollContainer scrollAmount={200}>
+          <ShoppingCard title={"Espresso"} price={1.99} image={Espresso} />
+          <ShoppingCard title={"Kaffee"} price={5.99} image={Kaffee} />
+          <ShoppingCard
+            title={"Latte Machiatto"}
+            price={5.99}
+            image={LatteMachiatto}
+          />
+          <ShoppingCard
+            title={"Orangensaft"}
+            price={5.99}
+            image={Orangensaft}
+          />
+          <ShoppingCard title={"Früchtetee"} price={5.99} image={Früchtetee} />
+          <ShoppingCard title={"Wasser"} price={5.99} image={Wasser} />
+          <ShoppingCard
+            title={"Zitronentee"}
+            price={5.99}
+            image={Zitronentee}
+          />
+          <ShoppingCard
+            title={"Heiße Schokolade"}
+            price={5.99}
+            image={HeißeSchokolade}
+          />
+        </ScrollContainer>
+      ) : (
+        <div
+          style={{ display: "flex", flexWrap: "nowrap", overflowX: "scroll" }}
+        >
+          <ShoppingCard title={"Espresso"} price={1.99} image={Espresso} />
+          <ShoppingCard title={"Kaffee"} price={5.99} image={Kaffee} />
+          <ShoppingCard
+            title={"Latte Machiatto"}
+            price={5.99}
+            image={LatteMachiatto}
+          />
+          <ShoppingCard
+            title={"Orangensaft"}
+            price={5.99}
+            image={Orangensaft}
+          />
+          <ShoppingCard title={"Früchtetee"} price={5.99} image={Früchtetee} />
+          <ShoppingCard title={"Wasser"} price={5.99} image={Wasser} />
+          <ShoppingCard
+            title={"Zitronentee"}
+            price={5.99}
+            image={Zitronentee}
+          />
+          <ShoppingCard
+            title={"Heiße Schokolade"}
+            price={5.99}
+            image={HeißeSchokolade}
+          />
+        </div>
+      )}
 
       <h2 style={{ color: colors.black }}>Menüs</h2>
-      <div style={{ display: "flex", flexWrap: "nowrap", overflowX: "scroll" }}>
-        <ShoppingCard
-          title={"Brötchen mit Kaffee"}
-          price={5.99}
-          image={BrötchenMitKaffe}
-        />
-        <ShoppingCard
-          title={"Obstmenü"}
-          price={5.99}
-          image={BrotEiTeeUndObst}
-        />
-        <ShoppingCard
-          title={"Eiermenü"}
-          price={5.99}
-          image={EigetränkUndEierbrot}
-        />
-        <ShoppingCard
-          title={"Klassikermenü"}
-          price={5.99}
-          image={KaffeeMitEiUndBrot}
-        />
-        <ShoppingCard
-          title={"Broccolimenü"}
-          price={5.99}
-          image={OSaftMitFrüchtebrot}
-        />
-        <ShoppingCard
-          title={"Orangenmenü"}
-          price={5.99}
-          image={OSaftUndOrangenbrot}
-        />
-      </div>
+      {showScrollContainer && !isMaxWidth1024 ? (
+        <ScrollContainer scrollAmount={200}>
+          <ShoppingCard
+            title={"Brötchen mit Kaffee"}
+            price={5.99}
+            image={BrötchenMitKaffe}
+          />
+          <ShoppingCard
+            title={"Obstmenü"}
+            price={5.99}
+            image={BrotEiTeeUndObst}
+          />
+          <ShoppingCard
+            title={"Eiermenü"}
+            price={5.99}
+            image={EigetränkUndEierbrot}
+          />
+          <ShoppingCard
+            title={"Klassikermenü"}
+            price={5.99}
+            image={KaffeeMitEiUndBrot}
+          />
+          <ShoppingCard
+            title={"Broccolimenü"}
+            price={5.99}
+            image={OSaftMitFrüchtebrot}
+          />
+          <ShoppingCard
+            title={"Orangenmenü"}
+            price={5.99}
+            image={OSaftUndOrangenbrot}
+          />
+        </ScrollContainer>
+      ) : (
+        <div
+          style={{ display: "flex", flexWrap: "nowrap", overflowX: "scroll" }}
+        >
+          <ShoppingCard
+            title={"Brötchen mit Kaffee"}
+            price={5.99}
+            image={BrötchenMitKaffe}
+          />
+          <ShoppingCard
+            title={"Obstmenü"}
+            price={5.99}
+            image={BrotEiTeeUndObst}
+          />
+          <ShoppingCard
+            title={"Eiermenü"}
+            price={5.99}
+            image={EigetränkUndEierbrot}
+          />
+          <ShoppingCard
+            title={"Klassikermenü"}
+            price={5.99}
+            image={KaffeeMitEiUndBrot}
+          />
+          <ShoppingCard
+            title={"Broccolimenü"}
+            price={5.99}
+            image={OSaftMitFrüchtebrot}
+          />
+          <ShoppingCard
+            title={"Orangenmenü"}
+            price={5.99}
+            image={OSaftUndOrangenbrot}
+          />
+        </div>
+      )}
       <ToastContainer />
     </>
   );
