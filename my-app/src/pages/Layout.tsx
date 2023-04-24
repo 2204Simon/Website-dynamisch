@@ -1,13 +1,20 @@
+import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import logo from ".././img/Logo.webp";
-import "../App.css";
 import { SignIn, User, ShoppingCart } from "phosphor-react";
 import { useLoggedIn } from "../globalVariables/loggedin";
 import Badge from "@mui/material/Badge";
-
 import { useSelector } from "react-redux";
 import { CartState } from "../redux/types";
 import Chatra from "./home/Chatra";
+import {
+  Header,
+  Logo,
+  Menu,
+  MenuItem,
+  StyledImg,
+  StyledLink,
+} from "./Layout.styles";
 
 const Layout = () => {
   const { loggedIn } = useLoggedIn();
@@ -17,56 +24,46 @@ const Layout = () => {
   const arrayLength = cartItems.length;
   return (
     <>
-      <header id="zumSeitenanfang" className="header">
-        <p></p>
-        <div className="Logo">
+      <Header id="zumSeitenanfang">
+        <Logo>
           <a href="/">
-            <img
-              src={logo}
-              alt="Logo"
-              className="logo"
-              width="100"
-              height="100"
-            />
+            <StyledImg src={logo} alt="Logo" />
           </a>
-        </div>
-        <nav>
-          <div className="navigation">
-            <ul className="menu">
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/Produkte">Produkte</Link>
-              </li>
-              <li>
-                <Link to="/Unsere Geschichte">Unsere Geschichte</Link>
-              </li>
-              <li>
-                <Link to="/Kontakt">Kontakt</Link>
-              </li>
-              <li>
-                <Link to="/Bestellung">
-                  <ShoppingCart />
-                  <Badge badgeContent={arrayLength} color="error" />
-                </Link>
-              </li>
-              <li>
-                {loggedIn ? (
-                  <Link to="/LoggedIn">
-                    <User />
-                  </Link>
-                ) : (
-                  <Link to="/SignUp">
-                    <SignIn weight="fill" />
-                  </Link>
-                )}
-              </li>
-            </ul>
-          </div>
-        </nav>
+        </Logo>
+        <Menu>
+          <MenuItem>
+            <StyledLink to="/">Home</StyledLink>
+          </MenuItem>
+          <MenuItem>
+            <StyledLink to="/Produkte">Produkte</StyledLink>
+          </MenuItem>
+          <MenuItem>
+            <StyledLink to="/Unsere Geschichte">Unsere Geschichte</StyledLink>
+          </MenuItem>
+          <MenuItem>
+            <StyledLink to="/Kontakt">Kontakt</StyledLink>
+          </MenuItem>
+          <MenuItem>
+            <StyledLink to="/Bestellung">
+              <ShoppingCart />
+              <Badge badgeContent={arrayLength} color="error" />
+            </StyledLink>
+          </MenuItem>
+          <MenuItem>
+            {loggedIn ? (
+              <StyledLink to="/LoggedIn">
+                <User />
+              </StyledLink>
+            ) : (
+              <StyledLink to="/SignUp">
+                <SignIn weight="fill" />
+              </StyledLink>
+            )}
+          </MenuItem>
+        </Menu>
+
         <Chatra />
-      </header>
+      </Header>
       <Outlet />
     </>
   );
