@@ -1,37 +1,43 @@
-// actions.ts
+import {
+  CartActionTypes,
+  ActionTypesUser,
+  CartItem,
+  LogInData,
+  AdressData,
+  ActionTypesAdressData,
+} from "./types"; // Importieren Sie die erforderlichen Typen
 
-import { ActionTypes, ActionTypesUser, CartItem, LogInData } from "./types"; // Importieren Sie die erforderlichen Typen
-
+// Cart
 export const addToCart = (item: CartItem) => {
   return {
-    type: ActionTypes.ADD_TO_CART,
+    type: CartActionTypes.ADD_TO_CART,
     payload: item,
   };
 };
 
 export const clearCart = () => {
   return {
-    type: ActionTypes.CLEAR_CART,
+    type: CartActionTypes.CLEAR_CART,
   };
 };
 
 export const increaseQuantity = (item: CartItem) => {
   return {
-    type: ActionTypes.INCREASE_QUANTITY,
+    type: CartActionTypes.INCREASE_QUANTITY,
     payload: item,
   };
 };
 
 export const removeFromCart = (item: CartItem) => {
   return {
-    type: ActionTypes.REMOVE_FROM_CART,
+    type: CartActionTypes.REMOVE_FROM_CART,
     payload: item,
   };
 };
 
 export const decreaseQuantity = (item: CartItem) => {
   return {
-    type: ActionTypes.DECREASE_QUANTITY,
+    type: CartActionTypes.DECREASE_QUANTITY,
     payload: item,
   };
 };
@@ -42,5 +48,14 @@ export const addNewUser = (LogInData: LogInData) => {
   return {
     type: ActionTypesUser.ADD_NEW_USER,
     payload: LogInData,
+  };
+};
+
+//Adress Data
+
+export const addNewAdressData = (AdressData: AdressData) => {
+  return {
+    type: ActionTypesAdressData.ADD_NEW_ADRESS,
+    payload: AdressData,
   };
 };

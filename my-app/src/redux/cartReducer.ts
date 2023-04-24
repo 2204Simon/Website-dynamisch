@@ -1,4 +1,4 @@
-import { ActionTypes, CartState } from "./types"; // Importieren Sie die erforderlichen Typen
+import { CartActionTypes, CartState } from "./types"; // Importieren Sie die erforderlichen Typen
 
 const cartReducer = (
   state: CartState = {
@@ -7,22 +7,22 @@ const cartReducer = (
   action: any
 ) => {
   switch (action.type) {
-    case ActionTypes.ADD_TO_CART:
+    case CartActionTypes.ADD_TO_CART:
       return {
         ...state,
         cartItems: [...state.cartItems, action.payload],
       };
-    case ActionTypes.REMOVE_FROM_CART:
+    case CartActionTypes.REMOVE_FROM_CART:
       return {
         ...state,
         cartItems: state.cartItems.filter(item => item !== action.payload),
       };
-    case ActionTypes.CLEAR_CART:
+    case CartActionTypes.CLEAR_CART:
       return {
         ...state,
         cartItems: [],
       };
-    case ActionTypes.INCREASE_QUANTITY:
+    case CartActionTypes.INCREASE_QUANTITY:
       return {
         ...state,
         cartItems: state.cartItems.map(item => {
@@ -35,7 +35,7 @@ const cartReducer = (
           return item;
         }),
       };
-    case ActionTypes.DECREASE_QUANTITY:
+    case CartActionTypes.DECREASE_QUANTITY:
       return {
         ...state,
         cartItems: state.cartItems.map(item => {

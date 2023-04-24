@@ -1,10 +1,10 @@
-import { ActionTypesUser, UserDataState, LogInData } from "./types"; // Importieren Sie die erforderlichen Typen
+import { ActionTypesUser, UserDataState, LogInData } from "./types";
 
 const userReducer = (
   state: UserDataState | undefined = {
     LogInData: { firstName: "", lastName: "", email: "", password: "" },
   },
-  action: { type: ActionTypesUser; payload: LogInData } // Aktualisieren Sie den Action-Typ mit ActionTypesUser und Payload-Typ mit LogInData
+  action: { type: ActionTypesUser; payload: LogInData }
 ) => {
   switch (action.type) {
     case ActionTypesUser.ADD_NEW_USER:

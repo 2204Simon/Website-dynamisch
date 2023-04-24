@@ -27,9 +27,33 @@ export const SideBarWrapper = styled.div`
     box-shadow: none;
     border-radius: 8px;
   }
+`;
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-  }
+export const PopupBackdrop = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  will-change: transform;
+  max-height: 100vh;
+`;
+
+export const PopupWrapper = styled.div`
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  z-index: 11;
+  color: ${colors.black};
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform;
 `;
