@@ -77,6 +77,7 @@ const ScrollContainer: React.FC<ScrollContainerProps> = ({
             backgroundColor: colors.companycolor,
             borderRadius: "50px",
             visibility: scrollRightVisible ? "visible" : "hidden",
+            marginRight: "15px",
           }}
           size={50}
           onClick={scrollRight}
