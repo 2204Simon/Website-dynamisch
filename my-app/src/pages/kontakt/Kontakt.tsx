@@ -14,6 +14,7 @@ import { ContactMap } from "./Map";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
+import { BlackColorButton } from "../general/button";
 
 function Kontakt(): JSX.Element {
   const [email, setEmail] = useState("");
@@ -72,7 +73,7 @@ function Kontakt(): JSX.Element {
             Nachricht:
             <FormTextArea value={message} onChange={handleMessageChange} />
           </FormLabel>
-          <FormButton type="submit">Anmelden</FormButton>
+          <BlackColorButton caption={"Anmelden"}></BlackColorButton>
         </form>
       </ContactContainer>
     </MainContainer>
