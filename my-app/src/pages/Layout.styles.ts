@@ -17,7 +17,6 @@ export const Logo = styled.div``;
 export const StyledImg = styled.img`
   max-width: 100px;
   width: 80px;
-
   border: 2px solid ${colors.white};
   border-radius: 5px;
 `;
@@ -26,7 +25,6 @@ export const Menu = styled.ul`
   display: flex;
   align-items: center;
   list-style: none;
-  width: 100%;
   gap: 1em;
   text-transform: uppercase;
   font-weight: 100;
