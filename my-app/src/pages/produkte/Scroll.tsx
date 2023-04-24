@@ -63,7 +63,8 @@ const ScrollContainer: React.FC<ScrollContainerProps> = ({
         <ArrowCircleLeft
           style={{
             zIndex: "2",
-            backgroundColor: colors.companycolor,
+            backgroundColor: colors.black,
+            color: colors.companycolor,
             borderRadius: "50px",
             visibility: scrollLeftVisible ? "visible" : "hidden",
           }}
@@ -74,7 +75,8 @@ const ScrollContainer: React.FC<ScrollContainerProps> = ({
         <ArrowCircleRight
           style={{
             zIndex: "2",
-            backgroundColor: colors.companycolor,
+            backgroundColor: colors.black,
+            color: colors.companycolor,
             borderRadius: "50px",
             visibility: scrollRightVisible ? "visible" : "hidden",
             marginRight: "15px",
