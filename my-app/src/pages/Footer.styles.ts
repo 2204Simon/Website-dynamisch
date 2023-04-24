@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "./general/constants";
+import { colors, mediaQueries } from "./general/constants";
 
 export const FooterContainer = styled.footer`
   bottom: 0;
@@ -12,6 +12,10 @@ export const FooterContainer = styled.footer`
   color: ${colors.black};
   text-align: center;
   overflow: hidden;
+  @media (max-width: ${mediaQueries.large}) {
+   {
+      margin-bottom: 69px;
+    }
 `;
 
 export const FooterLinks = styled.div`
@@ -19,9 +23,9 @@ export const FooterLinks = styled.div`
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
     flex-direction: row;
     justify-content: center;
+    
 
     li {
       margin: 0 10px;
@@ -31,7 +35,10 @@ export const FooterLinks = styled.div`
         padding: 10px;
         color: ${colors.white};
       }
-    }
+    }@media (min-width: 380px) {
+      {
+         display:flex; 
+       }
   }
 `;
 

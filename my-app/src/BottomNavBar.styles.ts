@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "./pages/general/constants";
+import { colors, mediaQueries } from "./pages/general/constants";
 
 export const BottomNavStyle = styled.div`
   .bottom-nav {
@@ -42,13 +42,13 @@ export const BottomNavStyle = styled.div`
     text-decoration: none;
   }
 
-  @media (max-width: 1200px) {
+  @media (max-width: ${mediaQueries.large}) {
     .bottom-nav .menu {
       justify-content: flex-end;
       padding-right: 100px; //Ausrichtung Icons wegen Chatbot
     }
   }
-  @media (min-width: 1200px) {
+  @media (min-width: ${mediaQueries.large}) {
     .bottom-nav {
       display: none;
     }

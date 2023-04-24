@@ -20,13 +20,13 @@ export const Container = styled.div`
 
 export const ImageContainer = styled.div`
   overflow: hidden;
-  border-radius: 10px;
   margin-bottom: 1rem;
 `;
 
 export const Image = styled.img`
   width: 100%;
   height: auto;
+  border-radius: 10px;
   transition: transform 0.3s ease-in-out;
 `;
 
