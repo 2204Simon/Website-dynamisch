@@ -1,5 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
-import { TimelineItemA, TimelineContent, Image, TimelineDot, TimelineDate } from "./TimelineBlock.styles";
+import { TimelineItemA, TimelineContent, Image, TimelineDot, TimelineDate, ImageWrapper, } from "./TimelineBlock.styles";
 
 interface TimelineItemProps {
   date: string;
@@ -15,23 +14,19 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   description,
   details,
   image,
-}) => {
-  
-  return (
-    <TimelineItemA>
-       <TimelineDot />
-       <TimelineDate>
-        <h1>{date}</h1>
-       </TimelineDate>
-      
-      <TimelineContent>
+}) => (
+  <TimelineItemA>
+    <TimelineDot />
+      <TimelineDate>{date}</TimelineDate>
+    <TimelineContent>
+      <ImageWrapper>
         <Image src={image} alt="history_picture" />
-        <h3 style={{ color: "black" }}>{title}</h3>
-        <p>{description}</p>
-        <details>{details}</details>
-      </TimelineContent>
-    </TimelineItemA>
-  );
-};
+      </ImageWrapper>
+      <h3>{title}</h3>
+      <p>{description}</p>
+      <details>{details}</details>
+    </TimelineContent>
+  </TimelineItemA>
+);
 
 export default TimelineItem;
