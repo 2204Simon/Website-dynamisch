@@ -36,6 +36,7 @@ const StyledMenu = styled.div<{ open: boolean }>`
   transition: transform 0.3s ease-in-out;
   transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
   visibility: ${({ open }) => (open ? "visible" : "hidden")};
+  border-radius: 15px;
 `;
 
 const StyledCloseIcon = styled(CloseIcon)`
@@ -51,6 +52,14 @@ const StyledList = styled(List)`
 
 const StyledListItem = styled(ListItem)`
   margin-bottom: 16px;
+  a {
+    text-decoration: none;
+    color: ${colors.white};
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  border-radius: 15px;
 `;
 
 const BurgerMenu: React.FC = () => {
