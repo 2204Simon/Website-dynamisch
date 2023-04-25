@@ -34,7 +34,11 @@ function WarenkorbSeite(): JSX.Element {
   return cartItems.length === 0 ? (
     <NoOrderContainer>
       <NoOrderTextWrapper>
-        <h2 style={{ color: "black" }}>Sie haben nichts im Warenkorb</h2>
+        <h2 style={{ color: "black" }}>Du hast nichts im Warenkorb</h2>
+        <p>
+          Schaue dich doch bei unseren Produkten um. Hier gibt es eine große
+          Auswahl an Getränken, Speisen und Frühstücksmenüs!
+        </p>
         <RouterLink to="/Produkte">
           <Button className="white-orange black-color">Zu den Produkten</Button>
         </RouterLink>
