@@ -58,9 +58,32 @@ export const QuantityInput = styled.input`
   width: 3rem;
   padding: 0.5rem;
   border: 1px solid #aaa;
-  border-radius: 5px;
-  margin-left: 0.5rem;
   font-size: 1.2rem;
   text-align: center;
   appearance: textfield;
+  border-radius: 5px;
+  height: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+`;
+
+export const PlusQuantity = styled.div`
+  width: 3rem;
+  border: 1px solid #aaa;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  height: 20px;
+  width: 20px;
+`;
+
+export const MinusQuantity = styled.div`
+  width: 3rem;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  height: 20px;
+  width: 20px;
+  border: 1px solid #aaa;
+  margin-left: 5px;
 `;

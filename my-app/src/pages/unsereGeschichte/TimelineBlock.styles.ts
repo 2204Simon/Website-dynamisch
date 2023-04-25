@@ -5,7 +5,7 @@ import { colors } from "../general/constants";
 export const TimelineSection = styled.section`
   background-color: transparent;
   min-height: 100vh;
-  padding: 5% 0 5% 0;
+  padding: 5% 2% 5% 2%;
   }
 `;
 
@@ -41,7 +41,7 @@ export const TimelineItems = styled.div`
     left: calc(50% - 1px);
     width: 3px;
     height: 100%;
-    background-color: #aa7d03;
+    background-color: ${colors.companycolor};
   }
 
   @media (max-width: 800px) {
@@ -86,7 +86,7 @@ margin-bottom: 40px;
 export const TimelineDot = styled.div`
   height: 16px;
   width: 16px;
-  background-color: black;
+  background-color: ${colors.companycolor};
   position: absolute;
   left: calc(50% - 8px);
   border-radius: 50%;
@@ -101,14 +101,14 @@ export const TimelineDot = styled.div`
 export const TimelineDate = styled.h1`
   font-size: 25px;
   font-weight: 800;
-  color: #000;
-  margin: 5px 5px 15px 5px;
+  color: ${colors.companycolor};
+  margin: 0px 5px 15px 5px;
   }
 `;
 
 export const TimelineContent = styled.div`
-  background-color: #ffffff;
+  background-color: ${colors.white};
   padding: 30px;
   border-radius: 15px;
-  border: 2px solid #aa7d03;
+  border: 3px solid ${colors.companycolor};
 `;
