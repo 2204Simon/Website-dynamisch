@@ -7,6 +7,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { NavLink } from "react-router-dom";
 import { colors, mediaQueries } from "./general/constants";
+import { StyledLink } from "./Layout.styles";
 
 const StyledBurgerMenu = styled.div`
   display: none;
@@ -57,7 +58,7 @@ const StyledListItem = styled(ListItem)`
     color: ${colors.white};
   }
   a:hover {
-    text-decoration: underline;
+    text-decoration: none;
   }
   border-radius: 15px;
 `;
@@ -76,29 +77,32 @@ const BurgerMenu: React.FC = () => {
         <StyledCloseIcon onClick={handleBurgerClick} />
         <StyledList>
           <StyledListItem>
-            <NavLink to={"/"}>
-              <ListItemText primary="Home" />
-            </NavLink>
+            <StyledLink
+              to="/"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
+            >
+              Home
+            </StyledLink>
           </StyledListItem>
           <StyledListItem>
-            <NavLink to={"Produkte"}>
-              <ListItemText primary="Produkte" />
-            </NavLink>
+            <StyledLink to="/Produkte">Produkte</StyledLink>
           </StyledListItem>
           <StyledListItem>
-            <NavLink to={"Bestellung"}>
+            <StyledLink to={"Bestellung"}>
               <ListItemText primary="Warenkorb" />
-            </NavLink>
+            </StyledLink>
           </StyledListItem>
           <StyledListItem>
-            <NavLink to={"Kontakt"}>
+            <StyledLink to={"Kontakt"}>
               <ListItemText primary="Kontakte" />
-            </NavLink>
+            </StyledLink>
           </StyledListItem>
           <StyledListItem>
-            <NavLink to={"Unsere Geschichte"}>
+            <StyledLink to={"Unsere Geschichte"}>
               <ListItemText primary="Unsere Geschichte" />
-            </NavLink>
+            </StyledLink>
           </StyledListItem>
         </StyledList>
       </StyledMenu>
