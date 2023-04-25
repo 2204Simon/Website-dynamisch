@@ -35,7 +35,19 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
   const dispatch = useDispatch(); // Initialisierung der useDispatch-Hook
 
   const handleQuantityChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuantity(Number(event.target.value));
+    const value = event.target.value.replace(/^0+/, ""); // entfernt führende Nullen
+    const parsedValue = Number(value); // konvertiert die eingegebene Zeichenfolge in eine Zahl
+
+    if (isNaN(parsedValue)) {
+      setQuantity(0); // wenn der Wert NaN ist, wird der Wert auf 0 gesetzt
+      CustomToast.error("Ungültige Eingabe");
+    } else {
+      if (parsedValue > 99) {
+        setQuantity(99);
+      } else {
+        setQuantity(parsedValue);
+      }
+    }
   };
 
   const handleAddToCart = () => {
@@ -87,10 +99,10 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
             <Minus />
           </MinusQuantity>
           <QuantityInput
-            type="number"
+            type="text"
             id="quantity"
             name="quantity"
-            min="0"
+            pattern="[0-9]*"
             value={quantity}
             onChange={handleQuantityChange}
           />
