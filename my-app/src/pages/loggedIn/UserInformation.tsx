@@ -8,9 +8,11 @@ import {
   Paragraph,
   Title,
 } from "./UserInformation.styles";
+import { useNavigate } from "react-router-dom";
 
 export default function UserInformation(): JSX.Element {
   const { changeLoggedIn, loggedIn } = useLoggedIn();
+  const navigate = useNavigate();
   const userInformation = useSelector(
     (state: { user: UserDataState }) => state.user
   );
@@ -18,6 +20,7 @@ export default function UserInformation(): JSX.Element {
   const handleClick = (): void => {
     console.log("changedlogin");
     changeLoggedIn();
+    navigate("/SignUp");
   };
 
   return (
@@ -35,7 +38,7 @@ export default function UserInformation(): JSX.Element {
           className="black-color white-orange "
           onClick={handleClick}
         >
-          test
+          Ausloggen
         </LogoutButton>
       </Card>
     </Container>

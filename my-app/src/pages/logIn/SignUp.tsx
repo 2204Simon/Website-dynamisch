@@ -8,7 +8,7 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useLoggedIn } from "../../globalVariables/loggedin";
 import { LogInData } from "../../redux/types";
 import { useDispatch } from "react-redux";
@@ -26,7 +26,8 @@ function Copyright(props: any) {
 }
 
 export default function SignUp() {
-  const { changeLoggedIn } = useLoggedIn(); // Verwende den useLoggedIn-Hook, um auf den globalen Zustand zuzugreifen
+  const { changeLoggedIn } = useLoggedIn();
+  const navigate = useNavigate();
   function handleClick(): void {
     console.log("changedlogin");
     changeLoggedIn();
@@ -43,6 +44,7 @@ export default function SignUp() {
     };
     console.log(preparedData);
     dispatch(addNewUser(preparedData));
+    navigate("/LoggedIn");
   };
   return (
     <div>
@@ -132,9 +134,7 @@ export default function SignUp() {
               className="black-color white-orange"
               onClick={handleClick}
             >
-              <Link component={RouterLink} to="/LoggedIn" variant="body2">
-                Sign Up
-              </Link>
+              Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>

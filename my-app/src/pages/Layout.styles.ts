@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { colors } from "./general/constants";
 
 export const Header = styled.header`
@@ -41,15 +42,15 @@ export const MenuItem = styled.li`
   padding: 10px;
 `;
 
-export const StyledLink = styled(Link)`
+export const StyledLink = styled(NavLink)`
   text-decoration: none;
-  color: ${colors.white}; /* Ändere die Textfarbe an die gewünschte Farbe */
+  color: ${colors.white};
   margin-right: 16px;
   position: relative;
   width: 100%;
 
   &:hover {
-    color: ${colors.white}; /* Ändere die Textfarbe des Hover-Effekts an die gewünschte Farbe */
+    color: ${colors.white};
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1);
     &::before {
       content: "";
@@ -60,12 +61,21 @@ export const StyledLink = styled(Link)`
       left: 0;
       right: 0;
       height: 2px;
-      background-color: ${colors.white}; /* Ändere die Farbe des Hover-Effekts an die gewünschte Farbe */
+      background-color: ${colors.white};
       pointer-events: none;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1);
     }
     &::after {
       box-sizing: inherit;
     }
+  }
+
+  /* Füge hier das Styling für den aktiven Link hinzu */
+  &.active {
+    color: ${colors.black};
+    font-weight: bold;
+
+  &:active {
+    color: red;
   }
 `;

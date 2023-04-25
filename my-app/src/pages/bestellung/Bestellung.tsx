@@ -14,14 +14,14 @@ import { Link as RouterLink } from "react-router-dom";
 import { CartItem, CartState } from "../../redux/types";
 import { removeFromCart } from "../../redux/action";
 function WarenkorbSeite(): JSX.Element {
-  // Zugriff auf den Gesamtpreis aus dem Redux-Store
-  const dispatch = useDispatch(); // Zugriff auf die dispatch-Funktion, um Aktionen auszulösen
+  const dispatch = useDispatch();
+
   const cartItems = useSelector(
     (state: { cart: CartState }) => state.cart.cartItems
   );
 
   const handleRemoveItem = (item: CartItem) => {
-    dispatch(removeFromCart(item)); // Aktion zum Entfernen eines Elements aus dem Warenkorb mit dispatch auslösen
+    dispatch(removeFromCart(item));
   };
   const priceCounter = (): number => {
     let price = 0;
@@ -35,9 +35,9 @@ function WarenkorbSeite(): JSX.Element {
     <NoOrderContainer>
       <NoOrderTextWrapper>
         <h2 style={{ color: "black" }}>Sie haben nichts im Warenkorb</h2>
-        <Button className="white-orange black-color">
-          <RouterLink to="/Produkte">Zu den Produkten</RouterLink>
-        </Button>
+        <RouterLink to="/Produkte">
+          <Button className="white-orange black-color">Zu den Produkten</Button>
+        </RouterLink>
       </NoOrderTextWrapper>
       <NoOrderShoppingBag />
     </NoOrderContainer>

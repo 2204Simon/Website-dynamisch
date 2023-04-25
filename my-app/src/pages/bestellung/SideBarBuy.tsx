@@ -7,7 +7,6 @@ import {
   SideBarWrapper,
 } from "./stylesBestellung/SideBarBuy.styles";
 import { Button } from "../general/button.styles";
-import { Link } from "react-router-dom";
 import Adressdaten from "../loggedIn/AdressData"; // Import der Popup-Komponente
 
 interface SideBarProps {
