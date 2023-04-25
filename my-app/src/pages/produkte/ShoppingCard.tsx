@@ -10,6 +10,8 @@ import {
   QuantityInput,
   Title,
   Image,
+  PlusQuantity,
+  MinusQuantity,
 } from "./styles/ShoppingCard.styles";
 import { BlackColorButton } from "../general/button";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,6 +22,7 @@ import {
   increaseQuantity,
 } from "../../redux/action";
 import { CartItem } from "../../redux/types";
+import { Plus, Minus } from "phosphor-react";
 
 interface ShoppingCardProps {
   image: string;
@@ -52,12 +55,21 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
     }
   };
 
-  const handlePlus = (item: CartItem) => {
-    decreaseQuantity(item);
+  const handlePlus = (quantity: number) => {
+    quantity += 1;
+    if (quantity === 100) {
+      CustomToast.error("Maximale Anzahl erreicht");
+    } else {
+      setQuantity(Number(quantity));
+    }
   };
 
-  const handleMinus = (item: CartItem) => {
-    increaseQuantity(item);
+  const handleMinus = (quantity: number) => {
+    quantity -= 1;
+    if (quantity === -1) {
+    } else {
+      setQuantity(Number(quantity));
+    }
   };
 
   return (
@@ -71,6 +83,9 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
 
         <Quantity>
           <label htmlFor="quantity">Menge:</label>
+          <MinusQuantity onClick={() => handleMinus(quantity)}>
+            <Minus />
+          </MinusQuantity>
           <QuantityInput
             type="number"
             id="quantity"
@@ -79,6 +94,9 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
             value={quantity}
             onChange={handleQuantityChange}
           />
+          <PlusQuantity onClick={() => handlePlus(quantity)}>
+            <Plus />
+          </PlusQuantity>
         </Quantity>
 
         <BlackColorButton
