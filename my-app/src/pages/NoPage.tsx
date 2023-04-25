@@ -1,8 +1,15 @@
-import React from 'react';
-import '../App.css';
+import { Link } from "react-router-dom";
+import { OrangeButton } from "./general/button";
 
 function NoPage(): JSX.Element {
-    return(<h1>NoPage found</h1>);
-  };
-  
-  export default NoPage;
+  return (
+    <div>
+      <h1>
+        Diese Seite wurde leider nicht gefunden. Eventuell wurde diese gelöscht.
+      </h1>
+      <Link to="/">
+        <OrangeButton caption={"Zur Home Seite"}></OrangeButton>
+      </Link>
+    </div>
+  );
+}
