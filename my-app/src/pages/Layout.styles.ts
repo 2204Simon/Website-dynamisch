@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import { colors } from "./general/constants";
+import { colors, mediaQueries } from "./general/constants";
 
 export const Header = styled.header`
   display: flex;
@@ -14,7 +13,7 @@ export const Header = styled.header`
   background-color: ${colors.companycolor};
   font-family: Arial, sans-serif;
   padding: 16px;
-  @media (max-width: 1200px) {
+  @media (max-width: ${mediaQueries.large}) {
     display: none;
   }
 `;
@@ -70,7 +69,6 @@ export const StyledLink = styled(NavLink)`
     }
   }
 
-  /* Füge hier das Styling für den aktiven Link hinzu */
   &.active {
     color: ${colors.black};
     font-weight: bold;

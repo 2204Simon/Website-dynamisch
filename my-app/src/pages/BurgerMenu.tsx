@@ -5,7 +5,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { colors, mediaQueries } from "./general/constants";
 
 const StyledBurgerMenu = styled.div`
@@ -67,29 +67,29 @@ const BurgerMenu: React.FC = () => {
         <StyledCloseIcon onClick={handleBurgerClick} />
         <StyledList>
           <StyledListItem>
-            <Link to={"/"}>
+            <NavLink to={"/"}>
               <ListItemText primary="Home" />
-            </Link>
+            </NavLink>
           </StyledListItem>
           <StyledListItem>
-            <Link to={"Produkte"}>
+            <NavLink to={"Produkte"}>
               <ListItemText primary="Produkte" />
-            </Link>
+            </NavLink>
           </StyledListItem>
           <StyledListItem>
-            <Link to={"Bestellung"}>
+            <NavLink to={"Bestellung"}>
               <ListItemText primary="Warenkorb" />
-            </Link>
+            </NavLink>
           </StyledListItem>
           <StyledListItem>
-            <Link to={"Kontakt"}>
+            <NavLink to={"Kontakt"}>
               <ListItemText primary="Kontakte" />
-            </Link>
+            </NavLink>
           </StyledListItem>
           <StyledListItem>
-            <Link to={"Unsere Geschichte"}>
+            <NavLink to={"Unsere Geschichte"}>
               <ListItemText primary="Unsere Geschichte" />
-            </Link>
+            </NavLink>
           </StyledListItem>
         </StyledList>
       </StyledMenu>
