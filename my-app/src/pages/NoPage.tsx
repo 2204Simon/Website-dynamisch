@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { OrangeButton } from "./general/button";
+import { BlackColorButton, OrangeButton } from "./general/button";
 
 function NoPage(): JSX.Element {
   return (
@@ -8,7 +8,7 @@ function NoPage(): JSX.Element {
         Diese Seite wurde leider nicht gefunden. Eventuell wurde diese gelöscht.
       </h1>
       <Link to="/">
-        <OrangeButton caption={"Zur Home Seite"}></OrangeButton>
+        <BlackColorButton caption={"Zur Home Seite"}></BlackColorButton>
       </Link>
     </div>
   );

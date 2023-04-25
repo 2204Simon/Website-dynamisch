@@ -12,7 +12,7 @@ const Home: React.FC = (): JSX.Element => {
         <div className="Anfangssatz">
           <h2>Stelle dir dein perfektes Frühstück zusammen</h2>
           <div>
-            <Link to="/Produkte">
+            <Link to="/Produkt">
               <OrangeButton caption={"Zu unseren Produkten"}></OrangeButton>
             </Link>
           </div>
