@@ -13,3 +13,4 @@ function NoPage(): JSX.Element {
     </div>
   );
 }
+export default NoPage;
