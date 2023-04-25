@@ -5,7 +5,7 @@ import { colors } from "../general/constants";
 export const TimelineSection = styled.section`
   background-color: transparent;
   min-height: 100vh;
-  padding: 5% 2% 5% 2%;
+  padding: 5% 5% 5% 5%;
   }
 `;
 
@@ -112,3 +112,10 @@ export const TimelineContent = styled.div`
   border-radius: 15px;
   border: 3px solid ${colors.companycolor};
 `;
+
+export const TimelineTitle = styled.h3`
+  /* font-size: 20px;
+  font-weight: 800; */
+  color: ${colors.black};
+  margin: 10px 5px 10px 0px;
+  `;

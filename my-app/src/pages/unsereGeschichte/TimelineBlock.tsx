@@ -1,9 +1,16 @@
-import { TimelineItemA, TimelineContent, Image, TimelineDot, TimelineDate, ImageWrapper, } from "./TimelineBlock.styles";
+import { 
+  TimelineItemA, 
+  TimelineContent, 
+  Image, 
+  TimelineDot, 
+  TimelineDate, 
+  ImageWrapper,
+  TimelineTitle, 
+} from "./TimelineBlock.styles";
 
 interface TimelineItemProps {
   date: string;
   title: string;
-  description: string;
   details: string;
   image: string;
 }
@@ -11,7 +18,6 @@ interface TimelineItemProps {
 const TimelineItem: React.FC<TimelineItemProps> = ({
   date,
   title,
-  description,
   details,
   image,
 }) => (
@@ -22,8 +28,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
       <ImageWrapper>
         <Image src={image} alt="history_picture" />
       </ImageWrapper>
-      <h3>{title}</h3>
-      <p>{description}</p>
+      <TimelineTitle>{title}</TimelineTitle>
       <details>{details}</details>
     </TimelineContent>
   </TimelineItemA>
