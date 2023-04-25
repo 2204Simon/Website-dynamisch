@@ -78,7 +78,7 @@ const BurgerMenu: React.FC = () => {
           </StyledListItem>
           <StyledListItem>
             <Link to={"Bestellung"}>
-              <ListItemText primary="Warenborb" />
+              <ListItemText primary="Warenkorb" />
             </Link>
           </StyledListItem>
           <StyledListItem>
