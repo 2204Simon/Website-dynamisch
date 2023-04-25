@@ -1,7 +1,6 @@
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import { Button } from "../general/button.styles";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
@@ -11,6 +10,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Link as RouterLink } from "react-router-dom";
 import { useLoggedIn } from "../../globalVariables/loggedin";
+import { LogInData } from "../../redux/types";
+import { useDispatch } from "react-redux";
+import { addNewUser } from "../../redux/action";
 
 function Copyright(props: any) {
   return (
@@ -29,15 +31,18 @@ export default function SignUp() {
     console.log("changedlogin");
     changeLoggedIn();
   }
+  const dispatch = useDispatch();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-    });
+    const preparedData: LogInData = {
+      email: data.get("email") as string,
+      password: data.get("password") as string,
+      firstName: data.get("firstName") as string,
+      lastName: data.get("lastName") as string,
+    };
+    console.log(preparedData);
+    dispatch(addNewUser(preparedData));
   };
   return (
     <div>

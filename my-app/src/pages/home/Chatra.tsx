@@ -34,7 +34,7 @@ declare global {
 window.ChatraSetup = {
   chatWidth: 500,
   chatHeight: 500,
-  buttonSize: 50,
+  buttonSize: 49,
   colors: {
     buttonText: colors.companycolor,
     buttonBg: colors.black,

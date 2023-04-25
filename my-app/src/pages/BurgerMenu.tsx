@@ -9,16 +9,20 @@ import { Link } from "react-router-dom";
 import { colors, mediaQueries } from "./general/constants";
 
 const StyledBurgerMenu = styled.div`
-  display: none; /* Standardmäßig ausgeblendet */
+  display: none;
   @media (max-width: ${mediaQueries.large}) {
-    display: flex; /* Ab einer Bildschirmbreite von 1200px eingeblendet */
+    display: flex;
     align-items: center;
     justify-content: flex-end;
+    background-color: ${colors.companycolor};
+    height: 70px;
   }
 `;
 
 const StyledBurgerIcon = styled(MenuIcon)`
   cursor: pointer;
+  color: ${colors.white};
+  margin-right: 20px;
 `;
 
 const StyledMenu = styled.div<{ open: boolean }>`
@@ -27,7 +31,7 @@ const StyledMenu = styled.div<{ open: boolean }>`
   right: 0;
   width: 200px;
   padding: 16px;
-  background-color: ${colors.companycolor}; /* Ändere die Hintergrundfarbe an die gewünschte Farbe */
+  background-color: ${colors.companycolor};
   z-index: 4;
   transition: transform 0.3s ease-in-out;
   transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
@@ -37,6 +41,7 @@ const StyledMenu = styled.div<{ open: boolean }>`
 const StyledCloseIcon = styled(CloseIcon)`
   cursor: pointer;
   align-self: flex-end;
+  color: ${colors.white};
 `;
 
 const StyledList = styled(List)`
@@ -73,7 +78,7 @@ const BurgerMenu: React.FC = () => {
           </StyledListItem>
           <StyledListItem>
             <Link to={"Bestellung"}>
-              <ListItemText primary="Warenborb" />
+              <ListItemText primary="Warenkorb" />
             </Link>
           </StyledListItem>
           <StyledListItem>

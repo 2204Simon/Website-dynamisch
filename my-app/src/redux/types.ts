@@ -13,7 +13,23 @@ export enum ActionTypesUser {
   ADD_NEW_USER = "ADD_NEW_USER",
 }
 
-//Array
+//Adress Data
+export interface AdressDataState {
+  AdressData: AdressData;
+}
+
+export interface AdressData {
+  street: string;
+  housenumber: number;
+  city: string;
+  payment: string;
+}
+
+export enum ActionTypesAdressData {
+  ADD_NEW_ADRESS = "ADD_NEW_ADRESS",
+}
+
+//CartArray
 
 export interface CartState {
   cartItems: CartItem[];
@@ -26,7 +42,7 @@ export interface CartItem {
   anzahl: number;
 }
 
-export enum ActionTypes {
+export enum CartActionTypes {
   ADD_TO_CART = "ADD_TO_CART",
   REMOVE_FROM_CART = "REMOVE_FROM_CART",
   CLEAR_CART = "CLEAR_CART",
