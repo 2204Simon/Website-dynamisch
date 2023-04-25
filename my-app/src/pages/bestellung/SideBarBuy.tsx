@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Logo from "../../img/Logo.webp";
 import {
   LogoImage,
@@ -7,7 +7,10 @@ import {
   SideBarWrapper,
 } from "./stylesBestellung/SideBarBuy.styles";
 import { Button } from "../general/button.styles";
-import Adressdaten from "../loggedIn/AdressData"; // Import der Popup-Komponente
+import Adressdaten from "../loggedIn/AdressData";
+import { useLoggedIn } from "../../globalVariables/loggedin";
+import SignIn from "../logIn/LogIn";
+import { useNavigate } from "react-router-dom";
 
 interface SideBarProps {
   produktAnzahl: number;
@@ -18,16 +21,24 @@ export default function SideBarBuy({
   produktAnzahl,
   price,
 }: SideBarProps): JSX.Element {
-  const [showPopup, setShowPopup] = useState(false); // State für das Anzeigen des Popups
+  const { loggedIn } = useLoggedIn();
+  const navigate = useNavigate();
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleBuyNow = () => {
-    setShowPopup(true); // Setzen des State-Werts auf true, um das Popup anzuzeigen
+    setShowPopup(true);
     document.body.style.overflow = "hidden";
   };
 
+  const handleSideChange = () => {
+    setShowPopup(false);
+    document.body.style.overflow = "auto";
+    navigate("/LogIn");
+  };
+
   const handleClosePopup = () => {
-    setShowPopup(false); // Setzen des State-Werts auf false, um das Popup zu schließen
-    document.body.style.overflow = "auto"; // Freigeben des body-Scrolls
+    setShowPopup(false);
+    document.body.style.overflow = "auto";
   };
   return (
     <SideBarWrapper>
@@ -46,20 +57,42 @@ export default function SideBarBuy({
       {showPopup && (
         <PopupBackdrop>
           <PopupWrapper>
-            <h2 style={{ color: "black" }}>Sind deine Adressdaten akutell?</h2>
-            <Adressdaten />
-            <Button
-              className="black-color white-orange"
-              onClick={() => handleClosePopup()}
-            >
-              Zurück
-            </Button>
-            <Button
-              className="black-color white-orange"
-              onClick={() => handleClosePopup()}
-            >
-              Kostenpflichtig Bestellen
-            </Button>
+            {!loggedIn ? (
+              <div>
+                <h1>Du musst dich anmelden um bei uns zu bestellen</h1>
+                <Button
+                  className="black-color white-orange"
+                  onClick={() => handleClosePopup()}
+                >
+                  Zurück
+                </Button>
+                <Button
+                  className="black-color white-orange"
+                  onClick={() => handleSideChange()}
+                >
+                  Zum SignIn
+                </Button>
+              </div>
+            ) : (
+              <>
+                <h2 style={{ color: "black" }}>
+                  Sind deine Adressdaten akutell?
+                </h2>
+                <Adressdaten />
+                <Button
+                  className="black-color white-orange"
+                  onClick={() => handleClosePopup()}
+                >
+                  Zurück
+                </Button>
+                <Button
+                  className="black-color white-orange"
+                  onClick={() => handleClosePopup()}
+                >
+                  Kostenpflichtig Bestellen
+                </Button>
+              </>
+            )}
           </PopupWrapper>
         </PopupBackdrop>
       )}
