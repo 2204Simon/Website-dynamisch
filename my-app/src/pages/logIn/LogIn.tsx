@@ -75,8 +75,8 @@ export default function SignIn() {
           <Box
             component="form"
             onSubmit={handleSubmit}
-            noValidate
             sx={{ mt: 1 }}
+            noValidate
           >
             <TextField
               margin="normal"
@@ -86,6 +86,7 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              required
               InputLabelProps={{
                 sx: {
                   backgroundColor: "white", // Hier den gewünschten Farbcode eintragen
@@ -95,6 +96,7 @@ export default function SignIn() {
             <TextField
               margin="normal"
               fullWidth
+              required
               name="password"
               label="Password"
               type="password"
