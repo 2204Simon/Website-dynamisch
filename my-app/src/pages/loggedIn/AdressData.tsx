@@ -99,7 +99,7 @@ export default function AdressInformation(): JSX.Element {
                 fullWidth
                 required
                 id="hausnummer"
-                label="hausnummer"
+                label="Hausnummer"
                 name="hausnummer"
                 defaultValue={editedData?.housenumber}
                 InputLabelProps={{

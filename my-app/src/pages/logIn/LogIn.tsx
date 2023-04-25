@@ -9,7 +9,12 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { UserDataState } from "../../redux/types";
+import { CustomToast } from "../general/toast.style";
+import { ToastContainer } from "react-toastify";
+import { useLoggedIn } from "../../globalVariables/loggedin";
 
 function Copyright(props: any) {
   return (
@@ -25,9 +30,25 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function SignIn() {
+  const userInformation = useSelector(
+    (state: { user: UserDataState }) => state.user.LogInData
+  );
+  const navigate = useNavigate();
+  const { changeLoggedIn } = useLoggedIn();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    if (
+      data.get("email") === userInformation.email &&
+      data.get("password") === userInformation.password
+    ) {
+      console.log("erfolgreicher Login");
+      navigate("/loggedIn");
+      changeLoggedIn();
+    } else {
+      CustomToast.error("falsches Passwort oder e-Mail");
+    }
     console.log({
       email: data.get("email"),
       password: data.get("password"),
@@ -36,7 +57,7 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" style={{ height: "600px" }}>
         <Box
           sx={{
             marginTop: 8,
@@ -105,6 +126,7 @@ export default function SignIn() {
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
+      <ToastContainer />
     </ThemeProvider>
   );
 }
