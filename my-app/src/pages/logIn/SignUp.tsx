@@ -63,24 +63,20 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
                   name="firstName"
                   fullWidth
+                  required
                   id="firstName"
                   label="First Name"
                   autoFocus
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: "white", // Hier den gewünschten Farbcode eintragen
+                      backgroundColor: "white",
                     },
                   }}
                 />
@@ -88,13 +84,14 @@ export default function SignUp() {
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
+                  required
                   id="lastName"
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: "white", // Hier den gewünschten Farbcode eintragen
+                      backgroundColor: "white",
                     },
                   }}
                 />
@@ -102,13 +99,14 @@ export default function SignUp() {
               <Grid item xs={12}>
                 <TextField
                   fullWidth
+                  required
                   id="email"
                   label="Email Address"
                   name="email"
                   autoComplete="email"
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: "white", // Hier den gewünschten Farbcode eintragen
+                      backgroundColor: "white",
                     },
                   }}
                 />
@@ -116,6 +114,7 @@ export default function SignUp() {
               <Grid item xs={12}>
                 <TextField
                   fullWidth
+                  required
                   name="password"
                   label="Password"
                   type="password"
@@ -123,8 +122,12 @@ export default function SignUp() {
                   autoComplete="new-password"
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: "white", // Hier den gewünschten Farbcode eintragen
+                      backgroundColor: "white",
                     },
+                  }}
+                  inputProps={{
+                    pattern: ".{8,}",
+                    title: "Passwort muss mindestens 8 Zeichen haben",
                   }}
                 />
               </Grid>
