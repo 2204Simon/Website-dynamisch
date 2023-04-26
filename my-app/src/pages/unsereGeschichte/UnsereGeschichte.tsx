@@ -21,7 +21,7 @@ const UnsereGeschichte: React.FC = () => {
   return (
       
    
-       <h2> "Unsere Geschichte" </h2>
+     /*   <h2> "Unsere Geschichte" </h2> */
       
       
       <TimelineSection>
