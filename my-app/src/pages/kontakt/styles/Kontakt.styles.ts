@@ -69,7 +69,7 @@ export const FormLabel = styled.label`
 export const FormInput = styled.input`
   padding: 0.5rem;
   border: 1px solid ${colors.companycolor};
-  border-radius: 4px;
+  border-radius: 10px;
   font-size: 1rem;
   width: 100%;
 `;
@@ -77,7 +77,7 @@ export const FormInput = styled.input`
 export const FormTextArea = styled.textarea`
   padding: 0.5rem;
   border: 1px solid ${colors.companycolor};
-  border-radius: 4px;
+  border-radius: 10px;
   font-size: 1rem;
   width: 100%;
   resize: vertical;
@@ -88,7 +88,7 @@ export const FormButton = styled.button`
   color: ${colors.white};
   padding: 0.5rem 1rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   font-size: 1rem;
   cursor: pointer;
 `;
@@ -121,7 +121,7 @@ export const MapContainer = styled.div`
   padding-bottom: 56.25%;
   height: 0;
   overflow: hidden;
-  border-radius: 15px;
+  border-radius: 10px;
 
   iframe {
     position: absolute;
