@@ -90,19 +90,13 @@ const BurgerMenu: React.FC = () => {
             <StyledLink to="/Produkte">Produkte</StyledLink>
           </StyledListItem>
           <StyledListItem>
-            <StyledLink to={"Bestellung"}>
-              <ListItemText primary="Warenkorb" />
-            </StyledLink>
+            <StyledLink to="/Bestellung">Bestellung</StyledLink>
           </StyledListItem>
           <StyledListItem>
-            <StyledLink to={"Kontakt"}>
-              <ListItemText primary="Kontakte" />
-            </StyledLink>
+            <StyledLink to="/Kontakte">Kontakte</StyledLink>
           </StyledListItem>
           <StyledListItem>
-            <StyledLink to={"Unsere Geschichte"}>
-              <ListItemText primary="Unsere Geschichte" />
-            </StyledLink>
+            <StyledLink to="/Unsere Geschichte">Unsere Geschichte</StyledLink>
           </StyledListItem>
         </StyledList>
       </StyledMenu>
