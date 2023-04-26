@@ -185,7 +185,7 @@ function Produkt() {
         <ScrollContainer scrollAmount={300}>
           <ShoppingCard
             title={"Brötchen mit Kaffee"}
-            price={5.99}
+            price={6.99}
             image={BrötchenMitKaffe}
           />
           <ShoppingCard
