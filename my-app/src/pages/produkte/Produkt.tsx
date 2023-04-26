@@ -250,7 +250,6 @@ function Produkt() {
           />
         </div>
       )}
-      <ToastContainer />
     </>
   );
 }

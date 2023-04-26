@@ -16,13 +16,10 @@ import {
 import { BlackColorButton } from "../general/button";
 import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
-import {
-  addToCart,
-  decreaseQuantity,
-  increaseQuantity,
-} from "../../redux/action";
-import { CartItem } from "../../redux/types";
+import { addToCart, increaseQuantity } from "../../redux/action";
+import { CartState } from "../../redux/types";
 import { Plus, Minus } from "phosphor-react";
+import { useSelector } from "react-redux";
 
 interface ShoppingCardProps {
   image: string;
@@ -33,6 +30,9 @@ interface ShoppingCardProps {
 const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
   const [quantity, setQuantity] = useState<number>(0);
   const dispatch = useDispatch(); // Initialisierung der useDispatch-Hook
+  const cartItems = useSelector(
+    (state: { cart: CartState }) => state.cart.cartItems
+  );
 
   const handleQuantityChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value.replace(/^0+/, ""); // entfernt führende Nullen
@@ -50,11 +50,26 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
     }
   };
 
+  const test = (quantity2: number) => {
+    const item = {
+      produktname: title,
+      logo: image,
+      preis: price,
+      anzahl: quantity,
+    };
+    dispatch(increaseQuantity(item, quantity2));
+  };
+
   const handleAddToCart = () => {
     if (quantity === 0) {
       CustomToast.error("Menge erhöhen");
-      console.log("Bitte gebe eine Anzahl ein!");
     } else {
+      for (let i = 0; i < cartItems.length; i++) {
+        if (cartItems[i].produktname === title) {
+          test(quantity);
+          return;
+        }
+      }
       const item = {
         produktname: title,
         logo: image,
@@ -63,7 +78,6 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
       };
       dispatch(addToCart(item)); // Dispatch der addToCart-Action mit dem erstellten Item
       CustomToast.success("Produkt im Warenkorb");
-      console.log(item);
     }
   };
 
