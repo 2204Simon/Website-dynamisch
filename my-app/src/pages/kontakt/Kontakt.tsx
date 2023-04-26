@@ -15,6 +15,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
 import { BlackColorButton } from "../general/button";
+import PackageLocationQRCode from "./PackageLocationQRCode";
 
 function Kontakt(): JSX.Element {
   const [email, setEmail] = useState("");
@@ -75,6 +76,10 @@ function Kontakt(): JSX.Element {
           </FormLabel>
           <BlackColorButton caption={"Anmelden"}></BlackColorButton>
         </form>
+        <div>
+          <h1>Dein persönlicher Frühstücks Tracker</h1>
+          <PackageLocationQRCode latitude={48.676666} longitude={10.153616} />
+        </div>
       </ContactContainer>
     </MainContainer>
   );
