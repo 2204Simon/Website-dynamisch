@@ -12,6 +12,7 @@ import Badge from "@mui/material/Badge";
 import { CartState } from "../redux/types";
 import { ShoppingCart, SignIn, User } from "phosphor-react";
 import logo from ".././img/Logo.webp";
+import { ToastContainer } from "react-toastify";
 
 export const DesktopMenu: React.FC = () => {
   const { loggedIn } = useLoggedIn();
@@ -65,6 +66,7 @@ export const DesktopMenu: React.FC = () => {
           )}
         </MenuItem>
       </Menu>
+      <ToastContainer />
     </Header>
   );
 };

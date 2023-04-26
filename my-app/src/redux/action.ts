@@ -21,10 +21,10 @@ export const clearCart = () => {
   };
 };
 
-export const increaseQuantity = (item: CartItem) => {
+export const increaseQuantity = (item: CartItem, amount: number) => {
   return {
     type: CartActionTypes.INCREASE_QUANTITY,
-    payload: item,
+    payload: { item, amount },
   };
 };
 

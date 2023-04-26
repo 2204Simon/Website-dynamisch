@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
@@ -37,7 +37,7 @@ const StyledMenu = styled.div<{ open: boolean }>`
   transition: transform 0.3s ease-in-out;
   transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
   visibility: ${({ open }) => (open ? "visible" : "hidden")};
-  border-radius: 15px;
+  border-bottom-left-radius: 10px;
 `;
 
 const StyledCloseIcon = styled(CloseIcon)`
@@ -70,6 +70,18 @@ const BurgerMenu: React.FC = () => {
     setOpen(!open);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setOpen(false);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <StyledBurgerMenu>
       <StyledBurgerIcon onClick={handleBurgerClick} />
@@ -93,7 +105,7 @@ const BurgerMenu: React.FC = () => {
             <StyledLink to="/Bestellung">Bestellung</StyledLink>
           </StyledListItem>
           <StyledListItem>
-            <StyledLink to="/Kontakte">Kontakte</StyledLink>
+            <StyledLink to="/Kontakt">Kontakte</StyledLink>
           </StyledListItem>
           <StyledListItem>
             <StyledLink to="/Unsere Geschichte">Unsere Geschichte</StyledLink>

@@ -52,7 +52,6 @@ export const StyledLink = styled(NavLink)`
 
   &:hover {
     color: ${colors.white};
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1);
     &::before {
       content: "";
       box-sizing: inherit;
@@ -64,7 +63,6 @@ export const StyledLink = styled(NavLink)`
       height: 2px;
       background-color: ${colors.white};
       pointer-events: none;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1);
     }
     &::after {
       box-sizing: inherit;
@@ -76,6 +74,6 @@ export const StyledLink = styled(NavLink)`
     font-weight: bold;
 
   &:active {
-    color: red;
+    color: ${colors.white};
   }
 `;
