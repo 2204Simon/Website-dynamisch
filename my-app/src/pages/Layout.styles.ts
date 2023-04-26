@@ -74,6 +74,6 @@ export const StyledLink = styled(NavLink)`
     font-weight: bold;
 
   &:active {
-    color: red;
+    color: ${colors.white};
   }
 `;
