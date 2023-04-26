@@ -47,6 +47,8 @@ export const StyledLink = styled(NavLink)`
   margin-right: 16px;
   position: relative;
   width: 100%;
+  font-family: "Montserrat", sans-serif;
+
 
   &:hover {
     color: ${colors.white};

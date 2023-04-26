@@ -4,11 +4,14 @@ h1 {
 }
 
 h2 {
-  color: #fff;
+  color: #aa7d03;
+  font-weight: bold;
+  padding-left: 30px;
+  font-size: 30px;
 }
 
 h3 {
-  font-family: "Oswald", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 p {
