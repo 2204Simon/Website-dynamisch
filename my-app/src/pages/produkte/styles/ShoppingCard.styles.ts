@@ -11,7 +11,7 @@ export const Container = styled.div`
   max-width: 250px;
   margin: 1rem;
   cursor: pointer;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 
   &:hover {
     transform: scale(1.05);
