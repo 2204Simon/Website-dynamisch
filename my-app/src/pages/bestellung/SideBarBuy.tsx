@@ -84,6 +84,7 @@ export default function SideBarBuy({
                   Sind deine Adressdaten akutell?
                 </h2>
                 <Adressdaten />
+                {/* Anliefertag */}
                 <Button
                   className="black-color white-orange"
                   onClick={() => handleClosePopup()}

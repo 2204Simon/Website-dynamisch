@@ -1,4 +1,4 @@
-import { Flip, Slide, toast } from "react-toastify";
+import { Slide, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { colors } from "./constants";
 
@@ -13,7 +13,7 @@ export const CustomToast = {
       draggable: true,
       draggablePercent: 60,
       position: "top-left",
-      transition: Flip,
+      transition: Slide,
       progressClassName: "my-toast-progress-bar",
       progressStyle: { backgroundColor: colors.companycolor },
       style: { backgroundColor: colors.white, color: colors.black },
