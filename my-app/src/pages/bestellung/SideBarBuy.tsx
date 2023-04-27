@@ -60,11 +60,11 @@ export default function SideBarBuy({
     <SideBarWrapper>
       <div>
         <LogoImage src={Logo} alt="Logo" />
-        <h2>Ihr Einkauf</h2>
+        <h2>Dein Einkauf</h2>
         {produktAnzahl === 1 ? (
-          <h4>Du hast 1 Produkt in deinem Warenkorb</h4>
+          <h4>Du hast 1 Produkt in Deinem Warenkorb</h4>
         ) : (
-          <h4>Du hast {produktAnzahl} Produkte in deinem Warenkorb</h4>
+          <h4>Du hast {produktAnzahl} Produkte in Deinem Warenkorb</h4>
         )}
       </div>
       <div>
@@ -79,7 +79,7 @@ export default function SideBarBuy({
           <PopupWrapper>
             {!loggedIn ? (
               <div>
-                <h1>Du musst dich anmelden um bei uns zu bestellen</h1>
+                <h1>Du musst Dich anmelden um Dein perfektes Frühstück zu bestellen!</h1>
                 <Button
                   className="black-color white-orange"
                   onClick={() => handleClosePopup()}
@@ -96,10 +96,10 @@ export default function SideBarBuy({
             ) : (
               <>
                 <h2 style={{ color: "black" }}>
-                  Sind deine Adressdaten akutell?
+                  Sind Deine Adressdaten aktuell?
                 </h2>
                 <Adressdaten />
-                <div>Anliefertag</div>
+                <div>Tag der Lieferung</div>
                 <CalendarComponent />
                 <Button
                   className="black-color white-orange"

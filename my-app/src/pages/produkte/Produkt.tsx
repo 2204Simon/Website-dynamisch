@@ -33,9 +33,14 @@ function Produkt() {
   const isMaxWidth1024 = window.matchMedia("(max-width: 1024px)").matches;
   return (
     <>
-      <h2>
-        Unsere Speisen:
-      </h2>
+
+      <h2>Unsere Produkte</h2>
+      <p>Nachfolgend findest Du unser reichliches Angebot an Speisen und Getränken, um Dir Dein perfektes Frühstück zusammenzustellen. Alle Produkte sind bio und klimaneutral hergestellt sowie geliefert. Wenn Du weitere Informationen zu deren Ursprüngen oder zu den Zutaten erhalten möchtest, helfen Dir gerne unsere Mitarbeiter:innen weiter!</p>
+
+      
+      <h3>
+        Speisen
+      </h3>
       {showScrollContainer && !isMaxWidth1024 ? (
         <ScrollContainer scrollAmount={300}>
           <ShoppingCard title={"Baguette"} price={2.99} image={BaguetteAlone} />
@@ -96,9 +101,9 @@ function Produkt() {
         </div>
       )}
 
-      <h2>
-        Unsere Getränke:
-      </h2>
+      <h3>
+        Getränke
+      </h3>
       {showScrollContainer && !isMaxWidth1024 ? (
         <ScrollContainer scrollAmount={300}>
           <ShoppingCard title={"Espresso"} price={1.99} image={Espresso} />
@@ -157,9 +162,9 @@ function Produkt() {
         </div>
       )}
 
-      <h2>
-        Unsere Menüs:
-      </h2>
+      <h3>
+        Menüs
+      </h3>
       {showScrollContainer && !isMaxWidth1024 ? (
         <ScrollContainer scrollAmount={300}>
           <ShoppingCard

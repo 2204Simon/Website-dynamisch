@@ -10,7 +10,7 @@ const Home: React.FC = (): JSX.Element => {
       <Chatra />
       <main className="DunklerHintergrund">
         <div className="Anfangssatz">
-          <h2>Stelle dir dein perfektes Frühstück zusammen</h2>
+          <h2>Stelle Dir Dein perfektes Frühstück zusammen</h2>
           <div>
             <Link to="/Produkte">
               <OrangeButton caption={"Zu unseren Produkten"}></OrangeButton>
@@ -30,7 +30,7 @@ const Home: React.FC = (): JSX.Element => {
               Wir haben seit 2001 eine Kooperation mit der Zeitungsfirma
               FakeZeitung.
               <br />
-              Mit Hilfe der Zeitungsboten kommt dein Frühstück zu dir. Dadurch
+              Mit Hilfe der Zeitungsboten kommt Dein Frühstück zu Dir. Dadurch
               können wir kostengünstig und emissionsarm liefern!
             </p>
           </div>

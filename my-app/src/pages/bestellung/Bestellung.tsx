@@ -36,7 +36,7 @@ function WarenkorbSeite(): JSX.Element {
       <NoOrderTextWrapper>
         <h2 style={{ color: "black" }}>Du hast nichts im Warenkorb</h2>
         <p>
-          Schaue dich doch bei unseren Produkten um. Hier gibt es eine große
+          Schaue Dich doch bei unseren Produkten um. Hier gibt es eine große
           Auswahl an Getränken, Speisen und Frühstücksmenüs!
         </p>
         <RouterLink to="/Produkte">

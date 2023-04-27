@@ -20,8 +20,18 @@ import YoungGeneration from "../../img/Our_History/Young_Generation.png";
 const UnsereGeschichte: React.FC = () => {
   return (
       
-   
-     /*   <h2> "Unsere Geschichte" </h2> */
+   <>
+     <h2> Unsere Geschichte </h2>
+     <p> Die „Bayerischen Wollfilzfabriken KG Offermann, Zeiler, Schmid & Co. KG Offingen Hof“ (BWF) gehen 1962 aus einer Fusion zweier Filzfabriken hervor. Eine davon wird 1892 von Theodor Wilhelm Schmid und seinen Partnern in Hof gegründet, die andere wurde 1896 in Offingen von den Unternehmern Silbermann und Lembert gegründet. 1912 übernimmt Johann Offermann die Lembert-Anteile. Beide Firmen sind bis zu ihrem Zusammenschluss in erster Linie in der Filzproduktion tätig.
+
+Im Jahr 1956 gelingt die Herstellung des ersten „Plexigum“-Kunststoffprofils im Extrusionsverfahren. Dies ist der Gründungszeitpunkt von BWF Profiles. Zu einer Erweiterung des Tätigkeitsfeldes in den Bereich Filtermedien als erster Hersteller in Europa kommt es 1968 mit der Gründung von BWF Envirotec.
+
+In den Jahrzehnten bis zur Jahrtausendwende wird der erfolgreiche Schritt in die USA, nach Italien und China gemacht. Die Einrichtung von internationalen Produktionsstätten in der Türkei, Indien, Russland, Österreich, Südafrika, Polen und Spanien prägt das vergangene und aktuelle Jahrzehnt der in fünfter Generation inhabergeführten BWF Group.
+</p>
+
+<h3>
+Nachfolgend möchten wir Dir mittels einer Reise zurück in die Vergangenheit unsere Wurzeln sowie unsere Erfolgsgeschichte näherbringen:
+</h3>
       
       
       <TimelineSection>
@@ -76,6 +86,8 @@ const UnsereGeschichte: React.FC = () => {
           />
         </TimelineItems>
       </TimelineSection>
+
+      </>
   );
 };
 

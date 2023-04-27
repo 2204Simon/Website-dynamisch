@@ -5,7 +5,7 @@ import { colors } from "../general/constants";
 export const TimelineSection = styled.section`
   background-color: transparent;
   min-height: 100vh;
-  padding: 5% 5% 5% 5%;
+  padding: 0% 5% 5% 5%;
   }
 `;
 

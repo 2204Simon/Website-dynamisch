@@ -112,7 +112,7 @@ export default function AdressInformation(): JSX.Element {
           </form>
         ) : (
           <div>
-            <Title>Address Information</Title>
+            <Title>persönliche Daten:</Title>
             <Paragraph>
               <strong>Straße: </strong>
               {adressInformation?.street}
@@ -122,7 +122,7 @@ export default function AdressInformation(): JSX.Element {
               {adressInformation?.city}
             </Paragraph>
             <Paragraph>
-              <strong>hausnummer: </strong>
+              <strong>Hausnummer: </strong>
               {adressInformation?.housenumber}
             </Paragraph>
             <Paragraph>

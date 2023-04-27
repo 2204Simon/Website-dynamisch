@@ -32,7 +32,7 @@ export default function UserInformation(): JSX.Element {
           {userInformation.LogInData.lastName}
         </Paragraph>
         <Paragraph>
-          Deine E-Mail ist {userInformation.LogInData.email}
+          Deine E-Mail lautet {userInformation.LogInData.email}
         </Paragraph>
         <LogoutButton
           className="black-color white-orange "

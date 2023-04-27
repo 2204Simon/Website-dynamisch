@@ -42,7 +42,7 @@ export const DesktopMenu: React.FC = () => {
           <StyledLink to="/Produkte">Produkte</StyledLink>
         </MenuItem>
         <MenuItem>
-          <StyledLink to="/Unsere Geschichte">Unsere Geschichte</StyledLink>
+          <StyledLink to="/Unsere Geschichte">Geschichte</StyledLink>
         </MenuItem>
         <MenuItem>
           <StyledLink to="/Kontakt">Kontakt</StyledLink>
