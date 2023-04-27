@@ -33,14 +33,7 @@ function Produkt() {
   const isMaxWidth1024 = window.matchMedia("(max-width: 1024px)").matches;
   return (
     <>
-      <h2
-        style={{
-          color: colors.companycolor,
-          fontWeight: "bold",
-          paddingLeft: 30,
-          fontSize: 30,
-        }}
-      >
+      <h2>
         Unsere Speisen:
       </h2>
       {showScrollContainer && !isMaxWidth1024 ? (
@@ -103,14 +96,7 @@ function Produkt() {
         </div>
       )}
 
-      <h2
-        style={{
-          color: colors.companycolor,
-          fontWeight: "bold",
-          paddingLeft: 30,
-          fontSize: 30,
-        }}
-      >
+      <h2>
         Unsere Getränke:
       </h2>
       {showScrollContainer && !isMaxWidth1024 ? (
@@ -171,14 +157,7 @@ function Produkt() {
         </div>
       )}
 
-      <h2
-        style={{
-          color: colors.companycolor,
-          fontWeight: "bold",
-          paddingLeft: 30,
-          fontSize: 30,
-        }}
-      >
+      <h2>
         Unsere Menüs:
       </h2>
       {showScrollContainer && !isMaxWidth1024 ? (
@@ -250,7 +229,6 @@ function Produkt() {
           />
         </div>
       )}
-      <ToastContainer />
     </>
   );
 }

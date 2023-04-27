@@ -19,6 +19,11 @@ import YoungGeneration from "../../img/Our_History/Young_Generation.png";
 
 const UnsereGeschichte: React.FC = () => {
   return (
+      
+   
+     /*   <h2> "Unsere Geschichte" </h2> */
+      
+      
       <TimelineSection>
         <TimelineItems>
           <TimelineItem

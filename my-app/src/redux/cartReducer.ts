@@ -1,3 +1,4 @@
+import { Quantity } from "../pages/produkte/styles/ShoppingCard.styles";
 import { CartActionTypes, CartState } from "./types"; // Importieren Sie die erforderlichen Typen
 
 const cartReducer = (
@@ -26,10 +27,11 @@ const cartReducer = (
       return {
         ...state,
         cartItems: state.cartItems.map(item => {
-          if (item === action.payload) {
+          if (item.produktname === action.payload.item.produktname) {
+            console.log("passendes Item gefunden");
             return {
               ...item,
-              anzahl: item.anzahl + 1,
+              anzahl: item.anzahl + action.payload.amount,
             };
           }
           return item;
