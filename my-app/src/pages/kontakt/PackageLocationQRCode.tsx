@@ -17,7 +17,7 @@ export default function PackageLocationQRCode(props: Props): JSX.Element {
         zu sehen
       </p>
       <a href={locationUrl} target="_blank" rel="noopener noreferrer">
-        Hier klicken wenn der QR Code nicht funktioniert
+        Hier geht´s zum Tracker wenn du keinen QR Code Scanner hast
       </a>
     </div>
   );
