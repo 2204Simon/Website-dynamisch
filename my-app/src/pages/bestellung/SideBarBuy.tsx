@@ -40,12 +40,17 @@ export default function SideBarBuy({
     setShowPopup(false);
     document.body.style.overflow = "auto";
   };
+
   return (
     <SideBarWrapper>
       <div>
         <LogoImage src={Logo} alt="Logo" />
         <h2>Ihr Einkauf</h2>
-        <h4>Du hast {produktAnzahl} Produkt(e) in deinem Warenkorb</h4>
+        {produktAnzahl === 1 ? (
+          <h4>Du hast 1 Produkt in deinem Warenkorb</h4>
+        ) : (
+          <h4>Du hast {produktAnzahl} Produkte in deinem Warenkorb</h4>
+        )}
       </div>
       <div>
         <h3>Gesamtpreis: {price}€</h3>
