@@ -11,6 +11,9 @@ import Adressdaten from "../loggedIn/AdressData";
 import { useLoggedIn } from "../../globalVariables/loggedin";
 import SignIn from "../logIn/LogIn";
 import { useNavigate } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { StyledDatePicker } from "./stylesBestellung/Calendar.styles";
 
 interface SideBarProps {
   produktAnzahl: number;
@@ -41,6 +44,18 @@ export default function SideBarBuy({
     document.body.style.overflow = "auto";
   };
 
+  function CalendarComponent() {
+    const [startDate, setStartDate] = useState<Date>(new Date());
+    return (
+      <div>
+        <StyledDatePicker
+          selected={startDate}
+          onChange={(date: Date) => setStartDate(date)}
+          minDate={new Date()}
+        />
+      </div>
+    );
+  }
   return (
     <SideBarWrapper>
       <div>
@@ -84,7 +99,8 @@ export default function SideBarBuy({
                   Sind deine Adressdaten akutell?
                 </h2>
                 <Adressdaten />
-                {/* Anliefertag */}
+                <div>Anliefertag</div>
+                <CalendarComponent />
                 <Button
                   className="black-color white-orange"
                   onClick={() => handleClosePopup()}
