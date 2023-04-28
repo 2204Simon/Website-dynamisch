@@ -106,7 +106,7 @@ const BurgerMenu: React.FC = () => {
             <StyledLink to="/Bestellung">Bestellung</StyledLink>
           </StyledListItem>
           <StyledListItem>
-            <StyledLink to="/Kontakt">Kontakte</StyledLink>
+            <StyledLink to="/Kontakt">Kontakt</StyledLink>
           </StyledListItem>
           <StyledListItem>
             <StyledLink to="/Unsere Geschichte">Geschichte</StyledLink>
