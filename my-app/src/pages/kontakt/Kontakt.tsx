@@ -37,7 +37,7 @@ function Kontakt(): JSX.Element {
   }
 
   return (
-    <MainContainer>
+    <>
       <h2>Kontakt</h2>
       <p>
         Wenn wir Dein Interesse geweckt haben, Du jedoch noch weitere
@@ -45,6 +45,8 @@ function Kontakt(): JSX.Element {
         haben möchtest, kannst Du uns tagsüber unter den nachfolgenden
         Kontaktmöglichkeiten erreichen. Wir freuen uns, von Dir zu hören!
       </p>
+     
+      <MainContainer>
       <ContactList>
         <ContactListItem style={{ color: "#aa7d03" }}>
           <Envelope size={40} />{" "}
@@ -89,6 +91,7 @@ function Kontakt(): JSX.Element {
         </div>
       </ContactContainer>
     </MainContainer>
+    </>
   );
 }
 
