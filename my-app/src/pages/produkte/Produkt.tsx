@@ -21,6 +21,8 @@ import Zitronentee from "../../img/Drinks/Zitronentee.webp";
 import HeißeSchokolade from "../../img/Drinks/heißeSchokolade.webp";
 import { ToastContainer } from "react-toastify";
 import { colors } from "../general/constants";
+import Bayrisches_Essen from "../../img/Food/bayrisches_Essen.png";
+import Menemen from "../../img/Food/Menemen.png";
 import BrotEiTeeUndObst from "../../img/Food/BrotEiTeeUndObst.webp";
 import EigetränkUndEierbrot from "../../img/Food/EigetränkUndEierbrot.webp";
 import KaffeeMitEiUndBrot from "../../img/Food/KaffeeMitEiUndBrot.webp";
@@ -33,14 +35,16 @@ function Produkt() {
   const isMaxWidth1024 = window.matchMedia("(max-width: 1024px)").matches;
   return (
     <>
-
       <h2>Unsere Produkte</h2>
-      <p>Nachfolgend findest Du unser reichliches Angebot an Speisen und Getränken, um Dir Dein perfektes Frühstück zusammenzustellen. Alle Produkte sind bio und klimaneutral hergestellt sowie geliefert. Wenn Du weitere Informationen zu deren Ursprüngen oder zu den Zutaten erhalten möchtest, helfen Dir gerne unsere Mitarbeiter:innen weiter!</p>
+      <p>
+        Nachfolgend findest Du unser reichliches Angebot an Speisen und
+        Getränken, um Dir Dein perfektes Frühstück zusammenzustellen. Alle
+        Produkte sind bio und klimaneutral hergestellt sowie geliefert. Wenn Du
+        weitere Informationen zu deren Ursprüngen oder zu den Zutaten erhalten
+        möchtest, helfen Dir gerne unsere Mitarbeiter:innen weiter!
+      </p>
 
-      
-      <h3>
-        Speisen
-      </h3>
+      <h3>Speisen</h3>
       {showScrollContainer && !isMaxWidth1024 ? (
         <ScrollContainer scrollAmount={300}>
           <ShoppingCard title={"Baguette"} price={2.99} image={BaguetteAlone} />
@@ -101,9 +105,7 @@ function Produkt() {
         </div>
       )}
 
-      <h3>
-        Getränke
-      </h3>
+      <h3>Getränke</h3>
       {showScrollContainer && !isMaxWidth1024 ? (
         <ScrollContainer scrollAmount={300}>
           <ShoppingCard title={"Espresso"} price={1.99} image={Espresso} />
@@ -162,13 +164,21 @@ function Produkt() {
         </div>
       )}
 
-      <h3>
-        Menüs
-      </h3>
+      <h3>Menüs</h3>
       {showScrollContainer && !isMaxWidth1024 ? (
         <ScrollContainer scrollAmount={300}>
           <ShoppingCard
-            title={"Brötchen mit Kaffee"}
+            title={"Bayrisches Menü"}
+            price={7.99}
+            image={Bayrisches_Essen}
+          />
+          <ShoppingCard
+            title={"Türkisches Menemen"}
+            price={7.99}
+            image={Menemen}
+          />
+          <ShoppingCard
+            title={"Wecken mit Kaffee"}
             price={6.99}
             image={BrötchenMitKaffe}
           />
