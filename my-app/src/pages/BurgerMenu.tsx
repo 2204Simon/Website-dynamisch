@@ -38,7 +38,7 @@ const StyledMenu = styled.div<{ open: boolean }>`
   transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
   visibility: ${({ open }) => (open ? "visible" : "hidden")};
   border-bottom-left-radius: 10px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 2);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 4);
 `;
 
 const StyledCloseIcon = styled(CloseIcon)`
