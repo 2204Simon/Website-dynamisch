@@ -56,4 +56,13 @@ export const PopupWrapper = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   will-change: transform;
+
+  @media (max-width: ${mediaQueries.medium}) {
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px 10px;
+    box-shadow: none;
+  }
 `;
