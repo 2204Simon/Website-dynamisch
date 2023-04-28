@@ -3,7 +3,9 @@ import styled from "styled-components";
 import { colors, mediaQueries } from "../../general/constants";
 export const MainContainer = styled.div`
   max-width: 100%;
-
+  margin: 2rem auto;
+  padding: 0 1rem;
+  display: center;
   h1 {
     text-align: center;
     color: ${colors.black};
@@ -12,6 +14,13 @@ export const MainContainer = styled.div`
   ul {
     list-style: none;
     padding: 0;
+    @media (max-width: ${mediaQueries.small}) {
+      display: center;
+    }
+    @media (min-width: ${mediaQueries.large}) {
+      display: flex;
+      justify-content: center;
+    }
 
     li {
       display: flex;
