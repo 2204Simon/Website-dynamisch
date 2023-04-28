@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { colors, mediaQueries } from "../../general/constants";
 export const MainContainer = styled.div`
   max-width: 100%;
-  margin: 2rem auto;
   padding: 0 1rem;
   display: center;
   h1 {
@@ -125,10 +124,10 @@ export const ContactListItem = styled.li`
 
 export const MapContainer = styled.div`
   position: relative;
-  padding-bottom: 56.25%;
   height: 0;
   overflow: hidden;
   border-radius: 10px;
+  padding-bottom: 30%;
 
   iframe {
     position: absolute;
