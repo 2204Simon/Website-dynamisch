@@ -11,7 +11,6 @@ import Adressdaten from "../loggedIn/AdressData";
 import { useLoggedIn } from "../../globalVariables/loggedin";
 import SignIn from "../logIn/LogIn";
 import { useNavigate } from "react-router-dom";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { StyledDatePicker } from "./stylesBestellung/Calendar.styles";
 
@@ -79,7 +78,10 @@ export default function SideBarBuy({
           <PopupWrapper>
             {!loggedIn ? (
               <div>
-                <h1>Du musst Dich anmelden um Dein perfektes Frühstück zu bestellen!</h1>
+                <h1>
+                  Du musst Dich anmelden um Dein perfektes Frühstück zu
+                  bestellen!
+                </h1>
                 <Button
                   className="black-color white-orange"
                   onClick={() => handleClosePopup()}
