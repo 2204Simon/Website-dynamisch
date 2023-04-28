@@ -11,7 +11,6 @@ import {
   ContactListItem,
 } from "./styles/Kontakt.styles";
 import { ContactMap } from "./Map";
-import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
 import { BlackColorButton } from "../general/button";
@@ -39,10 +38,13 @@ function Kontakt(): JSX.Element {
 
   return (
     <MainContainer>
-      <ToastContainer />
       <h2>Kontakt</h2>
-      <p>Wenn wir Dein Interesse geweckt haben, Du jedoch noch weitere Informationen zu Produkten, dem Service oder zu unserem Unternehmen haben möchtest, 
-        kannst Du uns tagsüber unter den nachfolgenden Kontaktmöglichkeiten erreichen. Wir freuen uns, von Dir zu hören!</p>
+      <p>
+        Wenn wir Dein Interesse geweckt haben, Du jedoch noch weitere
+        Informationen zu Produkten, dem Service oder zu unserem Unternehmen
+        haben möchtest, kannst Du uns tagsüber unter den nachfolgenden
+        Kontaktmöglichkeiten erreichen. Wir freuen uns, von Dir zu hören!
+      </p>
       <ContactList>
         <ContactListItem style={{ color: "#aa7d03" }}>
           <Envelope size={24} />{" "}
@@ -61,7 +63,10 @@ function Kontakt(): JSX.Element {
       <hr />
       <ContactContainer>
         <h2>Newsletter abonnieren</h2>
-        <p>Melde Dich für unseren Newsletter an, um keine neuen Frühstücksmenüs zu verpassen:</p>
+        <p>
+          Melde Dich für unseren Newsletter an, um keine neuen Frühstücksmenüs
+          zu verpassen:
+        </p>
         <form onSubmit={handleSubmit}>
           <FormLabel>
             E-Mail-Adresse:
