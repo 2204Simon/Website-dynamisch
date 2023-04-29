@@ -213,8 +213,18 @@ function Produkt() {
           style={{ display: "flex", flexWrap: "nowrap", overflowX: "scroll" }}
         >
           <ShoppingCard
-            title={"Brötchen mit Kaffee"}
-            price={5.99}
+            title={"Bayrisches Menü"}
+            price={7.99}
+            image={Bayrisches_Essen}
+          />
+          <ShoppingCard
+            title={"Türkisches Menemen"}
+            price={7.99}
+            image={Menemen}
+          />
+          <ShoppingCard
+            title={"Wecken mit Kaffee"}
+            price={6.99}
             image={BrötchenMitKaffe}
           />
           <ShoppingCard
