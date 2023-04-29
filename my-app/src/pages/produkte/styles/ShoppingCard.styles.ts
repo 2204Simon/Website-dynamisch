@@ -46,6 +46,7 @@ export const Title = styled.h2`
 export const Price = styled.p`
   margin: 0;
   font-size: 1.2rem;
+  padding-left: 0px;
 `;
 
 export const Quantity = styled.div`
