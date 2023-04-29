@@ -1,3 +1,4 @@
+import { CustomToast } from "../pages/general/toast.style";
 import { Quantity } from "../pages/produkte/styles/ShoppingCard.styles";
 import { CartActionTypes, CartState } from "./types"; // Importieren Sie die erforderlichen Typen
 
@@ -29,10 +30,19 @@ const cartReducer = (
         cartItems: state.cartItems.map(item => {
           if (item.produktname === action.payload.item.produktname) {
             console.log("passendes Item gefunden");
-            return {
-              ...item,
-              anzahl: item.anzahl + action.payload.amount,
-            };
+            if (item.anzahl + action.payload.amount > 99) {
+              CustomToast.error("Maximale Anzahl erreicht");
+              return {
+                ...item,
+                anzahl: 99,
+              };
+            } else {
+              CustomToast.success("Produkt im Warenkorb");
+              return {
+                ...item,
+                anzahl: item.anzahl + action.payload.amount,
+              };
+            }
           }
           return item;
         }),
