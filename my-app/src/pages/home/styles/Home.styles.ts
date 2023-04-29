@@ -4,7 +4,7 @@ import { colors, mediaQueries } from "../../general/constants";
 
 export const Produktteaser = styled.div`
   padding-top: 20%;
-  padding-bottom: 40%;
+  padding-bottom: 20%;
   text-align: center;
 
 
@@ -33,7 +33,8 @@ export const Cooperation = styled.div`
 
   h1 {
     text-align: center;
-    color: ${colors.black};
+    // color: ${colors.black};
+    color: config.textColor;
   }
 
   p {
@@ -71,3 +72,5 @@ export const media = {
   tablet: "@media(min-width: ${mediaQueries.medium})",
   laptop: "@media(min-width: ${mediaQueries.large})",
 };
+
+

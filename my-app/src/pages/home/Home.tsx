@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import fakeZeitung from "../.././img/test1.webp";
 import Chatra from "./Chatra";
-import { OrangeButton } from "../general/button";
+import {OrangeButton } from "../general/button";
 
 // const Home: React.FC = (): JSX.Element => {
 //   return (
@@ -62,7 +62,7 @@ const defaultConfig: HomePageConfig = {
 };
 
 // Definiere die Komponente für die Startseite
-const HomePage: React.FC = () => {
+const Home: React.FC = () => {
   const [config, setConfig] = useState(defaultConfig);
 
   // Definiere die Funktion, die beim Scrollen aufgerufen wird
@@ -100,21 +100,29 @@ const HomePage: React.FC = () => {
 
       <div style={{ backgroundColor: config.backgroundColor, color: config.textColor }}>
         {/* Hier kommt der Inhalt der Startseite */}
-
+       
         <Produktteaser>
-          <h2>Stelle Dir Dein perfektes Frühstück zusammen</h2>
+          
+          <h2 style={{color: config.textColor}}>Stelle Dir Dein perfektes Frühstück zusammen</h2>
           <Link to="/Produkte">
-            <OrangeButton caption={"Zu unseren Produkten"}></OrangeButton>
+            {/* <LandingPageButton 
+              caption={"Zu unseren Produkten"} 
+              color={config.textColor}
+              ></LandingPageButton> */}
+              <OrangeButton
+                caption={"Zu unseren Produkten" } />
+              
           </Link>
+         
         </Produktteaser>
-
+       
         <Cooperation>
-          <h1>Unsere Kooperation</h1>
+          <h1 style={{color: config.textColor}}>Unsere Kooperation</h1>
           <ImageBox>
           <Image src={fakeZeitung} alt="LogoFakezeitung" />
           </ImageBox>
           
-          <p>
+          <p style={{color: config.textColor}}>
             Wir haben seit 2001 eine Kooperation mit der Zeitungsfirma
             FakeZeitung.
             <br />
@@ -131,4 +139,4 @@ const HomePage: React.FC = () => {
   );
 }
 
-export default HomePage;
+export default Home;
