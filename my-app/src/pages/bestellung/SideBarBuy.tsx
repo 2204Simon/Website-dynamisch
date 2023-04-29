@@ -13,6 +13,8 @@ import SignIn from "../logIn/LogIn";
 import { useNavigate } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 import { StyledDatePicker } from "./stylesBestellung/Calendar.styles";
+import { isTomorrow, startOfTomorrow } from "date-fns";
+import { de } from "date-fns/locale";
 
 interface SideBarProps {
   produktAnzahl: number;
@@ -43,18 +45,25 @@ export default function SideBarBuy({
     document.body.style.overflow = "auto";
   };
 
-  function CalendarComponent() {
-    const [startDate, setStartDate] = useState<Date>(new Date());
+  const minDate = new Date();
+  minDate.setDate(minDate.getDate() + 1);
+
+  function CalendarComponent(): JSX.Element {
+    const [startDate, setStartDate] = useState<Date>(minDate);
     return (
       <div>
         <StyledDatePicker
           selected={startDate}
           onChange={(date: Date) => setStartDate(date)}
-          minDate={new Date()}
+          minDate={minDate}
+          dateFormat={"dd.MM.yyyy"}
+          locale={de}
+          popperPlacement={"top"}
         />
       </div>
     );
   }
+
   return (
     <SideBarWrapper>
       <div>
