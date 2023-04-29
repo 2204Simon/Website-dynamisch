@@ -104,7 +104,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
         <Image src={image} alt="product" />
       </ImageContainer>
       <Details>
-        <Title>{title}</Title>
+        <Title style={{ paddingLeft: "0px" }}>{title}</Title>
         <Price>Preis: {price} €</Price>
 
         <Quantity>
