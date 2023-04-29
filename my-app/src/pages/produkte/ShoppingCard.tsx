@@ -20,6 +20,7 @@ import { addToCart, increaseQuantity } from "../../redux/action";
 import { CartState } from "../../redux/types";
 import { Plus, Minus } from "phosphor-react";
 import { useSelector } from "react-redux";
+import { formatNumber } from "../general/constants";
 
 interface ShoppingCardProps {
   image: string;
@@ -105,7 +106,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
       </ImageContainer>
       <Details>
         <Title style={{ paddingLeft: "0px" }}>{title}</Title>
-        <Price>Preis: {price} €</Price>
+        <Price>Preis: {formatNumber(price)} €</Price>
 
         <Quantity>
           <label htmlFor="quantity">Menge:</label>

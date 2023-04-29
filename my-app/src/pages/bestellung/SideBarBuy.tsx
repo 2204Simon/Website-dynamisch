@@ -13,8 +13,8 @@ import SignIn from "../logIn/LogIn";
 import { useNavigate } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 import { StyledDatePicker } from "./stylesBestellung/Calendar.styles";
-import { isTomorrow, startOfTomorrow } from "date-fns";
 import { de } from "date-fns/locale";
+import { formatNumber } from "../general/constants";
 
 interface SideBarProps {
   produktAnzahl: number;
@@ -53,6 +53,7 @@ export default function SideBarBuy({
     return (
       <div>
         <StyledDatePicker
+          className="custom-datepicker"
           selected={startDate}
           onChange={(date: Date) => setStartDate(date)}
           minDate={minDate}
@@ -76,7 +77,7 @@ export default function SideBarBuy({
         )}
       </div>
       <div>
-        <h3>Gesamtpreis: {price}€</h3>
+        <h3>Gesamtpreis: {formatNumber(price)}€</h3>
         <Button className="white-orange black-color" onClick={handleBuyNow}>
           Jetzt kaufen
         </Button>

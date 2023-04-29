@@ -11,6 +11,7 @@ import {
   TotalPrice,
 } from "./stylesBestellung/Warenkorb.styles";
 import { Trash } from "phosphor-react";
+import { formatNumber } from "../general/constants";
 interface WarenkorbProps {
   image: string;
   productName: string;
@@ -34,11 +35,11 @@ export default function Warenkorb({
         <div>
           <Count>{count}x</Count>
           <ProductName>{productName}:</ProductName>
-          <Price>{price}€</Price>
+          <Price>{formatNumber(price)}€</Price>
         </div>
         <div>
           <ProductName>Gesamtpreis:</ProductName>
-          <TotalPrice>{totalPrice}€</TotalPrice>{" "}
+          <TotalPrice>{formatNumber(totalPrice)}€</TotalPrice>{" "}
           {/* Anzeige des Gesamtpreises */}
         </div>
       </ContentContainer>

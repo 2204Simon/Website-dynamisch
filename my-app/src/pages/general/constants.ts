@@ -19,3 +19,10 @@ export const GeneralstyledLink = styled(Link)`
   text-decoration: none;
   color: ${colors.white};
 `;
+
+export function formatNumber(number: number): string {
+  return number.toLocaleString("de-DE", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+}

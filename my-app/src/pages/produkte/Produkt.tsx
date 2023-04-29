@@ -19,8 +19,6 @@ import Orangensaft from "../../img/Drinks/Orangensaft.webp";
 import Wasser from "../../img/Drinks/Wasserglas.webp";
 import Zitronentee from "../../img/Drinks/Zitronentee.webp";
 import HeißeSchokolade from "../../img/Drinks/heißeSchokolade.webp";
-import { ToastContainer } from "react-toastify";
-import { colors } from "../general/constants";
 import Bayrisches_Essen from "../../img/Food/bayrisches_Essen.webp";
 import Menemen from "../../img/Food/Menemen.webp";
 import BrotEiTeeUndObst from "../../img/Food/BrotEiTeeUndObst.webp";

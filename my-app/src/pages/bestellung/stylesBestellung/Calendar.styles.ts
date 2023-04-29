@@ -12,29 +12,36 @@ export const StyledDatePicker = styled(DatePicker)`
   text-align: center;
   border-radius: 5px;
 
-  &__header {
-    background-color: #ffffff;
-    padding-top: 0px;
-    border: none;
-  }
-
-  &__day-name {
-    color: #c7c7c7;
-    font-size: 14px;
-  }
-
-  &__day {
-    color: #000000;
-    font-size: 13px;
-
-    &--keyboard-selected,
-    &--selected {
-      border-radius: 25px;
-      background: #8b0000;
-      color: #ffffff;
+  &.custom-datepicker {
+    &__header {
+      background-color: "red";
+      padding-top: 0px;
+      border: none;
     }
-    &--disabled {
+
+    &__day-name {
       color: #c7c7c7;
+      font-size: 100px;
+    }
+
+    &__day {
+      color: #000000;
+      font-size: 13px;
+
+      &--keyboard-selected,
+      &--selected {
+        border-radius: 25px;
+        background: #8b0000;
+        color: #ffffff;
+      }
+      &--disabled {
+        color: #c7c7c7;
+      }
+    }
+
+    &__month {
+      /* Styles für die Klasse des Monatskalenders */
+      color: "red";
     }
   }
 `;
