@@ -13,6 +13,10 @@ import { Pencil } from "phosphor-react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
+import FormControl from "@mui/material/FormControl";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Radio from "@mui/material/Radio";
 
 export default function AdressInformation(): JSX.Element {
   const dispatch = useDispatch();
@@ -54,6 +58,7 @@ export default function AdressInformation(): JSX.Element {
         {editMode ? (
           <form onSubmit={handleSubmit}>
             <Grid>
+              <Title>Adresse:</Title>
               <TextField
                 fullWidth
                 required
@@ -61,32 +66,6 @@ export default function AdressInformation(): JSX.Element {
                 label="Straße"
                 name="street"
                 defaultValue={editedData?.street}
-                InputLabelProps={{
-                  sx: {
-                    backgroundColor: "white",
-                  },
-                }}
-              />
-              <TextField
-                fullWidth
-                required
-                id="city"
-                label="Stadt"
-                name="city"
-                defaultValue={editedData?.city}
-                InputLabelProps={{
-                  sx: {
-                    backgroundColor: "white",
-                  },
-                }}
-              />
-              <TextField
-                fullWidth
-                required
-                id="payment"
-                label="Zahlung"
-                name="payment"
-                defaultValue={editedData?.payment}
                 InputLabelProps={{
                   sx: {
                     backgroundColor: "white",
@@ -106,6 +85,44 @@ export default function AdressInformation(): JSX.Element {
                   },
                 }}
               />
+              <TextField
+                fullWidth
+                required
+                id="city"
+                label="Stadt"
+                name="city"
+                defaultValue={editedData?.city}
+                InputLabelProps={{
+                  sx: {
+                    backgroundColor: "white",
+                  },
+                }}
+              />
+
+              <Title>Zahlungsmöglichkeiten:</Title>
+              <FormControl component="fieldset">
+                <RadioGroup
+                  aria-label="Zahlung"
+                  name="payment"
+                  defaultValue={editedData?.payment}
+                >
+                  <FormControlLabel
+                    value="bar"
+                    control={<Radio />}
+                    label="Bar"
+                  />
+                  <FormControlLabel
+                    value="lastschrift"
+                    control={<Radio />}
+                    label="SEPA Lastschrift"
+                  />
+                  <FormControlLabel
+                    value="paypal"
+                    control={<Radio />}
+                    label="Paypal"
+                  />
+                </RadioGroup>
+              </FormControl>
             </Grid>
             <Button type="submit">Save</Button>
             <Button onClick={handleCancel}>Cancel</Button>
