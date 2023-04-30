@@ -16,7 +16,7 @@ const ScrollContainer: React.FC<ScrollContainerProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scrollLeftVisible, setScrollLeftVisible] = useState(false);
-  const [scrollRightVisible, setScrollRightVisible] = useState(true);
+  const [scrollRightVisible, setScrollRightVisible] = useState(false);
 
   const checkScroll = () => {
     if (containerRef.current) {
@@ -43,19 +43,39 @@ const ScrollContainer: React.FC<ScrollContainerProps> = ({
   };
 
   useEffect(() => {
-    checkScroll();
+    let timer: ReturnType<typeof setTimeout>;
+
+    const handleMouseMove = () => {
+      checkScroll();
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        setScrollLeftVisible(false);
+        setScrollRightVisible(false);
+      }, 3000);
+    };
+
+    if (containerRef.current) {
+      window.addEventListener("mousemove", handleMouseMove);
+    }
+
+    return () => {
+      clearTimeout(timer);
+      if (containerRef.current) {
+        window.removeEventListener("mousemove", handleMouseMove);
+      }
+    };
   }, [scrollLeftVisible, scrollRightVisible]);
 
-  const ArrowContainer = styled.div`
-    position: absolute;
-    width: 100%;
-    height: 50px;
-    margin-top: 250px;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    z-index: 1;
-  `;
+  const ArrowContainer = styled.div({
+    position: "absolute",
+    width: "100%",
+    height: "50px",
+    marginTop: "250px",
+    padding: "10px",
+    display: "flex",
+    justifyContent: "space-between",
+    zIndex: 1,
+  });
 
   return (
     <div style={{ margin: 0, padding: 0 }}>

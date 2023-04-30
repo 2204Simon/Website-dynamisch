@@ -51,7 +51,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
     }
   };
 
-  const test = (quantity2: number) => {
+  const neu = (quantity2: number) => {
     const item = {
       produktname: title,
       logo: image,
@@ -67,7 +67,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
     } else {
       for (let i = 0; i < cartItems.length; i++) {
         if (cartItems[i].produktname === title) {
-          test(quantity);
+          neu(quantity);
           return;
         }
       }

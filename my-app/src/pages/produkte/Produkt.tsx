@@ -26,7 +26,7 @@ import EigetränkUndEierbrot from "../../img/Food/EigetränkUndEierbrot.webp";
 import KaffeeMitEiUndBrot from "../../img/Food/KaffeeMitEiUndBrot.webp";
 import OSaftMitFrüchtebrot from "../../img/Food/OSaftMitFrüchtebrot.webp";
 import OSaftUndOrangenbrot from "../../img/Food/OSaftUndOrangenbrot.webp";
-import ScrollContainer from "./Scroll";
+import ScrollContainer from "./Arrows";
 
 function Produkt() {
   const showScrollContainer = window.innerWidth >= 1024;
