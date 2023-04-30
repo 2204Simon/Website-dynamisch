@@ -102,7 +102,7 @@ export default function SideBarBuy({
                   className="black-color white-orange"
                   onClick={() => handleSideChange()}
                 >
-                  Zum SignIn
+                  Zur Anmeldung
                 </Button>
               </div>
             ) : (

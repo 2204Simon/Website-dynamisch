@@ -70,7 +70,7 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Anmelden
           </Typography>
           <Box
             component="form"
@@ -110,12 +110,12 @@ export default function SignIn() {
             />
 
             <Button type="submit" className="black-color white-orange">
-              Sign In
+              Anmelden
             </Button>
             <Grid container>
               <Grid item>
                 <Link component={RouterLink} to="/SignUp" variant="body2">
-                  Have no account? Sign in
+                  Keinen Account? Hier geht´s zur Registrierung
                 </Link>
               </Grid>
             </Grid>
