@@ -28,6 +28,7 @@ export default function SideBarBuy({
   const { loggedIn } = useLoggedIn();
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
+  const [agbChecked, setAgbChecked] = useState(false);
 
   const handleBuyNow = () => {
     setShowPopup(true);
@@ -43,6 +44,10 @@ export default function SideBarBuy({
   const handleClosePopup = () => {
     setShowPopup(false);
     document.body.style.overflow = "auto";
+  };
+
+  const handleAgbCheckboxChange = () => {
+    setAgbChecked(!agbChecked);
   };
 
   const minDate = new Date();
@@ -78,7 +83,30 @@ export default function SideBarBuy({
       </div>
       <div>
         <h3>Gesamtpreis: {formatNumber(price)}€</h3>
-        <Button className="white-orange black-color" onClick={handleBuyNow}>
+
+        <label>
+          <input
+            type="checkbox"
+            onChange={handleAgbCheckboxChange}
+            checked={agbChecked}
+          />
+          Ich habe die{" "}
+          <a
+            href="https://delivery-breakfast.projekt.dhbw-heidenheim.de/AGBs_delivery-breakfast.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            download
+          >
+            AGBs
+          </a>{" "}
+          gelesen und akzeptiere sie.
+        </label>
+
+        <Button
+          className="white-orange black-color"
+          onClick={handleBuyNow}
+          disabled={!agbChecked}
+        >
           Jetzt kaufen
         </Button>
       </div>
