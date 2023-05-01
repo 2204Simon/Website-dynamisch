@@ -61,7 +61,20 @@ function Footer(): JSX.Element {
       <FooterLinks>
         <ul>
           <li>
-            <a href="#top">Nach oben</a>
+            <button
+              style={{
+                color: "white",
+                background: "transparent",
+                border: "none",
+                font: "Montserrat",
+                fontStyle: "sans-serif",
+                fontSize: "15px",
+                cursor: "pointer",
+              }}
+              onClick={() => window.scroll(0, 0)}
+            >
+              Nach oben
+            </button>
           </li>
           <li>
             <GeneralstyledLink
