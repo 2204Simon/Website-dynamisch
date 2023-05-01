@@ -89,13 +89,13 @@ export default function SideBarBuy({
       <div>
         <h3>Gesamtpreis: {formatNumber(price)}€</h3>
 
-        <label>
+        <p>
           <input
             type="checkbox"
             onChange={handleAgbCheckboxChange}
             checked={agbChecked}
           />
-          Ich habe die{" "}
+          Ich akzeptiere die{" "}
           <a
             href="https://delivery-breakfast.projekt.dhbw-heidenheim.de/AGBs_delivery-breakfast.pdf"
             target="_blank"
@@ -104,8 +104,7 @@ export default function SideBarBuy({
           >
             AGBs
           </a>{" "}
-          gelesen und akzeptiere sie.
-        </label>
+        </p>
 
         <Button className="white-orange black-color" onClick={handleBuyNow}>
           Jetzt kaufen
