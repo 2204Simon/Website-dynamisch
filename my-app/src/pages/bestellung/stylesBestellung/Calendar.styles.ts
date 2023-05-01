@@ -11,6 +11,7 @@ export const StyledDatePicker = styled(DatePicker)`
   padding: 15px 0;
   text-align: center;
   border-radius: 5px;
+  z-index: 1;
 
   &.custom-datepicker {
     &__header {

@@ -13,6 +13,7 @@ import { useLoggedIn } from "../../globalVariables/loggedin";
 import { LogInData } from "../../redux/types";
 import { useDispatch } from "react-redux";
 import { addNewUser } from "../../redux/action";
+import { colors } from "../general/constants";
 
 function Copyright(props: any) {
   return (
@@ -141,7 +142,12 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link component={RouterLink} to="/LogIn" variant="body2">
+                <Link
+                  component={RouterLink}
+                  to="/LogIn"
+                  variant="body2"
+                  style={{ color: colors.companycolor }}
+                >
                   Hast du bereits einen Account? Anmelden
                 </Link>
               </Grid>

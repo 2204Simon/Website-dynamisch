@@ -15,6 +15,7 @@ import { UserDataState } from "../../redux/types";
 import { CustomToast } from "../general/toast.style";
 import { ToastContainer } from "react-toastify";
 import { useLoggedIn } from "../../globalVariables/loggedin";
+import { colors } from "../general/constants";
 
 function Copyright(props: any) {
   return (
@@ -114,7 +115,12 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item>
-                <Link component={RouterLink} to="/SignUp" variant="body2">
+                <Link
+                  component={RouterLink}
+                  to="/SignUp"
+                  variant="body2"
+                  style={{ color: colors.companycolor }}
+                >
                   Keinen Account? Hier geht´s zur Registrierung
                 </Link>
               </Grid>
