@@ -15,13 +15,14 @@ h3 {
   color: #aa7d03;
   padding-left: 30px;
   font-size: 1.25rem;
-
 }
 
 p {
   font-family: "Montserrat", sans-serif;
   padding-left: 30px;
-
+}
+a {
+  color: #aa7d03;
 }
 
 body {
