@@ -17,6 +17,9 @@ import FormControl from "@mui/material/FormControl";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
+import LocalAtmOutlinedIcon from "@mui/icons-material/LocalAtmOutlined";
+import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
+import { FaPaypal, FaApplePay } from "react-icons/fa";
 
 export default function AdressInformation(): JSX.Element {
   const dispatch = useDispatch();
@@ -109,17 +112,40 @@ export default function AdressInformation(): JSX.Element {
                   <FormControlLabel
                     value="bar"
                     control={<Radio />}
-                    label="Bar"
+                    label={
+                      <div>
+                        <LocalAtmOutlinedIcon fontSize="small" /> Bar
+                      </div>
+                    }
                   />
                   <FormControlLabel
                     value="lastschrift"
                     control={<Radio />}
-                    label="SEPA Lastschrift"
+                    label={
+                      <div>
+                        <AccountBalanceOutlinedIcon fontSize="small" /> SEPA
+                        Lastschrift
+                      </div>
+                    }
                   />
                   <FormControlLabel
                     value="paypal"
                     control={<Radio />}
-                    label="Paypal"
+                    label={
+                      <div>
+                        <FaPaypal size={20} />
+                        <span></span>
+                      </div>
+                    }
+                  />
+                  <FormControlLabel
+                    value="apple-pay"
+                    control={<Radio />}
+                    label={
+                      <div>
+                        <FaApplePay size={40} />
+                      </div>
+                    }
                   />
                 </RadioGroup>
               </FormControl>
