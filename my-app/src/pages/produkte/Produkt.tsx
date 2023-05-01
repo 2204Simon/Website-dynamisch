@@ -38,6 +38,7 @@ function Produkt() {
         image={BaguetteYellow}
       />
       <ShoppingCard title={"Brezel"} price={1.49} image={Brezel} />
+      <ShoppingCard title={"Türkisches Menemen"} price={7.99} image={Menemen} />
       <ShoppingCard title={"Brötchen"} price={1.29} image={Brötchen} />
       <ShoppingCard title={"Croissant"} price={1.79} image={Croissant} />
       <ShoppingCard
@@ -86,7 +87,6 @@ function Produkt() {
         price={7.99}
         image={Bayrisches_Essen}
       />
-      <ShoppingCard title={"Türkisches Menemen"} price={7.99} image={Menemen} />
       <ShoppingCard
         title={"Wecken mit Kaffee"}
         price={6.99}

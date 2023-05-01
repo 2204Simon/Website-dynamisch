@@ -15,6 +15,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { StyledDatePicker } from "./stylesBestellung/Calendar.styles";
 import { de } from "date-fns/locale";
 import { formatNumber } from "../general/constants";
+import { CustomToast } from "../general/toast.style";
 
 interface SideBarProps {
   produktAnzahl: number;
@@ -31,8 +32,12 @@ export default function SideBarBuy({
   const [agbChecked, setAgbChecked] = useState(false);
 
   const handleBuyNow = () => {
-    setShowPopup(true);
-    document.body.style.overflow = "hidden";
+    if (!agbChecked) {
+      CustomToast.error("Bitte die ABGs bestätigen!");
+    } else {
+      setShowPopup(true);
+      document.body.style.overflow = "hidden";
+    }
   };
 
   const handleSideChange = () => {
@@ -102,11 +107,7 @@ export default function SideBarBuy({
           gelesen und akzeptiere sie.
         </label>
 
-        <Button
-          className="white-orange black-color"
-          onClick={handleBuyNow}
-          disabled={!agbChecked}
-        >
+        <Button className="white-orange black-color" onClick={handleBuyNow}>
           Jetzt kaufen
         </Button>
       </div>
