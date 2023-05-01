@@ -115,23 +115,24 @@ function Produkt() {
       />
     </div>
   );
+
   const [mouseActive, setMouseActive] = useState(false);
 
   useEffect(() => {
-    function handleMouseMove() {
-      setMouseActive(true);
-    }
+    let timer: ReturnType<typeof setTimeout>;
 
-    function handleMouseLeave() {
-      setMouseActive(false);
-    }
+    const handleMouseMove = () => {
+      setMouseActive(true);
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        setMouseActive(false);
+      }, 3000);
+    };
 
     window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, []);
   return (
@@ -152,7 +153,13 @@ function Produkt() {
         </ScrollContainer>
       ) : (
         <div
-          style={{ display: "flex", flexWrap: "nowrap", overflowX: "scroll" }}
+          style={{
+            display: "flex",
+            flexWrap: "nowrap",
+            overflowX: "scroll",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+          }}
         >
           <ShoppingCardFood />
         </div>
@@ -165,7 +172,13 @@ function Produkt() {
         </ScrollContainer>
       ) : (
         <div
-          style={{ display: "flex", flexWrap: "nowrap", overflowX: "scroll" }}
+          style={{
+            display: "flex",
+            flexWrap: "nowrap",
+            overflowX: "scroll",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+          }}
         >
           <ShoppingCardTrinks />
         </div>
@@ -178,7 +191,13 @@ function Produkt() {
         </ScrollContainer>
       ) : (
         <div
-          style={{ display: "flex", flexWrap: "nowrap", overflowX: "scroll" }}
+          style={{
+            display: "flex",
+            flexWrap: "nowrap",
+            overflowX: "scroll",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+          }}
         >
           <ShoppingCardMenu />
         </div>
