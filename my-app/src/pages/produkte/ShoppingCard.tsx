@@ -63,7 +63,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
 
   const handleAddToCart = () => {
     if (quantity === 0) {
-      CustomToast.error("Menge erhöhen");
+      CustomToast.error("Bitte erhöhe die Menge!");
     } else {
       for (let i = 0; i < cartItems.length; i++) {
         if (cartItems[i].produktname === title) {
@@ -78,14 +78,14 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
         anzahl: quantity,
       };
       dispatch(addToCart(item)); // Dispatch der addToCart-Action mit dem erstellten Item
-      CustomToast.success("Produkt im Warenkorb");
+      CustomToast.success("Dein Produkt ist im Warenkorb!");
     }
   };
 
   const handlePlus = (quantity: number) => {
     quantity += 1;
     if (quantity === 100) {
-      CustomToast.error("Maximale Anzahl erreicht");
+      CustomToast.error("Die maximale Anzahl wurde erreicht!");
     } else {
       setQuantity(Number(quantity));
     }

@@ -62,7 +62,7 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Anmelden
+            Registrieren
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -138,7 +138,7 @@ export default function SignUp() {
               className="black-color white-orange"
               onClick={handleClick}
             >
-              Anmelden
+              Registrieren
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
