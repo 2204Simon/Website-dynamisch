@@ -116,25 +116,8 @@ function Produkt() {
     </div>
   );
 
-  const [mouseActive, setMouseActive] = useState(false);
+  const isTouchpad = matchMedia("(pointer: coarse)").matches;
 
-  useEffect(() => {
-    let timer: ReturnType<typeof setTimeout>;
-
-    const handleMouseMove = () => {
-      setMouseActive(true);
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        setMouseActive(false);
-      }, 3000);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
   return (
     <>
       <h2>Unsere Produkte</h2>
@@ -147,11 +130,8 @@ function Produkt() {
       </p>
 
       <h3>Speisen</h3>
-      {mouseActive ? (
-        <ScrollContainer scrollAmount={300}>
-          <ShoppingCardFood />
-        </ScrollContainer>
-      ) : (
+
+      {isTouchpad ? (
         <div
           style={{
             display: "flex",
@@ -163,14 +143,14 @@ function Produkt() {
         >
           <ShoppingCardFood />
         </div>
+      ) : (
+        <ScrollContainer scrollAmount={300}>
+          <ShoppingCardFood />
+        </ScrollContainer>
       )}
 
       <h3>Getränke</h3>
-      {mouseActive ? (
-        <ScrollContainer scrollAmount={300}>
-          <ShoppingCardTrinks />
-        </ScrollContainer>
-      ) : (
+      {isTouchpad ? (
         <div
           style={{
             display: "flex",
@@ -182,14 +162,14 @@ function Produkt() {
         >
           <ShoppingCardTrinks />
         </div>
+      ) : (
+        <ScrollContainer scrollAmount={300}>
+          <ShoppingCardTrinks />
+        </ScrollContainer>
       )}
 
       <h3>Menüs</h3>
-      {mouseActive ? (
-        <ScrollContainer scrollAmount={300}>
-          <ShoppingCardMenu />
-        </ScrollContainer>
-      ) : (
+      {isTouchpad ? (
         <div
           style={{
             display: "flex",
@@ -201,6 +181,10 @@ function Produkt() {
         >
           <ShoppingCardMenu />
         </div>
+      ) : (
+        <ScrollContainer scrollAmount={300}>
+          <ShoppingCardMenu />
+        </ScrollContainer>
       )}
     </>
   );
