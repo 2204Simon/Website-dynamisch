@@ -7,6 +7,7 @@ export const WarenkorbWrapper = styled.div`
   flex-direction: row;
   padding: 10px;
   height: auto;
+  min-height: 90vh;
 
   @media (max-width: ${mediaQueries.large}) {
     flex-direction: column-reverse;

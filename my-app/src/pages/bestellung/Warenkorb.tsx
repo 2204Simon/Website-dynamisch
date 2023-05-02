@@ -34,13 +34,12 @@ export default function Warenkorb({
       <ContentContainer>
         <div>
           <Count>{count}x</Count>
-          <ProductName>{productName}:</ProductName>
+          <ProductName>{productName}</ProductName>
           <Price>{formatNumber(price)}€</Price>
         </div>
         <div>
           <ProductName>Gesamtpreis:</ProductName>
           <TotalPrice>{formatNumber(totalPrice)}€</TotalPrice>{" "}
-          {/* Anzeige des Gesamtpreises */}
         </div>
       </ContentContainer>
       <RemoveButton onClick={onRemove}>
