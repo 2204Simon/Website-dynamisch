@@ -28,10 +28,11 @@ export const Image = styled.img`
 
 export const ContentContainer = styled.div`
   display: flex;
-  gap: 0.5rem;
+  gap:0.5rem
   justify-content: space-between;
   align-items: center;
   flex: 1;
+  flex-direction: row;
 
   > * {
     display: flex;
@@ -44,32 +45,47 @@ export const ContentContainer = styled.div`
 
   &:nth-child(2) {
     flex: 1 1 auto;
+    justify-content: space-between;
   }
   @media (max-width: ${mediaQueries.large}) {
     flex-direction: column;
   }
 `;
-export const ProductName = styled.h2`
+export const ProductName = styled.p`
+  font-size: 20px;
   color: black;
-  margin-right: 0.5rem;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
-export const Count = styled.h2`
-  color: black;
-  margin-right: 0.5rem;
+export const Count = styled.p`
+  font-size: 20px;
+  color: black
+  margin: 0;
+  padding: 0;
 `;
 
-export const Price = styled.h2`
+export const Price = styled.p`
   color: black;
-  margin-right: 0.5rem;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0.5 rem;
+  font-size: 20px;
   @media (${mediaQueries.medium}) {
     align-self: flex-end;
   }
 `;
 
-export const TotalPrice = styled.h2`
+export const TotalPrice = styled.p`
+  font-size: 20px;
   color: black;
-  margin: 0;
+  padding-left: 0;
+  padding-right: 0.5 rem;
   @media (${mediaQueries.medium}) {
     align-self: flex-end;
   }

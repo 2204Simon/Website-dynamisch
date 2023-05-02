@@ -29,14 +29,7 @@ export const DesktopMenu: React.FC = () => {
       </Logo>
       <Menu>
         <MenuItem>
-          <StyledLink
-            to="/"
-            className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "active" : ""
-            }
-          >
-            Home
-          </StyledLink>
+          <StyledLink to="/">Home</StyledLink>
         </MenuItem>
         <MenuItem>
           <StyledLink to="/Produkte">Produkte</StyledLink>
