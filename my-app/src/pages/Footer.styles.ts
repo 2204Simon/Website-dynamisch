@@ -12,7 +12,7 @@ export const FooterContainer = styled.footer`
   color: ${colors.black};
   text-align: center;
   overflow: hidden;
-  @media (max-width: 1023px) {
+  @media (max-width: 1024px) {
    {
       margin-bottom: 69px;
     }
