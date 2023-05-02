@@ -3,7 +3,7 @@ import { BlackColorButton, OrangeButton } from "./general/button";
 
 function NoPage(): JSX.Element {
   return (
-    <div>
+    <div style={{ height: "88vh" }}>
       <h1>
         Diese Seite wurde leider nicht gefunden. Eventuell wurde diese gelöscht.
       </h1>
