@@ -6,11 +6,21 @@ import {
   ClockCounterClockwise,
   AddressBook,
   User,
+  SignIn,
 } from "phosphor-react";
 import { BottomNavStyle } from "./BottomNavBar.styles";
 import { colors } from "./pages/general/constants";
+import { useLoggedIn } from "./globalVariables/loggedin";
+import { useSelector } from "react-redux";
+import { CartState } from "./redux/types";
+import { Badge } from "@mui/material";
 
 function BottomNavBar(): JSX.Element {
+  const { loggedIn } = useLoggedIn();
+  const cartItems = useSelector(
+    (state: { cart: CartState }) => state.cart.cartItems
+  );
+  const arrayLength = cartItems.length;
   return (
     <BottomNavStyle>
       <nav>
@@ -29,12 +39,20 @@ function BottomNavBar(): JSX.Element {
             <li>
               <Link to="/Bestellung" onClick={() => window.scrollTo(0, 0)}>
                 <ShoppingCart size={30} />
+                <Badge badgeContent={arrayLength} color="error" />
               </Link>
             </li>
             <li>
-              <Link to="/LoggedIn" onClick={() => window.scrollTo(0, 0)}>
-                <User size={30} />
-              </Link>
+              {" "}
+              {loggedIn ? (
+                <Link to="/LoggedIn" onClick={() => window.scrollTo(0, 0)}>
+                  <User size={30} />
+                </Link>
+              ) : (
+                <Link to="/SignUp">
+                  <SignIn size={30} onClick={() => window.scrollTo(0, 0)} />
+                </Link>
+              )}
             </li>
           </ul>
         </div>
