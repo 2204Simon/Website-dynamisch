@@ -63,7 +63,6 @@ export default function SideBarBuy({
     return (
       <div>
         <StyledDatePicker
-          className="custom-datepicker"
           selected={startDate}
           onChange={(date: Date) => setStartDate(date)}
           minDate={minDate}
