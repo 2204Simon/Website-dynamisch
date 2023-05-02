@@ -48,7 +48,7 @@ export const BottomNavStyle = styled.div`
       padding-right: 100px; //Ausrichtung Icons wegen Chatbot
     }
   }
-  @media (min-width: ${mediaQueries.large}) {
+  @media (min-width: 1025px) {
     .bottom-nav {
       display: none;
     }
