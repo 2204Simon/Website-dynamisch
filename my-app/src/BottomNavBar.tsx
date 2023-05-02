@@ -3,13 +3,10 @@ import {
   HouseLine,
   ShoppingBagOpen,
   ShoppingCart,
-  ClockCounterClockwise,
-  AddressBook,
   User,
   SignIn,
 } from "phosphor-react";
 import { BottomNavStyle } from "./BottomNavBar.styles";
-import { colors } from "./pages/general/constants";
 import { useLoggedIn } from "./globalVariables/loggedin";
 import { useSelector } from "react-redux";
 import { CartState } from "./redux/types";

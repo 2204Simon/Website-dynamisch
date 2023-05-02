@@ -60,8 +60,7 @@ export const PopupWrapper = styled.div`
   @media (max-width: ${mediaQueries.medium}) {
     width: 100%;
     height: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 0;
     padding: 20px 10px;
     box-shadow: none;
   }
