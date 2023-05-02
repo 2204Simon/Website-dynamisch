@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { colors, mediaQueries } from "../../general/constants";
 export const MainContainer = styled.div`
   max-width: 100%;
-  padding: 0 10px;
+  padding: 0 1rem;
   display: center;
   h1 {
     text-align: center;
