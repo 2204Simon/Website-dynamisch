@@ -4,10 +4,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import { NavLink } from "react-router-dom";
 import { colors, mediaQueries } from "./general/constants";
 import { StyledLink } from "./Layout.styles";
+import { ShoppingCart, SignIn, User } from "phosphor-react";
+import { Badge } from "@mui/material";
+import { useLoggedIn } from "../globalVariables/loggedin";
+import { useSelector } from "react-redux";
+import { CartState } from "../redux/types";
 
 const StyledBurgerMenu = styled.div`
   display: none;
@@ -66,7 +69,11 @@ const StyledListItem = styled(ListItem)`
 
 const BurgerMenu: React.FC = () => {
   const [open, setOpen] = useState(false);
-
+  const { loggedIn } = useLoggedIn();
+  const cartItems = useSelector(
+    (state: { cart: CartState }) => state.cart.cartItems
+  );
+  const arrayLength = cartItems.length;
   const handleBurgerClick = () => {
     setOpen(!open);
   };
@@ -90,14 +97,7 @@ const BurgerMenu: React.FC = () => {
         <StyledCloseIcon onClick={handleBurgerClick} />
         <StyledList>
           <StyledListItem>
-            <StyledLink
-              to="/"
-              className={({ isActive, isPending }) =>
-                isPending ? "pending" : isActive ? "active" : ""
-              }
-            >
-              Home
-            </StyledLink>
+            <StyledLink to="/">Home</StyledLink>
           </StyledListItem>
           <StyledListItem>
             <StyledLink to="/Produkte">Produkte</StyledLink>
@@ -106,10 +106,27 @@ const BurgerMenu: React.FC = () => {
             <StyledLink to="/Bestellung">Bestellung</StyledLink>
           </StyledListItem>
           <StyledListItem>
+            <StyledLink to="/Unsere Geschichte">Geschichte</StyledLink>
+          </StyledListItem>
+          <StyledListItem>
             <StyledLink to="/Kontakt">Kontakt</StyledLink>
           </StyledListItem>
           <StyledListItem>
-            <StyledLink to="/Unsere Geschichte">Geschichte</StyledLink>
+            <StyledLink to="/Bestellung">
+              <ShoppingCart size={40} />
+              <Badge badgeContent={arrayLength} color="error" />
+            </StyledLink>
+          </StyledListItem>
+          <StyledListItem>
+            {loggedIn ? (
+              <StyledLink to="/LoggedIn">
+                <User size={40} />
+              </StyledLink>
+            ) : (
+              <StyledLink to="/SignUp">
+                <SignIn size={40} />
+              </StyledLink>
+            )}
           </StyledListItem>
         </StyledList>
       </StyledMenu>
