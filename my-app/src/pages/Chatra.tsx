@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { colors } from "../general/constants";
+import { colors } from "./general/constants";
 
 interface ChatraProps {}
 
