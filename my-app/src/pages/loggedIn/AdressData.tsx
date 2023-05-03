@@ -17,9 +17,8 @@ import FormControl from "@mui/material/FormControl";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
-import LocalAtmOutlinedIcon from "@mui/icons-material/LocalAtmOutlined";
 import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
-import { FaPaypal, FaApplePay } from "react-icons/fa";
+import { FaPaypal, FaApplePay, FaEuroSign } from "react-icons/fa";
 
 export default function AdressInformation(): JSX.Element {
   const dispatch = useDispatch();
@@ -114,7 +113,7 @@ export default function AdressInformation(): JSX.Element {
                     control={<Radio />}
                     label={
                       <div>
-                        <LocalAtmOutlinedIcon fontSize="small" /> Bar
+                        <FaEuroSign /> Bar
                       </div>
                     }
                   />
