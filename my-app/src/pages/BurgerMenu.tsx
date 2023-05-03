@@ -74,8 +74,13 @@ const BurgerMenu: React.FC = () => {
     (state: { cart: CartState }) => state.cart.cartItems
   );
   const arrayLength = cartItems.length;
+
   const handleBurgerClick = () => {
     setOpen(!open);
+  };
+
+  const closeMenu = () => {
+    setOpen(false);
   };
 
   useEffect(() => {
@@ -97,34 +102,44 @@ const BurgerMenu: React.FC = () => {
         <StyledCloseIcon onClick={handleBurgerClick} />
         <StyledList>
           <StyledListItem>
-            <StyledLink to="/">Home</StyledLink>
+            <StyledLink to="/" onClick={closeMenu}>
+              Home
+            </StyledLink>
           </StyledListItem>
           <StyledListItem>
-            <StyledLink to="/Produkte">Produkte</StyledLink>
+            <StyledLink to="/Produkte" onClick={closeMenu}>
+              Produkte
+            </StyledLink>
           </StyledListItem>
           <StyledListItem>
-            <StyledLink to="/Bestellung">Bestellung</StyledLink>
+            <StyledLink to="/Bestellung" onClick={closeMenu}>
+              Bestellung
+            </StyledLink>
           </StyledListItem>
           <StyledListItem>
-            <StyledLink to="/Unsere Geschichte">Geschichte</StyledLink>
+            <StyledLink to="/Unsere Geschichte" onClick={closeMenu}>
+              Geschichte
+            </StyledLink>
           </StyledListItem>
           <StyledListItem>
-            <StyledLink to="/Kontakt">Kontakt</StyledLink>
+            <StyledLink to="/Kontakt" onClick={closeMenu}>
+              Kontakt
+            </StyledLink>
           </StyledListItem>
           <StyledListItem>
-            <StyledLink to="/Bestellung">
-              <ShoppingCart size={40} />
+            <StyledLink to="/Bestellung" onClick={closeMenu}>
+              <ShoppingCart size={30} />
               <Badge badgeContent={arrayLength} color="error" />
             </StyledLink>
           </StyledListItem>
           <StyledListItem>
             {loggedIn ? (
               <StyledLink to="/LoggedIn">
-                <User size={40} />
+                <User size={30} />
               </StyledLink>
             ) : (
               <StyledLink to="/SignUp">
-                <SignIn size={40} />
+                <SignIn size={30} />
               </StyledLink>
             )}
           </StyledListItem>
