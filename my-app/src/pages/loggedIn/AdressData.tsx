@@ -110,7 +110,7 @@ export default function AdressInformation(): JSX.Element {
                   defaultValue={"bar"}
                 >
                   <FormControlLabel
-                    value="bar"
+                    value="Barzahlung"
                     control={<Radio />}
                     label={
                       <div>
@@ -119,7 +119,7 @@ export default function AdressInformation(): JSX.Element {
                     }
                   />
                   <FormControlLabel
-                    value="lastschrift"
+                    value="SEPA Lastschriftmandat"
                     control={<Radio />}
                     label={
                       <div>
@@ -129,7 +129,7 @@ export default function AdressInformation(): JSX.Element {
                     }
                   />
                   <FormControlLabel
-                    value="paypal"
+                    value="Paypal"
                     control={<Radio />}
                     label={
                       <div>
@@ -139,7 +139,7 @@ export default function AdressInformation(): JSX.Element {
                     }
                   />
                   <FormControlLabel
-                    value="apple-pay"
+                    value="Apple Pay"
                     control={<Radio />}
                     label={
                       <div>
@@ -150,8 +150,8 @@ export default function AdressInformation(): JSX.Element {
                 </RadioGroup>
               </FormControl>
             </Grid>
-            <Button type="submit">Save</Button>
-            <Button onClick={handleCancel}>Cancel</Button>
+            <Button type="submit">Speichern</Button>
+            <Button onClick={handleCancel}>Abbrechen</Button>
           </form>
         ) : (
           <div>
