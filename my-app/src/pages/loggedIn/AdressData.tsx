@@ -21,6 +21,11 @@ import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlin
 import { FaPaypal, FaApplePay, FaEuroSign } from "react-icons/fa";
 import { BlackColorButton } from "../general/button";
 import { Link } from "react-router-dom";
+import {
+  PopupWrapper,
+  SideBarWrapper,
+} from "../bestellung/stylesBestellung/SideBarBuy.styles";
+import SideBarBuy from "../bestellung/SideBarBuy";
 
 export default function AdressInformation(): JSX.Element {
   const dispatch = useDispatch();
@@ -183,6 +188,7 @@ export default function AdressInformation(): JSX.Element {
             <br />
             <Link to="/Bestellung">
               <BlackColorButton
+                //onClick={() => showPopup(false)}
                 caption={"Zurück zum Einkauf"}
               ></BlackColorButton>
             </Link>
