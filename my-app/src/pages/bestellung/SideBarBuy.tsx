@@ -125,7 +125,7 @@ export default function SideBarBuy({
             {showThankyouPopup && (
               <PopupBackdrop>
                 <PopupWrapper>
-                  <h1>Danke für deine Bestellung!</h1>
+                  <h2>Danke für deine Bestellung!</h2>
                   <p>fiktives Projekt, keine gültige Bestellung!</p>
                   <div>
                     <h2>Frühstücks Tracker</h2>
