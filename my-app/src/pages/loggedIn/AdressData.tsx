@@ -185,13 +185,6 @@ export default function AdressInformation(): JSX.Element {
             >
               <Pencil size={20} />
             </LogoutButton>
-            <br />
-            <Link to="/Bestellung">
-              <BlackColorButton
-                //onClick={() => showPopup(false)}
-                caption={"Zurück zum Einkauf"}
-              ></BlackColorButton>
-            </Link>
           </div>
         )}
       </Card>
