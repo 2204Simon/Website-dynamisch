@@ -11,7 +11,7 @@ export const BottomNavStyle = styled.div`
     width: 100%; /* Aktualisierte Breite auf 100% */
     height: 70px;
     background-color: ${colors.black};
-    z-index: 2;
+    z-index: 10;
   }
 
   .bottom-nav .menu {

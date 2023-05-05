@@ -115,7 +115,7 @@ export default function SideBarBuy({
         </p>
 
         <Button className="white-orange black-color" onClick={handleBuyNow}>
-          Weiter zum Zahlungsvorgang
+          Weiter zum Bestellvorgang
         </Button>
       </div>
 
@@ -125,12 +125,8 @@ export default function SideBarBuy({
             {showThankyouPopup && (
               <PopupBackdrop>
                 <PopupWrapper>
-                  <h1 style={{ color: "black" }}>
-                    Danke für deine Bestellung!
-                  </h1>
-                  <p style={{ color: "black" }}>
-                    fiktives Projekt, keine gültige Bestellung!
-                  </p>
+                  <h1>Danke für deine Bestellung!</h1>
+                  <p>fiktives Projekt, keine gültige Bestellung!</p>
                   <div>
                     <h2>Frühstücks Tracker</h2>
                     <PackageLocationQRCode
