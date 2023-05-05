@@ -12,12 +12,9 @@ export default function PackageLocationQRCode(props: Props): JSX.Element {
   return (
     <div>
       <QRCode value={locationUrl} />
-      <p>
-        Scanne den QR Code um den aktuellen Standort deiner Frühstückslieferung
-        zu sehen
-      </p>
+      <p>Scanne den Code um den Standort deiner Lieferung zu verfolgen!</p>
       <a href={locationUrl} target="_blank" rel="noopener noreferrer">
-        Hier geht´s zum Tracker wenn du keinen QR Code Scanner hast
+        Hier geht´s zum Standort ohne QR Code Scanner!
       </a>
     </div>
   );

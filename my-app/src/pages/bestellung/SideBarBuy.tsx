@@ -128,6 +128,9 @@ export default function SideBarBuy({
                   <h1 style={{ color: "black" }}>
                     Danke für deine Bestellung!
                   </h1>
+                  <p style={{ color: "black" }}>
+                    fiktives Projekt, keine gültige Bestellung!
+                  </p>
                   <div>
                     <h2>Frühstücks Tracker</h2>
                     <PackageLocationQRCode
