@@ -112,11 +112,6 @@ const BurgerMenu: React.FC = () => {
             </StyledLink>
           </StyledListItem>
           <StyledListItem>
-            <StyledLink to="/Bestellung" onClick={closeMenu}>
-              Bestellung
-            </StyledLink>
-          </StyledListItem>
-          <StyledListItem>
             <StyledLink to="/Unsere Geschichte" onClick={closeMenu}>
               Geschichte
             </StyledLink>

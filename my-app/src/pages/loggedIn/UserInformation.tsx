@@ -26,7 +26,7 @@ export default function UserInformation(): JSX.Element {
   return (
     <Container>
       <Card>
-        <Title>{loggedIn ? "Ihr Konto" : "Anmelden"}</Title>
+        <Title>{loggedIn ? "Dein Konto" : "Anmelden"}</Title>
         <Paragraph>
           Hallo {userInformation.LogInData.firstName}{" "}
           {userInformation.LogInData.lastName}

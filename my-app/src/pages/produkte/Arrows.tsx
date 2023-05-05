@@ -30,14 +30,20 @@ const ScrollContainer: React.FC<ScrollContainerProps> = ({
 
   const scrollLeft = () => {
     if (containerRef.current) {
-      containerRef.current.scrollLeft -= scrollAmount;
+      containerRef.current.scrollTo({
+        left: containerRef.current.scrollLeft - scrollAmount,
+        behavior: "smooth",
+      });
       checkScroll();
     }
   };
 
   const scrollRight = () => {
     if (containerRef.current) {
-      containerRef.current.scrollLeft += scrollAmount;
+      containerRef.current.scrollTo({
+        left: containerRef.current.scrollLeft + scrollAmount,
+        behavior: "smooth",
+      });
       checkScroll();
     }
   };

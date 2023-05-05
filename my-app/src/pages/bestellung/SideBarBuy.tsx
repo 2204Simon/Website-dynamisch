@@ -16,6 +16,7 @@ import { StyledDatePicker } from "./stylesBestellung/Calendar.styles";
 import { de } from "date-fns/locale";
 import { formatNumber } from "../general/constants";
 import { CustomToast } from "../general/toast.style";
+import PackageLocationQRCode from "../kontakt/PackageLocationQRCode";
 
 interface SideBarProps {
   produktAnzahl: number;
@@ -29,6 +30,8 @@ export default function SideBarBuy({
   const { loggedIn } = useLoggedIn();
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
+  const [showThankyouPopup, setShowThankyouPopup] = useState(false);
+
   const [agbChecked, setAgbChecked] = useState(false);
 
   const handleBuyNow = () => {
@@ -48,7 +51,13 @@ export default function SideBarBuy({
 
   const handleClosePopup = () => {
     setShowPopup(false);
+    setShowThankyouPopup(false);
     document.body.style.overflow = "auto";
+  };
+
+  const handleThankyouPopup = () => {
+    setShowThankyouPopup(true);
+    document.body.style.overflow = "hidden";
   };
 
   const handleAgbCheckboxChange = () => {
@@ -106,13 +115,36 @@ export default function SideBarBuy({
         </p>
 
         <Button className="white-orange black-color" onClick={handleBuyNow}>
-          Jetzt kaufen
+          Weiter zum Zahlungsvorgang
         </Button>
       </div>
 
       {showPopup && (
         <PopupBackdrop>
           <PopupWrapper>
+            {showThankyouPopup && (
+              <PopupBackdrop>
+                <PopupWrapper>
+                  <h1 style={{ color: "black" }}>
+                    Danke für deine Bestellung!
+                  </h1>
+                  <div>
+                    <h2>Frühstücks Tracker</h2>
+                    <PackageLocationQRCode
+                      latitude={48.676666}
+                      longitude={10.153616}
+                    />
+                  </div>
+                  <Button
+                    className="black-color white-orange"
+                    onClick={() => handleClosePopup()}
+                  >
+                    Schließen
+                  </Button>
+                </PopupWrapper>
+              </PopupBackdrop>
+            )}
+
             {!loggedIn ? (
               <div>
                 <h1>
@@ -148,7 +180,7 @@ export default function SideBarBuy({
                 </Button>
                 <Button
                   className="black-color white-orange"
-                  onClick={() => handleClosePopup()}
+                  onClick={() => handleThankyouPopup()}
                 >
                   Kostenpflichtig Bestellen
                 </Button>

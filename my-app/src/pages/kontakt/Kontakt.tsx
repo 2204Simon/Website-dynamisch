@@ -45,52 +45,48 @@ function Kontakt(): JSX.Element {
         haben möchtest, kannst Du uns tagsüber unter den nachfolgenden
         Kontaktmöglichkeiten erreichen. Wir freuen uns, von Dir zu hören!
       </p>
-     
+
       <MainContainer>
-      <ContactList>
-        <ContactListItem style={{ color: "#aa7d03" }}>
-          <Envelope size={40} />{" "}
-          <a href="mailto:delivery-breakfast@outlook.de">
-            delivery-breakfast@outlook.de
-          </a>
-        </ContactListItem>
-        <ContactListItem style={{ color: "#aa7d03" }}>
-          <Phone size={40} /> <a href="tel:+49123456789">0 123 456789</a>
-        </ContactListItem>
-        <ContactListItem style={{ color: "#aa7d03" }}>
-          <MapPin size={40} /> Frühstücksstr. 20, 89518 Frühhausen
-        </ContactListItem>
-      </ContactList>
-      <ContactMap />
-      <hr />
-      <ContactContainer>
-        <h2>Newsletter abonnieren</h2>
-        <p>
-          Melde Dich für unseren Newsletter an, um keine neuen Frühstücksmenüs
-          zu verpassen:
-        </p>
-        <form onSubmit={handleSubmit}>
-          <FormLabel>
-            E-Mail-Adresse:
-            <FormInput
-              type="email"
-              value={email}
-              onChange={handleEmailChange}
-              required
-            />
-          </FormLabel>
-          <FormLabel>
-            Nachricht:
-            <FormTextArea value={message} onChange={handleMessageChange} />
-          </FormLabel>
-          <BlackColorButton caption={"Anmelden"}></BlackColorButton>
-        </form>
-        <div>
-          <h1>Dein persönlicher Frühstücks Tracker</h1>
-          <PackageLocationQRCode latitude={48.676666} longitude={10.153616} />
-        </div>
-      </ContactContainer>
-    </MainContainer>
+        <ContactList>
+          <ContactListItem style={{ color: "#aa7d03" }}>
+            <Envelope size={40} />{" "}
+            <a href="mailto:delivery-breakfast@outlook.de">
+              delivery-breakfast@outlook.de
+            </a>
+          </ContactListItem>
+          <ContactListItem style={{ color: "#aa7d03" }}>
+            <Phone size={40} /> <a href="tel:+49123456789">0 123 456789</a>
+          </ContactListItem>
+          <ContactListItem style={{ color: "#aa7d03" }}>
+            <MapPin size={40} /> Frühstücksstr. 20, 89518 Frühhausen
+          </ContactListItem>
+        </ContactList>
+        <ContactMap />
+        <hr />
+        <ContactContainer>
+          <h2>Newsletter abonnieren</h2>
+          <p>
+            Melde Dich für unseren Newsletter an, um keine neuen Frühstücksmenüs
+            zu verpassen:
+          </p>
+          <form onSubmit={handleSubmit}>
+            <FormLabel>
+              E-Mail-Adresse:
+              <FormInput
+                type="email"
+                value={email}
+                onChange={handleEmailChange}
+                required
+              />
+            </FormLabel>
+            <FormLabel>
+              Nachricht:
+              <FormTextArea value={message} onChange={handleMessageChange} />
+            </FormLabel>
+            <BlackColorButton caption={"Anmelden"}></BlackColorButton>
+          </form>
+        </ContactContainer>
+      </MainContainer>
     </>
   );
 }
