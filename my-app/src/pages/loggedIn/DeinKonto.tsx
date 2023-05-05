@@ -15,7 +15,7 @@ export default function DeinKonto(): JSX.Element {
           backgroundColor: "rgb(248, 248, 248)",
         }}
       >
-        <Link to="/Bestellung">
+        <Link to="/Bestellung" onClick={() => window.scrollTo(0, 0)}>
           <BlackColorButton caption={"Zurück zum Einkauf"}></BlackColorButton>
         </Link>
       </div>
