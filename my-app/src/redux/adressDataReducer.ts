@@ -3,7 +3,7 @@ import { ActionTypesAdressData, AdressData, AdressDataState } from "./types";
 const adressDataReducer = (
   state: AdressDataState | undefined = {
     AdressData: {
-      housenumber: 0,
+      housenumber: "",
       city: "",
       payment: "",
       street: "",
