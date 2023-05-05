@@ -1,6 +1,7 @@
 //import React from "react";
 import { Link } from "react-router-dom";
 import fakeZeitung from "../.././img/test1.webp";
+import hintergrund_dunkel from "../.././img/Hintergrund_Croissant_verdunkelt.webp";
 import { OrangeButton } from "../general/button";
 
 // const Home: React.FC = (): JSX.Element => {
@@ -106,12 +107,18 @@ const Home: React.FC = () => {
 
   return (
     <>
+    
+  
+
       <div
         style={{
           backgroundColor: config.backgroundColor,
           color: config.textColor,
         }}
       >
+
+<ImageBox>
+    <Image src={hintergrund_dunkel} alt="LogoFakezeitung" />
         {/* Hier kommt der Inhalt der Startseite */}
 
         <Produktteaser>
@@ -141,6 +148,10 @@ const Home: React.FC = () => {
             können wir kostengünstig und emissionsarm liefern!
           </p>
         </Cooperation>
+
+        </ImageBox>
+
+
       </div>
     </>
   );
