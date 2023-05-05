@@ -2,6 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { colors, mediaQueries } from "../../general/constants";
 
+
+export const Container = styled.img`
+  position: relative;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+`;
+
+
 export const Produktteaser = styled.div`
   padding-top: 20%;
   padding-bottom: 20%;
