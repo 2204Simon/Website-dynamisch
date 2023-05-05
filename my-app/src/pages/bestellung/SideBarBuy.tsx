@@ -115,7 +115,7 @@ export default function SideBarBuy({
         </p>
 
         <Button className="white-orange black-color" onClick={handleBuyNow}>
-          Jetzt kaufen
+          Weiter zum Zahlungsvorgang
         </Button>
       </div>
 
