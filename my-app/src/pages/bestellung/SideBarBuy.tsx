@@ -35,12 +35,8 @@ export default function SideBarBuy({
   const [agbChecked, setAgbChecked] = useState(false);
 
   const handleBuyNow = () => {
-    if (!agbChecked) {
-      CustomToast.error("Bitte die ABGs bestätigen!");
-    } else {
-      setShowPopup(true);
-      document.body.style.overflow = "hidden";
-    }
+    setShowPopup(true);
+    document.body.style.overflow = "hidden";
   };
 
   const handleSideChange = () => {
@@ -56,8 +52,12 @@ export default function SideBarBuy({
   };
 
   const handleThankyouPopup = () => {
-    setShowThankyouPopup(true);
-    document.body.style.overflow = "hidden";
+    if (!agbChecked) {
+      CustomToast.error("Bitte die ABGs bestätigen!");
+    } else {
+      setShowThankyouPopup(true);
+      document.body.style.overflow = "hidden";
+    }
   };
 
   const handleAgbCheckboxChange = () => {
@@ -96,23 +96,6 @@ export default function SideBarBuy({
       </div>
       <div>
         <h3>Gesamtpreis: {formatNumber(price)}€</h3>
-
-        <p>
-          <input
-            type="checkbox"
-            onChange={handleAgbCheckboxChange}
-            checked={agbChecked}
-          />
-          Ich akzeptiere die{" "}
-          <a
-            href="https://delivery-breakfast.projekt.dhbw-heidenheim.de/AGBs_delivery-breakfast.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            download
-          >
-            AGBs
-          </a>{" "}
-        </p>
 
         <Button className="white-orange black-color" onClick={handleBuyNow}>
           Weiter zum Bestellvorgang
@@ -171,7 +154,22 @@ export default function SideBarBuy({
                 <Adressdaten />
                 <div>Tag der Lieferung</div>
                 <CalendarComponent />
-
+                <p>
+                  <input
+                    type="checkbox"
+                    onChange={handleAgbCheckboxChange}
+                    checked={agbChecked}
+                  />
+                  Ich akzeptiere die{" "}
+                  <a
+                    href="https://delivery-breakfast.projekt.dhbw-heidenheim.de/AGBs_delivery-breakfast.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download
+                  >
+                    AGBs
+                  </a>{" "}
+                </p>
                 <Button
                   className="black-color white-orange"
                   onClick={() => handleClosePopup()}
