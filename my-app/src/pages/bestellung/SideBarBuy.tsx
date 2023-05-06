@@ -171,6 +171,7 @@ export default function SideBarBuy({
                 <Adressdaten />
                 <div>Tag der Lieferung</div>
                 <CalendarComponent />
+
                 <Button
                   className="black-color white-orange"
                   onClick={() => handleClosePopup()}
