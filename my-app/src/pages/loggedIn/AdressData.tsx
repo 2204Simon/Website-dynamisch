@@ -114,7 +114,7 @@ export default function AdressInformation(): JSX.Element {
                 <RadioGroup
                   aria-label="Zahlung"
                   name="payment"
-                  defaultValue={"bar"}
+                  defaultValue={"Barzahlung"}
                 >
                   <FormControlLabel
                     value="Barzahlung"
