@@ -16,6 +16,8 @@ import { de } from "date-fns/locale";
 import { formatNumber } from "../general/constants";
 import { CustomToast } from "../general/toast.style";
 import PackageLocationQRCode from "./PackageLocationQRCode";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../../redux/action";
 
 interface SideBarProps {
   produktAnzahl: number;
@@ -30,7 +32,7 @@ export default function SideBarBuy({
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
   const [showThankyouPopup, setShowThankyouPopup] = useState(false);
-
+  const dispatch = useDispatch();
   const [agbChecked, setAgbChecked] = useState(false);
 
   const handleBuyNow = () => {
@@ -55,6 +57,7 @@ export default function SideBarBuy({
       CustomToast.error("Bitte die ABGs bestätigen!");
     } else {
       setShowThankyouPopup(true);
+      dispatch(clearCart());
       document.body.style.overflow = "hidden";
     }
   };
