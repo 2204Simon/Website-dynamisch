@@ -17,9 +17,10 @@ const ScrollContainer: React.FC<ScrollContainerProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [scrollLeftVisible, setScrollLeftVisible] = useState(false);
   const [scrollRightVisible, setScrollRightVisible] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
 
   const checkScroll = () => {
-    if (containerRef.current) {
+    if (!isScrolling && containerRef.current) {
       setScrollLeftVisible(containerRef.current.scrollLeft > 0);
       setScrollRightVisible(
         containerRef.current.scrollLeft <
@@ -35,6 +36,10 @@ const ScrollContainer: React.FC<ScrollContainerProps> = ({
       });
       setScrollLeftVisible(containerRef.current.scrollLeft - scrollAmount > 0);
       setScrollRightVisible(true);
+      setIsScrolling(true); // Setze isScrolling auf true
+      setTimeout(() => {
+        setIsScrolling(false); // Setze isScrolling auf false nach einer bestimmten Zeit
+      }, 500);
     }
   };
 
@@ -49,6 +54,10 @@ const ScrollContainer: React.FC<ScrollContainerProps> = ({
         containerRef.current.scrollLeft + scrollAmount <
           containerRef.current.scrollWidth - containerRef.current.clientWidth
       );
+      setIsScrolling(true); // Setze isScrolling auf true
+      setTimeout(() => {
+        setIsScrolling(false); // Setze isScrolling auf false nach einer bestimmten Zeit
+      }, 500);
     }
   };
 
