@@ -82,6 +82,7 @@ export default function SignUp() {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
+              <Title>Persönliche Daten:</Title>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
