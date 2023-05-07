@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
 import ShoppingCard from "./ShoppingCard";
-import Logo from "../../img/Logo.webp";
 import BaguetteAlone from "../../img/Food/BaguetteAlone.webp";
 import BaguetteYellow from "../../img/Food/BaguetteGelb.webp";
 import Brezel from "../../img/Food/Brezel.webp";

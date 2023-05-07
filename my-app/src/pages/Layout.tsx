@@ -1,4 +1,3 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
 import BurgerMenu from "./BurgerMenu";
 import { DesktopMenu } from "./DesktopMenu";

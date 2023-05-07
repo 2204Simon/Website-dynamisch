@@ -19,13 +19,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
 import { FaPaypal, FaApplePay, FaEuroSign } from "react-icons/fa";
-import { BlackColorButton } from "../general/button";
-import { Link } from "react-router-dom";
-import {
-  PopupWrapper,
-  SideBarWrapper,
-} from "../bestellung/stylesBestellung/SideBarBuy.styles";
-import SideBarBuy from "../bestellung/SideBarBuy";
 
 export default function AdressInformation(): JSX.Element {
   const dispatch = useDispatch();

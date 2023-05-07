@@ -9,14 +9,13 @@ import {
 import { Button } from "../general/button.styles";
 import Adressdaten from "../loggedIn/AdressData";
 import { useLoggedIn } from "../../globalVariables/loggedin";
-import SignIn from "../logIn/LogIn";
 import { useNavigate } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 import { StyledDatePicker } from "./stylesBestellung/Calendar.styles";
 import { de } from "date-fns/locale";
 import { formatNumber } from "../general/constants";
 import { CustomToast } from "../general/toast.style";
-import PackageLocationQRCode from "../kontakt/PackageLocationQRCode";
+import PackageLocationQRCode from "./PackageLocationQRCode";
 
 interface SideBarProps {
   produktAnzahl: number;

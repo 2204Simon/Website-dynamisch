@@ -14,7 +14,6 @@ import { ContactMap } from "./Map";
 import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
 import { BlackColorButton } from "../general/button";
-import PackageLocationQRCode from "./PackageLocationQRCode";
 
 function Kontakt(): JSX.Element {
   const [email, setEmail] = useState("");

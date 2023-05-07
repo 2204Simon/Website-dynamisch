@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Link } from "react-router-dom";
 import {
   TwitterLogo,
@@ -8,7 +7,7 @@ import {
   SnapchatLogo,
   LinkedinLogo,
 } from "phosphor-react";
-import { GeneralstyledLink, colors } from "./general/constants";
+import { GeneralstyledLink } from "./general/constants";
 import { FooterContainer, FooterLinks, SocialMedia } from "./Footer.styles";
 
 function Footer(): JSX.Element {
