@@ -27,14 +27,14 @@ const ScrollContainer: React.FC<ScrollContainerProps> = ({
       );
     }
   };
-
   const scrollLeft = () => {
     if (containerRef.current) {
       containerRef.current.scrollTo({
-        left: containerRef.current.scrollLeft - scrollAmount,
+        left: containerRef.current.scrollLeft - scrollAmount - 1,
         behavior: "smooth",
       });
-      checkScroll();
+      setScrollLeftVisible(containerRef.current.scrollLeft - scrollAmount > 0);
+      setScrollRightVisible(true);
     }
   };
 
@@ -44,7 +44,11 @@ const ScrollContainer: React.FC<ScrollContainerProps> = ({
         left: containerRef.current.scrollLeft + scrollAmount,
         behavior: "smooth",
       });
-      checkScroll();
+      setScrollLeftVisible(true);
+      setScrollRightVisible(
+        containerRef.current.scrollLeft + scrollAmount <
+          containerRef.current.scrollWidth - containerRef.current.clientWidth
+      );
     }
   };
 
