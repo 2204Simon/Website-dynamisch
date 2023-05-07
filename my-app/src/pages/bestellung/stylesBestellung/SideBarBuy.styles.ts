@@ -41,7 +41,7 @@ export const PopupBackdrop = styled.div`
   justify-content: center;
   z-index: 10;
   will-change: transform;
-  max-height: 100vh;
+  overflow-y: auto;
 `;
 
 export const PopupWrapper = styled.div`
@@ -54,14 +54,16 @@ export const PopupWrapper = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -40%);
   will-change: transform;
+  padding-bottom: 100px; 
 
   @media (max-width: ${mediaQueries.medium}) {
     width: 100%;
     height: 100%;
-    margin: 0;
+    margin-bottom: 50px;
     padding: 20px 10px;
     box-shadow: none;
   }
+};
 `;

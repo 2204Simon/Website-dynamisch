@@ -44,7 +44,6 @@ export default function AdressInformation(): JSX.Element {
     const preparedData: AdressData = {
       street: data.get("street") as string,
       city: data.get("city") as string,
-      // housenumber: data.get("hausnummer") as unknown as number,
       housenumber: data.get("hausnummer") as string,
       payment: data.get("payment") as string,
     };
@@ -52,7 +51,6 @@ export default function AdressInformation(): JSX.Element {
     dispatch(addNewAdressData(preparedData));
     setEditedData(null);
     setEditMode(false);
-    console.log("adress information", adressInformation);
   };
 
   return (
