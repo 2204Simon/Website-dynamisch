@@ -132,7 +132,7 @@ function Produkt() {
           {ShoppingCardsFood}
         </div>
       ) : (
-        <ScrollContainer scrollAmount={282}>
+        <ScrollContainer scrollAmount={283}>
           {ShoppingCardsFood}
         </ScrollContainer>
       )}
@@ -151,7 +151,7 @@ function Produkt() {
           {ShoppingCardsTrink}
         </div>
       ) : (
-        <ScrollContainer scrollAmount={282}>
+        <ScrollContainer scrollAmount={283}>
           {ShoppingCardsTrink}
         </ScrollContainer>
       )}
@@ -170,7 +170,7 @@ function Produkt() {
           {ShoppingCardsMenu}
         </div>
       ) : (
-        <ScrollContainer scrollAmount={282}>
+        <ScrollContainer scrollAmount={283}>
           {ShoppingCardsMenu}
         </ScrollContainer>
       )}
