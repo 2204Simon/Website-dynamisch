@@ -7,9 +7,9 @@ import {
   SignIn,
 } from "phosphor-react";
 import { BottomNavStyle } from "./BottomNavBar.styles";
-import { useLoggedIn } from "./globalVariables/loggedin";
+import { useLoggedIn } from "../globalVariables/loggedin";
 import { useSelector } from "react-redux";
-import { CartState } from "./redux/types";
+import { CartState } from "../redux/types";
 import { Badge } from "@mui/material";
 
 function BottomNavBar(): JSX.Element {

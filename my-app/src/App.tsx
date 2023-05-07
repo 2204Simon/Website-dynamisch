@@ -15,7 +15,7 @@ import DeinKonto from "./pages/loggedIn/DeinKonto";
 import { LoggedInProvider } from "./globalVariables/loggedin"; // Import the LoggedInProvider component
 import Impressum from "./pages/Impressum";
 import Datenschutzerklaerung from "./pages/Datenschutzerklaerung";
-import BottomNavBar from "./BottomNavBar";
+import BottomNavBar from "./pages/BottomNavBar";
 import Chatra from "./pages/Chatra";
 
 export default function App(): JSX.Element {
@@ -24,32 +24,27 @@ export default function App(): JSX.Element {
       <LoggedInProvider>
         {/* Wrap your routes in LoggedInProvider */}
         <BrowserRouter>
-          <div id="top">
-            <Routes>
-              <Route path="/" element={<Layout />}>
-                <Route index element={<Home />} />
-                <Route path="Produkte" element={<Produkte />} />
-                <Route path="Bestellung" element={<Bestellung />} />
-                <Route
-                  path="Unsere Geschichte"
-                  element={<UnsereGeschichte />}
-                />
-                <Route path="Kontakt" element={<Kontakt />} />
-                <Route path="LogIn" element={<LoginForm />} />
-                <Route path="SignUp" element={<SignUp />} />
-                <Route path="LoggedIn" element={<DeinKonto />} />
-                <Route path="Impressum" element={<Impressum />} />
-                <Route
-                  path="Datenschutzerklaerung"
-                  element={<Datenschutzerklaerung />}
-                />
-                <Route path="*" element={<NoPage />} />
-              </Route>
-            </Routes>
-            <BottomNavBar /> {/* Add BottomNavBar component */}
-            <Chatra />
-            <Footer />
-          </div>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="Produkte" element={<Produkte />} />
+              <Route path="Bestellung" element={<Bestellung />} />
+              <Route path="Unsere Geschichte" element={<UnsereGeschichte />} />
+              <Route path="Kontakt" element={<Kontakt />} />
+              <Route path="LogIn" element={<LoginForm />} />
+              <Route path="SignUp" element={<SignUp />} />
+              <Route path="LoggedIn" element={<DeinKonto />} />
+              <Route path="Impressum" element={<Impressum />} />
+              <Route
+                path="Datenschutzerklaerung"
+                element={<Datenschutzerklaerung />}
+              />
+              <Route path="*" element={<NoPage />} />
+            </Route>
+          </Routes>
+          <Footer />
+          <Chatra />
+          <BottomNavBar />
         </BrowserRouter>
       </LoggedInProvider>
     </React.StrictMode>

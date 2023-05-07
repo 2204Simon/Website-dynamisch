@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors, mediaQueries } from "./pages/general/constants";
+import { colors, mediaQueries } from "./general/constants";
 
 export const BottomNavStyle = styled.div`
   .bottom-nav {
