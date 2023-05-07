@@ -31,7 +31,7 @@ const ScrollContainer: React.FC<ScrollContainerProps> = ({
   const scrollLeft = () => {
     if (containerRef.current) {
       containerRef.current.scrollTo({
-        left: containerRef.current.scrollLeft - scrollAmount - 1,
+        left: containerRef.current.scrollLeft - scrollAmount,
         behavior: "smooth",
       });
       setScrollLeftVisible(containerRef.current.scrollLeft - scrollAmount > 0);
