@@ -10,7 +10,7 @@ export const WarenkorbWrapper = styled.div`
   min-height: 90vh;
 
   @media (max-width: ${mediaQueries.large}) {
-    flex-direction: column-reverse;
+    flex-direction: column;
     height: auto;
     margin-bottom: 20px;
   }
