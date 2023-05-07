@@ -12,7 +12,7 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useLoggedIn } from "../../globalVariables/loggedin";
 import { LogInData } from "../../redux/types";
 import { useDispatch } from "react-redux";
-import { addNewUser } from "../../redux/action";
+import { addNewAdressData, addNewUser } from "../../redux/action";
 import { colors } from "../general/constants";
 import {
   FormControl,
@@ -52,8 +52,15 @@ export default function SignUp() {
       firstName: data.get("firstName") as string,
       lastName: data.get("lastName") as string,
     };
+    const adressData = {
+      street: data.get("street") as string,
+      city: data.get("city") as string,
+      housenumber: data.get("hausnummer") as string,
+      payment: data.get("payment") as string,
+    };
     console.log(preparedData);
     dispatch(addNewUser(preparedData));
+    dispatch(addNewAdressData(adressData));
     navigate("/LoggedIn");
   };
   return (
