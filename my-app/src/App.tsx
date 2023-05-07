@@ -16,6 +16,7 @@ import { LoggedInProvider } from "./globalVariables/loggedin"; // Import the Log
 import Impressum from "./pages/Impressum";
 import Datenschutzerklaerung from "./pages/Datenschutzerklaerung";
 import BottomNavBar from "./BottomNavBar";
+import Chatra from "./pages/Chatra";
 
 export default function App(): JSX.Element {
   return (
@@ -46,6 +47,7 @@ export default function App(): JSX.Element {
               </Route>
             </Routes>
             <BottomNavBar /> {/* Add BottomNavBar component */}
+            <Chatra />
             <Footer />
           </div>
         </BrowserRouter>

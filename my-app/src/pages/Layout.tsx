@@ -1,6 +1,5 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Chatra from "./Chatra";
 import BurgerMenu from "./BurgerMenu";
 import { DesktopMenu } from "./DesktopMenu";
 import { ToastContainer } from "react-toastify";
@@ -11,7 +10,6 @@ const Layout = () => {
       <DesktopMenu />
       <BurgerMenu />
       <Outlet />
-      <Chatra />
       <ToastContainer />
     </>
   );
