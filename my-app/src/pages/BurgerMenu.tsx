@@ -73,7 +73,8 @@ const BurgerMenu: React.FC = () => {
   const cartItems = useSelector(
     (state: { cart: CartState }) => state.cart.cartItems
   );
-  const arrayLength = cartItems.length;
+  let cartLength = 0;
+  cartItems.map(item => (cartLength += item.anzahl));
 
   const handleBurgerClick = () => {
     setOpen(!open);
@@ -124,7 +125,7 @@ const BurgerMenu: React.FC = () => {
           <StyledListItem>
             <StyledLink to="/Bestellung" onClick={closeMenu}>
               <ShoppingCart size={30} />
-              <Badge badgeContent={arrayLength} color="error" />
+              <Badge badgeContent={cartLength} color="error" />
             </StyledLink>
           </StyledListItem>
           <StyledListItem>

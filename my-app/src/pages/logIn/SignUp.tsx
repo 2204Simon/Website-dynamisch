@@ -14,6 +14,15 @@ import { LogInData } from "../../redux/types";
 import { useDispatch } from "react-redux";
 import { addNewUser } from "../../redux/action";
 import { colors } from "../general/constants";
+import {
+  FormControl,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+} from "@mui/material";
+import { FaEuroSign, FaPaypal, FaApplePay } from "react-icons/fa";
+import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
+import { Title } from "../loggedIn/UserInformation.styles";
 
 function Copyright(props: any) {
   return (
@@ -49,7 +58,7 @@ export default function SignUp() {
   };
   return (
     <div>
-      <Container component="main" maxWidth="xs" style={{ height: "600px" }}>
+      <Container component="main" maxWidth="xs" style={{ height: "auto" }}>
         <Box
           sx={{
             marginTop: 8,
@@ -132,6 +141,101 @@ export default function SignUp() {
                   }}
                 />
               </Grid>
+              <Grid item xs={12} sm={8}>
+                <TextField
+                  fullWidth
+                  required
+                  id="street"
+                  label="Straße"
+                  name="street"
+                  InputLabelProps={{
+                    sx: {
+                      backgroundColor: "white",
+                    },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <TextField
+                  fullWidth
+                  required
+                  id="hausnummer"
+                  label="Hausnummer"
+                  name="hausnummer"
+                  InputLabelProps={{
+                    sx: {
+                      backgroundColor: "white",
+                    },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  required
+                  id="city"
+                  label="Stadt"
+                  name="city"
+                  InputLabelProps={{
+                    sx: {
+                      backgroundColor: "white",
+                    },
+                  }}
+                />
+              </Grid>
+              <Title>Zahlungsmöglichkeiten:</Title>
+              <FormControl component="fieldset">
+                <RadioGroup
+                  aria-label="Zahlung"
+                  name="payment"
+                  defaultValue={"Barzahlung"}
+                >
+                  <Grid item xs={12}>
+                    <FormControlLabel
+                      value="Barzahlung"
+                      control={<Radio />}
+                      label={
+                        <div>
+                          <FaEuroSign /> Bar
+                        </div>
+                      }
+                    />
+                  </Grid>
+                  <FormControlLabel
+                    value="SEPA Lastschriftmandat"
+                    control={<Radio />}
+                    label={
+                      <div>
+                        <AccountBalanceOutlinedIcon fontSize="small" /> SEPA
+                        Lastschrift
+                      </div>
+                    }
+                  />
+                  <Grid item xs={12}>
+                    <FormControlLabel
+                      value="Paypal"
+                      control={<Radio />}
+                      label={
+                        <div>
+                          <FaPaypal size={20} />
+                          <span></span>
+                        </div>
+                      }
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormControlLabel
+                      value="Apple Pay"
+                      control={<Radio />}
+                      label={
+                        <div>
+                          <FaApplePay size={40} />
+                        </div>
+                      }
+                    />
+                  </Grid>
+                </RadioGroup>
+              </FormControl>
             </Grid>
             <Button
               type="submit"

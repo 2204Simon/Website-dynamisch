@@ -47,6 +47,9 @@ export default function SideBarBuy({
   };
 
   const handleClosePopup = () => {
+    if (showThankyouPopup === true) {
+      dispatch(clearCart());
+    }
     setShowPopup(false);
     setShowThankyouPopup(false);
     document.body.style.overflow = "auto";
@@ -57,7 +60,6 @@ export default function SideBarBuy({
       CustomToast.error("Bitte die ABGs bestätigen!");
     } else {
       setShowThankyouPopup(true);
-      dispatch(clearCart());
       document.body.style.overflow = "hidden";
     }
   };

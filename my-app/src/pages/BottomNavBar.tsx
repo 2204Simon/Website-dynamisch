@@ -17,7 +17,8 @@ function BottomNavBar(): JSX.Element {
   const cartItems = useSelector(
     (state: { cart: CartState }) => state.cart.cartItems
   );
-  const arrayLength = cartItems.length;
+  let cartLength = 0;
+  cartItems.map(item => (cartLength += item.anzahl));
   return (
     <BottomNavStyle>
       <nav>
@@ -36,7 +37,7 @@ function BottomNavBar(): JSX.Element {
             <li>
               <Link to="/Bestellung" onClick={() => window.scrollTo(0, 0)}>
                 <ShoppingCart size={30} />
-                <Badge badgeContent={arrayLength} color="error" />
+                <Badge badgeContent={cartLength} color="error" />
               </Link>
             </li>
             <li>

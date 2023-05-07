@@ -18,7 +18,8 @@ export const DesktopMenu: React.FC = () => {
   const cartItems = useSelector(
     (state: { cart: CartState }) => state.cart.cartItems
   );
-  const arrayLength = cartItems.length;
+  let cartLength = 0;
+  cartItems.map(item => (cartLength += item.anzahl));
   return (
     <Header id="zumSeitenanfang">
       <p></p>
@@ -43,7 +44,7 @@ export const DesktopMenu: React.FC = () => {
         <MenuItem>
           <StyledLink to="/Bestellung">
             <ShoppingCart size={40} />
-            <Badge badgeContent={arrayLength} color="error" />
+            <Badge badgeContent={cartLength} color="error" />
           </StyledLink>
         </MenuItem>
         <MenuItem>
