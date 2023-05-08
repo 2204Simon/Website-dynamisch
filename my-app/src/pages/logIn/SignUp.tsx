@@ -201,9 +201,9 @@ export default function SignUp() {
                   <Grid item xs={12}>
                     <FormControlLabel
                       value="Barzahlung"
-                      control={<Radio />}
+                      control={<Radio style={{ color: "#aa7d03" }} />}
                       label={
-                        <div>
+                        <div style={{ color: "#aa7d03" }}>
                           <FaEuroSign /> Bar
                         </div>
                       }
@@ -211,9 +211,9 @@ export default function SignUp() {
                   </Grid>
                   <FormControlLabel
                     value="SEPA Lastschriftmandat"
-                    control={<Radio />}
+                    control={<Radio style={{ color: "#aa7d03" }} />}
                     label={
-                      <div>
+                      <div style={{ color: "#aa7d03" }}>
                         <AccountBalanceOutlinedIcon fontSize="small" /> SEPA
                         Lastschrift
                       </div>
@@ -222,9 +222,9 @@ export default function SignUp() {
                   <Grid item xs={12}>
                     <FormControlLabel
                       value="Paypal"
-                      control={<Radio />}
+                      control={<Radio style={{ color: "#aa7d03" }} />}
                       label={
-                        <div>
+                        <div style={{ color: "#aa7d03" }}>
                           <FaPaypal size={20} />
                           <span></span>
                         </div>
@@ -234,9 +234,9 @@ export default function SignUp() {
                   <Grid item xs={12}>
                     <FormControlLabel
                       value="Apple Pay"
-                      control={<Radio />}
+                      control={<Radio style={{ color: "#aa7d03" }} />}
                       label={
-                        <div>
+                        <div style={{ color: "#aa7d03" }}>
                           <FaApplePay size={40} />
                         </div>
                       }
