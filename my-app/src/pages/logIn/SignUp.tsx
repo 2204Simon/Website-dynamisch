@@ -95,6 +95,7 @@ export default function SignUp() {
                   InputLabelProps={{
                     sx: {
                       backgroundColor: "white",
+                      color: colors.companycolor,
                     },
                   }}
                 />
@@ -110,6 +111,7 @@ export default function SignUp() {
                   InputLabelProps={{
                     sx: {
                       backgroundColor: "white",
+                      color: colors.companycolor,
                     },
                   }}
                 />
@@ -125,6 +127,7 @@ export default function SignUp() {
                   InputLabelProps={{
                     sx: {
                       backgroundColor: "white",
+                      color: colors.companycolor,
                     },
                   }}
                 />
@@ -141,6 +144,7 @@ export default function SignUp() {
                   InputLabelProps={{
                     sx: {
                       backgroundColor: "white",
+                      color: colors.companycolor,
                     },
                   }}
                   inputProps={{
@@ -159,6 +163,7 @@ export default function SignUp() {
                   InputLabelProps={{
                     sx: {
                       backgroundColor: "white",
+                      color: colors.companycolor,
                     },
                   }}
                 />
@@ -173,6 +178,7 @@ export default function SignUp() {
                   InputLabelProps={{
                     sx: {
                       backgroundColor: "white",
+                      color: colors.companycolor,
                     },
                   }}
                 />
@@ -187,6 +193,7 @@ export default function SignUp() {
                   InputLabelProps={{
                     sx: {
                       backgroundColor: "white",
+                      color: colors.companycolor,
                     },
                   }}
                 />
@@ -201,9 +208,9 @@ export default function SignUp() {
                   <Grid item xs={12}>
                     <FormControlLabel
                       value="Barzahlung"
-                      control={<Radio style={{ color: "#aa7d03" }} />}
+                      control={<Radio style={{ color: colors.companycolor }} />}
                       label={
-                        <div style={{ color: "#aa7d03" }}>
+                        <div>
                           <FaEuroSign /> Bar
                         </div>
                       }
@@ -211,9 +218,9 @@ export default function SignUp() {
                   </Grid>
                   <FormControlLabel
                     value="SEPA Lastschriftmandat"
-                    control={<Radio style={{ color: "#aa7d03" }} />}
+                    control={<Radio style={{ color: colors.companycolor }} />}
                     label={
-                      <div style={{ color: "#aa7d03" }}>
+                      <div>
                         <AccountBalanceOutlinedIcon fontSize="small" /> SEPA
                         Lastschrift
                       </div>
@@ -222,9 +229,9 @@ export default function SignUp() {
                   <Grid item xs={12}>
                     <FormControlLabel
                       value="Paypal"
-                      control={<Radio style={{ color: "#aa7d03" }} />}
+                      control={<Radio style={{ color: colors.companycolor }} />}
                       label={
-                        <div style={{ color: "#aa7d03" }}>
+                        <div>
                           <FaPaypal size={20} />
                           <span></span>
                         </div>
@@ -234,9 +241,9 @@ export default function SignUp() {
                   <Grid item xs={12}>
                     <FormControlLabel
                       value="Apple Pay"
-                      control={<Radio style={{ color: "#aa7d03" }} />}
+                      control={<Radio style={{ color: colors.companycolor }} />}
                       label={
-                        <div style={{ color: "#aa7d03" }}>
+                        <div>
                           <FaApplePay size={40} />
                         </div>
                       }

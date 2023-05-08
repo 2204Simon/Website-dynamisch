@@ -19,6 +19,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
 import { FaPaypal, FaApplePay, FaEuroSign } from "react-icons/fa";
+import { colors } from "../general/constants";
 
 export default function AdressInformation(): JSX.Element {
   const dispatch = useDispatch();
@@ -70,6 +71,7 @@ export default function AdressInformation(): JSX.Element {
                 InputLabelProps={{
                   sx: {
                     backgroundColor: "white",
+                    color: colors.companycolor,
                   },
                 }}
               />
@@ -83,6 +85,7 @@ export default function AdressInformation(): JSX.Element {
                 InputLabelProps={{
                   sx: {
                     backgroundColor: "white",
+                    color: colors.companycolor,
                   },
                 }}
               />
@@ -96,6 +99,7 @@ export default function AdressInformation(): JSX.Element {
                 InputLabelProps={{
                   sx: {
                     backgroundColor: "white",
+                    color: colors.companycolor,
                   },
                 }}
               />
@@ -107,18 +111,20 @@ export default function AdressInformation(): JSX.Element {
                   name="payment"
                   defaultValue={"Barzahlung"}
                 >
-                  <FormControlLabel
-                    value="Barzahlung"
-                    control={<Radio />}
-                    label={
-                      <div>
-                        <FaEuroSign /> Bar
-                      </div>
-                    }
-                  />
+                  <Grid item xs={12}>
+                    <FormControlLabel
+                      value="Barzahlung"
+                      control={<Radio style={{ color: colors.companycolor }} />}
+                      label={
+                        <div>
+                          <FaEuroSign /> Bar
+                        </div>
+                      }
+                    />
+                  </Grid>
                   <FormControlLabel
                     value="SEPA Lastschriftmandat"
-                    control={<Radio />}
+                    control={<Radio style={{ color: colors.companycolor }} />}
                     label={
                       <div>
                         <AccountBalanceOutlinedIcon fontSize="small" /> SEPA
@@ -126,30 +132,41 @@ export default function AdressInformation(): JSX.Element {
                       </div>
                     }
                   />
-                  <FormControlLabel
-                    value="Paypal"
-                    control={<Radio />}
-                    label={
-                      <div>
-                        <FaPaypal size={20} />
-                        <span></span>
-                      </div>
-                    }
-                  />
-                  <FormControlLabel
-                    value="Apple Pay"
-                    control={<Radio />}
-                    label={
-                      <div>
-                        <FaApplePay size={40} />
-                      </div>
-                    }
-                  />
+                  <Grid item xs={12}>
+                    <FormControlLabel
+                      value="Paypal"
+                      control={<Radio style={{ color: colors.companycolor }} />}
+                      label={
+                        <div>
+                          <FaPaypal size={20} />
+                          <span></span>
+                        </div>
+                      }
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormControlLabel
+                      value="Apple Pay"
+                      control={<Radio style={{ color: colors.companycolor }} />}
+                      label={
+                        <div>
+                          <FaApplePay size={40} />
+                        </div>
+                      }
+                    />
+                  </Grid>
                 </RadioGroup>
               </FormControl>
             </Grid>
-            <Button type="submit">Speichern</Button>
-            <Button onClick={handleCancel}>Abbrechen</Button>
+            <Button style={{ color: colors.companycolor }} type="submit">
+              Speichern
+            </Button>
+            <Button
+              style={{ color: colors.companycolor }}
+              onClick={handleCancel}
+            >
+              Abbrechen
+            </Button>
           </form>
         ) : (
           <div>
