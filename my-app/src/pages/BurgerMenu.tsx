@@ -5,22 +5,39 @@ import CloseIcon from "@mui/icons-material/Close";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import { colors, mediaQueries } from "./general/constants";
-import { StyledLink } from "./Layout.styles";
+import { Logo, StyledLink } from "./Layout.styles";
 import { ShoppingCart, SignIn, User } from "phosphor-react";
 import { Badge } from "@mui/material";
 import { useLoggedIn } from "../globalVariables/loggedin";
 import { useSelector } from "react-redux";
 import { CartState } from "../redux/types";
+import logo from ".././img/Logo.webp";
 
 const StyledBurgerMenu = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+export const Header = styled.div`
   display: none;
   @media (max-width: ${mediaQueries.large}) {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
     background-color: ${colors.companycolor};
     height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
+`;
+
+export const StyledImg = styled.img`
+  max-width: 80px;
+  width: 60px;
+  border: 2px solid ${colors.white};
+  border-radius: 5px;
+  line-height 1;
+  margin-top: 5px;
+  margin-left:5px;
 `;
 
 const StyledBurgerIcon = styled(MenuIcon)`
@@ -97,51 +114,58 @@ const BurgerMenu: React.FC = () => {
   }, []);
 
   return (
-    <StyledBurgerMenu>
-      <StyledBurgerIcon onClick={handleBurgerClick} />
-      <StyledMenu open={open}>
-        <StyledCloseIcon onClick={handleBurgerClick} />
-        <StyledList>
-          <StyledListItem>
-            <StyledLink to="/" onClick={closeMenu}>
-              Home
-            </StyledLink>
-          </StyledListItem>
-          <StyledListItem>
-            <StyledLink to="/Produkte" onClick={closeMenu}>
-              Produkte
-            </StyledLink>
-          </StyledListItem>
-          <StyledListItem>
-            <StyledLink to="/Unsere Geschichte" onClick={closeMenu}>
-              Geschichte
-            </StyledLink>
-          </StyledListItem>
-          <StyledListItem>
-            <StyledLink to="/Kontakt" onClick={closeMenu}>
-              Kontakt
-            </StyledLink>
-          </StyledListItem>
-          <StyledListItem>
-            <StyledLink to="/Bestellung" onClick={closeMenu}>
-              <ShoppingCart size={30} />
-              <Badge badgeContent={cartLength} color="error" />
-            </StyledLink>
-          </StyledListItem>
-          <StyledListItem>
-            {loggedIn ? (
-              <StyledLink to="/LoggedIn">
-                <User size={30} />
+    <Header>
+      <Logo>
+        <a href="/">
+          <StyledImg src={logo} alt="Logo" />
+        </a>
+      </Logo>
+      <StyledBurgerMenu>
+        <StyledBurgerIcon onClick={handleBurgerClick} />
+        <StyledMenu open={open}>
+          <StyledCloseIcon onClick={handleBurgerClick} />
+          <StyledList>
+            <StyledListItem>
+              <StyledLink to="/" onClick={closeMenu}>
+                Home
               </StyledLink>
-            ) : (
-              <StyledLink to="/SignUp">
-                <SignIn size={30} />
+            </StyledListItem>
+            <StyledListItem>
+              <StyledLink to="/Produkte" onClick={closeMenu}>
+                Produkte
               </StyledLink>
-            )}
-          </StyledListItem>
-        </StyledList>
-      </StyledMenu>
-    </StyledBurgerMenu>
+            </StyledListItem>
+            <StyledListItem>
+              <StyledLink to="/Unsere Geschichte" onClick={closeMenu}>
+                Geschichte
+              </StyledLink>
+            </StyledListItem>
+            <StyledListItem>
+              <StyledLink to="/Kontakt" onClick={closeMenu}>
+                Kontakt
+              </StyledLink>
+            </StyledListItem>
+            <StyledListItem>
+              <StyledLink to="/Bestellung" onClick={closeMenu}>
+                <ShoppingCart size={30} />
+                <Badge badgeContent={cartLength} color="error" />
+              </StyledLink>
+            </StyledListItem>
+            <StyledListItem>
+              {loggedIn ? (
+                <StyledLink to="/LoggedIn">
+                  <User size={30} />
+                </StyledLink>
+              ) : (
+                <StyledLink to="/SignUp">
+                  <SignIn size={30} />
+                </StyledLink>
+              )}
+            </StyledListItem>
+          </StyledList>
+        </StyledMenu>
+      </StyledBurgerMenu>
+    </Header>
   );
 };
 
