@@ -90,7 +90,7 @@ export default function SignIn() {
               required
               InputLabelProps={{
                 sx: {
-                  backgroundColor: "white", // Hier den gewünschten Farbcode eintragen
+                  backgroundColor: "white",
                 },
               }}
             />
@@ -105,7 +105,7 @@ export default function SignIn() {
               autoComplete="current-password"
               InputLabelProps={{
                 sx: {
-                  backgroundColor: "white", // Hier den gewünschten Farbcode eintragen
+                  backgroundColor: "white",
                 },
               }}
             />
