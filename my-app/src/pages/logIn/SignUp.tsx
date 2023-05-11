@@ -216,16 +216,18 @@ export default function SignUp() {
                       }
                     />
                   </Grid>
-                  <FormControlLabel
-                    value="SEPA Lastschriftmandat"
-                    control={<Radio style={{ color: colors.companycolor }} />}
-                    label={
-                      <div>
-                        <AccountBalanceOutlinedIcon fontSize="small" /> SEPA
-                        Lastschrift
-                      </div>
-                    }
-                  />
+                  <Grid item xs={12}>
+                    <FormControlLabel
+                      value="SEPA Lastschriftmandat"
+                      control={<Radio style={{ color: colors.companycolor }} />}
+                      label={
+                        <div>
+                          <AccountBalanceOutlinedIcon fontSize="small" /> SEPA
+                          Lastschrift
+                        </div>
+                      }
+                    />
+                  </Grid>
                   <Grid item xs={12}>
                     <FormControlLabel
                       value="Paypal"
