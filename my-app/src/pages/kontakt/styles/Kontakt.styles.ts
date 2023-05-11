@@ -127,7 +127,7 @@ export const MapContainer = styled.div`
   height: 0;
   overflow: hidden;
   border-radius: 10px;
-  padding-bottom: 30%;
+  padding-bottom: 35%;
 
   iframe {
     position: absolute;
