@@ -20,6 +20,9 @@ h3 {
 p {
   font-family: "Montserrat", sans-serif;
   padding-left: 30px;
+  text-align: justify;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 a {
   color: #aa7d03;
