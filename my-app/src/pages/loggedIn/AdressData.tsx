@@ -189,6 +189,7 @@ export default function AdressInformation(): JSX.Element {
             </Paragraph>
 
             <LogoutButton
+              style={{ display: "center" }}
               className="black-color white-orange "
               onClick={() => handleEdit(adressInformation)}
             >
