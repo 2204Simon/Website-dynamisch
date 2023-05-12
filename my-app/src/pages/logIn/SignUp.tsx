@@ -20,8 +20,12 @@ import {
   FormControlLabel,
   Radio,
 } from "@mui/material";
-import { FaEuroSign, FaPaypal, FaApplePay } from "react-icons/fa";
-import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
+import {
+  FaEuroSign,
+  FaPaypal,
+  FaApplePay,
+  FaCcMastercard,
+} from "react-icons/fa";
 import { Title } from "../loggedIn/UserInformation.styles";
 
 function Copyright(props: any) {
@@ -198,32 +202,30 @@ export default function SignUp() {
                   }}
                 />
               </Grid>
-              <Title>Zahlungsmöglichkeiten:</Title>
+              <Title>
+                Zahlungsmöglichkeiten:
+                <br />
+              </Title>
+
               <FormControl component="fieldset">
                 <RadioGroup
                   aria-label="Zahlung"
                   name="payment"
                   defaultValue={"Barzahlung"}
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                  }}
                 >
                   <Grid item xs={12}>
                     <FormControlLabel
                       value="Barzahlung"
                       control={<Radio style={{ color: colors.companycolor }} />}
                       label={
-                        <div>
-                          <FaEuroSign /> Bar
-                        </div>
-                      }
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <FormControlLabel
-                      value="SEPA Lastschriftmandat"
-                      control={<Radio style={{ color: colors.companycolor }} />}
-                      label={
-                        <div>
-                          <AccountBalanceOutlinedIcon fontSize="small" /> SEPA
-                          Lastschrift
+                        <div style={{ fontWeight: "bold" }}>
+                          <FaEuroSign />
+                          Bar
                         </div>
                       }
                     />

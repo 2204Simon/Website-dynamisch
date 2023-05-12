@@ -17,7 +17,6 @@ import FormControl from "@mui/material/FormControl";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
-import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
 import { FaPaypal, FaApplePay, FaEuroSign } from "react-icons/fa";
 import { colors } from "../general/constants";
 
@@ -110,6 +109,11 @@ export default function AdressInformation(): JSX.Element {
                   aria-label="Zahlung"
                   name="payment"
                   defaultValue={"Barzahlung"}
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                  }}
                 >
                   <Grid item xs={12}>
                     <FormControlLabel
@@ -122,16 +126,6 @@ export default function AdressInformation(): JSX.Element {
                       }
                     />
                   </Grid>
-                  <FormControlLabel
-                    value="SEPA Lastschriftmandat"
-                    control={<Radio style={{ color: colors.companycolor }} />}
-                    label={
-                      <div>
-                        <AccountBalanceOutlinedIcon fontSize="small" /> SEPA
-                        Lastschrift
-                      </div>
-                    }
-                  />
                   <Grid item xs={12}>
                     <FormControlLabel
                       value="Paypal"
