@@ -20,12 +20,7 @@ import {
   FormControlLabel,
   Radio,
 } from "@mui/material";
-import {
-  FaEuroSign,
-  FaPaypal,
-  FaApplePay,
-  FaCcMastercard,
-} from "react-icons/fa";
+import { FaEuroSign, FaPaypal, FaApplePay } from "react-icons/fa";
 import { Title } from "../loggedIn/UserInformation.styles";
 
 function Copyright(props: any) {
@@ -202,10 +197,7 @@ export default function SignUp() {
                   }}
                 />
               </Grid>
-              <Title>
-                Zahlungsmöglichkeiten:
-                <br />
-              </Title>
+              <Title>Zahlungsmöglichkeiten:</Title>
 
               <FormControl component="fieldset">
                 <RadioGroup
