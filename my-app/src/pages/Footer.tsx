@@ -94,7 +94,11 @@ function Footer(): JSX.Element {
         </ul>
       </FooterLinks>
       <div style={{ textAlign: "center", marginTop: "1rem" }}>
-        <Link to="/" style={{ color: "white", textDecoration: "none" }}>
+        <Link
+          onClick={() => window.scrollTo(0, 0)}
+          to="/"
+          style={{ color: "white", textDecoration: "none" }}
+        >
           &copy; delivery-breakfast {new Date().getFullYear()}
         </Link>
       </div>
