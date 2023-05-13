@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { colors, mediaQueries } from "../../general/constants";
 export const MainContainer = styled.div`
-  max-width: 90%;
-  padding: 2.5%;
+  max-width: 100%;
+  padding: 5%;
   display: center;
   h1 {
     text-align: center;
