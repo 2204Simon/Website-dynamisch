@@ -16,8 +16,9 @@ import { de } from "date-fns/locale";
 import { formatNumber } from "../general/constants";
 import { CustomToast } from "../general/toast.style";
 import PackageLocationQRCode from "./PackageLocationQRCode";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../../redux/action";
+import { CartState } from "../../redux/types";
 
 interface SideBarProps {
   produktAnzahl: number;
@@ -67,6 +68,11 @@ export default function SideBarBuy({
   const handleAgbCheckboxChange = () => {
     setAgbChecked(!agbChecked);
   };
+  const cartItems = useSelector(
+    (state: { cart: CartState }) => state.cart.cartItems
+  );
+  let cartLength = 0;
+  cartItems.map(item => (cartLength += item.anzahl));
 
   const minDate = new Date();
   minDate.setDate(minDate.getDate() + 1);
@@ -92,10 +98,10 @@ export default function SideBarBuy({
       <div>
         <LogoImage src={Logo} alt="Logo" />
         <h2>Dein Einkauf</h2>
-        {produktAnzahl === 1 ? (
+        {cartLength === 1 ? (
           <h4>Du hast 1 Produkt in Deinem Warenkorb</h4>
         ) : (
-          <h4>Du hast {produktAnzahl} Produkte in Deinem Warenkorb</h4>
+          <h4>Du hast {cartLength} Produkte in Deinem Warenkorb</h4>
         )}
       </div>
       <div>
