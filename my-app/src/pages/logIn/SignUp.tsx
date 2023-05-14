@@ -79,7 +79,12 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Registrieren
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}
+            style={{ paddingLeft: "20px" }}
+          >
             <Grid container spacing={2}>
               <Title>Persönliche Daten:</Title>
               <Grid item xs={12} sm={6}>
@@ -136,7 +141,7 @@ export default function SignUp() {
                   fullWidth
                   required
                   name="password"
-                  label="Password mit mindestens 8 Zeichen"
+                  label="Passwort mit mindestens 8 Zeichen"
                   type="password"
                   id="password"
                   autoComplete="new-password"
