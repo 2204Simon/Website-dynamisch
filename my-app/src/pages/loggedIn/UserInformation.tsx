@@ -31,7 +31,7 @@ export default function UserInformation(): JSX.Element {
           Hallo {userInformation.LogInData.firstName}{" "}
           {userInformation.LogInData.lastName}
         </Paragraph>
-        <Paragraph>
+        <Paragraph style={{ textAlign: "center" }}>
           Deine E-Mail lautet {userInformation.LogInData.email}
         </Paragraph>
         <LogoutButton
