@@ -60,6 +60,7 @@ export default function SideBarBuy({
     if (!agbChecked) {
       CustomToast.error("Bitte die ABGs bestätigen!");
     } else {
+      setShowPopup(false);
       setShowThankyouPopup(true);
       document.body.style.overflow = "hidden";
     }
@@ -111,32 +112,30 @@ export default function SideBarBuy({
           Weiter zum Bestellvorgang
         </Button>
       </div>
-
+      {showThankyouPopup && (
+        <PopupBackdrop>
+          <PopupWrapper>
+            <h2>Danke für deine Bestellung!</h2>
+            <p>fiktives Projekt, keine gültige Bestellung!</p>
+            <div>
+              <h2>Frühstücks Tracker</h2>
+              <PackageLocationQRCode
+                latitude={48.676666}
+                longitude={10.153616}
+              />
+            </div>
+            <Button
+              className="black-color white-orange"
+              onClick={() => handleClosePopup()}
+            >
+              Schließen
+            </Button>
+          </PopupWrapper>
+        </PopupBackdrop>
+      )}
       {showPopup && (
         <PopupBackdrop>
           <PopupWrapper>
-            {showThankyouPopup && (
-              <PopupBackdrop>
-                <PopupWrapper>
-                  <h2>Danke für deine Bestellung!</h2>
-                  <p>fiktives Projekt, keine gültige Bestellung!</p>
-                  <div>
-                    <h2>Frühstücks Tracker</h2>
-                    <PackageLocationQRCode
-                      latitude={48.676666}
-                      longitude={10.153616}
-                    />
-                  </div>
-                  <Button
-                    className="black-color white-orange"
-                    onClick={() => handleClosePopup()}
-                  >
-                    Schließen
-                  </Button>
-                </PopupWrapper>
-              </PopupBackdrop>
-            )}
-
             {!loggedIn ? (
               <div>
                 <h1>
