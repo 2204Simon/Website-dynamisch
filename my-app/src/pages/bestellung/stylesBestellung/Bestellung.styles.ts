@@ -6,8 +6,7 @@ export const WarenkorbWrapper = styled.div`
   display: flex;
   flex-direction: row;
   padding: 10px;
-  height: auto;
-  min-height: 90vh;
+  height: calc(100vh - 150px);
 
   @media (max-width: ${mediaQueries.large}) {
     flex-direction: column;
@@ -36,7 +35,7 @@ export const BestellungsWrapper = styled.div`
   margin-right: 10px;
   overflow-y: auto;
   overflow-x: hidden;
-  height: 550px;
+  height: calc(100vh - 150px);
   background-color: ${colors.white};
 
   ::-webkit-scrollbar {
