@@ -89,7 +89,7 @@ export default function SignUp() {
                   fullWidth
                   required
                   id="firstName"
-                  label="First Name"
+                  label="Vorname"
                   autoFocus
                   InputLabelProps={{
                     sx: {
@@ -104,7 +104,7 @@ export default function SignUp() {
                   fullWidth
                   required
                   id="lastName"
-                  label="Last Name"
+                  label="Nachname"
                   name="lastName"
                   autoComplete="family-name"
                   InputLabelProps={{
@@ -120,7 +120,7 @@ export default function SignUp() {
                   fullWidth
                   required
                   id="email"
-                  label="Email Address"
+                  label="Email Adresse"
                   name="email"
                   autoComplete="email"
                   InputLabelProps={{
@@ -136,7 +136,7 @@ export default function SignUp() {
                   fullWidth
                   required
                   name="password"
-                  label="Password"
+                  label="Password mit mindestens 8 Zeichen"
                   type="password"
                   id="password"
                   autoComplete="new-password"
