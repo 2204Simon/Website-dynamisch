@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useRef } from "react";
 import { useDispatch } from "react-redux"; // Import der useDispatch-Hook
 // Import der addToCart-Action aus deiner Redux-Komponente
 import {
@@ -12,6 +12,9 @@ import {
   Image,
   PlusQuantity,
   MinusQuantity,
+  DetailsButton,
+  ContainerBack,
+  ContainerFront,
 } from "./styles/ShoppingCard.styles";
 import { BlackColorButton } from "../general/button";
 import "react-toastify/dist/ReactToastify.css";
@@ -29,6 +32,8 @@ interface ShoppingCardProps {
 }
 
 const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
+  const [isFlipped, setIsFlipped] = useState<boolean>(false);
+  const [displayNone, setDisplayNone] = useState(false);
   const [quantity, setQuantity] = useState<number>(0);
   const dispatch = useDispatch(); // Initialisierung der useDispatch-Hook
   const cartItems = useSelector(
@@ -99,38 +104,61 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
     }
   };
 
+  const isProcessingRef = useRef(false);
+
+  const handleDetailsClick = () => {
+    if (!isProcessingRef.current) {
+      isProcessingRef.current = true; // Markiere den Klick als in Bearbeitung
+
+      setIsFlipped(!isFlipped); // 2. Zustand ändern
+
+      setTimeout(() => {
+        setDisplayNone(!displayNone);
+        isProcessingRef.current = false; // Markiere den Klick als abgeschlossen
+      }, 500); // 0,5 Sekunden Verzögerung
+    }
+  };
+
   return (
-    <Container>
-      <ImageContainer>
-        <Image src={image} alt="product" />
-      </ImageContainer>
-      <Details>
-        <Title style={{ paddingLeft: "0px" }}>{title}</Title>
-        <Price>Preis: {formatNumber(price)} €</Price>
+    <Container flipped={isFlipped}>
+      <ContainerFront flipped={isFlipped} displayNone={displayNone}>
+        <ImageContainer>
+          <Image src={image} alt="product" />
+        </ImageContainer>
+        <Details>
+          <Title style={{ paddingLeft: "0px" }}>{title}</Title>
+          <DetailsButton onClick={handleDetailsClick}>
+            Details anzeigen
+          </DetailsButton>
+          <Price>Preis: {formatNumber(price)} €</Price>
 
-        <Quantity>
-          <label htmlFor="quantity">Menge:</label>
-          <MinusQuantity onClick={() => handleMinus(quantity)}>
-            <Minus />
-          </MinusQuantity>
-          <QuantityInput
-            type="text"
-            id="quantity"
-            name="quantity"
-            pattern="[0-9]*"
-            value={quantity}
-            onChange={handleQuantityChange}
+          <Quantity>
+            <label htmlFor="quantity">Menge:</label>
+            <MinusQuantity onClick={() => handleMinus(quantity)}>
+              <Minus />
+            </MinusQuantity>
+            <QuantityInput
+              type="text"
+              id="quantity"
+              name="quantity"
+              pattern="[0-9]*"
+              value={quantity}
+              onChange={handleQuantityChange}
+            />
+            <PlusQuantity onClick={() => handlePlus(quantity)}>
+              <Plus />
+            </PlusQuantity>
+          </Quantity>
+
+          <BlackColorButton
+            onClick={handleAddToCart}
+            caption="Zum Warenkorb hinzufügen"
           />
-          <PlusQuantity onClick={() => handlePlus(quantity)}>
-            <Plus />
-          </PlusQuantity>
-        </Quantity>
-
-        <BlackColorButton
-          onClick={handleAddToCart}
-          caption="Zum Warenkorb hinzufügen"
-        />
-      </Details>
+        </Details>
+      </ContainerFront>
+      <ContainerBack flipped={isFlipped} displayNone={displayNone}>
+        <p onClick={handleDetailsClick}>hello</p>
+      </ContainerBack>
     </Container>
   );
 };

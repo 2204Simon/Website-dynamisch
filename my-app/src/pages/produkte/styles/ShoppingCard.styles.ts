@@ -1,21 +1,72 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { colors } from "../../general/constants";
 
-export const Container = styled.div`
+const rotateAnimation = keyframes`
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(180deg);
+  }
+`;
+
+const reverseRotateAnimation = keyframes`
+  from {
+    transform: rotateY(180deg);
+  }
+  to {
+    transform: rotateY(0deg);
+  }
+`;
+
+export const Container = styled.div<{ flipped: boolean }>`
+  width: 400px;
+  height: 600px;
+  position: relative;
+  transform-style: preserve-3d;
+  margin-bottom: 20px;
+  animation: ${props =>
+      props.flipped ? rotateAnimation : reverseRotateAnimation}
+    1s;
+  transform: ${props => (props.flipped ? "rotateY(180deg)" : "none")};
+`;
+
+export const ContainerFront = styled.div<{
+  flipped: boolean;
+  displayNone: boolean;
+}>`
   display: flex;
   flex-direction: column;
   background-color: ${colors.white};
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   padding: 1rem;
-  max-width: 250px;
+  width: 250px;
+  height: 550px;
   margin: 1rem;
   cursor: pointer;
-  transition: transform 0.2s ease-in-out;
+  backface-visibility: hidden;
+  transform: rotateY(0deg);
+  display: ${props => (props.displayNone ? "none" : "block")};
+`;
 
-  &:hover {
-    transform: scale(1.05);
-  }
+export const ContainerBack = styled.div<{
+  flipped: boolean;
+  displayNone: boolean;
+}>`
+  display: flex;
+  flex-direction: column;
+  background-color: ${colors.companycolor};
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  width: 250px;
+  height: 550px;
+  margin: 1rem;
+  cursor: pointer;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  display: ${props => (props.displayNone ? "block" : "none")};
 `;
 
 export const ImageContainer = styled.div`
@@ -42,6 +93,8 @@ export const Title = styled.h2`
   text-align: center;
   color: ${colors.black};
 `;
+
+export const DetailsButton = styled.p``;
 
 export const Price = styled.p`
   margin: 0;
