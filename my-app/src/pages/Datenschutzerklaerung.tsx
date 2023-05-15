@@ -3,7 +3,7 @@ import React from "react";
 const Datenschutzerklaerung: React.FC = () => {
   return (
     <>
-      <h1>Datenschutzerklärung</h1>
+      <h2>Datenschutzerklärung</h2>
       <h2 id="m14">Einleitung</h2>
       <p>
         Mit der folgenden Datenschutzerklärung möchten wir Sie darüber

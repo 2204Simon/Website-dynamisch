@@ -1,7 +1,7 @@
 function Impressum() {
   return (
     <>
-      <h1>Impressum</h1>
+      <h2>Impressum</h2>
       <h2>Herausgeber:</h2>
       <p>
         Delivery Breakfast (fiktive Firma - Projekt der DHBW Heidenheim)
