@@ -108,7 +108,7 @@ export const Top = styled.div`
 `;
 //////////////////////////////////////////////////////////////////////////////////////////
 export const ListContainer = styled.ul`
-  list-style-image: url(../public/Croissant.ico);
+  list-style: "▶";
 `;
 
 export const MiniH = styled.h4`
