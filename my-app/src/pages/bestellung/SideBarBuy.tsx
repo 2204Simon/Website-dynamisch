@@ -157,9 +157,7 @@ export default function SideBarBuy({
               </div>
             ) : (
               <>
-                <h2 style={{ color: "black" }}>
-                  Sind Deine Adressdaten aktuell?
-                </h2>
+                <h2 style={{ color: "black" }}>Sind Deine Daten aktuell?</h2>
                 <Adressdaten />
                 <div>Tag der Lieferung</div>
                 <CalendarComponent />
