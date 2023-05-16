@@ -106,9 +106,9 @@ export const Top = styled.div`
   text-items: center;
   justify-content: space-between;
 `;
-
+//////////////////////////////////////////////////////////////////////////////////////////
 export const ListContainer = styled.ul`
-  list-style-type: "▶ ";
+  list-style-image: url(../public/Croissant.ico);
 `;
 
 export const MiniH = styled.h4`
