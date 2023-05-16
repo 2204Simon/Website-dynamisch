@@ -25,6 +25,7 @@ export const Container = styled.div<{ flipped: boolean }>`
   position: relative;
   transform-style: preserve-3d;
   margin-bottom: 20px;
+
   animation: ${props =>
       props.flipped ? rotateAnimation : reverseRotateAnimation}
     1s;
@@ -56,7 +57,7 @@ export const ContainerBack = styled.div<{
 }>`
   display: flex;
   flex-direction: column;
-  background-color: ${colors.companycolor};
+  background-color: ${colors.white};
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   padding: 1rem;
@@ -94,7 +95,31 @@ export const Title = styled.h2`
   color: ${colors.black};
 `;
 
-export const DetailsButton = styled.p``;
+export const Title2 = styled.h2`
+  margin: 0;
+  font-size: 1.25rem;
+  color: ${colors.companycolor};
+`;
+
+export const Top = styled.div`
+  display: flex;
+  text-items: center;
+  justify-content: space-between;
+`;
+//////////////////////////////////////////////////////////////////////////////////////////
+export const ListContainer = styled.ul`
+  list-style: "▶";
+`;
+
+export const MiniH = styled.h4`
+  color: ${colors.companycolor};
+  font-size: 18px;
+`;
+
+export const DetailsButton = styled.p`
+  text-decoration: underline;
+  color: ${colors.companycolor};
+`;
 
 export const Price = styled.p`
   margin: 0;

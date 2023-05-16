@@ -15,13 +15,17 @@ import {
   DetailsButton,
   ContainerBack,
   ContainerFront,
+  Title2,
+  Top,
+  MiniH,
+  ListContainer,
 } from "./styles/ShoppingCard.styles";
 import { BlackColorButton } from "../general/button";
 import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
 import { addToCart, increaseQuantity } from "../../redux/action";
 import { CartState } from "../../redux/types";
-import { Plus, Minus } from "phosphor-react";
+import { Plus, XCircle, Minus, List } from "phosphor-react";
 import { useSelector } from "react-redux";
 import { formatNumber } from "../general/constants";
 
@@ -29,9 +33,17 @@ interface ShoppingCardProps {
   image: string;
   title: string;
   price: number;
+  content: string[];
+  allergy: string[];
 }
 
-const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
+const ShoppingCard: React.FC<ShoppingCardProps> = ({
+  image,
+  title,
+  price,
+  content,
+  allergy,
+}) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
   const [displayNone, setDisplayNone] = useState(false);
   const [quantity, setQuantity] = useState<number>(0);
@@ -157,7 +169,30 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
         </Details>
       </ContainerFront>
       <ContainerBack flipped={isFlipped} displayNone={displayNone}>
-        <p onClick={handleDetailsClick}>hello</p>
+        <Top>
+          <Title2 style={{ paddingLeft: "0px" }}>{title}</Title2>
+          <XCircle size={30} onClick={handleDetailsClick} />
+        </Top>
+        <MiniH>Inhalt:</MiniH>
+        <ListContainer>
+          {content.map((item, index) => (
+            <li key={index} style={{ paddingBottom: "10px" }}>
+              {item}
+            </li>
+          ))}
+        </ListContainer>
+        {allergy.length > 0 && (
+          <>
+            <MiniH>Allergiehinweise:</MiniH>
+            <ListContainer>
+              {allergy.map((item, index) => (
+                <li key={index} style={{ paddingBottom: "10px" }}>
+                  {item}
+                </li>
+              ))}
+            </ListContainer>
+          </>
+        )}
       </ContainerBack>
     </Container>
   );
