@@ -1,5 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import { colors } from "../../general/constants";
+import CroissantGif from "../../../img/Croissant.png";
 
 const rotateAnimation = keyframes`
   from {
@@ -108,7 +109,7 @@ export const Top = styled.div`
 `;
 //////////////////////////////////////////////////////////////////////////////////////////
 export const ListContainer = styled.ul`
-  list-style: "▶";
+  list-style-image: url(${CroissantGif});
 `;
 
 export const MiniH = styled.h4`
