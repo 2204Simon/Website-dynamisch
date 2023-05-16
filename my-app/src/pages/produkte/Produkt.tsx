@@ -28,45 +28,133 @@ import ScrollContainer from "./Arrows";
 
 function Produkt() {
   const ShoppingCardsFood = [
-    <ShoppingCard title={"Baguette"} price={2.99} image={BaguetteAlone} />,
-    <ShoppingCard title={"Käsebaguette"} price={3.59} image={BaguetteYellow} />,
-    <ShoppingCard title={"Brezel"} price={1.49} image={Brezel} />,
-    <ShoppingCard title={"Türkisches Menemen"} price={7.99} image={Menemen} />,
-    <ShoppingCard title={"Brötchen"} price={1.29} image={Brötchen} />,
-    <ShoppingCard title={"Croissant"} price={1.79} image={Croissant} />,
+    <ShoppingCard
+      title={"Baguette"}
+      price={2.99}
+      image={BaguetteAlone}
+      content={["Inhalt 1", "Inhalt 2"]}
+      allergy={["Allergie 1", "Allergie 2"]}
+    />,
+    <ShoppingCard
+      title={"Käsebaguette"}
+      price={3.59}
+      image={BaguetteYellow}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+    />,
+    <ShoppingCard
+      title={"Brezel"}
+      price={1.49}
+      image={Brezel}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+    />,
+    <ShoppingCard
+      title={"Türkisches Menemen"}
+      price={7.99}
+      image={Menemen}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+    />,
+    <ShoppingCard
+      title={"Brötchen"}
+      price={1.29}
+      image={Brötchen}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+    />,
+    <ShoppingCard
+      title={"Croissant"}
+      price={1.79}
+      image={Croissant}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+    />,
     <ShoppingCard
       title={"DB Fresh Chicken"}
       price={3.79}
       image={HamburgerBrötchen}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
     />,
-    <ShoppingCard title={"Toast"} price={3.59} image={Toast} />,
+    <ShoppingCard
+      title={"Toast"}
+      price={3.59}
+      image={Toast}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+    />,
     <ShoppingCard
       title={"Toast mit Käse"}
       price={1.79}
       image={BelegtesBrötchen}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
     />,
     <ShoppingCard
       title={"Baguette mit Käse"}
       price={3.59}
       image={KäseBaguette}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
     />,
   ];
   const ShoppingCardsTrink = [
-    <ShoppingCard title={"Espresso"} price={1.99} image={Espresso} />,
-    <ShoppingCard title={"Kaffee"} price={5.99} image={Kaffee} />,
+    <ShoppingCard
+      title={"Espresso"}
+      price={1.99}
+      image={Espresso}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+    />,
+    <ShoppingCard
+      title={"Kaffee"}
+      price={5.99}
+      image={Kaffee}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+    />,
     <ShoppingCard
       title={"Latte Machiatto"}
       price={5.99}
       image={LatteMachiatto}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
     />,
-    <ShoppingCard title={"Orangensaft"} price={5.99} image={Orangensaft} />,
-    <ShoppingCard title={"Früchtetee"} price={5.99} image={Früchtetee} />,
-    <ShoppingCard title={"Wasser"} price={5.99} image={Wasser} />,
-    <ShoppingCard title={"Zitronentee"} price={5.99} image={Zitronentee} />,
+    <ShoppingCard
+      title={"Orangensaft"}
+      price={5.99}
+      image={Orangensaft}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+    />,
+    <ShoppingCard
+      title={"Früchtetee"}
+      price={5.99}
+      image={Früchtetee}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+    />,
+    <ShoppingCard
+      title={"Wasser"}
+      price={5.99}
+      image={Wasser}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+    />,
+    <ShoppingCard
+      title={"Zitronentee"}
+      price={5.99}
+      image={Zitronentee}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+    />,
     <ShoppingCard
       title={"Heiße Schokolade"}
       price={5.99}
       image={HeißeSchokolade}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
     />,
   ];
 
@@ -75,32 +163,50 @@ function Produkt() {
       title={"Bayrisches Menü"}
       price={7.99}
       image={Bayrisches_Essen}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
     />,
     <ShoppingCard
       title={"Wecken mit Kaffee"}
       price={6.99}
       image={BrötchenMitKaffe}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
     />,
-    <ShoppingCard title={"Obstmenü"} price={5.99} image={BrotEiTeeUndObst} />,
+    <ShoppingCard
+      title={"Obstmenü"}
+      price={5.99}
+      image={BrotEiTeeUndObst}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+    />,
     <ShoppingCard
       title={"Eiermenü"}
       price={5.99}
       image={EigetränkUndEierbrot}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
     />,
     <ShoppingCard
       title={"klassische Menü"}
       price={5.99}
       image={KaffeeMitEiUndBrot}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
     />,
     <ShoppingCard
       title={"Veggiemenü"}
       price={5.99}
       image={OSaftMitFrüchtebrot}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
     />,
     <ShoppingCard
       title={"Orangenmenü"}
       price={5.99}
       image={OSaftUndOrangenbrot}
+      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
+      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
     />,
   ];
 

@@ -25,6 +25,7 @@ export const Container = styled.div<{ flipped: boolean }>`
   position: relative;
   transform-style: preserve-3d;
   margin-bottom: 20px;
+
   animation: ${props =>
       props.flipped ? rotateAnimation : reverseRotateAnimation}
     1s;
@@ -56,7 +57,7 @@ export const ContainerBack = styled.div<{
 }>`
   display: flex;
   flex-direction: column;
-  background-color: ${colors.companycolor};
+  background-color: ${colors.white};
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   padding: 1rem;

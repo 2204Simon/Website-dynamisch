@@ -29,9 +29,17 @@ interface ShoppingCardProps {
   image: string;
   title: string;
   price: number;
+  content: string[];
+  allergy: string[];
 }
 
-const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
+const ShoppingCard: React.FC<ShoppingCardProps> = ({
+  image,
+  title,
+  price,
+  content,
+  allergy,
+}) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
   const [displayNone, setDisplayNone] = useState(false);
   const [quantity, setQuantity] = useState<number>(0);
@@ -158,6 +166,16 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ image, title, price }) => {
       </ContainerFront>
       <ContainerBack flipped={isFlipped} displayNone={displayNone}>
         <p onClick={handleDetailsClick}>hello</p>
+        <ul>
+          {content.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+        <ul>
+          {allergy.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
       </ContainerBack>
     </Container>
   );
