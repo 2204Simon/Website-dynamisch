@@ -39,7 +39,7 @@ export const PopupBackdrop = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  z-index: 11;
   will-change: transform;
   overflow-y: auto;
 `;
