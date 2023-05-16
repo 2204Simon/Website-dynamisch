@@ -33,14 +33,17 @@ function Produkt() {
       price={2.99}
       image={BaguetteAlone}
       content={["Inhalt 1", "Inhalt 2"]}
-      allergy={["Allergie 1", "Allergie 2"]}
+      allergy={[
+        "Allergie 1",
+        "Allergie 2 BlaBlaBlaBlaBlaBl a BlaBlaBlaBla BlaBlaBlaBlaBlaBla BlaBlaBlaBlaBlaBla BlaBlaBlaBlaBlaBla BlaBlaBlaBlaBlaBlaBlaBla",
+      ]}
     />,
     <ShoppingCard
       title={"Käsebaguette"}
       price={3.59}
       image={BaguetteYellow}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      content={["Inhalt 1"]}
+      allergy={[]}
     />,
     <ShoppingCard
       title={"Brezel"}

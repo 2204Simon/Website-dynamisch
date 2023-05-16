@@ -15,13 +15,17 @@ import {
   DetailsButton,
   ContainerBack,
   ContainerFront,
+  Title2,
+  Top,
+  MiniH,
+  ListContainer,
 } from "./styles/ShoppingCard.styles";
 import { BlackColorButton } from "../general/button";
 import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
 import { addToCart, increaseQuantity } from "../../redux/action";
 import { CartState } from "../../redux/types";
-import { Plus, Minus } from "phosphor-react";
+import { Plus, XCircle, Minus, List } from "phosphor-react";
 import { useSelector } from "react-redux";
 import { formatNumber } from "../general/constants";
 
@@ -165,17 +169,30 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
         </Details>
       </ContainerFront>
       <ContainerBack flipped={isFlipped} displayNone={displayNone}>
-        <p onClick={handleDetailsClick}>hello</p>
-        <ul>
+        <Top>
+          <Title2 style={{ paddingLeft: "0px" }}>{title}</Title2>
+          <XCircle size={30} onClick={handleDetailsClick} />
+        </Top>
+        <MiniH>Inhalt:</MiniH>
+        <ListContainer>
           {content.map((item, index) => (
-            <li key={index}>{item}</li>
+            <li key={index} style={{ paddingBottom: "10px" }}>
+              {item}
+            </li>
           ))}
-        </ul>
-        <ul>
-          {allergy.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ul>
+        </ListContainer>
+        {allergy.length > 0 && (
+          <>
+            <MiniH>Allergiehinweise:</MiniH>
+            <ListContainer>
+              {allergy.map((item, index) => (
+                <li key={index} style={{ paddingBottom: "10px" }}>
+                  {item}
+                </li>
+              ))}
+            </ListContainer>
+          </>
+        )}
       </ContainerBack>
     </Container>
   );

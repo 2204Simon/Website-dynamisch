@@ -95,7 +95,31 @@ export const Title = styled.h2`
   color: ${colors.black};
 `;
 
-export const DetailsButton = styled.p``;
+export const Title2 = styled.h2`
+  margin: 0;
+  font-size: 1.25rem;
+  color: ${colors.companycolor};
+`;
+
+export const Top = styled.div`
+  display: flex;
+  text-items: center;
+  justify-content: space-between;
+`;
+
+export const ListContainer = styled.ul`
+  list-style-type: "▶ ";
+`;
+
+export const MiniH = styled.h4`
+  color: ${colors.companycolor};
+  font-size: 18px;
+`;
+
+export const DetailsButton = styled.p`
+  text-decoration: underline;
+  color: ${colors.companycolor};
+`;
 
 export const Price = styled.p`
   margin: 0;
