@@ -1,6 +1,5 @@
-import React from "react";
 import styled from "styled-components";
-import { colors, mediaQueries } from "../../general/constants";
+import { colors } from "../../general/constants";
 import hintergrund_dunkel from "../../../img/Hintergrund_Croissant.webp";
 
 export const Produktteaser = styled.div`

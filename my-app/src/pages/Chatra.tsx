@@ -8,7 +8,6 @@ const Chatra: React.FC<ChatraProps> = () => {
     const loadChatraScript = () => {
       (window as any).ChatraID = "38RWm9wEWfoWWHmSM";
       const chatraScript = document.createElement("script");
-      chatraScript.async = true;
       chatraScript.src = "https://call.chatra.io/chatra.js";
       document.body.appendChild(chatraScript);
     };

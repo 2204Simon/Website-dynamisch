@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { BlackColorButton, OrangeButton } from "./general/button";
+import { BlackColorButton } from "./general/button";
 
 function NoPage(): JSX.Element {
   return (
