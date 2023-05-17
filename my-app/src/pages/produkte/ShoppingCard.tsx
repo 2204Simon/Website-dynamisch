@@ -25,7 +25,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
 import { addToCart, increaseQuantity } from "../../redux/action";
 import { CartState } from "../../redux/types";
-import { Plus, XCircle, Minus, List } from "phosphor-react";
+import { Plus, XCircle, Minus } from "phosphor-react";
 import { useSelector } from "react-redux";
 import { formatNumber } from "../general/constants";
 
