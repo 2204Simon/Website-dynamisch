@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { colors, mediaQueries } from "../../general/constants";
-import hintergrund_dunkel from '../../../img/Hintergrund_Croissant.webp';
-
+import hintergrund_dunkel from "../../../img/Hintergrund_Croissant.webp";
 
 export const Produktteaser = styled.div`
   // padding-top: 20%;
@@ -11,16 +10,13 @@ export const Produktteaser = styled.div`
   color: ${colors.black};
   height: calc(100vh - 130px);
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
-
 
   h2 {
     // text-align: center;
     padding: 0;
-    color: ${colors.white};  
-
-
+    color: ${colors.white};
   }
 
   p {
@@ -28,7 +24,6 @@ export const Produktteaser = styled.div`
     margin-bottom: 1rem;
     color: ${colors.companycolor};
   }
-
 `;
 
 export const Cooperation = styled.div`
@@ -36,17 +31,14 @@ export const Cooperation = styled.div`
   background-color: ${colors.black};
   height: calc(100vh - 134.5px);
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
-
-  
 
   h1 {
     text-align: center;
     color: ${colors.white};
     color: config.textColor;
     margin-top: 0px;
-
   }
 
   p {
@@ -65,7 +57,6 @@ export const Cooperation = styled.div`
 
 export const Image = styled.img`
   // width: 20%;
-  height: 300px;
   margin-left: auto;
   margin-right: auto;
   transition: transform 0.3s ease-in-out;
@@ -75,10 +66,10 @@ export const Image = styled.img`
 `;
 
 export const ImageBox = styled.div`
-display: flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  
+
   margin-top: 10px;
   margin-bottom: 10px;
 `;
@@ -89,14 +80,18 @@ export const media = {
 };
 
 export const Dunkel = styled.div`
-background-color: rgba(0, 0, 0, 0.8); /* Hier kannst du die Farbe und Transparenz anpassen */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.8
+  ); /* Hier kannst du die Farbe und Transparenz anpassen */
 `;
 
 export const Bg = styled.div`
-background-image: url(${hintergrund_dunkel});
-background-attachment: fixed;
-background-position: center;
-background-repeat: no-repeat;
-background-size: cover;
-
+  background-image: url(${hintergrund_dunkel});
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
