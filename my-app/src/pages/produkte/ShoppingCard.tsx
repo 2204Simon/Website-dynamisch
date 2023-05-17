@@ -156,6 +156,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
               pattern="[0-9]*"
               value={quantity}
               onChange={handleQuantityChange}
+              inputMode="numeric"
             />
             <PlusQuantity onClick={() => handlePlus(quantity)}>
               <Plus />
