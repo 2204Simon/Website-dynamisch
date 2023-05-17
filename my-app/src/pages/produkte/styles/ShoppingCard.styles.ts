@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import { colors } from "../../general/constants";
-import CroissantGif from "../../../img/Croissant.png";
+import CroissantGif from "../../../img/Croissant.webp";
 
 const rotateAnimation = keyframes`
   from {
