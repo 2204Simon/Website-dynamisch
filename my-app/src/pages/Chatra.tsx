@@ -1,22 +1,29 @@
-import { Component } from "react";
+import React, { useEffect } from "react";
 import { colors } from "./general/constants";
 
 interface ChatraProps {}
 
-class Chatra extends Component<ChatraProps> {
-  componentDidMount() {
-    (window as any).ChatraID = "38RWm9wEWfoWWHmSM";
-    const chatraScript = document.createElement("script");
-    chatraScript.defer = true;
-    chatraScript.setAttribute("crossorigin", "anonymous");
-    chatraScript.src = "https://call.chatra.io/chatra.js";
-    document.head.appendChild(chatraScript);
-  }
+const Chatra: React.FC<ChatraProps> = () => {
+  useEffect(() => {
+    const loadChatraScript = () => {
+      (window as any).ChatraID = "38RWm9wEWfoWWHmSM";
+      const chatraScript = document.createElement("script");
+      chatraScript.src = "https://call.chatra.io/chatra.js";
+      chatraScript.defer = true;
+      chatraScript.setAttribute("crossorigin", "anonymous");
+      document.body.appendChild(chatraScript);
+    };
 
-  render() {
-    return null;
-  }
-}
+    // Prüfen Sie hier Ihre Bedingungen, ob das Skript geladen werden soll oder nicht.
+    const shouldLoadChatra = true;
+
+    if (shouldLoadChatra) {
+      loadChatraScript();
+    }
+  }, []);
+
+  return null;
+};
 
 declare global {
   interface Window {
