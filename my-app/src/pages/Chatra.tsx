@@ -7,7 +7,8 @@ class Chatra extends Component<ChatraProps> {
   componentDidMount() {
     (window as any).ChatraID = "38RWm9wEWfoWWHmSM";
     const chatraScript = document.createElement("script");
-    chatraScript.async = true;
+    chatraScript.defer = true;
+    chatraScript.setAttribute("crossorigin", "anonymous");
     chatraScript.src = "https://call.chatra.io/chatra.js";
     document.head.appendChild(chatraScript);
   }

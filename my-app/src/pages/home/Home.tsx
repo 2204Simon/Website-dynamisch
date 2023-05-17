@@ -31,8 +31,8 @@ const Home: React.FC = () => {
                 <Image
                   src={fakeZeitung}
                   alt="LogoFakezeitung"
-                  width={"auto"}
-                  height={"auto"}
+                  width={"200px"}
+                  height={"200px"}
                 />
               </ImageBox>
               <p>
