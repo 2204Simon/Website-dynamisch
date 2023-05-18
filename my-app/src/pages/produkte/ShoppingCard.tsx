@@ -25,7 +25,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
 import { addToCart, increaseQuantity } from "../../redux/action";
 import { CartState } from "../../redux/types";
-import { Plus, XCircle, Minus, AppleLogo } from "phosphor-react";
+import { Plus, XCircle, Minus } from "phosphor-react";
+import { FaSeedling } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { formatNumber } from "../general/constants";
 
@@ -186,9 +187,9 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
                 marginTop: "5px",
               }}
             >
-              <AppleLogo
+              <FaSeedling
                 size={30}
-                alt="Vegetarisch"
+                aria-label="Vegetarisch"
                 style={{ color: "green" }}
               />
             </div>

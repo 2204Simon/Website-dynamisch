@@ -16,6 +16,7 @@ function Footer(): JSX.Element {
       <SocialMedia>
         <a
           href="https://twitter.com/deliverybreak"
+          aria-label="Link zu Twitter"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -23,6 +24,7 @@ function Footer(): JSX.Element {
         </a>
         <a
           href="https://www.facebook.com/profile.php?id=100091669221469&sk=about"
+          aria-label="Link zu Facebook"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -30,6 +32,7 @@ function Footer(): JSX.Element {
         </a>
         <a
           href="https://www.instagram.com/delivery_breakfast_"
+          aria-label="Link zu Instagram"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -37,6 +40,7 @@ function Footer(): JSX.Element {
         </a>
         <a
           href="https://www.tiktok.com/@delivery_breakfast?is_from_webapp=1&sender_device=pc"
+          aria-label="Link zu Tiktok"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -44,6 +48,7 @@ function Footer(): JSX.Element {
         </a>
         <a
           href="https://t.snapchat.com/E0HWtcis"
+          aria-label="Link zu Snapchat"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -51,6 +56,7 @@ function Footer(): JSX.Element {
         </a>
         <a
           href="https://www.linkedin.com/in/delivery-breakfast-723b46272"
+          aria-label="Link zu LinkedIn"
           target="_blank"
           rel="noopener noreferrer"
         >
