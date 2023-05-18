@@ -54,7 +54,7 @@ const UnsereGeschichte: React.FC = () => {
             date="1956"
             image={history_1}
             title="Gründung der 'Kuchenmanufaktur Wunnerlich, Schmid &amp; Co.'"
-            details="Die Inhaber der Bäckerei setzen weiter auf den Konsum der Menschen, und gründeten die Kuchenmanufaktur."
+            details="Die Inhaber der Bäckerei setzen weiter auf den Konsum der Menschen und gründeten die Kuchenmanufaktur."
           />
 
           <TimelineItem
