@@ -31,8 +31,6 @@ export const Header = styled.div`
 `;
 
 export const StyledImg = styled.img`
-  max-width: 80px;
-  width: 60px;
   border: 2px solid ${colors.white};
   border-radius: 5px;
   line-height 1;
@@ -117,7 +115,7 @@ const BurgerMenu: React.FC = () => {
     <Header>
       <Logo>
         <a href="/">
-          <StyledImg src={logo} alt="Logo" />
+          <StyledImg src={logo} alt="Logo" width="60px" height="60px" />
         </a>
       </Logo>
       <StyledBurgerMenu>

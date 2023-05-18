@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors, mediaQueries } from "./general/constants";
+import { colors } from "./general/constants";
 
 export const FooterContainer = styled.footer`
   bottom: 0;
