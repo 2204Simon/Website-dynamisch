@@ -59,9 +59,8 @@ export const PopupWrapper = styled.div`
   padding-bottom: 100px; 
 
   @media (max-width: ${mediaQueries.medium}) {
-    width: 100%;
-    height: 100%;
-    margin-bottom: 50px;
+    width: 100vw;
+    height: fit-content;
     padding: 20px 10px;
     box-shadow: none;
   }
