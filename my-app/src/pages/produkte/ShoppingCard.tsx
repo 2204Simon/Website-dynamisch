@@ -176,6 +176,24 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
           <Title2 style={{ paddingLeft: "0px" }}>{title}</Title2>
           <XCircle size={30} onClick={handleDetailsClick} />
         </Top>
+        {veggie && (
+          <>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                marginTop: "5px",
+              }}
+            >
+              <AppleLogo
+                size={30}
+                alt="Vegetarisch"
+                style={{ color: "green" }}
+              />
+            </div>
+          </>
+        )}
 
         <MiniH>Inhalt:</MiniH>
 
@@ -196,23 +214,6 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
                 </li>
               ))}
             </ListContainer>
-          </>
-        )}
-        {veggie && (
-          <>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <AppleLogo
-                size={30}
-                alt="Vegetarisch"
-                style={{ color: "green" }}
-              />
-            </div>
           </>
         )}
       </ContainerBack>

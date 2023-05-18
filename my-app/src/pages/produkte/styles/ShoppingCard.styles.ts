@@ -107,7 +107,6 @@ export const Top = styled.div`
   text-items: center;
   justify-content: space-between;
 `;
-//////////////////////////////////////////////////////////////////////////////////////////
 export const ListContainer = styled.ul`
   list-style-image: url(${CroissantGif});
 `;
@@ -115,6 +114,7 @@ export const ListContainer = styled.ul`
 export const MiniH = styled.h4`
   color: ${colors.companycolor};
   font-size: 18px;
+  margin: 5px;
 `;
 
 export const DetailsButton = styled.p`
