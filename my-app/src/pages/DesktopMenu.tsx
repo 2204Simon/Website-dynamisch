@@ -25,7 +25,11 @@ export const DesktopMenu: React.FC = () => {
       <p></p>
       <Logo>
         <a href="/">
-          <StyledImg src={logo} alt="Logo" />
+          <StyledImg
+            src={logo}
+            alt="Logo"
+            style={{ width: "80px", height: "80px" }}
+          />
         </a>
       </Logo>
       <Menu>

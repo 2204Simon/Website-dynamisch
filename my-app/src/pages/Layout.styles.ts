@@ -21,8 +21,6 @@ export const Header = styled.header`
 export const Logo = styled.div``;
 
 export const StyledImg = styled.img`
-  max-width: 100px;
-  width: 80px;
   border: 2px solid ${colors.white};
   border-radius: 5px;
 `;

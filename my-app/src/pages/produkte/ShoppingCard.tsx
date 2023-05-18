@@ -25,7 +25,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
 import { addToCart, increaseQuantity } from "../../redux/action";
 import { CartState } from "../../redux/types";
-import { Plus, XCircle, Minus, List } from "phosphor-react";
+import { Plus, XCircle, Minus, AppleLogo } from "phosphor-react";
 import { useSelector } from "react-redux";
 import { formatNumber } from "../general/constants";
 
@@ -35,6 +35,7 @@ interface ShoppingCardProps {
   price: number;
   content: string[];
   allergy: string[];
+  veggie: boolean;
 }
 
 const ShoppingCard: React.FC<ShoppingCardProps> = ({
@@ -43,6 +44,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
   price,
   content,
   allergy,
+  veggie,
 }) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
   const [displayNone, setDisplayNone] = useState(false);
@@ -174,7 +176,27 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
           <Title2 style={{ paddingLeft: "0px" }}>{title}</Title2>
           <XCircle size={30} onClick={handleDetailsClick} />
         </Top>
+        {veggie && (
+          <>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                marginTop: "5px",
+              }}
+            >
+              <AppleLogo
+                size={30}
+                alt="Vegetarisch"
+                style={{ color: "green" }}
+              />
+            </div>
+          </>
+        )}
+
         <MiniH>Inhalt:</MiniH>
+
         <ListContainer>
           {content.map((item, index) => (
             <li key={index} style={{ paddingBottom: "10px" }}>

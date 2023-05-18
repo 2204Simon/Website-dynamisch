@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./pages/Layout";
 import Home from "./pages/home/Home";
@@ -16,7 +15,7 @@ import { LoggedInProvider } from "./globalVariables/loggedin"; // Import the Log
 import Impressum from "./pages/Impressum";
 import Datenschutzerklaerung from "./pages/Datenschutzerklaerung";
 import BottomNavBar from "./pages/BottomNavBar";
-import Chatra from "./pages/Chatra";
+import React from "react";
 
 export default function App(): JSX.Element {
   return (
@@ -43,7 +42,6 @@ export default function App(): JSX.Element {
             </Route>
           </Routes>
           <Footer />
-          <Chatra />
           <BottomNavBar />
         </BrowserRouter>
       </LoggedInProvider>

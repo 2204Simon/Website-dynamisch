@@ -1,16 +1,9 @@
 import React from "react";
 import { Button } from "./button.styles";
-import { colors } from "./constants";
 
 interface ButtonProps {
   caption: string;
   onClick?: () => void;
-}
-
-interface ButtonPropsLandingPage {
-  caption: string;
-  onClick?: () => void;
-  latest_color: string;
 }
 
 export const BlackButton: React.FC<ButtonProps> = ({ caption, onClick }) => {
@@ -45,7 +38,6 @@ export const BlackColorButton: React.FC<ButtonProps> = ({
 //     </Button>
 //   );
 // };
-
 
 // export const but = styled.button`
 //   display: inline-block;

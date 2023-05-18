@@ -1,5 +1,4 @@
 import { CustomToast } from "../pages/general/toast.style";
-import { Quantity } from "../pages/produkte/styles/ShoppingCard.styles";
 import { CartActionTypes, CartState } from "./types"; // Importieren Sie die erforderlichen Typen
 
 const cartReducer = (

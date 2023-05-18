@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { lazy, startTransition, useState, useTransition } from "react";
 import Logo from "../../img/Logo.webp";
 import {
   LogoImage,
@@ -19,25 +19,28 @@ import PackageLocationQRCode from "./PackageLocationQRCode";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../../redux/action";
 import { CartState } from "../../redux/types";
+const LazyCalendar = lazy(() => import(StyledDatePicker));
 
 interface SideBarProps {
   produktAnzahl: number;
   price: number;
 }
 
-export default function SideBarBuy({
-  produktAnzahl,
-  price,
-}: SideBarProps): JSX.Element {
+export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   const { loggedIn } = useLoggedIn();
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
   const [showThankyouPopup, setShowThankyouPopup] = useState(false);
   const dispatch = useDispatch();
   const [agbChecked, setAgbChecked] = useState(false);
+  const [, startTransition] = useTransition();
+  const [load, setLoad] = useState(false);
 
   const handleBuyNow = () => {
     setShowPopup(true);
+    startTransition(() => {
+      setLoad(true);
+    });
     document.body.style.overflow = "hidden";
   };
 
@@ -82,14 +85,16 @@ export default function SideBarBuy({
     const [startDate, setStartDate] = useState<Date>(minDate);
     return (
       <div>
-        <StyledDatePicker
-          selected={startDate}
-          onChange={(date: Date) => setStartDate(date)}
-          minDate={minDate}
-          dateFormat={"dd.MM.yyyy"}
-          locale={de}
-          popperPlacement={"top"}
-        />
+        {load && (
+          <StyledDatePicker
+            selected={startDate}
+            onChange={(date: Date) => setStartDate(date)}
+            minDate={minDate}
+            dateFormat={"dd.MM.yyyy"}
+            locale={de}
+            popperPlacement={"top"}
+          />
+        )}
       </div>
     );
   }

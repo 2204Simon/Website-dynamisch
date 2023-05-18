@@ -1,11 +1,11 @@
-import { 
-  TimelineItemA, 
-  TimelineContent, 
-  Image, 
-  TimelineDot, 
-  TimelineDate, 
+import {
+  TimelineItemA,
+  TimelineContent,
+  Image,
+  TimelineDot,
+  TimelineDate,
   ImageWrapper,
-  TimelineTitle, 
+  TimelineTitle,
 } from "./TimelineBlock.styles";
 
 interface TimelineItemProps {
@@ -23,13 +23,13 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
 }) => (
   <TimelineItemA>
     <TimelineDot />
-      <TimelineDate>{date}</TimelineDate>
+    <TimelineDate>{date}</TimelineDate>
     <TimelineContent>
       <ImageWrapper>
         <Image src={image} alt="history_picture" />
       </ImageWrapper>
       <TimelineTitle>{title}</TimelineTitle>
-      <details>{details}</details>
+      <details style={{ cursor: "pointer" }}>{details}</details>
     </TimelineContent>
   </TimelineItemA>
 );

@@ -4,7 +4,7 @@ const Datenschutzerklaerung: React.FC = () => {
   return (
     <>
       <h2>Datenschutzerklärung</h2>
-      <h2 id="m14">Einleitung</h2>
+      <h2>Einleitung</h2>
       <p>
         Mit der folgenden Datenschutzerklärung möchten wir Sie darüber
         aufklären, welche Arten Ihrer personenbezogenen Daten (nachfolgend auch
@@ -103,7 +103,7 @@ const Datenschutzerklaerung: React.FC = () => {
         </li>
         <li>Informationstechnische Infrastruktur.</li>
       </ul>
-      <h3 id="m13">Maßgebliche Rechtsgrundlagen</h3>
+      <h3>Maßgebliche Rechtsgrundlagen</h3>
       <p>
         Im Folgenden erhalten Sie eine Übersicht der Rechtsgrundlagen der DSGVO,
         auf deren Basis wir personenbezogene Daten verarbeiten. Bitte nehmen Sie
@@ -163,7 +163,7 @@ const Datenschutzerklaerung: React.FC = () => {
         Ferner können Landesdatenschutzgesetze der einzelnen Bundesländer zur
         Anwendung gelangen.
       </p>
-      <h2 id="m25">Übermittlung von personenbezogenen Daten</h2>
+      <h2>Übermittlung von personenbezogenen Daten</h2>
       <p>
         Im Rahmen unserer Verarbeitung von personenbezogenen Daten kommt es vor,
         dass die Daten an andere Stellen, Unternehmen, rechtlich selbstständige
@@ -207,7 +207,7 @@ const Datenschutzerklaerung: React.FC = () => {
         Aufbewahrung und Löschung von Daten beinhalten, die für die jeweiligen
         Verarbeitungen vorrangig gelten.
       </p>
-      <h2 id="m317">Geschäftliche Leistungen</h2>
+      <h2>Geschäftliche Leistungen</h2>
       <p>
         Wir verarbeiten Daten unserer Vertrags- und Geschäftspartner, z.B.
         Kunden und Interessenten (zusammenfassend bezeichnet als
@@ -291,7 +291,7 @@ const Datenschutzerklaerung: React.FC = () => {
           Berechtigte Interessen (Art. 6 Abs. 1 S. 1 lit. f) DSGVO).
         </li>
       </ul>
-      <h2 id="m225">Bereitstellung des Onlineangebotes und Webhosting</h2>
+      <h2>Bereitstellung des Onlineangebotes und Webhosting</h2>
       <p>
         Wir verarbeiten die Daten der Nutzer, um ihnen unsere Online-Dienste zur
         Verfügung stellen zu können. Zu diesem Zweck verarbeiten wir die
@@ -385,7 +385,7 @@ const Datenschutzerklaerung: React.FC = () => {
           .
         </li>
       </ul>
-      <h2 id="m182">Kontakt- und Anfragenverwaltung</h2>
+      <h2>Kontakt- und Anfragenverwaltung</h2>
       <p>
         Bei der Kontaktaufnahme mit uns (z.B. per Kontaktformular, E-Mail,
         Telefon oder via soziale Medien) sowie im Rahmen bestehender Nutzer- und
@@ -432,7 +432,7 @@ const Datenschutzerklaerung: React.FC = () => {
           Berechtigte Interessen (Art. 6 Abs. 1 S. 1 lit. f) DSGVO).
         </li>
       </ul>
-      <h2 id="m17">Newsletter und elektronische Benachrichtigungen</h2>
+      <h2>Newsletter und elektronische Benachrichtigungen</h2>
       <p>
         Wir versenden Newsletter, E-Mails und weitere elektronische
         Benachrichtigungen (nachfolgend "Newsletter“) nur mit der Einwilligung
@@ -507,7 +507,7 @@ const Datenschutzerklaerung: React.FC = () => {
           Kontaktmöglichkeiten, vorzugswürdig E-Mail, hierzu nutzen.
         </li>
       </ul>
-      <h2 id="m15">Änderung und Aktualisierung der Datenschutzerklärung</h2>
+      <h2>Änderung und Aktualisierung der Datenschutzerklärung</h2>
       <p>
         Wir bitten Sie, sich regelmäßig über den Inhalt unserer
         Datenschutzerklärung zu informieren. Wir passen die Datenschutzerklärung
@@ -522,7 +522,7 @@ const Datenschutzerklaerung: React.FC = () => {
         wir zu beachten, dass die Adressen sich über die Zeit ändern können und
         bitten die Angaben vor Kontaktaufnahme zu prüfen.
       </p>
-      <h2 id="m42">Begriffsdefinitionen</h2>
+      <h2>Begriffsdefinitionen</h2>
       <p>
         In diesem Abschnitt erhalten Sie eine Übersicht über die in dieser
         Datenschutzerklärung verwendeten Begrifflichkeiten. Viele der Begriffe
@@ -562,7 +562,7 @@ const Datenschutzerklaerung: React.FC = () => {
         </li>
       </ul>
 
-      <h2 id="m3">Verantwortlicher</h2>
+      <h2>Verantwortlicher</h2>
       <p>Delivery Breakfast (fiktive Firma - Projekt der DHBW Heidenheim)</p>
     </>
   );
