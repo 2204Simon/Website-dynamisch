@@ -37,6 +37,7 @@ function Produkt() {
         "Allergie 1",
         "Allergie 2 BlaBlaBlaBlaBlaBl a BlaBlaBlaBla BlaBlaBlaBlaBlaBla BlaBlaBlaBlaBlaBla BlaBlaBlaBlaBlaBla BlaBlaBlaBlaBlaBlaBlaBla",
       ]}
+      veggie={false}
     />,
     <ShoppingCard
       title={"Käsebaguette"}
@@ -44,6 +45,7 @@ function Produkt() {
       image={BaguetteYellow}
       content={["Inhalt 1"]}
       allergy={[]}
+      veggie={true}
     />,
     <ShoppingCard
       title={"Brezel"}
@@ -51,6 +53,7 @@ function Produkt() {
       image={Brezel}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
     <ShoppingCard
       title={"Türkisches Menemen"}
@@ -58,6 +61,7 @@ function Produkt() {
       image={Menemen}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
     <ShoppingCard
       title={"Brötchen"}
@@ -65,6 +69,7 @@ function Produkt() {
       image={Brötchen}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
     <ShoppingCard
       title={"Croissant"}
@@ -72,6 +77,7 @@ function Produkt() {
       image={Croissant}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
     <ShoppingCard
       title={"DB Fresh Chicken"}
@@ -79,6 +85,7 @@ function Produkt() {
       image={HamburgerBrötchen}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
     <ShoppingCard
       title={"Toast"}
@@ -86,6 +93,7 @@ function Produkt() {
       image={Toast}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
     <ShoppingCard
       title={"Toast mit Käse"}
@@ -93,6 +101,7 @@ function Produkt() {
       image={BelegtesBrötchen}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
     <ShoppingCard
       title={"Baguette mit Käse"}
@@ -100,6 +109,7 @@ function Produkt() {
       image={KäseBaguette}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
   ];
   const ShoppingCardsTrink = [
@@ -109,6 +119,7 @@ function Produkt() {
       image={Espresso}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
     <ShoppingCard
       title={"Kaffee"}
@@ -116,6 +127,7 @@ function Produkt() {
       image={Kaffee}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
     <ShoppingCard
       title={"Latte Machiatto"}
@@ -123,6 +135,7 @@ function Produkt() {
       image={LatteMachiatto}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
     <ShoppingCard
       title={"Orangensaft"}
@@ -130,6 +143,7 @@ function Produkt() {
       image={Orangensaft}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
     <ShoppingCard
       title={"Früchtetee"}
@@ -137,6 +151,7 @@ function Produkt() {
       image={Früchtetee}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
     <ShoppingCard
       title={"Wasser"}
@@ -144,6 +159,7 @@ function Produkt() {
       image={Wasser}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
     <ShoppingCard
       title={"Zitronentee"}
@@ -151,6 +167,7 @@ function Produkt() {
       image={Zitronentee}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
     <ShoppingCard
       title={"Heiße Schokolade"}
@@ -158,6 +175,7 @@ function Produkt() {
       image={HeißeSchokolade}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
   ];
 
@@ -168,6 +186,7 @@ function Produkt() {
       image={Bayrisches_Essen}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
     <ShoppingCard
       title={"Wecken mit Kaffee"}
@@ -175,6 +194,7 @@ function Produkt() {
       image={BrötchenMitKaffe}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
     <ShoppingCard
       title={"Obstmenü"}
@@ -182,6 +202,7 @@ function Produkt() {
       image={BrotEiTeeUndObst}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
     <ShoppingCard
       title={"Eiermenü"}
@@ -189,6 +210,7 @@ function Produkt() {
       image={EigetränkUndEierbrot}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
     <ShoppingCard
       title={"klassische Menü"}
@@ -196,6 +218,7 @@ function Produkt() {
       image={KaffeeMitEiUndBrot}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
     <ShoppingCard
       title={"Veggiemenü"}
@@ -203,6 +226,7 @@ function Produkt() {
       image={OSaftMitFrüchtebrot}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
     <ShoppingCard
       title={"Orangenmenü"}
@@ -210,6 +234,7 @@ function Produkt() {
       image={OSaftUndOrangenbrot}
       content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
       allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      veggie={true}
     />,
   ];
 
