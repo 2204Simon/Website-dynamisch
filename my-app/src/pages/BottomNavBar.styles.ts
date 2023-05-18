@@ -45,7 +45,7 @@ export const BottomNavStyle = styled.div`
   @media (max-width: ${mediaQueries.medium}) {
     .bottom-nav .menu {
       justify-content: flex-end;
-      padding-right: 100px; //Ausrichtung Icons wegen Chatbot
+      padding-right: 85px; //Ausrichtung Icons wegen Chatbot
     }
   }
   @media (min-width: 1025px) {

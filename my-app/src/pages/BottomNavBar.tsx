@@ -77,7 +77,7 @@ function BottomNavBar(): JSX.Element {
                 </Link>
               )}
             </li>
-            <li>{hasScrolled && load && <LazyChatra />}</li>
+            {hasScrolled && load && <LazyChatra />}
           </ul>
         </div>
       </nav>
