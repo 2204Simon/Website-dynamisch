@@ -1,24 +1,49 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   HouseLine,
   ShoppingBagOpen,
   ShoppingCart,
   User,
   SignIn,
+  ChatCircleText,
 } from "phosphor-react";
 import { BottomNavStyle } from "./BottomNavBar.styles";
 import { useLoggedIn } from "../globalVariables/loggedin";
 import { useSelector } from "react-redux";
 import { CartState } from "../redux/types";
 import { Badge } from "@mui/material";
+import { lazy, useEffect, useState, useTransition } from "react";
+const LazyChatra = lazy(() => import("./Chatra"));
 
 function BottomNavBar(): JSX.Element {
   const { loggedIn } = useLoggedIn();
+  const [, startTransition] = useTransition();
+  const [load, setLoad] = useState(false);
   const cartItems = useSelector(
     (state: { cart: CartState }) => state.cart.cartItems
   );
   let cartLength = 0;
   cartItems.map(item => (cartLength += item.anzahl));
+  const [hasScrolled, setHasScrolled] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = (): void => {
+      if (!hasScrolled && window.pageYOffset > 0) {
+        setHasScrolled(true);
+        startTransition(() => {
+          setLoad(true);
+        });
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return (): void => window.removeEventListener("scroll", handleScroll);
+  }, [hasScrolled]);
+
+  useEffect(() => {
+    setHasScrolled(false);
+  }, [location]);
+
   return (
     <BottomNavStyle>
       <nav>
@@ -52,6 +77,7 @@ function BottomNavBar(): JSX.Element {
                 </Link>
               )}
             </li>
+            <li>{hasScrolled && load && <LazyChatra />}</li>
           </ul>
         </div>
       </nav>

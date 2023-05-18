@@ -15,9 +15,7 @@ import { LoggedInProvider } from "./globalVariables/loggedin"; // Import the Log
 import Impressum from "./pages/Impressum";
 import Datenschutzerklaerung from "./pages/Datenschutzerklaerung";
 import BottomNavBar from "./pages/BottomNavBar";
-import React, { lazy } from "react";
-
-const LazyChatra = lazy(() => import("./pages/Chatra"));
+import React from "react";
 
 export default function App(): JSX.Element {
   return (
@@ -44,7 +42,6 @@ export default function App(): JSX.Element {
             </Route>
           </Routes>
           <Footer />
-          <LazyChatra />
           <BottomNavBar />
         </BrowserRouter>
       </LoggedInProvider>
