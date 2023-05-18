@@ -5,6 +5,8 @@ import {
   PopupBackdrop,
   PopupWrapper,
   SideBarWrapper,
+  SideBarButton,
+  SideBarInformation,
 } from "./stylesBestellung/SideBarBuy.styles";
 import { Button } from "../general/button.styles";
 import Adressdaten from "../loggedIn/AdressData";
@@ -101,22 +103,22 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
 
   return (
     <SideBarWrapper>
-      <div>
-        <LogoImage src={Logo} alt="Logo" />
+      <SideBarInformation>
         <h2>Dein Einkauf</h2>
+        <LogoImage src={Logo} alt="Logo" />
         {cartLength === 1 ? (
           <h4>Du hast 1 Produkt in Deinem Warenkorb</h4>
         ) : (
           <h4>Du hast {cartLength} Produkte in Deinem Warenkorb</h4>
         )}
-      </div>
-      <div>
+      </SideBarInformation>
+      <SideBarButton>
         <h3>Gesamtpreis: {formatNumber(price)}€</h3>
 
         <Button className="white-orange black-color" onClick={handleBuyNow}>
           Weiter zum Bestellvorgang
         </Button>
-      </div>
+      </SideBarButton>
       {showThankyouPopup && (
         <PopupBackdrop>
           <PopupWrapper>

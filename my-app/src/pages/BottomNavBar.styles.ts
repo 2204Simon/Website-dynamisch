@@ -8,7 +8,7 @@ export const BottomNavStyle = styled.div`
     align-items: center;
     position: fixed;
     bottom: 0;
-    width: 100%; /* Aktualisierte Breite auf 100% */
+    width: 100vw; /* Aktualisierte Breite auf 100% */
     height: 70px;
     background-color: ${colors.black};
     z-index: 10;

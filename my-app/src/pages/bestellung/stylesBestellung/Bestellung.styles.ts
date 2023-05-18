@@ -11,7 +11,10 @@ export const WarenkorbWrapper = styled.div`
   @media (max-width: ${mediaQueries.large}) {
     flex-direction: column-reverse;
     height: auto;
-    margin-bottom: 20px;
+    'width: 100vw;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
   }
 `;
 
@@ -36,6 +39,8 @@ export const BestellungsWrapper = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   height: calc(100vh - 150px);
+  width: 80vw;
+  align-self: center;
   background-color: ${colors.white};
 
   ::-webkit-scrollbar {
@@ -51,6 +56,7 @@ export const BestellungsWrapper = styled.div`
   }
   @media (max-width: ${mediaQueries.large}) {
     height: auto;
+    margin-right: 0px;
   }
 `;
 

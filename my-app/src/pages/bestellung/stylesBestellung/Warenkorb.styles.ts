@@ -12,6 +12,9 @@ export const Container = styled.div`
 
   @media (max-width: ${mediaQueries.large}) {
     flex-direction: column;
+    gap: 0;
+    border-radius: 0;
+    border-top: 2px solid ${colors.primarycolor};
   }
 `;
 
@@ -21,7 +24,7 @@ export const Image = styled.img`
   object-fit: cover;
   border-radius: 4px;
   @media (max-width${mediaQueries.medium}) {
-    width: 100%;
+    width: auto;
     height: auto;
   }
 `;
@@ -78,6 +81,7 @@ export const Price = styled.p`
   font-size: 20px;
   @media (${mediaQueries.medium}) {
     align-self: flex-end;
+    padding-right: 0;
   }
 `;
 

@@ -2,10 +2,23 @@ import styled from "styled-components";
 import { colors, mediaQueries } from "../../general/constants";
 
 export const LogoImage = styled.img`
-  width: 300px;
+  width: 10rem;
   height: auto;
+  @media (max-width: ${mediaQueries.medium}) {
+    display: none;
+  }
 `;
 
+export const SideBarInformation = styled.div`
+  h2 {
+    padding: 0;
+  }
+`;
+export const SideBarButton = styled.div`
+  h3 {
+    padding: 0;
+  }
+`;
 export const SideBarWrapper = styled.div`
   background-color: ${colors.white};
   display: flex;
@@ -19,12 +32,7 @@ export const SideBarWrapper = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 
   @media (max-width: ${mediaQueries.medium}) {
-    width: 100%;
-    height: 600px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 20px 10px;
-    box-shadow: none;
+    margin: 20px;
     border-radius: 8px;
   }
 `;
@@ -56,7 +64,7 @@ export const PopupWrapper = styled.div`
   left: 50%;
   transform: translate(-50%, -40%);
   will-change: transform;
-  padding-bottom: 100px; 
+  padding-bottom: 100px;
 
   @media (max-width: ${mediaQueries.medium}) {
     width: 100vw;
@@ -64,5 +72,4 @@ export const PopupWrapper = styled.div`
     padding: 20px 10px;
     box-shadow: none;
   }
-};
 `;
