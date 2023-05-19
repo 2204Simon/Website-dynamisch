@@ -19,6 +19,7 @@ function Footer(): JSX.Element {
           aria-label="Link zu Twitter"
           target="_blank"
           rel="noopener noreferrer"
+          style={{ display: "inline-block", width: "48px", height: "48px" }}
         >
           <TwitterLogo size={24} />
         </a>
@@ -27,6 +28,7 @@ function Footer(): JSX.Element {
           aria-label="Link zu Facebook"
           target="_blank"
           rel="noopener noreferrer"
+          style={{ display: "inline-block", width: "48px", height: "48px" }}
         >
           <FacebookLogo size={24} />
         </a>
@@ -35,6 +37,7 @@ function Footer(): JSX.Element {
           aria-label="Link zu Instagram"
           target="_blank"
           rel="noopener noreferrer"
+          style={{ display: "inline-block", width: "48px", height: "48px" }}
         >
           <InstagramLogo size={24} />
         </a>
@@ -43,6 +46,7 @@ function Footer(): JSX.Element {
           aria-label="Link zu Tiktok"
           target="_blank"
           rel="noopener noreferrer"
+          style={{ display: "inline-block", width: "48px", height: "48px" }}
         >
           <TiktokLogo size={24} />
         </a>
@@ -51,6 +55,7 @@ function Footer(): JSX.Element {
           aria-label="Link zu Snapchat"
           target="_blank"
           rel="noopener noreferrer"
+          style={{ display: "inline-block", width: "48px", height: "48px" }}
         >
           <SnapchatLogo size={24} />
         </a>
@@ -59,6 +64,7 @@ function Footer(): JSX.Element {
           aria-label="Link zu LinkedIn"
           target="_blank"
           rel="noopener noreferrer"
+          style={{ display: "inline-block", width: "48px", height: "48px" }}
         >
           <LinkedinLogo size={24} />
         </a>
