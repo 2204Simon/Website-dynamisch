@@ -6,6 +6,7 @@ import {
   TiktokLogo,
   SnapchatLogo,
   LinkedinLogo,
+  ArrowUp,
 } from "phosphor-react";
 import { GeneralstyledLink } from "./general/constants";
 import { FooterContainer, FooterLinks, SocialMedia } from "./Footer.styles";
@@ -79,12 +80,15 @@ function Footer(): JSX.Element {
                 border: "none",
                 font: "Montserrat",
                 fontStyle: "sans-serif",
-                fontSize: "15px",
+                fontSize: "16px",
                 cursor: "pointer",
+                width: "48px",
+                height: "48px",
               }}
               onClick={() => window.scroll(0, 0)}
             >
-              Nach oben
+              <ArrowUp size={24} />
+              Anfang
             </button>
           </li>
           <li>
