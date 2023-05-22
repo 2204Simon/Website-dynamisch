@@ -13,7 +13,7 @@ import Adressdaten from "../loggedIn/AdressData";
 import { useLoggedIn } from "../../globalVariables/loggedin";
 import { useNavigate } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
-import { StyledDatePicker } from "./stylesBestellung/Calendar.styles";
+import { StyledDatePicker } from "./Calendar";
 import { de } from "date-fns/locale";
 import { formatNumber } from "../general/constants";
 import { CustomToast } from "../general/toast.style";
@@ -38,6 +38,8 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   const [load, setLoad] = useState(false);
   const minDate = new Date();
   minDate.setDate(minDate.getDate() + 1);
+  const maxDate = new Date();
+  maxDate.setMonth(maxDate.getMonth() + 6);
   const [selectedDate, setSelectedDate] = useState<Date>(minDate);
   const handleBuyNow = () => {
     setShowPopup(true);
@@ -89,9 +91,11 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
             selected={selectedDate}
             onChange={(date: Date) => setSelectedDate(date)}
             minDate={minDate}
+            maxDate={maxDate}
             dateFormat={"dd.MM.yyyy"}
             locale={de}
             popperPlacement={"top"}
+            onFocus={() => {}}
           />
         )}
       </div>
