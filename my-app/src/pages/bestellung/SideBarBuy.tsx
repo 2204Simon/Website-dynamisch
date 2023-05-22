@@ -37,7 +37,9 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   const [agbChecked, setAgbChecked] = useState(false);
   const [, startTransition] = useTransition();
   const [load, setLoad] = useState(false);
-
+  const minDate = new Date();
+  minDate.setDate(minDate.getDate() + 1);
+  const [selectedDate, setSelectedDate] = useState<Date>(minDate);
   const handleBuyNow = () => {
     setShowPopup(true);
     startTransition(() => {
@@ -80,17 +82,13 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   let cartLength = 0;
   cartItems.map(item => (cartLength += item.anzahl));
 
-  const minDate = new Date();
-  minDate.setDate(minDate.getDate() + 1);
-
   function CalendarComponent(): JSX.Element {
-    const [startDate, setStartDate] = useState<Date>(minDate);
     return (
       <div>
         {load && (
           <StyledDatePicker
-            selected={startDate}
-            onChange={(date: Date) => setStartDate(date)}
+            selected={selectedDate}
+            onChange={(date: Date) => setSelectedDate(date)}
             minDate={minDate}
             dateFormat={"dd.MM.yyyy"}
             locale={de}
