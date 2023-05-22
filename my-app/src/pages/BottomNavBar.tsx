@@ -5,7 +5,6 @@ import {
   ShoppingCart,
   User,
   SignIn,
-  ChatCircleText,
 } from "phosphor-react";
 import { BottomNavStyle } from "./BottomNavBar.styles";
 import { useLoggedIn } from "../globalVariables/loggedin";

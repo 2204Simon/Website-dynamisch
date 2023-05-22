@@ -1,4 +1,4 @@
-import { lazy, startTransition, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import Logo from "../../img/Logo.webp";
 import {
   LogoImage,
@@ -21,7 +21,6 @@ import PackageLocationQRCode from "./PackageLocationQRCode";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../../redux/action";
 import { CartState } from "../../redux/types";
-const LazyCalendar = lazy(() => import(StyledDatePicker));
 
 interface SideBarProps {
   produktAnzahl: number;
