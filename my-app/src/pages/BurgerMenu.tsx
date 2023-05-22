@@ -35,7 +35,7 @@ export const StyledImg = styled.img`
   border-radius: 5px;
   line-height 1;
   margin-top: 5px;
-  margin-left:5px;
+  margin-left: 25px;
 `;
 
 const StyledBurgerIcon = styled(MenuIcon)`
