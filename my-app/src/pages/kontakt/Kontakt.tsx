@@ -74,12 +74,17 @@ function Kontakt(): JSX.Element {
                 type="email"
                 value={email}
                 onChange={handleEmailChange}
+                maxLength={50}
                 required
               />
             </FormLabel>
             <FormLabel>
               Nachricht:
-              <FormTextArea value={message} onChange={handleMessageChange} />
+              <FormTextArea
+                value={message}
+                onChange={handleMessageChange}
+                maxLength={300}
+              />
             </FormLabel>
             <BlackColorButton caption={"Anmelden"}></BlackColorButton>
           </form>
