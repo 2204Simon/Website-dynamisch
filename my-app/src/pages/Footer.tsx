@@ -93,6 +93,10 @@ function Footer(): JSX.Element {
           </li>
           <li>
             <GeneralstyledLink
+              style={{
+                width: "48px",
+                height: "48px",
+              }}
               to="/Datenschutzerklaerung"
               onClick={() => window.scrollTo(0, 0)}
             >
@@ -101,6 +105,10 @@ function Footer(): JSX.Element {
           </li>
           <li>
             <GeneralstyledLink
+              style={{
+                width: "48px",
+                height: "48px",
+              }}
               to="/Impressum"
               onClick={() => window.scrollTo(0, 0)}
             >
