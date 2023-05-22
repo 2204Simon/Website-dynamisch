@@ -22,6 +22,7 @@ import {
 } from "@mui/material";
 import { FaEuroSign, FaPaypal, FaApplePay } from "react-icons/fa";
 import { Title } from "../loggedIn/UserInformation.styles";
+/*import { CustomToast } from "../general/toast.style";*/
 
 function Copyright(props: any) {
   return (
@@ -41,6 +42,19 @@ export default function SignUp() {
     console.log("changedlogin");
     changeLoggedIn();
   }
+  /*function PasswordMismatch() {
+    return CustomToast.error("Die Passwörter sind nicht identisch");
+  }
+  function PasswordComparisonValidator({
+    password,
+    confirmPassword,
+  }: {
+    password: string;
+    confirmPassword: string;
+  }) {
+    return password === confirmPassword ? null : PasswordMismatch();
+  } */
+
   const dispatch = useDispatch();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -57,7 +71,14 @@ export default function SignUp() {
       housenumber: data.get("hausnummer") as string,
       payment: data.get("payment") as string,
     };
-    console.log(preparedData);
+    /*
+    const password = data.get("password") as string;
+    const confirmPassword = data.get("confirmPassword") as string;
+    if (password !== confirmPassword) {
+      PasswordMismatch();
+      return;
+    }
+*/
     dispatch(addNewUser(preparedData));
     dispatch(addNewAdressData(adressData));
     navigate("/LoggedIn");
@@ -154,6 +175,24 @@ export default function SignUp() {
                   inputProps={{
                     pattern: ".{8,}",
                     title: "Passwort muss mindestens 8 Zeichen haben",
+                  }}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  required
+                  id="confirmPassword"
+                  label="Passwort bestätigen"
+                  name="confirmPassword"
+                  type="password"
+                  autoComplete="new-password"
+                  InputLabelProps={{
+                    sx: {
+                      backgroundColor: "white",
+                      color: colors.companycolor,
+                    },
                   }}
                 />
               </Grid>
