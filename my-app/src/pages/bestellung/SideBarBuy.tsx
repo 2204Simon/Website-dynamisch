@@ -46,12 +46,12 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
     startTransition(() => {
       setLoad(true);
     });
-    document.body.style.overflow = "hidden";
+    // document.body.style.overflow = "hidden";
   };
 
   const handleSideChange = () => {
     setShowPopup(false);
-    document.body.style.overflow = "auto";
+    // document.body.style.overflow = "auto";
     navigate("/LogIn");
   };
 
@@ -61,7 +61,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
     }
     setShowPopup(false);
     setShowThankyouPopup(false);
-    document.body.style.overflow = "auto";
+    // document.body.style.overflow = "auto";
   };
 
   const handleThankyouPopup = () => {
@@ -70,7 +70,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
     } else {
       setShowPopup(false);
       setShowThankyouPopup(true);
-      document.body.style.overflow = "scroll";
+      // document.body.style.overflow = "hidden";
     }
   };
 

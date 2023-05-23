@@ -49,7 +49,6 @@ export const PopupBackdrop = styled.div`
   justify-content: center;
   z-index: 11;
   will-change: transform;
-  overflow-y: auto;
 `;
 
 export const PopupWrapper = styled.div`
@@ -65,6 +64,23 @@ export const PopupWrapper = styled.div`
   transform: translate(-50%, -40%);
   will-change: transform;
   padding-bottom: 100px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: ${colors.black} ${colors.white};
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${colors.black};
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: ${colors.white};
+    border-radius: 4px;
+  }
 
   @media (max-width: ${mediaQueries.medium}) {
     width: 100vw;
@@ -72,4 +88,4 @@ export const PopupWrapper = styled.div`
     padding: 20px 10px;
     box-shadow: none;
   }
-`;
+};`;
