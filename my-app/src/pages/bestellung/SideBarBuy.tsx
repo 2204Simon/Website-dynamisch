@@ -145,7 +145,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
         <PopupBackdrop>
           <PopupWrapper
             className="scrollable-popup"
-            style={{ overflowY: "scroll", maxHeight: "600px" }}
+            style={{ overflowY: "scroll", maxHeight: "700px" }}
           >
             {!loggedIn ? (
               <div>
