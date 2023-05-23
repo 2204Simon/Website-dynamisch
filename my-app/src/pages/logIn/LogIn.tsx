@@ -40,16 +40,25 @@ export default function SignIn() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const email = data.get("email") as string;
+    const password = data.get("password") as string;
+
+    if (email.trim() === "" || password.trim() === "") {
+      CustomToast.error("Bitte füllen Sie alle Felder aus");
+      return;
+    }
+
     if (
-      data.get("email") === userInformation.email &&
-      data.get("password") === userInformation.password
+      email === userInformation.email &&
+      password === userInformation.password
     ) {
-      console.log("erfolgreicher Login");
+      console.log("Erfolgreicher Login");
       navigate("/loggedIn");
       changeLoggedIn();
     } else {
-      CustomToast.error("falsches Passwort oder e-Mail");
+      CustomToast.error("Falsches Passwort oder E-Mail");
     }
+
     console.log({
       email: data.get("email"),
       password: data.get("password"),
