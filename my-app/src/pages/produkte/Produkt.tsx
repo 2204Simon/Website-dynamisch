@@ -32,150 +32,164 @@ function Produkt() {
       title={"Baguette"}
       price={2.99}
       image={BaguetteAlone}
-      content={["Inhalt 1", "Inhalt 2"]}
+      content={["Baguette aus Weizenmehl"]}
       allergy={[
-        "Allergie 1",
-        "Allergie 2 BlaBlaBlaBlaBlaBl a BlaBlaBlaBla BlaBlaBlaBlaBlaBla BlaBlaBlaBlaBlaBla BlaBlaBlaBlaBlaBla BlaBlaBlaBlaBlaBlaBlaBla",
+        "Glutenhaltig",
+        "Erdnusserzeugnisse",
       ]}
-      veggie={false}
+      veggie={true}
     />,
     <ShoppingCard
       title={"Käsebaguette"}
       price={3.59}
       image={BaguetteYellow}
-      content={["Inhalt 1"]}
-      allergy={[]}
+      content={["Baguette aus Weizenmehl", 
+      "Limburger Käsebelag",
+      "Butter"
+      ]}
+      allergy={[
+        "Glutenhaltig",
+        "Eier und Eiererzeugnisse",
+        "Erdnusserzeugnisse",
+        "Lactosehaltig"
+      ]}
+      veggie={false}
+    />,
+
+    <ShoppingCard
+      title={"Veganes Käsebaguette"}
+      price={3.59}
+      image={KäseBaguette}
+      content={["Baguette aus Weizenmehl", 
+      "veganer Käsebelag",
+      "vegane Magarine"]}
+      allergy={["Glutenhaltig"]}
       veggie={true}
     />,
+
     <ShoppingCard
       title={"Brezel"}
       price={1.49}
       image={Brezel}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      content={["Brezel aus Weizenmehl"]}
+      allergy={["Glutenhaltig",
+      "Erdnusserzeugnisse"]}
       veggie={true}
     />,
     <ShoppingCard
       title={"Türkisches Menemen"}
       price={7.99}
       image={Menemen}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
-      veggie={true}
+      content={["pochierte Eier", "würzige Tomaten-Paprika-Soße"]}
+      allergy={["Eier und Eiererzeugnisse", "Glutenhaltig", "Lactosehaltig", "Konservierungsstoffe"]}
+      veggie={false}
     />,
     <ShoppingCard
       title={"Brötchen"}
       price={1.29}
       image={Brötchen}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      content={["Brötchen aus Dinkelmehl"]}
+      allergy={["Erdnusserzeugnisse"]}
       veggie={true}
     />,
     <ShoppingCard
       title={"Croissant"}
       price={1.79}
       image={Croissant}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      content={["Croissant aus Pflanzenfett"]}
+      allergy={["Glutenhaltig"]}
       veggie={true}
     />,
     <ShoppingCard
-      title={"DB Fresh Chicken"}
+      title={"Fresh Chicken"}
       price={3.79}
       image={HamburgerBrötchen}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
-      veggie={true}
+      content={["Brötchen aus Weizenmehl", "Emmentaler Käse", "Tomaten", "Salat", "Ei", "Hähnchenpatty", "Burgersoße"]}
+      allergy={["Glutenhaltig", "Eiprodukte", "Milchprodukte", "Senfprodukte"]}
+      veggie={false}
     />,
     <ShoppingCard
-      title={"Toast"}
+      title={"Veganer Toast"}
       price={3.59}
       image={Toast}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      content={["Toast aus Weizenmehl", "Tomaten", "Salat", "Gemüsepatty", "Burgersoße"]}
+      allergy={["Glutenhaltig", "Senfprodukte"]}
       veggie={true}
     />,
     <ShoppingCard
-      title={"Toast mit Käse"}
+      title={"Toast mit Rinderpatty"}
       price={1.79}
       image={BelegtesBrötchen}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
-      veggie={true}
+      content={["Toast aus Weizenmehl", "Emmentaler Käse", "Tomaten", "Salat", "Patty aus Rindfleisch", "Burgersoße"]}
+      allergy={["Glutenhaltig", "Eiprodukte", "Milchprodukte", "Senfprodukte"]}
+      veggie={false}
     />,
-    <ShoppingCard
-      title={"Baguette mit Käse"}
-      price={3.59}
-      image={KäseBaguette}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
-      veggie={true}
-    />,
+    
   ];
   const ShoppingCardsTrink = [
     <ShoppingCard
       title={"Espresso"}
       price={1.99}
       image={Espresso}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      content={["Espressobohnen aus Kolumbien", "filtriertes Wasser"]}
+      allergy={["Koffeinhaltig"]}
       veggie={true}
     />,
     <ShoppingCard
-      title={"Kaffee"}
+      title={"Schwarzer Kaffee"}
       price={5.99}
       image={Kaffee}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      content={["Kaffeebohnen aus Brasilien", "filtriertes Wasser"]}
+      allergy={["Koffeinhaltig"]}
       veggie={true}
     />,
     <ShoppingCard
       title={"Latte Machiatto"}
       price={5.99}
       image={LatteMachiatto}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
-      veggie={true}
+      content={["Espressobohnen aus Kolumbien", "Frische Milch aus den Alpen"]}
+      allergy={["Laktosehaltig", "Koffeinhaltig"]}
+      veggie={false}
     />,
     <ShoppingCard
       title={"Orangensaft"}
       price={5.99}
       image={Orangensaft}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      content={["Bio-Organgen aus zertifizierten Fairtrade Anbau"]}
+      allergy={["Konservierungsstoffe"]}
       veggie={true}
     />,
     <ShoppingCard
       title={"Früchtetee"}
       price={5.99}
       image={Früchtetee}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      content={["Waldbeerengeschmack", "filtriertes Wasser"]}
+      allergy={[]}
       veggie={true}
     />,
     <ShoppingCard
       title={"Wasser"}
       price={5.99}
       image={Wasser}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      content={["Das filtrierte Mineralwasser stammt aus einer Quelle in den Alpen"]}
+      allergy={[]}
       veggie={true}
     />,
     <ShoppingCard
       title={"Zitronentee"}
       price={5.99}
       image={Zitronentee}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      content={["Zitronengeschmack", "filtriertes Wasser"]}
+      allergy={["Konservierungsstoffe", "Koffeinhaltig"]}
       veggie={true}
     />,
     <ShoppingCard
       title={"Heiße Schokolade"}
       price={5.99}
       image={HeißeSchokolade}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
-      veggie={true}
+      content={["geschmolzene schweizer Schokolade", "Frische Milch aus den Alpen"]}
+      allergy={["Milcherzeugnisse", "Lactosehaltig"]}
+      veggie={false}
     />,
   ];
 
@@ -184,56 +198,56 @@ function Produkt() {
       title={"Bayrisches Menü"}
       price={7.99}
       image={Bayrisches_Essen}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
-      veggie={true}
+      content={["eine Flasche Helles", "ein Paar Weißwurst", "eine Breze"]}
+      allergy={["Alkoholhaltig", "Glutenhaltig", "Hopfenhaltig"]}
+      veggie={false}
     />,
     <ShoppingCard
       title={"Wecken mit Kaffee"}
       price={6.99}
       image={BrötchenMitKaffe}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
-      veggie={true}
+      content={["Wecken aus Weizenmehl", "Kaffee mit Kaffeesahne"]}
+      allergy={["Glutenhaltig", "Koffeinhaltig", "Mlicherzeugnisse", "Lactosehaltig"]}
+      veggie={false}
     />,
     <ShoppingCard
       title={"Obstmenü"}
       price={5.99}
       image={BrotEiTeeUndObst}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
-      veggie={true}
+      content={["mit einem Spiegelei belegtes Brötchen", "Saisonfrüchte", "Früchtetee"]}
+      allergy={["Glutenhaltig", "Eiprodukte"]}
+      veggie={false}
     />,
     <ShoppingCard
       title={"Eiermenü"}
       price={5.99}
       image={EigetränkUndEierbrot}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
-      veggie={true}
+      content={["mit einem Spiegelei belegtes Brötchen", "Eierlikör", "schwarzer Kaffee"]}
+      allergy={["Glutenhaltig", "Eiprodukte", "Koffeinhaltig"]}
+      veggie={false}
     />,
     <ShoppingCard
-      title={"klassische Menü"}
+      title={"klassisches Menü"}
       price={5.99}
       image={KaffeeMitEiUndBrot}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
-      veggie={true}
+      content={["Baguettescheiben", "Spiegelei mit Bacon", "Kräuteraufstrich", "schwarzer Kaffee"]}
+      allergy={["Glutenhaltig", "Eiprodukte", "Koffeinhaltig"]}
+      veggie={false}
     />,
     <ShoppingCard
       title={"Veggiemenü"}
       price={5.99}
       image={OSaftMitFrüchtebrot}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      content={["Baguettescheiben", "veganer Pancake", "Saisonfrüchte", "Saisongemüse", "Orangensaft", "Zitronentee"]}
+      allergy={["Glutenhaltig", "Koffeinhaltig", "Erdnusshaltig"]}
       veggie={true}
     />,
     <ShoppingCard
       title={"Orangenmenü"}
       price={5.99}
       image={OSaftUndOrangenbrot}
-      content={["Inhalt 1", "Inhalt 2", "Inhalt 3"]}
-      allergy={["Allergie 1", "Allergie 2", "Allergie 3"]}
+      content={["Orangenpie", "Orangenmarmelade", "Saisonfrüchte", "Zimt und Zucker"]}
+      allergy={["Glutenhaltig", "Zimthaltig"]}
       veggie={true}
     />,
   ];
