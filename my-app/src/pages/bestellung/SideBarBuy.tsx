@@ -70,7 +70,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
     } else {
       setShowPopup(false);
       setShowThankyouPopup(true);
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = "scroll";
     }
   };
 
