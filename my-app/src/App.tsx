@@ -1,3 +1,5 @@
+import React, { Suspense, lazy } from "react";
+import BottomNavBar from "./pages/BottomNavBar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./pages/Layout";
 import Home from "./pages/home/Home";
@@ -13,9 +15,9 @@ import SignUp from "./pages/logIn/SignUp";
 import DeinKonto from "./pages/loggedIn/DeinKonto";
 import { LoggedInProvider } from "./globalVariables/loggedin"; // Import the LoggedInProvider component
 import Impressum from "./pages/Impressum";
-import Datenschutzerklaerung from "./pages/Datenschutzerklaerung";
-import BottomNavBar from "./pages/BottomNavBar";
-import React from "react";
+const DatenschutzerklaerungLazy = lazy(
+  () => import("./pages/Datenschutzerklaerung")
+);
 
 export default function App(): JSX.Element {
   return (
@@ -36,7 +38,15 @@ export default function App(): JSX.Element {
               <Route path="Impressum" element={<Impressum />} />
               <Route
                 path="Datenschutzerklaerung"
-                element={<Datenschutzerklaerung />}
+                element={
+                  <Suspense
+                    fallback={
+                      <div>Lädt die umfangreiche Datenschutzerklärung...</div>
+                    }
+                  >
+                    <DatenschutzerklaerungLazy />
+                  </Suspense>
+                }
               />
               <Route path="*" element={<NoPage />} />
             </Route>
