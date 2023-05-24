@@ -325,66 +325,6 @@ const Datenschutzerklaerung: React.FC = () => {
           Weitere Hinweise zu Verarbeitungsprozessen, Verfahren und Diensten:
         </strong>
       </p>
-      <ul>
-        <li>
-          <strong>
-            Bereitstellung Onlineangebot auf gemietetem Speicherplatz:{" "}
-          </strong>
-          Für die Bereitstellung unseres Onlineangebotes nutzen wir
-          Speicherplatz, Rechenkapazität und Software, die wir von einem
-          entsprechenden Serveranbieter (auch "Webhoster" genannt) mieten oder
-          anderweitig beziehen; <strong>Rechtsgrundlagen:</strong> Berechtigte
-          Interessen (Art. 6 Abs. 1 S. 1 lit. f) DSGVO).
-        </li>
-        <li>
-          <strong>Erhebung von Zugriffsdaten und Logfiles: </strong>Der Zugriff
-          auf unser Onlineangebot wird in Form von so genannten
-          "Server-Logfiles" protokolliert. Zu den Serverlogfiles können die
-          Adresse und Name der abgerufenen Webseiten und Dateien, Datum und
-          Uhrzeit des Abrufs, übertragene Datenmengen, Meldung über
-          erfolgreichen Abruf, Browsertyp nebst Version, das Betriebssystem des
-          Nutzers, Referrer URL (die zuvor besuchte Seite) und im Regelfall
-          IP-Adressen und der anfragende Provider gehören. Die Serverlogfiles
-          können zum einen zu Zwecken der Sicherheit eingesetzt werden, z.B., um
-          eine Überlastung der Server zu vermeiden (insbesondere im Fall von
-          missbräuchlichen Angriffen, sogenannten DDoS-Attacken) und zum
-          anderen, um die Auslastung der Server und ihre Stabilität
-          sicherzustellen; <strong>Rechtsgrundlagen:</strong> Berechtigte
-          Interessen (Art. 6 Abs. 1 S. 1 lit. f) DSGVO);{" "}
-          <strong>Löschung von Daten:</strong> Logfile-Informationen werden für
-          die Dauer von maximal 30 Tagen gespeichert und danach gelöscht oder
-          anonymisiert. Daten, deren weitere Aufbewahrung zu Beweiszwecken
-          erforderlich ist, sind bis zur endgültigen Klärung des jeweiligen
-          Vorfalls von der Löschung ausgenommen.
-        </li>
-        <li>
-          <strong>Hetzner: </strong>Leistungen auf dem Gebiet der Bereitstellung
-          von informationstechnischer Infrastruktur und verbundenen
-          Dienstleistungen (z.B. Speicherplatz und/oder Rechenkapazitäten);{" "}
-          <strong>Dienstanbieter:</strong> Hetzner Online GmbH, Industriestr.
-          25, 91710 Gunzenhausen, Deutschland;{" "}
-          <strong>Rechtsgrundlagen:</strong> Berechtigte Interessen (Art. 6 Abs.
-          1 S. 1 lit. f) DSGVO); <strong>Website:</strong>{" "}
-          <a href="https://www.hetzner.com" target="_blank">
-            https://www.hetzner.com
-          </a>
-          ; <strong>Datenschutzerklärung:</strong>{" "}
-          <a
-            href="https://www.hetzner.com/de/rechtliches/datenschutz"
-            target="_blank"
-          >
-            https://www.hetzner.com/de/rechtliches/datenschutz
-          </a>
-          ; <strong>Auftragsverarbeitungsvertrag:</strong>{" "}
-          <a
-            href="https://docs.hetzner.com/de/general/general-terms-and-conditions/data-privacy-faq/"
-            target="_blank"
-          >
-            https://docs.hetzner.com/de/general/general-terms-and-conditions/data-privacy-faq/
-          </a>
-          .
-        </li>
-      </ul>
       <h2>Kontakt- und Anfragenverwaltung</h2>
       <p>
         Bei der Kontaktaufnahme mit uns (z.B. per Kontaktformular, E-Mail,
