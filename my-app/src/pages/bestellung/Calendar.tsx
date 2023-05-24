@@ -26,3 +26,13 @@ export const StyledDatePicker = styled(LazyDatePicker)`
   border-radius: 5px;
   z-index: 1;
 `;
+
+export const Calendar = styled.div`
+  box-shadow: 0 6px 12px rgba(27, 37, 86, 0.16);
+  height: 280px;
+`;
+
+export const Popper = styled.div`
+  position: absolute;
+  z-index: 2;
+`;

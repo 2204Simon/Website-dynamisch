@@ -13,7 +13,7 @@ import Adressdaten from "../loggedIn/AdressData";
 import { useLoggedIn } from "../../globalVariables/loggedin";
 import { useNavigate } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
-import { StyledDatePicker } from "./Calendar";
+import { StyledDatePicker, Calendar, Popper } from "./Calendar";
 import { de } from "date-fns/locale";
 import { formatNumber } from "../general/constants";
 import { CustomToast } from "../general/toast.style";
@@ -96,6 +96,11 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
             locale={de}
             popperPlacement={"top"}
             onFocus={() => {}}
+            calendarContainer={Calendar}
+            popperContainer={Popper}
+            onKeyDown={e => {
+              e.preventDefault();
+            }}
           />
         )}
       </div>
