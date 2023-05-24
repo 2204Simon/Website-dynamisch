@@ -45,62 +45,64 @@ function BottomNavBar(): JSX.Element {
 
   return (
     <BottomNavStyle>
-      <nav>
-        <div className="navigation bottom-nav">
-          <ul className="menu">
-            <li>
-              <Link
-                to="/"
-                onClick={() => window.scrollTo(0, 0)}
-                aria-label="Link zu Home"
-              >
-                <HouseLine size={30} />
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/Produkte"
-                onClick={() => window.scrollTo(0, 0)}
-                aria-label="Link zu Produkte"
-              >
-                <ShoppingBagOpen size={30} />
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/Bestellung"
-                onClick={() => window.scrollTo(0, 0)}
-                aria-label="Link zu Bestellung"
-              >
-                <ShoppingCart size={30} />
-                <Badge badgeContent={cartLength} color="error" />
-              </Link>
-            </li>
-            <li>
-              {" "}
-              {loggedIn ? (
+      {hasScrolled && load && (
+        <nav>
+          <div className="navigation bottom-nav">
+            <ul className="menu">
+              <li>
                 <Link
-                  to="/LoggedIn"
+                  to="/"
                   onClick={() => window.scrollTo(0, 0)}
-                  aria-label="Link zu LoggedIn"
+                  aria-label="Link zu Home"
                 >
-                  <User size={30} />
+                  <HouseLine size={30} />
                 </Link>
-              ) : (
+              </li>
+              <li>
                 <Link
-                  to="/SignUp"
+                  to="/Produkte"
                   onClick={() => window.scrollTo(0, 0)}
-                  aria-label="Link zu SignUp"
+                  aria-label="Link zu Produkte"
                 >
-                  <SignIn size={30} />
+                  <ShoppingBagOpen size={30} />
                 </Link>
-              )}
-            </li>
-            {hasScrolled && load && <LazyChatra />}
-          </ul>
-        </div>
-      </nav>
+              </li>
+              <li>
+                <Link
+                  to="/Bestellung"
+                  onClick={() => window.scrollTo(0, 0)}
+                  aria-label="Link zu Bestellung"
+                >
+                  <ShoppingCart size={30} />
+                  <Badge badgeContent={cartLength} color="error" />
+                </Link>
+              </li>
+              <li>
+                {loggedIn ? (
+                  <Link
+                    to="/LoggedIn"
+                    onClick={() => window.scrollTo(0, 0)}
+                    aria-label="Link zu LoggedIn"
+                  >
+                    <User size={30} />
+                  </Link>
+                ) : (
+                  <Link
+                    to="/SignUp"
+                    onClick={() => window.scrollTo(0, 0)}
+                    aria-label="Link zu SignUp"
+                  >
+                    <SignIn size={30} />
+                  </Link>
+                )}
+              </li>
+              <LazyChatra />
+            </ul>
+          </div>
+        </nav>
+      )}
     </BottomNavStyle>
   );
 }
+
 export default BottomNavBar;
