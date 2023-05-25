@@ -9,7 +9,7 @@ const LazyDatePicker = (
     ReactDatePickerProps<string, boolean | undefined> &
     React.RefAttributes<ReactDatePicker<string, boolean | undefined>>
 ) => (
-  <Suspense fallback={<div>Loading...</div>}>
+  <Suspense fallback={<div>Lädt...</div>}>
     <DatePicker {...props} />
   </Suspense>
 );
