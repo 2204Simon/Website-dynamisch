@@ -24,7 +24,6 @@ function BottomNavBar(): JSX.Element {
   let cartLength = 0;
   cartItems.map(item => (cartLength += item.anzahl));
   const [hasScrolled, setHasScrolled] = useState(false);
-  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = (): void => {
@@ -41,7 +40,7 @@ function BottomNavBar(): JSX.Element {
 
   useEffect(() => {
     setHasScrolled(false);
-  }, [location]);
+  }, []);
 
   return (
     <BottomNavStyle>
