@@ -97,6 +97,9 @@ export default function SignIn() {
               autoComplete="email"
               autoFocus
               required
+              inputProps={{
+                maxLength: 50,
+              }}
               InputLabelProps={{
                 sx: {
                   backgroundColor: "white",
@@ -112,6 +115,9 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              inputProps={{
+                maxLength: 50,
+              }}
               InputLabelProps={{
                 sx: {
                   backgroundColor: "white",

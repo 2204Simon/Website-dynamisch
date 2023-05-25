@@ -117,6 +117,9 @@ export default function SignUp() {
                   id="firstName"
                   label="Vorname"
                   autoFocus
+                  inputProps={{
+                    maxLength: 50,
+                  }}
                   InputLabelProps={{
                     sx: {
                       backgroundColor: "white",
@@ -133,6 +136,9 @@ export default function SignUp() {
                   label="Nachname"
                   name="lastName"
                   autoComplete="family-name"
+                  inputProps={{
+                    maxLength: 50,
+                  }}
                   InputLabelProps={{
                     sx: {
                       backgroundColor: "white",
@@ -149,6 +155,9 @@ export default function SignUp() {
                   label="Email Adresse"
                   name="email"
                   autoComplete="email"
+                  inputProps={{
+                    maxLength: 50,
+                  }}
                   InputLabelProps={{
                     sx: {
                       backgroundColor: "white",
@@ -173,6 +182,7 @@ export default function SignUp() {
                     },
                   }}
                   inputProps={{
+                    maxLength: 50,
                     pattern: ".{8,}",
                     title: "Passwort muss mindestens 8 Zeichen haben",
                   }}
@@ -188,6 +198,9 @@ export default function SignUp() {
                   name="confirmPassword"
                   type="password"
                   autoComplete="new-password"
+                  inputProps={{
+                    maxLength: 50,
+                  }}
                   InputLabelProps={{
                     sx: {
                       backgroundColor: "white",
@@ -203,6 +216,9 @@ export default function SignUp() {
                   id="street"
                   label="Straße"
                   name="street"
+                  inputProps={{
+                    maxLength: 50,
+                  }}
                   InputLabelProps={{
                     sx: {
                       backgroundColor: "white",
@@ -218,6 +234,9 @@ export default function SignUp() {
                   id="hausnummer"
                   label="Hausnummer"
                   name="hausnummer"
+                  inputProps={{
+                    maxLength: 50,
+                  }}
                   InputLabelProps={{
                     sx: {
                       backgroundColor: "white",
@@ -233,6 +252,9 @@ export default function SignUp() {
                   id="city"
                   label="Stadt"
                   name="city"
+                  inputProps={{
+                    maxLength: 50,
+                  }}
                   InputLabelProps={{
                     sx: {
                       backgroundColor: "white",
