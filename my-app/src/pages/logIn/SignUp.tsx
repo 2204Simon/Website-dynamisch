@@ -58,7 +58,7 @@ export default function SignUp() {
       lastName: data.get("lastName") as string,
     };
     if (!validateEmail(email)) {
-      CustomToast.error("Bitte geben Sie eine gültige E-Mail-Adresse ein");
+      CustomToast.error("Bitte gebe eine gültige E-Mail-Adresse ein");
       return;
     }
     const adressData = {
