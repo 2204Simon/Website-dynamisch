@@ -75,6 +75,7 @@ function Footer(): JSX.Element {
           <li>
             <button
               style={{
+                display: "flex",
                 color: "white",
                 background: "transparent",
                 border: "none",
@@ -82,12 +83,13 @@ function Footer(): JSX.Element {
                 fontStyle: "sans-serif",
                 fontSize: "16px",
                 cursor: "pointer",
-                width: "48px",
+                width: "fit-content",
                 height: "48px",
+                alignItems: "center",
               }}
               onClick={() => window.scroll(0, 0)}
             >
-              <ArrowUp size={24} />
+              <ArrowUp size={24} style={{ marginRight: "5px" }} />
               Anfang
             </button>
           </li>

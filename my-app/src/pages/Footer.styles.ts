@@ -25,6 +25,7 @@ export const FooterLinks = styled.div`
     margin: 0;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     
 
     li {
