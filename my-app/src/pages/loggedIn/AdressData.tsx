@@ -164,7 +164,7 @@ export default function AdressInformation(): JSX.Element {
           </form>
         ) : (
           <div>
-            <Title>persönliche Daten:</Title>
+            <Title>Persönliche Daten:</Title>
             <Paragraph>
               <strong>Straße: </strong>
               {adressInformation?.street}

@@ -131,7 +131,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
         <PopupBackdrop>
           <PopupWrapper>
             <h2>Danke für deine Bestellung!</h2>
-            <p>fiktives Projekt, keine gültige Bestellung!</p>
+            <p>Fiktives Projekt, keine gültige Bestellung!</p>
             <div>
               <h2>Frühstücks Tracker</h2>
               <PackageLocationQRCode
