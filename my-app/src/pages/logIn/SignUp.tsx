@@ -50,12 +50,17 @@ export default function SignUp() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const email = data.get("email") as string;
     const preparedData: LogInData = {
-      email: data.get("email") as string,
+      email: email,
       password: data.get("password") as string,
       firstName: data.get("firstName") as string,
       lastName: data.get("lastName") as string,
     };
+    if (!validateEmail(email)) {
+      CustomToast.error("Bitte geben Sie eine gültige E-Mail-Adresse ein");
+      return;
+    }
     const adressData = {
       street: data.get("street") as string,
       city: data.get("city") as string,
@@ -74,6 +79,11 @@ export default function SignUp() {
     dispatch(addNewAdressData(adressData));
     navigate("/LoggedIn");
   };
+  function validateEmail(email: string): boolean {
+    // Einfache Überprüfung auf gültiges E-Mail-Format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
   return (
     <div>
       <Container component="main" maxWidth="xs" style={{ height: "auto" }}>
