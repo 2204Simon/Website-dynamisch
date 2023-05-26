@@ -45,15 +45,6 @@ export default function SignUp() {
   function PasswordMismatch() {
     return CustomToast.error("Die Passwörter sind nicht identisch");
   }
-  function PasswordComparisonValidator({
-    password,
-    confirmPassword,
-  }: {
-    password: string;
-    confirmPassword: string;
-  }) {
-    return password === confirmPassword ? null : PasswordMismatch();
-  } 
 
   const dispatch = useDispatch();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -71,7 +62,7 @@ export default function SignUp() {
       housenumber: data.get("hausnummer") as string,
       payment: data.get("payment") as string,
     };
-    
+
     const password = data.get("password") as string;
     const confirmPassword = data.get("confirmPassword") as string;
     if (password !== confirmPassword) {
