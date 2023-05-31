@@ -24,6 +24,7 @@ import EigetränkUndEierbrot from "../../img/Food/EigetränkUndEierbrot.webp";
 import KaffeeMitEiUndBrot from "../../img/Food/KaffeeMitEiUndBrot.webp";
 import OSaftMitFrüchtebrot from "../../img/Food/OSaftMitFrüchtebrot.webp";
 import OSaftUndOrangenbrot from "../../img/Food/OSaftUndOrangenbrot.webp";
+import AufstiegsKaffee from "../../img/Drinks/Aufstieg.webp";
 import ScrollContainer from "./Arrows";
 
 function Produkt() {
@@ -33,25 +34,19 @@ function Produkt() {
       price={2.99}
       image={BaguetteAlone}
       content={["Baguette aus Weizenmehl"]}
-      allergy={[
-        "Glutenhaltig",
-        "Erdnusserzeugnisse",
-      ]}
+      allergy={["Glutenhaltig", "Erdnusserzeugnisse"]}
       veggie={true}
     />,
     <ShoppingCard
       title={"Käsebaguette"}
       price={3.59}
       image={BaguetteYellow}
-      content={["Baguette aus Weizenmehl", 
-      "Limburger Käsebelag",
-      "Butter"
-      ]}
+      content={["Baguette aus Weizenmehl", "Limburger Käsebelag", "Butter"]}
       allergy={[
         "Glutenhaltig",
         "Eier und Eiererzeugnisse",
         "Erdnusserzeugnisse",
-        "Lactosehaltig"
+        "Lactosehaltig",
       ]}
       veggie={false}
     />,
@@ -60,9 +55,11 @@ function Produkt() {
       title={"Veganes Käsebaguette"}
       price={3.59}
       image={KäseBaguette}
-      content={["Baguette aus Weizenmehl", 
-      "veganer Käsebelag",
-      "vegane Magarine"]}
+      content={[
+        "Baguette aus Weizenmehl",
+        "veganer Käsebelag",
+        "vegane Magarine",
+      ]}
       allergy={["Glutenhaltig"]}
       veggie={true}
     />,
@@ -72,8 +69,7 @@ function Produkt() {
       price={1.49}
       image={Brezel}
       content={["Brezel aus Weizenmehl"]}
-      allergy={["Glutenhaltig",
-      "Erdnusserzeugnisse"]}
+      allergy={["Glutenhaltig", "Erdnusserzeugnisse"]}
       veggie={true}
     />,
     <ShoppingCard
@@ -81,7 +77,12 @@ function Produkt() {
       price={7.99}
       image={Menemen}
       content={["pochierte Eier", "würzige Tomaten-Paprika-Soße"]}
-      allergy={["Eier und Eiererzeugnisse", "Glutenhaltig", "Lactosehaltig", "Konservierungsstoffe"]}
+      allergy={[
+        "Eier und Eiererzeugnisse",
+        "Glutenhaltig",
+        "Lactosehaltig",
+        "Konservierungsstoffe",
+      ]}
       veggie={false}
     />,
     <ShoppingCard
@@ -104,7 +105,15 @@ function Produkt() {
       title={"Fresh Chicken"}
       price={3.79}
       image={HamburgerBrötchen}
-      content={["Brötchen aus Weizenmehl", "Emmentaler Käse", "Tomaten", "Salat", "Ei", "Hähnchenpatty", "Burgersoße"]}
+      content={[
+        "Brötchen aus Weizenmehl",
+        "Emmentaler Käse",
+        "Tomaten",
+        "Salat",
+        "Ei",
+        "Hähnchenpatty",
+        "Burgersoße",
+      ]}
       allergy={["Glutenhaltig", "Eiprodukte", "Milchprodukte", "Senfprodukte"]}
       veggie={false}
     />,
@@ -112,7 +121,13 @@ function Produkt() {
       title={"Veganer Toast"}
       price={3.59}
       image={Toast}
-      content={["Toast aus Weizenmehl", "Tomaten", "Salat", "Gemüsepatty", "Burgersoße"]}
+      content={[
+        "Toast aus Weizenmehl",
+        "Tomaten",
+        "Salat",
+        "Gemüsepatty",
+        "Burgersoße",
+      ]}
       allergy={["Glutenhaltig", "Senfprodukte"]}
       veggie={true}
     />,
@@ -120,11 +135,17 @@ function Produkt() {
       title={"Toast mit Rinderpatty"}
       price={1.79}
       image={BelegtesBrötchen}
-      content={["Toast aus Weizenmehl", "Emmentaler Käse", "Tomaten", "Salat", "Patty aus Rindfleisch", "Burgersoße"]}
+      content={[
+        "Toast aus Weizenmehl",
+        "Emmentaler Käse",
+        "Tomaten",
+        "Salat",
+        "Patty aus Rindfleisch",
+        "Burgersoße",
+      ]}
       allergy={["Glutenhaltig", "Eiprodukte", "Milchprodukte", "Senfprodukte"]}
       veggie={false}
     />,
-    
   ];
   const ShoppingCardsTrink = [
     <ShoppingCard
@@ -152,6 +173,14 @@ function Produkt() {
       veggie={false}
     />,
     <ShoppingCard
+      title={"!! Neu !! Aufstieg 1. Bundesliga Kaffee"}
+      price={5.99}
+      image={AufstiegsKaffee}
+      content={["handsignierter Becher eines Aufstiegshelden"]}
+      allergy={["Laktosehaltig", "Koffeinhaltig"]}
+      veggie={false}
+    />,
+    <ShoppingCard
       title={"Orangensaft"}
       price={5.99}
       image={Orangensaft}
@@ -171,7 +200,9 @@ function Produkt() {
       title={"Wasser"}
       price={5.99}
       image={Wasser}
-      content={["Das filtrierte Mineralwasser stammt aus einer Quelle in den Alpen"]}
+      content={[
+        "Das filtrierte Mineralwasser stammt aus einer Quelle in den Alpen",
+      ]}
       allergy={[]}
       veggie={true}
     />,
@@ -187,7 +218,10 @@ function Produkt() {
       title={"Heiße Schokolade"}
       price={5.99}
       image={HeißeSchokolade}
-      content={["geschmolzene schweizer Schokolade", "Frische Milch aus den Alpen"]}
+      content={[
+        "geschmolzene schweizer Schokolade",
+        "Frische Milch aus den Alpen",
+      ]}
       allergy={["Milcherzeugnisse", "Lactosehaltig"]}
       veggie={false}
     />,
@@ -207,14 +241,23 @@ function Produkt() {
       price={6.99}
       image={BrötchenMitKaffe}
       content={["Wecken aus Weizenmehl", "Kaffee mit Kaffeesahne"]}
-      allergy={["Glutenhaltig", "Koffeinhaltig", "Mlicherzeugnisse", "Lactosehaltig"]}
+      allergy={[
+        "Glutenhaltig",
+        "Koffeinhaltig",
+        "Mlicherzeugnisse",
+        "Lactosehaltig",
+      ]}
       veggie={false}
     />,
     <ShoppingCard
       title={"Obstmenü"}
       price={5.99}
       image={BrotEiTeeUndObst}
-      content={["mit einem Spiegelei belegtes Brötchen", "Saisonfrüchte", "Früchtetee"]}
+      content={[
+        "mit einem Spiegelei belegtes Brötchen",
+        "Saisonfrüchte",
+        "Früchtetee",
+      ]}
       allergy={["Glutenhaltig", "Eiprodukte"]}
       veggie={false}
     />,
@@ -222,7 +265,11 @@ function Produkt() {
       title={"Eiermenü"}
       price={5.99}
       image={EigetränkUndEierbrot}
-      content={["mit einem Spiegelei belegtes Brötchen", "Eierlikör", "schwarzer Kaffee"]}
+      content={[
+        "mit einem Spiegelei belegtes Brötchen",
+        "Eierlikör",
+        "schwarzer Kaffee",
+      ]}
       allergy={["Glutenhaltig", "Eiprodukte", "Koffeinhaltig"]}
       veggie={false}
     />,
@@ -230,7 +277,12 @@ function Produkt() {
       title={"klassisches Menü"}
       price={5.99}
       image={KaffeeMitEiUndBrot}
-      content={["Baguettescheiben", "Spiegelei mit Bacon", "Kräuteraufstrich", "schwarzer Kaffee"]}
+      content={[
+        "Baguettescheiben",
+        "Spiegelei mit Bacon",
+        "Kräuteraufstrich",
+        "schwarzer Kaffee",
+      ]}
       allergy={["Glutenhaltig", "Eiprodukte", "Koffeinhaltig"]}
       veggie={false}
     />,
@@ -238,7 +290,14 @@ function Produkt() {
       title={"Veggiemenü"}
       price={5.99}
       image={OSaftMitFrüchtebrot}
-      content={["Baguettescheiben", "veganer Pancake", "Saisonfrüchte", "Saisongemüse", "Orangensaft", "Zitronentee"]}
+      content={[
+        "Baguettescheiben",
+        "veganer Pancake",
+        "Saisonfrüchte",
+        "Saisongemüse",
+        "Orangensaft",
+        "Zitronentee",
+      ]}
       allergy={["Glutenhaltig", "Koffeinhaltig", "Erdnusshaltig"]}
       veggie={true}
     />,
@@ -246,7 +305,12 @@ function Produkt() {
       title={"Orangenmenü"}
       price={5.99}
       image={OSaftUndOrangenbrot}
-      content={["Orangenpie", "Orangenmarmelade", "Saisonfrüchte", "Zimt und Zucker"]}
+      content={[
+        "Orangenpie",
+        "Orangenmarmelade",
+        "Saisonfrüchte",
+        "Zimt und Zucker",
+      ]}
       allergy={["Glutenhaltig", "Zimthaltig"]}
       veggie={true}
     />,
