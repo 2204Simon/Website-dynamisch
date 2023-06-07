@@ -46,7 +46,9 @@ export const decreaseQuantity = (item: CartItem) => {
 
 export const addNewUser = (LogInData: LogInData) => {
   return {
+    // Angabe es soll den Case ADD_NEW_USER ausführen
     type: ActionTypesUser.ADD_NEW_USER,
+    // payload der benutzt werden soll Funktionsparameter
     payload: LogInData,
   };
 };

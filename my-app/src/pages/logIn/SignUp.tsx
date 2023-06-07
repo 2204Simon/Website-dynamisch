@@ -38,10 +38,7 @@ function Copyright(props: any) {
 export default function SignUp() {
   const { changeLoggedIn } = useLoggedIn();
   const navigate = useNavigate();
-  function handleClick(): void {
-    console.log("changedlogin");
-    changeLoggedIn();
-  }
+
   function PasswordMismatch() {
     return CustomToast.error("Die Passwörter sind nicht identisch");
   }
@@ -78,6 +75,7 @@ export default function SignUp() {
     dispatch(addNewUser(preparedData));
     dispatch(addNewAdressData(adressData));
     navigate("/LoggedIn");
+    changeLoggedIn();
   };
   function validateEmail(email: string): boolean {
     // Einfache Überprüfung auf gültiges E-Mail-Format
@@ -315,11 +313,7 @@ export default function SignUp() {
                 </RadioGroup>
               </FormControl>
             </Grid>
-            <Button
-              type="submit"
-              className="black-color white-orange"
-              onClick={handleClick}
-            >
+            <Button type="submit" className="black-color white-orange">
               Registrieren
             </Button>
             <Grid container justifyContent="flex-end">
