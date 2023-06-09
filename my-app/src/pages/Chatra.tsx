@@ -12,7 +12,6 @@ const Chatra: React.FC<ChatraProps> = () => {
       document.body.appendChild(chatraScript);
     };
 
-    // Prüfen Sie hier Ihre Bedingungen, ob das Skript geladen werden soll oder nicht.
     const shouldLoadChatra = true;
 
     if (shouldLoadChatra) {
