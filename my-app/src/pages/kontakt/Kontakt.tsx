@@ -1,4 +1,4 @@
-import React, { useState, FormEvent, ChangeEvent } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 import { MapPin, Phone, Envelope } from "phosphor-react";
 import {
   MainContainer,
