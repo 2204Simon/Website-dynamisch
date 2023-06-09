@@ -1,18 +1,13 @@
-**Halli hallo also das müsst ihr befolgen wenn ihr die react app starten wollt**
+**Anleitung zum Starten der React-App**
  
 # Requirement
-kleiner Typ VSCode hat auch ein Terminal shortcut strg+j und es erscheint
-
-1. Ihr braucht node.js dann könnt ihr npm benuzen und bitte nutzt die `Node Version 19.3.0`
-1. wenn ihr den nvm Manager für Windows habt `nvm use 19.3.0`
-1. wenn ihr die Version noch nicht habt nehmt den Command `nvm install 19.3.0`
+1. Terminal in VSCode starten (Shortcut Str+J). 
+2. Anforderung: node.js `Node Version 19.3.0`für die bequeme Nutzung von npm. Falls der nvm Manager für Windows eingesetzt wird `nvm use 19.3.0`. Wenn die Version nicht installiert ist, den Command `nvm install 19.3.0`verwenden. 
 
 
 # Schritt für Schritt Anleitung um zu starten
 
-2. cd ins richtige Verzeichnis in unserem Fall `my-app`
-2. wenn ihr in dem Verzeichnis seit npm i 
-2. wenn fertig installiert npm start
-2. läuft auf localhost 3000 müsste sich automatisch öffnen wenn nicht gebt in euren Browser `http://localhost:3000/` ein
-
-Viel Spaß beim ausprobieren 
+1. Wechseln ins richtige Verzeichnis "my-app" in unserem Fall mit `cd my-app`.
+2. In dem Verzeichnis, die aktuellsten notwendigen Komponenten installieren mit `npm i`. 
+2. Wenn die Paketinstallationen fertig installiert sind, dann die Anwendung starten mit `npm start`.
+2. Website läuft auf "localhost 3000" müsste sich automatisch öffnen, wenn nicht manuell öffnen mit `http://localhost:3000/`. 
