@@ -22,7 +22,6 @@ function Kontakt(): JSX.Element {
     event.preventDefault();
     console.log(`Danke für Ihre Anmeldung, ${email}!`);
     console.log(`Nachricht: ${message}`);
-    // Hier könntest du den Code hinzufügen, der das Formular an deinen Server sendet
     CustomToast.success("Die Anmeldung zum Newsletter war erfolgreich!");
   }
 

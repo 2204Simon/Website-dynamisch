@@ -53,7 +53,7 @@ function WarenkorbSeite(): JSX.Element {
             key={index}
             image={item.logo}
             price={item.preis}
-            onRemove={() => handleRemoveItem(item)} // pass the item index to handleRemoveItem
+            onRemove={() => handleRemoveItem(item)} // Item an handleRemoveItem übergeben
             productName={item.produktname}
             count={item.anzahl}
           />
