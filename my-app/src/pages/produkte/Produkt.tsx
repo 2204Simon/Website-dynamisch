@@ -24,7 +24,7 @@ import EigetränkUndEierbrot from "../../img/Food/EigetränkUndEierbrot.webp";
 import KaffeeMitEiUndBrot from "../../img/Food/KaffeeMitEiUndBrot.webp";
 import OSaftMitFrüchtebrot from "../../img/Food/OSaftMitFrüchtebrot.webp";
 import OSaftUndOrangenbrot from "../../img/Food/OSaftUndOrangenbrot.webp";
-import AufstiegsKaffee from "../../img/Drinks/Aufstieg.webp";
+import Fußball from "../../img/Food/Fußball.jpg";
 import ScrollContainer from "./Arrows";
 
 function Produkt() {
@@ -173,14 +173,6 @@ function Produkt() {
       veggie={false}
     />,
     <ShoppingCard
-      title={"!! Neu !! Aufstieg 1. Bundesliga Kaffee"}
-      price={5.99}
-      image={AufstiegsKaffee}
-      content={["handsignierter Becher eines Aufstiegshelden"]}
-      allergy={["Laktosehaltig", "Koffeinhaltig"]}
-      veggie={false}
-    />,
-    <ShoppingCard
       title={"Orangensaft"}
       price={5.99}
       image={Orangensaft}
@@ -228,6 +220,19 @@ function Produkt() {
   ];
 
   const ShoppingCardsMenu = [
+    <ShoppingCard
+      title={"!! Neu !! 1. Liga FCH"}
+      price={5.99}
+      image={Fußball}
+      content={["Fußball Überaschungsbox"]}
+      allergy={[
+        "Laktosehaltig",
+        "Koffeinhaltig",
+        "Glutenhaltig",
+        "Alkoholhaltig",
+      ]}
+      veggie={false}
+    />,
     <ShoppingCard
       title={"Bayrisches Menü"}
       price={7.99}
