@@ -151,11 +151,11 @@ const BurgerMenu: React.FC = () => {
             </StyledListItem>
             <StyledListItem>
               {loggedIn ? (
-                <StyledLink to="/LoggedIn">
+                <StyledLink to="/LoggedIn" onClick={closeMenu}>
                   <User size={30} />
                 </StyledLink>
               ) : (
-                <StyledLink to="/SignUp">
+                <StyledLink to="/SignUp" onClick={closeMenu}>
                   <SignIn size={30} />
                 </StyledLink>
               )}
