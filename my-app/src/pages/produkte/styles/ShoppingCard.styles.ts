@@ -98,7 +98,8 @@ export const Title = styled.h2`
 
 export const Title2 = styled.h2`
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.05rem;
+  text-decoration: underline;
   color: ${colors.companycolor};
 `;
 

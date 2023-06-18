@@ -221,7 +221,7 @@ function Produkt() {
 
   const ShoppingCardsMenu = [
     <ShoppingCard
-      title={"!! Neu !! 1. Liga FCH"}
+      title={"1. Liga FCH Aufstiegsbox"}
       price={5.99}
       image={Fußball}
       content={["Fußball Überaschungsbox"]}
@@ -279,7 +279,7 @@ function Produkt() {
       veggie={false}
     />,
     <ShoppingCard
-      title={"klassisches Menü"}
+      title={"Klassisches Menü"}
       price={5.99}
       image={KaffeeMitEiUndBrot}
       content={[
