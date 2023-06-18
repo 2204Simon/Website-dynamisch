@@ -24,7 +24,7 @@ import EigetränkUndEierbrot from "../../img/Food/EigetränkUndEierbrot.webp";
 import KaffeeMitEiUndBrot from "../../img/Food/KaffeeMitEiUndBrot.webp";
 import OSaftMitFrüchtebrot from "../../img/Food/OSaftMitFrüchtebrot.webp";
 import OSaftUndOrangenbrot from "../../img/Food/OSaftUndOrangenbrot.webp";
-import Fußball from "../../img/Food/Fußball.jpg";
+import Fußball from "../../img/Food/Fußball.webp";
 import ScrollContainer from "./Arrows";
 
 function Produkt() {
