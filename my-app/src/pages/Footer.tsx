@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import {
-  TwitterLogo,
   FacebookLogo,
   InstagramLogo,
   TiktokLogo,
@@ -15,15 +14,6 @@ function Footer(): JSX.Element {
   return (
     <FooterContainer>
       <SocialMedia>
-        <a
-          href="https://twitter.com/deliverybreak"
-          aria-label="Link zu Twitter"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ display: "inline-block", width: "48px", height: "48px" }}
-        >
-          <TwitterLogo size={24} />
-        </a>
         <a
           href="https://www.facebook.com/profile.php?id=100091669221469&sk=about"
           aria-label="Link zu Facebook"
