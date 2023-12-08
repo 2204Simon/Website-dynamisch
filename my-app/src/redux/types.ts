@@ -19,6 +19,7 @@ export interface AdressDataState {
 }
 
 export interface AdressData {
+  plz: string;
   street: string;
   housenumber: string;
   city: string;

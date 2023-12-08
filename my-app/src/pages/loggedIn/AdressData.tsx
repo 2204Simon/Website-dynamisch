@@ -42,6 +42,7 @@ export default function AdressInformation(): JSX.Element {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const preparedData: AdressData = {
+      plz: data.get("plz") as string,
       street: data.get("street") as string,
       city: data.get("city") as string,
       housenumber: data.get("hausnummer") as string,
@@ -63,6 +64,34 @@ export default function AdressInformation(): JSX.Element {
               <TextField
                 fullWidth
                 required
+                id="plz"
+                label="Postleitzahl"
+                name="plz"
+                defaultValue={editedData?.plz}
+                InputLabelProps={{
+                  sx: {
+                    backgroundColor: "white",
+                    color: colors.companycolor,
+                  },
+                }}
+              />
+              <TextField
+                fullWidth
+                required
+                id="city"
+                label="Stadt"
+                name="city"
+                defaultValue={editedData?.city}
+                InputLabelProps={{
+                  sx: {
+                    backgroundColor: "white",
+                    color: colors.companycolor,
+                  },
+                }}
+              />
+              <TextField
+                fullWidth
+                required
                 id="street"
                 label="Straße"
                 name="street"
@@ -81,20 +110,6 @@ export default function AdressInformation(): JSX.Element {
                 label="Hausnummer"
                 name="hausnummer"
                 defaultValue={editedData?.housenumber}
-                InputLabelProps={{
-                  sx: {
-                    backgroundColor: "white",
-                    color: colors.companycolor,
-                  },
-                }}
-              />
-              <TextField
-                fullWidth
-                required
-                id="city"
-                label="Stadt"
-                name="city"
-                defaultValue={editedData?.city}
                 InputLabelProps={{
                   sx: {
                     backgroundColor: "white",
@@ -166,12 +181,16 @@ export default function AdressInformation(): JSX.Element {
           <div>
             <Title>Persönliche Daten:</Title>
             <Paragraph>
-              <strong>Straße: </strong>
-              {adressInformation?.street}
+              <strong>Postleitzahl: </strong>
+              {adressInformation?.plz}
             </Paragraph>
             <Paragraph>
               <strong>Stadt: </strong>
               {adressInformation?.city}
+            </Paragraph>
+            <Paragraph>
+              <strong>Straße: </strong>
+              {adressInformation?.street}
             </Paragraph>
             <Paragraph>
               <strong>Hausnummer: </strong>
