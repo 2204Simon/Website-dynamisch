@@ -15,6 +15,7 @@ import SignUp from "./pages/logIn/SignUp";
 import DeinKonto from "./pages/loggedIn/DeinKonto";
 import { LoggedInProvider } from "./globalVariables/loggedin"; // Import the LoggedInProvider component
 import Impressum from "./pages/Impressum";
+import Zeitung from "./pages/zeitung/Zeitung";
 const DatenschutzerklaerungLazy = lazy(
   () => import("./pages/Datenschutzerklaerung")
 );
@@ -33,6 +34,7 @@ export default function App(): JSX.Element {
               <Route path="Unsere Geschichte" element={<UnsereGeschichte />} />
               <Route path="Kontakt" element={<Kontakt />} />
               <Route path="LogIn" element={<LoginForm />} />
+              <Route path="Zeitung" element={<Zeitung />} />
               <Route path="SignUp" element={<SignUp />} />
               <Route path="LoggedIn" element={<DeinKonto />} />
               <Route path="Impressum" element={<Impressum />} />

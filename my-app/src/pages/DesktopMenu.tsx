@@ -46,6 +46,9 @@ export const DesktopMenu: React.FC = () => {
           <StyledLink to="/Kontakt">Kontakt</StyledLink>
         </MenuItem>
         <MenuItem>
+          <StyledLink to="/Zeitung">Zeitung</StyledLink>
+        </MenuItem>
+        <MenuItem>
           <StyledLink to="/Bestellung" aria-label="Link zu Bestellung">
             <ShoppingCart size={40} />
             <Badge badgeContent={cartLength} color="error" />
