@@ -58,7 +58,7 @@ function Produkt() {
       content={[
         "Baguette aus Weizenmehl",
         "veganer Käsebelag",
-        "vegane Magarine",
+        "vegane Margarine",
       ]}
       allergy={["Glutenhaltig"]}
       veggie={true}

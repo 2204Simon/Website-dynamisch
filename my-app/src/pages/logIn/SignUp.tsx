@@ -59,6 +59,7 @@ export default function SignUp() {
       return;
     }
     const adressData = {
+      plz: data.get("plz") as string,
       street: data.get("street") as string,
       city: data.get("city") as string,
       housenumber: data.get("hausnummer") as string,
@@ -208,6 +209,43 @@ export default function SignUp() {
                   }}
                 />
               </Grid>
+              <Grid item xs={12} sm={5}>
+                <TextField
+                  fullWidth
+                  required
+                  id="plz"
+                  label="Postleitzahl"
+                  name="plz"
+                  inputProps={{
+                    maxLength: 50,
+                  }}
+                  InputLabelProps={{
+                    sx: {
+                      backgroundColor: "white",
+                      color: colors.companycolor,
+                    },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={7}>
+                <TextField
+                  fullWidth
+                  required
+                  id="city"
+                  label="Stadt"
+                  name="city"
+                  inputProps={{
+                    maxLength: 50,
+                  }}
+                  InputLabelProps={{
+                    sx: {
+                      backgroundColor: "white",
+                      color: colors.companycolor,
+                    },
+                  }}
+                />
+              </Grid>
+
               <Grid item xs={12} sm={8}>
                 <TextField
                   fullWidth
@@ -244,24 +282,7 @@ export default function SignUp() {
                   }}
                 />
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  required
-                  id="city"
-                  label="Stadt"
-                  name="city"
-                  inputProps={{
-                    maxLength: 50,
-                  }}
-                  InputLabelProps={{
-                    sx: {
-                      backgroundColor: "white",
-                      color: colors.companycolor,
-                    },
-                  }}
-                />
-              </Grid>
+
               <Title>Zahlungsmöglichkeiten:</Title>
 
               <FormControl component="fieldset">
