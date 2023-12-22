@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import Avatar from "@mui/material/Avatar";
 import { Button } from "../general/button.styles";
 import TextField from "@mui/material/TextField";
@@ -23,6 +24,8 @@ import {
 import { FaEuroSign, FaPaypal, FaApplePay } from "react-icons/fa";
 import { Title } from "../loggedIn/UserInformation.styles";
 import { CustomToast } from "../general/toast.style";
+import { PayPalPayment } from "../PaypalPayment";
+import { useState } from "react";
 
 function Copyright(props: any) {
   return (
@@ -38,6 +41,7 @@ function Copyright(props: any) {
 export default function SignUp() {
   const { changeLoggedIn } = useLoggedIn();
   const navigate = useNavigate();
+  const [selectedPayment, setSelectedPayment] = useState("");
 
   function PasswordMismatch() {
     return CustomToast.error("Die Passwörter sind nicht identisch");
@@ -290,6 +294,7 @@ export default function SignUp() {
                   aria-label="Zahlung"
                   name="payment"
                   defaultValue={"Barzahlung"}
+                  onChange={event => setSelectedPayment(event.target.value)}
                   style={{
                     display: "flex",
                     flexDirection: "row",
@@ -315,6 +320,7 @@ export default function SignUp() {
                       label={
                         <div>
                           <FaPaypal size={20} />
+                          <PayPalPayment />
                           <span></span>
                         </div>
                       }
@@ -333,6 +339,7 @@ export default function SignUp() {
                   </Grid>
                 </RadioGroup>
               </FormControl>
+              {selectedPayment === "PayPal" && <PayPalPayment />}
             </Grid>
             <Button type="submit" className="black-color white-orange">
               Registrieren
