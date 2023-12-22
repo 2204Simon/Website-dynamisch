@@ -144,6 +144,11 @@ const BurgerMenu: React.FC = () => {
               </StyledLink>
             </StyledListItem>
             <StyledListItem>
+              <StyledLink to="/Zeitung" onClick={closeMenu}>
+                Zeitung
+              </StyledLink>
+            </StyledListItem>
+            <StyledListItem>
               <StyledLink to="/Bestellung" onClick={closeMenu}>
                 <ShoppingCart size={30} />
                 <Badge badgeContent={cartLength} color="error" />
