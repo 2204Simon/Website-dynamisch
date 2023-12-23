@@ -30,9 +30,9 @@ const faqs = [
 const UnsereGeschichte: React.FC = () => {
   return (
     <>
-      <h1>Das Konzept von Delivery-Breakfast</h1>
+      <h2>Das Konzept von Delivery-Breakfast</h2>
       <FaqSection>
-        <h2>FAQs</h2>
+        <h3>FAQs</h3>
         <FaqList>
           {faqs.map((faq, index) => (
             <FaqItem key={index}>
@@ -44,7 +44,7 @@ const UnsereGeschichte: React.FC = () => {
           ))}
         </FaqList>
       </FaqSection>
-      <h2> Unsere Geschichte </h2>
+      <h3> Unsere Geschichte </h3>
       <p>
         Nachfolgend möchten wir Dir mittels einer Reise zurück in die
         Vergangenheit unsere Wurzeln sowie unsere Erfolgsgeschichte
