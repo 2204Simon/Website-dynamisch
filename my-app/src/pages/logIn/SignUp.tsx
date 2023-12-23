@@ -42,7 +42,7 @@ function Copyright(props: any) {
 export default function SignUp() {
   const { changeLoggedIn } = useLoggedIn();
   const navigate = useNavigate();
-  const [selectedPayment, setSelectedPayment] = useState("");
+  const [selectedPayment, setSelectedPayment] = useState("Paypal");
 
   function PasswordMismatch() {
     return CustomToast.error("Die Passwörter sind nicht identisch");
@@ -297,7 +297,7 @@ export default function SignUp() {
                 <RadioGroup
                   aria-label="Zahlung"
                   name="payment"
-                  defaultValue={"Barzahlung"}
+                  defaultValue={"Paypal"}
                   onChange={event => setSelectedPayment(event.target.value)}
                   style={{
                     display: "flex",

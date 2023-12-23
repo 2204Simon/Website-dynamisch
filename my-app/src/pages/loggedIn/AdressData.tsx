@@ -28,7 +28,7 @@ export default function AdressInformation(): JSX.Element {
   const adressInformation = useSelector(
     (state: { adress: AdressDataState }) => state.adress.AdressData
   );
-  const [selectedPayment, setSelectedPayment] = useState("");
+  const [selectedPayment, setSelectedPayment] = useState("Paypal");
   const handleEdit = (data: AdressData) => {
     setEditedData(data);
     setEditMode(true);
@@ -124,7 +124,7 @@ export default function AdressInformation(): JSX.Element {
                 <RadioGroup
                   aria-label="Zahlung"
                   name="payment"
-                  defaultValue={"Barzahlung"}
+                  defaultValue={"Paypal"}
                   onChange={event => setSelectedPayment(event.target.value)}
                   style={{
                     display: "flex",
