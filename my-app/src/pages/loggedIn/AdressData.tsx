@@ -20,6 +20,7 @@ import Radio from "@mui/material/Radio";
 import { FaPaypal } from "react-icons/fa";
 import { colors } from "../general/constants";
 import { PayPalPayment } from "../PaypalPayment";
+import { ZeitungsAbo } from "../Zeitungsabo";
 
 export default function AdressInformation(): JSX.Element {
   const dispatch = useDispatch();
@@ -54,6 +55,8 @@ export default function AdressInformation(): JSX.Element {
     setEditedData(null);
     setEditMode(false);
   };
+  const [hasSubscription, setHasSubscription] = useState(false);
+  const [expiryDate, setExpiryDate] = useState(new Date());
 
   return (
     <Container>
@@ -118,7 +121,13 @@ export default function AdressInformation(): JSX.Element {
                   },
                 }}
               />
-
+              <Title>Zeitungsabonnement:</Title>
+              <ZeitungsAbo
+                hasSubscription={hasSubscription}
+                setHasSubscription={setHasSubscription}
+                expiryDate={expiryDate}
+                setExpiryDate={setExpiryDate}
+              />
               <Title>Zahlungsmöglichkeiten:</Title>
               <FormControl component="fieldset">
                 <RadioGroup

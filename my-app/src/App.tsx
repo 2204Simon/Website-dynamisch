@@ -5,7 +5,6 @@ import Layout from "./pages/Layout";
 import Home from "./pages/home/Home";
 import Kontakt from "./pages/kontakt/Kontakt";
 import Produkte from "./pages/produkte/Produkt";
-import UnsereGeschichte from "./pages/unsereGeschichte/UnsereGeschichte";
 import NoPage from "./pages/NoPage";
 import Bestellung from "./pages/bestellung/Bestellung";
 import "./App.css";
@@ -15,7 +14,8 @@ import SignUp from "./pages/logIn/SignUp";
 import DeinKonto from "./pages/loggedIn/DeinKonto";
 import { LoggedInProvider } from "./globalVariables/loggedin"; // Import the LoggedInProvider component
 import Impressum from "./pages/Impressum";
-import Zeitung from "./pages/zeitung/Zeitung";
+import Konzept from "./pages/konzept/Konzept";
+import Konfigurator from "./pages/konfigurator/Konfigurator";
 const DatenschutzerklaerungLazy = lazy(
   () => import("./pages/Datenschutzerklaerung")
 );
@@ -31,10 +31,10 @@ export default function App(): JSX.Element {
               <Route index element={<Home />} />
               <Route path="Produkte" element={<Produkte />} />
               <Route path="Bestellung" element={<Bestellung />} />
-              <Route path="Unsere Geschichte" element={<UnsereGeschichte />} />
+              <Route path="Konzept" element={<Konzept />} />
               <Route path="Kontakt" element={<Kontakt />} />
               <Route path="LogIn" element={<LoginForm />} />
-              <Route path="Zeitung" element={<Zeitung />} />
+              <Route path="Konfigurator" element={<Konfigurator />} />
               <Route path="SignUp" element={<SignUp />} />
               <Route path="LoggedIn" element={<DeinKonto />} />
               <Route path="Impressum" element={<Impressum />} />

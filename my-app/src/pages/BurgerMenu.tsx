@@ -134,8 +134,8 @@ const BurgerMenu: React.FC = () => {
               </StyledLink>
             </StyledListItem>
             <StyledListItem>
-              <StyledLink to="/Unsere Geschichte" onClick={closeMenu}>
-                Geschichte
+              <StyledLink to="/Konzept" onClick={closeMenu}>
+                Konzept
               </StyledLink>
             </StyledListItem>
             <StyledListItem>
@@ -144,8 +144,8 @@ const BurgerMenu: React.FC = () => {
               </StyledLink>
             </StyledListItem>
             <StyledListItem>
-              <StyledLink to="/Zeitung" onClick={closeMenu}>
-                Zeitung
+              <StyledLink to="/Konfigurator" onClick={closeMenu}>
+                Breakfast Builder
               </StyledLink>
             </StyledListItem>
             <StyledListItem>

@@ -1,11 +1,14 @@
 import React from "react";
 import TimelineItem from "./TimelineBlock";
 
-import { 
-  TimelineItems, 
-  TimelineSection 
-} from "./TimelineBlock.styles";
-
+import { TimelineItems, TimelineSection } from "./TimelineBlock.styles";
+import {
+  FaqSection,
+  FaqList,
+  FaqItem,
+  FaqDetails,
+  FaqSummary,
+} from "./styles/Konzept.styles";
 import history_1 from "../../img/Our_History/history_1.webp";
 import old_bakery from "../../img/Our_History/old_bakery.webp";
 import founding from "../../img/Our_History/founding.webp";
@@ -13,27 +16,50 @@ import Mustermann from "../../img/Our_History/Johann_Mustermann.webp";
 import Germany from "../../img/Our_History/Germany.webp";
 import Austria from "../../img/Our_History/Austria.webp";
 import YoungGeneration from "../../img/Our_History/Young_Generation.webp";
-
-
-
-
+const faqs = [
+  {
+    question: "Wie kann ich ein Abonnement abschließen?",
+    answer: "Sie können ein Abonnement online über unsere Website abschließen.",
+  },
+  {
+    question: "Wann wird meine Zeitung geliefert?",
+    answer: "Die Zeitung wird jeden Morgen um 6 Uhr geliefert.",
+  },
+  // Füge weitere FAQs hinzu
+];
 const UnsereGeschichte: React.FC = () => {
   return (
-      
-   <>
-     <h2> Unsere Geschichte </h2>
-     <p> 
-        Nachfolgend möchten wir Dir mittels einer Reise zurück in die Vergangenheit unsere Wurzeln sowie unsere Erfolgsgeschichte näherbringen:
+    <>
+      <h1>Das Konzept von Delivery-Breakfast</h1>
+      <FaqSection>
+        <h2>FAQs</h2>
+        <FaqList>
+          {faqs.map((faq, index) => (
+            <FaqItem key={index}>
+              <FaqDetails>
+                <FaqSummary>{faq.question}</FaqSummary>
+                <p>{faq.answer}</p>
+              </FaqDetails>
+            </FaqItem>
+          ))}
+        </FaqList>
+      </FaqSection>
+      <h2> Unsere Geschichte </h2>
+      <p>
+        Nachfolgend möchten wir Dir mittels einer Reise zurück in die
+        Vergangenheit unsere Wurzeln sowie unsere Erfolgsgeschichte
+        näherbringen:
       </p>
-      
-      
+
       <TimelineSection>
         <TimelineItems>
           <TimelineItem
             date="2016"
             image={YoungGeneration}
             title={"Übernahme des Unternehmens durch die junge Generation"}
-            details={"Die Kinder der bisherigen Gesellschafter übernehmen das Tagesgeschäft, nachdem diese bereits fünf Jahre Erfahrung gesammelt haben."}
+            details={
+              "Die Kinder der bisherigen Gesellschafter übernehmen das Tagesgeschäft, nachdem diese bereits fünf Jahre Erfahrung gesammelt haben."
+            }
           />
 
           <TimelineItem
@@ -79,8 +105,7 @@ const UnsereGeschichte: React.FC = () => {
           />
         </TimelineItems>
       </TimelineSection>
-
-      </>
+    </>
   );
 };
 

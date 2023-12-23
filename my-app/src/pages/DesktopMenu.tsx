@@ -40,13 +40,13 @@ export const DesktopMenu: React.FC = () => {
           <StyledLink to="/Produkte">Produkte</StyledLink>
         </MenuItem>
         <MenuItem>
-          <StyledLink to="/Unsere Geschichte">Geschichte</StyledLink>
+          <StyledLink to="/Konzept">Konzept</StyledLink>
         </MenuItem>
         <MenuItem>
           <StyledLink to="/Kontakt">Kontakt</StyledLink>
         </MenuItem>
         <MenuItem>
-          <StyledLink to="/Zeitung">Zeitung</StyledLink>
+          <StyledLink to="/Konfigurator">Breakfast Builder</StyledLink>
         </MenuItem>
         <MenuItem>
           <StyledLink to="/Bestellung" aria-label="Link zu Bestellung">

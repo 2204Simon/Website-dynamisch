@@ -27,6 +27,7 @@ import { CustomToast } from "../general/toast.style";
 import { PayPalPayment } from "../PaypalPayment";
 import { useState } from "react";
 import { Bank } from "phosphor-react";
+import { ZeitungsAbo } from "../Zeitungsabo";
 
 function Copyright(props: any) {
   return (
@@ -91,6 +92,8 @@ export default function SignUp() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
+  const [hasSubscription, setHasSubscription] = useState(false);
+  const [expiryDate, setExpiryDate] = useState(new Date());
   return (
     <div>
       <Container component="main" maxWidth="xs" style={{ height: "auto" }}>
@@ -290,7 +293,13 @@ export default function SignUp() {
                   }}
                 />
               </Grid>
-
+              <Title>Zeitungsabonnement:</Title>
+              <ZeitungsAbo
+                hasSubscription={hasSubscription}
+                setHasSubscription={setHasSubscription}
+                expiryDate={expiryDate}
+                setExpiryDate={setExpiryDate}
+              />
               <Title>Zahlungsmöglichkeiten:</Title>
 
               <FormControl component="fieldset">
