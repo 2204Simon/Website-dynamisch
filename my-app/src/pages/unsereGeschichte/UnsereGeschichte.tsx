@@ -1,10 +1,7 @@
 import React from "react";
 import TimelineItem from "./TimelineBlock";
 
-import { 
-  TimelineItems, 
-  TimelineSection 
-} from "./TimelineBlock.styles";
+import { TimelineItems, TimelineSection } from "./TimelineBlock.styles";
 
 import history_1 from "../../img/Our_History/history_1.webp";
 import old_bakery from "../../img/Our_History/old_bakery.webp";
@@ -13,27 +10,27 @@ import Mustermann from "../../img/Our_History/Johann_Mustermann.webp";
 import Germany from "../../img/Our_History/Germany.webp";
 import Austria from "../../img/Our_History/Austria.webp";
 import YoungGeneration from "../../img/Our_History/Young_Generation.webp";
-
-
-
+import { colors } from "../general/constants";
 
 const UnsereGeschichte: React.FC = () => {
   return (
-      
-   <>
-     <h2> Unsere Geschichte </h2>
-     <p> 
-        Nachfolgend möchten wir Dir mittels einer Reise zurück in die Vergangenheit unsere Wurzeln sowie unsere Erfolgsgeschichte näherbringen:
+    <>
+      <h2 style={{ color: colors.black }}> Unsere Geschichte </h2>
+      <p style={{ color: colors.black }}>
+        Nachfolgend möchten wir Dir mittels einer Reise zurück in die
+        Vergangenheit unsere Wurzeln sowie unsere Erfolgsgeschichte
+        näherbringen:
       </p>
-      
-      
+
       <TimelineSection>
         <TimelineItems>
           <TimelineItem
             date="2016"
             image={YoungGeneration}
             title={"Übernahme des Unternehmens durch die junge Generation"}
-            details={"Die Kinder der bisherigen Gesellschafter übernehmen das Tagesgeschäft, nachdem diese bereits fünf Jahre Erfahrung gesammelt haben."}
+            details={
+              "Die Kinder der bisherigen Gesellschafter übernehmen das Tagesgeschäft, nachdem diese bereits fünf Jahre Erfahrung gesammelt haben."
+            }
           />
 
           <TimelineItem
@@ -79,8 +76,7 @@ const UnsereGeschichte: React.FC = () => {
           />
         </TimelineItems>
       </TimelineSection>
-
-      </>
+    </>
   );
 };
 

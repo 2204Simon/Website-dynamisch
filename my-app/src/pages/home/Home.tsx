@@ -9,6 +9,7 @@ import {
   Dunkel,
 } from "./styles/Home.styles";
 import fakeZeitung from "../.././img/Fake_Zeitung.webp";
+import { ThemeButton } from "../../Theme";
 
 const Home: React.FC = () => {
   return (

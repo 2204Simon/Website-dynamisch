@@ -36,7 +36,7 @@ export const Cooperation = styled.div`
   h1 {
     text-align: center;
     color: ${colors.white};
-    color: config.textColor;
+    color: ${colors.companycolor};
     margin-top: 0px;
   }
 

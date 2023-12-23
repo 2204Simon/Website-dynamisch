@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { colors } from "./constants";
 export const Button = styled.button`
   display: inline-block;
   width: 200px;
@@ -10,7 +10,7 @@ export const Button = styled.button`
   border-radius: 25px;
   font-weight: bold;
   border: 2px solid #000;
-  color: #fff;
+  color: ${colors.white};
   cursor: pointer;
   position: relative;
   overflow: hidden;

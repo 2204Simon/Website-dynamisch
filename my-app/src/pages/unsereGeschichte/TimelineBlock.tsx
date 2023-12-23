@@ -1,3 +1,4 @@
+import { colors } from "../general/constants";
 import {
   TimelineItemA,
   TimelineContent,
@@ -29,7 +30,9 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
         <Image src={image} alt="history_picture" />
       </ImageWrapper>
       <TimelineTitle>{title}</TimelineTitle>
-      <details style={{ cursor: "pointer" }}>{details}</details>
+      <details style={{ cursor: "pointer", color: colors.black }}>
+        {details}
+      </details>
     </TimelineContent>
   </TimelineItemA>
 );
