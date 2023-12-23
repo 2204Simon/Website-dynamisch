@@ -9,7 +9,7 @@ import {
   Paragraph,
   Title,
 } from "./UserInformation.styles";
-import { Pencil } from "phosphor-react";
+import { Bank, Pencil } from "phosphor-react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
@@ -17,8 +17,9 @@ import FormControl from "@mui/material/FormControl";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
-import { FaPaypal, FaApplePay, FaEuroSign } from "react-icons/fa";
+import { FaPaypal } from "react-icons/fa";
 import { colors } from "../general/constants";
+import { PayPalPayment } from "../PaypalPayment";
 
 export default function AdressInformation(): JSX.Element {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ export default function AdressInformation(): JSX.Element {
   const adressInformation = useSelector(
     (state: { adress: AdressDataState }) => state.adress.AdressData
   );
-
+  const [selectedPayment, setSelectedPayment] = useState("");
   const handleEdit = (data: AdressData) => {
     setEditedData(data);
     setEditMode(true);
@@ -124,6 +125,7 @@ export default function AdressInformation(): JSX.Element {
                   aria-label="Zahlung"
                   name="payment"
                   defaultValue={"Barzahlung"}
+                  onChange={event => setSelectedPayment(event.target.value)}
                   style={{
                     display: "flex",
                     flexDirection: "row",
@@ -132,40 +134,87 @@ export default function AdressInformation(): JSX.Element {
                 >
                   <Grid item xs={12}>
                     <FormControlLabel
-                      value="Barzahlung"
-                      control={<Radio style={{ color: colors.companycolor }} />}
-                      label={
-                        <div>
-                          <FaEuroSign /> Bar
-                        </div>
-                      }
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <FormControlLabel
                       value="Paypal"
                       control={<Radio style={{ color: colors.companycolor }} />}
                       label={
                         <div>
-                          <FaPaypal size={20} />
-                          <span></span>
+                          <FaPaypal size={15} />
                         </div>
                       }
                     />
                   </Grid>
                   <Grid item xs={12}>
                     <FormControlLabel
-                      value="Apple Pay"
+                      value="Lastschrift"
                       control={<Radio style={{ color: colors.companycolor }} />}
                       label={
                         <div>
-                          <FaApplePay size={40} />
+                          <Bank size={20} />
                         </div>
                       }
                     />
                   </Grid>
                 </RadioGroup>
               </FormControl>
+              {selectedPayment === "Paypal" && <PayPalPayment />}
+              {selectedPayment === "Lastschrift" && (
+                <>
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      required
+                      id="bankName"
+                      label="Bankname"
+                      name="bankName"
+                      inputProps={{
+                        maxLength: 50,
+                      }}
+                      InputLabelProps={{
+                        sx: {
+                          backgroundColor: "white",
+                          color: colors.companycolor,
+                        },
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      required
+                      id="bic"
+                      label="BIC"
+                      name="bic"
+                      inputProps={{
+                        maxLength: 50,
+                      }}
+                      InputLabelProps={{
+                        sx: {
+                          backgroundColor: "white",
+                          color: colors.companycolor,
+                        },
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      required
+                      id="iban"
+                      label="IBAN"
+                      name="iban"
+                      inputProps={{
+                        maxLength: 50,
+                      }}
+                      InputLabelProps={{
+                        sx: {
+                          backgroundColor: "white",
+                          color: colors.companycolor,
+                        },
+                      }}
+                    />
+                  </Grid>
+                </>
+              )}
             </Grid>
             <Button style={{ color: colors.companycolor }} type="submit">
               Speichern

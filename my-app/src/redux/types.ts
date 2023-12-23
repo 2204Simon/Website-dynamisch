@@ -21,9 +21,12 @@ export interface AdressDataState {
 export interface AdressData {
   plz: string;
   street: string;
-  housenumber: string;
   city: string;
+  housenumber: string;
   payment: string;
+  bankName?: string;
+  bic?: string;
+  iban?: string;
 }
 
 export enum ActionTypesAdressData {

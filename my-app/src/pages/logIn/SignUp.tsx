@@ -21,11 +21,12 @@ import {
   FormControlLabel,
   Radio,
 } from "@mui/material";
-import { FaEuroSign, FaPaypal, FaApplePay } from "react-icons/fa";
+import { FaPaypal } from "react-icons/fa";
 import { Title } from "../loggedIn/UserInformation.styles";
 import { CustomToast } from "../general/toast.style";
 import { PayPalPayment } from "../PaypalPayment";
 import { useState } from "react";
+import { Bank } from "phosphor-react";
 
 function Copyright(props: any) {
   return (
@@ -68,6 +69,9 @@ export default function SignUp() {
       city: data.get("city") as string,
       housenumber: data.get("hausnummer") as string,
       payment: data.get("payment") as string,
+      bankName: data.get("bankName") as string,
+      bic: data.get("bic") as string,
+      iban: data.get("iban") as string,
     };
 
     const password = data.get("password") as string;
@@ -303,43 +307,87 @@ export default function SignUp() {
                 >
                   <Grid item xs={12}>
                     <FormControlLabel
-                      value="Barzahlung"
-                      control={<Radio style={{ color: colors.companycolor }} />}
-                      label={
-                        <div style={{ fontWeight: "bold" }}>
-                          <FaEuroSign />
-                          Bar
-                        </div>
-                      }
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <FormControlLabel
                       value="Paypal"
                       control={<Radio style={{ color: colors.companycolor }} />}
                       label={
                         <div>
-                          <FaPaypal size={20} />
-                          <PayPalPayment />
-                          <span></span>
+                          <FaPaypal size={15} />
                         </div>
                       }
                     />
                   </Grid>
                   <Grid item xs={12}>
                     <FormControlLabel
-                      value="Apple Pay"
+                      value="Lastschrift"
                       control={<Radio style={{ color: colors.companycolor }} />}
                       label={
                         <div>
-                          <FaApplePay size={40} />
+                          <Bank size={20} />
                         </div>
                       }
                     />
                   </Grid>
                 </RadioGroup>
               </FormControl>
-              {selectedPayment === "PayPal" && <PayPalPayment />}
+              {selectedPayment === "Paypal" && <PayPalPayment />}
+              {selectedPayment === "Lastschrift" && (
+                <>
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      required
+                      id="bankName"
+                      label="Bankname"
+                      name="bankName"
+                      inputProps={{
+                        maxLength: 50,
+                      }}
+                      InputLabelProps={{
+                        sx: {
+                          backgroundColor: "white",
+                          color: colors.companycolor,
+                        },
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      required
+                      id="bic"
+                      label="BIC"
+                      name="bic"
+                      inputProps={{
+                        maxLength: 50,
+                      }}
+                      InputLabelProps={{
+                        sx: {
+                          backgroundColor: "white",
+                          color: colors.companycolor,
+                        },
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      required
+                      id="iban"
+                      label="IBAN"
+                      name="iban"
+                      inputProps={{
+                        maxLength: 50,
+                      }}
+                      InputLabelProps={{
+                        sx: {
+                          backgroundColor: "white",
+                          color: colors.companycolor,
+                        },
+                      }}
+                    />
+                  </Grid>
+                </>
+              )}
             </Grid>
             <Button type="submit" className="black-color white-orange">
               Registrieren

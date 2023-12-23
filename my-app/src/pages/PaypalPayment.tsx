@@ -1,6 +1,7 @@
 import {
   PayPalScriptProvider,
   PayPalButtons,
+  FUNDING,
   ReactPayPalScriptOptions,
 } from "@paypal/react-paypal-js";
 
@@ -13,7 +14,7 @@ export function PayPalPayment() {
         } as ReactPayPalScriptOptions
       }
     >
-      <PayPalButtons />
+      <PayPalButtons fundingSource={FUNDING.PAYPAL} />
     </PayPalScriptProvider>
   );
 }
