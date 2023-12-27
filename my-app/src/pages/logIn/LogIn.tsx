@@ -37,7 +37,7 @@ export default function SignIn() {
   const navigate = useNavigate();
   const { changeLoggedIn } = useLoggedIn();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const email = data.get("email") as string;
@@ -48,21 +48,34 @@ export default function SignIn() {
       return;
     }
 
-    if (
-      email === userInformation.email &&
-      password === userInformation.password
-    ) {
-      console.log("Erfolgreicher Login");
-      navigate("/loggedIn");
-      changeLoggedIn();
-    } else {
-      CustomToast.error("Falsches Passwort oder E-Mail");
-    }
+    try {
+      // Sende Anmeldeinformationen an das Backend
+      const response = await fetch("http://localhost:3000/api/v1/kunde/login", {
+        // Ändern Sie die URL entsprechend Ihrer neuen Route
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=UTF-8",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+      // Überprüfe die Antwort des Backends
+      if (response.ok) {
+        console.log("Erfolgreicher Login");
+        navigate("/loggedIn");
+        changeLoggedIn();
+      } else {
+        const responseBody = await response.json();
+        if (responseBody.error === "User not found") {
+          CustomToast.error("Benutzer nicht gefunden");
+        } else {
+          CustomToast.error("Falsches Passwort oder E-Mail");
+        }
+      }
+    } catch (error) {
+      console.error("Fehler bei der Anmeldung:", (error as any).message);
+      CustomToast.error("Fehler bei der Anmeldung");
+    }
   };
 
   return (
