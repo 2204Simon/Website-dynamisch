@@ -28,9 +28,13 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     if (theme === "dark") {
       root.style.setProperty("--black-color", "#000000");
       root.style.setProperty("--white-color", "#ffffff");
+      root.style.setProperty("--primary-color", "#e0e0e0");
+      root.style.setProperty("--secondary-color", "#333333");
     } else {
       root.style.setProperty("--black-color", "#ffffff");
       root.style.setProperty("--white-color", "#000000");
+      root.style.setProperty("--primary-color", "#333333");
+      root.style.setProperty("--secondary-color", "#e0e0e0");
     }
   }, [theme]);
   const toggleTheme = () => {
