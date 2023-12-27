@@ -20,7 +20,7 @@ export const SideBarButton = styled.div`
   }
 `;
 export const SideBarWrapper = styled.div`
-  background-color: ${colors.white};
+  background-color: ${colors.primarycolor};
   display: flex;
   flex-direction: column;
   justify-content: center;
