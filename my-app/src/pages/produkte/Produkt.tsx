@@ -26,6 +26,7 @@ import OSaftMitFrüchtebrot from "../../img/Food/OSaftMitFrüchtebrot.webp";
 import OSaftUndOrangenbrot from "../../img/Food/OSaftUndOrangenbrot.webp";
 import Fußball from "../../img/Food/Fußball.webp";
 import ScrollContainer from "./Arrows";
+import { colors } from "../general/constants";
 
 function Produkt() {
   const ShoppingCardsFood = [
@@ -326,7 +327,7 @@ function Produkt() {
   return (
     <>
       <h2>Unsere Produkte</h2>
-      <p>
+      <p style={{ color: colors.black }}>
         Nachfolgend findest Du unser reichliches Angebot an Speisen und
         Getränken, um Dir Dein perfektes Frühstück zusammenzustellen. Alle
         Produkte sind bio und klimaneutral hergestellt sowie geliefert. Wenn Du

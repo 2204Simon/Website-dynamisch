@@ -13,6 +13,7 @@ import { Button } from "../general/button.styles";
 import { Link as RouterLink } from "react-router-dom";
 import { CartItem, CartState } from "../../redux/types";
 import { removeFromCart } from "../../redux/action";
+import { colors } from "../general/constants";
 function WarenkorbSeite(): JSX.Element {
   const dispatch = useDispatch();
 
@@ -34,8 +35,8 @@ function WarenkorbSeite(): JSX.Element {
   return cartItems.length === 0 ? (
     <NoOrderContainer>
       <NoOrderTextWrapper>
-        <h2 style={{ color: "black" }}>Du hast nichts im Warenkorb</h2>
-        <p>
+        <h2 style={{ color: colors.black }}>Du hast nichts im Warenkorb</h2>
+        <p style={{ color: colors.black }}>
           Schaue Dich doch bei unseren Produkten um. Hier gibt es eine große
           Auswahl an Getränken, Speisen und Frühstücksmenüs!
         </p>

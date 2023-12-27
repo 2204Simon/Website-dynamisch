@@ -11,7 +11,7 @@ export const WarenkorbWrapper = styled.div`
   @media (max-width: ${mediaQueries.large}) {
     flex-direction: column-reverse;
     height: auto;
-    'width: 100vw;
+    width: 100vw;
     overflow: hidden;
     padding: 0;
     margin: 0;
@@ -30,7 +30,7 @@ export const Badge = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 12px;
-  color: white;
+  color: ${colors.white};
 `;
 
 export const BestellungsWrapper = styled.div`

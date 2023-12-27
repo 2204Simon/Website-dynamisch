@@ -52,7 +52,7 @@ export const PopupBackdrop = styled.div`
 `;
 
 export const PopupWrapper = styled.div`
-  background-color: #f9f9f9;
+  background-color: ${colors.primarycolor};
   padding: 20px;
   border-radius: 5px;
   text-align: center;
@@ -88,4 +88,4 @@ export const PopupWrapper = styled.div`
     padding: 20px 10px;
     box-shadow: none;
   }
-};`;
+`;
