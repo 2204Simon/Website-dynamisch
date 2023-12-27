@@ -293,13 +293,7 @@ export default function SignUp() {
                   }}
                 />
               </Grid>
-              <Title>Zeitungsabonnement:</Title>
-              <ZeitungsAbo
-                hasSubscription={hasSubscription}
-                setHasSubscription={setHasSubscription}
-                expiryDate={expiryDate}
-                setExpiryDate={setExpiryDate}
-              />
+
               <Title>Zahlungsmöglichkeiten:</Title>
 
               <FormControl component="fieldset">

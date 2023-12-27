@@ -19,31 +19,16 @@ export const ZeitungsAbo: React.FC<ZeitungsAboProps> = ({
 }) => {
   return (
     <>
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={hasSubscription}
-            onChange={event => setHasSubscription(event.target.checked)}
-            name="hasSubscription"
-            color="primary"
-          />
-        }
-        label="Hat das Abonnement abonniert"
+      <p>Das Abonnement läuft ab am: </p>
+      <DatePicker
+        selected={expiryDate}
+        onChange={(date: Date) => setExpiryDate(date)}
+        locale={de} // Setzen Sie die Locale auf Deutsch
+        dateFormat="dd.MM.yyyy" // Setzen Sie das Datumsformat auf Deutsch
+        popperContainer={({ children }) => (
+          <div style={{ zIndex: 9999 }}>{children}</div>
+        )}
       />
-      {hasSubscription && (
-        <>
-          <p>Das Abonnement läuft ab am: </p>
-          <DatePicker
-            selected={expiryDate}
-            onChange={(date: Date) => setExpiryDate(date)}
-            locale={de} // Setzen Sie die Locale auf Deutsch
-            dateFormat="dd.MM.yyyy" // Setzen Sie das Datumsformat auf Deutsch
-            popperContainer={({ children }) => (
-              <div style={{ zIndex: 9999 }}>{children}</div>
-            )}
-          />
-        </>
-      )}
     </>
   );
 };

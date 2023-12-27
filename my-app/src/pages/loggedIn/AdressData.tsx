@@ -14,13 +14,12 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import FormControl from "@mui/material/FormControl";
-import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Radio from "@mui/material/Radio";
 import { FaPaypal } from "react-icons/fa";
 import { colors } from "../general/constants";
 import { PayPalPayment } from "../PaypalPayment";
 import { ZeitungsAbo } from "../Zeitungsabo";
+import { Checkbox, FormGroup } from "@mui/material";
 
 export default function AdressInformation(): JSX.Element {
   const dispatch = useDispatch();
@@ -29,7 +28,18 @@ export default function AdressInformation(): JSX.Element {
   const adressInformation = useSelector(
     (state: { adress: AdressDataState }) => state.adress.AdressData
   );
-  const [selectedPayment, setSelectedPayment] = useState("Paypal");
+  const [selectedPayments, setSelectedPayments] = useState<string[]>([]);
+  const handlePaymentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const paymentOption = event.target.value;
+
+    if (selectedPayments.includes(paymentOption)) {
+      setSelectedPayments(
+        selectedPayments.filter(option => option !== paymentOption)
+      );
+    } else {
+      setSelectedPayments([...selectedPayments, paymentOption]);
+    }
+  };
   const handleEdit = (data: AdressData) => {
     setEditedData(data);
     setEditMode(true);
@@ -48,7 +58,7 @@ export default function AdressInformation(): JSX.Element {
       street: data.get("street") as string,
       city: data.get("city") as string,
       housenumber: data.get("hausnummer") as string,
-      payment: data.get("payment") as string,
+      payment: selectedPayments.join(", "), // Verwenden Sie den selectedPayments Zustand
     };
     console.log(preparedData);
     dispatch(addNewAdressData(preparedData));
@@ -130,100 +140,116 @@ export default function AdressInformation(): JSX.Element {
               />
               <Title>Zahlungsmöglichkeiten:</Title>
               <FormControl component="fieldset">
-                <RadioGroup
-                  aria-label="Zahlung"
-                  name="payment"
-                  defaultValue={"Paypal"}
-                  onChange={event => setSelectedPayment(event.target.value)}
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    flexWrap: "wrap",
-                  }}
-                >
+                <FormGroup>
                   <Grid item xs={12}>
                     <FormControlLabel
-                      value="Paypal"
-                      control={<Radio style={{ color: colors.companycolor }} />}
-                      label={
-                        <div>
-                          <FaPaypal size={15} />
-                        </div>
+                      control={
+                        <Checkbox
+                          checked={selectedPayments.includes("Paypal")}
+                          onChange={handlePaymentChange}
+                          value="Paypal"
+                          style={{ color: colors.companycolor }}
+                        />
                       }
+                      label={<FaPaypal size={15} />}
                     />
                   </Grid>
+                  {selectedPayments.includes("Paypal") && (
+                    <>
+                      <Grid item xs={12}>
+                        <TextField
+                          fullWidth
+                          required
+                          id="paypalEmail"
+                          label="PayPal Email"
+                          name="paypalEmail"
+                          inputProps={{
+                            maxLength: 100,
+                          }}
+                          InputLabelProps={{
+                            sx: {
+                              backgroundColor: "white",
+                              color: colors.companycolor,
+                            },
+                          }}
+                        />
+                      </Grid>
+                      <PayPalPayment />
+                    </>
+                  )}
                   <Grid item xs={12}>
                     <FormControlLabel
-                      value="Lastschrift"
-                      control={<Radio style={{ color: colors.companycolor }} />}
-                      label={
-                        <div>
-                          <Bank size={20} />
-                        </div>
+                      control={
+                        <Checkbox
+                          checked={selectedPayments.includes("Lastschrift")}
+                          onChange={handlePaymentChange}
+                          value="Lastschrift"
+                          style={{ color: colors.companycolor }}
+                        />
                       }
+                      label={<Bank size={20} />}
                     />
                   </Grid>
-                </RadioGroup>
+                  {selectedPayments.includes("Lastschrift") && (
+                    <>
+                      <Grid item xs={12}>
+                        <TextField
+                          fullWidth
+                          required
+                          id="bankName"
+                          label="Bankname"
+                          name="bankName"
+                          inputProps={{
+                            maxLength: 50,
+                          }}
+                          InputLabelProps={{
+                            sx: {
+                              backgroundColor: "white",
+                              color: colors.companycolor,
+                            },
+                          }}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                          fullWidth
+                          required
+                          id="bic"
+                          label="BIC"
+                          name="bic"
+                          inputProps={{
+                            maxLength: 50,
+                          }}
+                          InputLabelProps={{
+                            sx: {
+                              backgroundColor: "white",
+                              color: colors.companycolor,
+                            },
+                          }}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                          fullWidth
+                          required
+                          id="iban"
+                          label="IBAN"
+                          name="iban"
+                          inputProps={{
+                            maxLength: 50,
+                          }}
+                          InputLabelProps={{
+                            sx: {
+                              backgroundColor: "white",
+                              color: colors.companycolor,
+                            },
+                          }}
+                        />
+                      </Grid>
+                    </>
+                  )}
+                </FormGroup>
               </FormControl>
-              {selectedPayment === "Paypal" && <PayPalPayment />}
-              {selectedPayment === "Lastschrift" && (
-                <>
-                  <Grid item xs={12}>
-                    <TextField
-                      fullWidth
-                      required
-                      id="bankName"
-                      label="Bankname"
-                      name="bankName"
-                      inputProps={{
-                        maxLength: 50,
-                      }}
-                      InputLabelProps={{
-                        sx: {
-                          backgroundColor: "white",
-                          color: colors.companycolor,
-                        },
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      fullWidth
-                      required
-                      id="bic"
-                      label="BIC"
-                      name="bic"
-                      inputProps={{
-                        maxLength: 50,
-                      }}
-                      InputLabelProps={{
-                        sx: {
-                          backgroundColor: "white",
-                          color: colors.companycolor,
-                        },
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      fullWidth
-                      required
-                      id="iban"
-                      label="IBAN"
-                      name="iban"
-                      inputProps={{
-                        maxLength: 50,
-                      }}
-                      InputLabelProps={{
-                        sx: {
-                          backgroundColor: "white",
-                          color: colors.companycolor,
-                        },
-                      }}
-                    />
-                  </Grid>
-                </>
-              )}
             </Grid>
             <Button style={{ color: colors.companycolor }} type="submit">
               Speichern
