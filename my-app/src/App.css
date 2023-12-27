@@ -4,6 +4,7 @@
   --company-color: #aa7d03;
   --primary-color: #e0e0e0;
   --secondary-color: #333333;
+  user-select: none;
 }
 
 h1 {
