@@ -21,8 +21,10 @@ const reverseRotateAnimation = keyframes`
 `;
 
 export const Container = styled.div<{ flipped: boolean }>`
-  width: 400px;
+  width: 314px;
   height: 600px;
+  display: flex;
+  flex-direction: column;
   position: relative;
   transform-style: preserve-3d;
   margin-bottom: 20px;

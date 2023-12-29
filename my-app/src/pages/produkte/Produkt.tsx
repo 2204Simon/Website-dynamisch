@@ -26,6 +26,7 @@ import OSaftMitFrüchtebrot from "../../img/Food/OSaftMitFrüchtebrot.webp";
 import OSaftUndOrangenbrot from "../../img/Food/OSaftUndOrangenbrot.webp";
 import Fußball from "../../img/Food/Fußball.webp";
 import ScrollContainer from "./Arrows";
+import ShoppingCardNewspaper from "./ShoppingCardNewspaper";
 
 function Produkt() {
   const ShoppingCardsFood = [
@@ -321,6 +322,14 @@ function Produkt() {
     />,
   ];
 
+  const ShoppingcardsNewspaper = [
+    <ShoppingCardNewspaper
+      title={"Zeitung"}
+      price={1}
+      image={OSaftUndOrangenbrot}
+    />,
+  ];
+
   const isTouchpad = matchMedia("(pointer: coarse)").matches;
 
   return (
@@ -391,6 +400,19 @@ function Produkt() {
           {ShoppingCardsMenu}
         </ScrollContainer>
       )}
+
+      <h3>Zeitung</h3>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "nowrap",
+          overflowX: "scroll",
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+        }}
+      >
+        {ShoppingcardsNewspaper}
+      </div>
     </>
   );
 }
