@@ -325,7 +325,7 @@ function Produkt() {
   const ShoppingcardsNewspaper = [
     <ShoppingCardNewspaper
       title={"Zeitung"}
-      price={1}
+      basePrice={1}
       image={OSaftUndOrangenbrot}
     />,
   ];

@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, useRef } from "react";
+import React, { useState, ChangeEvent, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux"; // Import der useDispatch-Hook
 // Import der addToCart-Action aus deiner Redux-Komponente
 import {
@@ -31,13 +31,13 @@ import { de } from "date-fns/locale";
 interface ShoppingCardProps {
   image: string;
   title: string;
-  price: number;
+  basePrice: number;
 }
 
 const ShoppingCardNewspaper: React.FC<ShoppingCardProps> = ({
   image,
   title,
-  price,
+  basePrice,
 }) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
   const [displayNone, setDisplayNone] = useState(false);
@@ -72,13 +72,39 @@ const ShoppingCardNewspaper: React.FC<ShoppingCardProps> = ({
     <input type="text" {...props} readOnly />
   );
 
+  const [selectedDays, setSelectedDays] = useState(1);
+  const [price, setPrice] = useState(basePrice);
+
+  useEffect(() => {
+    setPrice(basePrice + (selectedDays > 1 ? selectedDays - 1 : 0));
+  }, [selectedDays, basePrice]);
+
+  const handleDateChange = (date: Date) => {
+    setSelectedDate(date);
+    const selectedDateMidnight = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    );
+    const minDateMidnight = new Date(
+      minDate.getFullYear(),
+      minDate.getMonth(),
+      minDate.getDate()
+    );
+    const days = Math.ceil(
+      (selectedDateMidnight.getTime() - minDateMidnight.getTime()) /
+        (1000 * 60 * 60 * 24)
+    );
+    setSelectedDays(days + 1);
+  };
+
   function CalendarComponent(): JSX.Element {
     return (
       <div>
         {load && (
           <StyledDatePicker
             selected={selectedDate}
-            onChange={(date: Date) => setSelectedDate(date)}
+            onChange={handleDateChange}
             minDate={minDate}
             maxDate={maxDate}
             dateFormat={"dd.MM.yyyy"}
