@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { CartState } from "../redux/types";
 import { Badge } from "@mui/material";
 import { lazy, useEffect, useState, useTransition } from "react";
+import { useCookies } from "react-cookie";
 const LazyChatra = lazy(() => import("./Chatra"));
 
 function BottomNavBar(): JSX.Element {
@@ -24,6 +25,7 @@ function BottomNavBar(): JSX.Element {
   let cartLength = 0;
   cartItems.map(item => (cartLength += item.anzahl));
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [cookies, setCookie] = useCookies(["cookiesAccepted"]);
 
   useEffect(() => {
     const handleScroll = (): void => {

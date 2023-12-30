@@ -1,4 +1,6 @@
+import React, { useEffect, useState } from "react";
 import { MapContainer } from "./styles/Kontakt.styles";
+import { useCookies } from "react-cookie";
 
 function ContactMap(): JSX.Element {
   return (
@@ -15,4 +17,5 @@ function ContactMap(): JSX.Element {
     </MapContainer>
   );
 }
+
 export { ContactMap };

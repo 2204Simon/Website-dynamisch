@@ -16,16 +16,32 @@ import { LoggedInProvider } from "./globalVariables/loggedin"; // Import the Log
 import Impressum from "./pages/Impressum";
 import Konzept from "./pages/konzept/Konzept";
 import Konfigurator from "./pages/konfigurator/Konfigurator";
+import { useCookies } from "react-cookie";
+import { CookieBanner } from "./CookieBanner"; // Import the CookieBanner component
+
 const DatenschutzerklaerungLazy = lazy(
   () => import("./pages/Datenschutzerklaerung")
 );
 
 export default function App(): JSX.Element {
+  const [cookies, setCookie] = useCookies(["cookiesAccepted"]);
+
+  const handleAccept = () => {
+    setCookie("cookiesAccepted", "true", { path: "/" });
+  };
+
+  const handleDecline = () => {
+    setCookie("cookiesAccepted", "false", { path: "/" });
+  };
+
   return (
     <React.StrictMode>
       <LoggedInProvider>
         {/* Wrap your routes in LoggedInProvider */}
         <BrowserRouter>
+          {cookies.cookiesAccepted === undefined && (
+            <CookieBanner onAccept={handleAccept} onDecline={handleDecline} />
+          )}
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
@@ -54,7 +70,7 @@ export default function App(): JSX.Element {
             </Route>
           </Routes>
           <Footer />
-          <BottomNavBar />
+          {cookies.cookiesAccepted === true ? <BottomNavBar /> : ""}
         </BrowserRouter>
       </LoggedInProvider>
     </React.StrictMode>

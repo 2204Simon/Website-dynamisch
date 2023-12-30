@@ -13,11 +13,12 @@ import { ContactMap } from "./Map";
 import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
 import { BlackColorButton } from "../general/button";
+import { useCookies } from "react-cookie";
 
 function Kontakt(): JSX.Element {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-
+  const [cookies, setCookie] = useCookies(["cookiesAccepted"]);
   function handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
     console.log(`Danke für Ihre Anmeldung, ${email}!`);
@@ -58,7 +59,11 @@ function Kontakt(): JSX.Element {
             <MapPin size={40} /> Frühstücksstr. 20, 89518 Frühhausen
           </ContactListItem>
         </ContactList>
-        <ContactMap />
+        {cookies.cookiesAccepted === true ? (
+          <ContactMap />
+        ) : (
+          <div>Du musst die Cookies akzeptieren, um die Karte zu sehen.</div>
+        )}
         <hr />
         <ContactContainer>
           <h2>Newsletter abonnieren</h2>
