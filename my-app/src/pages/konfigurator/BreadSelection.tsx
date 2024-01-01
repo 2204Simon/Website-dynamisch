@@ -3,54 +3,71 @@ import React, { useState } from "react";
 import {
   Stage,
   StageHeader,
+  ProductImage,
   SelectionContainer,
   SelectionList,
   SelectionItem,
-  SelectionItemImage,
+  NavigationIcon,
 } from "./styles/Konfigurator.styles";
-import baguetteImage from "../../img/Food/BaguetteAlone.webp";
-import whiteBreadImage from "../../img/Food/BaguetteAlone.webp";
-import wholeWheatBreadImage from "../../img/Food/BaguetteGelb.webp";
+
+import whiteBreadImage from "../../img/Food/Croissant.webp"; // Platzhalterbild
+import wholegrainBreadImage from "../../img/Food/Croissant.webp"; // Platzhalterbild
+import lunchDiningImage from "../../img/Food/Croissant.webp"; // Platzhalterbild
+import baguetteImage from "../../img/Food/Croissant.webp"; // Platzhalterbild
+import { ArrowForward } from "@mui/icons-material";
 
 interface BreadSelectionProps {
-  onNextStage: (selectedProduct: string) => void;
+  onNextStage: (selectedProduct: string, selectedImage: string) => void;
 }
 
 const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
   const [selectedBread, setSelectedBread] = useState<string | null>(null);
 
-  const handleBreadSelect = (breadType: string) => {
+  const handleBreadSelect = (breadType: string, image: string) => {
     setSelectedBread(breadType);
-  };
-
-  const handleNext = () => {
-    if (selectedBread) {
-      onNextStage(selectedBread);
-    }
+    onNextStage(breadType, image);
   };
 
   return (
     <Stage>
-      <StageHeader>Wähle dein Brot</StageHeader>
+      <StageHeader>
+        <NavigationIcon>
+          <ArrowForward />
+        </NavigationIcon>
+        Wähle dein Brot
+      </StageHeader>
       <SelectionContainer>
         <SelectionList>
-          <SelectionItem onClick={() => handleBreadSelect("Weißbrot")}>
-            <SelectionItemImage src={whiteBreadImage} alt="Weißbrot" />
+          <SelectionItem
+            onClick={() => handleBreadSelect("Weißbrot", whiteBreadImage)}
+          >
+            <ProductImage src={whiteBreadImage} alt="Weißbrot" />
             Weißbrot
           </SelectionItem>
-          <SelectionItem onClick={() => handleBreadSelect("Vollkornbrot")}>
-            <SelectionItemImage src={wholeWheatBreadImage} alt="Vollkornbrot" />
+          <SelectionItem
+            onClick={() =>
+              handleBreadSelect("Vollkornbrot", wholegrainBreadImage)
+            }
+          >
+            <ProductImage src={wholegrainBreadImage} alt="Vollkornbrot" />
             Vollkornbrot
+          </SelectionItem>
+          <SelectionItem
+            onClick={() => handleBreadSelect("Mischbrot", lunchDiningImage)}
+          >
+            <ProductImage src={lunchDiningImage} alt="Mischbrot" />
+            Mischbrot
+          </SelectionItem>
+          <SelectionItem
+            onClick={() => handleBreadSelect("Baguette", baguetteImage)}
+          >
+            <ProductImage src={baguetteImage} alt="Baguette" />
+            Baguette
           </SelectionItem>
           {/* Weitere Brot-Optionen hinzufügen */}
         </SelectionList>
       </SelectionContainer>
-      {selectedBread && (
-        <>
-          <p>Ausgewähltes Produkt: {selectedBread}</p>
-          <button onClick={handleNext}>Weiter</button>
-        </>
-      )}
+      {selectedBread && <p>Ausgewähltes Produkt: {selectedBread}</p>}
     </Stage>
   );
 };

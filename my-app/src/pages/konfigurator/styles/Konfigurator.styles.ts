@@ -1,5 +1,13 @@
 // Konfigurator.styles.ts
 import styled from "styled-components";
+import {
+  ArrowForward,
+  ArrowBack,
+  Fastfood,
+  LocalCafe,
+  LunchDining,
+  EmojiFoodBeverage,
+} from "@mui/icons-material";
 
 export const ConfiguratorContainer = styled.div`
   max-width: 800px;
@@ -15,7 +23,9 @@ export const ConfiguratorContent = styled.div`
 
 export const StageContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
+  justify-content: center;
 `;
 
 export const Stage = styled.div`
@@ -28,11 +38,15 @@ export const Stage = styled.div`
 export const StageHeader = styled.h2`
   font-size: 1.5rem;
   color: #333;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 `;
 
 export const ProductImage = styled.img`
   max-width: 100%;
   height: auto;
+  max-height: 150px; /* Anpassung der Bildgröße */
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 `;
@@ -42,6 +56,7 @@ export const SelectionContainer = styled.div`
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
 `;
 
 export const SelectionList = styled.ul`
@@ -49,6 +64,7 @@ export const SelectionList = styled.ul`
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 `;
 
 export const SelectionItem = styled.li`
@@ -58,15 +74,18 @@ export const SelectionItem = styled.li`
   border: 1px solid #ddd;
   border-radius: 4px;
   transition: background-color 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 
   &:hover {
     background-color: #f4f4f4;
   }
-`;
 
-export const SelectionItemImage = styled(ProductImage)`
-  max-width: 50px;
-  margin-right: 10px;
+  svg {
+    font-size: 2rem;
+  }
 `;
 
 export const SummaryContainer = styled.div`
@@ -84,4 +103,19 @@ export const SummaryHeader = styled.h3`
 
 export const SummaryText = styled.p`
   margin-top: 10px;
+`;
+
+export const NavigationIcon = styled.div`
+  font-size: 2rem;
+  cursor: pointer;
+  color: #333;
+  display: flex;
+  align-items: center;
+`;
+
+export const NavigationContainer = styled.div`
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
 `;

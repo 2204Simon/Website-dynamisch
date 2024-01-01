@@ -3,18 +3,26 @@ import React, { useState } from "react";
 import {
   Stage,
   StageHeader,
+  ProductImage,
   SelectionContainer,
   SelectionList,
   SelectionItem,
-  SelectionItemImage,
+  NavigationIcon,
 } from "./styles/Konfigurator.styles";
-import cheeseImage from "../../img/Food/Croissant.webp";
-import tomatoImage from "../../img/Food/Brezel.webp";
-import lettuceImage from "../../img/Food/BaguetteAlone.webp";
+import {
+  ArrowForward,
+  ArrowBack,
+  EmojiFoodBeverage,
+} from "@mui/icons-material";
+
+import cheeseImage from "../../img/Food/Croissant.webp"; // Platzhalterbild
+import tomatoImage from "../../img/Food/Croissant.webp"; // Platzhalterbild
+import lettuceImage from "../../img/Food/Croissant.webp"; // Platzhalterbild
+import eggImage from "../../img/Food/Croissant.webp"; // Platzhalterbild
 
 interface ToppingsSelectionProps {
+  onNextStage: (selectedProduct: string, selectedImage: string) => void;
   onPrevStage: () => void;
-  onNextStage: (selectedProduct: string) => void;
 }
 
 const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
@@ -23,7 +31,15 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
 }) => {
   const [selectedToppings, setSelectedToppings] = useState<string[]>([]);
 
-  const handleToppingSelect = (topping: string) => {
+  const toppingsData = [
+    { name: "Käse", image: cheeseImage },
+    { name: "Tomate", image: tomatoImage },
+    { name: "Salat", image: lettuceImage },
+    { name: "Ei", image: eggImage },
+    // Weitere Belag-Optionen hinzufügen
+  ];
+
+  const handleToppingSelect = (topping: string, image: string) => {
     const updatedToppings = selectedToppings.includes(topping)
       ? selectedToppings.filter(selected => selected !== topping)
       : [...selectedToppings, topping];
@@ -37,36 +53,58 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
 
   const handleNext = () => {
     if (selectedToppings.length > 0) {
-      onNextStage(selectedToppings.join(", "));
+      onNextStage(
+        selectedToppings.join(", "),
+        selectedToppings
+          .map(topping => {
+            const matchingTopping = toppingsData.find(t => t.name === topping);
+            return matchingTopping?.image || "";
+          })
+          .join(", ")
+      );
     }
   };
 
   return (
     <Stage>
-      <StageHeader>Wähle deine Beläge</StageHeader>
+      <StageHeader>
+        <NavigationIcon onClick={handlePrev}>
+          <ArrowBack />
+        </NavigationIcon>
+        Wähle deine Beläge
+        <NavigationIcon onClick={handleNext}>
+          <ArrowForward />
+        </NavigationIcon>
+      </StageHeader>
       <SelectionContainer>
         <SelectionList>
-          <SelectionItem onClick={() => handleToppingSelect("Käse")}>
-            <SelectionItemImage src={cheeseImage} alt="Käse" />
+          <SelectionItem
+            onClick={() => handleToppingSelect("Käse", cheeseImage)}
+          >
+            <ProductImage src={cheeseImage} alt="Käse" />
             Käse
           </SelectionItem>
-          <SelectionItem onClick={() => handleToppingSelect("Tomate")}>
-            <SelectionItemImage src={tomatoImage} alt="Tomate" />
+          <SelectionItem
+            onClick={() => handleToppingSelect("Tomate", tomatoImage)}
+          >
+            <ProductImage src={tomatoImage} alt="Tomate" />
             Tomate
           </SelectionItem>
-          <SelectionItem onClick={() => handleToppingSelect("Salat")}>
-            <SelectionItemImage src={lettuceImage} alt="Salat" />
+          <SelectionItem
+            onClick={() => handleToppingSelect("Salat", lettuceImage)}
+          >
+            <ProductImage src={lettuceImage} alt="Salat" />
             Salat
+          </SelectionItem>
+          <SelectionItem onClick={() => handleToppingSelect("Ei", eggImage)}>
+            <ProductImage src={eggImage} alt="Ei" />
+            Ei
           </SelectionItem>
           {/* Weitere Belag-Optionen hinzufügen */}
         </SelectionList>
       </SelectionContainer>
       {selectedToppings.length > 0 && (
-        <>
-          <p>Ausgewählte Produkte: {selectedToppings.join(", ")}</p>
-          <button onClick={handlePrev}>Zurück</button>
-          <button onClick={handleNext}>Weiter</button>
-        </>
+        <p>Ausgewählte Beläge: {selectedToppings.join(", ")}</p>
       )}
     </Stage>
   );
