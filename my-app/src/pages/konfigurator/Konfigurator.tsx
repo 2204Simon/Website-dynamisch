@@ -3,70 +3,64 @@ import React, { useState } from "react";
 import BreadSelection from "./BreadSelection";
 import ToppingsSelection from "./ToppingsSelection";
 import DrinkSelection from "./DrinkSelection";
-import {
-  ConfiguratorContainer,
-  ConfiguratorContent,
-  StageContainer,
-  SummaryContainer,
-  SummaryHeader,
-  SummaryText,
-} from "./styles/Konfigurator.styles";
+import { NavigationIcon } from "./styles/Konfigurator.styles";
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 
 const Konfigurator: React.FC = () => {
-  const [currentStage, setCurrentStage] = useState(1);
-  const [config, setConfig] = useState({
-    bread: null,
-    toppings: [],
-    drink: null,
-  });
+  const [currentStage, setCurrentStage] = useState<number>(1);
+  const [selectedBread, setSelectedBread] = useState<string>("");
+  const [selectedToppings, setSelectedToppings] = useState<string>("");
+  const [selectedDrink, setSelectedDrink] = useState<string>("");
 
-  const handleNextStage = () => {
-    setCurrentStage(prevStage => prevStage + 1);
+  const handleNextStage = (selectedProduct: string, selectedImage: string) => {
+    setCurrentStage(currentStage + 1);
+
+    switch (currentStage) {
+      case 1:
+        setSelectedBread(selectedProduct);
+        break;
+      case 2:
+        setSelectedToppings(selectedProduct);
+        break;
+      case 3:
+        setSelectedDrink(selectedProduct);
+        break;
+      default:
+        break;
+    }
   };
 
   const handlePrevStage = () => {
-    setCurrentStage(prevStage => prevStage - 1);
-  };
-
-  const handleComplete = () => {
-    // Handle the completion logic, e.g., send the configuration to the server
-    console.log("Configuration:", config);
+    setCurrentStage(currentStage - 1);
   };
 
   return (
-    <ConfiguratorContainer>
-      <ConfiguratorContent>
-        <StageContainer>
-          {currentStage === 1 && (
-            <BreadSelection onNextStage={handleNextStage} />
-          )}
-          {currentStage === 2 && (
-            <ToppingsSelection
-              onPrevStage={handlePrevStage}
-              onNextStage={handleNextStage}
-            />
-          )}
-          {currentStage === 3 && (
-            <DrinkSelection
-              onPrevStage={handlePrevStage}
-              onComplete={handleComplete}
-            />
-          )}
-        </StageContainer>
-        {currentStage === 3 && (
-          <SummaryContainer>
-            <SummaryHeader>Zusammenfassung</SummaryHeader>
-            <SummaryText>
-              Brot: {config.bread}
-              <br />
-              Beläge: {config.toppings.join(", ")}
-              <br />
-              Getränke: {config.drink}
-            </SummaryText>
-          </SummaryContainer>
-        )}
-      </ConfiguratorContent>
-    </ConfiguratorContainer>
+    <div>
+      {currentStage === 1 && <BreadSelection onNextStage={handleNextStage} />}
+      {currentStage === 2 && (
+        <ToppingsSelection
+          onNextStage={handleNextStage}
+          onPrevStage={handlePrevStage}
+        />
+      )}
+      {currentStage === 3 && (
+        <DrinkSelection
+          onPrevStage={handlePrevStage}
+          onComplete={handleNextStage}
+        />
+      )}
+      {currentStage === 4 && (
+        <div>
+          <NavigationIcon onClick={handlePrevStage}>
+            <ArrowBack />
+          </NavigationIcon>
+          <h2>Zusammenfassung</h2>
+          <p>Ausgewähltes Brot: {selectedBread}</p>
+          <p>Ausgewählte Beläge: {selectedToppings}</p>
+          <p>Ausgewähltes Getränk: {selectedDrink}</p>
+        </div>
+      )}
+    </div>
   );
 };
 

@@ -10,10 +10,10 @@ import {
   NavigationIcon,
 } from "./styles/Konfigurator.styles";
 
-import whiteBreadImage from "../../img/Food/Croissant.webp"; // Platzhalterbild
-import wholegrainBreadImage from "../../img/Food/Croissant.webp"; // Platzhalterbild
-import lunchDiningImage from "../../img/Food/Croissant.webp"; // Platzhalterbild
-import baguetteImage from "../../img/Food/Croissant.webp"; // Platzhalterbild
+import whiteBreadImage from "../../img/Food/BaguetteAlone.webp"; // Platzhalterbild
+import wholegrainBreadImage from "../../img/Food/BaguetteAlone.webp"; // Platzhalterbild
+import lunchDiningImage from "../../img/Food/BaguttSalat.webp"; // Platzhalterbild
+import baguetteImage from "../../img/Food/käseBaguett.webp"; // Platzhalterbild
 import { ArrowForward } from "@mui/icons-material";
 
 interface BreadSelectionProps {

@@ -11,9 +11,9 @@ import {
 } from "./styles/Konfigurator.styles";
 import { LocalCafe, ArrowForward, ArrowBack } from "@mui/icons-material";
 
-import orangeJuiceImage from "../../img/Food/Croissant.webp"; // Platzhalterbild
-import coffeeImage from "../../img/Food/Croissant.webp"; // Platzhalterbild
-import teaImage from "../../img/Food/Croissant.webp"; // Platzhalterbild
+import orangeJuiceImage from "../../img/Drinks/Orangensaft.webp"; // Platzhalterbild
+import coffeeImage from "../../img/Drinks/Kaffee.webp"; // Platzhalterbild
+import teaImage from "../../img/Drinks/Zitronentee.webp"; // Platzhalterbild
 
 interface DrinkSelectionProps {
   onPrevStage: () => void;
