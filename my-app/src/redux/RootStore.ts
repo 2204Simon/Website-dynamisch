@@ -21,9 +21,7 @@ const localStorageMiddleware: Middleware<{}, RootState> =
   storeAPI => next => (action: unknown) => {
     const result = next(action);
     const state = storeAPI.getState();
-    console.log(state);
     localStorage.setItem("cardState", JSON.stringify(state.cart));
-    console.log(localStorage);
 
     return result;
   };
@@ -31,16 +29,10 @@ const localStorageMiddleware: Middleware<{}, RootState> =
 // Function to load state from localStorage
 const loadState = () => {
   try {
-    console.log("aufgeruuuuuuuuuuuuuuuffffffffffffffennnnnnn");
-
     const serializedState = localStorage.getItem("cardState");
-    console.log(serializedState);
-
     if (serializedState === null) {
       return undefined;
     }
-    console.log({ cart: JSON.parse(serializedState) });
-
     return { cart: JSON.parse(serializedState) };
   } catch (err) {
     return undefined;
