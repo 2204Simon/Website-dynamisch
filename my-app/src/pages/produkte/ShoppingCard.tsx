@@ -23,12 +23,13 @@ import {
 import { BlackColorButton } from "../general/button";
 import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
-import { addToCart, increaseQuantity } from "../../redux/action";
+
 import { CartState } from "../../redux/types";
 import { Plus, XCircle, Minus } from "phosphor-react";
 import { FaSeedling } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { formatNumber } from "../general/constants";
+import { addToCart, increaseQuantity } from "../../redux/cartReducer";
 
 interface ShoppingCardProps {
   image: string;
@@ -78,7 +79,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
       preis: price,
       anzahl: quantity,
     };
-    dispatch(increaseQuantity(item, quantity2));
+    dispatch(increaseQuantity({ item, amount: quantity2 }));
   };
 
   const handleAddToCart = () => {

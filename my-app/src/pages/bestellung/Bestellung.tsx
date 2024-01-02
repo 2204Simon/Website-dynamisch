@@ -12,7 +12,8 @@ import {
 import { Button } from "../general/button.styles";
 import { Link as RouterLink } from "react-router-dom";
 import { CartItem, CartState } from "../../redux/types";
-import { removeFromCart } from "../../redux/action";
+import { removeFromCart } from "../../redux/cartReducer";
+
 function WarenkorbSeite(): JSX.Element {
   const dispatch = useDispatch();
 

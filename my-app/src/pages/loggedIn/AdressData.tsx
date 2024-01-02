@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addNewAdressData } from "../../redux/action";
 import { AdressDataState, AdressData } from "../../redux/types";
 import {
   Card,
@@ -20,6 +19,7 @@ import { colors } from "../general/constants";
 import { PayPalPayment } from "../PaypalPayment";
 import { ZeitungsAbo } from "../Zeitungsabo";
 import { Checkbox, FormGroup } from "@mui/material";
+import { addNewAdress } from "../../redux/adressDataReducer";
 
 export default function AdressInformation(): JSX.Element {
   const dispatch = useDispatch();
@@ -61,7 +61,7 @@ export default function AdressInformation(): JSX.Element {
       payment: selectedPayments.join(", "), // Verwenden Sie den selectedPayments Zustand
     };
     console.log(preparedData);
-    dispatch(addNewAdressData(preparedData));
+    dispatch(addNewAdress(preparedData));
     setEditedData(null);
     setEditMode(false);
   };

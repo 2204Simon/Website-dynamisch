@@ -19,8 +19,8 @@ import { formatNumber } from "../general/constants";
 import { CustomToast } from "../general/toast.style";
 import PackageLocationQRCode from "./PackageLocationQRCode";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart } from "../../redux/action";
 import { CartState } from "../../redux/types";
+import { clearCart } from "../../redux/cartReducer";
 
 interface SideBarProps {
   produktAnzahl: number;

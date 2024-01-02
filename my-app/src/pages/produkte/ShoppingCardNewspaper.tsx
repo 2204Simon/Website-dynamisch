@@ -13,20 +13,15 @@ import {
   ContainerFront,
   Title2,
   Top,
-  MiniH,
-  ListContainer,
 } from "./styles/ShoppingCard.styles";
 import { BlackColorButton } from "../general/button";
 import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
-import { addToCart } from "../../redux/action";
-import { CartState } from "../../redux/types";
 import { XCircle } from "phosphor-react";
 import { FaSeedling } from "react-icons/fa";
-import { useSelector } from "react-redux";
-import { formatNumber } from "../general/constants";
 import { Calendar, Popper, StyledDatePicker } from "../bestellung/Calendar";
 import { de } from "date-fns/locale";
+import { formatNumber } from "../general/constants";
 
 interface ShoppingCardProps {
   image: string;

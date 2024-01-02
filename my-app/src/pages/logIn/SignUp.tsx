@@ -13,7 +13,6 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useLoggedIn } from "../../globalVariables/loggedin";
 import { LogInData } from "../../redux/types";
 import { useDispatch } from "react-redux";
-import { addNewAdressData, addNewUser } from "../../redux/action";
 import { colors } from "../general/constants";
 import {
   FormControl,
@@ -28,6 +27,8 @@ import { PayPalPayment } from "../PaypalPayment";
 import { useState } from "react";
 import { Bank } from "phosphor-react";
 import { ZeitungsAbo } from "../Zeitungsabo";
+import { addNewUser } from "../../redux/userReducer";
+import { addNewAdress } from "../../redux/adressDataReducer";
 
 function Copyright(props: any) {
   return (
@@ -83,7 +84,7 @@ export default function SignUp() {
     }
 
     dispatch(addNewUser(preparedData));
-    dispatch(addNewAdressData(adressData));
+    dispatch(addNewAdress(adressData));
     navigate("/LoggedIn");
     changeLoggedIn();
   };

@@ -1,67 +1,49 @@
-import { CustomToast } from "../pages/general/toast.style";
-import { CartActionTypes, CartState } from "./types"; // Importieren Sie die erforderlichen Typen
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { CartItem, CartState } from "./types";
 
-const cartReducer = (
-  state: CartState = {
-    cartItems: [],
-  },
-  action: any
-) => {
-  switch (action.type) {
-    case CartActionTypes.ADD_TO_CART:
-      return {
-        ...state,
-        cartItems: [...state.cartItems, action.payload],
-      };
-    case CartActionTypes.REMOVE_FROM_CART:
-      return {
-        ...state,
-        cartItems: state.cartItems.filter(item => item !== action.payload),
-      };
-    case CartActionTypes.CLEAR_CART:
-      return {
-        ...state,
-        cartItems: [],
-      };
-    case CartActionTypes.INCREASE_QUANTITY:
-      return {
-        ...state,
-        cartItems: state.cartItems.map(item => {
-          if (item.produktname === action.payload.item.produktname) {
-            console.log("passendes Item gefunden");
-            if (item.anzahl + action.payload.amount > 99) {
-              CustomToast.error("Maximale Anzahl erreicht");
-              return {
-                ...item,
-                anzahl: 99,
-              };
-            } else {
-              CustomToast.success("Produkt im Warenkorb");
-              return {
-                ...item,
-                anzahl: item.anzahl + action.payload.amount,
-              };
-            }
-          }
-          return item;
-        }),
-      };
-    case CartActionTypes.DECREASE_QUANTITY:
-      return {
-        ...state,
-        cartItems: state.cartItems.map(item => {
-          if (item === action.payload) {
-            return {
-              ...item,
-              anzahl: Math.max(0, item.anzahl - 1),
-            };
-          }
-          return item;
-        }),
-      };
-    default:
-      return state;
-  }
+const initialState: CartState = {
+  cartItems: [],
 };
 
-export default cartReducer;
+const cartSlice = createSlice({
+  name: "cart",
+  initialState,
+  reducers: {
+    addToCart: (state, action: PayloadAction<CartItem>) => {
+      state.cartItems.push(action.payload);
+    },
+    removeFromCart: (state, action: PayloadAction<CartItem>) => {
+      state.cartItems = state.cartItems.filter(item => item !== action.payload);
+    },
+    clearCart: state => {
+      state.cartItems = [];
+    },
+    increaseQuantity: (
+      state,
+      action: PayloadAction<{ item: CartItem; amount: number }>
+    ) => {
+      state.cartItems = state.cartItems.map(item => {
+        if (item.produktname === action.payload.item.produktname) {
+          if (item.anzahl + action.payload.amount > 99) {
+            return {
+              ...item,
+              anzahl: 99,
+            };
+          } else {
+            return {
+              ...item,
+              anzahl: item.anzahl + action.payload.amount,
+            };
+          }
+        }
+        return item;
+      });
+      // Implementieren Sie die Logik zum Erhöhen der Menge
+    },
+  },
+});
+
+export const { addToCart, removeFromCart, clearCart, increaseQuantity } =
+  cartSlice.actions;
+
+export default cartSlice.reducer;
