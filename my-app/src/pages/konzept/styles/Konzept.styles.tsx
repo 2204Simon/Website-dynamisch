@@ -7,7 +7,9 @@ export const FaqSection = styled.div`
 
 export const FaqList = styled.ul`
   list-style: none;
-  padding: 0;
+  padding-left: 30px;
+  padding-right: 30px;
+  
 `;
 
 export const FaqItem = styled.li`
