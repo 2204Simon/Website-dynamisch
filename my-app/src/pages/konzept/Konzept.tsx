@@ -64,6 +64,7 @@ const UnsereGeschichte: React.FC = () => {
       <h2>Das Konzept von Delivery-Breakfast</h2>
       <FaqSection>
         <h3>FAQs</h3>
+        <p>Wenn Du genauere Informationen über unser Konzept erhalten möchtest, findest Du unter den folgenden Fragen die Spezifikation. Klicke einfach auf die Fragen, dann erscheint die dazugehörige Antwort. Wenn Deine Frage weiterhin besteht, dann tritt gerne mit uns unter KONTAKT in Verbindung!</p>
         <FaqList>
           {faqs.map((faq, index) => (
             <FaqItem key={index}>
