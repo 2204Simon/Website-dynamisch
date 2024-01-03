@@ -24,7 +24,7 @@ import EigetränkUndEierbrot from "../../img/Food/EigetränkUndEierbrot.webp";
 import KaffeeMitEiUndBrot from "../../img/Food/KaffeeMitEiUndBrot.webp";
 import OSaftMitFrüchtebrot from "../../img/Food/OSaftMitFrüchtebrot.webp";
 import OSaftUndOrangenbrot from "../../img/Food/OSaftUndOrangenbrot.webp";
-import Osterfruehstueck from "../../img/Food/Osterfrühstück.webp";
+import Osterfruehstueck from "../../img/Food/Osterfruehstueck.webp";
 import ScrollContainer from "./Arrows";
 import ShoppingCardNewspaper from "./ShoppingCardNewspaper";
 
