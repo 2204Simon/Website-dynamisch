@@ -35,11 +35,16 @@ const DrinkSelection: React.FC<DrinkSelectionProps> = ({
 
   const handleDrinkSelect = (drink: string, image: string) => {
     setSelectedDrink(drink);
-    onComplete(drink, image);
   };
 
   const handlePrev = () => {
     onPrevStage();
+  };
+
+  const handleNext = () => {
+    if (selectedDrink) {
+      onComplete(selectedDrink, "");
+    }
   };
 
   return (
@@ -54,31 +59,41 @@ const DrinkSelection: React.FC<DrinkSelectionProps> = ({
             handleDrinkSelect(selectedDrink || "", selectedDrink || "")
           }
         >
-          <ArrowForward />
+          <ArrowForward onClick={handleNext} />
         </NavigationIcon>
       </StageHeader>
       <SelectionContainer>
         <SelectionList>
           <SelectionItem
+            className={selectedDrink === "Orangensaft" ? "selected" : ""}
             onClick={() => handleDrinkSelect("Orangensaft", orangeJuiceImage)}
           >
             <ProductImage src={orangeJuiceImage} alt="Orangensaft" />
             Orangensaft
           </SelectionItem>
           <SelectionItem
+            className={selectedDrink === "Kaffee" ? "selected" : ""}
             onClick={() => handleDrinkSelect("Kaffee", coffeeImage)}
           >
             <ProductImage src={coffeeImage} alt="Kaffee" />
             Kaffee
           </SelectionItem>
-          <SelectionItem onClick={() => handleDrinkSelect("Tee", teaImage)}>
+          <SelectionItem
+            className={selectedDrink === "Tee" ? "selected" : ""}
+            onClick={() => handleDrinkSelect("Tee", teaImage)}
+          >
             <ProductImage src={teaImage} alt="Tee" />
             Tee
           </SelectionItem>
           {/* Weitere Getränke-Optionen hinzufügen */}
         </SelectionList>
       </SelectionContainer>
-      {selectedDrink && <p>Ausgewähltes Getränk: {selectedDrink}</p>}
+      {selectedDrink && (
+        <div>
+          <p>Ausgewähltes Getränk: {selectedDrink}</p>
+          <p>Bestätige die Auswahl mit dem Vorwärtspfeil</p>
+        </div>
+      )}
     </Stage>
   );
 };

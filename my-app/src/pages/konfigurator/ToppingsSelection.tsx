@@ -79,24 +79,30 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
       <SelectionContainer>
         <SelectionList>
           <SelectionItem
+            className={selectedToppings.includes("Käse") ? "selected" : ""}
             onClick={() => handleToppingSelect("Käse", cheeseImage)}
           >
             <ProductImage src={cheeseImage} alt="Käse" />
             Käse
           </SelectionItem>
           <SelectionItem
+            className={selectedToppings.includes("Tomate") ? "selected" : ""}
             onClick={() => handleToppingSelect("Tomate", tomatoImage)}
           >
             <ProductImage src={tomatoImage} alt="Tomate" />
             Tomate
           </SelectionItem>
           <SelectionItem
+            className={selectedToppings.includes("Salat") ? "selected" : ""}
             onClick={() => handleToppingSelect("Salat", lettuceImage)}
           >
             <ProductImage src={lettuceImage} alt="Salat" />
             Salat
           </SelectionItem>
-          <SelectionItem onClick={() => handleToppingSelect("Ei", eggImage)}>
+          <SelectionItem
+            className={selectedToppings.includes("Ei") ? "selected" : ""}
+            onClick={() => handleToppingSelect("Ei", eggImage)}
+          >
             <ProductImage src={eggImage} alt="Ei" />
             Ei
           </SelectionItem>
@@ -104,7 +110,10 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
         </SelectionList>
       </SelectionContainer>
       {selectedToppings.length > 0 && (
-        <p>Ausgewählte Beläge: {selectedToppings.join(", ")}</p>
+        <div>
+          <p>Ausgewählte Beläge: {selectedToppings.join(", ")}</p>
+          <p>Bestätige die Auswahl mit dem Vorwärtspfeil</p>
+        </div>
       )}
     </Stage>
   );

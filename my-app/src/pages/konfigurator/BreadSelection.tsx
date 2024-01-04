@@ -25,26 +25,33 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
 
   const handleBreadSelect = (breadType: string, image: string) => {
     setSelectedBread(breadType);
-    onNextStage(breadType, image);
+  };
+
+  const handleNext = () => {
+    if (selectedBread) {
+      onNextStage(selectedBread, "");
+    }
   };
 
   return (
     <Stage>
       <StageHeader>
-        <NavigationIcon>
+        Wähle dein Brot
+        <NavigationIcon onClick={handleNext}>
           <ArrowForward />
         </NavigationIcon>
-        Wähle dein Brot
       </StageHeader>
       <SelectionContainer>
         <SelectionList>
           <SelectionItem
+            className={selectedBread === "Weißbrot" ? "selected" : ""}
             onClick={() => handleBreadSelect("Weißbrot", whiteBreadImage)}
           >
             <ProductImage src={whiteBreadImage} alt="Weißbrot" />
             Weißbrot
           </SelectionItem>
           <SelectionItem
+            className={selectedBread === "Vollkornbrot" ? "selected" : ""}
             onClick={() =>
               handleBreadSelect("Vollkornbrot", wholegrainBreadImage)
             }
@@ -53,12 +60,14 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
             Vollkornbrot
           </SelectionItem>
           <SelectionItem
+            className={selectedBread === "Mischbrot" ? "selected" : ""}
             onClick={() => handleBreadSelect("Mischbrot", lunchDiningImage)}
           >
             <ProductImage src={lunchDiningImage} alt="Mischbrot" />
             Mischbrot
           </SelectionItem>
           <SelectionItem
+            className={selectedBread === "Baguette" ? "selected" : ""}
             onClick={() => handleBreadSelect("Baguette", baguetteImage)}
           >
             <ProductImage src={baguetteImage} alt="Baguette" />
@@ -67,7 +76,12 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
           {/* Weitere Brot-Optionen hinzufügen */}
         </SelectionList>
       </SelectionContainer>
-      {selectedBread && <p>Ausgewähltes Produkt: {selectedBread}</p>}
+      {selectedBread && (
+        <div>
+          <p>Ausgewähltes Produkt: {selectedBread}</p>
+          <p>Bestätige die Auswahl mit dem Vorwärtspfeil</p>
+        </div>
+      )}
     </Stage>
   );
 };

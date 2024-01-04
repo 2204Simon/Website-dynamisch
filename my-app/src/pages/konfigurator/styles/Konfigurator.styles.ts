@@ -14,7 +14,6 @@ export const ConfiguratorContainer = styled.div`
   margin: 0 auto;
   padding: 20px;
 `;
-
 export const ConfiguratorContent = styled.div`
   display: flex;
   flex-direction: column;
@@ -81,6 +80,11 @@ export const SelectionItem = styled.li`
 
   &:hover {
     background-color: #f4f4f4;
+  }
+
+  &.selected {
+    background-color: #aa7d04;
+    color: #fff;
   }
 
   svg {
