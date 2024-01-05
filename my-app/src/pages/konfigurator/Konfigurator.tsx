@@ -5,13 +5,17 @@ import ToppingsSelection from "./ToppingsSelection";
 import DrinkSelection from "./DrinkSelection";
 import { NavigationIcon } from "./styles/Konfigurator.styles";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import { useLoggedIn } from "../../globalVariables/loggedin";
+import { useNavigate } from "react-router-dom";
+import { Button } from "../general/button.styles";
 
 const Konfigurator: React.FC = () => {
   const [currentStage, setCurrentStage] = useState<number>(1);
   const [selectedBread, setSelectedBread] = useState<string>("");
   const [selectedToppings, setSelectedToppings] = useState<string>("");
   const [selectedDrink, setSelectedDrink] = useState<string>("");
-
+  const { loggedIn } = useLoggedIn();
+  const navigate = useNavigate();
   const handleNextStage = (selectedProduct: string, selectedImage: string) => {
     setCurrentStage(currentStage + 1);
 
@@ -29,6 +33,20 @@ const Konfigurator: React.FC = () => {
         break;
     }
   };
+
+  if (!loggedIn) {
+    return (
+      <div>
+        <h1>Du musst Dich anmelden um den Konfigurator nutzen zu können.</h1>
+        <Button
+          className="white-orange black-color"
+          onClick={() => navigate("/LogIn")}
+        >
+          Zur Anmeldung
+        </Button>
+      </div>
+    );
+  }
 
   const handlePrevStage = () => {
     setCurrentStage(currentStage - 1);
