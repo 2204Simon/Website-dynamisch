@@ -47,9 +47,9 @@ const store = configureStore({
     cart: cartReducer,
     adress: adressDataReducer,
   },
-  preloadedState: persistedState,
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(localStorageMiddleware),
+  // preloadedState: persistedState,
+  // middleware: getDefaultMiddleware =>
+  //   getDefaultMiddleware().concat(localStorageMiddleware),
 });
 
 export default store;
