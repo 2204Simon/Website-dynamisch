@@ -27,317 +27,62 @@ import OSaftUndOrangenbrot from "../../img/Food/OSaftUndOrangenbrot.webp";
 import Osterfruehstueck from "../../img/Food/Osterfruehstueck.webp";
 import ScrollContainer from "./Arrows";
 import ShoppingCardNewspaper from "./ShoppingCardNewspaper";
+import { useEffect, useState } from "react";
 
+interface Product {
+  titel: string;
+  preis: number;
+  bild: string;
+  kundenId?: string;
+  sparte: string;
+}
 function Produkt() {
-  const ShoppingCardsFood = [
-    <ShoppingCard
-      title={"Baguette"}
-      price={2.99}
-      image={BaguetteAlone}
-      content={["Baguette aus Weizenmehl"]}
-      allergy={["Glutenhaltig", "Erdnusserzeugnisse"]}
-      veggie={true}
-    />,
-    <ShoppingCard
-      title={"Käsebaguette"}
-      price={3.59}
-      image={BaguetteYellow}
-      content={["Baguette aus Weizenmehl", "Limburger Käsebelag", "Butter"]}
-      allergy={[
-        "Glutenhaltig",
-        "Eier und Eiererzeugnisse",
-        "Erdnusserzeugnisse",
-        "Lactosehaltig",
-      ]}
-      veggie={false}
-    />,
-
-    <ShoppingCard
-      title={"Veganes Käsebaguette"}
-      price={3.59}
-      image={KäseBaguette}
-      content={[
-        "Baguette aus Weizenmehl",
-        "veganer Käsebelag",
-        "vegane Margarine",
-      ]}
-      allergy={["Glutenhaltig"]}
-      veggie={true}
-    />,
-
-    <ShoppingCard
-      title={"Brezel"}
-      price={1.49}
-      image={Brezel}
-      content={["Brezel aus Weizenmehl"]}
-      allergy={["Glutenhaltig", "Erdnusserzeugnisse"]}
-      veggie={true}
-    />,
-    <ShoppingCard
-      title={"Türkisches Menemen"}
-      price={7.99}
-      image={Menemen}
-      content={["pochierte Eier", "würzige Tomaten-Paprika-Soße"]}
-      allergy={[
-        "Eier und Eiererzeugnisse",
-        "Glutenhaltig",
-        "Lactosehaltig",
-        "Konservierungsstoffe",
-      ]}
-      veggie={false}
-    />,
-    <ShoppingCard
-      title={"Brötchen"}
-      price={1.29}
-      image={Brötchen}
-      content={["Brötchen aus Dinkelmehl"]}
-      allergy={["Erdnusserzeugnisse"]}
-      veggie={true}
-    />,
-    <ShoppingCard
-      title={"Croissant"}
-      price={1.79}
-      image={Croissant}
-      content={["Croissant aus Pflanzenfett"]}
-      allergy={["Glutenhaltig"]}
-      veggie={true}
-    />,
-    <ShoppingCard
-      title={"Fresh Chicken"}
-      price={3.79}
-      image={HamburgerBrötchen}
-      content={[
-        "Brötchen aus Weizenmehl",
-        "Emmentaler Käse",
-        "Tomaten",
-        "Salat",
-        "Ei",
-        "Hähnchenpatty",
-        "Burgersoße",
-      ]}
-      allergy={["Glutenhaltig", "Eiprodukte", "Milchprodukte", "Senfprodukte"]}
-      veggie={false}
-    />,
-    <ShoppingCard
-      title={"Veganer Toast"}
-      price={3.59}
-      image={Toast}
-      content={[
-        "Toast aus Weizenmehl",
-        "Tomaten",
-        "Salat",
-        "Gemüsepatty",
-        "Burgersoße",
-      ]}
-      allergy={["Glutenhaltig", "Senfprodukte"]}
-      veggie={true}
-    />,
-    <ShoppingCard
-      title={"Toast mit Rinderpatty"}
-      price={1.79}
-      image={BelegtesBrötchen}
-      content={[
-        "Toast aus Weizenmehl",
-        "Emmentaler Käse",
-        "Tomaten",
-        "Salat",
-        "Patty aus Rindfleisch",
-        "Burgersoße",
-      ]}
-      allergy={["Glutenhaltig", "Eiprodukte", "Milchprodukte", "Senfprodukte"]}
-      veggie={false}
-    />,
-  ];
-  const ShoppingCardsTrink = [
-    <ShoppingCard
-      title={"Espresso"}
-      price={1.99}
-      image={Espresso}
-      content={["Espressobohnen aus Kolumbien", "filtriertes Wasser"]}
-      allergy={["Koffeinhaltig"]}
-      veggie={true}
-    />,
-    <ShoppingCard
-      title={"Schwarzer Kaffee"}
-      price={5.99}
-      image={Kaffee}
-      content={["Kaffeebohnen aus Brasilien", "filtriertes Wasser"]}
-      allergy={["Koffeinhaltig"]}
-      veggie={true}
-    />,
-    <ShoppingCard
-      title={"Latte Machiatto"}
-      price={5.99}
-      image={LatteMachiatto}
-      content={["Espressobohnen aus Kolumbien", "Frische Milch aus den Alpen"]}
-      allergy={["Laktosehaltig", "Koffeinhaltig"]}
-      veggie={false}
-    />,
-    <ShoppingCard
-      title={"Orangensaft"}
-      price={5.99}
-      image={Orangensaft}
-      content={["Bio-Organgen aus zertifizierten Fairtrade Anbau"]}
-      allergy={["Konservierungsstoffe"]}
-      veggie={true}
-    />,
-    <ShoppingCard
-      title={"Früchtetee"}
-      price={5.99}
-      image={Früchtetee}
-      content={["Waldbeerengeschmack", "filtriertes Wasser"]}
-      allergy={[]}
-      veggie={true}
-    />,
-    <ShoppingCard
-      title={"Wasser"}
-      price={5.99}
-      image={Wasser}
-      content={[
-        "Das filtrierte Mineralwasser stammt aus einer Quelle in den Alpen",
-      ]}
-      allergy={[]}
-      veggie={true}
-    />,
-    <ShoppingCard
-      title={"Zitronentee"}
-      price={5.99}
-      image={Zitronentee}
-      content={["Zitronengeschmack", "filtriertes Wasser"]}
-      allergy={["Konservierungsstoffe", "Koffeinhaltig"]}
-      veggie={true}
-    />,
-    <ShoppingCard
-      title={"Heiße Schokolade"}
-      price={5.99}
-      image={HeißeSchokolade}
-      content={[
-        "geschmolzene schweizer Schokolade",
-        "Frische Milch aus den Alpen",
-      ]}
-      allergy={["Milcherzeugnisse", "Lactosehaltig"]}
-      veggie={false}
-    />,
-  ];
-
-  const ShoppingCardsMenu = [
-    <ShoppingCard
-      title={"Das kleine Osterfrühstück"}
-      price={5.99}
-      image={Osterfruehstueck}
-      content={[
-        "Ein Frühstücksmenü, welches alles wichtige für den Morgen am Feiertag beinhaltet.",
-        "Kaffee",
-        "Latte",
-        "Toast",
-        "Brötchen",
-        "Croissant",
-        "Ei",
-      ]}
-      allergy={[
-        "Laktosehaltig",
-        "Koffeinhaltig",
-        "Glutenhaltig",
-      ]}
-      veggie={false}
-    />,
-    <ShoppingCard
-      title={"Bayrisches Menü"}
-      price={7.99}
-      image={Bayrisches_Essen}
-      content={["eine Flasche Helles", "ein Paar Weißwurst", "eine Breze"]}
-      allergy={["Alkoholhaltig", "Glutenhaltig", "Hopfenhaltig"]}
-      veggie={false}
-    />,
-    <ShoppingCard
-      title={"Wecken mit Kaffee"}
-      price={6.99}
-      image={BrötchenMitKaffe}
-      content={["Wecken aus Weizenmehl", "Kaffee mit Kaffeesahne"]}
-      allergy={[
-        "Glutenhaltig",
-        "Koffeinhaltig",
-        "Mlicherzeugnisse",
-        "Lactosehaltig",
-      ]}
-      veggie={false}
-    />,
-    <ShoppingCard
-      title={"Obstmenü"}
-      price={5.99}
-      image={BrotEiTeeUndObst}
-      content={[
-        "mit einem Spiegelei belegtes Brötchen",
-        "Saisonfrüchte",
-        "Früchtetee",
-      ]}
-      allergy={["Glutenhaltig", "Eiprodukte"]}
-      veggie={false}
-    />,
-    <ShoppingCard
-      title={"Eiermenü"}
-      price={5.99}
-      image={EigetränkUndEierbrot}
-      content={[
-        "mit einem Spiegelei belegtes Brötchen",
-        "Eierlikör",
-        "schwarzer Kaffee",
-      ]}
-      allergy={["Glutenhaltig", "Eiprodukte", "Koffeinhaltig"]}
-      veggie={false}
-    />,
-    <ShoppingCard
-      title={"Klassisches Menü"}
-      price={5.99}
-      image={KaffeeMitEiUndBrot}
-      content={[
-        "Baguettescheiben",
-        "Spiegelei mit Bacon",
-        "Kräuteraufstrich",
-        "schwarzer Kaffee",
-      ]}
-      allergy={["Glutenhaltig", "Eiprodukte", "Koffeinhaltig"]}
-      veggie={false}
-    />,
-    <ShoppingCard
-      title={"Veggiemenü"}
-      price={5.99}
-      image={OSaftMitFrüchtebrot}
-      content={[
-        "Baguettescheiben",
-        "veganer Pancake",
-        "Saisonfrüchte",
-        "Saisongemüse",
-        "Orangensaft",
-        "Zitronentee",
-      ]}
-      allergy={["Glutenhaltig", "Koffeinhaltig", "Erdnusshaltig"]}
-      veggie={true}
-    />,
-    <ShoppingCard
-      title={"Orangenmenü"}
-      price={5.99}
-      image={OSaftUndOrangenbrot}
-      content={[
-        "Orangenpie",
-        "Orangenmarmelade",
-        "Saisonfrüchte",
-        "Zimt und Zucker",
-      ]}
-      allergy={["Glutenhaltig", "Zimthaltig"]}
-      veggie={true}
-    />,
-  ];
-
-  const ShoppingcardsNewspaper = [
-    <ShoppingCardNewspaper
-      title={"Zeitung"}
-      basePrice={1}
-      image={OSaftUndOrangenbrot}
-    />,
-  ];
-
   const isTouchpad = matchMedia("(pointer: coarse)").matches;
+  const [products, setProducts] = useState<Array<Product>>([]);
+
+  //const existSparte = (sparte: string): boolean => {
+  //  return products.some(product => product.sparte === sparte);
+  // };
+
+  const loadProducts = async (): Promise<void> => {
+    try {
+      const request = await fetch(
+        `http://localhost:3001/api/v1/generalProdukts`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json; charset=UTF-8",
+          },
+        }
+      ); // TODO http://localhost:3000/api/v1 austauschen mit Variablenname bsp. ${apiUrl}
+      const product = await request.json();
+      console.log(product);
+      setProducts(product);
+    } catch (error) {
+      console.error(error);
+      console.log("Fehler");
+      setProducts([]);
+    }
+  };
+
+  useEffect(() => {
+    loadProducts();
+  }, []);
+
+  const ShoppingCards = (sparte: string) => {
+    return products
+      .filter((product: Product) => product.sparte === sparte)
+      .map((product: Product) => (
+        <ShoppingCard
+          image={product.bild}
+          title={product.titel}
+          price={product.preis}
+          content={["ABC-Salat", "Buchstabensuppe"]}
+          allergy={["Alles", "Nichts"]}
+          veggie={true}
+        />
+      ));
+  };
 
   return (
     <>
@@ -362,11 +107,11 @@ function Produkt() {
             msOverflowStyle: "none",
           }}
         >
-          {ShoppingCardsFood}
+          {ShoppingCards("Food")}
         </div>
       ) : (
         <ScrollContainer scrollAmount={283}>
-          {ShoppingCardsFood}
+          {ShoppingCards("Food")}
         </ScrollContainer>
       )}
 
@@ -381,11 +126,11 @@ function Produkt() {
             msOverflowStyle: "none",
           }}
         >
-          {ShoppingCardsTrink}
+          {ShoppingCards("Drink")}
         </div>
       ) : (
         <ScrollContainer scrollAmount={283}>
-          {ShoppingCardsTrink}
+          {ShoppingCards("Drink")}
         </ScrollContainer>
       )}
 
@@ -400,26 +145,13 @@ function Produkt() {
             msOverflowStyle: "none",
           }}
         >
-          {ShoppingCardsMenu}
+          {ShoppingCards("Menu")}
         </div>
       ) : (
         <ScrollContainer scrollAmount={283}>
-          {ShoppingCardsMenu}
+          {ShoppingCards("Menu")}
         </ScrollContainer>
       )}
-
-      <h3>Zeitung</h3>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "nowrap",
-          overflowX: "scroll",
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-        }}
-      >
-        {ShoppingcardsNewspaper}
-      </div>
     </>
   );
 }
