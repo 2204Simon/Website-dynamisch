@@ -34,20 +34,6 @@ const Konfigurator: React.FC = () => {
     }
   };
 
-  if (!loggedIn) {
-    return (
-      <div>
-        <h1>Du musst Dich anmelden um den Konfigurator nutzen zu können.</h1>
-        <Button
-          className="white-orange black-color"
-          onClick={() => navigate("/LogIn")}
-        >
-          Zur Anmeldung
-        </Button>
-      </div>
-    );
-  }
-
   const handlePrevStage = () => {
     setCurrentStage(currentStage - 1);
   };
@@ -76,10 +62,31 @@ const Konfigurator: React.FC = () => {
           <p>Ausgewähltes Brot: {selectedBread}</p>
           <p>Ausgewählte Beläge: {selectedToppings}</p>
           <p>Ausgewähltes Getränk: {selectedDrink}</p>
+          {!loggedIn && (
+            <div>
+              <h1>
+                Du musst dich anmelden, um dein perfektes Frühstück zu
+                bestellen!
+              </h1>
+              <Button
+                className="black-color white-orange"
+                onClick={() => navigate("/LogIn")}
+              >
+                Zur Anmeldung
+              </Button>
+            </div>
+          )}
+          {loggedIn && currentStage === 4 && (
+            <Button
+              className="black-color white-orange"
+              onClick={() => navigate("/Bestellung")} //TODO anpassung an server senden/Warenkorb hinzufügen
+            >
+              Zum Warenkorb hinzufügen
+            </Button>
+          )}
         </div>
       )}
     </div>
   );
 };
-
 export default Konfigurator;
