@@ -1,33 +1,6 @@
 import ShoppingCard from "./ShoppingCard";
-import BaguetteAlone from "../../img/Food/BaguetteAlone.webp";
-import BaguetteYellow from "../../img/Food/BaguetteGelb.webp";
-import Brezel from "../../img/Food/Brezel.webp";
-import Brötchen from "../../img/Food/Brötchen.webp";
-import BrötchenMitKaffe from "../../img/Food/BötchenmitKaffee.webp";
-import Croissant from "../../img/Food/Croissant.webp";
-import HamburgerBrötchen from "../../img/Food/HamburgerBrötchen.webp";
-import Toast from "../../img/Food/Toast.webp";
-import BelegtesBrötchen from "../../img/Food/belegtesBrötchen.webp";
-import KäseBaguette from "../../img/Food/käseBaguett.webp";
-import Espresso from "../../img/Drinks/Espresso.webp";
-import Früchtetee from "../../img/Drinks/Früchtetee.webp";
-import Kaffee from "../../img/Drinks/Kaffee.webp";
-import LatteMachiatto from "../../img/Drinks/Latte Machiatto.webp";
-import Orangensaft from "../../img/Drinks/Orangensaft.webp";
-import Wasser from "../../img/Drinks/Wasserglas.webp";
-import Zitronentee from "../../img/Drinks/Zitronentee.webp";
-import HeißeSchokolade from "../../img/Drinks/heißeSchokolade.webp";
-import Bayrisches_Essen from "../../img/Food/bayrisches_Essen.webp";
-import Menemen from "../../img/Food/Menemen.webp";
-import BrotEiTeeUndObst from "../../img/Food/BrotEiTeeUndObst.webp";
-import EigetränkUndEierbrot from "../../img/Food/EigetränkUndEierbrot.webp";
-import KaffeeMitEiUndBrot from "../../img/Food/KaffeeMitEiUndBrot.webp";
-import OSaftMitFrüchtebrot from "../../img/Food/OSaftMitFrüchtebrot.webp";
-import OSaftUndOrangenbrot from "../../img/Food/OSaftUndOrangenbrot.webp";
-import Osterfruehstueck from "../../img/Food/Osterfruehstueck.webp";
 import ScrollContainer from "./Arrows";
-import ShoppingCardNewspaper from "./ShoppingCardNewspaper";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 interface Product {
   titel: string;
@@ -54,13 +27,16 @@ function Produkt() {
             "Content-Type": "application/json; charset=UTF-8",
           },
         }
-      ); // TODO http://localhost:3000/api/v1 austauschen mit Variablenname bsp. ${apiUrl}
+      ); // TODO http://localhost:3001/api/v1 austauschen mit Variablenname bsp. ${apiUrl}
       const product = await request.json();
-      console.log(product);
+
+      product.map(
+        async (product: Product) =>
+          (product.bild = await loadImage(product.bild))
+      );
       setProducts(product);
     } catch (error) {
       console.error(error);
-      console.log("Fehler");
       setProducts([]);
     }
   };
@@ -69,19 +45,34 @@ function Produkt() {
     loadProducts();
   }, []);
 
+  async function loadImage(path: string): Promise<string> {
+    const image = await import(`../../img/${path}`);
+    return image.default; //Wegen ES6 mit default
+  }
+
   const ShoppingCards = (sparte: string) => {
-    return products
+    const productsToRender = products
       .filter((product: Product) => product.sparte === sparte)
-      .map((product: Product) => (
-        <ShoppingCard
-          image={product.bild}
-          title={product.titel}
-          price={product.preis}
-          content={["ABC-Salat", "Buchstabensuppe"]}
-          allergy={["Alles", "Nichts"]}
-          veggie={true}
-        />
-      ));
+      .map((product: Product) => ({
+        image: product.bild,
+        title: product.titel,
+        price: product.preis,
+        content: ["ABC-Salat", "Buchstabensuppe"],
+        allergy: ["Alles", "Nichts"],
+        veggie: true,
+      }));
+
+    return productsToRender.map(product => (
+      <ShoppingCard
+        key={product.title}
+        image={product.image}
+        title={product.title}
+        price={product.price}
+        content={product.content}
+        allergy={product.allergy}
+        veggie={product.veggie}
+      />
+    ));
   };
 
   return (
@@ -116,23 +107,25 @@ function Produkt() {
       )}
 
       <h3>Getränke</h3>
-      {isTouchpad ? (
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "nowrap",
-            overflowX: "scroll",
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
-          }}
-        >
-          {ShoppingCards("Drink")}
-        </div>
-      ) : (
-        <ScrollContainer scrollAmount={283}>
-          {ShoppingCards("Drink")}
-        </ScrollContainer>
-      )}
+      <Suspense fallback={<div>Loading...</div>}>
+        {isTouchpad ? (
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "nowrap",
+              overflowX: "scroll",
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+            }}
+          >
+            {ShoppingCards("Drink")}
+          </div>
+        ) : (
+          <ScrollContainer scrollAmount={283}>
+            {ShoppingCards("Drink")}
+          </ScrollContainer>
+        )}
+      </Suspense>
 
       <h3>Menüs</h3>
       {isTouchpad ? (
