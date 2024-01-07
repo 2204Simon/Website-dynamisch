@@ -57,8 +57,3 @@ export enum CartActionTypes {
   INCREASE_QUANTITY = "INCREASE_QUANTITY",
   DECREASE_QUANTITY = "DECREASE_QUANTITY",
 }
-
-export type ErrorMessageType = {
-  statusCode: number;
-  message: string;
-};

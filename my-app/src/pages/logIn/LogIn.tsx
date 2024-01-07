@@ -16,6 +16,7 @@ import { CustomToast } from "../general/toast.style";
 import { ToastContainer } from "react-toastify";
 import { useLoggedIn } from "../../globalVariables/loggedin";
 import { colors } from "../general/constants";
+import { baseUrl } from "../../redux/baseUrl";
 
 function Copyright(props: any) {
   return (
@@ -50,7 +51,7 @@ export default function SignIn() {
 
     try {
       // Sende Anmeldeinformationen an das Backend
-      const response = await fetch("http://localhost:3000/api/v1/kunde/login", {
+      const response = await fetch(`${baseUrl}/kunde/login`, {
         // Ändern Sie die URL entsprechend Ihrer neuen Route
         method: "POST",
         headers: {

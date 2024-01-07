@@ -26,9 +26,9 @@ import { CustomToast } from "../general/toast.style";
 import { PayPalPayment } from "../PaypalPayment";
 import { useState } from "react";
 import { Bank } from "phosphor-react";
-import { ZeitungsAbo } from "../Zeitungsabo";
 import { addNewUser } from "../../redux/userReducer";
 import { addNewAdress } from "../../redux/adressDataReducer";
+import { sendPostRequestKunde } from "../../serverFunctions/sendPostRequest";
 
 function Copyright(props: any) {
   return (
@@ -51,43 +51,48 @@ export default function SignUp() {
   }
 
   const dispatch = useDispatch();
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const email = formData.get("email") as string;
-    const preparedData: LogInData = {
-      email: email,
-      passwort: formData.get("password") as string,
-      vorname: formData.get("firstName") as string,
-      nachname: formData.get("lastName") as string,
-      telefonnummer: formData.get("telefonnummer") as string,
-    };
-    if (!validateEmail(email)) {
-      CustomToast.error("Bitte gebe eine gültige E-Mail-Adresse ein");
-      return;
-    }
-    const adressData: AdressData = {
-      postleitzahl: formData.get("plz") as string,
-      strasse: formData.get("street") as string,
-      ort: formData.get("city") as string,
-      hausnummer: formData.get("hausnummer") as string,
-      zahlungsmethode: formData.get("payment") as string,
-      bankName: formData.get("bankName") as string,
-      bic: formData.get("bic") as string,
-      iban: formData.get("iban") as string,
-    };
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    try {
+      event.preventDefault();
+      const formData = new FormData(event.currentTarget);
+      const email = formData.get("email") as string;
+      const preparedData: LogInData = {
+        email: email,
+        passwort: formData.get("password") as string,
+        vorname: formData.get("firstName") as string,
+        nachname: formData.get("lastName") as string,
+        telefonnummer: formData.get("telefonnummer") as string,
+      };
+      const kundenData = await sendPostRequestKunde("kunde", preparedData);
+      console.log(kundenData);
+      if (!validateEmail(email)) {
+        CustomToast.error("Bitte gebe eine gültige E-Mail-Adresse ein");
+        return;
+      }
+      const adressData: AdressData = {
+        postleitzahl: formData.get("plz") as string,
+        strasse: formData.get("street") as string,
+        ort: formData.get("city") as string,
+        hausnummer: formData.get("hausnummer") as string,
+        zahlungsmethode: formData.get("payment") as string,
+        bankName: formData.get("bankName") as string,
+        bic: formData.get("bic") as string,
+        iban: formData.get("iban") as string,
+      };
 
-    const password = formData.get("password") as string;
-    const confirmPassword = formData.get("confirmPassword") as string;
-    if (password !== confirmPassword) {
-      PasswordMismatch();
-      return;
+      const password = formData.get("password") as string;
+      const confirmPassword = formData.get("confirmPassword") as string;
+      if (password !== confirmPassword) {
+        PasswordMismatch();
+        return;
+      }
+      dispatch(addNewUser(kundenData));
+      dispatch(addNewAdress(adressData));
+      navigate("/LoggedIn");
+      changeLoggedIn();
+    } catch (error) {
+      CustomToast.error("error");
     }
-
-    dispatch(addNewUser(preparedData));
-    dispatch(addNewAdress(adressData));
-    navigate("/LoggedIn");
-    changeLoggedIn();
   };
   function validateEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
