@@ -13,7 +13,12 @@ const cartSlice = createSlice({
       state.cartItems.push(action.payload);
     },
     removeFromCart: (state, action: PayloadAction<CartItem>) => {
-      state.cartItems = state.cartItems.filter(item => item !== action.payload);
+      console.log(action, "removeFromCart");
+      state.cartItems = state.cartItems.filter(item => {
+        console.log("Item:", item.produktname);
+        console.log("Action payload:", action.payload);
+        return item.produktname !== action.payload.produktname;
+      });
     },
     clearCart: state => {
       state.cartItems = [];
