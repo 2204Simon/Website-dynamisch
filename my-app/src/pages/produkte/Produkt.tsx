@@ -1,12 +1,14 @@
 import ShoppingCard from "./ShoppingCard";
 import ScrollContainer from "./Arrows";
 import { Suspense, useEffect, useState } from "react";
+import { CustomToast } from "../general/toast.style";
 
 interface Product {
+  kundenId?: string;
+  produktId: string;
   titel: string;
   preis: number;
   bild: string;
-  kundenId?: string;
   sparte: string;
 }
 function Produkt() {
@@ -29,14 +31,18 @@ function Produkt() {
         }
       ); // TODO http://localhost:3001/api/v1 austauschen mit Variablenname bsp. ${apiUrl}
       const product = await request.json();
-
-      product.map(
-        async (product: Product) =>
-          (product.bild = await loadImage(product.bild))
+      if (!request.ok) throw new Error(product.message);
+      const loadedProducts = await Promise.all(
+        product.map(async (product: Product) => {
+          const image = await loadImage(product.bild);
+          console.log("image", image);
+          return { ...product, bild: image };
+        })
       );
-      setProducts(product);
+      setProducts(loadedProducts);
     } catch (error) {
       console.error(error);
+      CustomToast.error("Fehler beim Laden der Produkte");
       setProducts([]);
     }
   };
@@ -46,8 +52,14 @@ function Produkt() {
   }, []);
 
   async function loadImage(path: string): Promise<string> {
-    const image = await import(`../../img/${path}`);
-    return image.default; //Wegen ES6 mit default
+    try {
+      const image = await import(`../../img/${path}`);
+      console.log(image.default);
+      return image.default;
+    } catch (error) {
+      console.error(`Error loading image at path ${path}:`, error);
+      return "";
+    }
   }
 
   const ShoppingCards = (sparte: string) => {
