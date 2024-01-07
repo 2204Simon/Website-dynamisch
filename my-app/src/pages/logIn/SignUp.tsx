@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useLoggedIn } from "../../globalVariables/loggedin";
-import { LogInData } from "../../redux/types";
+import { AdressData, LogInData } from "../../redux/types";
 import { useDispatch } from "react-redux";
 import { colors } from "../general/constants";
 import {
@@ -53,31 +53,32 @@ export default function SignUp() {
   const dispatch = useDispatch();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const email = data.get("email") as string;
+    const formData = new FormData(event.currentTarget);
+    const email = formData.get("email") as string;
     const preparedData: LogInData = {
       email: email,
-      password: data.get("password") as string,
-      firstName: data.get("firstName") as string,
-      lastName: data.get("lastName") as string,
+      passwort: formData.get("password") as string,
+      vorname: formData.get("firstName") as string,
+      nachname: formData.get("lastName") as string,
+      telefonnummer: formData.get("telefonnummer") as string,
     };
     if (!validateEmail(email)) {
       CustomToast.error("Bitte gebe eine gültige E-Mail-Adresse ein");
       return;
     }
-    const adressData = {
-      plz: data.get("plz") as string,
-      street: data.get("street") as string,
-      city: data.get("city") as string,
-      housenumber: data.get("hausnummer") as string,
-      payment: data.get("payment") as string,
-      bankName: data.get("bankName") as string,
-      bic: data.get("bic") as string,
-      iban: data.get("iban") as string,
+    const adressData: AdressData = {
+      postleitzahl: formData.get("plz") as string,
+      strasse: formData.get("street") as string,
+      ort: formData.get("city") as string,
+      hausnummer: formData.get("hausnummer") as string,
+      zahlungsmethode: formData.get("payment") as string,
+      bankName: formData.get("bankName") as string,
+      bic: formData.get("bic") as string,
+      iban: formData.get("iban") as string,
     };
 
-    const password = data.get("password") as string;
-    const confirmPassword = data.get("confirmPassword") as string;
+    const password = formData.get("password") as string;
+    const confirmPassword = formData.get("confirmPassword") as string;
     if (password !== confirmPassword) {
       PasswordMismatch();
       return;
@@ -89,12 +90,10 @@ export default function SignUp() {
     changeLoggedIn();
   };
   function validateEmail(email: string): boolean {
-    // Einfache Überprüfung auf gültiges E-Mail-Format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
-  const [hasSubscription, setHasSubscription] = useState(false);
-  const [expiryDate, setExpiryDate] = useState(new Date());
+
   return (
     <div>
       <Container component="main" maxWidth="xs" style={{ height: "auto" }}>
@@ -119,7 +118,7 @@ export default function SignUp() {
             style={{ paddingLeft: "20px" }}
           >
             <Grid container spacing={2}>
-              <Title>Persönliche Daten:</Title>
+              <Title>Persönliche Daten</Title>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
@@ -178,6 +177,26 @@ export default function SignUp() {
                   }}
                 />
               </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="telefonnumber"
+                  name="telefonnummer"
+                  fullWidth
+                  required
+                  id="telefonnummer"
+                  label="telefonnummer"
+                  autoFocus
+                  inputProps={{
+                    maxLength: 50,
+                  }}
+                  InputLabelProps={{
+                    sx: {
+                      backgroundColor: "white",
+                      color: colors.companycolor,
+                    },
+                  }}
+                />
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   fullWidth
@@ -221,7 +240,8 @@ export default function SignUp() {
                   }}
                 />
               </Grid>
-              <Grid item xs={12} sm={5}>
+              <Title>Adress Daten</Title>
+              <Grid item xs={12} xl={12}>
                 <TextField
                   fullWidth
                   required

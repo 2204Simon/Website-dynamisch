@@ -3,11 +3,11 @@ import { AdressData, AdressDataState } from "./types";
 
 const initialState: AdressDataState = {
   AdressData: {
-    plz: "",
-    housenumber: "",
-    city: "",
-    payment: "",
-    street: "",
+    postleitzahl: "",
+    hausnummer: "",
+    ort: "",
+    strasse: "",
+    zahlungsmethode: "",
   },
 };
 

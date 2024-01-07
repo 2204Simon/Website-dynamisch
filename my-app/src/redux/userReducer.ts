@@ -2,7 +2,14 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserDataState, LogInData } from "./types";
 
 const initialState: UserDataState = {
-  LogInData: { firstName: "", lastName: "", email: "", password: "" },
+  LogInData: {
+    email: "",
+    vorname: "",
+    nachname: "",
+    passwort: "",
+    telefonnummer: "",
+    zeitungsaboablaufdatum: undefined,
+  },
 };
 
 const userSlice = createSlice({

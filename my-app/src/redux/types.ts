@@ -4,9 +4,11 @@ export interface UserDataState {
 
 export interface LogInData {
   email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
+  vorname: string;
+  nachname: string;
+  passwort: string;
+  telefonnummer: string;
+  zeitungsaboablaufdatum?: Date;
 }
 
 export enum ActionTypesUser {
@@ -19,11 +21,12 @@ export interface AdressDataState {
 }
 
 export interface AdressData {
-  plz: string;
-  street: string;
-  city: string;
-  housenumber: string;
-  payment: string;
+  postleitzahl: string;
+  strasse: string;
+  ort: string;
+  hausnummer: string;
+  zahlungsmethode: string;
+  hausnummerzusatz?: string;
   bankName?: string;
   bic?: string;
   iban?: string;
@@ -54,3 +57,8 @@ export enum CartActionTypes {
   INCREASE_QUANTITY = "INCREASE_QUANTITY",
   DECREASE_QUANTITY = "DECREASE_QUANTITY",
 }
+
+export type ErrorMessageType = {
+  statusCode: number;
+  message: string;
+};

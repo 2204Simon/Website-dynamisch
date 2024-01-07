@@ -28,8 +28,8 @@ export default function UserInformation(): JSX.Element {
       <Card>
         <Title>{loggedIn ? "Dein Konto" : "Anmelden"}</Title>
         <Paragraph>
-          Hallo {userInformation.LogInData.firstName}{" "}
-          {userInformation.LogInData.lastName}
+          Hallo {userInformation.LogInData.vorname}{" "}
+          {userInformation.LogInData.nachname}
         </Paragraph>
         <Paragraph style={{ textAlign: "center" }}>
           Deine E-Mail lautet {userInformation.LogInData.email}
