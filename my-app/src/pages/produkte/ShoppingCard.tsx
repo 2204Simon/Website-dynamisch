@@ -32,6 +32,7 @@ import { formatNumber } from "../general/constants";
 import { addToCart, increaseQuantity } from "../../redux/cartReducer";
 
 interface ShoppingCardProps {
+  produktId: string;
   image: string;
   title: string;
   price: number;
@@ -47,6 +48,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
   content,
   allergy,
   veggie,
+  produktId,
 }) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
   const [displayNone, setDisplayNone] = useState(false);
@@ -74,12 +76,14 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
 
   const neu = (quantity2: number) => {
     const item = {
+      produktId: produktId,
       produktname: title,
       logo: image,
       preis: price,
       anzahl: quantity,
     };
     dispatch(increaseQuantity({ item, amount: quantity2 }));
+    CustomToast.success(`Es wurde  ${quantity} ${title} hinzugefügt!`);
   };
 
   const handleAddToCart = () => {
@@ -93,6 +97,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
         }
       }
       const item = {
+        produktId: produktId,
         produktname: title,
         logo: image,
         preis: price,

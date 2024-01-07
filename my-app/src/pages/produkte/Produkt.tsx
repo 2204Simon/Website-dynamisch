@@ -3,14 +3,14 @@ import ScrollContainer from "./Arrows";
 import { Suspense, useEffect, useState } from "react";
 import { CustomToast } from "../general/toast.style";
 
-interface Product {
+type Product = {
   kundenId?: string;
   produktId: string;
   titel: string;
   preis: number;
   bild: string;
   sparte: string;
-}
+};
 function Produkt() {
   const isTouchpad = matchMedia("(pointer: coarse)").matches;
   const [products, setProducts] = useState<Array<Product>>([]);
@@ -66,6 +66,7 @@ function Produkt() {
     const productsToRender = products
       .filter((product: Product) => product.sparte === sparte)
       .map((product: Product) => ({
+        produktId: product.produktId,
         image: product.bild,
         title: product.titel,
         price: product.preis,
@@ -76,6 +77,7 @@ function Produkt() {
 
     return productsToRender.map(product => (
       <ShoppingCard
+        produktId={product.produktId}
         key={product.title}
         image={product.image}
         title={product.title}

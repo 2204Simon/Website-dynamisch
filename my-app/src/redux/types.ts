@@ -40,6 +40,7 @@ export interface CartState {
 }
 
 export interface CartItem {
+  produktId: string;
   logo: string;
   preis: number;
   produktname: string;

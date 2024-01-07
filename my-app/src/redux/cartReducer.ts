@@ -28,7 +28,7 @@ const cartSlice = createSlice({
       action: PayloadAction<{ item: CartItem; amount: number }>
     ) => {
       state.cartItems = state.cartItems.map(item => {
-        if (item.produktname === action.payload.item.produktname) {
+        if (item.produktId === action.payload.item.produktId) {
           if (item.anzahl + action.payload.amount > 99) {
             return {
               ...item,
