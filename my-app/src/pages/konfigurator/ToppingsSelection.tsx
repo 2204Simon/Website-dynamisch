@@ -1,5 +1,5 @@
 // ToppingsSelection.tsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Stage,
   StageHeader,
@@ -9,16 +9,7 @@ import {
   SelectionItem,
   NavigationIcon,
 } from "./styles/Konfigurator.styles";
-import {
-  ArrowForward,
-  ArrowBack,
-  EmojiFoodBeverage,
-} from "@mui/icons-material";
-
-import cheeseImage from "../../img/Food/Croissant.webp"; // Platzhalterbild
-import tomatoImage from "../../img/Food/Croissant.webp"; // Platzhalterbild
-import lettuceImage from "../../img/Food/Croissant.webp"; // Platzhalterbild
-import eggImage from "../../img/Food/Croissant.webp"; // Platzhalterbild
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 
 interface ToppingsSelectionProps {
   onNextStage: (selectedProduct: string, selectedImage: string) => void;
@@ -30,14 +21,29 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
   onNextStage,
 }) => {
   const [selectedToppings, setSelectedToppings] = useState<string[]>([]);
+  const [toppings, setToppings] = useState<any[]>([]); // Hier speichern wir die vom Server geholten Toppings
 
-  const toppingsData = [
-    { name: "Käse", image: cheeseImage },
-    { name: "Tomate", image: tomatoImage },
-    { name: "Salat", image: lettuceImage },
-    { name: "Ei", image: eggImage },
-    // Weitere Belag-Optionen hinzufügen
-  ];
+  useEffect(() => {
+    fetch("http://localhost:3001/api/v1/zutat/Topping")
+      .then(response => response.json())
+      .then(data =>
+        Promise.all(
+          data.map((topping: any) =>
+            loadImage(topping.zutatBild).then(image => ({
+              ...topping,
+              zutatBild: image,
+            }))
+          )
+        )
+      )
+      .then(toppings => {
+        setToppings(toppings); // Speichern der Daten im State
+      })
+      .catch(error => {
+        console.log("Fehler");
+        console.error("Error:", error);
+      });
+  }, []);
 
   const handleToppingSelect = (topping: string, image: string) => {
     const updatedToppings = selectedToppings.includes(topping)
@@ -47,19 +53,24 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
     setSelectedToppings(updatedToppings);
   };
 
+  async function loadImage(path: string): Promise<string> {
+    const image = await import(`../../img/${path}`);
+    return image.default; //Wegen ES6 mit default
+  }
+
   const handlePrev = () => {
     onPrevStage();
   };
 
   const handleNext = () => {
     if (selectedToppings.length > 0) {
+      const selectedToppingsData = selectedToppings.map(topping =>
+        toppings.find(t => t.zutatsname === topping)
+      );
       onNextStage(
         selectedToppings.join(", "),
-        selectedToppings
-          .map(topping => {
-            const matchingTopping = toppingsData.find(t => t.name === topping);
-            return matchingTopping?.image || "";
-          })
+        selectedToppingsData
+          .map(toppingData => toppingData?.zutatBild || "")
           .join(", ")
       );
     }
@@ -78,35 +89,29 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
       </StageHeader>
       <SelectionContainer>
         <SelectionList>
-          <SelectionItem
-            className={selectedToppings.includes("Käse") ? "selected" : ""}
-            onClick={() => handleToppingSelect("Käse", cheeseImage)}
-          >
-            <ProductImage src={cheeseImage} alt="Käse" />
-            Käse
-          </SelectionItem>
-          <SelectionItem
-            className={selectedToppings.includes("Tomate") ? "selected" : ""}
-            onClick={() => handleToppingSelect("Tomate", tomatoImage)}
-          >
-            <ProductImage src={tomatoImage} alt="Tomate" />
-            Tomate
-          </SelectionItem>
-          <SelectionItem
-            className={selectedToppings.includes("Salat") ? "selected" : ""}
-            onClick={() => handleToppingSelect("Salat", lettuceImage)}
-          >
-            <ProductImage src={lettuceImage} alt="Salat" />
-            Salat
-          </SelectionItem>
-          <SelectionItem
-            className={selectedToppings.includes("Ei") ? "selected" : ""}
-            onClick={() => handleToppingSelect("Ei", eggImage)}
-          >
-            <ProductImage src={eggImage} alt="Ei" />
-            Ei
-          </SelectionItem>
-          {/* Weitere Belag-Optionen hinzufügen */}
+          {toppings.map(
+            (
+              topping // Anzeigen der Toppings aus dem State
+            ) => (
+              <SelectionItem
+                key={topping.zutatsId}
+                className={
+                  selectedToppings.includes(topping.zutatsname)
+                    ? "selected"
+                    : ""
+                }
+                onClick={() =>
+                  handleToppingSelect(topping.zutatsname, topping.zutatBild)
+                }
+              >
+                <ProductImage
+                  src={topping.zutatBild}
+                  alt={topping.zutatsname}
+                />
+                {topping.zutatsname}
+              </SelectionItem>
+            )
+          )}
         </SelectionList>
       </SelectionContainer>
       {selectedToppings.length > 0 && (

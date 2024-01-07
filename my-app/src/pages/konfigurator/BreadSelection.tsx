@@ -1,5 +1,5 @@
 // BreadSelection.tsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Stage,
   StageHeader,
@@ -9,11 +9,6 @@ import {
   SelectionItem,
   NavigationIcon,
 } from "./styles/Konfigurator.styles";
-
-import whiteBreadImage from "../../img/Food/BaguetteAlone.webp"; // Platzhalterbild
-import wholegrainBreadImage from "../../img/Food/BaguetteAlone.webp"; // Platzhalterbild
-import lunchDiningImage from "../../img/Food/BaguttSalat.webp"; // Platzhalterbild
-import baguetteImage from "../../img/Food/käseBaguett.webp"; // Platzhalterbild
 import { ArrowForward } from "@mui/icons-material";
 
 interface BreadSelectionProps {
@@ -22,10 +17,38 @@ interface BreadSelectionProps {
 
 const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
   const [selectedBread, setSelectedBread] = useState<string | null>(null);
+  const [breads, setBreads] = useState<any[]>([]); // Hier speichern wir die vom Server geholten Brote
+
+  useEffect(() => {
+    fetch("http://localhost:3001/api/v1/zutat/Brot")
+      .then(response => response.json())
+      .then(data =>
+        Promise.all(
+          data.map((bread: any) =>
+            loadImage(bread.zutatBild).then(image => ({
+              ...bread,
+              zutatBild: image,
+            }))
+          )
+        )
+      )
+      .then(breads => {
+        setBreads(breads); // Speichern der Daten im State
+      })
+      .catch(error => {
+        console.log("Fehler");
+        console.error("Error:", error);
+      });
+  }, []);
 
   const handleBreadSelect = (breadType: string, image: string) => {
     setSelectedBread(breadType);
   };
+
+  async function loadImage(path: string): Promise<string> {
+    const image = await import(`../../img/${path}`);
+    return image.default; //Wegen ES6 mit default
+  }
 
   const handleNext = () => {
     if (selectedBread) {
@@ -43,37 +66,28 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
       </StageHeader>
       <SelectionContainer>
         <SelectionList>
-          <SelectionItem
-            className={selectedBread === "Weißbrot" ? "selected" : ""}
-            onClick={() => handleBreadSelect("Weißbrot", whiteBreadImage)}
-          >
-            <ProductImage src={whiteBreadImage} alt="Weißbrot" />
-            Weißbrot
-          </SelectionItem>
-          <SelectionItem
-            className={selectedBread === "Vollkornbrot" ? "selected" : ""}
-            onClick={() =>
-              handleBreadSelect("Vollkornbrot", wholegrainBreadImage)
-            }
-          >
-            <ProductImage src={wholegrainBreadImage} alt="Vollkornbrot" />
-            Vollkornbrot
-          </SelectionItem>
-          <SelectionItem
-            className={selectedBread === "Mischbrot" ? "selected" : ""}
-            onClick={() => handleBreadSelect("Mischbrot", lunchDiningImage)}
-          >
-            <ProductImage src={lunchDiningImage} alt="Mischbrot" />
-            Mischbrot
-          </SelectionItem>
-          <SelectionItem
-            className={selectedBread === "Baguette" ? "selected" : ""}
-            onClick={() => handleBreadSelect("Baguette", baguetteImage)}
-          >
-            <ProductImage src={baguetteImage} alt="Baguette" />
-            Baguette
-          </SelectionItem>
-          {/* Weitere Brot-Optionen hinzufügen */}
+          {breads.map(
+            (
+              bread // Anzeigen der Brote aus dem State
+            ) => (
+              console.log(bread),
+              (
+                <SelectionItem
+                  key={bread.zutatsId}
+                  className={
+                    selectedBread === bread.zutatsname ? "selected" : ""
+                  }
+                  onClick={() =>
+                    handleBreadSelect(bread.zutatsname, bread.zutatBild)
+                  }
+                >
+                  <ProductImage src={bread.zutatBild} alt={bread.zutatsname} />
+                  {bread.zutatsname}
+                  {}
+                </SelectionItem>
+              )
+            )
+          )}
         </SelectionList>
       </SelectionContainer>
       {selectedBread && (

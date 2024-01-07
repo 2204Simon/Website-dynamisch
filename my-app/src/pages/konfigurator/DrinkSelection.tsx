@@ -1,5 +1,5 @@
 // DrinkSelection.tsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Stage,
   StageHeader,
@@ -9,11 +9,7 @@ import {
   SelectionItem,
   NavigationIcon,
 } from "./styles/Konfigurator.styles";
-import { LocalCafe, ArrowForward, ArrowBack } from "@mui/icons-material";
-
-import orangeJuiceImage from "../../img/Drinks/Orangensaft.webp"; // Platzhalterbild
-import coffeeImage from "../../img/Drinks/Kaffee.webp"; // Platzhalterbild
-import teaImage from "../../img/Drinks/Zitronentee.webp"; // Platzhalterbild
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 
 interface DrinkSelectionProps {
   onPrevStage: () => void;
@@ -25,17 +21,38 @@ const DrinkSelection: React.FC<DrinkSelectionProps> = ({
   onComplete,
 }) => {
   const [selectedDrink, setSelectedDrink] = useState<string | null>(null);
+  const [drinks, setDrinks] = useState<any[]>([]); // Hier speichern wir die vom Server geholten Getränke
 
-  const drinkData = [
-    { name: "Orangensaft", image: orangeJuiceImage },
-    { name: "Kaffee", image: coffeeImage },
-    { name: "Tee", image: teaImage },
-    // Weitere Getränke-Optionen hinzufügen
-  ];
+  useEffect(() => {
+    fetch("http://localhost:3001/api/v1/zutat/Getränk")
+      .then(response => response.json())
+      .then(data =>
+        Promise.all(
+          data.map((drink: any) =>
+            loadImage(drink.zutatBild).then(image => ({
+              ...drink,
+              zutatBild: image,
+            }))
+          )
+        )
+      )
+      .then(drinks => {
+        setDrinks(drinks); // Speichern der Daten im State
+      })
+      .catch(error => {
+        console.log("Fehler");
+        console.error("Error:", error);
+      });
+  }, []);
 
-  const handleDrinkSelect = (drink: string, image: string) => {
-    setSelectedDrink(drink);
+  const handleDrinkSelect = (drinkType: string, image: string) => {
+    setSelectedDrink(drinkType);
   };
+
+  async function loadImage(path: string): Promise<string> {
+    const image = await import(`../../img/${path}`);
+    return image.default; //Wegen ES6 mit default
+  }
 
   const handlePrev = () => {
     onPrevStage();
@@ -43,7 +60,10 @@ const DrinkSelection: React.FC<DrinkSelectionProps> = ({
 
   const handleNext = () => {
     if (selectedDrink) {
-      onComplete(selectedDrink, "");
+      const selectedDrinkData = drinks.find(
+        drink => drink.zutatsname === selectedDrink
+      );
+      onComplete(selectedDrink, selectedDrinkData?.zutatBild || "");
     }
   };
 
@@ -54,38 +74,28 @@ const DrinkSelection: React.FC<DrinkSelectionProps> = ({
           <ArrowBack />
         </NavigationIcon>
         Wähle dein Getränk
-        <NavigationIcon
-          onClick={() =>
-            handleDrinkSelect(selectedDrink || "", selectedDrink || "")
-          }
-        >
-          <ArrowForward onClick={handleNext} />
+        <NavigationIcon onClick={handleNext}>
+          <ArrowForward />
         </NavigationIcon>
       </StageHeader>
       <SelectionContainer>
         <SelectionList>
-          <SelectionItem
-            className={selectedDrink === "Orangensaft" ? "selected" : ""}
-            onClick={() => handleDrinkSelect("Orangensaft", orangeJuiceImage)}
-          >
-            <ProductImage src={orangeJuiceImage} alt="Orangensaft" />
-            Orangensaft
-          </SelectionItem>
-          <SelectionItem
-            className={selectedDrink === "Kaffee" ? "selected" : ""}
-            onClick={() => handleDrinkSelect("Kaffee", coffeeImage)}
-          >
-            <ProductImage src={coffeeImage} alt="Kaffee" />
-            Kaffee
-          </SelectionItem>
-          <SelectionItem
-            className={selectedDrink === "Tee" ? "selected" : ""}
-            onClick={() => handleDrinkSelect("Tee", teaImage)}
-          >
-            <ProductImage src={teaImage} alt="Tee" />
-            Tee
-          </SelectionItem>
-          {/* Weitere Getränke-Optionen hinzufügen */}
+          {drinks.map(
+            (
+              drink // Anzeigen der Getränke aus dem State
+            ) => (
+              <SelectionItem
+                key={drink.zutatsId}
+                className={selectedDrink === drink.zutatsname ? "selected" : ""}
+                onClick={() =>
+                  handleDrinkSelect(drink.zutatsname, drink.zutatBild)
+                }
+              >
+                <ProductImage src={drink.zutatBild} alt={drink.zutatsname} />
+                {drink.zutatsname}
+              </SelectionItem>
+            )
+          )}
         </SelectionList>
       </SelectionContainer>
       {selectedDrink && (
