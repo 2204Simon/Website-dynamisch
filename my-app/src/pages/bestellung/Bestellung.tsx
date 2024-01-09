@@ -60,7 +60,6 @@ function WarenkorbSeite(): JSX.Element {
           />
         ))}
       </BestellungsWrapper>
-
       <SideBarBuy produktAnzahl={cartItems.length} price={sumPrice} />
     </WarenkorbWrapper>
   );

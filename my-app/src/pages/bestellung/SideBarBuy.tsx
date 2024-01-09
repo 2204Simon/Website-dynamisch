@@ -21,7 +21,7 @@ import PackageLocationQRCode from "./PackageLocationQRCode";
 import { useDispatch, useSelector } from "react-redux";
 import { CartState } from "../../redux/types";
 import { clearCart } from "../../redux/cartReducer";
-import { PayPalPayment } from "../PaypalPayment";
+import { PayPalPayment } from "./PaypalPayment";
 
 interface SideBarProps {
   produktAnzahl: number;
@@ -209,13 +209,13 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                     {" Kostenpflichtig Bestellen mit Lastschrift"}
                   </>
                 )}
-                {selectedPayments.includes("Paypal") && (
-                  <>
-                    Kostenpflichtig Bestellen mit
-                    <PayPalPayment />
-                  </>
-                )}
+                {/* TODO {selectedPayments.includes("Paypal") && (
+                  <> */}
+                Kostenpflichtig Bestellen mit
+                <PayPalPayment price={price} />
               </>
+              //   )}
+              // </>
             )}
           </PopupWrapper>
         </PopupBackdrop>
