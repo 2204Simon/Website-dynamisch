@@ -62,12 +62,8 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   };
 
   const handleThankyouPopup = () => {
-    if (!agbChecked) {
-      CustomToast.error("Bitte die ABGs bestätigen!");
-    } else {
-      setShowPopup(false);
-      setShowThankyouPopup(true);
-    }
+    setShowPopup(false);
+    setShowThankyouPopup(true);
   };
   const [selectedPayments, setSelectedPayments] = useState<string[]>([]);
   const handleAgbCheckboxChange = () => {
@@ -212,7 +208,11 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                 {/* TODO {selectedPayments.includes("Paypal") && (
                   <> */}
                 Kostenpflichtig Bestellen mit
-                <PayPalPayment price={price} />
+                <PayPalPayment
+                  price={price}
+                  handleThankyouPopup={handleThankyouPopup}
+                  agbChecked={agbChecked}
+                />
               </>
               //   )}
               // </>
