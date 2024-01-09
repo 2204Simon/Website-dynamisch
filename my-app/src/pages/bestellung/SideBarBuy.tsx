@@ -21,6 +21,7 @@ import PackageLocationQRCode from "./PackageLocationQRCode";
 import { useDispatch, useSelector } from "react-redux";
 import { CartState } from "../../redux/types";
 import { clearCart } from "../../redux/cartReducer";
+import { PayPalPayment } from "../PaypalPayment";
 
 interface SideBarProps {
   produktAnzahl: number;
@@ -47,7 +48,6 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
       setLoad(true);
     });
   };
-
   const handleSideChange = () => {
     setShowPopup(false);
     navigate("/LogIn");
@@ -69,7 +69,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
       setShowThankyouPopup(true);
     }
   };
-
+  const [selectedPayments, setSelectedPayments] = useState<string[]>([]);
   const handleAgbCheckboxChange = () => {
     setAgbChecked(!agbChecked);
   };
@@ -200,12 +200,21 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                 >
                   Zurück
                 </Button>
-                <Button
-                  className="black-color white-orange"
-                  onClick={() => handleThankyouPopup()}
-                >
-                  Kostenpflichtig Bestellen
-                </Button>
+                {/* //TODO: Stati global */}
+                {selectedPayments.includes("Lastschrift") && (
+                  <>
+                    <Button onClick={() => handleThankyouPopup()}>
+                      className= "black-color white-orange"
+                    </Button>
+                    {" Kostenpflichtig Bestellen mit Lastschrift"}
+                  </>
+                )}
+                {selectedPayments.includes("Paypal") && (
+                  <>
+                    Kostenpflichtig Bestellen mit
+                    <PayPalPayment />
+                  </>
+                )}
               </>
             )}
           </PopupWrapper>

@@ -16,7 +16,6 @@ import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { FaPaypal } from "react-icons/fa";
 import { colors } from "../general/constants";
-import { PayPalPayment } from "../PaypalPayment";
 import { ZeitungsAbo } from "../Zeitungsabo";
 import { Checkbox, FormGroup } from "@mui/material";
 import { addNewAdress } from "../../redux/adressDataReducer";
@@ -174,7 +173,6 @@ export default function AdressInformation(): JSX.Element {
                           }}
                         />
                       </Grid>
-                      <PayPalPayment />
                     </>
                   )}
                   <Grid item xs={12}>
