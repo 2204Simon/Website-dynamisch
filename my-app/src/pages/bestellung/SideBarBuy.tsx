@@ -22,6 +22,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { CartState } from "../../redux/types";
 import { clearCart } from "../../redux/cartReducer";
 import { PayPalPayment } from "./PaypalPayment";
+import { sendDeleteRequest } from "../../serverFunctions/generelAPICalls";
+import { useCookies } from "react-cookie";
 
 interface SideBarProps {
   produktAnzahl: number;
@@ -32,6 +34,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   const { loggedIn } = useLoggedIn();
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
+  const [cookies] = useCookies(["kundenId"]);
   const [showThankyouPopup, setShowThankyouPopup] = useState(false);
   const dispatch = useDispatch();
   const [agbChecked, setAgbChecked] = useState(false);
@@ -61,7 +64,8 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
     setShowThankyouPopup(false);
   };
 
-  const handleThankyouPopup = () => {
+  const handleThankyouPopup = async () => {
+    await sendDeleteRequest(`/Warenkorb/${cookies.kundenId}`);
     setShowPopup(false);
     setShowThankyouPopup(true);
   };

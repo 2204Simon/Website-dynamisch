@@ -46,3 +46,18 @@ export async function sendPutRequest(url: string, data: any) {
 
   return await response.json();
 }
+
+export async function sendDeleteRequest(url: string) {
+  const response = await fetch(baseUrl + url, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  return await response.json();
+}

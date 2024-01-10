@@ -12,9 +12,12 @@ import {
 import { Button } from "../general/button.styles";
 import { Link as RouterLink } from "react-router-dom";
 import { CartItem, CartState, ProduktApiType } from "../../redux/types";
-import { addToCart, removeFromCart } from "../../redux/cartReducer";
+import { addToCart, clearCart, removeFromCart } from "../../redux/cartReducer";
 import { useEffect, useState } from "react";
-import { getRequest } from "../../serverFunctions/generelAPICalls";
+import {
+  getRequest,
+  sendDeleteRequest,
+} from "../../serverFunctions/generelAPICalls";
 import { CustomToast } from "../general/toast.style";
 import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
@@ -39,8 +42,11 @@ function WarenkorbSeite(): JSX.Element {
             throw new Error("Keine Daten gefunden");
           }
           const loadedimage = await loadImage(item.bild);
-          console.log({ ...item, bild: loadedimage });
+          console.log(item.anzahl);
 
+          console.log({ ...item, bild: loadedimage });
+          // sehr sus aber sonst muss viel geändert werden
+          dispatch(clearCart());
           dispatch(addToCart({ ...item, bild: loadedimage }));
         }
       } catch (error) {
@@ -51,8 +57,11 @@ function WarenkorbSeite(): JSX.Element {
     fetchData();
   }, []);
 
-  const handleRemoveItem = (item: CartItem) => {
-    dispatch(removeFromCart(item));
+  const handleRemoveItem = async (item: CartItem) => {
+    try {
+      await sendDeleteRequest(`/Warenkorb/${cookies.kundenId}`);
+      dispatch(removeFromCart(item));
+    } catch (error) {}
   };
   const priceCounter = (): number => {
     let price = 0;
