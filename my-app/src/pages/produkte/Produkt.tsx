@@ -3,6 +3,17 @@ import ScrollContainer from "./Arrows";
 import { Suspense, useEffect, useState } from "react";
 import { CustomToast } from "../general/toast.style";
 
+export async function loadImage(path: string): Promise<string> {
+  try {
+    const image = await import(`../../img/${path}`);
+    console.log(image.default);
+    return image.default;
+  } catch (error) {
+    console.error(`Error loading image at path ${path}:`, error);
+    return "";
+  }
+}
+
 type Product = {
   kundenId?: string;
   produktId: string;
@@ -50,17 +61,6 @@ function Produkt() {
   useEffect(() => {
     loadProducts();
   }, []);
-
-  async function loadImage(path: string): Promise<string> {
-    try {
-      const image = await import(`../../img/${path}`);
-      console.log(image.default);
-      return image.default;
-    } catch (error) {
-      console.error(`Error loading image at path ${path}:`, error);
-      return "";
-    }
-  }
 
   const ShoppingCards = (sparte: string) => {
     const productsToRender = products

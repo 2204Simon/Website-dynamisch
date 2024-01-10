@@ -24,12 +24,15 @@ import { BlackColorButton } from "../general/button";
 import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
 
-import { CartState } from "../../redux/types";
+import { CartItem, CartState } from "../../redux/types";
 import { Plus, XCircle, Minus } from "phosphor-react";
 import { FaSeedling } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { formatNumber } from "../general/constants";
 import { addToCart, increaseQuantity } from "../../redux/cartReducer";
+import { sendPostRequest } from "../../serverFunctions/generelAPICalls";
+import { useCookies } from "react-cookie";
+import { KUNDEN_ID } from "../../globalVariables/global";
 
 interface ShoppingCardProps {
   produktId: string;
@@ -54,6 +57,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
   const [displayNone, setDisplayNone] = useState(false);
   const [quantity, setQuantity] = useState<number>(0);
   const dispatch = useDispatch(); // Initialisierung der useDispatch-Hook
+  const [cookie, setCookie] = useCookies([KUNDEN_ID]); // Initialisierung der useDispatch-Hook
   const cartItems = useSelector(
     (state: { cart: CartState }) => state.cart.cartItems
   );
@@ -74,11 +78,11 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
     }
   };
 
-  const neu = (quantity2: number) => {
-    const item = {
+  const addProduct = async (quantity2: number) => {
+    const item: CartItem = {
       produktId: produktId,
-      produktname: title,
-      logo: image,
+      titel: title,
+      bild: image,
       preis: price,
       anzahl: quantity,
     };
@@ -86,25 +90,36 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
     CustomToast.success(`Es wurde  ${quantity} ${title} hinzugefügt!`);
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (quantity === 0) {
       CustomToast.error("Bitte erhöhe die Menge!");
     } else {
       for (let i = 0; i < cartItems.length; i++) {
-        if (cartItems[i].produktname === title) {
-          neu(quantity);
+        if (cartItems[i].titel === title) {
+          addProduct(quantity);
           return;
         }
       }
       const item = {
         produktId: produktId,
-        produktname: title,
-        logo: image,
+        titel: title,
+        bild: image,
         preis: price,
         anzahl: quantity,
       };
-      dispatch(addToCart(item)); // Dispatch der addToCart-Action mit dem erstellten Item
-      CustomToast.success("Dein Produkt ist im Warenkorb!");
+      try {
+        const itemObjekt = {
+          produktId: item.produktId,
+          produktMenge: item.anzahl,
+          kundenId: cookie.kundenId,
+        };
+        console.log(itemObjekt);
+        const addedProdukt = await sendPostRequest("warenkorb", itemObjekt);
+        CustomToast.success("Dein Produkt ist im Warenkorb!");
+        dispatch(addToCart(item as CartItem)); // Dispatch der addToCart-Action mit dem erstellten Item
+      } catch (error) {
+        CustomToast.error("Fehler hinzufügen (Serververbindung))");
+      }
     }
   };
 

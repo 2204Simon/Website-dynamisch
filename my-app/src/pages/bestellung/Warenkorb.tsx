@@ -28,7 +28,7 @@ export default function Warenkorb({
   const totalPrice = count * price; // Berechnung des Gesamtpreises
   return (
     <Container>
-      <Image src={image} />
+      <Image src={"../../image/Food/BaguetteGelbd.webp"} />
       <ContentContainer>
         <div>
           <Count>{count}x</Count>

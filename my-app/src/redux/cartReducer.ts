@@ -15,9 +15,7 @@ const cartSlice = createSlice({
     removeFromCart: (state, action: PayloadAction<CartItem>) => {
       console.log(action, "removeFromCart");
       state.cartItems = state.cartItems.filter(item => {
-        console.log("Item:", item.produktname);
-        console.log("Action payload:", action.payload);
-        return item.produktname !== action.payload.produktname;
+        return item.titel !== action.payload.titel;
       });
     },
     clearCart: state => {

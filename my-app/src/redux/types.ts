@@ -21,6 +21,7 @@ export interface AdressDataState {
 }
 
 export interface AdressData {
+  kundenId?: string;
   postleitzahl: string;
   strasse: string;
   ort: string;
@@ -44,9 +45,10 @@ export interface CartState {
 
 export interface CartItem {
   produktId: string;
-  logo: string;
+  bild: string;
   preis: number;
-  produktname: string;
+  titel: string;
+  kundenId?: string;
   anzahl: number;
 }
 
@@ -56,4 +58,18 @@ export enum CartActionTypes {
   CLEAR_CART = "CLEAR_CART",
   INCREASE_QUANTITY = "INCREASE_QUANTITY",
   DECREASE_QUANTITY = "DECREASE_QUANTITY",
+}
+
+export interface ProduktApiType {
+  produkt: {
+    produktId: string;
+    titel: string;
+    preis: number;
+    bild: string;
+    sparte: string;
+    kundenId: string | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+  bestellmenge: number;
 }
