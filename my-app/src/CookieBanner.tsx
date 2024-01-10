@@ -1,4 +1,6 @@
 import React from "react";
+import "./App.css";
+import "./pages/general/button.styles";
 
 interface CookieBannerProps {
   onAccept: () => void;
@@ -19,3 +21,6 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({
     <button onClick={onDecline}>Ablehnen</button>
   </div>
 );
+
+//<BlackColorButton onClick={onAccept}>Akzeptieren</BlackColorButton>
+  //  <BlackColorButton onClick={onDecline}>Ablehnen</BlackColorButton>
