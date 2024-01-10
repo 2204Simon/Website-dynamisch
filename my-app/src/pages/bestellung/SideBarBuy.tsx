@@ -22,7 +22,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { CartState } from "../../redux/types";
 import { clearCart } from "../../redux/cartReducer";
 import { PayPalPayment } from "./PaypalPayment";
-import { sendDeleteRequest } from "../../serverFunctions/generelAPICalls";
+import {
+  sendDeleteRequest,
+  sendPostRequest,
+} from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
 
 interface SideBarProps {
@@ -65,7 +68,13 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   };
 
   const handleThankyouPopup = async () => {
-    await sendDeleteRequest(`/Warenkorb/${cookies.kundenId}`);
+    const bodyForBestellung = {
+      kundenId: cookies.kundenId,
+      zahlungsId: 1,
+      lieferdatum: selectedDate,
+      gewünschtesLieferdatum: selectedDate,
+    };
+    await sendPostRequest(`bestellung`, bodyForBestellung);
     setShowPopup(false);
     setShowThankyouPopup(true);
   };

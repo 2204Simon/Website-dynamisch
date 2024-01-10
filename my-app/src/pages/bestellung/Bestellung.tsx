@@ -72,7 +72,9 @@ function WarenkorbSeite(): JSX.Element {
         `Warenkorb/${cookies.kundenId}/${item.produktId}`
       );
       dispatch(removeFromCart(item));
-    } catch (error) {}
+    } catch (error) {
+      CustomToast.error("Fehler beim Löschen des Produkts");
+    }
   };
   const priceCounter = (): number => {
     let price = 0;

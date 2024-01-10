@@ -32,6 +32,7 @@ import { addNewAdress } from "../../redux/adressDataReducer";
 import { sendPostRequest } from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
+import { send } from "process";
 
 function Copyright(props: any) {
   return (
@@ -48,7 +49,7 @@ export default function SignUp() {
   const { changeLoggedIn } = useLoggedIn();
   const navigate = useNavigate();
   //später für season token
-  const [cookies, setCookie] = useCookies([KUNDEN_ID]);
+  const [cookies, setCookie] = useCookies([KUNDEN_ID, "ZahlungsId"]);
   const [selectedPayments, setSelectedPayments] = useState<string[]>([]);
   const handlePaymentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const paymentOption = event.target.value;
@@ -72,6 +73,12 @@ export default function SignUp() {
       event.preventDefault();
       const formData = new FormData(event.currentTarget);
       const email = formData.get("email") as string;
+      const password = formData.get("password") as string;
+      const confirmPassword = formData.get("confirmPassword") as string;
+      if (password !== confirmPassword) {
+        PasswordMismatch();
+        return;
+      }
       const preparedData: LogInData = {
         email: email,
         passwort: formData.get("password") as string,
@@ -97,11 +104,21 @@ export default function SignUp() {
         iban: formData.get("iban") as string,
       };
       const adressData = await sendPostRequest("adresse", adressDataFormData);
-      const password = formData.get("password") as string;
-      const confirmPassword = formData.get("confirmPassword") as string;
-      if (password !== confirmPassword) {
-        PasswordMismatch();
-        return;
+      if (selectedPayments.includes("Paypal")) {
+        const payPalData = await sendPostRequest("paypal", {
+          kundenId: kundenData.kundenId,
+          email,
+        });
+        setCookie("ZahlungsId", payPalData.zahlungsId, { path: "/" });
+      }
+      if (selectedPayments.includes("Lastschrift")) {
+        const lastschriftData = await sendPostRequest("lastschrift", {
+          kundenId: kundenData.kundenId,
+          bankName: formData.get("bankName") as string,
+          bic: formData.get("bic") as string,
+          iban: formData.get("iban") as string,
+        });
+        setCookie("ZahlungsId", lastschriftData.zahlungsId, { path: "/" });
       }
       // const response eventuel season token
       setCookie(KUNDEN_ID, kundenData.kundenId, { path: "/" });
