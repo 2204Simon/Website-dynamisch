@@ -69,7 +69,7 @@ const UnsereGeschichte: React.FC = () => {
         <h3>FAQs</h3>
         <p>Wenn Du genauere Informationen über unser Konzept erhalten möchtest, findest Du unter den folgenden Fragen die Spezifikation. Klicke einfach auf die Fragen, dann erscheint die dazugehörige Antwort. Wenn Deine Frage weiterhin besteht, dann tritt gerne mit uns in Verbindung!</p>
         <ContactLink>
-        <Link to="/Produkte">
+        <Link to="/Kontakt">
           <BlackColorButton caption={"Tritt mit uns in Kontakt"} ></BlackColorButton>
               </Link>
               </ContactLink>
