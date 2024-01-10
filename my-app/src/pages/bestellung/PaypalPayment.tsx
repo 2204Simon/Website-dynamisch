@@ -26,6 +26,7 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
                   amount: {
                     value: price,
                   },
+
                   shipping: {
                     address: {
                       //TODO: replace with real address und name über Server
@@ -42,6 +43,9 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
                   },
                 },
               ],
+              payer: {
+                email_address: "example@example.com", // Ersetzen Sie dies durch die tatsächliche E-Mail-Adresse
+              },
             });
           }}
           onError={err => {
