@@ -8,6 +8,7 @@ import {
   FaqItem,
   FaqDetails,
   FaqSummary,
+  ContactLink,
 } from "./styles/Konzept.styles";
 import history_1 from "../../img/Our_History/history_1.webp";
 import old_bakery from "../../img/Our_History/old_bakery.webp";
@@ -16,6 +17,8 @@ import Mustermann from "../../img/Our_History/Johann_Mustermann.webp";
 import Germany from "../../img/Our_History/Germany.webp";
 import Austria from "../../img/Our_History/Austria.webp";
 import YoungGeneration from "../../img/Our_History/Young_Generation.webp";
+import {BlackColorButton } from "../../pages/general/button";
+import { Link } from "react-router-dom";
 const faqs = [
   {
     question: "Wie kann ich ein Abonnement abschließen?",
@@ -64,7 +67,12 @@ const UnsereGeschichte: React.FC = () => {
       <h2>Das Konzept von Delivery-Breakfast</h2>
       <FaqSection>
         <h3>FAQs</h3>
-        <p>Wenn Du genauere Informationen über unser Konzept erhalten möchtest, findest Du unter den folgenden Fragen die Spezifikation. Klicke einfach auf die Fragen, dann erscheint die dazugehörige Antwort. Wenn Deine Frage weiterhin besteht, dann tritt gerne mit uns unter KONTAKT in Verbindung!</p>
+        <p>Wenn Du genauere Informationen über unser Konzept erhalten möchtest, findest Du unter den folgenden Fragen die Spezifikation. Klicke einfach auf die Fragen, dann erscheint die dazugehörige Antwort. Wenn Deine Frage weiterhin besteht, dann tritt gerne mit uns in Verbindung!</p>
+        <ContactLink>
+        <Link to="/Produkte">
+          <BlackColorButton caption={"Tritt mit uns in Kontakt"} ></BlackColorButton>
+              </Link>
+              </ContactLink>
         <FaqList>
           {faqs.map((faq, index) => (
             <FaqItem key={index}>

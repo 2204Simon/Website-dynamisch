@@ -9,6 +9,7 @@ export const FaqList = styled.ul`
   list-style: none;
   padding-left: 30px;
   padding-right: 30px;
+  padding-bottom: 30px;
   
 `;
 
@@ -25,4 +26,10 @@ export const FaqDetails = styled.details`
 
 export const FaqSummary = styled.summary`
   font-weight: bold;
+`;
+
+export const ContactLink = styled.div`
+padding-left: 20px;
+padding-bottom: 10px;
+
 `;
