@@ -12,7 +12,11 @@ import {
 import { Button } from "../general/button.styles";
 import { Link as RouterLink } from "react-router-dom";
 import { CartItem, CartState, ProduktApiType } from "../../redux/types";
-import { addToCart, clearCart, removeFromCart } from "../../redux/cartReducer";
+import {
+  addMultipleToCart,
+  clearCart,
+  removeFromCart,
+} from "../../redux/cartReducer";
 import { useEffect, useState } from "react";
 import {
   getRequest,
@@ -34,21 +38,27 @@ function WarenkorbSeite(): JSX.Element {
     const fetchData = async () => {
       try {
         const serverCartItems: Array<CartItem> = await getRequest(
-          `/Warenkorb/${cookies.kundenId}`
+          `Warenkorb/${cookies.kundenId}`
         );
+        console.log(serverCartItems);
 
+        if (serverCartItems.length === 0 || !serverCartItems) {
+          throw new Error("Keine Daten gefunden");
+        }
+
+        const updatedCartItems = [];
         for (const item of serverCartItems) {
-          if (serverCartItems.length === 0 || !serverCartItems) {
-            throw new Error("Keine Daten gefunden");
-          }
           const loadedimage = await loadImage(item.bild);
           console.log(item.anzahl);
 
           console.log({ ...item, bild: loadedimage });
           // sehr sus aber sonst muss viel geändert werden
-          dispatch(clearCart());
-          dispatch(addToCart({ ...item, bild: loadedimage }));
+
+          updatedCartItems.push({ ...item, bild: loadedimage });
         }
+
+        dispatch(clearCart());
+        dispatch(addMultipleToCart(updatedCartItems));
       } catch (error) {
         CustomToast.error("Fehler beim Laden der Daten");
       }
@@ -56,10 +66,11 @@ function WarenkorbSeite(): JSX.Element {
 
     fetchData();
   }, []);
-
   const handleRemoveItem = async (item: CartItem) => {
     try {
-      await sendDeleteRequest(`/Warenkorb/${cookies.kundenId}`);
+      await sendDeleteRequest(
+        `Warenkorb/${cookies.kundenId}/${item.produktId}`
+      );
       dispatch(removeFromCart(item));
     } catch (error) {}
   };
