@@ -67,8 +67,11 @@ export default function BestellungsData(): JSX.Element {
                 <MetaDataDiv>
                   <MetaDataItem>
                     {deliverd
-                      ? `Bestellung: ${bestellung.bestellDatum}`
-                      : `vorrausichtliche Lieferung: ${bestellung.gewünschtesLieferdatum}`}
+                      ? `geliefert am: ${bestellung.bestellDatum.toString()}`
+                      : `vorrausichtliche Lieferung: ${bestellung.gewünschtesLieferdatum.toString()}`}
+                  </MetaDataItem>
+                  <MetaDataItem>
+                    Name: {bestellung.createdAt.toString()}
                   </MetaDataItem>
                   <MetaDataItem>
                     Email: {bestellung.zahlungsinformation.email}

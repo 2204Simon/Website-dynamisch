@@ -14,22 +14,25 @@ import {
 import { loadImage } from "../../produkte/Produkt";
 export default function EinzelBestellung() {
   const { id } = useParams();
-  const [cookies] = useCookies([KUNDEN_ID]);
   const [bestellungen, setBestellungen] =
     useState<BestellungsInformation | null>(null);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const serverBestellungen = await getRequest(`Bestellung/${id}`);
-        const loadedimage = await loadImage(
-          `../../img/${serverBestellungen.bild}`
+        const serverBestellungen: BestellungsInformation = await getRequest(
+          `Bestellung/${id}`
         );
+        console.log(serverBestellungen);
+        for (const produkt of serverBestellungen.produktInformationen) {
+          console.log(produkt.bild);
+
+          const loadedimage = await loadImage(produkt.bild);
+          produkt.bild = loadedimage;
+        }
         const loadedServerBestellung = {
           ...serverBestellungen,
-          bild: loadedimage,
+          // bild: loadedimage,
         };
 
         setBestellungen(loadedServerBestellung);
@@ -43,23 +46,22 @@ export default function EinzelBestellung() {
   return !bestellungen ? (
     <div>loading</div>
   ) : (
-    <WarenkorbWrapper>
-      <BestellungsWrapper>
-        {bestellungen.produktInformationen.map((item, index) => (
-          <Warenkorb
-            key={index}
-            image={item.bild}
-            price={item.preis}
-            onRemove={() => console.log("removed")} // Item an handleRemoveItem übergeben
-            productName={item.titel}
-            count={item.bestellmenge}
-          />
-        ))}
-      </BestellungsWrapper>
-      <SideBarBuy
-        produktAnzahl={bestellungen.produktInformationen.length}
-        price={bestellungen.gesamtpreis}
-      />
-    </WarenkorbWrapper>
+    <div>
+      <h1>Deine Bestellung vom {bestellungen.createdAt.toLocaleString()}</h1>
+      <WarenkorbWrapper>
+        <BestellungsWrapper>
+          {bestellungen.produktInformationen.map((item, index) => (
+            <Warenkorb
+              key={index}
+              image={item.bild}
+              price={item.preis}
+              onRemove={() => console.log("removed")} // Item an handleRemoveItem übergeben
+              productName={item.titel}
+              count={item.bestellmenge}
+            />
+          ))}
+        </BestellungsWrapper>
+      </WarenkorbWrapper>
+    </div>
   );
 }

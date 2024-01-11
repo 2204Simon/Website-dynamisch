@@ -74,7 +74,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
         kundenId: cookies.kundenId,
         zahlungsId: cookies.ZahlungsId,
         // das datum nur wenn die bestellung angekommen ist
-        bestellDatum: selectedDate,
+        // bestellDatum: selectedDate,
         gewünschtesLieferdatum: selectedDate,
       };
       console.log(bodyForBestellung);
