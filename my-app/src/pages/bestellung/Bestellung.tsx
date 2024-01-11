@@ -11,18 +11,70 @@ import {
 } from "./stylesBestellung/Bestellung.styles";
 import { Button } from "../general/button.styles";
 import { Link as RouterLink } from "react-router-dom";
-import { CartItem, CartState } from "../../redux/types";
-import { removeFromCart } from "../../redux/cartReducer";
+import { CartItem, CartState, ProduktApiType } from "../../redux/types";
+import {
+  addMultipleToCart,
+  clearCart,
+  removeFromCart,
+} from "../../redux/cartReducer";
+import { useEffect, useState } from "react";
+import {
+  getRequest,
+  sendDeleteRequest,
+} from "../../serverFunctions/generelAPICalls";
+import { CustomToast } from "../general/toast.style";
+import { useCookies } from "react-cookie";
+import { KUNDEN_ID } from "../../globalVariables/global";
+import { loadImage } from "../produkte/Produkt";
 
 function WarenkorbSeite(): JSX.Element {
   const dispatch = useDispatch();
-
+  const [cookies, setCookie] = useCookies([KUNDEN_ID]);
   const cartItems = useSelector(
     (state: { cart: CartState }) => state.cart.cartItems
   );
 
-  const handleRemoveItem = (item: CartItem) => {
-    dispatch(removeFromCart(item));
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const serverCartItems: Array<CartItem> = await getRequest(
+          `Warenkorb/${cookies.kundenId}`
+        );
+        console.log(serverCartItems);
+
+        if (serverCartItems.length === 0 || !serverCartItems) {
+          throw new Error("Keine Daten gefunden");
+        }
+
+        const updatedCartItems = [];
+        for (const item of serverCartItems) {
+          const loadedimage = await loadImage(item.bild);
+          console.log(item.anzahl);
+
+          console.log({ ...item, bild: loadedimage });
+          // sehr sus aber sonst muss viel geändert werden
+
+          updatedCartItems.push({ ...item, bild: loadedimage });
+        }
+
+        dispatch(clearCart());
+        dispatch(addMultipleToCart(updatedCartItems));
+      } catch (error) {
+        CustomToast.error("Fehler beim Laden der Daten");
+      }
+    };
+
+    fetchData();
+  }, []);
+  const handleRemoveItem = async (item: CartItem) => {
+    try {
+      await sendDeleteRequest(
+        `Warenkorb/${cookies.kundenId}/${item.produktId}`
+      );
+      dispatch(removeFromCart(item));
+    } catch (error) {
+      CustomToast.error("Fehler beim Löschen des Produkts");
+    }
   };
   const priceCounter = (): number => {
     let price = 0;
@@ -52,10 +104,10 @@ function WarenkorbSeite(): JSX.Element {
         {cartItems.map((item, index) => (
           <Warenkorb
             key={index}
-            image={item.logo}
+            image={item.bild}
             price={item.preis}
             onRemove={() => handleRemoveItem(item)} // Item an handleRemoveItem übergeben
-            productName={item.produktname}
+            productName={item.titel}
             count={item.anzahl}
           />
         ))}

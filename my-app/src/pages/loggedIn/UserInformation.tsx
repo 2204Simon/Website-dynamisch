@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLoggedIn } from "../../globalVariables/loggedin";
 import { UserDataState } from "../../redux/types";
 import {
@@ -9,13 +9,35 @@ import {
   Title,
 } from "./UserInformation.styles";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { getRequest } from "../../serverFunctions/generelAPICalls";
+import { KUNDEN_ID } from "../../globalVariables/global";
+import { useCookies } from "react-cookie";
+import { CustomToast } from "../general/toast.style";
+import { addNewUser } from "../../redux/userReducer";
 
 export default function UserInformation(): JSX.Element {
   const { changeLoggedIn, loggedIn } = useLoggedIn();
+  const [cookies, setCookie] = useCookies([KUNDEN_ID]);
   const navigate = useNavigate();
   const userInformation = useSelector(
     (state: { user: UserDataState }) => state.user
   );
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        console.log("cookies", cookies);
+
+        const responsekunde = await getRequest(`/kunde?id=${cookies.kundenId}`);
+        dispatch(addNewUser(responsekunde));
+      } catch (error) {
+        CustomToast.error("Fehler beim Laden der Daten");
+      }
+    };
+
+    fetchData();
+  }, [loggedIn]);
 
   const handleClick = (): void => {
     console.log("changedlogin");

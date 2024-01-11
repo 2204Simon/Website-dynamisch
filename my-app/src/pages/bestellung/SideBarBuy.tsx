@@ -22,6 +22,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { CartState } from "../../redux/types";
 import { clearCart } from "../../redux/cartReducer";
 import { PayPalPayment } from "./PaypalPayment";
+import {
+  sendDeleteRequest,
+  sendPostRequest,
+} from "../../serverFunctions/generelAPICalls";
+import { useCookies } from "react-cookie";
+import { KUNDEN_ID } from "../../globalVariables/global";
 
 interface SideBarProps {
   produktAnzahl: number;
@@ -32,6 +38,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   const { loggedIn } = useLoggedIn();
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
+  const [cookies] = useCookies([KUNDEN_ID, "ZahlungsId"]);
   const [showThankyouPopup, setShowThankyouPopup] = useState(false);
   const dispatch = useDispatch();
   const [agbChecked, setAgbChecked] = useState(false);
@@ -61,9 +68,21 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
     setShowThankyouPopup(false);
   };
 
-  const handleThankyouPopup = () => {
-    setShowPopup(false);
-    setShowThankyouPopup(true);
+  const handleThankyouPopup = async () => {
+    try {
+      const bodyForBestellung = {
+        kundenId: cookies.kundenId,
+        zahlungsId: cookies.ZahlungsId,
+        bestellDatum: selectedDate,
+        gewünschtesLieferdatum: selectedDate,
+      };
+      console.log(bodyForBestellung);
+      await sendPostRequest(`bestellung`, bodyForBestellung);
+      setShowPopup(false);
+      setShowThankyouPopup(true);
+    } catch (error) {
+      CustomToast.error("Fehler beim Bestellen");
+    }
   };
   const [selectedPayments, setSelectedPayments] = useState<string[]>([]);
   const handleAgbCheckboxChange = () => {

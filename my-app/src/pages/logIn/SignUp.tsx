@@ -29,7 +29,10 @@ import { useState } from "react";
 import { Bank } from "phosphor-react";
 import { addNewUser } from "../../redux/userReducer";
 import { addNewAdress } from "../../redux/adressDataReducer";
-import { sendPostRequestKunde } from "../../serverFunctions/sendPostRequest";
+import { sendPostRequest } from "../../serverFunctions/generelAPICalls";
+import { useCookies } from "react-cookie";
+import { KUNDEN_ID } from "../../globalVariables/global";
+import { send } from "process";
 
 function Copyright(props: any) {
   return (
@@ -45,6 +48,8 @@ function Copyright(props: any) {
 export default function SignUp() {
   const { changeLoggedIn } = useLoggedIn();
   const navigate = useNavigate();
+  //später für season token
+  const [cookies, setCookie] = useCookies([KUNDEN_ID, "ZahlungsId"]);
   const [selectedPayments, setSelectedPayments] = useState<string[]>([]);
   const handlePaymentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const paymentOption = event.target.value;
@@ -68,6 +73,12 @@ export default function SignUp() {
       event.preventDefault();
       const formData = new FormData(event.currentTarget);
       const email = formData.get("email") as string;
+      const password = formData.get("password") as string;
+      const confirmPassword = formData.get("confirmPassword") as string;
+      if (password !== confirmPassword) {
+        PasswordMismatch();
+        return;
+      }
       const preparedData: LogInData = {
         email: email,
         passwort: formData.get("password") as string,
@@ -75,13 +86,14 @@ export default function SignUp() {
         nachname: formData.get("lastName") as string,
         telefonnummer: formData.get("telefonnummer") as string,
       };
-      const kundenData = await sendPostRequestKunde("kunde", preparedData);
+      const kundenData = await sendPostRequest("kunde", preparedData);
       console.log(kundenData);
       if (!validateEmail(email)) {
         CustomToast.error("Bitte gebe eine gültige E-Mail-Adresse ein");
         return;
       }
-      const adressData: AdressData = {
+      const adressDataFormData: AdressData = {
+        kundenId: kundenData.kundenId,
         postleitzahl: formData.get("plz") as string,
         strasse: formData.get("street") as string,
         ort: formData.get("city") as string,
@@ -91,13 +103,26 @@ export default function SignUp() {
         bic: formData.get("bic") as string,
         iban: formData.get("iban") as string,
       };
-
-      const password = formData.get("password") as string;
-      const confirmPassword = formData.get("confirmPassword") as string;
-      if (password !== confirmPassword) {
-        PasswordMismatch();
-        return;
+      const adressData = await sendPostRequest("adresse", adressDataFormData);
+      if (selectedPayments.includes("Paypal")) {
+        const payPalData = await sendPostRequest("paypal", {
+          kundenId: kundenData.kundenId,
+          email,
+        });
+        setCookie("ZahlungsId", payPalData.zahlungsId, { path: "/" });
       }
+      if (selectedPayments.includes("Lastschrift")) {
+        const lastschriftData = await sendPostRequest("lastschrift", {
+          kundenId: kundenData.kundenId,
+          bankName: formData.get("bankName") as string,
+          bic: formData.get("bic") as string,
+          iban: formData.get("iban") as string,
+        });
+        setCookie("ZahlungsId", lastschriftData.zahlungsId, { path: "/" });
+      }
+      // const response eventuel season token
+      setCookie(KUNDEN_ID, kundenData.kundenId, { path: "/" });
+      // console.log(cookies.kundenId);
       dispatch(addNewUser(kundenData));
       dispatch(addNewAdress(adressData));
       navigate("/LoggedIn");

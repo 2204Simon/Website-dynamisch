@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { BlackColorButton } from "../general/button";
 import AdressInformation from "./AdressData";
 import UserInformation from "./UserInformation";
-import { ZeitungsAbo } from "../Zeitungsabo";
 
 export default function DeinKonto(): JSX.Element {
   return (

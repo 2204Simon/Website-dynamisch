@@ -16,7 +16,7 @@ import { CustomToast } from "../general/toast.style";
 import { ToastContainer } from "react-toastify";
 import { useLoggedIn } from "../../globalVariables/loggedin";
 import { colors } from "../general/constants";
-import { baseUrl } from "../../redux/baseUrl";
+import { baseUrl } from "../../globalVariables/global";
 
 function Copyright(props: any) {
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AdressDataState, AdressData } from "../../redux/types";
 import {
@@ -19,15 +19,36 @@ import { colors } from "../general/constants";
 import { ZeitungsAbo } from "../Zeitungsabo";
 import { Checkbox, FormGroup } from "@mui/material";
 import { addNewAdress } from "../../redux/adressDataReducer";
+import { getRequest } from "../../serverFunctions/generelAPICalls";
+import { useCookies } from "react-cookie";
+import { KUNDEN_ID } from "../../globalVariables/global";
+import { CustomToast } from "../general/toast.style";
 
 export default function AdressInformation(): JSX.Element {
   const dispatch = useDispatch();
   const [editMode, setEditMode] = useState(false);
   const [editedData, setEditedData] = useState<AdressData | null>(null);
+  const [cookies, setCookie] = useCookies([KUNDEN_ID]);
   const adressInformation = useSelector(
     (state: { adress: AdressDataState }) => state.adress.AdressData
   );
   const [selectedPayments, setSelectedPayments] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        console.log("cookies", cookies);
+
+        const responseAdress = await getRequest(`/adresse/${cookies.kundenId}`);
+        dispatch(addNewAdress(responseAdress));
+      } catch (error) {
+        CustomToast.error("Fehler beim Laden der Daten");
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const handlePaymentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const paymentOption = event.target.value;
 
