@@ -18,6 +18,7 @@ import Konzept from "./pages/konzept/Konzept";
 import Konfigurator from "./pages/konfigurator/Konfigurator";
 import { useCookies } from "react-cookie";
 import { CookieBanner } from "./CookieBanner"; // Import the CookieBanner component
+import EinzelBestellung from "./pages/loggedIn/einzelBestellung/einzelbestellung";
 
 const DatenschutzerklaerungLazy = lazy(
   () => import("./pages/Datenschutzerklaerung")
@@ -54,6 +55,7 @@ export default function App(): JSX.Element {
               <Route path="SignUp" element={<SignUp />} />
               <Route path="LoggedIn" element={<DeinKonto />} />
               <Route path="Impressum" element={<Impressum />} />
+              <Route path="Bestellung/:id" element={<EinzelBestellung />} />
               <Route
                 path="Datenschutzerklaerung"
                 element={

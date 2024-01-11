@@ -18,11 +18,15 @@ import {
   SingleBestellungWrapper,
 } from "./Bestellungen.styles";
 import { Package, Truck } from "phosphor-react";
+import { Link, useNavigate } from "react-router-dom";
 export default function BestellungsData(): JSX.Element {
   const [cookies] = useCookies([KUNDEN_ID]);
   const [bestellungen, setBestellungen] = useState<
     Array<BestellungsInformation>
   >([]);
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -42,6 +46,7 @@ export default function BestellungsData(): JSX.Element {
 
     fetchData();
   }, []);
+
   return (
     <Container>
       <Card>
@@ -53,7 +58,12 @@ export default function BestellungsData(): JSX.Element {
               deliverd = false;
             }
             return (
-              <SingleBestellungWrapper key={bestellung.bestellungsId}>
+              <SingleBestellungWrapper
+                key={bestellung.bestellungsId}
+                onClick={() =>
+                  navigate(`/bestellung/${bestellung.bestellungsId}`)
+                }
+              >
                 <MetaDataDiv>
                   <MetaDataItem>
                     {deliverd

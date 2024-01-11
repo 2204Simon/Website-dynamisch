@@ -17,11 +17,11 @@ export const CookieBannerStyle = styled.div`
   }
 
   .cookietext {
-        font-family: "Montserrat", sans-serif;
-        color: #aa7d03;
-        font-size: 1.25rem;
-      }
-    
+    font-family: "Montserrat", sans-serif;
+    color: #aa7d03;
+    font-size: 1.25rem;
+  }
+
   @media (max-width: ${mediaQueries.medium}) {
     .cookiebanner {
       justify-content: center;
@@ -29,13 +29,11 @@ export const CookieBannerStyle = styled.div`
       height: 300px;
       width: 90vw; /* Aktualisierte Breite auf 100% */
       text-align: center;
-      
+
       padding-right: 85px; //Ausrichtung Icons wegen Chatbot
     }
     .cookietext {
-        font-size: 1rem;
-      }
-  }
- 
+      font-size: 1rem;
+    }
   }
 `;
