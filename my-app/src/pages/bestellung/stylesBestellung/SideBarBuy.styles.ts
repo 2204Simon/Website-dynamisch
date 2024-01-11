@@ -88,4 +88,4 @@ export const PopupWrapper = styled.div`
     padding: 20px 10px;
     box-shadow: none;
   }
-};`;
+`;

@@ -73,3 +73,47 @@ export interface ProduktApiType {
   };
   bestellmenge: number;
 }
+
+export type AddressenInformation = {
+  createdAt: string;
+  hausnummer: string;
+  hausnummerzusatz: string | null;
+  kundenId: string;
+  laufendeAdressenId: number;
+  ort: string;
+  postleitzahl: string;
+  strasse: string;
+  updatedAt: string;
+};
+
+export type ProduktInformationen = {
+  bestellmenge: number;
+  summe: number;
+  bestellungsId: string;
+  bild: string;
+  createdAt: string;
+  kundenId: string | null;
+  preis: number;
+  produktId: string;
+  sparte: string;
+  titel: string;
+  updatedAt: string;
+};
+
+export type Zahlungsinformation = {
+  createdAt: string;
+  email: string;
+  kundenId: string;
+  updatedAt: string;
+  zahlungsId: string;
+};
+
+export type BestellungsInformation = {
+  gesamtpreis: number;
+  bestellDatum: string;
+  gewünschtesLieferdatum: string;
+  bestellungsId: string;
+  zahlungsinformation: Zahlungsinformation;
+  adressenInformation: AddressenInformation;
+  produktInformationen: ProduktInformationen[];
+};

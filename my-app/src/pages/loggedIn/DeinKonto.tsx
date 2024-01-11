@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { BlackColorButton } from "../general/button";
 import AdressInformation from "./AdressData";
 import UserInformation from "./UserInformation";
+import BestellungsData from "./BestellungsData";
 
 export default function DeinKonto(): JSX.Element {
   return (
@@ -18,6 +19,7 @@ export default function DeinKonto(): JSX.Element {
           <BlackColorButton caption={"Zurück zum Einkauf"}></BlackColorButton>
         </Link>
       </div>
+      <BestellungsData />
     </>
   );
 }
