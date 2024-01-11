@@ -39,7 +39,7 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
                     address: {
                       //TODO: replace with real address und name über Server
                       address_line_1: `${adressInformation.strasse}`,
-                      address_line_2: `${adressInformation.hausnummer}`,
+                      address_line_2: `${adressInformation.hausnummer} ${adressInformation.hausnummerzusatz}`,
                       admin_area_2: `${adressInformation.ort}`,
                       postal_code: `${adressInformation.postleitzahl}`,
                       country_code: "DE",
