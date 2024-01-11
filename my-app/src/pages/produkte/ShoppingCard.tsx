@@ -30,7 +30,10 @@ import { FaSeedling } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { formatNumber } from "../general/constants";
 import { addToCart, increaseQuantity } from "../../redux/cartReducer";
-import { sendPostRequest } from "../../serverFunctions/generelAPICalls";
+import {
+  sendPostRequest,
+  sendPutRequest,
+} from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
 
@@ -86,6 +89,20 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
       preis: price,
       anzahl: quantity,
     };
+    try {
+      const itemObjekt = {
+        produktId: item.produktId,
+        produktMenge: item.anzahl,
+        kundenId: cookie.kundenId,
+      };
+      console.log(itemObjekt);
+      const addedProdukt = await sendPutRequest("warenkorb", itemObjekt);
+      CustomToast.success("Dein Produkt ist im Warenkorb!");
+      const amount = item.anzahl;
+      dispatch(increaseQuantity({ item, amount: quantity2 })); // Dispatch der addToCart-Action mit dem erstellten Item
+    } catch (error) {
+      CustomToast.error("Fehler hinzufügen (Serververbindung))");
+    }
     dispatch(increaseQuantity({ item, amount: quantity2 }));
     CustomToast.success(`Es wurde  ${quantity} ${title} hinzugefügt!`);
   };
