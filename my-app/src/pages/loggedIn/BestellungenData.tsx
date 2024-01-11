@@ -54,7 +54,7 @@ export default function BestellungsData(): JSX.Element {
         <BestellungWrapper>
           {bestellungen.map(bestellung => {
             let deliverd = true;
-            if (!bestellung.bestellDatum) {
+            if (!bestellung.lieferDatum) {
               deliverd = false;
             }
             return (
@@ -67,7 +67,7 @@ export default function BestellungsData(): JSX.Element {
                 <MetaDataDiv>
                   <MetaDataItem>
                     {deliverd
-                      ? `geliefert am: ${bestellung.bestellDatum.toString()}`
+                      ? `geliefert am: ${bestellung.lieferDatum.toString()}`
                       : `vorrausichtliche Lieferung: ${bestellung.gewünschtesLieferdatum.toString()}`}
                   </MetaDataItem>
                   <MetaDataItem>
