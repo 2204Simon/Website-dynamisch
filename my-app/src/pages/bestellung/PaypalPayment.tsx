@@ -5,8 +5,16 @@ import {
   ReactPayPalScriptOptions,
 } from "@paypal/react-paypal-js";
 import { CustomToast } from "../general/toast.style";
+import { useSelector } from "react-redux";
+import { AdressDataState, UserDataState } from "../../redux/types";
 
 export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
+  const userInformation = useSelector(
+    (state: { user: UserDataState }) => state.user
+  );
+  const adressInformation = useSelector(
+    (state: { adress: AdressDataState }) => state.adress.AdressData
+  );
   return (
     <PayPalScriptProvider
       options={
@@ -30,21 +38,20 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
                   shipping: {
                     address: {
                       //TODO: replace with real address und name über Server
-                      address_line_1: "123 Townsend St",
-                      address_line_2: "Apt 2",
-                      admin_area_2: "San Jose",
-                      admin_area_1: "CA",
-                      postal_code: "95131",
-                      country_code: "US",
+                      address_line_1: `${adressInformation.strasse}`,
+                      address_line_2: `${adressInformation.hausnummer} ${adressInformation.hausnummerzusatz}`,
+                      admin_area_2: `${adressInformation.ort}`,
+                      postal_code: `${adressInformation.postleitzahl}`,
+                      country_code: "DE",
                     },
                     name: {
-                      full_name: "John Doe",
+                      full_name: `${userInformation.LogInData.vorname} ${userInformation.LogInData.nachname}`,
                     },
                   },
                 },
               ],
               payer: {
-                email_address: "example@example.com", // Ersetzen Sie dies durch die tatsächliche E-Mail-Adresse
+                email_address: `${userInformation.LogInData.email}`, // Ersetzen Sie dies durch die tatsächliche E-Mail-Adresse
               },
             });
           }}
