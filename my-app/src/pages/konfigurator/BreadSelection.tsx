@@ -10,6 +10,7 @@ import {
   NavigationIcon,
 } from "./styles/Konfigurator.styles";
 import { ArrowForward } from "@mui/icons-material";
+import { CustomToast } from "../general/toast.style";
 
 interface BreadSelectionProps {
   onNextStage: (selectedProduct: string, selectedImage: string) => void;
@@ -36,6 +37,9 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
         setBreads(breads); // Speichern der Daten im State
       })
       .catch(error => {
+        CustomToast.error(
+          "Fehler beim Laden der Brote, der Server läuft nicht"
+        );
         console.log("Fehler");
         console.error("Error:", error);
       });
