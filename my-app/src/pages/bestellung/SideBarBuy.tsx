@@ -27,6 +27,7 @@ import {
   sendPostRequest,
 } from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
+import { KUNDEN_ID } from "../../globalVariables/global";
 
 interface SideBarProps {
   produktAnzahl: number;
@@ -37,7 +38,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   const { loggedIn } = useLoggedIn();
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
-  const [cookies] = useCookies(["kundenId"]);
+  const [cookies] = useCookies([KUNDEN_ID, "ZahlungsId"]);
   const [showThankyouPopup, setShowThankyouPopup] = useState(false);
   const dispatch = useDispatch();
   const [agbChecked, setAgbChecked] = useState(false);
@@ -68,15 +69,20 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   };
 
   const handleThankyouPopup = async () => {
-    const bodyForBestellung = {
-      kundenId: cookies.kundenId,
-      zahlungsId: 1,
-      lieferdatum: selectedDate,
-      gewünschtesLieferdatum: selectedDate,
-    };
-    await sendPostRequest(`bestellung`, bodyForBestellung);
-    setShowPopup(false);
-    setShowThankyouPopup(true);
+    try {
+      const bodyForBestellung = {
+        kundenId: cookies.kundenId,
+        zahlungsId: cookies.ZahlungsId,
+        bestellDatum: selectedDate,
+        gewünschtesLieferdatum: selectedDate,
+      };
+      console.log(bodyForBestellung);
+      await sendPostRequest(`bestellung`, bodyForBestellung);
+      setShowPopup(false);
+      setShowThankyouPopup(true);
+    } catch (error) {
+      CustomToast.error("Fehler beim Bestellen");
+    }
   };
   const [selectedPayments, setSelectedPayments] = useState<string[]>([]);
   const handleAgbCheckboxChange = () => {
