@@ -57,7 +57,9 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
           }}
           onError={err => {
             // Zeigt einen Toast-Fehler an, wenn ein Fehler auftritt
-            CustomToast.error(`Fehler beim Bezahlen mit PayPal: ${err}`);
+            CustomToast.error(
+              `Fehler beim Bezahlen ausgehend von der PayPal Schnittstelle. Bitte versuche es später erneut.`
+            );
           }}
           onCancel={data => {
             // Zeigt einen Toast an, wenn die Zahlung abgebrochen wird
