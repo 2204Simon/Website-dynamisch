@@ -98,6 +98,7 @@ export default function SignUp() {
         strasse: formData.get("street") as string,
         ort: formData.get("city") as string,
         hausnummer: formData.get("hausnummer") as string,
+        hausnummerzusatz: formData.get("hausnummerzusatz") as string,
         zahlungsmethode: formData.get("payment") as string,
         bankName: formData.get("bankName") as string,
         bic: formData.get("bic") as string,
@@ -219,7 +220,7 @@ export default function SignUp() {
                   }}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={12}>
                 <TextField
                   autoComplete="telefonnumber"
                   name="telefonnummer"
@@ -301,7 +302,7 @@ export default function SignUp() {
                   }}
                 />
               </Grid>
-              <Grid item xs={12} sm={7}>
+              <Grid item xs={12} sm={12}>
                 <TextField
                   fullWidth
                   required
@@ -320,7 +321,7 @@ export default function SignUp() {
                 />
               </Grid>
 
-              <Grid item xs={12} sm={8}>
+              <Grid item xs={12} sm={12}>
                 <TextField
                   fullWidth
                   required
@@ -338,13 +339,31 @@ export default function SignUp() {
                   }}
                 />
               </Grid>
-              <Grid item xs={12} sm={4}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
                   required
                   id="hausnummer"
                   label="Hausnummer"
                   name="hausnummer"
+                  inputProps={{
+                    maxLength: 50,
+                  }}
+                  InputLabelProps={{
+                    sx: {
+                      backgroundColor: "white",
+                      color: colors.companycolor,
+                    },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  required
+                  id="hausnummerzusatz"
+                  label="Hausnummerzusatz"
+                  name="hausnummerzusatz"
                   inputProps={{
                     maxLength: 50,
                   }}

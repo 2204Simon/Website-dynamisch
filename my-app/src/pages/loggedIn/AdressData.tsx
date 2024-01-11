@@ -78,6 +78,7 @@ export default function AdressInformation(): JSX.Element {
       strasse: data.get("street") as string,
       ort: data.get("city") as string,
       hausnummer: data.get("hausnummer") as string,
+      hausnummerzusatz: data.get("hausnummerzusatz") as string,
       zahlungsmethode: selectedPayments.join(", "), // Verwenden Sie den selectedPayments Zustand
     };
     console.log(preparedData);
@@ -137,6 +138,7 @@ export default function AdressInformation(): JSX.Element {
                   },
                 }}
               />
+
               <TextField
                 fullWidth
                 required
@@ -151,6 +153,22 @@ export default function AdressInformation(): JSX.Element {
                   },
                 }}
               />
+
+              <TextField
+                fullWidth
+                required
+                id="hausnummerzusatz"
+                label="Hausnummerzusatz"
+                name="hausnummerzusatz"
+                defaultValue={editedData?.hausnummerzusatz}
+                InputLabelProps={{
+                  sx: {
+                    backgroundColor: "white",
+                    color: colors.companycolor,
+                  },
+                }}
+              />
+
               <Title>Zeitungsabonnement:</Title>
               <ZeitungsAbo
                 hasSubscription={hasSubscription}
@@ -298,6 +316,10 @@ export default function AdressInformation(): JSX.Element {
             <Paragraph>
               <strong>Hausnummer: </strong>
               {adressInformation?.hausnummer}
+            </Paragraph>
+            <Paragraph>
+              <strong>Hausnummerzusatz: </strong>
+              {adressInformation?.hausnummerzusatz}
             </Paragraph>
             <Paragraph>
               <strong>Zahlungsart: </strong>
