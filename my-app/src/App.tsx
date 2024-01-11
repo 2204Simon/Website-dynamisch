@@ -6,7 +6,7 @@ import Home from "./pages/home/Home";
 import Kontakt from "./pages/kontakt/Kontakt";
 import Produkte from "./pages/produkte/Produkt";
 import NoPage from "./pages/NoPage";
-import Bestellung from "./pages/bestellung/Bestellung";
+import Bestellung from "./pages/bestellung/WarenkorbSeite";
 import "./App.css";
 import Footer from "./pages/Footer";
 import LoginForm from "./pages/logIn/LogIn";
