@@ -51,7 +51,7 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
                 },
               ],
               payer: {
-                email_address: "example@example.com", // Ersetzen Sie dies durch die tatsächliche E-Mail-Adresse
+                email_address: `${userInformation.LogInData.email}`, // Ersetzen Sie dies durch die tatsächliche E-Mail-Adresse
               },
             });
           }}
