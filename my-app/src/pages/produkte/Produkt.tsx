@@ -1,7 +1,8 @@
 import ShoppingCard from "./ShoppingCard";
 import ScrollContainer from "./Arrows";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { CustomToast } from "../general/toast.style";
+import NewspaperAbo from "./Newspaper";
 
 export async function loadImage(path: string): Promise<string> {
   try {
@@ -14,7 +15,7 @@ export async function loadImage(path: string): Promise<string> {
   }
 }
 
-type Product = {
+export type Product = {
   kundenId?: string;
   produktId: string;
   titel: string;
@@ -89,6 +90,27 @@ function Produkt() {
     ));
   };
 
+  const Newspaper = () => {
+    const productsToRender = products
+      .filter((product: Product) => product.sparte === "Newspaper")
+      .map((product: Product) => ({
+        image: product.bild,
+        title: product.titel,
+        price: product.preis,
+      }));
+    if (productsToRender.length > 0) {
+      return (
+        <NewspaperAbo
+          title={productsToRender[0].title}
+          price={productsToRender[0].price}
+          image={productsToRender[0].image}
+        />
+      );
+    } else {
+      return <NewspaperAbo title={""} price={0} image={""} />;
+    }
+  };
+
   return (
     <>
       <h2>Unsere Produkte</h2>
@@ -99,6 +121,7 @@ function Produkt() {
         weitere Informationen zu deren Ursprüngen oder zu den Zutaten erhalten
         möchtest, helfen Dir gerne unsere Mitarbeiter:innen weiter!
       </p>
+      {Newspaper()}
 
       <h3>Speisen</h3>
 
@@ -121,25 +144,23 @@ function Produkt() {
       )}
 
       <h3>Getränke</h3>
-      <Suspense fallback={<div>Loading...</div>}>
-        {isTouchpad ? (
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "nowrap",
-              overflowX: "scroll",
-              scrollbarWidth: "none",
-              msOverflowStyle: "none",
-            }}
-          >
-            {ShoppingCards("Drink")}
-          </div>
-        ) : (
-          <ScrollContainer scrollAmount={283}>
-            {ShoppingCards("Drink")}
-          </ScrollContainer>
-        )}
-      </Suspense>
+      {isTouchpad ? (
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "nowrap",
+            overflowX: "scroll",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+          }}
+        >
+          {ShoppingCards("Drink")}
+        </div>
+      ) : (
+        <ScrollContainer scrollAmount={283}>
+          {ShoppingCards("Drink")}
+        </ScrollContainer>
+      )}
 
       <h3>Menüs</h3>
       {isTouchpad ? (

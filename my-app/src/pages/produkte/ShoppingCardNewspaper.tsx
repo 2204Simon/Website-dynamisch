@@ -1,42 +1,33 @@
 import React, { useState, ChangeEvent, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux"; // Import der useDispatch-Hook
 // Import der addToCart-Action aus deiner Redux-Komponente
-import {
-  Container,
-  Details,
-  ImageContainer,
-  Price,
-  Title,
-  Image,
-  DetailsButton,
-  ContainerBack,
-  ContainerFront,
-  Title2,
-  Top,
-} from "./styles/ShoppingCard.styles";
 import { BlackColorButton } from "../general/button";
 import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
-import { XCircle } from "phosphor-react";
-import { FaSeedling } from "react-icons/fa";
 import { Calendar, Popper, StyledDatePicker } from "../bestellung/Calendar";
 import { de } from "date-fns/locale";
 import { formatNumber } from "../general/constants";
+import {
+  BannerContainer,
+  BannerContent,
+  BannerImage,
+  BannerTitle,
+  ButtonsContainer,
+} from "./styles/NewspaperBanner.styles";
 
 interface ShoppingCardProps {
   image: string;
   title: string;
   basePrice: number;
+  back: Function;
 }
 
-const ShoppingCardNewspaper: React.FC<ShoppingCardProps> = ({
+const NewspaperBanner: React.FC<ShoppingCardProps> = ({
   image,
   title,
   basePrice,
+  back,
 }) => {
-  const [isFlipped, setIsFlipped] = useState<boolean>(false);
-  const [displayNone, setDisplayNone] = useState(false);
-  const dispatch = useDispatch(); // Initialisierung der useDispatch-Hook
   const [load, setLoad] = useState(true);
   const minDate = new Date();
   minDate.setDate(minDate.getDate() + 1);
@@ -46,21 +37,6 @@ const ShoppingCardNewspaper: React.FC<ShoppingCardProps> = ({
 
   const handleAddToCart = () => {
     CustomToast.error("Work in Progress"); //Hier muss irgendwann die API für Zeitungsabonnement aufgerufen werden
-  };
-
-  const isProcessingRef = useRef(false);
-
-  const handleDetailsClick = () => {
-    if (!isProcessingRef.current) {
-      isProcessingRef.current = true; // Markiere den Klick als in Bearbeitung
-
-      setIsFlipped(!isFlipped); // 2. Zustand ändern
-
-      setTimeout(() => {
-        setDisplayNone(!displayNone);
-        isProcessingRef.current = false; // Markiere den Klick als abgeschlossen
-      }, 500); // 0,5 Sekunden Verzögerung
-    }
   };
 
   const DatepickerInput = ({ ...props }) => (
@@ -116,36 +92,21 @@ const ShoppingCardNewspaper: React.FC<ShoppingCardProps> = ({
   }
 
   return (
-    <Container flipped={isFlipped}>
-      <ContainerFront flipped={isFlipped} displayNone={displayNone}>
-        <ImageContainer>
-          <Image src={image} alt="product" />
-        </ImageContainer>
-        <Details>
-          <Title style={{ paddingLeft: "0px" }}>{title}</Title>
-          <DetailsButton onClick={handleDetailsClick}>
-            Details anzeigen
-          </DetailsButton>
-          <Price>Preis: {formatNumber(price)} €</Price>
-          <CalendarComponent />
-          <BlackColorButton
-            onClick={handleAddToCart}
-            caption="Zum Warenkorb hinzufügen"
-          />
-        </Details>
-      </ContainerFront>
-      <ContainerBack flipped={isFlipped} displayNone={displayNone}>
-        <Top>
-          <Title2 style={{ paddingLeft: "0px" }}>{title}</Title2>
-          <XCircle size={30} onClick={handleDetailsClick} />
-        </Top>
-        <p>
-          Aktuell gibt es keine Details. Irgendwelche Ideen? Sonst lösche ich
-          die Details.
-        </p>
-      </ContainerBack>
-    </Container>
+    <BannerContainer>
+      <BannerImage src={image} alt="Newspaper" />
+      <BannerContent>
+        <BannerTitle>{title}</BannerTitle>
+        <CalendarComponent />
+      </BannerContent>
+      <ButtonsContainer>
+        <BlackColorButton onClick={() => back()} caption="Abbrechen" />
+        <BlackColorButton
+          onClick={handleAddToCart}
+          caption="Zum Warenkorb hinzufügen"
+        />
+      </ButtonsContainer>
+    </BannerContainer>
   );
 };
 
-export default ShoppingCardNewspaper;
+export default NewspaperBanner;
