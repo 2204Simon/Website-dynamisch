@@ -27,9 +27,9 @@ function Produkt() {
   const isTouchpad = matchMedia("(pointer: coarse)").matches;
   const [products, setProducts] = useState<Array<Product>>([]);
 
-  //const existSparte = (sparte: string): boolean => {
-  //  return products.some(product => product.sparte === sparte);
-  // };
+  const existSparte = (sparte: string): boolean => {
+    return products.some(product => product.sparte === sparte);
+  };
 
   const loadProducts = async (): Promise<void> => {
     try {
@@ -75,19 +75,46 @@ function Produkt() {
         allergy: ["Alles", "Nichts"],
         veggie: true,
       }));
-
-    return productsToRender.map(product => (
-      <ShoppingCard
-        produktId={product.produktId}
-        key={product.title}
-        image={product.image}
-        title={product.title}
-        price={product.price}
-        content={product.content}
-        allergy={product.allergy}
-        veggie={product.veggie}
-      />
-    ));
+    if (existSparte(sparte)) {
+      return productsToRender.map(product => (
+        <ShoppingCard
+          produktId={product.produktId}
+          key={product.title}
+          image={product.image}
+          title={product.title}
+          price={product.price}
+          content={product.content}
+          allergy={product.allergy}
+          veggie={product.veggie}
+        />
+      ));
+    } else {
+      switch (sparte) {
+        case "Food":
+          return (
+            <p>
+              Simon, du hast vergessen das Backend zu starten. Starte das
+              Backend und refreshe die Seite :)
+            </p>
+          );
+        case "Drink":
+          return (
+            <p>
+              Mattis, du hast vergessen das Backend zu starten. Starte das
+              Backend und refreshe die Seite :)
+            </p>
+          );
+        case "Menu":
+          return (
+            <p>
+              Jonas, du hast vergessen das Backend zu starten. Starte das
+              Backend und refreshe die Seite :)
+            </p>
+          );
+        default:
+          return <p>Ein unbekannter Fehler ist aufgetreten</p>;
+      }
+    }
   };
 
   const Newspaper = () => {
