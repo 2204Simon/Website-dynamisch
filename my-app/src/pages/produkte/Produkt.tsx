@@ -75,46 +75,18 @@ function Produkt() {
         allergy: ["Alles", "Nichts"],
         veggie: true,
       }));
-    if (existSparte(sparte)) {
-      return productsToRender.map(product => (
-        <ShoppingCard
-          produktId={product.produktId}
-          key={product.title}
-          image={product.image}
-          title={product.title}
-          price={product.price}
-          content={product.content}
-          allergy={product.allergy}
-          veggie={product.veggie}
-        />
-      ));
-    } else {
-      switch (sparte) {
-        case "Food":
-          return (
-            <p>
-              Simon, du hast vergessen das Backend zu starten. Starte das
-              Backend und refreshe die Seite :)
-            </p>
-          );
-        case "Drink":
-          return (
-            <p>
-              Mattis, du hast vergessen das Backend zu starten. Starte das
-              Backend und refreshe die Seite :)
-            </p>
-          );
-        case "Menu":
-          return (
-            <p>
-              Jonas, du hast vergessen das Backend zu starten. Starte das
-              Backend und refreshe die Seite :)
-            </p>
-          );
-        default:
-          return <p>Ein unbekannter Fehler ist aufgetreten</p>;
-      }
-    }
+    return productsToRender.map(product => (
+      <ShoppingCard
+        produktId={product.produktId}
+        key={product.title}
+        image={product.image}
+        title={product.title}
+        price={product.price}
+        content={product.content}
+        allergy={product.allergy}
+        veggie={product.veggie}
+      />
+    ));
   };
 
   const Newspaper = () => {
@@ -164,10 +136,15 @@ function Produkt() {
         >
           {ShoppingCards("Food")}
         </div>
-      ) : (
+      ) : existSparte("Food") ? (
         <ScrollContainer scrollAmount={283}>
           {ShoppingCards("Food")}
         </ScrollContainer>
+      ) : (
+        <p>
+          Simon, du hast vergessen das Backend zu starten. Starte das Backend
+          und refreshe die Seite :)
+        </p>
       )}
 
       <h3>Getränke</h3>
@@ -183,10 +160,15 @@ function Produkt() {
         >
           {ShoppingCards("Drink")}
         </div>
-      ) : (
+      ) : existSparte("Drink") ? (
         <ScrollContainer scrollAmount={283}>
           {ShoppingCards("Drink")}
         </ScrollContainer>
+      ) : (
+        <p>
+          Mattis, du hast vergessen das Backend zu starten. Starte das Backend
+          und refreshe die Seite :)
+        </p>
       )}
 
       <h3>Menüs</h3>
@@ -202,10 +184,15 @@ function Produkt() {
         >
           {ShoppingCards("Menu")}
         </div>
-      ) : (
+      ) : existSparte("Menu") ? (
         <ScrollContainer scrollAmount={283}>
           {ShoppingCards("Menu")}
         </ScrollContainer>
+      ) : (
+        <p>
+          Jonas, du hast vergessen das Backend zu starten. Starte das Backend
+          und refreshe die Seite :)
+        </p>
       )}
     </>
   );
