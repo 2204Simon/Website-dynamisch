@@ -50,7 +50,7 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
   };
 
   async function loadImage(path: string): Promise<string> {
-    const image = await import(`../../img/${path}`);
+    const image = await import(`../../img/Ingredients/Breads/${path}`);
     return image.default; //Wegen ES6 mit default
   }
 
