@@ -10,10 +10,12 @@ import { formatNumber } from "../general/constants";
 import {
   BannerContainer,
   BannerContent,
+  BannerRight,
   BannerImage,
   BannerTitle,
-  ButtonsContainer,
+  XCircleWrapper,
 } from "./styles/NewspaperBanner.styles";
+import { XCircle } from "phosphor-react";
 
 interface ShoppingCardProps {
   image: string;
@@ -32,7 +34,7 @@ const NewspaperBanner: React.FC<ShoppingCardProps> = ({
   const minDate = new Date();
   minDate.setDate(minDate.getDate() + 1);
   const maxDate = new Date();
-  maxDate.setMonth(maxDate.getMonth() + 6);
+  maxDate.setMonth(maxDate.getMonth() + 12);
   const [selectedDate, setSelectedDate] = useState<Date>(minDate);
 
   const handleAddToCart = () => {
@@ -92,20 +94,29 @@ const NewspaperBanner: React.FC<ShoppingCardProps> = ({
   }
 
   return (
-    <BannerContainer>
-      <BannerImage src={image} alt="Newspaper" />
-      <BannerContent>
-        <BannerTitle>{title}</BannerTitle>
-        <CalendarComponent />
-      </BannerContent>
-      <ButtonsContainer>
-        <BlackColorButton onClick={() => back()} caption="Abbrechen" />
-        <BlackColorButton
-          onClick={handleAddToCart}
-          caption="Zum Warenkorb hinzufügen"
+    <>
+      <XCircleWrapper>
+        <XCircle
+          size={30}
+          onClick={() => back()}
+          style={{ cursor: "pointer" }}
         />
-      </ButtonsContainer>
-    </BannerContainer>
+      </XCircleWrapper>
+      <BannerContainer>
+        <BannerImage src={image} alt="Newspaper" />
+        <BannerContent>
+          <BannerTitle>{title}</BannerTitle>
+          <p>Wähle aus, wie lange du abonnieren möchtest:</p>
+          <CalendarComponent />
+        </BannerContent>
+        <BannerRight>
+          <BlackColorButton
+            onClick={handleAddToCart}
+            caption="Zum Warenkorb hinzufügen"
+          />
+        </BannerRight>
+      </BannerContainer>
+    </>
   );
 };
 

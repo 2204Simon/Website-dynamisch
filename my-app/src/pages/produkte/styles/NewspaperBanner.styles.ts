@@ -6,17 +6,18 @@ export const BannerContainer = styled.div`
   max-height: 150px;
   background-color: ${colors.white};
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: center;
-  justify-content: space-between;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: stretch;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  margin-left: 5%;
-  padding: 5px;
+  margin: 0 auto;
+  padding: 20px;
 `;
 
 export const BannerImage = styled.img`
   width: 90px;
   height: 90px;
+  align-self: center;
+  justify-self: end;
   object-fit: cover;
   border-radius: 50%;
 `;
@@ -25,23 +26,32 @@ export const BannerContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 `;
 
 export const BannerTitle = styled.h5`
   color: ${colors.black};
   font-size: 1.25rem;
-  margin-bottom: 10px;
+  margin-top: -10px;
+  margin-bottom: 5px;
 `;
 
-export const ButtonsContainer = styled.div`
+export const BannerRight = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: left;
+`;
+
+export const XCircleWrapper = styled.div`
+  position: absolute;
+  right: 5%;
+  margin: 10px;
+  z-index: 2;
 `;
 
 export const CenteredContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%; /* Fülle die gesamte Höhe des Containers aus */
+  height: 100%;
 `;
