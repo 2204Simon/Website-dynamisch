@@ -58,6 +58,7 @@ export default function EinzelBestellung() {
               onRemove={() => console.log("removed")} // Item an handleRemoveItem übergeben
               productName={item.titel}
               count={item.bestellmenge}
+              editabel={false}
             />
           ))}
         </BestellungsWrapper>

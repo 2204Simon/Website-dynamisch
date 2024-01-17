@@ -109,6 +109,7 @@ function WarenkorbSeite(): JSX.Element {
             onRemove={() => handleRemoveItem(item)} // Item an handleRemoveItem übergeben
             productName={item.titel}
             count={item.anzahl}
+            editabel={true}
           />
         ))}
       </BestellungsWrapper>

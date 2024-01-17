@@ -11,7 +11,7 @@ export const WarenkorbWrapper = styled.div`
   @media (max-width: ${mediaQueries.large}) {
     flex-direction: column-reverse;
     height: auto;
-    'width: 100vw;
+    width: 100vw;
     overflow: hidden;
     padding: 0;
     margin: 0;

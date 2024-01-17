@@ -15,6 +15,7 @@ interface WarenkorbProps {
   productName: string;
   count: number;
   price: number;
+  editabel?: boolean;
   onRemove: () => void;
 }
 
@@ -24,6 +25,7 @@ export default function Warenkorb({
   productName,
   price,
   onRemove,
+  editabel,
 }: WarenkorbProps): JSX.Element {
   const totalPrice = count * price; // Berechnung des Gesamtpreises
   return (
@@ -40,9 +42,11 @@ export default function Warenkorb({
           <TotalPrice>{formatNumber(totalPrice)}€</TotalPrice>{" "}
         </div>
       </ContentContainer>
-      <RemoveButton onClick={onRemove}>
-        <Trash size={30} />
-      </RemoveButton>
+      {editabel ? (
+        <RemoveButton onClick={onRemove}>
+          <Trash size={30} />
+        </RemoveButton>
+      ) : null}
     </Container>
   );
 }
