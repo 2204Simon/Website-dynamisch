@@ -86,8 +86,9 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
                   }
                 >
                   <ProductImage src={bread.zutatBild} alt={bread.zutatsname} />
-                  {bread.zutatsname}
-                  {}
+                  {bread.zutatsname} <br />
+                  {bread.zutatspreis} €{} <br />
+                  {bread.zutatsID}
                 </SelectionItem>
               )
             )

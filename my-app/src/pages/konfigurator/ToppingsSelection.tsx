@@ -109,6 +109,7 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
                   alt={topping.zutatsname}
                 />
                 {topping.zutatsname}
+                {topping.zutatspreis} €{} <br />
               </SelectionItem>
             )
           )}
