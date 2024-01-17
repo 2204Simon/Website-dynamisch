@@ -54,7 +54,7 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
   };
 
   async function loadImage(path: string): Promise<string> {
-    const image = await import(`../../img/${path}`);
+    const image = await import(`../../img/Ingredients/Toppings/${path}`);
     return image.default; //Wegen ES6 mit default
   }
 
@@ -109,6 +109,7 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
                   alt={topping.zutatsname}
                 />
                 {topping.zutatsname}
+                {topping.zutatspreis} €{} <br />
               </SelectionItem>
             )
           )}

@@ -93,6 +93,7 @@ const DrinkSelection: React.FC<DrinkSelectionProps> = ({
               >
                 <ProductImage src={drink.zutatBild} alt={drink.zutatsname} />
                 {drink.zutatsname}
+                {drink.zutatspreis} €{} <br />
               </SelectionItem>
             )
           )}

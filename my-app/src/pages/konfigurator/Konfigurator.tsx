@@ -16,7 +16,7 @@ const Konfigurator: React.FC = () => {
   const [selectedDrink, setSelectedDrink] = useState<string>("");
   const { loggedIn } = useLoggedIn();
   const navigate = useNavigate();
-  const handleNextStage = (selectedProduct: string, selectedImage: string) => {
+  const handleNextStage = (selectedProduct: string) => {
     setCurrentStage(currentStage + 1);
 
     switch (currentStage) {
@@ -62,6 +62,7 @@ const Konfigurator: React.FC = () => {
           <p>Ausgewähltes Brot: {selectedBread}</p>
           <p>Ausgewählte Beläge: {selectedToppings}</p>
           <p>Ausgewähltes Getränk: {selectedDrink}</p>
+
           {!loggedIn && (
             <div>
               <h1>
