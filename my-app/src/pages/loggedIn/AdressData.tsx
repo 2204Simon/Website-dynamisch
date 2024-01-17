@@ -156,7 +156,6 @@ export default function AdressInformation(): JSX.Element {
 
               <TextField
                 fullWidth
-                required
                 id="hausnummerzusatz"
                 label="Hausnummerzusatz"
                 name="hausnummerzusatz"

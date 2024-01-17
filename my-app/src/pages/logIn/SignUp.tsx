@@ -360,7 +360,6 @@ export default function SignUp() {
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
-                  required
                   id="hausnummerzusatz"
                   label="Hausnummerzusatz"
                   name="hausnummerzusatz"
