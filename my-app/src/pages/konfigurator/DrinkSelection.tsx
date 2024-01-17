@@ -8,8 +8,14 @@ import {
   SelectionList,
   SelectionItem,
   NavigationIcon,
+  Container,
+  Title,
+  Price,
+  Details,
 } from "./styles/Konfigurator.styles";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import { BlackColorButton } from "../general/button";
+
 
 interface DrinkSelectionProps {
   onPrevStage: () => void;
@@ -50,7 +56,7 @@ const DrinkSelection: React.FC<DrinkSelectionProps> = ({
   };
 
   async function loadImage(path: string): Promise<string> {
-    const image = await import(`../../img/${path}`);
+    const image = await import(`../../img/Drinks/${path}`);
     return image.default; //Wegen ES6 mit default
   }
 
@@ -78,12 +84,14 @@ const DrinkSelection: React.FC<DrinkSelectionProps> = ({
           <ArrowForward />
         </NavigationIcon>
       </StageHeader>
+      
       <SelectionContainer>
-        <SelectionList>
+        
           {drinks.map(
             (
               drink // Anzeigen der Getränke aus dem State
             ) => (
+              <Container flipped={false}>
               <SelectionItem
                 key={drink.zutatsId}
                 className={selectedDrink === drink.zutatsname ? "selected" : ""}
@@ -92,19 +100,26 @@ const DrinkSelection: React.FC<DrinkSelectionProps> = ({
                 }
               >
                 <ProductImage src={drink.zutatBild} alt={drink.zutatsname} />
-                {drink.zutatsname}
-                {drink.zutatspreis} €{} <br />
+                <Details>
+                <Title>{drink.zutatsname}</Title>
+                <Price>{drink.zutatspreis} €</Price>
+                <BlackColorButton
+                  //onClick={handleBreadSelect(bread.zutatsname, bread.zutatBild)}
+                  caption="Zur Konfiguration hinzufügen" />
+                </Details>
               </SelectionItem>
+              </Container>
             )
           )}
-        </SelectionList>
-      </SelectionContainer>
+       
+      
       {selectedDrink && (
         <div>
           <p>Ausgewähltes Getränk: {selectedDrink}</p>
           <p>Bestätige die Auswahl mit dem Vorwärtspfeil</p>
         </div>
       )}
+    </SelectionContainer>
     </Stage>
   );
 };

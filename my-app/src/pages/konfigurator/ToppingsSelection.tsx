@@ -8,8 +8,17 @@ import {
   SelectionList,
   SelectionItem,
   NavigationIcon,
+  Image,
+  ImageContainer,
+  Container,
+  Details,
+  Title,
+  Price,
+
 } from "./styles/Konfigurator.styles";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import { BlackColorButton } from "../general/button";
+
 
 interface ToppingsSelectionProps {
   onNextStage: (selectedProduct: string, selectedImage: string) => void;
@@ -88,11 +97,12 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
         </NavigationIcon>
       </StageHeader>
       <SelectionContainer>
-        <SelectionList>
+  
           {toppings.map(
             (
               topping // Anzeigen der Toppings aus dem State
             ) => (
+              <Container flipped={false}>
               <SelectionItem
                 key={topping.zutatsId}
                 className={
@@ -104,16 +114,25 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
                   handleToppingSelect(topping.zutatsname, topping.zutatBild)
                 }
               >
-                <ProductImage
+                <ImageContainer>
+                <Image
                   src={topping.zutatBild}
                   alt={topping.zutatsname}
                 />
-                {topping.zutatsname}
-                {topping.zutatspreis} €{} <br />
+                </ImageContainer>
+                <Details>
+                <Title> {topping.zutatsname} </Title>
+                <Price> Preis: {topping.zutatspreis} € </Price>
+                <BlackColorButton
+                  //onClick={handleBreadSelect(bread.zutatsname, bread.zutatBild)}
+                  caption="Zur Konfiguration hinzufügen"
+          />
+                </Details>
               </SelectionItem>
+              </Container>
             )
           )}
-        </SelectionList>
+    
       </SelectionContainer>
       {selectedToppings.length > 0 && (
         <div>
