@@ -48,7 +48,9 @@ export default function BestellungsData(): JSX.Element {
     fetchData();
   }, []);
 
-  return (
+  return bestellungen.length === 0 ? (
+    <></>
+  ) : (
     <Container>
       <Card>
         <h1>Bestellungen</h1>
@@ -67,8 +69,11 @@ export default function BestellungsData(): JSX.Element {
               >
                 {deliverd ? (
                   <div>
-                    {" "}
-                    <Package size={50} /> <p>f</p>{" "}
+                    <Package size={50} />
+                    <CRUDCardPText>geliefert am</CRUDCardPText>
+                    <CRUDCardPText>
+                      {bestellung.lieferDatum.toString()}
+                    </CRUDCardPText>
                   </div>
                 ) : (
                   <>

@@ -23,10 +23,15 @@ export const CRUDCardWrappper = styled.div`
   height: 250px;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
   :hover {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
     background-color: ${colors.companycolor};
     cursor: pointer;
+  }
+  :active {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    background-color: ${colors.secundarycolor};
   }
 `;
 
