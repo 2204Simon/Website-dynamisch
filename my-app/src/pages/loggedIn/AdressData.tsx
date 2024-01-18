@@ -125,7 +125,7 @@ export default function AdressInformation(): JSX.Element {
       <Card>
         {editMode ? (
           <form onSubmit={handleSubmit}>
-            <Grid>
+            <Grid justifyContent={"center"}>
               <Title>Adresse:</Title>
               <TextField
                 fullWidth
@@ -294,12 +294,12 @@ export default function AdressInformation(): JSX.Element {
               </Grid>
             </Grid>
 
-            <LogoutButton
-              className="black-color white-orange"
+            <Button
+              style={{ color: colors.companycolor }}
               onClick={() => handleEdit(adressInformation)}
             >
               Edit
-            </LogoutButton>
+            </Button>
 
             <Button
               style={{ color: colors.companycolor }}
@@ -311,7 +311,7 @@ export default function AdressInformation(): JSX.Element {
         ) : (
           <div>
             <Title style={{ textAlign: "center" }}>Persönliche Daten</Title>
-            <Grid container gap={10}>
+            <Grid container gap={10} justifyContent={"center"}>
               <Grid item>
                 <Paragraph>
                   <strong>Postleitzahl: </strong>
@@ -333,12 +333,6 @@ export default function AdressInformation(): JSX.Element {
                   <strong>Hausnummerzusatz: </strong>
                   {adressInformation?.hausnummerzusatz}
                 </Paragraph>
-                <LogoutButton
-                  className="black-color white-orange "
-                  onClick={() => handleEdit(adressInformation)}
-                >
-                  <Pencil size={20} />
-                </LogoutButton>
               </Grid>
               <Grid
                 item
@@ -358,6 +352,12 @@ export default function AdressInformation(): JSX.Element {
                 <Paragraph>{paymentInformation.iban}</Paragraph>
               </Grid>
             </Grid>
+            <LogoutButton
+              className="black-color white-orange "
+              onClick={() => handleEdit(adressInformation)}
+            >
+              <Pencil size={20} />
+            </LogoutButton>
           </div>
         )}
       </Card>
