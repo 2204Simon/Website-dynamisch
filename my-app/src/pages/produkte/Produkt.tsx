@@ -54,7 +54,6 @@ function Produkt() {
       setProducts(loadedProducts);
     } catch (error) {
       console.error(error);
-      CustomToast.error("Fehler beim Laden der Produkte");
       setProducts([]);
     }
   };
@@ -142,8 +141,8 @@ function Produkt() {
         </ScrollContainer>
       ) : (
         <p>
-          Simon, du hast vergessen das Backend zu starten. Starte das Backend
-          und refreshe die Seite :)
+          Die Speisen konnten nicht geladen werden. Bitte wenden Sie sich an den
+          Support.
         </p>
       )}
 
@@ -166,8 +165,8 @@ function Produkt() {
         </ScrollContainer>
       ) : (
         <p>
-          Mattis, du hast vergessen das Backend zu starten. Starte das Backend
-          und refreshe die Seite :)
+          Die Getränke konnten nicht geladen werden. Bitte wenden Sie sich an
+          den Support.
         </p>
       )}
 
@@ -190,8 +189,8 @@ function Produkt() {
         </ScrollContainer>
       ) : (
         <p>
-          Jonas, du hast vergessen das Backend zu starten. Starte das Backend
-          und refreshe die Seite :)
+          Die Menüs konnten nicht geladen werden. Bitte wenden Sie sich an den
+          Support.
         </p>
       )}
     </>

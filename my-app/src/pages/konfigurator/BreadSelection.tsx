@@ -36,7 +36,7 @@ interface BreadSelectionProps {
 const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
   const [selectedBread, setSelectedBread] = useState<string | null>(null);
   const [breads, setBreads] = useState<any[]>([]); // Hier speichern wir die vom Server geholten Brote
-
+  const [backendError, setBackendError] = useState(false);
   useEffect(() => {
     fetch("http://localhost:3001/api/v1/zutat/Brot")
       .then(response => response.json())
@@ -54,9 +54,7 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
         setBreads(breads); // Speichern der Daten im State
       })
       .catch(error => {
-        CustomToast.error(
-          "Fehler beim Laden der Brote, der Server läuft nicht"
-        );
+        setBackendError(true);
         console.log("Fehler");
         console.error("Error:", error);
       });
@@ -85,6 +83,12 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
           <ArrowForward />
         </NavigationIcon>
       </StageHeader>
+      {backendError && (
+        <p>
+          Die Brote konnten nicht geladen werden. Bitte wenden Sie sich an den
+          Support.
+        </p>
+      )}
       <SelectionContainer>
         {breads.map(
           (
