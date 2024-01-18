@@ -186,7 +186,6 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
           <Price>Preis: {formatNumber(price)} €</Price>
 
           <Quantity>
-            <label htmlFor="quantity">Menge:</label>
             <MinusQuantity onClick={() => handleMinus(quantity)}>
               <Minus />
             </MinusQuantity>

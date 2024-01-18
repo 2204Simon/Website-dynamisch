@@ -6,7 +6,7 @@ export const Container = styled.div`
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  background-color: ${colors.white};
+  background-color: ${colors.primarycolor};
   border-radius: 4px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.24);
 
@@ -31,7 +31,7 @@ export const Image = styled.img`
 
 export const ContentContainer = styled.div`
   display: flex;
-  gap:0.5rem
+  gap: 0.5rem;
   justify-content: space-between;
   align-items: center;
   flex: 1;
@@ -56,7 +56,7 @@ export const ContentContainer = styled.div`
 `;
 export const ProductName = styled.p`
   font-size: 20px;
-  color: black;
+  color: ${colors.black};
   padding-left: 10px;
   padding-right: 10px;
   display: -webkit-box;
@@ -68,13 +68,13 @@ export const ProductName = styled.p`
 
 export const Count = styled.p`
   font-size: 20px;
-  color: black
+  color: ${colors.black};
   margin: 0;
   padding: 0;
 `;
 
 export const Price = styled.p`
-  color: black;
+  color: ${colors.black};
   margin: 0;
   padding-left: 0;
   padding-right: 0.5 rem;
@@ -87,7 +87,7 @@ export const Price = styled.p`
 
 export const TotalPrice = styled.p`
   font-size: 20px;
-  color: black;
+  color: ${colors.black};
   padding-left: 0;
   padding-right: 0.5 rem;
   @media (${mediaQueries.medium}) {
@@ -96,7 +96,8 @@ export const TotalPrice = styled.p`
 `;
 
 export const RemoveButton = styled.button`
-  color: ${colors.black};
+  color: ${colors.primarycolor};
+  background-color: ${colors.secundarycolor};
   border: none;
   font-size: 20px;
   padding: 0.5rem;

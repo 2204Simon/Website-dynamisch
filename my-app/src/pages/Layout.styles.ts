@@ -47,7 +47,6 @@ export const StyledLink = styled(NavLink)`
   width: 100%;
   font-family: "Montserrat", sans-serif;
 
-
   &:hover {
     color: ${colors.white};
     &::before {
@@ -70,7 +69,7 @@ export const StyledLink = styled(NavLink)`
   &.active {
     color: ${colors.black};
     font-weight: bold;
-
+  }
   &:active {
     color: ${colors.white};
   }

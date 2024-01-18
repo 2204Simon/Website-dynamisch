@@ -79,8 +79,24 @@ export default function AdressInformation(): JSX.Element {
       ort: data.get("city") as string,
       hausnummer: data.get("hausnummer") as string,
       hausnummerzusatz: data.get("hausnummerzusatz") as string,
-      zahlungsmethode: selectedPayments.join(", "), // Verwenden Sie den selectedPayments Zustand
+      bankName: data.get("bankName") as string,
+      bic: data.get("bic") as string,
+      iban: data.get("iban") as string,
+      paypalEmail: data.get("paypalEmail") as string,
     };
+    if (preparedData.paypalEmail && !preparedData.paypalEmail.includes("@")) {
+      CustomToast.error("Bitte gebe eine gültige E-Mail-Adresse ein");
+      return;
+    }
+    if (
+      !preparedData.paypalEmail &&
+      (!preparedData.bankName || !preparedData.bic || !preparedData.iban)
+    ) {
+      CustomToast.error(
+        "Es muss mindestens PayPal oder Lastschrift ausgewählt sein"
+      );
+      return;
+    }
     console.log(preparedData);
     dispatch(addNewAdress(preparedData));
     setEditedData(null);
@@ -175,117 +191,92 @@ export default function AdressInformation(): JSX.Element {
                 expiryDate={expiryDate}
                 setExpiryDate={setExpiryDate}
               />
-              <Title>Zahlungsmöglichkeiten:</Title>
-              <FormControl component="fieldset">
-                <FormGroup>
-                  <Grid item xs={12}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={selectedPayments.includes("Paypal")}
-                          onChange={handlePaymentChange}
-                          value="Paypal"
-                          style={{ color: colors.companycolor }}
-                        />
-                      }
-                      label={<FaPaypal size={15} />}
-                    />
-                  </Grid>
-                  {selectedPayments.includes("Paypal") && (
-                    <>
-                      <Grid item xs={12}>
-                        <TextField
-                          fullWidth
-                          required
-                          id="paypalEmail"
-                          label="PayPal Email"
-                          name="paypalEmail"
-                          inputProps={{
-                            maxLength: 100,
-                          }}
-                          InputLabelProps={{
-                            sx: {
-                              backgroundColor: "white",
-                              color: colors.companycolor,
-                            },
-                          }}
-                        />
-                      </Grid>
-                    </>
-                  )}
-                  <Grid item xs={12}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={selectedPayments.includes("Lastschrift")}
-                          onChange={handlePaymentChange}
-                          value="Lastschrift"
-                          style={{ color: colors.companycolor }}
-                        />
-                      }
-                      label={<Bank size={20} />}
-                    />
-                  </Grid>
-                  {selectedPayments.includes("Lastschrift") && (
-                    <>
-                      <Grid item xs={12}>
-                        <TextField
-                          fullWidth
-                          required
-                          id="bankName"
-                          label="Bankname"
-                          name="bankName"
-                          inputProps={{
-                            maxLength: 50,
-                          }}
-                          InputLabelProps={{
-                            sx: {
-                              backgroundColor: "white",
-                              color: colors.companycolor,
-                            },
-                          }}
-                        />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <TextField
-                          fullWidth
-                          required
-                          id="bic"
-                          label="BIC"
-                          name="bic"
-                          inputProps={{
-                            maxLength: 50,
-                          }}
-                          InputLabelProps={{
-                            sx: {
-                              backgroundColor: "white",
-                              color: colors.companycolor,
-                            },
-                          }}
-                        />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <TextField
-                          fullWidth
-                          required
-                          id="iban"
-                          label="IBAN"
-                          name="iban"
-                          inputProps={{
-                            maxLength: 50,
-                          }}
-                          InputLabelProps={{
-                            sx: {
-                              backgroundColor: "white",
-                              color: colors.companycolor,
-                            },
-                          }}
-                        />
-                      </Grid>
-                    </>
-                  )}
-                </FormGroup>
-              </FormControl>
+              <Grid item xs={12}>
+                <Title>Zahlungsmöglichkeiten: </Title>
+                <FormControl component="fieldset">
+                  <FormGroup>
+                    <Title>
+                      <FaPaypal size={30} />
+                    </Title>
+
+                    <Grid item xs={12}>
+                      <TextField
+                        fullWidth
+                        required
+                        id="paypalEmail"
+                        label="PayPal Email"
+                        name="paypalEmail"
+                        inputProps={{
+                          maxLength: 100,
+                        }}
+                        InputLabelProps={{
+                          sx: {
+                            backgroundColor: "white",
+                            color: colors.companycolor,
+                          },
+                        }}
+                      />
+                    </Grid>
+                    <Title>
+                      <Bank size={30} />
+                    </Title>
+                    <Grid item xs={12}>
+                      <TextField
+                        fullWidth
+                        required
+                        id="bankName"
+                        label="Bankname"
+                        name="bankName"
+                        inputProps={{
+                          maxLength: 50,
+                        }}
+                        InputLabelProps={{
+                          sx: {
+                            backgroundColor: "white",
+                            color: colors.companycolor,
+                          },
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        fullWidth
+                        required
+                        id="bic"
+                        label="BIC"
+                        name="bic"
+                        inputProps={{
+                          maxLength: 50,
+                        }}
+                        InputLabelProps={{
+                          sx: {
+                            backgroundColor: "white",
+                            color: colors.companycolor,
+                          },
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        fullWidth
+                        required
+                        id="iban"
+                        label="IBAN"
+                        name="iban"
+                        inputProps={{
+                          maxLength: 50,
+                        }}
+                        InputLabelProps={{
+                          sx: {
+                            backgroundColor: "white",
+                            color: colors.companycolor,
+                          },
+                        }}
+                      />
+                    </Grid>
+                  </FormGroup>
+                </FormControl>
+              </Grid>
             </Grid>
             <Button style={{ color: colors.companycolor }} type="submit">
               Speichern
@@ -322,7 +313,9 @@ export default function AdressInformation(): JSX.Element {
             </Paragraph>
             <Paragraph>
               <strong>Zahlungsart: </strong>
-              {adressInformation?.zahlungsmethode}
+              if (adressInformation?.paypalEmail) {
+                <FaPaypal size={30} />
+              } else {<Bank size={30} />}
             </Paragraph>
 
             <LogoutButton

@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 import { StyledDatePicker, Calendar, Popper } from "./Calendar";
 import { de } from "date-fns/locale";
-import { formatNumber } from "../general/constants";
+import { colors, formatNumber } from "../general/constants";
 import { CustomToast } from "../general/toast.style";
 import { useDispatch, useSelector } from "react-redux";
 import { CartState } from "../../redux/types";
@@ -128,11 +128,15 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
         {cartLength === 1 ? (
           <h4>Du hast 1 Produkt in Deinem Warenkorb</h4>
         ) : (
-          <h4>Du hast {cartLength} Produkte in Deinem Warenkorb</h4>
+          <h4 style={{ color: colors.black }}>
+            Du hast {cartLength} Produkte in Deinem Warenkorb
+          </h4>
         )}
       </SideBarInformation>
       <SideBarButton>
-        <h3>Gesamtpreis: {formatNumber(price)}€</h3>
+        <h3 style={{ color: colors.black }}>
+          Gesamtpreis: {formatNumber(price)}€
+        </h3>
 
         <Button className="white-orange black-color" onClick={handleBuyNow}>
           Weiter zum Bestellvorgang
@@ -165,7 +169,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
             }}
           >
             {!loggedIn ? (
-              <div>
+              <div style={{ color: colors.black }}>
                 <h1>
                   Du musst Dich anmelden um Dein perfektes Frühstück zu
                   bestellen!
