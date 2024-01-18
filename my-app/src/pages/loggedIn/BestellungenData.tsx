@@ -19,6 +19,7 @@ import {
 } from "./Bestellungen.styles";
 import { Package, Truck } from "phosphor-react";
 import { Link, useNavigate } from "react-router-dom";
+import { CRUDCardPText, CRUDCardWrappper } from "../admin/Admin.styles";
 export default function BestellungsData(): JSX.Element {
   const [cookies] = useCookies([KUNDEN_ID]);
   const [bestellungen, setBestellungen] = useState<
@@ -31,7 +32,7 @@ export default function BestellungsData(): JSX.Element {
     const fetchData = async () => {
       try {
         const serverBestellungen = await getRequest(
-          `Bestellungen/${cookies.kundenId}`
+          `/Bestellungen/${cookies.kundenId}`
         );
 
         console.log(serverBestellungen);
@@ -47,7 +48,9 @@ export default function BestellungsData(): JSX.Element {
     fetchData();
   }, []);
 
-  return (
+  return bestellungen.length === 0 ? (
+    <></>
+  ) : (
     <Container>
       <Card>
         <h1>Bestellungen</h1>
@@ -58,37 +61,30 @@ export default function BestellungsData(): JSX.Element {
               deliverd = false;
             }
             return (
-              <SingleBestellungWrapper
+              <CRUDCardWrappper
                 key={bestellung.bestellungsId}
                 onClick={() =>
                   navigate(`/bestellung/${bestellung.bestellungsId}`)
                 }
               >
-                <MetaDataDiv>
-                  <MetaDataItem>
-                    {deliverd
-                      ? `geliefert am: ${bestellung.lieferDatum.toString()}`
-                      : `vorrausichtliche Lieferung: ${bestellung.gewünschtesLieferdatum.toString()}`}
-                  </MetaDataItem>
-                  <MetaDataItem>
-                    Name: {bestellung.createdAt.toString()}
-                  </MetaDataItem>
-                  <MetaDataItem>
-                    Email: {bestellung.zahlungsinformation.email}
-                  </MetaDataItem>
-                  <MetaDataItem>Zahlungsmethode: "Paypal"</MetaDataItem>
-                  <MetaDataItem>
-                    Gesamtsumme: {bestellung.gesamtpreis}
-                  </MetaDataItem>
-                  <MetaDataItem>
-                    Anzahl der Produkte:{" "}
-                    {bestellung.produktInformationen
-                      ? bestellung.produktInformationen.length
-                      : 0}
-                  </MetaDataItem>
-                </MetaDataDiv>
-                {deliverd ? <Package size={50} /> : <Truck size={50} />}
-              </SingleBestellungWrapper>
+                {deliverd ? (
+                  <div>
+                    <Package size={50} />
+                    <CRUDCardPText>geliefert am</CRUDCardPText>
+                    <CRUDCardPText>
+                      {bestellung.lieferDatum.toString()}
+                    </CRUDCardPText>
+                  </div>
+                ) : (
+                  <>
+                    <Truck size={50} />
+                    <CRUDCardPText>vorraussichtliche Lieferung</CRUDCardPText>
+                    <CRUDCardPText>
+                      {bestellung.gewünschtesLieferdatum.toString()}
+                    </CRUDCardPText>
+                  </>
+                )}
+              </CRUDCardWrappper>
             );
           })}
         </BestellungWrapper>

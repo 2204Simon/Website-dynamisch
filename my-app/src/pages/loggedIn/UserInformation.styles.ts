@@ -1,16 +1,18 @@
 import styled from "styled-components";
 import { Button } from "../general/button.styles";
+import { colors } from "../general/constants";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  background-color: #f8f8f8;
+  background-color: ${colors.white};
   padding: 20px;
 `;
 export const Card = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   background-color: #fff;
   padding: 32px;

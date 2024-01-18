@@ -41,6 +41,7 @@ export default function UserInformation(): JSX.Element {
 
   const handleClick = (): void => {
     console.log("changedlogin");
+    setCookie(KUNDEN_ID, "", { path: "/" });
     changeLoggedIn();
     navigate("/SignUp");
   };

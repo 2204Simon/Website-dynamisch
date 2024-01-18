@@ -27,11 +27,19 @@ export interface AdressData {
   ort: string;
   hausnummer: string;
   hausnummerzusatz?: string;
+}
+
+export type PaymentData = {
+  kundenId?: string;
   paypalEmail?: string;
-  bankName?: string;
+  bankname?: string;
   bic?: string;
   iban?: string;
-}
+};
+
+export type PaymentDataState = {
+  PaymentData: PaymentData;
+};
 
 export enum ActionTypesAdressData {
   ADD_NEW_ADRESS = "ADD_NEW_ADRESS",
@@ -50,14 +58,6 @@ export interface CartItem {
   titel: string;
   kundenId?: string;
   anzahl: number;
-}
-
-export enum CartActionTypes {
-  ADD_TO_CART = "ADD_TO_CART",
-  REMOVE_FROM_CART = "REMOVE_FROM_CART",
-  CLEAR_CART = "CLEAR_CART",
-  INCREASE_QUANTITY = "INCREASE_QUANTITY",
-  DECREASE_QUANTITY = "DECREASE_QUANTITY",
 }
 
 export interface ProduktApiType {
@@ -111,10 +111,10 @@ export type Zahlungsinformation = {
 export type BestellungsInformation = {
   gesamtpreis: number;
   lieferDatum: Date;
+  bestellDatum: string;
   gewünschtesLieferdatum: Date;
   bestellungsId: string;
   zahlungsinformation: Zahlungsinformation;
   adressenInformation: AddressenInformation;
   produktInformationen: ProduktInformationen[];
-  createdAt: Date;
 };

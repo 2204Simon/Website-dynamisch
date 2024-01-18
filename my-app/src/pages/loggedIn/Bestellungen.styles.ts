@@ -19,10 +19,6 @@ export const SingleBestellungWrapper = styled.div`
   }
 `;
 
-// export const IconWrapper = styled.div`
-//   height: 1%;
-// `;
-
 export const MetaDataDiv = styled.div`
   display: flex;
   flex-direction: column;

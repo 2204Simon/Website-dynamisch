@@ -18,7 +18,7 @@ import {
 } from "./styles/Konfigurator.styles";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { Button } from "../general/button.styles";
-
+import { baseUrl } from "../../globalVariables/global";
 
 interface DrinkSelectionProps {
   onPrevStage: () => void;
@@ -33,7 +33,7 @@ const DrinkSelection: React.FC<DrinkSelectionProps> = ({
   const [drinks, setDrinks] = useState<any[]>([]); // Hier speichern wir die vom Server geholten Getränke
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/v1/generalProdukts/Drinks")
+    fetch(`${baseUrl}/generalProdukts/Drinks`)
       .then(response => response.json())
       .then(data =>
         Promise.all(
@@ -103,9 +103,7 @@ const DrinkSelection: React.FC<DrinkSelectionProps> = ({
                 displayNone={false}
                 key={drink.produktId}
                 className={selectedDrink === drink.titel ? "selected" : ""}
-                onClick={() =>
-                  handleDrinkSelect(drink.titel, drink.bild)
-                }
+                onClick={() => handleDrinkSelect(drink.titel, drink.bild)}
               >
                 <ImageContainer>
                   <Image src={drink.bild} alt={drink.titel} />
@@ -120,12 +118,12 @@ const DrinkSelection: React.FC<DrinkSelectionProps> = ({
         )}
       </SelectionContainer>
 
-        {selectedDrink && (
-          <div>
-            <p>Ausgewähltes Getränk: {selectedDrink}</p>
-            <p>Bestätige die Auswahl mit dem Vorwärtspfeil</p>
-          </div>
-        )}
+      {selectedDrink && (
+        <div>
+          <p>Ausgewähltes Getränk: {selectedDrink}</p>
+          <p>Bestätige die Auswahl mit dem Vorwärtspfeil</p>
+        </div>
+      )}
       <NavigationIcon onClick={handleNext}>
         <Button className="black-color white-orange" onClick={handleNext}>
           Weiter zur Zusammenfassung

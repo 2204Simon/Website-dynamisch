@@ -8,10 +8,6 @@ const initialState: AdressDataState = {
     hausnummerzusatz: "",
     ort: "",
     strasse: "",
-    paypalEmail: "",
-    bankName: "",
-    bic: "",
-    iban: "",
   },
 };
 
