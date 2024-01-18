@@ -77,7 +77,12 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
 
   return (
     <Stage>
-      <StageHeader>Wähle dein Brot</StageHeader>
+      <StageHeader>Wähle dein Brot
+      <NavigationIcon onClick={handleNext}>
+          <ArrowForward />
+        </NavigationIcon>
+      </StageHeader>
+      
       <p>
         Durch Anklicken der Produktkarte kannst Du das gewünschte Brot zur
         Konfiguration hinzufügen.
@@ -122,18 +127,12 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
           )
         )}
       </SelectionContainer>
-      {selectedBread && (
-        <div>
-          <p>Ausgewähltes Produkt: {selectedBread}</p>
-          <p>Bestätige die Auswahl mit dem Vorwärtspfeil</p>
-        </div>
-      )}
+  
 
       <NavigationIcon onClick={handleNext}>
         <Button className="black-color white-orange" onClick={handleNext}>
           Weiter zum Belag
         </Button>
-        <ArrowForward />
       </NavigationIcon>
     </Stage>
   );
@@ -142,7 +141,12 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
 /*
 
 
-
+    /{selectedBread && (
+        <div>
+          <p>Ausgewähltes Produkt: {selectedBread}</p>
+          <p>Bestätige die Auswahl mit dem Vorwärtspfeil</p>
+        </div>
+      )}
 
 
 

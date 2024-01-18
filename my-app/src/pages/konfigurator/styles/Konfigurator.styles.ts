@@ -26,9 +26,10 @@ export const Stage = styled.div`
 `;
 export const SelectionContainer = styled.div`
   background-color: ${colors.white};
+  width: 80vw;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  align-items: strech;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 1px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
   padding: 10px;
@@ -137,7 +138,7 @@ const reverseRotateAnimation = keyframes`
 
 export const Container = styled.div<{ flipped: boolean }>`
   width: 314px;
-  height: 600px;
+  height: 450px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -161,7 +162,7 @@ export const ContainerFront = styled.div<{
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   width: 250px;
-  height: 550px;
+  height: 400px;
   margin: 1rem;
   cursor: pointer;
   backface-visibility: hidden;

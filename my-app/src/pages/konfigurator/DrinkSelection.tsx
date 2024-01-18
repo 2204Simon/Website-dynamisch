@@ -33,14 +33,14 @@ const DrinkSelection: React.FC<DrinkSelectionProps> = ({
   const [drinks, setDrinks] = useState<any[]>([]); // Hier speichern wir die vom Server geholten Getränke
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/v1/zutat/Getränk")
+    fetch("http://localhost:3001/api/v1/generalProdukts/Drinks")
       .then(response => response.json())
       .then(data =>
         Promise.all(
           data.map((drink: any) =>
-            loadImage(drink.zutatBild).then(image => ({
+            loadImage(drink.bild).then(image => ({
               ...drink,
-              zutatBild: image,
+              bild: image,
             }))
           )
         )
@@ -59,7 +59,7 @@ const DrinkSelection: React.FC<DrinkSelectionProps> = ({
   };
 
   async function loadImage(path: string): Promise<string> {
-    const image = await import(`../../img/Drinks/${path}`);
+    const image = await import(`../../img/${path}`);
     return image.default; //Wegen ES6 mit default
   }
 
@@ -70,9 +70,9 @@ const DrinkSelection: React.FC<DrinkSelectionProps> = ({
   const handleNext = () => {
     if (selectedDrink) {
       const selectedDrinkData = drinks.find(
-        drink => drink.zutatsname === selectedDrink
+        drink => drink.titel === selectedDrink
       );
-      onComplete(selectedDrink, selectedDrinkData?.zutatBild || "");
+      onComplete(selectedDrink, selectedDrinkData?.bild || "");
     }
   };
 
@@ -101,18 +101,18 @@ const DrinkSelection: React.FC<DrinkSelectionProps> = ({
               <ContainerFront
                 flipped={false}
                 displayNone={false}
-                key={drink.zutatsId}
-                className={selectedDrink === drink.zutatsname ? "selected" : ""}
+                key={drink.produktId}
+                className={selectedDrink === drink.titel ? "selected" : ""}
                 onClick={() =>
-                  handleDrinkSelect(drink.zutatsname, drink.zutatBild)
+                  handleDrinkSelect(drink.titel, drink.bild)
                 }
               >
                 <ImageContainer>
-                  <Image src={drink.zutatBild} alt={drink.zutatsname} />
+                  <Image src={drink.bild} alt={drink.titel} />
                 </ImageContainer>
                 <Details>
-                  <Title>{drink.zutatsname}</Title>
-                  <Price>{drink.zutatspreis} €</Price>
+                  <Title>{drink.titel}</Title>
+                  <Price>{drink.preis} €</Price>
                 </Details>
               </ContainerFront>
             </Container>

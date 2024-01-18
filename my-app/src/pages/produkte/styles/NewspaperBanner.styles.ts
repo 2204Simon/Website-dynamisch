@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { colors } from "../../general/constants";
 
 export const BannerContainer = styled.div`
-  width: 90%;
-  max-height: 150px;
+  width: 75%;
+  max-height: auto;
   background-color: ${colors.white};
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -14,12 +14,12 @@ export const BannerContainer = styled.div`
 `;
 
 export const BannerImage = styled.img`
-  width: 90px;
-  height: 90px;
+  width: 250px;
+  height: auto;
   align-self: center;
   justify-self: end;
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: 10px;
 `;
 
 export const BannerContent = styled.div`
@@ -44,7 +44,7 @@ export const BannerRight = styled.div`
 
 export const XCircleWrapper = styled.div`
   position: absolute;
-  right: 5%;
+  right: 11.8%;
   margin: 10px;
   z-index: 2;
 `;
