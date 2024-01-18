@@ -31,7 +31,7 @@ export default function BestellungsData(): JSX.Element {
     const fetchData = async () => {
       try {
         const serverBestellungen = await getRequest(
-          `Bestellungen/${cookies.kundenId}`
+          `/Bestellungen/${cookies.kundenId}`
         );
 
         console.log(serverBestellungen);

@@ -32,7 +32,7 @@ export interface AdressData {
 export type PaymentData = {
   kundenId?: string;
   paypalEmail?: string;
-  bankName?: string;
+  bankname?: string;
   bic?: string;
   iban?: string;
 };

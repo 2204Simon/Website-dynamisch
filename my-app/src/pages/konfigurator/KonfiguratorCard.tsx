@@ -95,7 +95,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
         kundenId: cookie.kundenId,
       };
       console.log(itemObjekt);
-      const addedProdukt = await sendPutRequest("warenkorb", itemObjekt);
+      const addedProdukt = await sendPutRequest("/warenkorb", itemObjekt);
       CustomToast.success("Dein Produkt ist im Warenkorb!");
       const amount = item.anzahl;
       dispatch(increaseQuantity({ item, amount: quantity2 })); // Dispatch der addToCart-Action mit dem erstellten Item
@@ -130,7 +130,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
           kundenId: cookie.kundenId,
         };
         console.log(itemObjekt);
-        const addedProdukt = await sendPostRequest("warenkorb", itemObjekt);
+        const addedProdukt = await sendPostRequest("/warenkorb", itemObjekt);
         CustomToast.success("Dein Produkt ist im Warenkorb!");
         dispatch(addToCart(item as CartItem)); // Dispatch der addToCart-Action mit dem erstellten Item
       } catch (error) {
@@ -186,7 +186,6 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
           />
         </Details>
       </ContainerFront>
-      
     </Container>
   );
 };

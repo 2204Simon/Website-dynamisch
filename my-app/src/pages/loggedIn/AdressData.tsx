@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { AdressDataState, AdressData, PaymentData } from "../../redux/types";
+import {
+  AdressDataState,
+  AdressData,
+  PaymentData,
+  PaymentDataState,
+} from "../../redux/types";
 import {
   Card,
   Container,
@@ -33,13 +38,20 @@ export default function AdressInformation(): JSX.Element {
   const adressInformation = useSelector(
     (state: { adress: AdressDataState }) => state.adress.AdressData
   );
+  const paymentInformation = useSelector(
+    (state: { payment: PaymentDataState }) => state.payment.PaymentData
+  );
   const [selectedPayments, setSelectedPayments] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseAdress = await getRequest(`adresse/${cookies.kundenId}`);
-        const responsePayment = await getRequest(`zahlung/${cookies.kundenId}`);
+        const responseAdress = await getRequest(`/adresse/${cookies.kundenId}`);
+        const responsePayment = await getRequest(
+          `/zahlung/${cookies.kundenId}`
+        );
+        console.log(responseAdress, "responseAdress");
+        console.log(responsePayment, "responsePayment");
         dispatch(addPayment(responsePayment));
         dispatch(addNewAdress(responseAdress));
       } catch (error) {
@@ -83,7 +95,7 @@ export default function AdressInformation(): JSX.Element {
     };
     const paymentData: PaymentData = {
       paypalEmail: data.get("paypalEmail") as string,
-      bankName: data.get("bankName") as string,
+      bankname: data.get("bankName") as string,
       bic: data.get("bic") as string,
       iban: data.get("iban") as string,
     };
@@ -93,7 +105,7 @@ export default function AdressInformation(): JSX.Element {
     }
     if (
       !paymentData.paypalEmail &&
-      (!paymentData.bankName || !paymentData.bic || !paymentData.iban)
+      (!paymentData.bankname || !paymentData.bic || !paymentData.iban)
     ) {
       CustomToast.error(
         "Es muss mindestens PayPal oder Lastschrift ausgewählt sein"
@@ -281,9 +293,14 @@ export default function AdressInformation(): JSX.Element {
                 </FormControl>
               </Grid>
             </Grid>
-            <Button style={{ color: colors.companycolor }} type="submit">
-              Speichern
-            </Button>
+
+            <LogoutButton
+              className="black-color white-orange"
+              onClick={() => handleEdit(adressInformation)}
+            >
+              Edit
+            </LogoutButton>
+
             <Button
               style={{ color: colors.companycolor }}
               onClick={handleCancel}
@@ -293,43 +310,54 @@ export default function AdressInformation(): JSX.Element {
           </form>
         ) : (
           <div>
-            <Title>Persönliche Daten:</Title>
-            <Paragraph>
-              <strong>Postleitzahl: </strong>
-              {adressInformation?.postleitzahl}
-            </Paragraph>
-            <Paragraph>
-              <strong>Stadt: </strong>
-              {adressInformation?.ort}
-            </Paragraph>
-            <Paragraph>
-              <strong>Straße: </strong>
-              {adressInformation?.strasse}
-            </Paragraph>
-            <Paragraph>
-              <strong>Hausnummer: </strong>
-              {adressInformation?.hausnummer}
-            </Paragraph>
-            <Paragraph>
-              <strong>Hausnummerzusatz: </strong>
-              {adressInformation?.hausnummerzusatz}
-            </Paragraph>
-            {/* <Paragraph>
-              <strong>Zahlungsart: </strong>
-              {adressInformation.paypalEmail ? (
+            <Title style={{ textAlign: "center" }}>Persönliche Daten</Title>
+            <Grid container gap={10}>
+              <Grid item>
+                <Paragraph>
+                  <strong>Postleitzahl: </strong>
+                  {adressInformation?.postleitzahl}
+                </Paragraph>
+                <Paragraph>
+                  <strong>Stadt: </strong>
+                  {adressInformation?.ort}
+                </Paragraph>
+                <Paragraph>
+                  <strong>Straße: </strong>
+                  {adressInformation?.strasse}
+                </Paragraph>
+                <Paragraph>
+                  <strong>Hausnummer: </strong>
+                  {adressInformation?.hausnummer}
+                </Paragraph>
+                <Paragraph>
+                  <strong>Hausnummerzusatz: </strong>
+                  {adressInformation?.hausnummerzusatz}
+                </Paragraph>
+                <LogoutButton
+                  className="black-color white-orange "
+                  onClick={() => handleEdit(adressInformation)}
+                >
+                  <Pencil size={20} />
+                </LogoutButton>
+              </Grid>
+              <Grid
+                item
+                alignItems={"center"}
+                display={"flex"}
+                justifyContent={"center"}
+                flexDirection={"column"}
+              >
+                <Paragraph>
+                  <strong>Zahlungsart</strong>
+                </Paragraph>
                 <FaPaypal size={30} />
-              ) : (
+                <Paragraph>{paymentInformation.paypalEmail}</Paragraph>
                 <Bank size={30} />
-              )}
-            </Paragraph> */}
-
-            <LogoutButton
-              style={{ display: "center" }}
-              className="black-color white-orange "
-              onClick={() => handleEdit(adressInformation)}
-            >
-              <Pencil size={20} />
-            </LogoutButton>
+                <Paragraph>{paymentInformation.bankname}</Paragraph>
+                <Paragraph>{paymentInformation.bic}</Paragraph>
+                <Paragraph>{paymentInformation.iban}</Paragraph>
+              </Grid>
+            </Grid>
           </div>
         )}
       </Card>

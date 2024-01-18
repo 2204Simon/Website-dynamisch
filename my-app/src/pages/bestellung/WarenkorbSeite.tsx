@@ -38,7 +38,7 @@ function WarenkorbSeite(): JSX.Element {
     const fetchData = async () => {
       try {
         const serverCartItems: Array<CartItem> = await getRequest(
-          `Warenkorb/${cookies.kundenId}`
+          `/Warenkorb/${cookies.kundenId}`
         );
         console.log(serverCartItems);
 

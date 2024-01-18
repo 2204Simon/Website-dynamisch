@@ -21,7 +21,7 @@ export default function EinzelBestellung() {
     const fetchData = async () => {
       try {
         const serverBestellungen: BestellungsInformation = await getRequest(
-          `Bestellung/${id}`
+          `/Bestellung/${id}`
         );
         console.log(serverBestellungen);
         for (const produkt of serverBestellungen.produktInformationen) {

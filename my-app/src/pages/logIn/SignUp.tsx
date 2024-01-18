@@ -92,7 +92,7 @@ export default function SignUp() {
         nachname: lastName,
         telefonnummer: telefonnummer,
       };
-      const kundenData = await sendPostRequest("kunde", preparedData);
+      const kundenData = await sendPostRequest("/kunde", preparedData);
       console.log(kundenData);
       if (!validateEmail(email)) {
         CustomToast.error("Bitte gebe eine gültige E-Mail-Adresse ein");
@@ -108,14 +108,14 @@ export default function SignUp() {
       };
       const paymentFormData = {
         kundenId: kundenData.kundenId,
-        bankName: bankName,
+        bankname: bankName,
         bic: bic,
         iban: iban,
         paypalEmail: paypalEmail,
       };
-      const adressData = await sendPostRequest("adresse", adressDataFormData);
+      const adressData = await sendPostRequest("/adresse", adressDataFormData);
 
-      const paymentData = await sendPostRequest("zahlung", paymentFormData);
+      const paymentData = await sendPostRequest("/zahlung", paymentFormData);
       // const response eventuel season token
       setCookie(KUNDEN_ID, kundenData.kundenId, { path: "/" });
       // console.log(cookies.kundenId);

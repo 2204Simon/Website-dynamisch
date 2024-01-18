@@ -4,7 +4,7 @@ import { PaymentDataState } from "./types";
 const initialState: PaymentDataState = {
   PaymentData: {
     paypalEmail: "",
-    bankName: "",
+    bankname: "",
     bic: "",
     iban: "",
   },

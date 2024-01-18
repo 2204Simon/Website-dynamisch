@@ -76,7 +76,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
         gewünschtesLieferdatum: selectedDate,
       };
       console.log(bodyForBestellung);
-      await sendPostRequest(`bestellung`, bodyForBestellung);
+      await sendPostRequest(`/bestellung`, bodyForBestellung);
       setShowPopup(false);
       setShowThankyouPopup(true);
     } catch (error) {
