@@ -105,12 +105,15 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
   };
 
   const handleNext = () => {
-    if (selectedToppings.length > 0) {
-      const selectedToppingsData = selectedToppings.map(topping =>
-        toppings.find(t => t.zutatsname === topping)
-      );
+    const selectedToppingsData = Object.keys(quantities)
+      .filter(topping => quantities[topping] > 0)
+      .map(topping => toppings.find(t => t.zutatsname === topping));
+
+    if (selectedToppingsData.length > 0) {
       onNextStage(
-        selectedToppings.join(", "),
+        selectedToppingsData
+          .map(toppingData => toppingData?.zutatsname)
+          .join(", "),
         selectedToppingsData
           .map(toppingData => toppingData?.zutatBild || "")
           .join(", ")
