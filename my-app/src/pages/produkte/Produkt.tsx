@@ -3,6 +3,7 @@ import ScrollContainer from "./Arrows";
 import { useEffect, useState } from "react";
 import { CustomToast } from "../general/toast.style";
 import NewspaperAbo from "./Newspaper";
+import { colors } from "@mui/material";
 
 export async function loadImage(path: string): Promise<string> {
   try {
@@ -112,7 +113,7 @@ function Produkt() {
   return (
     <>
       <h2>Unsere Produkte</h2>
-      <p style={{ color: colors.black }}>
+      <p style={{ color: colors.common.black }}>
         Nachfolgend findest Du unser reichliches Angebot an Speisen und
         Getränken, um Dir Dein perfektes Frühstück zusammenzustellen. Alle
         Produkte sind bio und klimaneutral hergestellt sowie geliefert. Wenn Du
