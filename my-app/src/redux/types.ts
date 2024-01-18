@@ -111,10 +111,10 @@ export type Zahlungsinformation = {
 export type BestellungsInformation = {
   gesamtpreis: number;
   lieferDatum: Date;
+  bestellDatum: string;
   gewünschtesLieferdatum: Date;
   bestellungsId: string;
   zahlungsinformation: Zahlungsinformation;
   adressenInformation: AddressenInformation;
   produktInformationen: ProduktInformationen[];
-  createdAt: Date;
 };

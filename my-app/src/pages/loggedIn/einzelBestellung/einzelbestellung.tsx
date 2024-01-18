@@ -47,7 +47,7 @@ export default function EinzelBestellung() {
     <div>loading</div>
   ) : (
     <div>
-      <h1>Deine Bestellung vom {bestellungen.createdAt.toLocaleString()}</h1>
+      <h1>Deine Bestellung vom {bestellungen.bestellDatum.toLocaleString()}</h1>
       <WarenkorbWrapper>
         <BestellungsWrapper>
           {bestellungen.produktInformationen.map((item, index) => (
