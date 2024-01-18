@@ -17,7 +17,6 @@ import { StyledDatePicker, Calendar, Popper } from "./Calendar";
 import { de } from "date-fns/locale";
 import { formatNumber } from "../general/constants";
 import { CustomToast } from "../general/toast.style";
-import PackageLocationQRCode from "./PackageLocationQRCode";
 import { useDispatch, useSelector } from "react-redux";
 import { CartState } from "../../redux/types";
 import { clearCart } from "../../redux/cartReducer";
@@ -143,13 +142,9 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
         <PopupBackdrop>
           <PopupWrapper>
             <h2>Danke für deine Bestellung!</h2>
-            <p>Fiktives Projekt, keine gültige Bestellung!</p>
+
             <div>
-              <h2>Frühstücks Tracker</h2>
-              <PackageLocationQRCode
-                latitude={48.676666}
-                longitude={10.153616}
-              />
+              <p>Fiktives Projekt, keine gültige Bestellung!</p>
             </div>
             <Button
               className="black-color white-orange"

@@ -15,6 +15,7 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
   const adressInformation = useSelector(
     (state: { adress: AdressDataState }) => state.adress.AdressData
   );
+
   return (
     <PayPalScriptProvider
       options={
@@ -60,7 +61,7 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
           onError={err => {
             // Zeigt einen Toast-Fehler an, wenn ein Fehler auftritt
             CustomToast.error(
-              `Fehler beim Bezahlen ausgehend von der PayPal Schnittstelle. Bitte versuche es später erneut.`
+              `Fehler beim Bezahlen ausgehend von der PayPal Schnittstelle. Laden Sie die Seite erneut und versuchen Sie es erneut.`
             );
           }}
           onCancel={data => {
