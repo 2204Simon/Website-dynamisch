@@ -8,7 +8,6 @@ import {
   SelectionList,
   SelectionItem,
   NavigationIcon,
-  
   Container,
   Details,
   ImageContainer,
@@ -19,7 +18,6 @@ import {
   Image,
   PlusQuantity,
   MinusQuantity,
-  DetailsButton,
   ContainerBack,
   ContainerFront,
   Title2,
@@ -30,8 +28,6 @@ import {
 import { ArrowForward } from "@mui/icons-material";
 import { CustomToast } from "../general/toast.style";
 import { BlackColorButton } from "../general/button";
-
-
 
 interface BreadSelectionProps {
   onNextStage: (selectedProduct: string, selectedImage: string) => void;
@@ -81,27 +77,22 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
     }
   };
 
-
-
-return (
-  <Stage>
+  return (
+    <Stage>
       <StageHeader>
         Wähle dein Brot
         <NavigationIcon onClick={handleNext}>
           <ArrowForward />
         </NavigationIcon>
       </StageHeader>
-    <SelectionContainer>
-
-          {breads.map(
+      <SelectionContainer>
+        {breads.map(
+          (
+            bread // Anzeigen der Brote aus dem State
+          ) => (
+            console.log(bread),
             (
-              bread // Anzeigen der Brote aus dem State
-            ) => (
-              console.log(bread),
-              (
-                
-
-                <Container flipped={false}>
+              <Container flipped={false}>
                 <SelectionItem
                   key={bread.zutatsId}
                   className={
@@ -113,25 +104,20 @@ return (
                 >
                   <ImageContainer>
                     <Image src={bread.zutatBild} alt={bread.zutatsname} />
-                  </ImageContainer> 
-                  <Details>
-                    <Title style={{ paddingLeft: "0px" }}> {bread.zutatsname}</Title>
+                  </ImageContainer>
+                  <Title style={{ paddingLeft: "0px" }}>
+                    {" "}
+                    {bread.zutatsname}
+                  </Title>
                   <br />
                   <Price>Preis: {bread.zutatspreis} €</Price> <br />
-                  <BlackColorButton
-                  //onClick={handleBreadSelect(bread.zutatsname, bread.zutatBild)}
-                  caption="Zur Konfiguration hinzufügen"
-          />
-                  </Details>
+                  <p>Durch Anklicken zur Konfiguration hinzufügen</p>
                 </SelectionItem>
-                </Container>
-                
-
-
-              )
+              </Container>
             )
-          )}
-          </SelectionContainer>
+          )
+        )}
+      </SelectionContainer>
       {selectedBread && (
         <div>
           <p>Ausgewähltes Produkt: {selectedBread}</p>
@@ -142,9 +128,7 @@ return (
   );
 };
 
-
-
-  /*return (
+/*return (
     <Stage>
       <StageHeader>
         Wähle dein Brot

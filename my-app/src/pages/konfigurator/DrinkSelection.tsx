@@ -16,7 +16,6 @@ import {
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { BlackColorButton } from "../general/button";
 
-
 interface DrinkSelectionProps {
   onPrevStage: () => void;
   onComplete: (selectedProduct: string, selectedImage: string) => void;
@@ -84,14 +83,13 @@ const DrinkSelection: React.FC<DrinkSelectionProps> = ({
           <ArrowForward />
         </NavigationIcon>
       </StageHeader>
-      
+
       <SelectionContainer>
-        
-          {drinks.map(
-            (
-              drink // Anzeigen der Getränke aus dem State
-            ) => (
-              <Container flipped={false}>
+        {drinks.map(
+          (
+            drink // Anzeigen der Getränke aus dem State
+          ) => (
+            <Container flipped={false}>
               <SelectionItem
                 key={drink.zutatsId}
                 className={selectedDrink === drink.zutatsname ? "selected" : ""}
@@ -100,26 +98,22 @@ const DrinkSelection: React.FC<DrinkSelectionProps> = ({
                 }
               >
                 <ProductImage src={drink.zutatBild} alt={drink.zutatsname} />
-                <Details>
+
                 <Title>{drink.zutatsname}</Title>
                 <Price>{drink.zutatspreis} €</Price>
-                <BlackColorButton
-                  //onClick={handleBreadSelect(bread.zutatsname, bread.zutatBild)}
-                  caption="Zur Konfiguration hinzufügen" />
-                </Details>
+                <p>Durch Anklicken zur Konfiguration hinzufügen</p>
               </SelectionItem>
-              </Container>
-            )
-          )}
-       
-      
-      {selectedDrink && (
-        <div>
-          <p>Ausgewähltes Getränk: {selectedDrink}</p>
-          <p>Bestätige die Auswahl mit dem Vorwärtspfeil</p>
-        </div>
-      )}
-    </SelectionContainer>
+            </Container>
+          )
+        )}
+
+        {selectedDrink && (
+          <div>
+            <p>Ausgewähltes Getränk: {selectedDrink}</p>
+            <p>Bestätige die Auswahl mit dem Vorwärtspfeil</p>
+          </div>
+        )}
+      </SelectionContainer>
     </Stage>
   );
 };

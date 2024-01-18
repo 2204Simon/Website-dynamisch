@@ -1,6 +1,6 @@
 // Konfigurator.styles.ts
-import styled, {keyframes} from "styled-components";
-import {colors} from "../../general/constants";
+import styled, { keyframes } from "styled-components";
+import { colors } from "../../general/constants";
 import {
   ArrowForward,
   ArrowBack,
@@ -10,7 +10,6 @@ import {
   EmojiFoodBeverage,
 } from "@mui/icons-material";
 import CroissantGif from "../../../img/Croissant.webp";
-
 
 export const StageContainer = styled.div`
   display: flex;
@@ -41,12 +40,11 @@ export const StageHeader = styled.h2`
 `;
 
 export const ProductImage = styled.img`
-width: 100%;
-height: auto;
-border-radius: 10px;
-transition: transform 0.3s ease-in-out;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
 `;
-
 
 export const SelectionList = styled.ul`
   list-style: none;
@@ -113,7 +111,6 @@ export const NavigationContainer = styled.div`
   justify-content: center;
   margin-top: 20px;
 `;
-
 
 //Produktkarten
 
@@ -233,11 +230,6 @@ export const MiniH = styled.h4`
   color: ${colors.companycolor};
   font-size: 18px;
   margin: 5px;
-`;
-
-export const DetailsButton = styled.p`
-  text-decoration: underline;
-  color: ${colors.companycolor};
 `;
 
 export const Price = styled.p`
