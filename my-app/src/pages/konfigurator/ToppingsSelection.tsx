@@ -40,7 +40,11 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
   const [selectedToppings, setSelectedToppings] = useState<string[]>([]);
   const [toppings, setToppings] = useState<any[]>([]); // Hier speichern wir die vom Server geholten Toppings
   const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
-
+  const [flipped, setFlipped] = useState(false);
+  const [displayNone, setDisplayNone] = useState(false);
+  const handleFlip = () => {
+    setFlipped(!flipped);
+  };
   const handleMinus = (topping: string) => {
     setQuantities(prev => ({
       ...prev,
@@ -139,11 +143,7 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
                 flipped={false}
                 displayNone={false}
                 key={topping.zutatsId}
-                className={
-                  selectedToppings.includes(topping.zutatsname)
-                    ? "selected"
-                    : ""
-                }
+                className={quantities[topping.zutatsname] > 0 ? "selected" : ""}
                 onClick={() =>
                   handleToppingSelect(topping.zutatsname, topping.zutatBild)
                 }
