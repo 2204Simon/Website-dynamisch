@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { colors } from "./constants";
 export const Button = styled.button`
   display: inline-block;
   width: 200px;
@@ -9,8 +9,8 @@ export const Button = styled.button`
   margin: 20px 10px;
   border-radius: 25px;
   font-weight: bold;
-  border: 2px solid #000;
-  color: #fff;
+  border: 2px solid ${colors.white};
+  color: ${colors.white};
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -18,14 +18,14 @@ export const Button = styled.button`
   z-index: 1;
 
   &.white-orange {
-    border: 2px solid #aa7d03;
+    border: 2px solid ${colors.companycolor};
     &:hover {
       border: none;
     }
   }
 
   &.black-color {
-    color: black;
+    color: ${colors.black};
   }
 
   &:before {
@@ -36,14 +36,14 @@ export const Button = styled.button`
     left: 0;
     width: 0%;
     height: 100%;
-    background-color: black;
+    background-color: ${colors.black};
     z-index: -1;
     border-radius: 25px;
     transition: all 0.5s;
   }
 
   &.white-orange:before {
-    background-color: #aa7d03;
+    background-color: ${colors.companycolor};
   }
 
   &:hover {

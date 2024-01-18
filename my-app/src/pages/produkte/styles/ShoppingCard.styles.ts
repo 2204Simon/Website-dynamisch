@@ -41,7 +41,7 @@ export const ContainerFront = styled.div<{
 }>`
   display: flex;
   flex-direction: column;
-  background-color: ${colors.white};
+  background-color: ${colors.primarycolor};
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   padding: 1rem;

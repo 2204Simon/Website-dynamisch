@@ -5,6 +5,7 @@ import { ShoppingBag } from "phosphor-react";
 export const WarenkorbWrapper = styled.div`
   display: flex;
   flex-direction: row;
+
   padding: 10px;
   height: calc(100vh - 150px);
 
@@ -30,11 +31,14 @@ export const Badge = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 12px;
-  color: white;
+  color: ${colors.white};
 `;
 
 export const BestellungsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   flex: 1 1 auto;
+  gap: 1rem;
   margin-right: 10px;
   overflow-y: auto;
   overflow-x: hidden;

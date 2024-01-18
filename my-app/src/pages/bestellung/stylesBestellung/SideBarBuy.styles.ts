@@ -20,7 +20,7 @@ export const SideBarButton = styled.div`
   }
 `;
 export const SideBarWrapper = styled.div`
-  background-color: ${colors.white};
+  background-color: ${colors.primarycolor};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -52,7 +52,7 @@ export const PopupBackdrop = styled.div`
 `;
 
 export const PopupWrapper = styled.div`
-  background-color: #f9f9f9;
+  background-color: ${colors.primarycolor};
   padding: 20px;
   border-radius: 5px;
   text-align: center;

@@ -1,12 +1,10 @@
 import styled from "styled-components";
 import { colors } from "../general/constants";
 
-
 export const TimelineSection = styled.section`
   background-color: transparent;
   min-height: 100vh;
   padding: 0% 5% 5% 5%;
-  }
 `;
 
 export const Image = styled.img`
@@ -47,11 +45,12 @@ export const TimelineItems = styled.div`
   @media (max-width: 800px) {
     &::before {
       left: 7px;
-    }}
+    }
+  }
 `;
 
 export const TimelineItemA = styled.div`
-margin-bottom: 40px;
+  margin-bottom: 40px;
   width: 100%;
   position: relative;
 
@@ -69,18 +68,16 @@ margin-bottom: 40px;
   }
 
   @media (max-width: 800px) {
-    
     &:nth-child(odd) {
       padding-right: 0;
       text-align: left;
     }
-  
+
     &:nth-child(odd),
     &:nth-child(even) {
       padding-left: 37px;
     }
   }
-
 `;
 
 export const TimelineDot = styled.div`
@@ -103,7 +100,6 @@ export const TimelineDate = styled.h1`
   font-weight: 800;
   color: ${colors.companycolor};
   margin: 0px 5px 15px 5px;
-  }
 `;
 
 export const TimelineContent = styled.div`
@@ -118,4 +114,4 @@ export const TimelineTitle = styled.h3`
   font-weight: 800; */
   color: ${colors.black};
   margin: 10px 5px 10px 0px;
-  `;
+`;

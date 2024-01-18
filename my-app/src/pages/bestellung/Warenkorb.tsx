@@ -9,7 +9,7 @@ import {
   TotalPrice,
 } from "./stylesBestellung/Warenkorb.styles";
 import { Trash } from "phosphor-react";
-import { formatNumber } from "../general/constants";
+import { colors, formatNumber } from "../general/constants";
 interface WarenkorbProps {
   image: string;
   productName: string;

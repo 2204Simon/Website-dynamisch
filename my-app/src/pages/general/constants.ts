@@ -8,11 +8,11 @@ export const mediaQueries = {
 };
 
 export const colors = {
-  white: "#ffffff",
-  black: "#000000",
-  companycolor: "#aa7d03",
-  primarycolor: " #E0E0E0",
-  secundarycolor: "#333333",
+  white: "var(--white-color)",
+  black: "var(--black-color)",
+  companycolor: "var(--company-color)",
+  primarycolor: "var(--primary-color)",
+  secundarycolor: "var(--secondary-color)",
 };
 
 export const GeneralstyledLink = styled(Link)`
