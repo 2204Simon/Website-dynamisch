@@ -28,6 +28,7 @@ import {
 import { ArrowForward } from "@mui/icons-material";
 import { CustomToast } from "../general/toast.style";
 import { Button } from "../general/button.styles";
+import { baseUrl } from "../../globalVariables/global";
 
 interface BreadSelectionProps {
   onNextStage: (selectedProduct: string, selectedImage: string) => void;
@@ -38,7 +39,7 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
   const [breads, setBreads] = useState<any[]>([]); // Hier speichern wir die vom Server geholten Brote
   const [backendError, setBackendError] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:3001/api/v1/zutat/Brot")
+    fetch(`${baseUrl}/zutat/Brot`)
       .then(response => response.json())
       .then(data =>
         Promise.all(
@@ -77,7 +78,13 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
 
   return (
     <Stage>
-      <StageHeader>Wähle dein Brot</StageHeader>
+      <StageHeader>
+        Wähle dein Brot
+        <NavigationIcon onClick={handleNext}>
+          <ArrowForward />
+        </NavigationIcon>
+      </StageHeader>
+
       <p>
         Durch Anklicken der Produktkarte kannst Du das gewünschte Brot zur
         Konfiguration hinzufügen.
@@ -105,16 +112,15 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
                   }
                   onClick={() =>
                     handleBreadSelect(bread.zutatsname, bread.zutatBild)
-                  }>
+                  }
+                >
                   <ImageContainer>
                     <Image src={bread.zutatBild} alt={bread.zutatsname} />
                   </ImageContainer>
                   <Details>
-                    <Title>
-                      {bread.zutatsname}
-                    </Title>
-                  
-                    <Price>Preis: {bread.zutatspreis} €</Price> 
+                    <Title>{bread.zutatsname}</Title>
+
+                    <Price>Preis: {bread.zutatspreis} €</Price>
                   </Details>
                 </ContainerFront>
               </Container>
@@ -122,18 +128,11 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
           )
         )}
       </SelectionContainer>
-      {selectedBread && (
-        <div>
-          <p>Ausgewähltes Produkt: {selectedBread}</p>
-          <p>Bestätige die Auswahl mit dem Vorwärtspfeil</p>
-        </div>
-      )}
 
       <NavigationIcon onClick={handleNext}>
         <Button className="black-color white-orange" onClick={handleNext}>
           Weiter zum Belag
         </Button>
-        <ArrowForward />
       </NavigationIcon>
     </Stage>
   );
@@ -142,7 +141,12 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
 /*
 
 
-
+    /{selectedBread && (
+        <div>
+          <p>Ausgewähltes Produkt: {selectedBread}</p>
+          <p>Bestätige die Auswahl mit dem Vorwärtspfeil</p>
+        </div>
+      )}
 
 
 

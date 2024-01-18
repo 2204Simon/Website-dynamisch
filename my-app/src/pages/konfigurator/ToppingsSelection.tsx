@@ -26,7 +26,7 @@ import {
 } from "../produkte/styles/ShoppingCard.styles";
 import { Minus, Plus } from "phosphor-react";
 import { Button } from "../general/button.styles";
-
+import { baseUrl } from "../../globalVariables/global";
 
 interface ToppingsSelectionProps {
   onNextStage: (selectedProduct: string, selectedImage: string) => void;
@@ -62,7 +62,7 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
     }
   };
   useEffect(() => {
-    fetch("http://localhost:3001/api/v1/zutat/Topping")
+    fetch(`${baseUrl}/zutat/Topping`)
       .then(response => response.json())
       .then(data =>
         Promise.all(
@@ -126,7 +126,8 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
         </NavigationIcon>
       </StageHeader>
       <p>
-        Durch das Ausfüllen der Menge in der Produktkarte kannst Du den gewünschten Belag zur Konfiguration hinzufügen.
+        Durch das Ausfüllen der Menge in der Produktkarte kannst Du den
+        gewünschten Belag zur Konfiguration hinzufügen.
       </p>
       <SelectionContainer>
         {toppings.map(
@@ -137,7 +138,7 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
               <ContainerFront
                 flipped={false}
                 displayNone={false}
-                /*key={topping.zutatsId}
+                key={topping.zutatsId}
                 className={
                   selectedToppings.includes(topping.zutatsname)
                     ? "selected"
@@ -145,7 +146,7 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
                 }
                 onClick={() =>
                   handleToppingSelect(topping.zutatsname, topping.zutatBild)
-                }*/
+                }
               >
                 <ImageContainer>
                   <Image src={topping.zutatBild} alt={topping.zutatsname} />
@@ -154,8 +155,7 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
                   <Title> {topping.zutatsname} </Title>
                   <Price> Preis: {topping.zutatspreis} € </Price>
                   <Quantity>
-                  <>
-                      
+                    <>
                       <label htmlFor={`quantity-${topping.zutatsname}`}>
                         Menge:
                       </label>
@@ -181,35 +181,6 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
                         <Plus />
                       </PlusQuantity>
                     </>
-                    {selectedToppings.includes(topping.zutatsname) && (
-                      <>
-                      
-                        <label htmlFor={`quantity-${topping.zutatsname}`}>
-                          Menge:
-                        </label>
-                        <MinusQuantity
-                          onClick={() => handleMinus(topping.zutatsname)}
-                        >
-                          <Minus />
-                        </MinusQuantity>
-                        <QuantityInput
-                          type="text"
-                          id={`quantity-${topping.zutatsname}`}
-                          name={`quantity-${topping.zutatsname}`}
-                          pattern="[0-9]*"
-                          value={quantities[topping.zutatsname] || 0}
-                          onChange={(
-                            event: React.ChangeEvent<HTMLInputElement>
-                          ) => handleQuantityChange(event, topping.zutatsname)}
-                          inputMode="numeric"
-                        />
-                        <PlusQuantity
-                          onClick={() => handlePlus(topping.zutatsname)}
-                        >
-                          <Plus />
-                        </PlusQuantity>
-                      </>
-                    )}
                   </Quantity>
                 </Details>
               </ContainerFront>
@@ -224,11 +195,10 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
         </div>
       )}
 
-<NavigationIcon onClick={handleNext}>
+      <NavigationIcon onClick={handleNext}>
         <Button className="black-color white-orange" onClick={handleNext}>
           Weiter zum Getränk
         </Button>
-        <ArrowForward />
       </NavigationIcon>
     </Stage>
   );
