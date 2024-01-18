@@ -2,13 +2,13 @@ import styled from "styled-components";
 import { colors } from "../general/constants";
 
 export const AdminPageWrapper = styled.div`
-  padding: 20, 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   background-color: ${colors.primarycolor};
   width: 100vw;
+  height: 100vh;
 `;
 
 export const CRUDCardWrappper = styled.div`

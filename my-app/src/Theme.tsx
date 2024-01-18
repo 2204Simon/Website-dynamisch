@@ -38,6 +38,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     }
   }, [theme]);
   const toggleTheme = () => {
+    console.log("toggleTheme");
     setTheme(theme === "light" ? "dark" : "light");
   };
 
@@ -52,7 +53,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 export const ThemeButton = () => {
   const { toggleTheme, theme } = useContext(ThemeContext);
   return theme === "light" ? (
-    <SunDim onClick={toggleTheme} size={40}>
+    <SunDim onClick={toggleTheme} size={80} cursor={"pointer"}>
       Toggle Theme
     </SunDim>
   ) : (
