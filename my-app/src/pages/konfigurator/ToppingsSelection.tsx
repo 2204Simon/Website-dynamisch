@@ -14,6 +14,7 @@ import {
   Details,
   Title,
   Price,
+  ContainerFront,
 } from "./styles/Konfigurator.styles";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { BlackColorButton } from "../general/button";
@@ -24,6 +25,8 @@ import {
   PlusQuantity,
 } from "../produkte/styles/ShoppingCard.styles";
 import { Minus, Plus } from "phosphor-react";
+import { Button } from "../general/button.styles";
+
 
 interface ToppingsSelectionProps {
   onNextStage: (selectedProduct: string, selectedImage: string) => void;
@@ -122,14 +125,19 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
           <ArrowForward />
         </NavigationIcon>
       </StageHeader>
+      <p>
+        Durch das Ausfüllen der Menge in der Produktkarte kannst Du den gewünschten Belag zur Konfiguration hinzufügen.
+      </p>
       <SelectionContainer>
         {toppings.map(
           (
             topping // Anzeigen der Toppings aus dem State
           ) => (
             <Container flipped={false}>
-              <SelectionItem
-                key={topping.zutatsId}
+              <ContainerFront
+                flipped={false}
+                displayNone={false}
+                /*key={topping.zutatsId}
                 className={
                   selectedToppings.includes(topping.zutatsname)
                     ? "selected"
@@ -137,46 +145,74 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
                 }
                 onClick={() =>
                   handleToppingSelect(topping.zutatsname, topping.zutatBild)
-                }
+                }*/
               >
                 <ImageContainer>
                   <Image src={topping.zutatBild} alt={topping.zutatsname} />
                 </ImageContainer>
-
-                <Title> {topping.zutatsname} </Title>
-                <Price> Preis: {topping.zutatspreis} € </Price>
-                <p>Durch Anklicken zur Konfiguration hinzufügen</p>
-              </SelectionItem>
-              <Quantity>
-                {selectedToppings.includes(topping.zutatsname) && (
+                <Details>
+                  <Title> {topping.zutatsname} </Title>
+                  <Price> Preis: {topping.zutatspreis} € </Price>
+                  <Quantity>
                   <>
-                    <label htmlFor={`quantity-${topping.zutatsname}`}>
-                      Menge:
-                    </label>
-                    <MinusQuantity
-                      onClick={() => handleMinus(topping.zutatsname)}
-                    >
-                      <Minus />
-                    </MinusQuantity>
-                    <QuantityInput
-                      type="text"
-                      id={`quantity-${topping.zutatsname}`}
-                      name={`quantity-${topping.zutatsname}`}
-                      pattern="[0-9]*"
-                      value={quantities[topping.zutatsname] || 0}
-                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                        handleQuantityChange(event, topping.zutatsname)
-                      }
-                      inputMode="numeric"
-                    />
-                    <PlusQuantity
-                      onClick={() => handlePlus(topping.zutatsname)}
-                    >
-                      <Plus />
-                    </PlusQuantity>
-                  </>
-                )}
-              </Quantity>
+                      
+                      <label htmlFor={`quantity-${topping.zutatsname}`}>
+                        Menge:
+                      </label>
+                      <MinusQuantity
+                        onClick={() => handleMinus(topping.zutatsname)}
+                      >
+                        <Minus />
+                      </MinusQuantity>
+                      <QuantityInput
+                        type="text"
+                        id={`quantity-${topping.zutatsname}`}
+                        name={`quantity-${topping.zutatsname}`}
+                        pattern="[0-9]*"
+                        value={quantities[topping.zutatsname] || 0}
+                        onChange={(
+                          event: React.ChangeEvent<HTMLInputElement>
+                        ) => handleQuantityChange(event, topping.zutatsname)}
+                        inputMode="numeric"
+                      />
+                      <PlusQuantity
+                        onClick={() => handlePlus(topping.zutatsname)}
+                      >
+                        <Plus />
+                      </PlusQuantity>
+                    </>
+                    {selectedToppings.includes(topping.zutatsname) && (
+                      <>
+                      
+                        <label htmlFor={`quantity-${topping.zutatsname}`}>
+                          Menge:
+                        </label>
+                        <MinusQuantity
+                          onClick={() => handleMinus(topping.zutatsname)}
+                        >
+                          <Minus />
+                        </MinusQuantity>
+                        <QuantityInput
+                          type="text"
+                          id={`quantity-${topping.zutatsname}`}
+                          name={`quantity-${topping.zutatsname}`}
+                          pattern="[0-9]*"
+                          value={quantities[topping.zutatsname] || 0}
+                          onChange={(
+                            event: React.ChangeEvent<HTMLInputElement>
+                          ) => handleQuantityChange(event, topping.zutatsname)}
+                          inputMode="numeric"
+                        />
+                        <PlusQuantity
+                          onClick={() => handlePlus(topping.zutatsname)}
+                        >
+                          <Plus />
+                        </PlusQuantity>
+                      </>
+                    )}
+                  </Quantity>
+                </Details>
+              </ContainerFront>
             </Container>
           )
         )}
@@ -187,6 +223,13 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
           <p>Bestätige die Auswahl mit dem Vorwärtspfeil</p>
         </div>
       )}
+
+<NavigationIcon onClick={handleNext}>
+        <Button className="black-color white-orange" onClick={handleNext}>
+          Weiter zum Getränk
+        </Button>
+        <ArrowForward />
+      </NavigationIcon>
     </Stage>
   );
 };

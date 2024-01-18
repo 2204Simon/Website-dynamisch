@@ -25,10 +25,13 @@ export const Stage = styled.div`
   gap: 10px;
 `;
 export const SelectionContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
+  background-color: ${colors.white};
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: strech;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  padding: 10px;
 `;
 
 export const StageHeader = styled.h2`
@@ -54,18 +57,18 @@ export const SelectionList = styled.ul`
   justify-content: center;
 `;
 
-export const SelectionItem = styled.li`
-  cursor: pointer;
-  margin: 5px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+export const SelectionItem = styled.div`
 
+cursor: pointer;
+margin: 5px;
+padding: 10px;
+border: 1px solid #ddd;
+border-radius: 4px;
+transition: background-color 0.3s;
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
   &:hover {
     background-color: #f4f4f4;
   }
@@ -164,6 +167,16 @@ export const ContainerFront = styled.div<{
   backface-visibility: hidden;
   transform: rotateY(0deg);
   display: ${props => (props.displayNone ? "none" : "block")};
+
+  &:hover {
+    background-color: #f4f4f4;
+  }
+
+  &.selected {
+    background-color: #aa7d04;
+    color: #fff;
+  }
+
 `;
 
 export const ContainerBack = styled.div<{
@@ -204,6 +217,7 @@ export const Details = styled.div`
 `;
 
 export const Title = styled.h2`
+  padding-left 0px;
   margin: 0;
   font-size: 1.25rem;
   text-align: center;

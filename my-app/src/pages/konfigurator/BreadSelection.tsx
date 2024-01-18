@@ -27,7 +27,7 @@ import {
 } from "./styles/Konfigurator.styles";
 import { ArrowForward } from "@mui/icons-material";
 import { CustomToast } from "../general/toast.style";
-import { BlackColorButton } from "../general/button";
+import { Button } from "../general/button.styles";
 
 interface BreadSelectionProps {
   onNextStage: (selectedProduct: string, selectedImage: string) => void;
@@ -77,12 +77,11 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
 
   return (
     <Stage>
-      <StageHeader>
-        Wähle dein Brot
-        <NavigationIcon onClick={handleNext}>
-          <ArrowForward />
-        </NavigationIcon>
-      </StageHeader>
+      <StageHeader>Wähle dein Brot</StageHeader>
+      <p>
+        Durch Anklicken der Produktkarte kannst Du das gewünschte Brot zur
+        Konfiguration hinzufügen.
+      </p>
       {backendError && (
         <p>
           Die Brote konnten nicht geladen werden. Bitte wenden Sie sich an den
@@ -97,26 +96,27 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
             console.log(bread),
             (
               <Container flipped={false}>
-                <SelectionItem
+                <ContainerFront
+                  flipped={false}
+                  displayNone={false}
                   key={bread.zutatsId}
                   className={
                     selectedBread === bread.zutatsname ? "selected" : ""
                   }
                   onClick={() =>
                     handleBreadSelect(bread.zutatsname, bread.zutatBild)
-                  }
-                >
+                  }>
                   <ImageContainer>
                     <Image src={bread.zutatBild} alt={bread.zutatsname} />
                   </ImageContainer>
-                  <Title style={{ paddingLeft: "0px" }}>
-                    {" "}
-                    {bread.zutatsname}
-                  </Title>
-                  <br />
-                  <Price>Preis: {bread.zutatspreis} €</Price> <br />
-                  <p>Durch Anklicken zur Konfiguration hinzufügen</p>
-                </SelectionItem>
+                  <Details>
+                    <Title>
+                      {bread.zutatsname}
+                    </Title>
+                  
+                    <Price>Preis: {bread.zutatspreis} €</Price> 
+                  </Details>
+                </ContainerFront>
               </Container>
             )
           )
@@ -128,11 +128,25 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
           <p>Bestätige die Auswahl mit dem Vorwärtspfeil</p>
         </div>
       )}
+
+      <NavigationIcon onClick={handleNext}>
+        <Button className="black-color white-orange" onClick={handleNext}>
+          Weiter zum Belag
+        </Button>
+        <ArrowForward />
+      </NavigationIcon>
     </Stage>
   );
 };
 
-/*return (
+/*
+
+
+
+
+
+
+return (
     <Stage>
       <StageHeader>
         Wähle dein Brot

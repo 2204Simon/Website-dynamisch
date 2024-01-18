@@ -9,12 +9,16 @@ import {
   SelectionItem,
   NavigationIcon,
   Container,
+  ContainerFront,
+  ImageContainer,
+  Image,
   Title,
   Price,
   Details,
 } from "./styles/Konfigurator.styles";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
-import { BlackColorButton } from "../general/button";
+import { Button } from "../general/button.styles";
+
 
 interface DrinkSelectionProps {
   onPrevStage: () => void;
@@ -83,6 +87,10 @@ const DrinkSelection: React.FC<DrinkSelectionProps> = ({
           <ArrowForward />
         </NavigationIcon>
       </StageHeader>
+      <p>
+        Durch Anklicken der Produktkarte kannst Du das gewünschte Getränk zur
+        Konfiguration hinzufügen.
+      </p>
 
       <SelectionContainer>
         {drinks.map(
@@ -90,22 +98,27 @@ const DrinkSelection: React.FC<DrinkSelectionProps> = ({
             drink // Anzeigen der Getränke aus dem State
           ) => (
             <Container flipped={false}>
-              <SelectionItem
+              <ContainerFront
+                flipped={false}
+                displayNone={false}
                 key={drink.zutatsId}
                 className={selectedDrink === drink.zutatsname ? "selected" : ""}
                 onClick={() =>
                   handleDrinkSelect(drink.zutatsname, drink.zutatBild)
                 }
               >
-                <ProductImage src={drink.zutatBild} alt={drink.zutatsname} />
-
-                <Title>{drink.zutatsname}</Title>
-                <Price>{drink.zutatspreis} €</Price>
-                <p>Durch Anklicken zur Konfiguration hinzufügen</p>
-              </SelectionItem>
+                <ImageContainer>
+                  <Image src={drink.zutatBild} alt={drink.zutatsname} />
+                </ImageContainer>
+                <Details>
+                  <Title>{drink.zutatsname}</Title>
+                  <Price>{drink.zutatspreis} €</Price>
+                </Details>
+              </ContainerFront>
             </Container>
           )
         )}
+      </SelectionContainer>
 
         {selectedDrink && (
           <div>
@@ -113,7 +126,12 @@ const DrinkSelection: React.FC<DrinkSelectionProps> = ({
             <p>Bestätige die Auswahl mit dem Vorwärtspfeil</p>
           </div>
         )}
-      </SelectionContainer>
+      <NavigationIcon onClick={handleNext}>
+        <Button className="black-color white-orange" onClick={handleNext}>
+          Weiter zur Zusammenfassung
+        </Button>
+        <ArrowForward />
+      </NavigationIcon>
     </Stage>
   );
 };
