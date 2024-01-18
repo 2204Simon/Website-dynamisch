@@ -313,9 +313,11 @@ export default function AdressInformation(): JSX.Element {
             </Paragraph>
             <Paragraph>
               <strong>Zahlungsart: </strong>
-              if (adressInformation?.paypalEmail) {
+              {adressInformation.paypalEmail ? (
                 <FaPaypal size={30} />
-              } else {<Bank size={30} />}
+              ) : (
+                <Bank size={30} />
+              )}
             </Paragraph>
 
             <LogoutButton
