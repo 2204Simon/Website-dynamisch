@@ -50,18 +50,6 @@ export default function SignUp() {
   const navigate = useNavigate();
   //später für season token
   const [cookies, setCookie] = useCookies([KUNDEN_ID, "ZahlungsId"]);
-  const [selectedPayments, setSelectedPayments] = useState<string[]>([]);
-  const handlePaymentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const paymentOption = event.target.value;
-
-    if (selectedPayments.includes(paymentOption)) {
-      setSelectedPayments(
-        selectedPayments.filter(option => option !== paymentOption)
-      );
-    } else {
-      setSelectedPayments([...selectedPayments, paymentOption]);
-    }
-  };
 
   function PasswordMismatch() {
     return CustomToast.error("Die Passwörter sind nicht identisch");
@@ -99,20 +87,30 @@ export default function SignUp() {
         ort: formData.get("city") as string,
         hausnummer: formData.get("hausnummer") as string,
         hausnummerzusatz: formData.get("hausnummerzusatz") as string,
-        zahlungsmethode: formData.get("payment") as string,
         bankName: formData.get("bankName") as string,
         bic: formData.get("bic") as string,
         iban: formData.get("iban") as string,
+        paypalEmail: formData.get("paypalEmail") as string,
       };
+
       const adressData = await sendPostRequest("adresse", adressDataFormData);
-      if (selectedPayments.includes("Paypal")) {
+      if (
+        !adressData.paypalEmail &&
+        (!adressData.bankName || !adressData.bic || !adressData.iban)
+      ) {
+        CustomToast.error(
+          "Es muss mindestens PayPal oder Lastschrift ausgewählt sein"
+        );
+        return;
+      }
+      if (adressData.paypalEmail) {
         const payPalData = await sendPostRequest("paypal", {
           kundenId: kundenData.kundenId,
           email,
         });
         setCookie("ZahlungsId", payPalData.zahlungsId, { path: "/" });
       }
-      if (selectedPayments.includes("Lastschrift")) {
+      if (adressData.bankName && adressData.bic && adressData.iban) {
         const lastschriftData = await sendPostRequest("lastschrift", {
           kundenId: kundenData.kundenId,
           bankName: formData.get("bankName") as string,
@@ -378,112 +376,81 @@ export default function SignUp() {
                 <Title>Zahlungsmöglichkeiten: </Title>
                 <FormControl component="fieldset">
                   <FormGroup>
+                    <Title>
+                      <FaPaypal size={30} />
+                    </Title>
+
                     <Grid item xs={12}>
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={selectedPayments.includes("Paypal")}
-                            onChange={handlePaymentChange}
-                            value="Paypal"
-                            style={{ color: colors.companycolor }}
-                          />
-                        }
-                        label={<FaPaypal size={15} />}
+                      <TextField
+                        fullWidth
+                        id="paypalEmail"
+                        label="PayPal Email"
+                        name="paypalEmail"
+                        inputProps={{
+                          maxLength: 100,
+                        }}
+                        InputLabelProps={{
+                          sx: {
+                            backgroundColor: "white",
+                            color: colors.companycolor,
+                          },
+                        }}
                       />
                     </Grid>
-                    {selectedPayments.includes("Paypal") && (
-                      <>
-                        <Grid item xs={12}>
-                          <TextField
-                            fullWidth
-                            required
-                            id="paypalEmail"
-                            label="PayPal Email"
-                            name="paypalEmail"
-                            inputProps={{
-                              maxLength: 100,
-                            }}
-                            InputLabelProps={{
-                              sx: {
-                                backgroundColor: "white",
-                                color: colors.companycolor,
-                              },
-                            }}
-                          />
-                        </Grid>
-                      </>
-                    )}
+                    <Title>
+                      <Bank size={30} />
+                    </Title>
                     <Grid item xs={12}>
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={selectedPayments.includes("Lastschrift")}
-                            onChange={handlePaymentChange}
-                            value="Lastschrift"
-                            style={{ color: colors.companycolor }}
-                          />
-                        }
-                        label={<Bank size={20} />}
+                      <TextField
+                        fullWidth
+                        id="bankName"
+                        label="Bankname"
+                        name="bankName"
+                        inputProps={{
+                          maxLength: 50,
+                        }}
+                        InputLabelProps={{
+                          sx: {
+                            backgroundColor: "white",
+                            color: colors.companycolor,
+                          },
+                        }}
                       />
                     </Grid>
-                    {selectedPayments.includes("Lastschrift") && (
-                      <>
-                        <Grid item xs={12}>
-                          <TextField
-                            fullWidth
-                            required
-                            id="bankName"
-                            label="Bankname"
-                            name="bankName"
-                            inputProps={{
-                              maxLength: 50,
-                            }}
-                            InputLabelProps={{
-                              sx: {
-                                backgroundColor: "white",
-                                color: colors.companycolor,
-                              },
-                            }}
-                          />
-                        </Grid>
-                        <Grid item xs={12}>
-                          <TextField
-                            fullWidth
-                            required
-                            id="bic"
-                            label="BIC"
-                            name="bic"
-                            inputProps={{
-                              maxLength: 50,
-                            }}
-                            InputLabelProps={{
-                              sx: {
-                                backgroundColor: "white",
-                                color: colors.companycolor,
-                              },
-                            }}
-                          />
-                        </Grid>
-                        <Grid item xs={12}>
-                          <TextField
-                            fullWidth
-                            required
-                            id="iban"
-                            label="IBAN"
-                            name="iban"
-                            inputProps={{
-                              maxLength: 50,
-                            }}
-                            InputLabelProps={{
-                              sx: {
-                                backgroundColor: "white",
-                                color: colors.companycolor,
-                              },
-                            }}
-                          />
-                        </Grid>
-                      </>
-                    )}
+                    <Grid item xs={12}>
+                      <TextField
+                        fullWidth
+                        id="bic"
+                        label="BIC"
+                        name="bic"
+                        inputProps={{
+                          maxLength: 50,
+                        }}
+                        InputLabelProps={{
+                          sx: {
+                            backgroundColor: "white",
+                            color: colors.companycolor,
+                          },
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        fullWidth
+                        id="iban"
+                        label="IBAN"
+                        name="iban"
+                        inputProps={{
+                          maxLength: 50,
+                        }}
+                        InputLabelProps={{
+                          sx: {
+                            backgroundColor: "white",
+                            color: colors.companycolor,
+                          },
+                        }}
+                      />
+                    </Grid>
                   </FormGroup>
                 </FormControl>
               </Grid>

@@ -5,9 +5,13 @@ const initialState: AdressDataState = {
   AdressData: {
     postleitzahl: "",
     hausnummer: "",
+    hausnummerzusatz: "",
     ort: "",
     strasse: "",
-    zahlungsmethode: "",
+    paypalEmail: "",
+    bankName: "",
+    bic: "",
+    iban: "",
   },
 };
 

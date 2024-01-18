@@ -26,8 +26,8 @@ export interface AdressData {
   strasse: string;
   ort: string;
   hausnummer: string;
-  zahlungsmethode: string;
   hausnummerzusatz?: string;
+  paypalEmail?: string;
   bankName?: string;
   bic?: string;
   iban?: string;
