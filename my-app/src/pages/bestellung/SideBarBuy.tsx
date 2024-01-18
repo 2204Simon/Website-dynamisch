@@ -71,9 +71,8 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
     try {
       const bodyForBestellung = {
         kundenId: cookies.kundenId,
-        zahlungsId: cookies.ZahlungsId,
-        // das datum nur wenn die bestellung angekommen ist
-        // bestellDatum: selectedDate,
+        //Todo checken ob paypal ausgewählt ist
+        isPaypal: true,
         gewünschtesLieferdatum: selectedDate,
       };
       console.log(bodyForBestellung);

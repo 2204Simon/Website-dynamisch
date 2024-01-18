@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { AdressDataState, AdressData } from "../../redux/types";
+import { AdressDataState, AdressData, PaymentData } from "../../redux/types";
 import {
   Card,
   Container,
@@ -23,6 +23,7 @@ import { getRequest } from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
 import { CustomToast } from "../general/toast.style";
+import { addPayment } from "../../redux/paymentReaducer";
 
 export default function AdressInformation(): JSX.Element {
   const dispatch = useDispatch();
@@ -37,9 +38,9 @@ export default function AdressInformation(): JSX.Element {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("cookies", cookies);
-
-        const responseAdress = await getRequest(`/adresse/${cookies.kundenId}`);
+        const responseAdress = await getRequest(`adresse/${cookies.kundenId}`);
+        const responsePayment = await getRequest(`zahlung/${cookies.kundenId}`);
+        dispatch(addPayment(responsePayment));
         dispatch(addNewAdress(responseAdress));
       } catch (error) {
         CustomToast.error("Fehler beim Laden der Daten");
@@ -79,18 +80,20 @@ export default function AdressInformation(): JSX.Element {
       ort: data.get("city") as string,
       hausnummer: data.get("hausnummer") as string,
       hausnummerzusatz: data.get("hausnummerzusatz") as string,
+    };
+    const paymentData: PaymentData = {
+      paypalEmail: data.get("paypalEmail") as string,
       bankName: data.get("bankName") as string,
       bic: data.get("bic") as string,
       iban: data.get("iban") as string,
-      paypalEmail: data.get("paypalEmail") as string,
     };
-    if (preparedData.paypalEmail && !preparedData.paypalEmail.includes("@")) {
+    if (paymentData.paypalEmail && !paymentData.paypalEmail.includes("@")) {
       CustomToast.error("Bitte gebe eine gültige E-Mail-Adresse ein");
       return;
     }
     if (
-      !preparedData.paypalEmail &&
-      (!preparedData.bankName || !preparedData.bic || !preparedData.iban)
+      !paymentData.paypalEmail &&
+      (!paymentData.bankName || !paymentData.bic || !paymentData.iban)
     ) {
       CustomToast.error(
         "Es muss mindestens PayPal oder Lastschrift ausgewählt sein"
@@ -311,14 +314,14 @@ export default function AdressInformation(): JSX.Element {
               <strong>Hausnummerzusatz: </strong>
               {adressInformation?.hausnummerzusatz}
             </Paragraph>
-            <Paragraph>
+            {/* <Paragraph>
               <strong>Zahlungsart: </strong>
               {adressInformation.paypalEmail ? (
                 <FaPaypal size={30} />
               ) : (
                 <Bank size={30} />
               )}
-            </Paragraph>
+            </Paragraph> */}
 
             <LogoutButton
               style={{ display: "center" }}

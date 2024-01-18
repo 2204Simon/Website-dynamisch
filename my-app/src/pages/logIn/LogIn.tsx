@@ -51,7 +51,7 @@ export default function SignIn() {
 
     try {
       // Sende Anmeldeinformationen an das Backend
-      const response = await fetch(`${baseUrl}/kunde/login`, {
+      const response = await fetch(`${baseUrl}kunde/login`, {
         // Ändern Sie die URL entsprechend Ihrer neuen Route
         method: "POST",
         headers: {

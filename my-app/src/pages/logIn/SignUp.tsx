@@ -32,7 +32,6 @@ import { addNewAdress } from "../../redux/adressDataReducer";
 import { sendPostRequest } from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
-import { send } from "process";
 
 function Copyright(props: any) {
   return (
@@ -49,7 +48,7 @@ export default function SignUp() {
   const { changeLoggedIn } = useLoggedIn();
   const navigate = useNavigate();
   //später für season token
-  const [cookies, setCookie] = useCookies([KUNDEN_ID, "ZahlungsId"]);
+  const [cookies, setCookie] = useCookies([KUNDEN_ID]);
 
   function PasswordMismatch() {
     return CustomToast.error("Die Passwörter sind nicht identisch");
@@ -63,16 +62,35 @@ export default function SignUp() {
       const email = formData.get("email") as string;
       const password = formData.get("password") as string;
       const confirmPassword = formData.get("confirmPassword") as string;
+      const firstName = formData.get("firstName") as string;
+      const lastName = formData.get("lastName") as string;
+      const telefonnummer = formData.get("telefonnummer") as string;
+      const plz = formData.get("plz") as string;
+      const street = formData.get("street") as string;
+      const city = formData.get("city") as string;
+      const hausnummer = formData.get("hausnummer") as string;
+      const hausnummerzusatz = formData.get("hausnummerzusatz") as string;
+      const bankName = formData.get("bankName") as string;
+      const bic = formData.get("bic") as string;
+      const iban = formData.get("iban") as string;
+      const paypalEmail = formData.get("paypalEmail") as string;
+
       if (password !== confirmPassword) {
         PasswordMismatch();
         return;
       }
+      if (!paypalEmail || (!bankName && !bic && !iban)) {
+        CustomToast.error(
+          "Es muss mindestens PayPal oder Lastschrift ausgewählt sein"
+        );
+        return;
+      }
       const preparedData: LogInData = {
         email: email,
-        passwort: formData.get("password") as string,
-        vorname: formData.get("firstName") as string,
-        nachname: formData.get("lastName") as string,
-        telefonnummer: formData.get("telefonnummer") as string,
+        passwort: password,
+        vorname: firstName,
+        nachname: lastName,
+        telefonnummer: telefonnummer,
       };
       const kundenData = await sendPostRequest("kunde", preparedData);
       console.log(kundenData);
@@ -82,43 +100,22 @@ export default function SignUp() {
       }
       const adressDataFormData: AdressData = {
         kundenId: kundenData.kundenId,
-        postleitzahl: formData.get("plz") as string,
-        strasse: formData.get("street") as string,
-        ort: formData.get("city") as string,
-        hausnummer: formData.get("hausnummer") as string,
-        hausnummerzusatz: formData.get("hausnummerzusatz") as string,
-        bankName: formData.get("bankName") as string,
-        bic: formData.get("bic") as string,
-        iban: formData.get("iban") as string,
-        paypalEmail: formData.get("paypalEmail") as string,
+        postleitzahl: plz,
+        strasse: street,
+        ort: city,
+        hausnummer: hausnummer,
+        hausnummerzusatz: hausnummerzusatz,
       };
-
+      const paymentFormData = {
+        kundenId: kundenData.kundenId,
+        bankName: bankName,
+        bic: bic,
+        iban: iban,
+        paypalEmail: paypalEmail,
+      };
       const adressData = await sendPostRequest("adresse", adressDataFormData);
-      if (
-        !adressData.paypalEmail &&
-        (!adressData.bankName || !adressData.bic || !adressData.iban)
-      ) {
-        CustomToast.error(
-          "Es muss mindestens PayPal oder Lastschrift ausgewählt sein"
-        );
-        return;
-      }
-      if (adressData.paypalEmail) {
-        const payPalData = await sendPostRequest("paypal", {
-          kundenId: kundenData.kundenId,
-          email,
-        });
-        setCookie("ZahlungsId", payPalData.zahlungsId, { path: "/" });
-      }
-      if (adressData.bankName && adressData.bic && adressData.iban) {
-        const lastschriftData = await sendPostRequest("lastschrift", {
-          kundenId: kundenData.kundenId,
-          bankName: formData.get("bankName") as string,
-          bic: formData.get("bic") as string,
-          iban: formData.get("iban") as string,
-        });
-        setCookie("ZahlungsId", lastschriftData.zahlungsId, { path: "/" });
-      }
+
+      const paymentData = await sendPostRequest("zahlung", paymentFormData);
       // const response eventuel season token
       setCookie(KUNDEN_ID, kundenData.kundenId, { path: "/" });
       // console.log(cookies.kundenId);
