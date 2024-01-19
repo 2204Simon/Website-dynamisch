@@ -12,7 +12,7 @@ import { useCookies } from "react-cookie";
 import { CustomToast } from "../general/toast.style";
 import { BestellungsInformation } from "../../redux/types";
 import {
-  BestellungWrapper,
+  ScrollableYContainer,
   MetaDataDiv,
   MetaDataItem,
   SingleBestellungWrapper,
@@ -58,7 +58,7 @@ export default function BestellungsData(): JSX.Element {
     <Container>
       <Card>
         <Title>Bestellungen</Title>
-        <BestellungWrapper>
+        <ScrollableYContainer>
           <CRUDCardsGridWrapper>
             {bestellungen.map(bestellung => {
               let deliverd = true;
@@ -93,7 +93,7 @@ export default function BestellungsData(): JSX.Element {
               );
             })}
           </CRUDCardsGridWrapper>
-        </BestellungWrapper>
+        </ScrollableYContainer>
       </Card>
     </Container>
   );

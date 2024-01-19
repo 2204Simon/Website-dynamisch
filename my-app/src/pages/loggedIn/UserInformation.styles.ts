@@ -30,6 +30,7 @@ export const Title = styled.h1`
 
 export const Paragraph = styled.p`
   color: ${colors.black};
+  text-align: center;
   font-size: 16px;
   margin-bottom: 8px;
 `;

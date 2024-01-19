@@ -29,10 +29,10 @@ export const MetaDataItem = styled.p`
   margin: 0;
 `;
 
-export const BestellungWrapper = styled.div`
+export const ScrollableYContainer = styled.div`
   overflow-y: auto;
   /* overflow-x: hidden; */
   /* align-self: flex-start; */
   width: 100%;
-  max-height: 100vh;
+  max-height: 50vh;
 `;

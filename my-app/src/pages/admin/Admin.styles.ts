@@ -5,16 +5,22 @@ export const AdminPageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 50px;
   justify-content: flex-start;
   background-color: ${colors.primarycolor};
   width: 100vw;
-  height: 100vh;
+  height: fit-content;
+  padding-bottom: 50px;
 `;
 export const CRUDCardsGridWrapper = styled.div`
   display: grid;
-  align-items: start;
+  align-items: center;
+  justify-items: center;
+  justify-content: center; // Elemente von rechts nach links ausrichten
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  grid-gap: 30px; // Abstand zwischen den Elementen
   row-gap: 20px;
+  width: 100%;
 `;
 export const CRUDCardWrappper = styled.div`
   display: flex;
@@ -37,6 +43,14 @@ export const CRUDCardWrappper = styled.div`
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
     background-color: ${colors.secundarycolor};
   }
+`;
+
+export const CRUDCardText = styled.p`
+  color: ${colors.white};
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0;
 `;
 
 export const CRUDCardPText = styled.p`

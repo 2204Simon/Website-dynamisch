@@ -118,3 +118,13 @@ export type BestellungsInformation = {
   adressenInformation: AddressenInformation;
   produktInformationen: ProduktInformationen[];
 };
+
+export type ZutatApiType = {
+  zutatsId: string;
+  zutatsname: string;
+  zutatseigenschaft: string;
+  zutatspreis: number;
+  zutatseinheit: string;
+  zutatBild: string;
+  zutatensparte: string;
+};
