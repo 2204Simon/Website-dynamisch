@@ -108,8 +108,10 @@ export default function AdressInformation(): JSX.Element {
       return;
     }
     if (
-      !paymentData.paypalEmail &&
-      (!paymentData.bankname || !paymentData.bic || !paymentData.iban)
+      !(
+        paymentData.paypalEmail ||
+        (paymentData.bankname && paymentData.bic && paymentData.iban)
+      )
     ) {
       CustomToast.error(
         "Es muss mindestens PayPal oder Lastschrift ausgewählt sein"
@@ -229,7 +231,6 @@ export default function AdressInformation(): JSX.Element {
                     <Grid item xs={12}>
                       <TextField
                         fullWidth
-                        required
                         id="paypalEmail"
                         label="PayPal Email"
                         name="paypalEmail"
@@ -251,7 +252,6 @@ export default function AdressInformation(): JSX.Element {
                     <Grid item xs={12}>
                       <TextField
                         fullWidth
-                        required
                         id="bankName"
                         label="Bankname"
                         name="bankName"
@@ -270,7 +270,6 @@ export default function AdressInformation(): JSX.Element {
                     <Grid item xs={12}>
                       <TextField
                         fullWidth
-                        required
                         id="bic"
                         label="BIC"
                         name="bic"
@@ -289,7 +288,6 @@ export default function AdressInformation(): JSX.Element {
                     <Grid item xs={12}>
                       <TextField
                         fullWidth
-                        required
                         id="iban"
                         label="IBAN"
                         name="iban"
@@ -310,7 +308,7 @@ export default function AdressInformation(): JSX.Element {
             </Grid>
 
             <Button style={{ color: colors.companycolor }} type="submit">
-              Edit
+              Speichern
             </Button>
 
             <Button
