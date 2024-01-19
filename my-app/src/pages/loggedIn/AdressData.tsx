@@ -308,7 +308,7 @@ export default function AdressInformation(): JSX.Element {
             </Grid>
 
             <Button style={{ color: colors.companycolor }} type="submit">
-              Edit
+              Speichern
             </Button>
 
             <Button
