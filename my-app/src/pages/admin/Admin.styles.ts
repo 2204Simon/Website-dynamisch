@@ -10,13 +10,17 @@ export const AdminPageWrapper = styled.div`
   width: 100vw;
   height: 100vh;
 `;
-
+export const CRUDCardsGridWrapper = styled.div`
+  display: grid;
+  align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  row-gap: 20px;
+`;
 export const CRUDCardWrappper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   background-color: ${colors.primarycolor};
   flex-grow: 1;
   width: 200px;
