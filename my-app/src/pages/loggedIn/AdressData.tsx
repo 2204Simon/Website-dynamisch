@@ -108,8 +108,10 @@ export default function AdressInformation(): JSX.Element {
       return;
     }
     if (
-      !paymentData.paypalEmail &&
-      (!paymentData.bankname || !paymentData.bic || !paymentData.iban)
+      !(
+        paymentData.paypalEmail ||
+        (paymentData.bankname && paymentData.bic && paymentData.iban)
+      )
     ) {
       CustomToast.error(
         "Es muss mindestens PayPal oder Lastschrift ausgewählt sein"
