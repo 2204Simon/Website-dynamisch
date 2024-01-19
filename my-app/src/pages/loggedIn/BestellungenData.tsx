@@ -53,7 +53,7 @@ export default function BestellungsData(): JSX.Element {
   ) : (
     <Container>
       <Card>
-        <h1>Bestellungen</h1>
+        <Title>Bestellungen</Title>
         <BestellungWrapper>
           {bestellungen.map(bestellung => {
             let deliverd = true;

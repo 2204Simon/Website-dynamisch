@@ -14,7 +14,7 @@ export const Card = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: #fff;
+  background-color: ${colors.white};
   padding: 32px;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -22,12 +22,14 @@ export const Card = styled.div`
   width: 80%;
 `;
 export const Title = styled.h1`
+  color: ${colors.black};
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 16px;
 `;
 
 export const Paragraph = styled.p`
+  color: ${colors.black};
   font-size: 16px;
   margin-bottom: 8px;
 `;

@@ -36,5 +36,6 @@ export const CRUDCardWrappper = styled.div`
 `;
 
 export const CRUDCardPText = styled.p`
+  color: ${colors.black};
   text-align: center;
 `;
