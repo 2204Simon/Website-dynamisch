@@ -89,6 +89,7 @@ export default function AdressInformation(): JSX.Element {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const preparedData: AdressData = {
+      kundenId: cookies.kundenId,
       postleitzahl: data.get("plz") as string,
       strasse: data.get("street") as string,
       ort: data.get("city") as string,
@@ -96,6 +97,7 @@ export default function AdressInformation(): JSX.Element {
       hausnummerzusatz: data.get("hausnummerzusatz") as string,
     };
     const paymentData: PaymentData = {
+      kundenId: cookies.kundenId,
       paypalEmail: data.get("paypalEmail") as string,
       bankname: data.get("bankName") as string,
       bic: data.get("bic") as string,
