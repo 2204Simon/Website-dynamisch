@@ -1,4 +1,4 @@
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import Logo from "../../img/Logo.webp";
 import {
   LogoImage,
@@ -71,6 +71,50 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
     setShowPopup(false);
     setShowThankyouPopup(false);
   };
+  // Initialisieren Sie selectedPayments basierend auf den vorhandenen Zahlungsinformationen
+  const [selectedPayments, setSelectedPayments] = useState(() => {
+    if (
+      paymentInformation.paypalEmail &&
+      paymentInformation.bankname &&
+      paymentInformation.bic &&
+      paymentInformation.iban
+    ) {
+      return ["Paypal"];
+    } else if (paymentInformation.paypalEmail && !paymentInformation.bankname) {
+      return ["Paypal"];
+    } else if (
+      paymentInformation.bankname &&
+      paymentInformation.bic &&
+      paymentInformation.iban &&
+      !paymentInformation.paypalEmail
+    ) {
+      return ["Lastschrift"];
+    } else {
+      return [];
+    }
+  });
+  useEffect(() => {
+    // Überprüfen Sie die Zahlungsinformationen und aktualisieren Sie die Anzeige der Schaltflächen
+    if (
+      paymentInformation.paypalEmail &&
+      paymentInformation.bankname &&
+      paymentInformation.bic &&
+      paymentInformation.iban
+    ) {
+      setSelectedPayments(["Paypal"]);
+    } else if (paymentInformation.paypalEmail && !paymentInformation.bankname) {
+      setSelectedPayments(["Paypal"]);
+    } else if (
+      paymentInformation.bankname &&
+      paymentInformation.bic &&
+      paymentInformation.iban &&
+      !paymentInformation.paypalEmail
+    ) {
+      setSelectedPayments(["Lastschrift"]);
+    } else {
+      setSelectedPayments([]);
+    }
+  }, [paymentInformation]); // Abhängigkeiten der useEffect Hook
 
   const handleThankyouPopup = async () => {
     if (!agbChecked && !selectedPayments.includes("Paypal")) {
@@ -92,7 +136,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
       CustomToast.error("Fehler beim Bestellen");
     }
   };
-  const [selectedPayments, setSelectedPayments] = useState<string[]>([]);
+
   const handleAgbCheckboxChange = () => {
     setAgbChecked(!agbChecked);
   };
@@ -201,20 +245,37 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                 <Adressdaten />
                 <div>Tag der Lieferung</div>
                 <CalendarComponent />
-                <div>Zahlungsart </div>
+                <p>
+                  <input
+                    type="checkbox"
+                    onChange={handleAgbCheckboxChange}
+                    checked={agbChecked}
+                  />
+                  Ich akzeptiere die{" "}
+                  <a
+                    href="https://delivery-breakfast.projekt.dhbw-heidenheim.de/AGBs_delivery-breakfast.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download
+                  >
+                    AGBs
+                  </a>{" "}
+                </p>
+
                 {
-                  // Wenn sowohl PayPal-E-Mail als auch Bankinformationen vorhanden sind
+                  // Wenn PayPal-E-Mail und Bankinformationen vorhanden sind
                   paymentInformation.paypalEmail &&
                   paymentInformation.bankname &&
                   paymentInformation.bic &&
                   paymentInformation.iban ? (
-                    //Radio Button für PayPal oder Bankinformationen
+                    // Radio Button für PayPal oder Bankinformationen
                     <div>
                       <input
                         type="radio"
                         id="paypal"
                         name="payment"
                         value="paypal"
+                        checked={selectedPayments.includes("Paypal")}
                         style={{ transform: "scale(1.5)" }}
                         onChange={() => setSelectedPayments(["Paypal"])}
                       />
@@ -233,52 +294,23 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                         <Bank size={30} />
                       </label>
                     </div>
-                  ) : // Wenn nur PayPal-E-Mail vorhanden ist
-                  paymentInformation.paypalEmail ? (
-                    <FaPaypal size={30} />
-                  ) : // Wenn nur Bankinformationen vorhanden sind
-                  paymentInformation.bankname &&
-                    paymentInformation.bic &&
-                    paymentInformation.iban ? (
-                    <Bank size={30} />
                   ) : null
                 }
-                <p>
-                  <input
-                    type="checkbox"
-                    onChange={handleAgbCheckboxChange}
-                    checked={agbChecked}
-                  />
-                  Ich akzeptiere die{" "}
-                  <a
-                    href="https://delivery-breakfast.projekt.dhbw-heidenheim.de/AGBs_delivery-breakfast.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    download
-                  >
-                    AGBs
-                  </a>{" "}
-                </p>
-                <Button
-                  className="black-color white-orange"
-                  onClick={() => handleClosePopup()}
-                >
-                  Zurück
-                </Button>
                 {selectedPayments.includes("Lastschrift") ||
                 (paymentInformation.bankname &&
                   paymentInformation.bic &&
-                  paymentInformation.iban) ? (
-                  <>
-                    <Button
-                      onClick={() => handleThankyouPopup()}
-                      className="black-color white-orange"
-                    >
-                      Kostenpflichtig Bestellen
-                    </Button>
-                  </>
-                ) : selectedPayments.includes("Paypal") ||
-                  paymentInformation.paypalEmail ? (
+                  paymentInformation.iban &&
+                  !paymentInformation.paypalEmail) ? (
+                  <Button
+                    onClick={() => handleThankyouPopup()}
+                    className="black-color white-orange"
+                  >
+                    Kostenpflichtig Bestellen
+                  </Button>
+                ) : null}
+                {selectedPayments.includes("Paypal") ||
+                (paymentInformation.paypalEmail &&
+                  !paymentInformation.bankname) ? (
                   <>
                     Kostenpflichtig Bestellen mit
                     <PayPalPayment
@@ -288,6 +320,13 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                     />
                   </>
                 ) : null}
+
+                <Button
+                  className="black-color white-orange"
+                  onClick={() => handleClosePopup()}
+                >
+                  Zurück
+                </Button>
               </>
             )}
           </PopupWrapper>

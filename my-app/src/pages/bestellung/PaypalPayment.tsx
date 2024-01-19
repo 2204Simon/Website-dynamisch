@@ -22,6 +22,7 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
         {
           clientId: process.env.REACT_APP_PAYPAL_CLIENT_ID as string,
           currency: "EUR",
+          components: "buttons",
         } as ReactPayPalScriptOptions
       }
     >
