@@ -63,15 +63,12 @@ function Produkt() {
 
   const loadZutatPosition = async (): Promise<void> => {
     try {
-      const request = await fetch(
-        `http://localhost:3001/api/v1/ZutatenPosition`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json; charset=UTF-8",
-          },
-        }
-      );
+      const request = await fetch(`${baseUrl}/ZutatenPosition`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      });
       const zutatPositions = await request.json();
       if (!request.ok) throw new Error(zutatPositions.message);
       setZutatPosition(zutatPositions);
