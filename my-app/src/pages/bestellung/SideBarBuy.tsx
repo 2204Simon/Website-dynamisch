@@ -18,7 +18,7 @@ import { de } from "date-fns/locale";
 import { colors, formatNumber } from "../general/constants";
 import { CustomToast } from "../general/toast.style";
 import { useDispatch, useSelector } from "react-redux";
-import { CartState } from "../../redux/types";
+import { CartState, PaymentDataState } from "../../redux/types";
 import { clearCart } from "../../redux/cartReducer";
 import { PayPalPayment } from "./PaypalPayment";
 import {
@@ -27,6 +27,8 @@ import {
 } from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
+import { Bank } from "phosphor-react";
+import { FaPaypal } from "react-icons/fa";
 
 interface SideBarProps {
   produktAnzahl: number;
@@ -48,6 +50,9 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   const maxDate = new Date();
   maxDate.setMonth(maxDate.getMonth() + 6);
   const [selectedDate, setSelectedDate] = useState<Date>(minDate);
+  const paymentInformation = useSelector(
+    (state: { payment: PaymentDataState }) => state.payment.PaymentData
+  );
   const handleBuyNow = () => {
     setShowPopup(true);
     startTransition(() => {
@@ -68,6 +73,10 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   };
 
   const handleThankyouPopup = async () => {
+    if (!agbChecked && !selectedPayments.includes("Paypal")) {
+      CustomToast.error("Bitte akzeptiere die AGBs");
+      return;
+    }
     try {
       const bodyForBestellung = {
         kundenId: cookies.kundenId,
@@ -192,6 +201,48 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                 <Adressdaten />
                 <div>Tag der Lieferung</div>
                 <CalendarComponent />
+                <div>Zahlungsart </div>
+                {
+                  // Wenn sowohl PayPal-E-Mail als auch Bankinformationen vorhanden sind
+                  paymentInformation.paypalEmail &&
+                  paymentInformation.bankname &&
+                  paymentInformation.bic &&
+                  paymentInformation.iban ? (
+                    //Radio Button für PayPal oder Bankinformationen
+                    <div>
+                      <input
+                        type="radio"
+                        id="paypal"
+                        name="payment"
+                        value="paypal"
+                        style={{ transform: "scale(1.5)" }}
+                        onChange={() => setSelectedPayments(["Paypal"])}
+                      />
+                      <label htmlFor="paypal">
+                        <FaPaypal size={30} />
+                      </label>
+                      <input
+                        type="radio"
+                        id="lastschrift"
+                        name="payment"
+                        value="lastschrift"
+                        style={{ transform: "scale(1.5)" }}
+                        onChange={() => setSelectedPayments(["Lastschrift"])}
+                      />
+                      <label htmlFor="lastschrift">
+                        <Bank size={30} />
+                      </label>
+                    </div>
+                  ) : // Wenn nur PayPal-E-Mail vorhanden ist
+                  paymentInformation.paypalEmail ? (
+                    <FaPaypal size={30} />
+                  ) : // Wenn nur Bankinformationen vorhanden sind
+                  paymentInformation.bankname &&
+                    paymentInformation.bic &&
+                    paymentInformation.iban ? (
+                    <Bank size={30} />
+                  ) : null
+                }
                 <p>
                   <input
                     type="checkbox"
@@ -214,26 +265,30 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                 >
                   Zurück
                 </Button>
-                {/* //TODO: Stati global */}
-                {selectedPayments.includes("Lastschrift") && (
+                {selectedPayments.includes("Lastschrift") ||
+                (paymentInformation.bankname &&
+                  paymentInformation.bic &&
+                  paymentInformation.iban) ? (
                   <>
-                    <Button onClick={() => handleThankyouPopup()}>
-                      className= "black-color white-orange"
+                    <Button
+                      onClick={() => handleThankyouPopup()}
+                      className="black-color white-orange"
+                    >
+                      Kostenpflichtig Bestellen
                     </Button>
-                    {" Kostenpflichtig Bestellen mit Lastschrift"}
                   </>
-                )}
-                {/* TODO {selectedPayments.includes("Paypal") && (
-                  <> */}
-                Kostenpflichtig Bestellen mit
-                <PayPalPayment
-                  price={price}
-                  handleThankyouPopup={handleThankyouPopup}
-                  agbChecked={agbChecked}
-                />
+                ) : selectedPayments.includes("Paypal") ||
+                  paymentInformation.paypalEmail ? (
+                  <>
+                    Kostenpflichtig Bestellen mit
+                    <PayPalPayment
+                      price={price}
+                      handleThankyouPopup={handleThankyouPopup}
+                      agbChecked={agbChecked}
+                    />
+                  </>
+                ) : null}
               </>
-              //   )}
-              // </>
             )}
           </PopupWrapper>
         </PopupBackdrop>

@@ -231,7 +231,6 @@ export default function AdressInformation(): JSX.Element {
                     <Grid item xs={12}>
                       <TextField
                         fullWidth
-                        required
                         id="paypalEmail"
                         label="PayPal Email"
                         name="paypalEmail"
@@ -253,7 +252,6 @@ export default function AdressInformation(): JSX.Element {
                     <Grid item xs={12}>
                       <TextField
                         fullWidth
-                        required
                         id="bankName"
                         label="Bankname"
                         name="bankName"
@@ -272,7 +270,6 @@ export default function AdressInformation(): JSX.Element {
                     <Grid item xs={12}>
                       <TextField
                         fullWidth
-                        required
                         id="bic"
                         label="BIC"
                         name="bic"
@@ -291,7 +288,6 @@ export default function AdressInformation(): JSX.Element {
                     <Grid item xs={12}>
                       <TextField
                         fullWidth
-                        required
                         id="iban"
                         label="IBAN"
                         name="iban"
