@@ -1,4 +1,6 @@
-//kann auch bei push auf Server auf localhost bleiben
+//export const baseUrl = "http://168.119.224.176:3001/api/v1";
 export const baseUrl = "http://localhost:3001/api/v1";
+
+//export const baseUrl = "https://delivery-breakfast.projekt.dhbw-heidenheim.de:3001/api/v1";
 
 export const KUNDEN_ID = "kundenId";
