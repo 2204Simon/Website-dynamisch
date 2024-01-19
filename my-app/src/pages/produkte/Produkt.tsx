@@ -9,7 +9,6 @@ import { baseUrl } from "../../globalVariables/global";
 export async function loadImage(path: string): Promise<string> {
   try {
     const image = await import(`../../img/${path}`);
-    console.log(image.default);
     return image.default;
   } catch (error) {
     console.error(`Error loading image at path ${path}:`, error);
@@ -25,9 +24,15 @@ export type Product = {
   bild: string;
   sparte: string;
 };
+export type ZutatPosition = {
+  produktId: string;
+  zutatId: string;
+  zutatsmenge: number;
+};
 function Produkt() {
   const isTouchpad = matchMedia("(pointer: coarse)").matches;
   const [products, setProducts] = useState<Array<Product>>([]);
+  const [zutatPosition, setZutatPosition] = useState<Array<ZutatPosition>>([]);
 
   const existSparte = (sparte: string): boolean => {
     return products.some(product => product.sparte === sparte);
@@ -46,7 +51,6 @@ function Produkt() {
       const loadedProducts = await Promise.all(
         product.map(async (product: Product) => {
           const image = await loadImage(product.bild);
-          console.log("image", image);
           return { ...product, bild: image };
         })
       );
@@ -57,8 +61,26 @@ function Produkt() {
     }
   };
 
+  const loadZutatPosition = async (): Promise<void> => {
+    try {
+      const request = await fetch(`${baseUrl}/ZutatenPosition`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      });
+      const zutatPositions = await request.json();
+      if (!request.ok) throw new Error(zutatPositions.message);
+      setZutatPosition(zutatPositions);
+    } catch (error) {
+      console.error(error);
+      setZutatPosition([]);
+    }
+  };
+
   useEffect(() => {
     loadProducts();
+    loadZutatPosition();
   }, []);
 
   const ShoppingCards = (sparte: string) => {
