@@ -53,7 +53,6 @@ function Produkt() {
         }
       );
       const product = await request.json();
-      console.log(product);
       if (!request.ok) throw new Error(product.message);
       const loadedProducts = await Promise.all(
         product.map(async (product: Product) => {
@@ -78,6 +77,13 @@ function Produkt() {
     return [];
   }
 
+  function zutatseigenschaft(zutaten: Array<Zutat>): boolean {
+    if (zutaten) {
+      return zutaten.every(zutat => zutat.zutatseigenschaft === "vegan");
+    }
+    return false;
+  }
+
   const ShoppingCards = (sparte: string) => {
     const productsToRender = products
       .filter((product: Product) => product.sparte === sparte)
@@ -88,7 +94,7 @@ function Produkt() {
         price: product.preis,
         content: zutatsname(product.Zutaten),
         allergy: [],
-        veggie: false,
+        veggie: zutatseigenschaft(product.Zutaten),
       }));
 
     return productsToRender.map(product => (
