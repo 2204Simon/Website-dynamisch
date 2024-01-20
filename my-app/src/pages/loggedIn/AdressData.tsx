@@ -291,6 +291,7 @@ export default function AdressInformation(): JSX.Element {
                         id="iban"
                         label="IBAN"
                         name="iban"
+                        defaultValue={paymentInformation.iban}
                         inputProps={{
                           maxLength: 50,
                         }}
