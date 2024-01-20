@@ -7,7 +7,7 @@ import {
   LinkedinLogo,
   ArrowUp,
 } from "phosphor-react";
-import { GeneralstyledLink } from "./general/constants";
+import { GeneralstyledLink, colors } from "./general/constants";
 import { FooterContainer, FooterLinks, SocialMedia } from "./Footer.styles";
 
 function Footer(): JSX.Element {
@@ -19,7 +19,11 @@ function Footer(): JSX.Element {
           aria-label="Link zu Facebook"
           target="_blank"
           rel="noopener noreferrer"
-          style={{ display: "inline-block", width: "48px", height: "48px" }}
+          style={{
+            display: "inline-block",
+            width: "48px",
+            height: "48px",
+          }}
         >
           <FacebookLogo size={24} />
         </a>
@@ -66,7 +70,7 @@ function Footer(): JSX.Element {
             <button
               style={{
                 display: "flex",
-                color: "white",
+                color: `${colors.white}`,
                 background: "transparent",
                 border: "none",
                 font: "Montserrat",
@@ -79,7 +83,10 @@ function Footer(): JSX.Element {
               }}
               onClick={() => window.scroll(0, 0)}
             >
-              <ArrowUp size={24} style={{ marginRight: "5px" }} />
+              <ArrowUp
+                size={24}
+                style={{ marginRight: "5px", color: `${colors.white}` }}
+              />
               Anfang
             </button>
           </li>
@@ -113,7 +120,7 @@ function Footer(): JSX.Element {
         <Link
           onClick={() => window.scrollTo(0, 0)}
           to="/"
-          style={{ color: "white", textDecoration: "none" }}
+          style={{ color: `${colors.white}`, textDecoration: "none" }}
         >
           &copy; delivery-breakfast {new Date().getFullYear()}
         </Link>
