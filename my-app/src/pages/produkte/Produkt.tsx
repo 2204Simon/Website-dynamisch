@@ -15,6 +15,12 @@ export async function loadImage(path: string): Promise<string> {
     return "";
   }
 }
+export type Zutat = {
+  zutatsId: string;
+  zutatsname: string;
+  zutatseigenschaft: string;
+  zutatseinheit: string;
+};
 
 export type Product = {
   kundenId?: string;
@@ -23,16 +29,12 @@ export type Product = {
   preis: number;
   bild: string;
   sparte: string;
+  Zutaten: Array<Zutat>;
 };
-export type ZutatPosition = {
-  produktId: string;
-  zutatId: string;
-  zutatsmenge: number;
-};
+
 function Produkt() {
   const isTouchpad = matchMedia("(pointer: coarse)").matches;
   const [products, setProducts] = useState<Array<Product>>([]);
-  const [zutatPosition, setZutatPosition] = useState<Array<ZutatPosition>>([]);
 
   const existSparte = (sparte: string): boolean => {
     return products.some(product => product.sparte === sparte);
@@ -40,13 +42,18 @@ function Produkt() {
 
   const loadProducts = async (): Promise<void> => {
     try {
-      const request = await fetch(`${baseUrl}/generalProdukts`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json; charset=UTF-8",
-        },
-      });
+      //const request = await fetch(`${baseUrl}/generalProdukts`, { //Musst auskommentiert werden, da die Anfragen an den Server gingen und nicht an das lokale Backend
+      const request = await fetch(
+        `http://localhost:3001/api/v1/generalProdukts`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json; charset=UTF-8",
+          },
+        }
+      );
       const product = await request.json();
+      console.log(product);
       if (!request.ok) throw new Error(product.message);
       const loadedProducts = await Promise.all(
         product.map(async (product: Product) => {
@@ -60,28 +67,16 @@ function Produkt() {
       setProducts([]);
     }
   };
-
-  const loadZutatPosition = async (): Promise<void> => {
-    try {
-      const request = await fetch(`${baseUrl}/ZutatenPosition`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json; charset=UTF-8",
-        },
-      });
-      const zutatPositions = await request.json();
-      if (!request.ok) throw new Error(zutatPositions.message);
-      setZutatPosition(zutatPositions);
-    } catch (error) {
-      console.error(error);
-      setZutatPosition([]);
-    }
-  };
-
   useEffect(() => {
     loadProducts();
-    loadZutatPosition();
   }, []);
+
+  function zutatsname(zutaten: Array<Zutat>) {
+    if (zutaten) {
+      return zutaten.map(zutat => zutat.zutatsname);
+    }
+    return [];
+  }
 
   const ShoppingCards = (sparte: string) => {
     const productsToRender = products
@@ -91,10 +86,11 @@ function Produkt() {
         image: product.bild,
         title: product.titel,
         price: product.preis,
-        content: ["ABC-Salat", "Buchstabensuppe"],
-        allergy: ["Alles", "Nichts"],
-        veggie: true,
+        content: zutatsname(product.Zutaten),
+        allergy: [],
+        veggie: false,
       }));
+
     return productsToRender.map(product => (
       <ShoppingCard
         produktId={product.produktId}

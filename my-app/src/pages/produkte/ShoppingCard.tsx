@@ -42,7 +42,7 @@ interface ShoppingCardProps {
   image: string;
   title: string;
   price: number;
-  content: string[];
+  content: string[] | undefined;
   allergy: string[];
   veggie: boolean;
 }
@@ -236,11 +236,15 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
         <MiniH>Inhalt:</MiniH>
 
         <ListContainer>
-          {content.map((item, index) => (
-            <li key={index} style={{ paddingBottom: "10px" }}>
-              {item}
-            </li>
-          ))}
+          {content ? (
+            content.map((item, index) => (
+              <li key={index} style={{ paddingBottom: "10px" }}>
+                {item}
+              </li>
+            ))
+          ) : (
+            <p>Error: Content is undefined</p>
+          )}
         </ListContainer>
         {allergy.length > 0 && (
           <>
