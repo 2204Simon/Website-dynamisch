@@ -26,10 +26,15 @@ import { CustomToast } from "../general/toast.style";
 import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
 import { loadImage } from "../produkte/Produkt";
+import {
+  PayPalScriptProvider,
+  ReactPayPalScriptOptions,
+} from "@paypal/react-paypal-js";
 
 function WarenkorbSeite(): JSX.Element {
   const dispatch = useDispatch();
   const [cookies, setCookie] = useCookies([KUNDEN_ID]);
+
   const cartItems = useSelector(
     (state: { cart: CartState }) => state.cart.cartItems
   );
@@ -113,7 +118,17 @@ function WarenkorbSeite(): JSX.Element {
           />
         ))}
       </BestellungsWrapper>
-      <SideBarBuy produktAnzahl={cartItems.length} price={sumPrice} />
+      <PayPalScriptProvider
+        options={
+          {
+            clientId: process.env.REACT_APP_PAYPAL_CLIENT_ID as string,
+            currency: "EUR",
+            components: "buttons",
+          } as ReactPayPalScriptOptions
+        }
+      >
+        <SideBarBuy produktAnzahl={cartItems.length} price={sumPrice} />
+      </PayPalScriptProvider>
     </WarenkorbWrapper>
   );
 }
