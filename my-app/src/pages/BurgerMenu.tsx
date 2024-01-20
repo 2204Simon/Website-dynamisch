@@ -12,6 +12,8 @@ import { useLoggedIn } from "../globalVariables/loggedin";
 import { useSelector } from "react-redux";
 import { CartState } from "../redux/types";
 import logo from ".././img/Logo.webp";
+import { ThemeButton } from "../Theme";
+import { useLocation } from "react-router-dom";
 
 const StyledBurgerMenu = styled.div`
   display: flex;
@@ -94,7 +96,7 @@ const BurgerMenu: React.FC = () => {
   const handleBurgerClick = () => {
     setOpen(!open);
   };
-
+  const location = useLocation();
   const closeMenu = () => {
     setOpen(false);
   };
@@ -164,6 +166,11 @@ const BurgerMenu: React.FC = () => {
                   <SignIn size={30} />
                 </StyledLink>
               )}
+            </StyledListItem>
+            <StyledListItem>
+              <StyledLink to={location.pathname} onClick={closeMenu}>
+                <ThemeButton />
+              </StyledLink>
             </StyledListItem>
           </StyledList>
         </StyledMenu>

@@ -135,7 +135,7 @@ function Produkt() {
   return (
     <>
       <h2>Unsere Produkte</h2>
-      <p style={{ color: colors.common.black }}>
+      <p>
         Nachfolgend findest Du unser reichliches Angebot an Speisen und
         Getränken, um Dir Dein perfektes Frühstück zusammenzustellen. Alle
         Produkte sind bio und klimaneutral hergestellt sowie geliefert. Wenn Du

@@ -143,7 +143,7 @@ export default function SignUp() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "#aa7d03" }}>
+          <Avatar sx={{ m: 1, bgcolor: `${colors.companycolor}` }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -171,7 +171,7 @@ export default function SignUp() {
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: "white",
+                      backgroundColor: `${colors.white}`,
                       color: colors.companycolor,
                     },
                   }}
@@ -190,7 +190,7 @@ export default function SignUp() {
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: "white",
+                      backgroundColor: `${colors.white}`,
                       color: colors.companycolor,
                     },
                   }}
@@ -209,7 +209,7 @@ export default function SignUp() {
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: "white",
+                      backgroundColor: `${colors.white}`,
                       color: colors.companycolor,
                     },
                   }}
@@ -229,7 +229,7 @@ export default function SignUp() {
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: "white",
+                      backgroundColor: `${colors.white}`,
                       color: colors.companycolor,
                     },
                   }}
@@ -246,7 +246,7 @@ export default function SignUp() {
                   autoComplete="new-password"
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: "white",
+                      backgroundColor: `${colors.white}`,
                       color: colors.companycolor,
                     },
                   }}
@@ -272,7 +272,7 @@ export default function SignUp() {
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: "white",
+                      backgroundColor: `${colors.white}`,
                       color: colors.companycolor,
                     },
                   }}
@@ -291,7 +291,7 @@ export default function SignUp() {
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: "white",
+                      backgroundColor: `${colors.white}`,
                       color: colors.companycolor,
                     },
                   }}
@@ -309,7 +309,7 @@ export default function SignUp() {
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: "white",
+                      backgroundColor: `${colors.white}`,
                       color: colors.companycolor,
                     },
                   }}
@@ -328,7 +328,7 @@ export default function SignUp() {
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: "white",
+                      backgroundColor: `${colors.white}`,
                       color: colors.companycolor,
                     },
                   }}
@@ -346,7 +346,7 @@ export default function SignUp() {
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: "white",
+                      backgroundColor: `${colors.white}`,
                       color: colors.companycolor,
                     },
                   }}
@@ -363,7 +363,7 @@ export default function SignUp() {
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: "white",
+                      backgroundColor: `${colors.white}`,
                       color: colors.companycolor,
                     },
                   }}
@@ -388,7 +388,7 @@ export default function SignUp() {
                         }}
                         InputLabelProps={{
                           sx: {
-                            backgroundColor: "white",
+                            backgroundColor: `${colors.white}`,
                             color: colors.companycolor,
                           },
                         }}
@@ -408,7 +408,7 @@ export default function SignUp() {
                         }}
                         InputLabelProps={{
                           sx: {
-                            backgroundColor: "white",
+                            backgroundColor: `${colors.white}`,
                             color: colors.companycolor,
                           },
                         }}
@@ -425,7 +425,7 @@ export default function SignUp() {
                         }}
                         InputLabelProps={{
                           sx: {
-                            backgroundColor: "white",
+                            backgroundColor: `${colors.white}`,
                             color: colors.companycolor,
                           },
                         }}
@@ -442,7 +442,7 @@ export default function SignUp() {
                         }}
                         InputLabelProps={{
                           sx: {
-                            backgroundColor: "white",
+                            backgroundColor: `${colors.white}`,
                             color: colors.companycolor,
                           },
                         }}

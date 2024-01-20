@@ -310,7 +310,9 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                 ) : null}
                 {selectedPayments.includes("Paypal") ||
                 (paymentInformation.paypalEmail &&
-                  !paymentInformation.bankname) ? (
+                  !paymentInformation.bankname) ||
+                !paymentInformation.bic ||
+                !paymentInformation.iban ? (
                   <>
                     Kostenpflichtig Bestellen mit
                     <PayPalPayment

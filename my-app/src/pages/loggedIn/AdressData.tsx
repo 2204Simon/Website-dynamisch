@@ -150,7 +150,7 @@ export default function AdressInformation(): JSX.Element {
                 defaultValue={editedData?.postleitzahl}
                 InputLabelProps={{
                   sx: {
-                    backgroundColor: "white",
+                    backgroundColor: `${colors.white}`,
                     color: colors.companycolor,
                   },
                 }}
@@ -164,7 +164,7 @@ export default function AdressInformation(): JSX.Element {
                 defaultValue={editedData?.ort}
                 InputLabelProps={{
                   sx: {
-                    backgroundColor: "white",
+                    backgroundColor: `${colors.white}`,
                     color: colors.companycolor,
                   },
                 }}
@@ -178,7 +178,7 @@ export default function AdressInformation(): JSX.Element {
                 defaultValue={editedData?.strasse}
                 InputLabelProps={{
                   sx: {
-                    backgroundColor: "white",
+                    backgroundColor: `${colors.white}`,
                     color: colors.companycolor,
                   },
                 }}
@@ -193,7 +193,7 @@ export default function AdressInformation(): JSX.Element {
                 defaultValue={editedData?.hausnummer}
                 InputLabelProps={{
                   sx: {
-                    backgroundColor: "white",
+                    backgroundColor: `${colors.white}`,
                     color: colors.companycolor,
                   },
                 }}
@@ -207,7 +207,7 @@ export default function AdressInformation(): JSX.Element {
                 defaultValue={editedData?.hausnummerzusatz}
                 InputLabelProps={{
                   sx: {
-                    backgroundColor: "white",
+                    backgroundColor: `${colors.white}`,
                     color: colors.companycolor,
                   },
                 }}
@@ -240,7 +240,7 @@ export default function AdressInformation(): JSX.Element {
                         }}
                         InputLabelProps={{
                           sx: {
-                            backgroundColor: "white",
+                            backgroundColor: `${colors.white}`,
                             color: colors.companycolor,
                           },
                         }}
@@ -261,7 +261,7 @@ export default function AdressInformation(): JSX.Element {
                         }}
                         InputLabelProps={{
                           sx: {
-                            backgroundColor: "white",
+                            backgroundColor: `${colors.white}`,
                             color: colors.companycolor,
                           },
                         }}
@@ -279,7 +279,7 @@ export default function AdressInformation(): JSX.Element {
                         }}
                         InputLabelProps={{
                           sx: {
-                            backgroundColor: "white",
+                            backgroundColor: `${colors.white}`,
                             color: colors.companycolor,
                           },
                         }}
@@ -297,7 +297,7 @@ export default function AdressInformation(): JSX.Element {
                         }}
                         InputLabelProps={{
                           sx: {
-                            backgroundColor: "white",
+                            backgroundColor: `${colors.white}`,
                             color: colors.companycolor,
                           },
                         }}

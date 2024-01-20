@@ -56,7 +56,7 @@ export const ContactContainer = styled.div`
   p {
     text-align: center;
     margin-bottom: 1rem;
-    color: ${colors.companycolor};
+    color: var(--black-color);
   }
 
   form {
@@ -78,6 +78,8 @@ export const FormInput = styled.input`
   border-radius: 10px;
   font-size: 1rem;
   width: 100%;
+  color: var(--black-color);
+  background-color: var(--primary-color);
 `;
 
 export const FormTextArea = styled.textarea`
@@ -87,6 +89,8 @@ export const FormTextArea = styled.textarea`
   font-size: 1rem;
   width: 100%;
   resize: vertical;
+  color: var(--black-color);
+  background-color: var(--primary-color);
 `;
 
 export const FormButton = styled.button`
