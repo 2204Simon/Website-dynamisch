@@ -116,7 +116,7 @@ export default function SignIn() {
               }}
               InputLabelProps={{
                 sx: {
-                  backgroundColor: "white",
+                  backgroundColor: `${colors.white}`,
                 },
               }}
             />
@@ -134,7 +134,7 @@ export default function SignIn() {
               }}
               InputLabelProps={{
                 sx: {
-                  backgroundColor: "white",
+                  backgroundColor: `${colors.white}`,
                 },
               }}
             />
