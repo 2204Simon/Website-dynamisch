@@ -12,6 +12,7 @@ import { useLoggedIn } from "../globalVariables/loggedin";
 import { useSelector } from "react-redux";
 import { CartState } from "../redux/types";
 import logo from ".././img/Logo.webp";
+import { ThemeButton } from "../Theme";
 
 const StyledBurgerMenu = styled.div`
   display: flex;
@@ -164,6 +165,9 @@ const BurgerMenu: React.FC = () => {
                   <SignIn size={30} />
                 </StyledLink>
               )}
+            </StyledListItem>
+            <StyledListItem>
+              <ThemeButton />
             </StyledListItem>
           </StyledList>
         </StyledMenu>
