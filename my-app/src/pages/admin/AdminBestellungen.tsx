@@ -51,7 +51,7 @@ export default function AdminBestellungsblock() {
           <Paragraph>Bestellung löschen</Paragraph>
         </CRUDCardWrappper>
       </CRUDCardsGridWrapper>
-      <div style={{ marginTop: "50px", width: "100%" }}>
+      <div style={{ marginTop: "50px" }}>
         <ScrollableYContainer>{optionalComponent}</ScrollableYContainer>
       </div>
     </Card>

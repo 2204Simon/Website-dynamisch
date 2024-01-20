@@ -31,6 +31,8 @@ export const MetaDataItem = styled.p`
 
 export const ScrollableYContainer = styled.div`
   overflow-y: auto;
+  padding: 10px;
+  overflow-x: clip;
   /* overflow-x: hidden; */
   /* align-self: flex-start; */
   width: 100%;
