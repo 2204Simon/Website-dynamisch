@@ -12,6 +12,7 @@ import {
   BestellungsWrapper,
 } from "../../bestellung/stylesBestellung/Bestellung.styles";
 import { loadImage } from "../../produkte/Produkt";
+import { formatGermanDate } from "../../../DateUtils";
 export default function EinzelBestellung() {
   const { id } = useParams();
   const [bestellungen, setBestellungen] =
@@ -47,7 +48,10 @@ export default function EinzelBestellung() {
     <div>loading</div>
   ) : (
     <div>
-      <h1>Deine Bestellung vom {bestellungen.bestellDatum.toLocaleString()}</h1>
+      <h1>
+        Deine Bestellung vom{" "}
+        {formatGermanDate(bestellungen.bestellDatum.toLocaleString())}
+      </h1>
       <WarenkorbWrapper>
         <BestellungsWrapper>
           {bestellungen.produktInformationen.map((item, index) => (

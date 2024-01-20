@@ -24,6 +24,7 @@ import {
   CRUDCardWrappper,
   CRUDCardsGridWrapper,
 } from "../admin/Admin.styles";
+import { formatGermanDate } from "../../DateUtils";
 export default function BestellungsData(): JSX.Element {
   const [cookies] = useCookies([KUNDEN_ID]);
   const [bestellungen, setBestellungen] = useState<
@@ -77,7 +78,7 @@ export default function BestellungsData(): JSX.Element {
                       <Package size={50} />
                       <CRUDCardPText>geliefert am</CRUDCardPText>
                       <CRUDCardPText>
-                        {bestellung.lieferDatum.toString()}
+                        {formatGermanDate(bestellung.lieferDatum.toString())}
                       </CRUDCardPText>
                     </div>
                   ) : (
@@ -85,7 +86,9 @@ export default function BestellungsData(): JSX.Element {
                       <Truck size={50} />
                       <CRUDCardPText>vorraussichtliche Lieferung</CRUDCardPText>
                       <CRUDCardPText>
-                        {bestellung.gewünschtesLieferdatum.toString()}
+                        {formatGermanDate(
+                          bestellung.gewünschtesLieferdatum.toString()
+                        )}
                       </CRUDCardPText>
                     </>
                   )}
