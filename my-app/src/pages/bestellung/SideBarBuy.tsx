@@ -1,4 +1,4 @@
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import Logo from "../../img/Logo.webp";
 import {
   LogoImage,
@@ -18,7 +18,7 @@ import { de } from "date-fns/locale";
 import { colors, formatNumber } from "../general/constants";
 import { CustomToast } from "../general/toast.style";
 import { useDispatch, useSelector } from "react-redux";
-import { CartState } from "../../redux/types";
+import { CartState, PaymentDataState } from "../../redux/types";
 import { clearCart } from "../../redux/cartReducer";
 import { PayPalPayment } from "./PaypalPayment";
 import {
@@ -27,6 +27,8 @@ import {
 } from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
+import { Bank } from "phosphor-react";
+import { FaPaypal } from "react-icons/fa";
 
 interface SideBarProps {
   produktAnzahl: number;
@@ -48,6 +50,9 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   const maxDate = new Date();
   maxDate.setMonth(maxDate.getMonth() + 6);
   const [selectedDate, setSelectedDate] = useState<Date>(minDate);
+  const paymentInformation = useSelector(
+    (state: { payment: PaymentDataState }) => state.payment.PaymentData
+  );
   const handleBuyNow = () => {
     setShowPopup(true);
     startTransition(() => {
@@ -66,8 +71,56 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
     setShowPopup(false);
     setShowThankyouPopup(false);
   };
+  // Initialisieren Sie selectedPayments basierend auf den vorhandenen Zahlungsinformationen
+  const [selectedPayments, setSelectedPayments] = useState(() => {
+    if (
+      paymentInformation.paypalEmail &&
+      paymentInformation.bankname &&
+      paymentInformation.bic &&
+      paymentInformation.iban
+    ) {
+      return ["Paypal"];
+    } else if (paymentInformation.paypalEmail && !paymentInformation.bankname) {
+      return ["Paypal"];
+    } else if (
+      paymentInformation.bankname &&
+      paymentInformation.bic &&
+      paymentInformation.iban &&
+      !paymentInformation.paypalEmail
+    ) {
+      return ["Lastschrift"];
+    } else {
+      return [];
+    }
+  });
+  useEffect(() => {
+    // Überprüfen Sie die Zahlungsinformationen und aktualisieren Sie die Anzeige der Schaltflächen
+    if (
+      paymentInformation.paypalEmail &&
+      paymentInformation.bankname &&
+      paymentInformation.bic &&
+      paymentInformation.iban
+    ) {
+      setSelectedPayments(["Paypal"]);
+    } else if (paymentInformation.paypalEmail && !paymentInformation.bankname) {
+      setSelectedPayments(["Paypal"]);
+    } else if (
+      paymentInformation.bankname &&
+      paymentInformation.bic &&
+      paymentInformation.iban &&
+      !paymentInformation.paypalEmail
+    ) {
+      setSelectedPayments(["Lastschrift"]);
+    } else {
+      setSelectedPayments([]);
+    }
+  }, [paymentInformation]); // Abhängigkeiten der useEffect Hook
 
   const handleThankyouPopup = async () => {
+    if (!agbChecked && !selectedPayments.includes("Paypal")) {
+      CustomToast.error("Bitte akzeptiere die AGBs");
+      return;
+    }
     try {
       const bodyForBestellung = {
         kundenId: cookies.kundenId,
@@ -83,7 +136,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
       CustomToast.error("Fehler beim Bestellen");
     }
   };
-  const [selectedPayments, setSelectedPayments] = useState<string[]>([]);
+
   const handleAgbCheckboxChange = () => {
     setAgbChecked(!agbChecked);
   };
@@ -208,32 +261,73 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                     AGBs
                   </a>{" "}
                 </p>
+
+                {
+                  // Wenn PayPal-E-Mail und Bankinformationen vorhanden sind
+                  paymentInformation.paypalEmail &&
+                  paymentInformation.bankname &&
+                  paymentInformation.bic &&
+                  paymentInformation.iban ? (
+                    // Radio Button für PayPal oder Bankinformationen
+                    <div>
+                      <input
+                        type="radio"
+                        id="paypal"
+                        name="payment"
+                        value="paypal"
+                        checked={selectedPayments.includes("Paypal")}
+                        style={{ transform: "scale(1.5)" }}
+                        onChange={() => setSelectedPayments(["Paypal"])}
+                      />
+                      <label htmlFor="paypal">
+                        <FaPaypal size={30} />
+                      </label>
+                      <input
+                        type="radio"
+                        id="lastschrift"
+                        name="payment"
+                        value="lastschrift"
+                        style={{ transform: "scale(1.5)" }}
+                        onChange={() => setSelectedPayments(["Lastschrift"])}
+                      />
+                      <label htmlFor="lastschrift">
+                        <Bank size={30} />
+                      </label>
+                    </div>
+                  ) : null
+                }
+                {selectedPayments.includes("Lastschrift") ||
+                (paymentInformation.bankname &&
+                  paymentInformation.bic &&
+                  paymentInformation.iban &&
+                  !paymentInformation.paypalEmail) ? (
+                  <Button
+                    onClick={() => handleThankyouPopup()}
+                    className="black-color white-orange"
+                  >
+                    Kostenpflichtig Bestellen
+                  </Button>
+                ) : null}
+                {selectedPayments.includes("Paypal") ||
+                (paymentInformation.paypalEmail &&
+                  !paymentInformation.bankname) ? (
+                  <>
+                    Kostenpflichtig Bestellen mit
+                    <PayPalPayment
+                      price={price}
+                      handleThankyouPopup={handleThankyouPopup}
+                      agbChecked={agbChecked}
+                    />
+                  </>
+                ) : null}
+
                 <Button
                   className="black-color white-orange"
                   onClick={() => handleClosePopup()}
                 >
                   Zurück
                 </Button>
-                {/* //TODO: Stati global */}
-                {selectedPayments.includes("Lastschrift") && (
-                  <>
-                    <Button onClick={() => handleThankyouPopup()}>
-                      className= "black-color white-orange"
-                    </Button>
-                    {" Kostenpflichtig Bestellen mit Lastschrift"}
-                  </>
-                )}
-                {/* TODO {selectedPayments.includes("Paypal") && (
-                  <> */}
-                Kostenpflichtig Bestellen mit
-                <PayPalPayment
-                  price={price}
-                  handleThankyouPopup={handleThankyouPopup}
-                  agbChecked={agbChecked}
-                />
               </>
-              //   )}
-              // </>
             )}
           </PopupWrapper>
         </PopupBackdrop>

@@ -12,14 +12,18 @@ import { useCookies } from "react-cookie";
 import { CustomToast } from "../general/toast.style";
 import { BestellungsInformation } from "../../redux/types";
 import {
-  BestellungWrapper,
+  ScrollableYContainer,
   MetaDataDiv,
   MetaDataItem,
   SingleBestellungWrapper,
 } from "./Bestellungen.styles";
 import { Package, Truck } from "phosphor-react";
 import { Link, useNavigate } from "react-router-dom";
-import { CRUDCardPText, CRUDCardWrappper } from "../admin/Admin.styles";
+import {
+  CRUDCardPText,
+  CRUDCardWrappper,
+  CRUDCardsGridWrapper,
+} from "../admin/Admin.styles";
 export default function BestellungsData(): JSX.Element {
   const [cookies] = useCookies([KUNDEN_ID]);
   const [bestellungen, setBestellungen] = useState<
@@ -53,41 +57,43 @@ export default function BestellungsData(): JSX.Element {
   ) : (
     <Container>
       <Card>
-        <h1>Bestellungen</h1>
-        <BestellungWrapper>
-          {bestellungen.map(bestellung => {
-            let deliverd = true;
-            if (!bestellung.lieferDatum) {
-              deliverd = false;
-            }
-            return (
-              <CRUDCardWrappper
-                key={bestellung.bestellungsId}
-                onClick={() =>
-                  navigate(`/bestellung/${bestellung.bestellungsId}`)
-                }
-              >
-                {deliverd ? (
-                  <div>
-                    <Package size={50} />
-                    <CRUDCardPText>geliefert am</CRUDCardPText>
-                    <CRUDCardPText>
-                      {bestellung.lieferDatum.toString()}
-                    </CRUDCardPText>
-                  </div>
-                ) : (
-                  <>
-                    <Truck size={50} />
-                    <CRUDCardPText>vorraussichtliche Lieferung</CRUDCardPText>
-                    <CRUDCardPText>
-                      {bestellung.gewünschtesLieferdatum.toString()}
-                    </CRUDCardPText>
-                  </>
-                )}
-              </CRUDCardWrappper>
-            );
-          })}
-        </BestellungWrapper>
+        <Title>Bestellungen</Title>
+        <ScrollableYContainer>
+          <CRUDCardsGridWrapper>
+            {bestellungen.map(bestellung => {
+              let deliverd = true;
+              if (!bestellung.lieferDatum) {
+                deliverd = false;
+              }
+              return (
+                <CRUDCardWrappper
+                  key={bestellung.bestellungsId}
+                  onClick={() =>
+                    navigate(`/bestellung/${bestellung.bestellungsId}`)
+                  }
+                >
+                  {deliverd ? (
+                    <div>
+                      <Package size={50} />
+                      <CRUDCardPText>geliefert am</CRUDCardPText>
+                      <CRUDCardPText>
+                        {bestellung.lieferDatum.toString()}
+                      </CRUDCardPText>
+                    </div>
+                  ) : (
+                    <>
+                      <Truck size={50} />
+                      <CRUDCardPText>vorraussichtliche Lieferung</CRUDCardPText>
+                      <CRUDCardPText>
+                        {bestellung.gewünschtesLieferdatum.toString()}
+                      </CRUDCardPText>
+                    </>
+                  )}
+                </CRUDCardWrappper>
+              );
+            })}
+          </CRUDCardsGridWrapper>
+        </ScrollableYContainer>
       </Card>
     </Container>
   );

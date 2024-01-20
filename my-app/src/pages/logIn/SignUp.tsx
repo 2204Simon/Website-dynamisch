@@ -79,7 +79,7 @@ export default function SignUp() {
         PasswordMismatch();
         return;
       }
-      if (!paypalEmail || (!bankName && !bic && !iban)) {
+      if (!(paypalEmail || (bankName && bic && iban))) {
         CustomToast.error(
           "Es muss mindestens PayPal oder Lastschrift ausgewählt sein"
         );
