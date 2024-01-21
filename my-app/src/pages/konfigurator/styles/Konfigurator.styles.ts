@@ -37,7 +37,7 @@ export const SelectionContainer = styled.div`
 
 export const StageHeader = styled.h2`
   font-size: 1.5rem;
-  color: #333;
+  color: ${colors.companycolor};
   display: flex;
   align-items: center;
   gap: 10px;
@@ -59,24 +59,23 @@ export const SelectionList = styled.ul`
 `;
 
 export const SelectionItem = styled.div`
-
-cursor: pointer;
-margin: 5px;
-padding: 10px;
-border: 1px solid #ddd;
-border-radius: 4px;
-transition: background-color 0.3s;
-display: flex;
-flex-direction: column;
-align-items: center;
-text-align: center;
+  cursor: pointer;
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   &:hover {
-    background-color: #f4f4f4;
+    background-color: ${colors.primarycolor};
   }
 
   &.selected {
-    background-color: #aa7d04;
-    color: #fff;
+    background-color: ${colors.companycolor};
+    color: ${colors.white};
   }
 
   svg {
@@ -94,7 +93,7 @@ export const SummaryContainer = styled.div`
 
 export const SummaryHeader = styled.h3`
   font-size: 1.2rem;
-  color: #333;
+  color: ${colors.companycolor};
 `;
 
 export const SummaryText = styled.p`
@@ -104,7 +103,7 @@ export const SummaryText = styled.p`
 export const NavigationIcon = styled.div`
   font-size: 2rem;
   cursor: pointer;
-  color: #333;
+  color: ${colors.companycolor};
   display: flex;
   align-items: center;
 `;
@@ -170,14 +169,13 @@ export const ContainerFront = styled.div<{
   display: ${props => (props.displayNone ? "none" : "block")};
 
   &:hover {
-    background-color: #f4f4f4;
+    background-color: ${colors.companycolor};
   }
 
   &.selected {
-    background-color: #aa7d04;
-    color: #fff;
+    background-color: ${colors.companycolor};
+    color: ${colors.white};
   }
-
 `;
 
 export const ContainerBack = styled.div<{
