@@ -42,16 +42,12 @@ function Produkt() {
 
   const loadProducts = async (): Promise<void> => {
     try {
-      //const request = await fetch(`${baseUrl}/generalProdukts`, { //Musst auskommentiert werden, da die Anfragen an den Server gingen und nicht an das lokale Backend
-      const request = await fetch(
-        `http://localhost:3001/api/v1/generalProdukts`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json; charset=UTF-8",
-          },
-        }
-      );
+      const request = await fetch(`${baseUrl}/generalProdukts`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      });
       const product = await request.json();
       if (!request.ok) throw new Error(product.message);
       const loadedProducts = await Promise.all(
