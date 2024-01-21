@@ -1,4 +1,5 @@
 import { baseUrl } from "../globalVariables/global";
+import { CustomToast } from "../pages/general/toast.style";
 
 export async function sendPostRequest(url: string, data: any) {
   const response = await fetch(baseUrl + url, {
@@ -24,6 +25,9 @@ export async function getRequest(url: string) {
     },
   });
 
+  if (response.status === 404) {
+    throw new Error(`${response.status}`);
+  }
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
@@ -61,3 +65,14 @@ export async function sendDeleteRequest(url: string) {
 
   return await response.json();
 }
+
+export const errorHandlerNotfound = (
+  error: any,
+  message?: string
+): string | undefined => {
+  if (error.message === "404") {
+    return "404";
+  }
+  CustomToast.error(message ? message : "Something went wrong");
+  return;
+};

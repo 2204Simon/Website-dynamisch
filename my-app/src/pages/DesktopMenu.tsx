@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLoggedIn } from "../globalVariables/loggedin";
 import {
   Header,
@@ -9,13 +9,50 @@ import {
   StyledLink,
 } from "./Layout.styles";
 import Badge from "@mui/material/Badge";
-import { CartState } from "../redux/types";
+import { CartItem, CartState } from "../redux/types";
 import { ShoppingCart, SignIn, User } from "phosphor-react";
 import logo from ".././img/Logo.webp";
 import { ThemeButton } from "../Theme";
+import { useEffect } from "react";
+import {
+  errorHandlerNotfound,
+  getRequest,
+} from "../serverFunctions/generelAPICalls";
+import { addMultipleToCart, clearCart } from "../redux/cartReducer";
+import { CustomToast } from "./general/toast.style";
+import { useCookies } from "react-cookie";
 
 export const DesktopMenu: React.FC = () => {
   const { loggedIn } = useLoggedIn();
+  const [cookies] = useCookies(["kundenId"]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const serverCartItems: Array<CartItem> = await getRequest(
+          `/Warenkorb/${cookies.kundenId}`
+        );
+        console.log(serverCartItems);
+
+        if (serverCartItems.length === 0 || !serverCartItems) {
+          throw new Error("Keine Daten gefunden");
+        }
+
+        dispatch(clearCart());
+        dispatch(addMultipleToCart(serverCartItems));
+      } catch (error) {
+        const notFound = errorHandlerNotfound(
+          error,
+          "Fehler beim Laden der Daten"
+        );
+        if (notFound) {
+          dispatch(clearCart());
+        }
+      }
+    };
+
+    fetchData();
+  }, []);
   const cartItems = useSelector(
     (state: { cart: CartState }) => state.cart.cartItems
   );

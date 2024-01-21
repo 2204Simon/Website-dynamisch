@@ -25,11 +25,12 @@ import {
   CRUDCardsGridWrapper,
 } from "../admin/Admin.styles";
 import { formatGermanDate } from "../../DateUtils";
+import { BlackButton, OrangeButton } from "../general/button";
+import { Button } from "../general/button.styles";
 export default function BestellungsData(): JSX.Element {
   const [cookies] = useCookies([KUNDEN_ID]);
-  const [bestellungen, setBestellungen] = useState<
-    Array<BestellungsInformation>
-  >([]);
+  const [bestellungen, setBestellungen] =
+    useState<Array<BestellungsInformation> | null>([]);
 
   const navigate = useNavigate();
 
@@ -46,6 +47,10 @@ export default function BestellungsData(): JSX.Element {
         }
         setBestellungen(serverBestellungen);
       } catch (error) {
+        if (error instanceof Error && error.message === "404") {
+          setBestellungen(null);
+          return;
+        }
         CustomToast.error("Fehler beim Laden der Daten");
       }
     };
@@ -53,50 +58,62 @@ export default function BestellungsData(): JSX.Element {
     fetchData();
   }, []);
 
-  return bestellungen.length === 0 ? (
-    <></>
-  ) : (
+  return (
     <Container>
       <Card>
         <Title>Bestellungen</Title>
-        <ScrollableYContainer>
-          <CRUDCardsGridWrapper>
-            {bestellungen.map(bestellung => {
-              let deliverd = true;
-              if (!bestellung.lieferDatum) {
-                deliverd = false;
-              }
-              return (
-                <CRUDCardWrappper
-                  key={bestellung.bestellungsId}
-                  onClick={() =>
-                    navigate(`/bestellung/${bestellung.bestellungsId}`)
-                  }
-                >
-                  {deliverd ? (
-                    <div>
-                      <Package size={50} />
-                      <CRUDCardPText>geliefert am</CRUDCardPText>
-                      <CRUDCardPText>
-                        {formatGermanDate(bestellung.lieferDatum.toString())}
-                      </CRUDCardPText>
-                    </div>
-                  ) : (
-                    <>
-                      <Truck size={50} />
-                      <CRUDCardPText>vorraussichtliche Lieferung</CRUDCardPText>
-                      <CRUDCardPText>
-                        {formatGermanDate(
-                          bestellung.gewünschtesLieferdatum.toString()
-                        )}
-                      </CRUDCardPText>
-                    </>
-                  )}
-                </CRUDCardWrappper>
-              );
-            })}
-          </CRUDCardsGridWrapper>
-        </ScrollableYContainer>
+        {bestellungen === null ? (
+          <Card>
+            <Title>Du hast noch keine Bestellungen</Title>
+            <Paragraph>Jonas nen Guten spruch bitte ;)</Paragraph>
+            <Link to="/Produkte">
+              <Button className="black-color white-orange ">
+                Zu unseren Produkten
+              </Button>
+            </Link>
+          </Card>
+        ) : (
+          <ScrollableYContainer>
+            <CRUDCardsGridWrapper>
+              {bestellungen.map(bestellung => {
+                let deliverd = true;
+                if (!bestellung.lieferDatum) {
+                  deliverd = false;
+                }
+                return (
+                  <CRUDCardWrappper
+                    key={bestellung.bestellungsId}
+                    onClick={() =>
+                      navigate(`/bestellung/${bestellung.bestellungsId}`)
+                    }
+                  >
+                    {deliverd ? (
+                      <div>
+                        <Package size={50} />
+                        <CRUDCardPText>geliefert am</CRUDCardPText>
+                        <CRUDCardPText>
+                          {formatGermanDate(bestellung.lieferDatum.toString())}
+                        </CRUDCardPText>
+                      </div>
+                    ) : (
+                      <>
+                        <Truck size={50} />
+                        <CRUDCardPText>
+                          vorraussichtliche Lieferung
+                        </CRUDCardPText>
+                        <CRUDCardPText>
+                          {formatGermanDate(
+                            bestellung.gewünschtesLieferdatum.toString()
+                          )}
+                        </CRUDCardPText>
+                      </>
+                    )}
+                  </CRUDCardWrappper>
+                );
+              })}
+            </CRUDCardsGridWrapper>
+          </ScrollableYContainer>
+        )}
       </Card>
     </Container>
   );
