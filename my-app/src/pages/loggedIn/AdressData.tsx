@@ -148,9 +148,13 @@ export default function AdressInformation(): JSX.Element {
                 label="Postleitzahl"
                 name="plz"
                 defaultValue={editedData?.postleitzahl}
+                inputProps={{
+                  maxLength: 50,
+                  style: { color: `${colors.black}` },
+                }}
                 InputLabelProps={{
                   sx: {
-                    backgroundColor: `${colors.white}`,
+                    backgroundColor: `${colors.primarycolor}`,
                     color: colors.companycolor,
                   },
                 }}
@@ -162,9 +166,13 @@ export default function AdressInformation(): JSX.Element {
                 label="Stadt"
                 name="city"
                 defaultValue={editedData?.ort}
+                inputProps={{
+                  maxLength: 50,
+                  style: { color: `${colors.black}` },
+                }}
                 InputLabelProps={{
                   sx: {
-                    backgroundColor: `${colors.white}`,
+                    backgroundColor: `${colors.primarycolor}`,
                     color: colors.companycolor,
                   },
                 }}
@@ -176,9 +184,13 @@ export default function AdressInformation(): JSX.Element {
                 label="Straße"
                 name="street"
                 defaultValue={editedData?.strasse}
+                inputProps={{
+                  maxLength: 50,
+                  style: { color: `${colors.black}` },
+                }}
                 InputLabelProps={{
                   sx: {
-                    backgroundColor: `${colors.white}`,
+                    backgroundColor: `${colors.primarycolor}`,
                     color: colors.companycolor,
                   },
                 }}
@@ -191,9 +203,13 @@ export default function AdressInformation(): JSX.Element {
                 label="Hausnummer"
                 name="hausnummer"
                 defaultValue={editedData?.hausnummer}
+                inputProps={{
+                  maxLength: 50,
+                  style: { color: `${colors.black}` },
+                }}
                 InputLabelProps={{
                   sx: {
-                    backgroundColor: `${colors.white}`,
+                    backgroundColor: `${colors.primarycolor}`,
                     color: colors.companycolor,
                   },
                 }}
@@ -205,9 +221,13 @@ export default function AdressInformation(): JSX.Element {
                 label="Hausnummerzusatz"
                 name="hausnummerzusatz"
                 defaultValue={editedData?.hausnummerzusatz}
+                inputProps={{
+                  maxLength: 50,
+                  style: { color: `${colors.black}` },
+                }}
                 InputLabelProps={{
                   sx: {
-                    backgroundColor: `${colors.white}`,
+                    backgroundColor: `${colors.primarycolor}`,
                     color: colors.companycolor,
                   },
                 }}
@@ -237,10 +257,11 @@ export default function AdressInformation(): JSX.Element {
                         defaultValue={paymentInformation.paypalEmail}
                         inputProps={{
                           maxLength: 100,
+                          style: { color: `${colors.black}` },
                         }}
                         InputLabelProps={{
                           sx: {
-                            backgroundColor: `${colors.white}`,
+                            backgroundColor: `${colors.primarycolor}`,
                             color: colors.companycolor,
                           },
                         }}
@@ -258,10 +279,11 @@ export default function AdressInformation(): JSX.Element {
                         defaultValue={paymentInformation.bankname}
                         inputProps={{
                           maxLength: 50,
+                          style: { color: `${colors.black}` },
                         }}
                         InputLabelProps={{
                           sx: {
-                            backgroundColor: `${colors.white}`,
+                            backgroundColor: `${colors.primarycolor}`,
                             color: colors.companycolor,
                           },
                         }}
@@ -276,10 +298,11 @@ export default function AdressInformation(): JSX.Element {
                         defaultValue={paymentInformation.bic}
                         inputProps={{
                           maxLength: 50,
+                          style: { color: `${colors.black}` },
                         }}
                         InputLabelProps={{
                           sx: {
-                            backgroundColor: `${colors.white}`,
+                            backgroundColor: `${colors.primarycolor}`,
                             color: colors.companycolor,
                           },
                         }}
@@ -294,10 +317,11 @@ export default function AdressInformation(): JSX.Element {
                         defaultValue={paymentInformation.iban}
                         inputProps={{
                           maxLength: 50,
+                          style: { color: `${colors.black}` },
                         }}
                         InputLabelProps={{
                           sx: {
-                            backgroundColor: `${colors.white}`,
+                            backgroundColor: `${colors.primarycolor}`,
                             color: colors.companycolor,
                           },
                         }}

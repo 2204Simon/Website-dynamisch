@@ -8,13 +8,15 @@ export const Container = styled.div`
   justify-content: flex-start;
   background-color: ${colors.white};
   padding: 20px;
+  color: ${colors.black};
 `;
 export const Card = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: ${colors.white};
+  background-color: ${colors.primarycolor};
+
   padding: 32px;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
