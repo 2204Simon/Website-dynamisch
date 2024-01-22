@@ -7,6 +7,7 @@ type Newspaper = {
   title: string;
   image: string;
   price: number;
+  produktId: string;
 };
 
 function NewspaperAbo(newspaper: Newspaper) {
@@ -30,6 +31,7 @@ function NewspaperAbo(newspaper: Newspaper) {
             title={newspaper.title}
             basePrice={newspaper.price}
             back={buttonclick}
+            produktId={newspaper.produktId}
           />
         </div>
       );

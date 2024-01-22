@@ -114,6 +114,7 @@ function Produkt() {
         image: product.bild,
         title: product.titel,
         price: product.preis,
+        produktId: product.produktId,
       }));
     if (productsToRender.length > 0) {
       return (
@@ -121,10 +122,11 @@ function Produkt() {
           title={productsToRender[0].title}
           price={productsToRender[0].price}
           image={productsToRender[0].image}
+          produktId={productsToRender[0].produktId}
         />
       );
     } else {
-      return <NewspaperAbo title={""} price={0} image={""} />;
+      return <NewspaperAbo title={""} price={0} image={""} produktId={""} />;
     }
   };
 
