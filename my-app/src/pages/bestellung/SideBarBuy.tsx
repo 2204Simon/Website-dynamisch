@@ -253,7 +253,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                   />
                   Ich akzeptiere die{" "}
                   <a
-                    href="https://delivery-breakfast.projekt.dhbw-heidenheim.de/AGBs_delivery-breakfast.pdf"
+                    href="http://delivery-breakfast.projekt.dhbw-heidenheim.de/AGBs_delivery-breakfast.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     download

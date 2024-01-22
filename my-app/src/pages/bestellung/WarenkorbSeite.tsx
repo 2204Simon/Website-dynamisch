@@ -19,6 +19,7 @@ import {
 } from "../../redux/cartReducer";
 import { useEffect, useState } from "react";
 import {
+  errorHandlerNotfound,
   getRequest,
   sendDeleteRequest,
 } from "../../serverFunctions/generelAPICalls";
@@ -65,7 +66,13 @@ function WarenkorbSeite(): JSX.Element {
         dispatch(clearCart());
         dispatch(addMultipleToCart(updatedCartItems));
       } catch (error) {
-        CustomToast.error("Fehler beim Laden der Daten");
+        const notFound = errorHandlerNotfound(
+          error,
+          "Fehler beim Laden der Daten"
+        );
+        if (notFound) {
+          dispatch(clearCart());
+        }
       }
     };
 

@@ -60,7 +60,7 @@ export const ContainerBack = styled.div<{
 }>`
   display: flex;
   flex-direction: column;
-  background-color: ${colors.white};
+  background-color: ${colors.primarycolor};
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   padding: 1rem;
@@ -112,6 +112,7 @@ export const Top = styled.div`
 `;
 export const ListContainer = styled.ul`
   list-style-image: url(${CroissantGif});
+  color: ${colors.black};
 `;
 
 export const MiniH = styled.h4`

@@ -134,7 +134,11 @@ export default function SignUp() {
 
   return (
     <div>
-      <Container component="main" maxWidth="xs" style={{ height: "auto" }}>
+      <Container
+        component="main"
+        maxWidth="xs"
+        style={{ height: "auto", backgroundColor: `${colors.primarycolor}` }}
+      >
         <Box
           sx={{
             marginTop: 8,
@@ -168,10 +172,11 @@ export default function SignUp() {
                   autoFocus
                   inputProps={{
                     maxLength: 50,
+                    style: { color: `${colors.black}` },
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: `${colors.white}`,
+                      backgroundColor: `${colors.primarycolor}`,
                       color: colors.companycolor,
                     },
                   }}
@@ -187,10 +192,11 @@ export default function SignUp() {
                   autoComplete="family-name"
                   inputProps={{
                     maxLength: 50,
+                    style: { color: `${colors.black}` },
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: `${colors.white}`,
+                      backgroundColor: `${colors.primarycolor}`,
                       color: colors.companycolor,
                     },
                   }}
@@ -206,10 +212,11 @@ export default function SignUp() {
                   autoComplete="email"
                   inputProps={{
                     maxLength: 50,
+                    style: { color: `${colors.black}` },
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: `${colors.white}`,
+                      backgroundColor: `${colors.primarycolor}`,
                       color: colors.companycolor,
                     },
                   }}
@@ -222,14 +229,15 @@ export default function SignUp() {
                   fullWidth
                   required
                   id="telefonnummer"
-                  label="telefonnummer"
+                  label="Telefonnummer"
                   autoFocus
                   inputProps={{
                     maxLength: 50,
+                    style: { color: `${colors.black}` },
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: `${colors.white}`,
+                      backgroundColor: `${colors.primarycolor}`,
                       color: colors.companycolor,
                     },
                   }}
@@ -246,12 +254,13 @@ export default function SignUp() {
                   autoComplete="new-password"
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: `${colors.white}`,
+                      backgroundColor: `${colors.primarycolor}`,
                       color: colors.companycolor,
                     },
                   }}
                   inputProps={{
                     maxLength: 50,
+                    style: { color: `${colors.black}` },
                     pattern: ".{8,}",
                     title: "Passwort muss mindestens 8 Zeichen haben",
                   }}
@@ -269,16 +278,17 @@ export default function SignUp() {
                   autoComplete="new-password"
                   inputProps={{
                     maxLength: 50,
+                    style: { color: `${colors.black}` },
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: `${colors.white}`,
+                      backgroundColor: `${colors.primarycolor}`,
                       color: colors.companycolor,
                     },
                   }}
                 />
               </Grid>
-              <Title>Adress Daten</Title>
+              <Title>Adressdaten</Title>
               <Grid item xs={12} xl={12}>
                 <TextField
                   fullWidth
@@ -288,10 +298,11 @@ export default function SignUp() {
                   name="plz"
                   inputProps={{
                     maxLength: 50,
+                    style: { color: `${colors.black}` },
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: `${colors.white}`,
+                      backgroundColor: `${colors.primarycolor}`,
                       color: colors.companycolor,
                     },
                   }}
@@ -306,10 +317,11 @@ export default function SignUp() {
                   name="city"
                   inputProps={{
                     maxLength: 50,
+                    style: { color: `${colors.black}` },
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: `${colors.white}`,
+                      backgroundColor: `${colors.primarycolor}`,
                       color: colors.companycolor,
                     },
                   }}
@@ -325,10 +337,11 @@ export default function SignUp() {
                   name="street"
                   inputProps={{
                     maxLength: 50,
+                    style: { color: `${colors.black}` },
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: `${colors.white}`,
+                      backgroundColor: `${colors.primarycolor}`,
                       color: colors.companycolor,
                     },
                   }}
@@ -343,10 +356,11 @@ export default function SignUp() {
                   name="hausnummer"
                   inputProps={{
                     maxLength: 50,
+                    style: { color: `${colors.black}` },
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: `${colors.white}`,
+                      backgroundColor: `${colors.primarycolor}`,
                       color: colors.companycolor,
                     },
                   }}
@@ -360,10 +374,11 @@ export default function SignUp() {
                   name="hausnummerzusatz"
                   inputProps={{
                     maxLength: 50,
+                    style: { color: `${colors.black}` },
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: `${colors.white}`,
+                      backgroundColor: `${colors.primarycolor}`,
                       color: colors.companycolor,
                     },
                   }}
@@ -385,10 +400,11 @@ export default function SignUp() {
                         name="paypalEmail"
                         inputProps={{
                           maxLength: 100,
+                          style: { color: `${colors.black}` },
                         }}
                         InputLabelProps={{
                           sx: {
-                            backgroundColor: `${colors.white}`,
+                            backgroundColor: `${colors.primarycolor}`,
                             color: colors.companycolor,
                           },
                         }}
@@ -405,10 +421,11 @@ export default function SignUp() {
                         name="bankName"
                         inputProps={{
                           maxLength: 50,
+                          style: { color: `${colors.black}` },
                         }}
                         InputLabelProps={{
                           sx: {
-                            backgroundColor: `${colors.white}`,
+                            backgroundColor: `${colors.primarycolor}`,
                             color: colors.companycolor,
                           },
                         }}
@@ -422,10 +439,11 @@ export default function SignUp() {
                         name="bic"
                         inputProps={{
                           maxLength: 50,
+                          style: { color: `${colors.black}` },
                         }}
                         InputLabelProps={{
                           sx: {
-                            backgroundColor: `${colors.white}`,
+                            backgroundColor: `${colors.primarycolor}`,
                             color: colors.companycolor,
                           },
                         }}
@@ -442,7 +460,7 @@ export default function SignUp() {
                         }}
                         InputLabelProps={{
                           sx: {
-                            backgroundColor: `${colors.white}`,
+                            backgroundColor: `${colors.primarycolor}`,
                             color: colors.companycolor,
                           },
                         }}
