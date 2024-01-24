@@ -26,13 +26,15 @@ export const Stage = styled.div`
 `;
 export const SelectionContainer = styled.div`
   background-color: ${colors.white};
-  width: 80vw;
+  width: 90vw;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 1px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
   padding: 10px;
+  justify-items: center; // Elemente horizontal zentrieren
+  align-items: center; // Elemente vertikal zentrieren
 `;
 
 export const StageHeader = styled.h2`
