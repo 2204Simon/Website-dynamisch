@@ -118,17 +118,16 @@ const DrinkSelection: React.FC<DrinkSelectionProps> = ({
         )}
       </SelectionContainer>
 
-      {selectedDrink && (
+      {/*selectedDrink && (
         <div>
           <p>Ausgewähltes Getränk: {selectedDrink}</p>
           <p>Bestätige die Auswahl mit dem Vorwärtspfeil</p>
         </div>
-      )}
+      )*/}
       <NavigationIcon onClick={handleNext}>
         <Button className="black-color white-orange" onClick={handleNext}>
           Weiter zur Zusammenfassung
         </Button>
-        <ArrowForward />
       </NavigationIcon>
     </Stage>
   );

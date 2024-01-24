@@ -191,12 +191,12 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
           )
         )}
       </SelectionContainer>
-      {selectedToppings.length > 0 && (
+      {/*selectedToppings.length > 0 && (
         <div>
           <p>Ausgewählte Beläge: {selectedToppings.join(", ")}</p>
           <p>Bestätige die Auswahl mit dem Vorwärtspfeil</p>
         </div>
-      )}
+      )*/}
 
       <NavigationIcon onClick={handleNext}>
         <Button className="black-color white-orange" onClick={handleNext}>
