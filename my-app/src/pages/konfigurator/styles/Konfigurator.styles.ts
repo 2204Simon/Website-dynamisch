@@ -25,16 +25,16 @@ export const Stage = styled.div`
   gap: 10px;
 `;
 export const SelectionContainer = styled.div`
-  background-color: ${colors.white};
   width: 90vw;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 1px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  //box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
   padding: 10px;
   justify-items: center; // Elemente horizontal zentrieren
   align-items: center; // Elemente vertikal zentrieren
+  border-radius: 10px;
 `;
 
 export const StageHeader = styled.h2`
@@ -158,7 +158,7 @@ export const ContainerFront = styled.div<{
 }>`
   display: flex;
   flex-direction: column;
-  background-color: ${colors.white};
+  background-color: ${colors.primarycolor};
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   padding: 1rem;
@@ -290,4 +290,9 @@ export const MinusQuantity = styled.div`
   width: 20px;
   border: 1px solid #aaa;
   margin-left: 5px;
+`;
+
+
+export const Label = styled.label`
+  color: ${colors.black}; // Farbe des Textes ändern
 `;

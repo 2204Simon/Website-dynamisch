@@ -15,6 +15,7 @@ import {
   Title,
   Price,
   ContainerFront,
+  Label,
 } from "./styles/Konfigurator.styles";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { BlackColorButton } from "../general/button";
@@ -27,6 +28,8 @@ import {
 import { Minus, Plus } from "phosphor-react";
 import { Button } from "../general/button.styles";
 import { baseUrl } from "../../globalVariables/global";
+import { colors } from "../general/constants";
+
 
 interface ToppingsSelectionProps {
   onNextStage: (selectedProduct: string, selectedImage: string) => void;
@@ -159,13 +162,13 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
                   <Price> Preis: {topping.zutatspreis} € </Price>
                   <Quantity>
                     <>
-                      <label htmlFor={`quantity-${topping.zutatsname}`}>
+                      <Label htmlFor={`quantity-${topping.zutatsname}`}>
                         Menge:
-                      </label>
+                      </Label>
                       <MinusQuantity
                         onClick={() => handleMinus(topping.zutatsname)}
                       >
-                        <Minus />
+                        <Minus color={colors.black}/>
                       </MinusQuantity>
                       <QuantityInput
                         type="text"
@@ -181,7 +184,7 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
                       <PlusQuantity
                         onClick={() => handlePlus(topping.zutatsname)}
                       >
-                        <Plus />
+                        <Plus color={colors.black}/>
                       </PlusQuantity>
                     </>
                   </Quantity>
