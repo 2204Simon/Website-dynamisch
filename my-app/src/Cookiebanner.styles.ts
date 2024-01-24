@@ -7,7 +7,7 @@ export const CookieBannerStyle = styled.div`
     //justify-content: space-evenly;
     justify-content: center;
     align-items: center;
-    position: fixed;
+    //position: fixed;
     bottom: 0;
     width: 96vh /* Aktualisierte Breite auf 100% */
     height: 100px;
