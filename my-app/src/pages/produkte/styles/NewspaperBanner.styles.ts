@@ -12,7 +12,7 @@ export const BannerContainer = styled.div`
   margin: 0 auto;
   padding: 20px;
 
-  @media (max-width: 800px) {
+  @media (max-width: 900px) {
     grid-template-columns: 1fr;
     max-height: 1fr;
     place-self: center;
@@ -29,7 +29,7 @@ export const BannerImage = styled.img`
   justify-self: end;
   object-fit: cover;
   border-radius: 10px;
-  @media (max-width: 800px) {
+  @media (max-width: 900px) {
     
     justify-self: center; }
 `;
