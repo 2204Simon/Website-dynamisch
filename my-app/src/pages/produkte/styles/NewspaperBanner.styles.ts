@@ -11,6 +11,15 @@ export const BannerContainer = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
   padding: 20px;
+
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr;
+    max-height: 1fr;
+    place-self: center;
+    justify-items: center; // Elemente horizontal zentrieren
+    align-items: center; // Elemente vertikal zentrieren
+  }
+
 `;
 
 export const BannerImage = styled.img`
@@ -20,6 +29,9 @@ export const BannerImage = styled.img`
   justify-self: end;
   object-fit: cover;
   border-radius: 10px;
+  @media (max-width: 800px) {
+    
+    justify-self: center; }
 `;
 
 export const BannerContent = styled.div`
@@ -27,6 +39,9 @@ export const BannerContent = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
+  text-align: center;
+  
 `;
 
 export const BannerTitle = styled.h5`
