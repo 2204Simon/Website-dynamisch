@@ -98,6 +98,13 @@ export const SummaryHeader = styled.h3`
   color: ${colors.companycolor};
 `;
 
+export const Unit = styled.p`
+  font-size: 0%.5;
+  color: ${colors.black};
+  margin-top: 2px;
+  margin-bottom: 2px;
+`;
+
 export const SummaryText = styled.p`
   margin-top: 10px;
 `;
@@ -139,7 +146,7 @@ const reverseRotateAnimation = keyframes`
 
 export const Container = styled.div<{ flipped: boolean }>`
   width: 314px;
-  height: 450px;
+  height: 475px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -163,7 +170,7 @@ export const ContainerFront = styled.div<{
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   width: 250px;
-  height: 400px;
+  height: 425px;
   margin: 1rem;
   cursor: pointer;
   backface-visibility: hidden;

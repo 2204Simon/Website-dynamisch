@@ -16,6 +16,7 @@ import {
   Price,
   ContainerFront,
   Label,
+  Unit,
 } from "./styles/Konfigurator.styles";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { BlackColorButton } from "../general/button";
@@ -160,6 +161,7 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
                 <Details>
                   <Title> {topping.zutatsname} </Title>
                   <Price> Preis: {topping.zutatspreis} € </Price>
+                  <Unit> Einheit: {topping.zutatseinheit} </Unit>
                   <Quantity>
                     <>
                       <Label htmlFor={`quantity-${topping.zutatsname}`}>
