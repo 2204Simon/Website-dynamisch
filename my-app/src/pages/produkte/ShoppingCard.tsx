@@ -36,6 +36,7 @@ import {
 } from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
+import { colors } from "../general/constants";
 
 interface ShoppingCardProps {
   produktId: string;
@@ -187,7 +188,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
 
           <Quantity>
             <MinusQuantity onClick={() => handleMinus(quantity)}>
-              <Minus />
+              <Minus color={colors.black}/>
             </MinusQuantity>
             <QuantityInput
               type="text"
@@ -199,7 +200,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
               inputMode="numeric"
             />
             <PlusQuantity onClick={() => handlePlus(quantity)}>
-              <Plus />
+              <Plus color={colors.black}/>
             </PlusQuantity>
           </Quantity>
 
