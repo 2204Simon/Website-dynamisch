@@ -65,7 +65,7 @@ export default function BestellungsData(): JSX.Element {
         {bestellungen === null ? (
           <Card>
             <Title>Du hast noch keine Bestellungen</Title>
-            <Paragraph>Jonas nen Guten spruch bitte ;)</Paragraph>
+            <Paragraph>Dann ist es höchste Zeit, dass Du unsere frisch zubereiteten Produkte probierst!</Paragraph>
             <Link to="/Produkte">
               <Button className="black-color white-orange ">
                 Zu unseren Produkten
