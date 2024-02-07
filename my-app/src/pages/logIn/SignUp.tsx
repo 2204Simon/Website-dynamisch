@@ -175,9 +175,6 @@ export default function SignUp() {
                       color: colors.companycolor,
                     },
                   }}
-                  onChange={e => {
-                    e.target.value = e.target.value.trim();
-                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -196,9 +193,6 @@ export default function SignUp() {
                     sx: {
                       color: colors.companycolor,
                     },
-                  }}
-                  onChange={e => {
-                    e.target.value = e.target.value.trim();
                   }}
                 />
               </Grid>
@@ -267,9 +261,6 @@ export default function SignUp() {
                     pattern: ".{8,}",
                     title: "Passwort muss mindestens 8 Zeichen haben",
                   }}
-                  onChange={e => {
-                    e.target.value = e.target.value.trim();
-                  }}
                 />
               </Grid>
 
@@ -290,9 +281,6 @@ export default function SignUp() {
                     sx: {
                       color: colors.companycolor,
                     },
-                  }}
-                  onChange={e => {
-                    e.target.value = e.target.value.trim();
                   }}
                 />
               </Grid>
@@ -334,9 +322,6 @@ export default function SignUp() {
                       color: colors.companycolor,
                     },
                   }}
-                  onChange={e => {
-                    e.target.value = e.target.value.trim();
-                  }}
                 />
               </Grid>
 
@@ -355,9 +340,6 @@ export default function SignUp() {
                     sx: {
                       color: colors.companycolor,
                     },
-                  }}
-                  onChange={e => {
-                    e.target.value = e.target.value.trim();
                   }}
                 />
               </Grid>
@@ -447,9 +429,6 @@ export default function SignUp() {
                           sx: {
                             color: colors.companycolor,
                           },
-                        }}
-                        onChange={e => {
-                          e.target.value = e.target.value.trim();
                         }}
                       />
                     </Grid>
