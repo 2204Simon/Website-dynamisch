@@ -15,7 +15,7 @@ export const Produktteaser = styled.div`
   h2 {
     // text-align: center;
     padding: 0;
-    color: ${colors.white};
+    color: white; //muss fix bleiben wegen Hintergrund
   }
 
   p {
@@ -35,7 +35,7 @@ export const Cooperation = styled.div`
 
   h1 {
     text-align: center;
-    color: ${colors.white};
+    color: white; //muss fix bleiben wegen Hintergrund
     color: ${colors.companycolor};
     margin-top: 0px;
   }

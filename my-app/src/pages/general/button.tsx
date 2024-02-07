@@ -29,15 +29,20 @@ export const BlackColorButton: React.FC<ButtonProps> = ({
   );
 };
 
-// export const LandingPageButton:React.FC<ButtonPropsLandingPage> = ({ caption, latest_color, onClick }) => {
-//   color: latest_color;
-//   return (
-//     <Button className="white-orange" onClick={onClick}>
-//       {caption}
-//       {latest_color}
-//     </Button>
-//   );
-// };
+export const LandingPageButton: React.FC<ButtonProps> = ({
+  caption,
+  onClick,
+}) => {
+  return (
+    <Button
+      style={{ color: "white" }}
+      className="white-orange"
+      onClick={onClick}
+    >
+      {caption}
+    </Button>
+  );
+};
 
 // export const but = styled.button`
 //   display: inline-block;
