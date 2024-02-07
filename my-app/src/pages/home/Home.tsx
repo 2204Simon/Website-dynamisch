@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { OrangeButton } from "../general/button";
+import { LandingPageButton, OrangeButton } from "../general/button";
 import {
   Cooperation,
   Produktteaser,
@@ -19,7 +19,7 @@ const Home: React.FC = () => {
             <div>
               <h2>Stelle Dir Dein perfektes Frühstück zusammen</h2>
               <Link to="/Produkte">
-                <OrangeButton caption={"Zu unseren Produkten"} />
+                <LandingPageButton caption={"Zu unseren Produkten"} />
               </Link>
             </div>
           </Produktteaser>

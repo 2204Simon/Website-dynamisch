@@ -10,7 +10,7 @@ export const BottomNavStyle = styled.div`
     bottom: 0;
     width: 100vw; /* Aktualisierte Breite auf 100% */
     height: 70px;
-    background-color: ${colors.black};
+    background-color: black; //muss fix bleiben wegen Chatbot
     z-index: 10;
   }
 
@@ -38,7 +38,7 @@ export const BottomNavStyle = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: ${colors.companycolor};
+    color: white; //muss fix bleiben wegen Chatbot
     text-decoration: none;
   }
 
