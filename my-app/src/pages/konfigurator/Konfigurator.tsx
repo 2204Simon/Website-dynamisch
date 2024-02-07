@@ -2,21 +2,27 @@
 import React, { useState } from "react";
 import BreadSelection from "./BreadSelection";
 import ToppingsSelection from "./ToppingsSelection";
-import DrinkSelection from "./DrinkSelection";
+import ExtraSelection from "./ExtrasSelection";
 import { NavigationIcon } from "./styles/Konfigurator.styles";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { useLoggedIn } from "../../globalVariables/loggedin";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../general/button.styles";
 
+interface A1 {
+  id: string;
+  quantity: number;
+}
+
+
 const Konfigurator: React.FC = () => {
   const [currentStage, setCurrentStage] = useState<number>(1);
-  const [selectedBread, setSelectedBread] = useState<string>("");
-  const [selectedToppings, setSelectedToppings] = useState<string>("");
-  const [selectedDrink, setSelectedDrink] = useState<string>("");
+  const [selectedBread, setSelectedBread] = useState<Array<A1>>([]);
+  const [selectedToppings, setSelectedToppings] = useState<Array<A1>>([]);
+  const [selectedDrink, setSelectedDrink] = useState<Array<A1>>([]);
   const { loggedIn } = useLoggedIn();
   const navigate = useNavigate();
-  const handleNextStage = (selectedProduct: string) => {
+  const handleNextStage = (selectedProduct: Array<A1>) => {
     setCurrentStage(currentStage + 1);
 
     switch (currentStage) {
@@ -40,7 +46,10 @@ const Konfigurator: React.FC = () => {
 
   return (
     <div>
-      {currentStage === 1 && <BreadSelection onNextStage={handleNextStage} />}
+      {currentStage === 1 && 
+        <BreadSelection 
+          onNextStage={handleNextStage} 
+          />}
       {currentStage === 2 && (
         <ToppingsSelection
           onNextStage={handleNextStage}
@@ -48,9 +57,9 @@ const Konfigurator: React.FC = () => {
         />
       )}
       {currentStage === 3 && (
-        <DrinkSelection
+        <ExtraSelection
           onPrevStage={handlePrevStage}
-          onComplete={handleNextStage}
+          onNextStage={handleNextStage}
         />
       )}
       {currentStage === 4 && (
@@ -59,9 +68,18 @@ const Konfigurator: React.FC = () => {
             <ArrowBack />
           </NavigationIcon>
           <h2>Zusammenfassung</h2>
-          <p>Ausgewähltes Brot: {selectedBread}</p>
-          <p>Ausgewählte Beläge: {selectedToppings}</p>
-          <p>Ausgewähltes Getränk: {selectedDrink}</p>
+          <>
+            {selectedToppings.map((item) => {
+                  return (<div>
+                    <p>test</p>
+                    <p>{item.id}</p>
+                    <p>{item.quantity}</p></div>);
+            })
+          
+          }
+          </>
+          <p>Ausgewählte Beläge: {selectedToppings.toString()}</p>
+          <p>Ausgewähltes Getränk: {selectedDrink.toString()}</p>
 
           {!loggedIn && (
             <div>
