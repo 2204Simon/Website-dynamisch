@@ -134,11 +134,7 @@ export default function SignUp() {
 
   return (
     <div>
-      <Container
-        component="main"
-        maxWidth="xs"
-        style={{ height: "auto", backgroundColor: `${colors.primarycolor}` }}
-      >
+      <Container component="main" maxWidth="xs" style={{ height: "auto" }}>
         <Box
           sx={{
             marginTop: 8,
@@ -176,9 +172,11 @@ export default function SignUp() {
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: `${colors.primarycolor}`,
                       color: colors.companycolor,
                     },
+                  }}
+                  onChange={e => {
+                    e.target.value = e.target.value.trim();
                   }}
                 />
               </Grid>
@@ -196,9 +194,11 @@ export default function SignUp() {
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: `${colors.primarycolor}`,
                       color: colors.companycolor,
                     },
+                  }}
+                  onChange={e => {
+                    e.target.value = e.target.value.trim();
                   }}
                 />
               </Grid>
@@ -216,9 +216,11 @@ export default function SignUp() {
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: `${colors.primarycolor}`,
                       color: colors.companycolor,
                     },
+                  }}
+                  onChange={e => {
+                    e.target.value = e.target.value.trim();
                   }}
                 />
               </Grid>
@@ -237,9 +239,11 @@ export default function SignUp() {
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: `${colors.primarycolor}`,
                       color: colors.companycolor,
                     },
+                  }}
+                  onChange={e => {
+                    e.target.value = e.target.value.trim();
                   }}
                 />
               </Grid>
@@ -254,7 +258,6 @@ export default function SignUp() {
                   autoComplete="new-password"
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: `${colors.primarycolor}`,
                       color: colors.companycolor,
                     },
                   }}
@@ -263,6 +266,9 @@ export default function SignUp() {
                     style: { color: `${colors.black}` },
                     pattern: ".{8,}",
                     title: "Passwort muss mindestens 8 Zeichen haben",
+                  }}
+                  onChange={e => {
+                    e.target.value = e.target.value.trim();
                   }}
                 />
               </Grid>
@@ -282,9 +288,11 @@ export default function SignUp() {
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: `${colors.primarycolor}`,
                       color: colors.companycolor,
                     },
+                  }}
+                  onChange={e => {
+                    e.target.value = e.target.value.trim();
                   }}
                 />
               </Grid>
@@ -302,9 +310,11 @@ export default function SignUp() {
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: `${colors.primarycolor}`,
                       color: colors.companycolor,
                     },
+                  }}
+                  onChange={e => {
+                    e.target.value = e.target.value.trim();
                   }}
                 />
               </Grid>
@@ -321,9 +331,11 @@ export default function SignUp() {
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: `${colors.primarycolor}`,
                       color: colors.companycolor,
                     },
+                  }}
+                  onChange={e => {
+                    e.target.value = e.target.value.trim();
                   }}
                 />
               </Grid>
@@ -341,9 +353,11 @@ export default function SignUp() {
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: `${colors.primarycolor}`,
                       color: colors.companycolor,
                     },
+                  }}
+                  onChange={e => {
+                    e.target.value = e.target.value.trim();
                   }}
                 />
               </Grid>
@@ -360,9 +374,11 @@ export default function SignUp() {
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: `${colors.primarycolor}`,
                       color: colors.companycolor,
                     },
+                  }}
+                  onChange={e => {
+                    e.target.value = e.target.value.trim();
                   }}
                 />
               </Grid>
@@ -378,9 +394,11 @@ export default function SignUp() {
                   }}
                   InputLabelProps={{
                     sx: {
-                      backgroundColor: `${colors.primarycolor}`,
                       color: colors.companycolor,
                     },
+                  }}
+                  onChange={e => {
+                    e.target.value = e.target.value.trim();
                   }}
                 />
               </Grid>
@@ -404,9 +422,11 @@ export default function SignUp() {
                         }}
                         InputLabelProps={{
                           sx: {
-                            backgroundColor: `${colors.primarycolor}`,
                             color: colors.companycolor,
                           },
+                        }}
+                        onChange={e => {
+                          e.target.value = e.target.value.trim();
                         }}
                       />
                     </Grid>
@@ -425,9 +445,11 @@ export default function SignUp() {
                         }}
                         InputLabelProps={{
                           sx: {
-                            backgroundColor: `${colors.primarycolor}`,
                             color: colors.companycolor,
                           },
+                        }}
+                        onChange={e => {
+                          e.target.value = e.target.value.trim();
                         }}
                       />
                     </Grid>
@@ -443,9 +465,11 @@ export default function SignUp() {
                         }}
                         InputLabelProps={{
                           sx: {
-                            backgroundColor: `${colors.primarycolor}`,
                             color: colors.companycolor,
                           },
+                        }}
+                        onChange={e => {
+                          e.target.value = e.target.value.trim();
                         }}
                       />
                     </Grid>
@@ -461,9 +485,11 @@ export default function SignUp() {
                         }}
                         InputLabelProps={{
                           sx: {
-                            backgroundColor: `${colors.primarycolor}`,
                             color: colors.companycolor,
                           },
+                        }}
+                        onChange={e => {
+                          e.target.value = e.target.value.trim();
                         }}
                       />
                     </Grid>
