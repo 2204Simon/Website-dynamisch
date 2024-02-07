@@ -158,6 +158,9 @@ export default function AdressInformation(): JSX.Element {
                     color: colors.companycolor,
                   },
                 }}
+                onChange={e => {
+                  e.target.value = e.target.value.trim();
+                }}
               />
               <TextField
                 fullWidth
@@ -213,6 +216,9 @@ export default function AdressInformation(): JSX.Element {
                     color: colors.companycolor,
                   },
                 }}
+                onChange={e => {
+                  e.target.value = e.target.value.trim();
+                }}
               />
 
               <TextField
@@ -230,6 +236,9 @@ export default function AdressInformation(): JSX.Element {
                     backgroundColor: `${colors.primarycolor}`,
                     color: colors.companycolor,
                   },
+                }}
+                onChange={e => {
+                  e.target.value = e.target.value.trim();
                 }}
               />
               {/* 
@@ -264,6 +273,9 @@ export default function AdressInformation(): JSX.Element {
                             backgroundColor: `${colors.primarycolor}`,
                             color: colors.companycolor,
                           },
+                        }}
+                        onChange={e => {
+                          e.target.value = e.target.value.trim();
                         }}
                       />
                     </Grid>
@@ -306,6 +318,9 @@ export default function AdressInformation(): JSX.Element {
                             color: colors.companycolor,
                           },
                         }}
+                        onChange={e => {
+                          e.target.value = e.target.value.trim();
+                        }}
                       />
                     </Grid>
                     <Grid item xs={12}>
@@ -324,6 +339,9 @@ export default function AdressInformation(): JSX.Element {
                             backgroundColor: `${colors.primarycolor}`,
                             color: colors.companycolor,
                           },
+                        }}
+                        onChange={e => {
+                          e.target.value = e.target.value.trim();
                         }}
                       />
                     </Grid>
