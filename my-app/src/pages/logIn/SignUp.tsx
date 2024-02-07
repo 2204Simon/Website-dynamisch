@@ -457,6 +457,7 @@ export default function SignUp() {
                         name="iban"
                         inputProps={{
                           maxLength: 50,
+                          style: { color: `${colors.black}` },
                         }}
                         InputLabelProps={{
                           sx: {
