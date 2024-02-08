@@ -2,13 +2,15 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AdressData, AdressDataState } from "./types";
 
 const initialState: AdressDataState = {
-  AdressData: {
-    postleitzahl: "",
-    hausnummer: "",
-    hausnummerzusatz: "",
-    ort: "",
-    strasse: "",
-  },
+  AdressData: [
+    {
+      postleitzahl: "",
+      hausnummer: "",
+      hausnummerzusatz: "",
+      ort: "",
+      strasse: "",
+    },
+  ],
 };
 
 const adressDataSlice = createSlice({
@@ -16,7 +18,7 @@ const adressDataSlice = createSlice({
   initialState,
   reducers: {
     addNewAdress: (state, action: PayloadAction<AdressData>) => {
-      state.AdressData = action.payload;
+      state.AdressData.push(action.payload);
     },
   },
 });

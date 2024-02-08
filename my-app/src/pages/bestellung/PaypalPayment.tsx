@@ -25,13 +25,13 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
 
                 shipping: {
                   address: {
-                    //TODO: replace with real address und name über Server
-                    address_line_1: `${adressInformation.strasse}`,
-                    address_line_2: adressInformation.hausnummerzusatz
-                      ? `${adressInformation.hausnummer} ${adressInformation.hausnummerzusatz}`
-                      : `${adressInformation.hausnummer}`,
-                    admin_area_2: `${adressInformation.ort}`,
-                    postal_code: `${adressInformation.postleitzahl}`,
+                    //TODO: replace with selectedAdress
+                    address_line_1: `${adressInformation[0].strasse}`,
+                    address_line_2: adressInformation[0].hausnummerzusatz
+                      ? `${adressInformation[0].hausnummer} ${adressInformation[0].hausnummerzusatz}`
+                      : `${adressInformation[0].hausnummer}`,
+                    admin_area_2: `${adressInformation[0].ort}`,
+                    postal_code: `${adressInformation[0].postleitzahl}`,
                     country_code: "DE",
                   },
                   name: {

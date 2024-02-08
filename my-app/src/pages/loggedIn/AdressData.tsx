@@ -13,7 +13,7 @@ import {
   Paragraph,
   Title,
 } from "./UserInformation.styles";
-import { Bank, Pencil } from "phosphor-react";
+import { Bank, Pencil, RadioButton } from "phosphor-react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
@@ -40,6 +40,7 @@ const ScrollableContainer = styled.div`
 export default function AdressInformation(): JSX.Element {
   const dispatch = useDispatch();
   const [editMode, setEditMode] = useState(false);
+  const [selectedAdress, setSelectedAdress] = useState<AdressData | null>(null);
   const [editedData, setEditedData] = useState<AdressData | null>(null);
   const [cookies, setCookie] = useCookies([KUNDEN_ID]);
   const adressInformation = useSelector(
@@ -81,7 +82,7 @@ export default function AdressInformation(): JSX.Element {
     }
   };
   const handleEdit = (data: AdressData) => {
-    setEditedData(data);
+    setSelectedAdress(data);
     setEditMode(true);
   };
 
@@ -174,30 +175,38 @@ export default function AdressInformation(): JSX.Element {
           <Grid container spacing={2} justifyContent={"center"}>
             <Grid item xs={12} sm={showFields ? 6 : 12}>
               <ScrollableContainer>
-                {/* map über responseAdress */}
-
-                <Grid>
-                  <Paragraph>
-                    <strong>Postleitzahl: </strong>
-                    {adressInformation.postleitzahl}
-                  </Paragraph>
-                  <Paragraph>
-                    <strong>Stadt: </strong>
-                    {adressInformation.ort}
-                  </Paragraph>
-                  <Paragraph>
-                    <strong>Straße: </strong>
-                    {adressInformation.strasse}
-                  </Paragraph>
-                  <Paragraph>
-                    <strong>Hausnummer: </strong>
-                    {adressInformation.hausnummer}
-                  </Paragraph>
-                  <Paragraph>
-                    <strong>Hausnummerzusatz: </strong>
-                    {adressInformation.hausnummerzusatz}
-                  </Paragraph>
-                </Grid>
+                {adressInformation.map((adress, index) => (
+                  <div key={index}>
+                    <input
+                      type="radio"
+                      id={`Adresse${index}`}
+                      name={`Adresse${index}`}
+                      value={`Adresse${index}`}
+                    />
+                    <Grid>
+                      <Paragraph>
+                        <strong>Postleitzahl: </strong>
+                        {adress.postleitzahl}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>Stadt: </strong>
+                        {adress.ort}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>Straße: </strong>
+                        {adress.strasse}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>Hausnummer: </strong>
+                        {adress.hausnummer}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>Hausnummerzusatz: </strong>
+                        {adress.hausnummerzusatz}
+                      </Paragraph>
+                    </Grid>
+                  </div>
+                ))}
               </ScrollableContainer>
             </Grid>
             {showFields && (
@@ -534,7 +543,11 @@ export default function AdressInformation(): JSX.Element {
                   </Paragraph>
                   <LogoutButton
                     className="black-color white-orange "
-                    onClick={() => handleEdit(adressInformation)}
+                    onClick={() => {
+                      if (selectedAdress) {
+                        handleEdit(selectedAdress);
+                      }
+                    }}
                   >
                     <Pencil size={20} />
                   </LogoutButton>
