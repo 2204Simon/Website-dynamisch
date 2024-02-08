@@ -98,7 +98,6 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
       };
       console.log(itemObjekt);
       const addedProdukt = await sendPutRequest("/warenkorb", itemObjekt);
-      CustomToast.success("Dein Produkt ist im Warenkorb!");
       const amount = item.anzahl;
       dispatch(increaseQuantity({ item, amount: quantity2 })); // Dispatch der addToCart-Action mit dem erstellten Item
     } catch (error) {
@@ -106,6 +105,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
     }
     dispatch(increaseQuantity({ item, amount: quantity2 }));
     CustomToast.success(`Es wurde  ${quantity} ${title} hinzugefügt!`);
+    setQuantity(0);
   };
 
   const handleAddToCart = async () => {
@@ -131,9 +131,9 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
           produktMenge: item.anzahl,
           kundenId: cookie.kundenId,
         };
-        console.log(itemObjekt);
         const addedProdukt = await sendPostRequest("/warenkorb", itemObjekt);
-        CustomToast.success("Dein Produkt ist im Warenkorb!");
+        CustomToast.success(`Es wurde  ${quantity} ${title} hinzugefügt!`);
+        setQuantity(0);
         dispatch(addToCart(item as CartItem)); // Dispatch der addToCart-Action mit dem erstellten Item
       } catch (error) {
         CustomToast.error("Fehler hinzufügen (Serververbindung))");
@@ -188,7 +188,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
 
           <Quantity>
             <MinusQuantity onClick={() => handleMinus(quantity)}>
-              <Minus color={colors.black}/>
+              <Minus color={colors.black} />
             </MinusQuantity>
             <QuantityInput
               type="text"
@@ -200,7 +200,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
               inputMode="numeric"
             />
             <PlusQuantity onClick={() => handlePlus(quantity)}>
-              <Plus color={colors.black}/>
+              <Plus color={colors.black} />
             </PlusQuantity>
           </Quantity>
 

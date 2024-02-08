@@ -33,7 +33,10 @@ export default function Warenkorb({
       <Image src={image} />
       <ContentContainer>
         <div>
-          <Count>{count}x</Count>
+          <Count>
+            {count}
+            {productName === "Zeitung" ? " Tage" : "x"}
+          </Count>
           <ProductName>{productName}</ProductName>
           <Price>{formatNumber(price)}€</Price>
         </div>

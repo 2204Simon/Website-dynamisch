@@ -26,3 +26,12 @@ export function formatNumber(number: number): string {
     maximumFractionDigits: 2,
   });
 }
+
+export function MonthsToDays(months: number): number {
+  const currentDate = new Date();
+  const futureDate = new Date();
+  futureDate.setMonth(currentDate.getMonth() + months);
+  const timeDifference = futureDate.getTime() - currentDate.getTime();
+  const days = Math.ceil(timeDifference / (1000 * 3600 * 24));
+  return days;
+}
