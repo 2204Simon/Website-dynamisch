@@ -54,14 +54,12 @@ export default function AdressInformation(): JSX.Element {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseAdress = await getRequest(`/adresse/${cookies.kundenId}`);
         const responsePayment = await getRequest(
           `/zahlung/${cookies.kundenId}`
         );
-        console.log(responseAdress, "responseAdress");
+
         console.log(responsePayment, "responsePayment");
         dispatch(addPayment(responsePayment));
-        dispatch(addNewAdress(responseAdress));
       } catch (error) {
         CustomToast.error("Fehler beim Laden der Daten");
       }
