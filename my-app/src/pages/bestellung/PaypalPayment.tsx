@@ -6,7 +6,7 @@ import {
   AdressDataState,
   UserDataState,
 } from "../../redux/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
   const userInformation = useSelector(
@@ -17,7 +17,7 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
   );
   const [selectedAdress, setSelectedAdress] =
     useState<AddressenInformation | null>(null);
-  const zahlungsID = (selectedAdress?.laufendeAdressenId as number) - 1;
+  const zahlungsID = selectedAdress;
   return (
     <div style={{ position: "relative" }}>
       <PayPalButtons
@@ -33,13 +33,12 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
                 shipping: {
                   address: {
                     //TODO: replace with selectedAdress
-                    address_line_1: `${adressInformation[zahlungsID].strasse}`,
-                    address_line_2: adressInformation[zahlungsID]
-                      .hausnummerzusatz
-                      ? `${adressInformation[zahlungsID].hausnummer} ${adressInformation[0].hausnummerzusatz}`
-                      : `${adressInformation[zahlungsID].hausnummer}`,
-                    admin_area_2: `${adressInformation[zahlungsID].ort}`,
-                    postal_code: `${adressInformation[zahlungsID].postleitzahl}`,
+                    address_line_1: `${zahlungsID?.strasse}`,
+                    address_line_2: `${zahlungsID?.hausnummerzusatz}`
+                      ? `${zahlungsID?.hausnummer} ${zahlungsID?.hausnummerzusatz}`
+                      : `${zahlungsID?.hausnummer}`,
+                    admin_area_2: `${zahlungsID?.ort}`,
+                    postal_code: `${zahlungsID?.postleitzahl}`,
                     country_code: "DE",
                   },
                   name: {
