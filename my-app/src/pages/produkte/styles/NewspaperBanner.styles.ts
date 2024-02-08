@@ -19,7 +19,6 @@ export const BannerContainer = styled.div`
     justify-items: center; // Elemente horizontal zentrieren
     align-items: center; // Elemente vertikal zentrieren
   }
-
 `;
 
 export const BannerImage = styled.img`
@@ -30,8 +29,8 @@ export const BannerImage = styled.img`
   object-fit: cover;
   border-radius: 10px;
   @media (max-width: 900px) {
-    
-    justify-self: center; }
+    justify-self: center;
+  }
 `;
 
 export const BannerContent = styled.div`
@@ -41,7 +40,6 @@ export const BannerContent = styled.div`
   justify-content: center;
   margin-top: 20px;
   text-align: center;
-  
 `;
 
 export const BannerTitle = styled.h5`
@@ -62,6 +60,7 @@ export const XCircleWrapper = styled.div`
   right: 11.8%;
   margin: 10px;
   z-index: 2;
+  color: ${colors.black};
 `;
 
 export const CenteredContainer = styled.div`
