@@ -172,7 +172,7 @@ export default function AdressInformation(): JSX.Element {
         <Card>
           <Title>Adresse</Title>
           <Grid container spacing={2} justifyContent={"center"}>
-            <Grid item xs={showFields ? 6 : 12}>
+            <Grid item xs={12} sm={showFields ? 6 : 12}>
               <ScrollableContainer>
                 {/* map über responseAdress */}
 
@@ -201,7 +201,7 @@ export default function AdressInformation(): JSX.Element {
               </ScrollableContainer>
             </Grid>
             {showFields && (
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
                   required
@@ -334,7 +334,6 @@ export default function AdressInformation(): JSX.Element {
                       hausnummerzusatz: hausnummerzusatz,
                     };
 
-                    console.log(data); // Überprüfen Sie den Wert von data
                     if (data) {
                       handleAddAdress(data);
                     } else {
