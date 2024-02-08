@@ -30,6 +30,12 @@ import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
 import { CustomToast } from "../general/toast.style";
 import { addPayment } from "../../redux/paymentReaducer";
+import styled from "styled-components";
+
+const ScrollableContainer = styled.div`
+  overflow: auto;
+  max-height: 300px;
+`;
 
 export default function AdressInformation(): JSX.Element {
   const dispatch = useDispatch();
@@ -43,7 +49,7 @@ export default function AdressInformation(): JSX.Element {
     (state: { payment: PaymentDataState }) => state.payment.PaymentData
   );
   const [selectedPayments, setSelectedPayments] = useState<string[]>([]);
-
+  const [showFields, setShowFields] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -79,23 +85,52 @@ export default function AdressInformation(): JSX.Element {
     setEditMode(true);
   };
 
+  const handleOpenAdress = () => {
+    setShowFields(true);
+  };
+
+  const handleAddAdress = async (data: AdressData) => {
+    console.log(data, "data");
+    // Überprüfen, ob die Felder leer sind
+    if (!data.postleitzahl || !data.ort || !data.strasse || !data.hausnummer) {
+      CustomToast.error("Bitte füllen Sie alle erforderlichen Felder aus.");
+      return;
+    }
+    const adressData: AdressData = {
+      kundenId: cookies.kundenId,
+      postleitzahl: data.postleitzahl,
+      ort: data.ort,
+      strasse: data.strasse,
+      hausnummer: data.hausnummer,
+      hausnummerzusatz: data.hausnummerzusatz,
+    };
+
+    console.log(adressData, "adressData");
+    try {
+      //ToDo: Add new Adress
+      const putAdressData = await sendPutRequest("/adresse", adressData);
+      dispatch(addNewAdress(putAdressData));
+      setShowFields(false);
+    } catch (error) {
+      CustomToast.error("Fehler beim Hinzufügen der Adresse");
+    }
+  };
+
   const handleCancel = () => {
     setEditedData(null);
     setEditMode(false);
+  };
+
+  const handleCancelAdress = () => {
+    setEditedData(null);
+    setShowFields(false);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     console.log("submit");
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const preparedData: AdressData = {
-      kundenId: cookies.kundenId,
-      postleitzahl: data.get("plz") as string,
-      strasse: data.get("street") as string,
-      ort: data.get("city") as string,
-      hausnummer: data.get("hausnummer") as string,
-      hausnummerzusatz: data.get("hausnummerzusatz") as string,
-    };
+
     const paymentData: PaymentData = {
       kundenId: cookies.kundenId,
       paypalEmail: data.get("paypalEmail") as string,
@@ -118,11 +153,10 @@ export default function AdressInformation(): JSX.Element {
       );
       return;
     }
-    console.log(preparedData);
+
     try {
-      const putAdressData = await sendPutRequest("/adresse", preparedData);
       const putPaymentData = await sendPutRequest("/zahlung", paymentData);
-      dispatch(addNewAdress(putAdressData));
+
       dispatch(addPayment(putPaymentData));
       setEditedData(null);
       setEditMode(false);
@@ -131,126 +165,224 @@ export default function AdressInformation(): JSX.Element {
       console.log(error);
     }
   };
-  const [hasSubscription, setHasSubscription] = useState(false);
-  const [expiryDate, setExpiryDate] = useState(new Date());
 
   return (
-    <Container>
-      <Card>
-        {editMode ? (
-          <form onSubmit={e => handleSubmit(e)}>
-            <Grid justifyContent={"center"}>
-              <Title>Adresse</Title>
-              <TextField
-                fullWidth
-                required
-                id="plz"
-                label="Postleitzahl"
-                name="plz"
-                defaultValue={editedData?.postleitzahl}
-                inputProps={{
-                  maxLength: 50,
-                  style: { color: `${colors.black}` },
-                }}
-                InputLabelProps={{
-                  sx: {
-                    backgroundColor: `${colors.primarycolor}`,
-                    color: colors.companycolor,
-                  },
-                }}
-                onChange={e => {
-                  e.target.value = e.target.value.trim();
-                }}
-              />
-              <TextField
-                fullWidth
-                required
-                id="city"
-                label="Stadt"
-                name="city"
-                defaultValue={editedData?.ort}
-                inputProps={{
-                  maxLength: 50,
-                  style: { color: `${colors.black}` },
-                }}
-                InputLabelProps={{
-                  sx: {
-                    backgroundColor: `${colors.primarycolor}`,
-                    color: colors.companycolor,
-                  },
-                }}
-              />
-              <TextField
-                fullWidth
-                required
-                id="street"
-                label="Straße"
-                name="street"
-                defaultValue={editedData?.strasse}
-                inputProps={{
-                  maxLength: 50,
-                  style: { color: `${colors.black}` },
-                }}
-                InputLabelProps={{
-                  sx: {
-                    backgroundColor: `${colors.primarycolor}`,
-                    color: colors.companycolor,
-                  },
-                }}
-              />
+    <div>
+      <Container>
+        <Card>
+          <Title>Adresse</Title>
+          <Grid container spacing={2} justifyContent={"center"}>
+            <Grid item xs={showFields ? 6 : 12}>
+              <ScrollableContainer>
+                {/* map über responseAdress */}
 
-              <TextField
-                fullWidth
-                required
-                id="hausnummer"
-                label="Hausnummer"
-                name="hausnummer"
-                defaultValue={editedData?.hausnummer}
-                inputProps={{
-                  maxLength: 50,
-                  style: { color: `${colors.black}` },
-                }}
-                InputLabelProps={{
-                  sx: {
-                    backgroundColor: `${colors.primarycolor}`,
-                    color: colors.companycolor,
-                  },
-                }}
-                onChange={e => {
-                  e.target.value = e.target.value.trim();
-                }}
-              />
+                <Grid>
+                  <Paragraph>
+                    <strong>Postleitzahl: </strong>
+                    {adressInformation.postleitzahl}
+                  </Paragraph>
+                  <Paragraph>
+                    <strong>Stadt: </strong>
+                    {adressInformation.ort}
+                  </Paragraph>
+                  <Paragraph>
+                    <strong>Straße: </strong>
+                    {adressInformation.strasse}
+                  </Paragraph>
+                  <Paragraph>
+                    <strong>Hausnummer: </strong>
+                    {adressInformation.hausnummer}
+                  </Paragraph>
+                  <Paragraph>
+                    <strong>Hausnummerzusatz: </strong>
+                    {adressInformation.hausnummerzusatz}
+                  </Paragraph>
+                </Grid>
+              </ScrollableContainer>
+            </Grid>
+            {showFields && (
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  required
+                  id="plz"
+                  label="Postleitzahl"
+                  name="plz"
+                  defaultValue={editedData?.postleitzahl}
+                  inputProps={{
+                    maxLength: 50,
+                    style: { color: `${colors.black}` },
+                  }}
+                  InputLabelProps={{
+                    sx: {
+                      backgroundColor: `${colors.primarycolor}`,
+                      color: colors.companycolor,
+                    },
+                  }}
+                  onChange={e => {
+                    e.target.value = e.target.value.trim();
+                  }}
+                />
+                <TextField
+                  fullWidth
+                  required
+                  id="city"
+                  label="Stadt"
+                  name="city"
+                  defaultValue={editedData?.ort}
+                  inputProps={{
+                    maxLength: 50,
+                    style: { color: `${colors.black}` },
+                  }}
+                  InputLabelProps={{
+                    sx: {
+                      backgroundColor: `${colors.primarycolor}`,
+                      color: colors.companycolor,
+                    },
+                  }}
+                />
+                <TextField
+                  fullWidth
+                  required
+                  id="street"
+                  label="Straße"
+                  name="street"
+                  defaultValue={editedData?.strasse}
+                  inputProps={{
+                    maxLength: 50,
+                    style: { color: `${colors.black}` },
+                  }}
+                  InputLabelProps={{
+                    sx: {
+                      backgroundColor: `${colors.primarycolor}`,
+                      color: colors.companycolor,
+                    },
+                  }}
+                />
 
-              <TextField
-                fullWidth
-                id="hausnummerzusatz"
-                label="Hausnummerzusatz"
-                name="hausnummerzusatz"
-                defaultValue={editedData?.hausnummerzusatz}
-                inputProps={{
-                  maxLength: 50,
-                  style: { color: `${colors.black}` },
-                }}
-                InputLabelProps={{
-                  sx: {
-                    backgroundColor: `${colors.primarycolor}`,
-                    color: colors.companycolor,
-                  },
-                }}
-                onChange={e => {
-                  e.target.value = e.target.value.trim();
-                }}
-              />
-              {/* 
-              <Title>Zeitungsabonnement:</Title> */}
-              {/* <ZeitungsAbo
+                <TextField
+                  fullWidth
+                  required
+                  id="hausnummer"
+                  label="Hausnummer"
+                  name="hausnummer"
+                  defaultValue={editedData?.hausnummer}
+                  inputProps={{
+                    maxLength: 50,
+                    style: { color: `${colors.black}` },
+                  }}
+                  InputLabelProps={{
+                    sx: {
+                      backgroundColor: `${colors.primarycolor}`,
+                      color: colors.companycolor,
+                    },
+                  }}
+                  onChange={e => {
+                    e.target.value = e.target.value.trim();
+                  }}
+                />
+                <TextField
+                  fullWidth
+                  id="hausnummerzusatz"
+                  label="Hausnummerzusatz"
+                  name="hausnummerzusatz"
+                  defaultValue={editedData?.hausnummerzusatz}
+                  inputProps={{
+                    maxLength: 50,
+                    style: { color: `${colors.black}` },
+                  }}
+                  InputLabelProps={{
+                    sx: {
+                      backgroundColor: `${colors.primarycolor}`,
+                      color: colors.companycolor,
+                    },
+                  }}
+                  onChange={e => {
+                    e.target.value = e.target.value.trim();
+                  }}
+                />
+                <Button
+                  style={{ color: colors.companycolor }}
+                  type="submit"
+                  onClick={() => {
+                    // Abrufen der Werte aus den Textfeldern
+                    const postleitzahl = (
+                      document.getElementById("plz") as HTMLInputElement
+                    ).value;
+                    const ort = (
+                      document.getElementById("city") as HTMLInputElement
+                    ).value;
+                    const strasse = (
+                      document.getElementById("street") as HTMLInputElement
+                    ).value;
+                    const hausnummer = (
+                      document.getElementById("hausnummer") as HTMLInputElement
+                    ).value;
+                    const hausnummerzusatz = (
+                      document.getElementById(
+                        "hausnummerzusatz"
+                      ) as HTMLInputElement
+                    ).value;
+
+                    // Initialisieren von editedData mit den abgerufenen Werten
+                    const data: AdressData = {
+                      kundenId: cookies.kundenId,
+                      postleitzahl: postleitzahl,
+                      ort: ort,
+                      strasse: strasse,
+                      hausnummer: hausnummer,
+                      hausnummerzusatz: hausnummerzusatz,
+                    };
+
+                    console.log(data); // Überprüfen Sie den Wert von data
+                    if (data) {
+                      handleAddAdress(data);
+                    } else {
+                      CustomToast.error("Keine Daten zum Hinzufügen");
+                    }
+                  }}
+                >
+                  Neu anlegen
+                </Button>
+
+                <Button
+                  style={{ color: colors.companycolor }}
+                  onClick={handleCancelAdress}
+                >
+                  Abbrechen
+                </Button>
+              </Grid>
+            )}
+            {!showFields && (
+              <Grid>
+                <LogoutButton
+                  className="black-color white-orange "
+                  onClick={() => handleOpenAdress()}
+                >
+                  {" "}
+                  Adresse hinzufügen
+                </LogoutButton>
+              </Grid>
+            )}
+          </Grid>
+        </Card>
+      </Container>
+
+      {/* 
+      <Title>Zeitungsabonnement:</Title> */}
+      {/* <ZeitungsAbo
                 hasSubscription={hasSubscription}
                 setHasSubscription={setHasSubscription}
                 expiryDate={expiryDate}
                 setExpiryDate={setExpiryDate}
               /> */}
+      <Container>
+        <Card>
+          <Title>Zahlungsmöglichkeiten: </Title>
+
+          {editMode ? (
+            <form onSubmit={e => handleSubmit(e)}>
               <Grid item xs={12}>
-                <Title>Zahlungsmöglichkeiten: </Title>
                 <FormControl component="fieldset">
                   <FormGroup>
                     <Title>
@@ -266,7 +398,10 @@ export default function AdressInformation(): JSX.Element {
                         defaultValue={paymentInformation.paypalEmail}
                         inputProps={{
                           maxLength: 100,
-                          style: { color: `${colors.black}` },
+                          style: {
+                            color: `${colors.black}`,
+                            textAlign: "left",
+                          },
                         }}
                         InputLabelProps={{
                           sx: {
@@ -291,7 +426,10 @@ export default function AdressInformation(): JSX.Element {
                         defaultValue={paymentInformation.bankname}
                         inputProps={{
                           maxLength: 50,
-                          style: { color: `${colors.black}` },
+                          style: {
+                            color: `${colors.black}`,
+                            textAlign: "left",
+                          },
                         }}
                         InputLabelProps={{
                           sx: {
@@ -310,7 +448,10 @@ export default function AdressInformation(): JSX.Element {
                         defaultValue={paymentInformation.bic}
                         inputProps={{
                           maxLength: 50,
-                          style: { color: `${colors.black}` },
+                          style: {
+                            color: `${colors.black}`,
+                            textAlign: "left",
+                          },
                         }}
                         InputLabelProps={{
                           sx: {
@@ -332,7 +473,10 @@ export default function AdressInformation(): JSX.Element {
                         defaultValue={paymentInformation.iban}
                         inputProps={{
                           maxLength: 50,
-                          style: { color: `${colors.black}` },
+                          style: {
+                            color: `${colors.black}`,
+                            textAlign: "left",
+                          },
                         }}
                         InputLabelProps={{
                           sx: {
@@ -348,72 +492,59 @@ export default function AdressInformation(): JSX.Element {
                   </FormGroup>
                 </FormControl>
               </Grid>
-            </Grid>
 
-            <Button style={{ color: colors.companycolor }} type="submit">
-              Speichern
-            </Button>
+              <Button style={{ color: colors.companycolor }} type="submit">
+                Speichern
+              </Button>
 
-            <Button
-              style={{ color: colors.companycolor }}
-              onClick={handleCancel}
-            >
-              Abbrechen
-            </Button>
-          </form>
-        ) : (
-          <div>
-            <Title style={{ textAlign: "center" }}>Persönliche Daten</Title>
-            <Grid container gap={10} justifyContent={"center"}>
-              <Grid item>
-                <Paragraph>
-                  <strong>Postleitzahl: </strong>
-                  {adressInformation?.postleitzahl}
-                </Paragraph>
-                <Paragraph>
-                  <strong>Stadt: </strong>
-                  {adressInformation?.ort}
-                </Paragraph>
-                <Paragraph>
-                  <strong>Straße: </strong>
-                  {adressInformation?.strasse}
-                </Paragraph>
-                <Paragraph>
-                  <strong>Hausnummer: </strong>
-                  {adressInformation?.hausnummer}
-                </Paragraph>
-                <Paragraph>
-                  <strong>Hausnummerzusatz: </strong>
-                  {adressInformation?.hausnummerzusatz}
-                </Paragraph>
-              </Grid>
-              <Grid
-                item
-                alignItems={"center"}
-                display={"flex"}
-                justifyContent={"center"}
-                flexDirection={"column"}
+              <Button
+                style={{ color: colors.companycolor }}
+                onClick={handleCancel}
               >
-                <Paragraph>
-                  <strong>Zahlungsart</strong>
-                </Paragraph>
-                <FaPaypal size={30} />
-                <Paragraph>{paymentInformation.paypalEmail}</Paragraph>
-                <Bank size={30} />
-                <Paragraph>{paymentInformation.bankname}</Paragraph>
-                <Paragraph>{paymentInformation.bic}</Paragraph>
-                <Paragraph>{paymentInformation.iban}</Paragraph>
+                Abbrechen
+              </Button>
+            </form>
+          ) : (
+            <div>
+              <Grid container gap={10} justifyContent={"center"}>
+                <Grid
+                  item
+                  alignItems={"center"}
+                  display={"flex"}
+                  justifyContent={"center"}
+                  flexDirection={"column"}
+                >
+                  <Paragraph>
+                    <strong>Zahlungsart</strong>
+                  </Paragraph>
+                  <FaPaypal size={30} />
+                  <Paragraph>
+                    <strong>Paypal-Email:</strong>{" "}
+                    {paymentInformation.paypalEmail}
+                  </Paragraph>
+                  <Bank size={30} />
+                  <Paragraph>
+                    <strong>Bankname:</strong> {paymentInformation.bankname}
+                  </Paragraph>
+                  <Paragraph>
+                    <strong>BIC:</strong> {paymentInformation.bic}
+                  </Paragraph>
+                  <Paragraph>
+                    <strong>IBAN: </strong>
+                    {paymentInformation.iban}
+                  </Paragraph>
+                  <LogoutButton
+                    className="black-color white-orange "
+                    onClick={() => handleEdit(adressInformation)}
+                  >
+                    <Pencil size={20} />
+                  </LogoutButton>
+                </Grid>
               </Grid>
-            </Grid>
-            <LogoutButton
-              className="black-color white-orange "
-              onClick={() => handleEdit(adressInformation)}
-            >
-              <Pencil size={20} />
-            </LogoutButton>
-          </div>
-        )}
-      </Card>
-    </Container>
+            </div>
+          )}
+        </Card>
+      </Container>
+    </div>
   );
 }
