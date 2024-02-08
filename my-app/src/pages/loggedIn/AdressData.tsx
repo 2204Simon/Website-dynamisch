@@ -5,6 +5,7 @@ import {
   AdressData,
   PaymentData,
   PaymentDataState,
+  AddressenInformation,
 } from "../../redux/types";
 import {
   Card,
@@ -40,7 +41,8 @@ const ScrollableContainer = styled.div`
 export default function AdressInformation(): JSX.Element {
   const dispatch = useDispatch();
   const [editMode, setEditMode] = useState(false);
-  const [selectedAdress, setSelectedAdress] = useState<AdressData | null>(null);
+  const [selectedAdress, setSelectedAdress] =
+    useState<AddressenInformation | null>(null);
   const [editedData, setEditedData] = useState<AdressData | null>(null);
   const [cookies, setCookie] = useCookies([KUNDEN_ID]);
   const adressInformation = useSelector(
@@ -106,7 +108,6 @@ export default function AdressInformation(): JSX.Element {
 
     console.log(adressData, "adressData");
     try {
-      //ToDo: Add new Adress
       const putAdressData = await sendPutRequest("/adresse", adressData);
       dispatch(addNewAdress(putAdressData));
       setShowFields(false);
@@ -544,7 +545,13 @@ export default function AdressInformation(): JSX.Element {
                   </Paragraph>
                   <LogoutButton
                     className="black-color white-orange "
-                    onClick={() => handleEdit(adressInformation[2])} //selected Adress mit globalSTate TOdo
+                    onClick={() =>
+                      handleEdit(
+                        adressInformation[
+                          (selectedAdress?.laufendeAdressenId as number) - 1
+                        ]
+                      )
+                    }
                   >
                     <Pencil size={20} />
                   </LogoutButton>
