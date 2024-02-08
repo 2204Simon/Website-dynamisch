@@ -82,8 +82,8 @@ export default function AdressInformation(): JSX.Element {
     }
   };
   const handleEdit = (data: AdressData) => {
-    setSelectedAdress(data);
     setEditMode(true);
+    setEditedData(data);
   };
 
   const handleOpenAdress = () => {
@@ -543,11 +543,7 @@ export default function AdressInformation(): JSX.Element {
                   </Paragraph>
                   <LogoutButton
                     className="black-color white-orange "
-                    onClick={() => {
-                      if (selectedAdress) {
-                        handleEdit(selectedAdress);
-                      }
-                    }}
+                    onClick={() => handleEdit(adressInformation[2])} //selected Adress mit globalSTate TOdo
                   >
                     <Pencil size={20} />
                   </LogoutButton>
