@@ -30,12 +30,18 @@ import { CustomToast } from "../general/toast.style";
 import { Button } from "../general/button.styles";
 import { baseUrl } from "../../globalVariables/global";
 
+
+interface A1 {
+  id: string;
+  quantity: number;
+}
+
 interface BreadSelectionProps {
-  onNextStage: (selectedProduct: string, selectedImage: string) => void;
+  onNextStage: (breadselection: Array<A1>) => void;
 }
 
 const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
-  const [selectedBread, setSelectedBread] = useState<string | null>(null);
+  const [selectedBread, setSelectedBread] = useState<Array<A1>> ([]); // Hier speichern wir das ausgewählte Brot
   const [breads, setBreads] = useState<any[]>([]); // Hier speichern wir die vom Server geholten Brote
   const [backendError, setBackendError] = useState(false);
   useEffect(() => {
@@ -47,7 +53,7 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
             loadImage(bread.zutatBild).then(image => ({
               ...bread,
               zutatBild: image,
-            }))
+            })),
           )
         )
       )
@@ -61,8 +67,8 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
       });
   }, []);
 
-  const handleBreadSelect = (breadType: string, image: string) => {
-    setSelectedBread(breadType);
+  const handleBreadSelect = (breadID: string) => {
+    setSelectedBread([{ id: breadID, quantity: 0 }]);
   };
 
   async function loadImage(path: string): Promise<string> {
@@ -71,8 +77,11 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
   }
 
   const handleNext = () => {
+   // const selectedBreadData: { [key: string]: number }[] = Object.keys(selectedBread).map(key => ({ [key]: selectedBread[key] }));
+      //.map(topping => selectedBread.find(t => t.zutatsId === topping));
+    
     if (selectedBread) {
-      onNextStage(selectedBread, "");
+      onNextStage(selectedBread);
     }
   };
 
@@ -108,10 +117,10 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
                   displayNone={false}
                   key={bread.zutatsId}
                   className={
-                    selectedBread === bread.zutatsname ? "selected" : ""
+                    selectedBread === bread.id ? "selected" : ""
                   }
                   onClick={() =>
-                    handleBreadSelect(bread.zutatsname, bread.zutatBild)
+                    handleBreadSelect(bread.zutatsId)
                   }
                 >
                   <ImageContainer>
