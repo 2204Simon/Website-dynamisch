@@ -17,7 +17,7 @@ export enum ActionTypesUser {
 
 //Adress Data
 export interface AdressDataState {
-  AdressData: AdressData;
+  AdressData: AdressData[];
 }
 
 export interface AdressData {

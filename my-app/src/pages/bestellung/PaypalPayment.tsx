@@ -1,7 +1,12 @@
 import { PayPalButtons, FUNDING } from "@paypal/react-paypal-js";
 import { CustomToast } from "../general/toast.style";
 import { useSelector } from "react-redux";
-import { AdressDataState, UserDataState } from "../../redux/types";
+import {
+  AddressenInformation,
+  AdressDataState,
+  UserDataState,
+} from "../../redux/types";
+import { useEffect, useState } from "react";
 
 export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
   const userInformation = useSelector(
@@ -10,9 +15,18 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
   const adressInformation = useSelector(
     (state: { adress: AdressDataState }) => state.adress.AdressData
   );
-
+  const [selectedAdress, setSelectedAdress] =
+    useState<AddressenInformation | null>(null);
+  const zahlungsID = selectedAdress;
   return (
-    <div style={{ position: "relative" }}>
+    <div
+      style={{
+        position: "relative",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <PayPalButtons
         fundingSource={FUNDING.PAYPAL}
         createOrder={(data: any, actions: any) => {
@@ -25,13 +39,13 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
 
                 shipping: {
                   address: {
-                    //TODO: replace with real address und name über Server
-                    address_line_1: `${adressInformation.strasse}`,
-                    address_line_2: adressInformation.hausnummerzusatz
-                      ? `${adressInformation.hausnummer} ${adressInformation.hausnummerzusatz}`
-                      : `${adressInformation.hausnummer}`,
-                    admin_area_2: `${adressInformation.ort}`,
-                    postal_code: `${adressInformation.postleitzahl}`,
+                    //TODO: replace with selectedAdress
+                    address_line_1: `${zahlungsID?.strasse}`,
+                    address_line_2: `${zahlungsID?.hausnummerzusatz}`
+                      ? `${zahlungsID?.hausnummer} ${zahlungsID?.hausnummerzusatz}`
+                      : `${zahlungsID?.hausnummer}`,
+                    admin_area_2: `${zahlungsID?.ort}`,
+                    postal_code: `${zahlungsID?.postleitzahl}`,
                     country_code: "DE",
                   },
                   name: {
