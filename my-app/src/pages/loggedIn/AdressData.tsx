@@ -53,12 +53,16 @@ export default function AdressInformation(): JSX.Element {
   );
   const [selectedPayments, setSelectedPayments] = useState<string[]>([]);
   const [showFields, setShowFields] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const responsePayment = await getRequest(
           `/zahlung/${cookies.kundenId}`
         );
+        const responseAdress = await getRequest(`/adresse/${cookies.kundenId}`);
+        console.log(responseAdress, "responseAdress");
+        dispatch(addNewAdress(responseAdress));
 
         console.log(responsePayment, "responsePayment");
         dispatch(addPayment(responsePayment));
