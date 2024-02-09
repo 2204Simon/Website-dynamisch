@@ -19,7 +19,14 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
     useState<AddressenInformation | null>(null);
   const zahlungsID = selectedAdress;
   return (
-    <div style={{ position: "relative" }}>
+    <div
+      style={{
+        position: "relative",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <PayPalButtons
         fundingSource={FUNDING.PAYPAL}
         createOrder={(data: any, actions: any) => {
