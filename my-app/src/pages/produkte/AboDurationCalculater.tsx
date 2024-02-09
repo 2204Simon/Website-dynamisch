@@ -81,6 +81,7 @@ function AboDurationCalculator() {
         product => product.titel === "Zeitung"
       );
       if (newspaperOrder) {
+        newspaperOrder.createdAt = order.bestellDatum;
         newspaperOrders.push(newspaperOrder);
       }
     });
