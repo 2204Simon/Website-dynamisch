@@ -53,7 +53,17 @@ export default function AdressInformation(): JSX.Element {
   );
   const [selectedPayments, setSelectedPayments] = useState<string[]>([]);
   const [showFields, setShowFields] = useState(false);
-
+  const uniqueAdressInformation = adressInformation.filter(
+    (adress, index, self) =>
+      index ===
+      self.findIndex(
+        t =>
+          t.postleitzahl === adress.postleitzahl &&
+          t.ort === adress.ort &&
+          t.strasse === adress.strasse &&
+          t.hausnummer === adress.hausnummer
+      )
+  );
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -178,7 +188,7 @@ export default function AdressInformation(): JSX.Element {
           <Grid container spacing={2} justifyContent={"center"}>
             <Grid item xs={12} sm={showFields ? 6 : 12}>
               <ScrollableContainer>
-                {adressInformation
+                {uniqueAdressInformation
                   .slice()
                   .reverse()
                   .map((adress, index) => (
