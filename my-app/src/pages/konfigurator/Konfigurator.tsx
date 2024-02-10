@@ -8,12 +8,12 @@ import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { useLoggedIn } from "../../globalVariables/loggedin";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../general/button.styles";
+import { baseUrl } from "../../globalVariables/global";
 
 interface A1 {
   id: string;
   quantity: number;
 }
-
 
 const Konfigurator: React.FC = () => {
   const [currentStage, setCurrentStage] = useState<number>(1);
@@ -44,12 +44,35 @@ const Konfigurator: React.FC = () => {
     setCurrentStage(currentStage - 1);
   };
 
+  // const addToCart = async () => {
+  //   const zutatIdWithAmount = [
+  //     ...selectedBread,
+  //     ...selectedToppings,
+  //     ...selectedDrink,
+  //   ].map(item => ({
+  //     zutatsId: item.id,
+  //     zutatenMenge: item.quantity,
+  //   }));
+
+  //   const response = await fetch(`${baseUrl}/Zutatenposition`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       produktId: "87056000-c733-11ee-aee9-c5556ce2ed0f", // ProduktID muss noch angepasst werden
+  //       zutatIdWithAmount,
+  //     }),
+  //   });
+
+  //   if (!response.ok) {
+  //     throw new Error("Failed to add to cart");
+  //   }
+  // };
+
   return (
     <div>
-      {currentStage === 1 && 
-        <BreadSelection 
-          onNextStage={handleNextStage} 
-          />}
+      {currentStage === 1 && <BreadSelection onNextStage={handleNextStage} />}
       {currentStage === 2 && (
         <ToppingsSelection
           onNextStage={handleNextStage}
@@ -69,14 +92,15 @@ const Konfigurator: React.FC = () => {
           </NavigationIcon>
           <h2>Zusammenfassung</h2>
           <>
-            {selectedToppings.map((item) => {
-                  return (<div>
-                    <p>test</p>
-                    <p>{item.id}</p>
-                    <p>{item.quantity}</p></div>);
-            })
-          
-          }
+            {selectedToppings.map(item => {
+              return (
+                <div>
+                  <p>test</p>
+                  <p>{item.id}</p>
+                  <p>{item.quantity}</p>
+                </div>
+              );
+            })}
           </>
           <p>Ausgewählte Beläge: {selectedToppings.toString()}</p>
           <p>Ausgewähltes Getränk: {selectedDrink.toString()}</p>
@@ -98,7 +122,14 @@ const Konfigurator: React.FC = () => {
           {loggedIn && currentStage === 4 && (
             <Button
               className="black-color white-orange"
-              onClick={() => navigate("/Bestellung")} //TODO anpassung an server senden/Warenkorb hinzufügen
+              // onClick={() => {
+              //   addToCart()
+              //     .then(() => navigate("/Bestellung"))
+              //     .catch(error => {
+              //       // Handle error here
+              //       console.error(error);
+              //     });
+              // }}
             >
               Zum Warenkorb hinzufügen
             </Button>
