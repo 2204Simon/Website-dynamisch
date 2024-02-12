@@ -12,9 +12,12 @@ const adressDataSlice = createSlice({
     addNewAdress: (state, action: PayloadAction<AdressData>) => {
       state.AdressData.push(action.payload);
     },
+    loadAdressen: (state, action: PayloadAction<AdressData[]>) => {
+      state.AdressData = action.payload;
+    },
   },
 });
 
-export const { addNewAdress } = adressDataSlice.actions;
+export const { addNewAdress, loadAdressen } = adressDataSlice.actions;
 
 export default adressDataSlice.reducer;

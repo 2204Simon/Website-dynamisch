@@ -22,7 +22,7 @@ import FormControl from "@mui/material/FormControl";
 import { FaPaypal } from "react-icons/fa";
 import { colors } from "../general/constants";
 import { FormGroup } from "@mui/material";
-import { addNewAdress } from "../../redux/adressDataReducer";
+import { addNewAdress, loadAdressen } from "../../redux/adressDataReducer";
 import {
   getRequest,
   sendPutRequest,
@@ -70,9 +70,11 @@ export default function AdressInformation(): JSX.Element {
         const responsePayment = await getRequest(
           `/zahlung/${cookies.kundenId}`
         );
-        const responseAdress = await getRequest(`/adresse/${cookies.kundenId}`);
+        const responseAdress = await getRequest(
+          `/adressen/${cookies.kundenId}`
+        );
         console.log(responseAdress, "responseAdress");
-        dispatch(addNewAdress(responseAdress));
+        dispatch(loadAdressen(responseAdress));
 
         console.log(responsePayment, "responsePayment");
         dispatch(addPayment(responsePayment));
