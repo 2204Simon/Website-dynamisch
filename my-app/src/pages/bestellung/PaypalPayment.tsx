@@ -32,9 +32,9 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
         style={{
           layout: "horizontal",
           color: "gold",
-          shape: "rect",
-          label: "pay",
-          height: 40,
+          shape: "pill",
+          label: "paypal",
+          height: 50,
         }}
         fundingSource={FUNDING.PAYPAL}
         createOrder={(data: any, actions: any) => {
