@@ -185,6 +185,19 @@ export default function AdressInformation(): JSX.Element {
       console.log(error);
     }
   };
+  const highestLaufendeAdressenId = Math.max(
+    ...uniqueAdressInformation
+      .map(adress => adress.laufendeAdressenId)
+      .filter((id): id is number => id !== undefined)
+  );
+  useEffect(() => {
+    const highestAdress = uniqueAdressInformation.find(
+      adress => adress.laufendeAdressenId === highestLaufendeAdressenId
+    );
+    if (highestAdress) {
+      dispatch(setSelectedAdress(highestAdress));
+    }
+  }, [highestLaufendeAdressenId, uniqueAdressInformation, dispatch]);
 
   return (
     <div>
@@ -203,8 +216,12 @@ export default function AdressInformation(): JSX.Element {
                         <input
                           type="radio"
                           id={`Adresse${index}`}
-                          name={`Adresse${index}`}
+                          name="Adresse"
                           value={`Adresse${index}`}
+                          defaultChecked={
+                            adress.laufendeAdressenId ===
+                            highestLaufendeAdressenId
+                          }
                           onChange={() => {
                             handleSelectAdress(adress);
                           }}
