@@ -32,6 +32,7 @@ import { KUNDEN_ID } from "../../globalVariables/global";
 import { CustomToast } from "../general/toast.style";
 import { addPayment } from "../../redux/paymentReaducer";
 import styled from "styled-components";
+import { setSelectedAdress } from "../../redux/adressDataReducer";
 
 const ScrollableContainer = styled.div`
   overflow: auto;
@@ -41,8 +42,6 @@ const ScrollableContainer = styled.div`
 export default function AdressInformation(): JSX.Element {
   const dispatch = useDispatch();
   const [editMode, setEditMode] = useState(false);
-  const [selectedAdress, setSelectedAdress] =
-    useState<AddressenInformation | null>(null);
   const [editedData, setEditedData] = useState<AdressData | null>(null);
   const [cookies, setCookie] = useCookies([KUNDEN_ID]);
   const adressInformation = useSelector(
@@ -132,6 +131,10 @@ export default function AdressInformation(): JSX.Element {
     }
   };
 
+  const handleSelectAdress = (adress: AdressData) => {
+    dispatch(setSelectedAdress(adress));
+  };
+
   const handleCancel = () => {
     setEditedData(null);
     setEditMode(false);
@@ -201,7 +204,11 @@ export default function AdressInformation(): JSX.Element {
                           id={`Adresse${index}`}
                           name={`Adresse${index}`}
                           value={`Adresse${index}`}
+                          onChange={() => {
+                            handleSelectAdress(adress);
+                          }}
                         />
+
                         <Paragraph>
                           <strong>Postleitzahl: </strong>
                           {adress.postleitzahl}
@@ -562,11 +569,7 @@ export default function AdressInformation(): JSX.Element {
                   <LogoutButton
                     className="black-color white-orange "
                     onClick={() =>
-                      handleEdit(
-                        adressInformation[
-                          (selectedAdress?.laufendeAdressenId as number) - 1
-                        ]
-                      )
+                      handleEdit(paymentInformation as unknown as AdressData)
                     }
                   >
                     <Pencil size={20} />

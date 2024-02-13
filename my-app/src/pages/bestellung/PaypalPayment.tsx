@@ -3,6 +3,7 @@ import { CustomToast } from "../general/toast.style";
 import { useSelector } from "react-redux";
 import {
   AddressenInformation,
+  AdressData,
   AdressDataState,
   UserDataState,
 } from "../../redux/types";
@@ -12,12 +13,10 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
   const userInformation = useSelector(
     (state: { user: UserDataState }) => state.user
   );
-  const adressInformation = useSelector(
-    (state: { adress: AdressDataState }) => state.adress.AdressData
+  const selectedAdress = useSelector(
+    (state: { selectedAdress: AdressData }) => state.selectedAdress
   );
-  const [selectedAdress, setSelectedAdress] =
-    useState<AddressenInformation | null>(null);
-  const zahlungsID = selectedAdress;
+
   return (
     <div
       style={{
@@ -40,12 +39,12 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
                 shipping: {
                   address: {
                     //TODO: replace with selectedAdress
-                    address_line_1: `${zahlungsID?.strasse}`,
-                    address_line_2: `${zahlungsID?.hausnummerzusatz}`
-                      ? `${zahlungsID?.hausnummer} ${zahlungsID?.hausnummerzusatz}`
-                      : `${zahlungsID?.hausnummer}`,
-                    admin_area_2: `${zahlungsID?.ort}`,
-                    postal_code: `${zahlungsID?.postleitzahl}`,
+                    address_line_1: `${selectedAdress.strasse}`,
+                    address_line_2: `${selectedAdress.hausnummerzusatz}`
+                      ? `${selectedAdress.hausnummer} ${selectedAdress.hausnummerzusatz}`
+                      : `${selectedAdress.hausnummer}`,
+                    admin_area_2: `${selectedAdress.ort}`,
+                    postal_code: `${selectedAdress.postleitzahl}`,
                     country_code: "DE",
                   },
                   name: {

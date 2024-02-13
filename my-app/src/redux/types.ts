@@ -18,6 +18,7 @@ export enum ActionTypesUser {
 //Adress Data
 export interface AdressDataState {
   AdressData: AdressData[];
+  selectedAdress: AdressData | null;
 }
 
 export interface AdressData {
@@ -27,6 +28,7 @@ export interface AdressData {
   ort: string;
   hausnummer: string;
   hausnummerzusatz?: string;
+  laufendeAdressenId?: number;
 }
 
 export type PaymentData = {
