@@ -28,6 +28,14 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
       }}
     >
       <PayPalButtons
+        key={selectedAdress?.laufendeAdressenId}
+        style={{
+          layout: "horizontal",
+          color: "gold",
+          shape: "rect",
+          label: "pay",
+          height: 40,
+        }}
         fundingSource={FUNDING.PAYPAL}
         createOrder={(data: any, actions: any) => {
           return actions.order.create({
@@ -39,7 +47,6 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
 
                 shipping: {
                   address: {
-                    //TODO: replace with selectedAdress
                     address_line_1: `${selectedAdress?.strasse}`,
                     address_line_2: `${selectedAdress?.hausnummerzusatz}`
                       ? `${selectedAdress?.hausnummer} ${selectedAdress?.hausnummerzusatz}`
