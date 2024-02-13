@@ -29,31 +29,31 @@ import { Minus, Plus } from "phosphor-react";
 import { Button } from "../general/button.styles";
 import { baseUrl } from "../../globalVariables/global";
 import { colors } from "../general/constants";
+import { string } from "prop-types";
 
-interface A1 {
+interface Ingredient {
   id: string;
   quantity: number;
 }
 
-
 interface ExtrasSelectionProps {
   onPrevStage: () => void;
-  onNextStage: (selectedExtra: Array<A1> ) => void;
+  onNextStage: (selectedExtra: Array<Ingredient>) => void;
 }
+var pufferTopping = {
+  id: "",
+  Quantity: 0,
+};
+const pufferToppings = [];
 
 const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
   onPrevStage,
   onNextStage,
 }) => {
-  const [selectedExtras, setSelectedExtras] = useState<string[]>([]);
-  const [extras, setExtras] = useState<any[]>([]); // Hier speichern wir die vom Server geholten Getränke
+  const [selectedExtras, setSelectedExtras] = useState<Array<Ingredient>>([]);
+  const [extras, setExtras] = useState<Array<any>>([]); // Hier speichern wir die vom Server geholten Getränke
   const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
-  const [flipped, setFlipped] = useState(false);
-  const [displayNone, setDisplayNone] = useState(false);
 
-  const handleFlip = () => {
-    setFlipped(!flipped);
-  };
   const handleMinus = (extra: string) => {
     setQuantities(prev => ({
       ...prev,
@@ -64,20 +64,19 @@ const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
   const handlePlus = (extra: string) => {
     setQuantities(prev => ({ ...prev, [extra]: (prev[extra] || 0) + 1 }));
   };
-
   const handleQuantityChange = (
     event: React.ChangeEvent<HTMLInputElement>,
-    extra: string
+    toppingid: string
   ) => {
     const value = parseInt(event.target.value, 10);
     if (!isNaN(value)) {
-      setQuantities(prev => ({ ...prev, [extra]: value }));
+      // setQuantities(prev => ({ ...prev, [topping]: value }));
+      setSelectedExtras([{ id: toppingid, quantity: value }]);
     }
   };
 
-
   useEffect(() => {
-    fetch(`${baseUrl}/zutat/Extra`)
+    fetch(`${baseUrl}/zutat/Topping`)
       .then(response => response.json())
       .then(data =>
         Promise.all(
@@ -99,12 +98,18 @@ const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
   }, []);
 
   const handleExtraSelect = (extraID: string) => {
-    const updatedExtras = selectedExtras.includes(extraID)
-    ? selectedExtras.filter(selected => selected !== extraID)
-    : [...selectedExtras, extraID];
-
-    setSelectedExtras(updatedExtras);
+    const selectedTopping = {
+      id: extraID,
+      quantity: 1,
+    };
+    setSelectedExtras([selectedTopping]);
   };
+  // const updatedExtras = selectedExtras.includes({ id: extraID })
+  //   ? selectedExtras.filter(selected => selected.id !== extraID)
+  //   : [...selectedExtras, { id: extraID }];
+
+  // setSelectedExtras(updatedExtras);
+  // };
 
   async function loadImage(path: string): Promise<string> {
     const image = await import(`../../img/Ingredients/Extras/${path}`);
@@ -116,20 +121,20 @@ const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
   };
 
   const handleNext = () => {
-    const selectedExtrasData = Object.keys(quantities)
-      .filter(extra => quantities[extra] > 0)
-      .map(extra => extras.find(e => e.zutatsId === extra));
+    onNextStage(selectedExtras);
+    // const selectedExtrasData = Object.keys(quantities)
+    //   .filter(extra => quantities[extra] > 0)
+    //   .map(extra => extras.find(e => e.zutatsId === extra));
 
-   // if (selectedExtrasData.length > 0) {
-      onNextStage(
-        selectedExtrasData
-          .map(extraData => extraData?.zutatsId)
-      /*    .join(", "),
+    // // if (selectedExtrasData.length > 0) {
+    // onNextStage(
+    //   selectedExtrasData.map(extraData => extraData?.zutatsId)
+    /*    .join(", "),
         selectedExtrasData
           .map(extraData => extraData?.zutatBild || "")
           .join(", ")*/
-      );
-   // }
+    // );
+    // }
   };
 
   return (
@@ -138,7 +143,7 @@ const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
         <NavigationIcon onClick={handlePrev}>
           <ArrowBack />
         </NavigationIcon>
-        Wähle deine Beilage
+        Wähle deine Extras
         <NavigationIcon onClick={handleNext}>
           <ArrowForward />
         </NavigationIcon>
@@ -158,10 +163,8 @@ const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
                 flipped={false}
                 displayNone={false}
                 key={extra.zutatsId}
-                className={quantities[extra.zutatsId] > 0 ? "selected" : ""}
-                onClick={() =>
-                  handleExtraSelect(extra.zutatsId)
-                }
+                // className={quantities[extra.zutatsId] > 0 ? "selected" : ""}
+                // onClick={() => handleExtraSelect(extra.zutatsId)}
               >
                 <ImageContainer>
                   <Image src={extra.zutatBild} alt={extra.zutatsname} />
@@ -170,7 +173,7 @@ const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
                   <Title> {extra.zutatsname} </Title>
                   <Price> Preis: {extra.zutatspreis} € </Price>
                   <Unit> Einheit: {extra.zutatseinheit} </Unit>
-                  <Quantity>
+                  {/* <Quantity>
                     <>
                       <Label htmlFor={`quantity-${extra.zutatsId}`}>
                         Menge:
@@ -178,7 +181,7 @@ const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
                       <MinusQuantity
                         onClick={() => handleMinus(extra.zutatsId)}
                       >
-                        <Minus color={colors.black}/>
+                        <Minus color={colors.black} />
                       </MinusQuantity>
                       <QuantityInput
                         type="text"
@@ -191,13 +194,11 @@ const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
                         ) => handleQuantityChange(event, extra.zutatsId)}
                         inputMode="numeric"
                       />
-                      <PlusQuantity
-                        onClick={() => handlePlus(extra.zutatsId)}
-                      >
-                        <Plus color={colors.black}/>
+                      <PlusQuantity onClick={() => handlePlus(extra.zutatsId)}>
+                        <Plus color={colors.black} />
                       </PlusQuantity>
                     </>
-                  </Quantity>
+                  </Quantity> */}
                 </Details>
               </ContainerFront>
             </Container>

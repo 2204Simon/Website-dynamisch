@@ -16,10 +16,11 @@ interface A1 {
 }
 
 const Konfigurator: React.FC = () => {
+  const [selectedIngredients, setSelectedIngredients] = useState<Array<A1>>([]);
   const [currentStage, setCurrentStage] = useState<number>(1);
   const [selectedBread, setSelectedBread] = useState<Array<A1>>([]);
   const [selectedToppings, setSelectedToppings] = useState<Array<A1>>([]);
-  const [selectedDrink, setSelectedDrink] = useState<Array<A1>>([]);
+  const [selectedExtras, setSelectedExtras] = useState<Array<A1>>([]);
   const { loggedIn } = useLoggedIn();
   const navigate = useNavigate();
   const handleNextStage = (selectedProduct: Array<A1>) => {
@@ -27,13 +28,15 @@ const Konfigurator: React.FC = () => {
 
     switch (currentStage) {
       case 1:
+        console.log(selectedIngredients);
         setSelectedBread(selectedProduct);
         break;
       case 2:
         setSelectedToppings(selectedProduct);
         break;
       case 3:
-        setSelectedDrink(selectedProduct);
+        setSelectedExtras(selectedProduct);
+
         break;
       default:
         break;
@@ -92,18 +95,39 @@ const Konfigurator: React.FC = () => {
           </NavigationIcon>
           <h2>Zusammenfassung</h2>
           <>
-            {selectedToppings.map(item => {
+            {selectedBread.map(item => {
               return (
                 <div>
-                  <p>test</p>
-                  <p>{item.id}</p>
-                  <p>{item.quantity}</p>
+                  <h1>Bread</h1>
+                  <p>id: {item.id}</p>
+                  <p>Menge: {item.quantity}</p>
                 </div>
               );
             })}
+            {selectedToppings.map(item => {
+              return (
+                <div>
+                  <h1>Topping</h1>
+                  <p>id: {item.id}</p>
+                  <p>Menge: {item.quantity}</p>
+                </div>
+              );
+            })}
+            {/* {selectedIngredients.map(item => {
+              selectedIngredients.concat(selectedBread, selectedToppings);
+
+              return (
+                <div>
+                  <h1>INgredients</h1>
+                  <p>id: {item.id}</p>
+                  <p>Menge: {item.quantity}</p>
+                </div>
+              );
+            })} */}
           </>
+          {/* 
           <p>Ausgewählte Beläge: {selectedToppings.toString()}</p>
-          <p>Ausgewähltes Getränk: {selectedDrink.toString()}</p>
+          <p>Ausgewähltes Getränk: {selectedExtras.toString()}</p> */}
 
           {!loggedIn && (
             <div>

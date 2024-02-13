@@ -18,7 +18,11 @@ import {
   Label,
   Unit,
 } from "./styles/Konfigurator.styles";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import {
+  ArrowBack,
+  ArrowForward,
+  RemoveShoppingCart,
+} from "@mui/icons-material";
 import { BlackColorButton } from "../general/button";
 import {
   Quantity,
@@ -31,12 +35,12 @@ import { Button } from "../general/button.styles";
 import { baseUrl } from "../../globalVariables/global";
 import { colors } from "../general/constants";
 
-interface A1 {
+interface Ingredient {
   id: string;
   quantity: number;
 }
 interface ToppingsSelectionProps {
-  onNextStage: (selectedToppingsID: Array<A1>) => void;
+  onNextStage: (selectedToppingsID: Array<Ingredient>) => void;
   onPrevStage: () => void;
 }
 
@@ -44,14 +48,12 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
   onPrevStage,
   onNextStage,
 }) => {
-  const [selectedToppings, setSelectedToppings] = useState<string[]>([]);
+  const [selectedToppings, setSelectedToppings] = useState<Array<Ingredient>>(
+    []
+  );
   const [toppings, setToppings] = useState<any[]>([]); // Hier speichern wir die vom Server geholten Toppings
   const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
-  const [flipped, setFlipped] = useState(false);
-  const [displayNone, setDisplayNone] = useState(false);
-  const handleFlip = () => {
-    setFlipped(!flipped);
-  };
+
   const handleMinus = (topping: string) => {
     setQuantities(prev => ({
       ...prev,
@@ -65,11 +67,13 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
 
   const handleQuantityChange = (
     event: React.ChangeEvent<HTMLInputElement>,
-    topping: string
+    toppingId: string
   ) => {
     const value = parseInt(event.target.value, 10);
     if (!isNaN(value)) {
-      setQuantities(prev => ({ ...prev, [topping]: value }));
+      // setQuantities(prev => ({ ...prev, [topping]: value }));
+      setSelectedToppings([{ id: toppingId, quantity: value }]);
+      return;
     }
   };
   useEffect(() => {
@@ -95,11 +99,12 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
   }, []);
 
   const handleToppingSelect = (toppingID: string) => {
-    const updatedToppings = selectedToppings.includes(toppingID)
-      ? selectedToppings.filter(selected => selected !== toppingID)
-      : [...selectedToppings, toppingID];
-
-    setSelectedToppings(updatedToppings);
+    //   const updatedToppings = selectedToppings.includes(toppingID)
+    //     ? selectedToppings.filter(selected => selected !== toppingID)
+    //     : [...selectedToppings, toppingID];
+    const oldToppings = selectedToppings;
+    oldToppings.push({ id: toppingID, quantity: 1 });
+    setSelectedToppings(oldToppings);
   };
 
   async function loadImage(path: string): Promise<string> {
@@ -112,21 +117,21 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
   };
 
   const handleNext = () => {
-    const selectedToppingsData = Object.keys(quantities)
-      .filter(topping => quantities[topping] > 0)
-      .map(topping => toppings.find(t => t.zutatsId === topping));
+    // const selectedToppingsData = Object.keys(quantities)
+    //   .filter(topping => quantities[topping] > 0)
+    //   .map(topping => toppings.find(t => t.zutatsId === topping));
 
-    if (selectedToppingsData.length > 0) {
-      onNextStage(
-        selectedToppingsData
-          .map(toppingData => toppingData?.zutatsId)
-         // .join(", "),
-     /*   selectedToppingsData
+    // if (selectedToppingsData.length > 0) {
+    onNextStage(
+      selectedToppings
+      // selectedToppingsData.map(toppingData => toppingData?.zutatsId)
+      // .join(", "),
+      /*   selectedToppingsData
           .map(toppingData => toppingData?.zutatBild || "")
           .join(", ")*/
-      );
-    }
+    );
   };
+  // };
 
   return (
     <Stage>
@@ -153,10 +158,16 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
                 flipped={false}
                 displayNone={false}
                 key={topping.zutatsId}
-                className={quantities[topping.zutatsId] > 0 ? "selected" : ""}
-                onClick={() =>
-                  handleToppingSelect(topping.zutatsId)
+                // className={quantities[topping.zutatsId] > 0 ? "selected" : ""}
+
+                className={
+                  selectedToppings.some(
+                    toppingObj => toppingObj.id === topping.zutatsId
+                  )
+                    ? "selected"
+                    : ""
                 }
+                onClick={() => handleToppingSelect(topping.zutatsId)}
               >
                 <ImageContainer>
                   <Image src={topping.zutatBild} alt={topping.zutatsname} />
@@ -165,7 +176,7 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
                   <Title> {topping.zutatsname} </Title>
                   <Price> Preis: {topping.zutatspreis} € </Price>
                   <Unit> Einheit: {topping.zutatseinheit} </Unit>
-                  <Quantity>
+                  {/* <Quantity>
                     <>
                       <Label htmlFor={`quantity-${topping.zutatsId}`}>
                         Menge:
@@ -173,7 +184,7 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
                       <MinusQuantity
                         onClick={() => handleMinus(topping.zutatsId)}
                       >
-                        <Minus color={colors.black}/>
+                        <Minus color={colors.black} />
                       </MinusQuantity>
                       <QuantityInput
                         type="text"
@@ -188,10 +199,10 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
                       <PlusQuantity
                         onClick={() => handlePlus(topping.zutatsId)}
                       >
-                        <Plus color={colors.black}/>
+                        <Plus color={colors.black} />
                       </PlusQuantity>
-                    </>
-                  </Quantity>
+                    </> 
+                  </Quantity>*/}
                 </Details>
               </ContainerFront>
             </Container>

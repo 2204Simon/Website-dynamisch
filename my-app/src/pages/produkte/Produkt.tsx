@@ -147,22 +147,30 @@ function Produkt() {
       {isTouchpad ? (
         <div
           style={{
-            // display: "flex",
-            // flexWrap: "nowrap",
-            // overflowX: "scroll",
-            // scrollbarWidth: "none",
-            // msOverflowStyle: "none",
-            display: "grid2Classes",
-            gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+            display: "flex",
+            flexWrap: "nowrap",
+            overflowX: "scroll",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
           }}
         >
           {ShoppingCards("Food")}
         </div>
       ) : existSparte("Food") ? (
-        <ScrollContainer scrollAmount={283}>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            marginBottom: "auto",
+          }}
+        >
           {ShoppingCards("Food")}
-        </ScrollContainer>
+        </div>
       ) : (
+        // <ScrollContainer scrollAmount={283}>
+        //   {ShoppingCards("Food")}
+        // </ScrollContainer>
         <p>
           Die Speisen konnten nicht geladen werden. Bitte wenden Sie sich an den
           Support.
@@ -183,17 +191,27 @@ function Produkt() {
           {ShoppingCards("Drink")}
         </div>
       ) : existSparte("Drink") ? (
-        <ScrollContainer scrollAmount={283}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))",
+            alignItems: "center",
+            margin: "auto",
+          }}
+        >
           {ShoppingCards("Drink")}
-        </ScrollContainer>
+        </div>
       ) : (
+        // <ScrollContainer scrollAmount={283}>
+        //   {ShoppingCards("Drink")}
+        // </ScrollContainer>
         <p>
           Die Getränke konnten nicht geladen werden. Bitte wenden Sie sich an
           den Support.
         </p>
       )}
 
-      <h3>Menüs</h3>
+      {/* <h3>Menüs</h3>
       {isTouchpad ? (
         <div
           style={{
@@ -215,7 +233,7 @@ function Produkt() {
           Die Menüs konnten nicht geladen werden. Bitte wenden Sie sich an den
           Support.
         </p>
-      )}
+      )} */}
     </>
   );
 }
