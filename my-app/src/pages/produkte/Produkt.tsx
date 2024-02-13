@@ -3,7 +3,7 @@ import ScrollContainer from "./Arrows";
 import { useEffect, useState } from "react";
 import { CustomToast } from "../general/toast.style";
 import NewspaperAbo from "./Newspaper";
-import { colors } from "@mui/material";
+import { colors, grid2Classes } from "@mui/material";
 import { baseUrl } from "../../globalVariables/global";
 
 export async function loadImage(path: string): Promise<string> {
@@ -147,11 +147,13 @@ function Produkt() {
       {isTouchpad ? (
         <div
           style={{
-            display: "flex",
-            flexWrap: "nowrap",
-            overflowX: "scroll",
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
+            // display: "flex",
+            // flexWrap: "nowrap",
+            // overflowX: "scroll",
+            // scrollbarWidth: "none",
+            // msOverflowStyle: "none",
+            display: "grid2Classes",
+            gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
           }}
         >
           {ShoppingCards("Food")}
