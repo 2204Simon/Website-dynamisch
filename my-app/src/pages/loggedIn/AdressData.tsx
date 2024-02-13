@@ -133,6 +133,7 @@ export default function AdressInformation(): JSX.Element {
 
   const handleSelectAdress = (adress: AdressData) => {
     dispatch(setSelectedAdress(adress));
+    console.log(adress, "adress Simon");
   };
 
   const handleCancel = () => {

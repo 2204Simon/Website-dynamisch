@@ -14,8 +14,9 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
     (state: { user: UserDataState }) => state.user
   );
   const selectedAdress = useSelector(
-    (state: { selectedAdress: AdressData }) => state.selectedAdress
+    (state: { adress: AdressDataState }) => state.adress.selectedAdress
   );
+  console.log("selectedAdresse von Simon" + selectedAdress);
 
   return (
     <div
@@ -39,12 +40,12 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
                 shipping: {
                   address: {
                     //TODO: replace with selectedAdress
-                    address_line_1: `${selectedAdress.strasse}`,
-                    address_line_2: `${selectedAdress.hausnummerzusatz}`
-                      ? `${selectedAdress.hausnummer} ${selectedAdress.hausnummerzusatz}`
-                      : `${selectedAdress.hausnummer}`,
-                    admin_area_2: `${selectedAdress.ort}`,
-                    postal_code: `${selectedAdress.postleitzahl}`,
+                    address_line_1: `${selectedAdress?.strasse}`,
+                    address_line_2: `${selectedAdress?.hausnummerzusatz}`
+                      ? `${selectedAdress?.hausnummer} ${selectedAdress?.hausnummerzusatz}`
+                      : `${selectedAdress?.hausnummer}`,
+                    admin_area_2: `${selectedAdress?.ort}`,
+                    postal_code: `${selectedAdress?.postleitzahl}`,
                     country_code: "DE",
                   },
                   name: {
