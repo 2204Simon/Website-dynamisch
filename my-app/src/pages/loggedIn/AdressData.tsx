@@ -173,28 +173,31 @@ export default function AdressInformation(): JSX.Element {
     const paymentData: PaymentData = {
       kundenId: cookies.kundenId,
       laufendeZahlungsId: paymentInformation.laufendeZahlungsId,
-    };
-    const paypalData: PaypalData = {
-      kundenId: cookies.kundenId,
-      paypalEmail: data.get("paypalEmail") as string,
-    };
-    const lastschriftData: LastschriftData = {
-      kundenId: cookies.kundenId,
-      bankname: data.get("bankName") as string,
-      iban: data.get("iban") as string,
-      bic: data.get("bic") as string,
+      paypalData: {
+        kundenId: cookies.kundenId,
+        paypalEmail: data.get("paypalEmail") as string,
+      },
+      lastschriftData: {
+        kundenId: cookies.kundenId,
+        bankname: data.get("bankName") as string,
+        iban: data.get("iban") as string,
+        bic: data.get("bic") as string,
+      },
     };
 
-    if (paypalData.paypalEmail && !paypalData.paypalEmail.includes("@")) {
+    if (
+      paymentData.paypalData?.paypalEmail &&
+      !paymentData.paypalData?.paypalEmail.includes("@")
+    ) {
       CustomToast.error("Bitte gebe eine gültige E-Mail-Adresse ein");
       return;
     }
     if (
       !(
-        paypalData.paypalEmail ||
-        (lastschriftData.bankname &&
-          lastschriftData.bic &&
-          lastschriftData.iban)
+        paymentData.paypalData?.paypalEmail ||
+        (paymentData.lastschriftData?.bankname &&
+          paymentData.lastschriftData?.bic &&
+          paymentData.lastschriftData.iban)
       )
     ) {
       CustomToast.error(
@@ -208,20 +211,23 @@ export default function AdressInformation(): JSX.Element {
       const putPaymentData = await sendPutRequest("/zahlung", paymentData);
 
       // POST request to add PayPal data
-      if (paypalData.paypalEmail) {
-        const postPaypalData = await sendPostRequest("/zahlung", paypalData);
+      if (paymentData.paypalData?.paypalEmail) {
+        const postPaypalData = await sendPostRequest(
+          "/zahlung",
+          paymentData.paypalData
+        );
         dispatch(addPaypal(postPaypalData));
       }
 
       // POST request to add bank data
       if (
-        lastschriftData.bankname &&
-        lastschriftData.bic &&
-        lastschriftData.iban
+        paymentData.lastschriftData?.bankname &&
+        paymentData.lastschriftData?.bic &&
+        paymentData.lastschriftData?.iban
       ) {
         const postLastschriftData = await sendPostRequest(
           "/zahlung",
-          lastschriftData
+          paymentData.lastschriftData
         );
         dispatch(addLastschrift(postLastschriftData));
       }
