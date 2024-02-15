@@ -33,11 +33,7 @@ import {
 import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
 import { CustomToast } from "../general/toast.style";
-import {
-  addLastschrift,
-  addPayment,
-  addPaypal,
-} from "../../redux/paymentReaducer";
+import { addPayment } from "../../redux/paymentReaducer";
 import styled from "styled-components";
 import { setSelectedAdress } from "../../redux/adressDataReducer";
 
@@ -207,16 +203,17 @@ export default function AdressInformation(): JSX.Element {
     }
 
     try {
-      // PUT request to update the payment data
-      const putPaymentData = await sendPutRequest("/zahlung", paymentData);
-
       // POST request to add PayPal data
       if (paymentData.paypalData?.paypalEmail) {
+        const postPaymentData = {
+          ...paymentData,
+          paypalEmail: paymentData.paypalData.paypalEmail,
+        };
         const postPaypalData = await sendPostRequest(
           "/zahlung",
-          paymentData.paypalData
+          postPaymentData
         );
-        dispatch(addPaypal(postPaypalData));
+        dispatch(addPayment(postPaypalData));
       }
 
       // POST request to add bank data
@@ -225,14 +222,18 @@ export default function AdressInformation(): JSX.Element {
         paymentData.lastschriftData?.bic &&
         paymentData.lastschriftData?.iban
       ) {
+        const postPaymentData = {
+          ...paymentData,
+          bankname: paymentData.lastschriftData.bankname,
+          bic: paymentData.lastschriftData.bic,
+          iban: paymentData.lastschriftData.iban,
+        };
         const postLastschriftData = await sendPostRequest(
           "/zahlung",
-          paymentData.lastschriftData
+          postPaymentData
         );
-        dispatch(addLastschrift(postLastschriftData));
+        dispatch(addPayment(postLastschriftData));
       }
-
-      dispatch(addPayment(putPaymentData));
 
       setEditedData(null);
       setEditMode(false);

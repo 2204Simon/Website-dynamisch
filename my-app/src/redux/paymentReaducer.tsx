@@ -2,9 +2,10 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { LastschriftData, PaymentData, PaypalData } from "./types";
 
 const initialState = {
-  PaymentData: {} as PaymentData,
-  PaypalData: {} as PaypalData,
-  LastschriftData: {} as LastschriftData,
+  PaymentData: {
+    PaypalData: {} as PaypalData,
+    LastschriftData: {} as LastschriftData,
+  } as PaymentData,
 };
 
 const paymentSlice = createSlice({
@@ -14,15 +15,9 @@ const paymentSlice = createSlice({
     addPayment: (state, action: PayloadAction<PaymentData>) => {
       state.PaymentData = action.payload;
     },
-    addPaypal: (state, action: PayloadAction<PaypalData>) => {
-      state.PaypalData = action.payload;
-    },
-    addLastschrift: (state, action: PayloadAction<LastschriftData>) => {
-      state.LastschriftData = action.payload;
-    },
   },
 });
 
-export const { addPayment, addPaypal, addLastschrift } = paymentSlice.actions;
+export const { addPayment } = paymentSlice.actions;
 
 export default paymentSlice.reducer;
