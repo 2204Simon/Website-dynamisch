@@ -53,6 +53,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   const paymentInformation = useSelector(
     (state: { payment: PaymentDataState }) => state.payment.PaymentData
   );
+
   const handleBuyNow = () => {
     setShowPopup(true);
     startTransition(() => {
@@ -74,19 +75,22 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   // Initialisieren Sie selectedPayments basierend auf den vorhandenen Zahlungsinformationen
   const [selectedPayments, setSelectedPayments] = useState(() => {
     if (
-      paymentInformation.paypalEmail &&
-      paymentInformation.bankname &&
-      paymentInformation.bic &&
-      paymentInformation.iban
+      paymentInformation.paypalData?.paypalEmail &&
+      paymentInformation.lastschriftData?.bankname &&
+      paymentInformation.lastschriftData?.bic &&
+      paymentInformation.lastschriftData?.iban
     ) {
       return ["Paypal"];
-    } else if (paymentInformation.paypalEmail && !paymentInformation.bankname) {
+    } else if (
+      paymentInformation.paypalData?.paypalEmail &&
+      !paymentInformation.lastschriftData?.bankname
+    ) {
       return ["Paypal"];
     } else if (
-      paymentInformation.bankname &&
-      paymentInformation.bic &&
-      paymentInformation.iban &&
-      !paymentInformation.paypalEmail
+      paymentInformation.lastschriftData?.bankname &&
+      paymentInformation.lastschriftData?.bic &&
+      paymentInformation.lastschriftData?.iban &&
+      !paymentInformation.paypalData?.paypalEmail
     ) {
       return ["Lastschrift"];
     } else {
@@ -96,19 +100,22 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   useEffect(() => {
     // Überprüfen Sie die Zahlungsinformationen und aktualisieren Sie die Anzeige der Schaltflächen
     if (
-      paymentInformation.paypalEmail &&
-      paymentInformation.bankname &&
-      paymentInformation.bic &&
-      paymentInformation.iban
+      paymentInformation.paypalData?.paypalEmail &&
+      paymentInformation.lastschriftData?.bankname &&
+      paymentInformation.lastschriftData?.bic &&
+      paymentInformation.lastschriftData?.iban
     ) {
       setSelectedPayments(["Paypal"]);
-    } else if (paymentInformation.paypalEmail && !paymentInformation.bankname) {
+    } else if (
+      paymentInformation.paypalData?.paypalEmail &&
+      !paymentInformation.lastschriftData?.bankname
+    ) {
       setSelectedPayments(["Paypal"]);
     } else if (
-      paymentInformation.bankname &&
-      paymentInformation.bic &&
-      paymentInformation.iban &&
-      !paymentInformation.paypalEmail
+      paymentInformation.lastschriftData?.bankname &&
+      paymentInformation.lastschriftData?.bic &&
+      paymentInformation.lastschriftData?.iban &&
+      !paymentInformation.paypalData?.paypalEmail
     ) {
       setSelectedPayments(["Lastschrift"]);
     } else {
@@ -264,10 +271,10 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
 
                 {
                   // Wenn PayPal-E-Mail und Bankinformationen vorhanden sind
-                  paymentInformation.paypalEmail &&
-                  paymentInformation.bankname &&
-                  paymentInformation.bic &&
-                  paymentInformation.iban ? (
+                  paymentInformation.paypalData?.paypalEmail &&
+                  paymentInformation.lastschriftData?.bankname &&
+                  paymentInformation.lastschriftData?.bic &&
+                  paymentInformation.lastschriftData?.iban ? (
                     // Radio Button für PayPal oder Bankinformationen
                     <div>
                       <input
@@ -297,10 +304,10 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                   ) : null
                 }
                 {selectedPayments.includes("Lastschrift") ||
-                (paymentInformation.bankname &&
-                  paymentInformation.bic &&
-                  paymentInformation.iban &&
-                  !paymentInformation.paypalEmail) ? (
+                (paymentInformation.lastschriftData?.bankname &&
+                  paymentInformation.lastschriftData?.bic &&
+                  paymentInformation.lastschriftData?.iban &&
+                  !paymentInformation.paypalData?.paypalEmail) ? (
                   <Button
                     onClick={() => handleThankyouPopup()}
                     className="black-color white-orange"
@@ -309,10 +316,10 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                   </Button>
                 ) : null}
                 {selectedPayments.includes("Paypal") ||
-                (paymentInformation.paypalEmail &&
-                  !paymentInformation.bankname) ||
-                !paymentInformation.bic ||
-                !paymentInformation.iban ? (
+                (paymentInformation.paypalData?.paypalEmail &&
+                  !paymentInformation.lastschriftData?.bankname) ||
+                !paymentInformation.lastschriftData?.bic ||
+                !paymentInformation.lastschriftData?.iban ? (
                   <>
                     Kostenpflichtig Bestellen mit
                     <PayPalPayment

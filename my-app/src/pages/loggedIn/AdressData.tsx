@@ -6,6 +6,8 @@ import {
   PaymentData,
   PaymentDataState,
   AddressenInformation,
+  PaypalData,
+  LastschriftData,
 } from "../../redux/types";
 import {
   Card,
@@ -25,24 +27,35 @@ import { FormGroup } from "@mui/material";
 import { addNewAdress, loadAdressen } from "../../redux/adressDataReducer";
 import {
   getRequest,
+  sendPostRequest,
   sendPutRequest,
 } from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
 import { CustomToast } from "../general/toast.style";
-import { addPayment } from "../../redux/paymentReaducer";
+import {
+  addLastschrift,
+  addPayment,
+  addPaypal,
+} from "../../redux/paymentReaducer";
 import styled from "styled-components";
 import { setSelectedAdress } from "../../redux/adressDataReducer";
 
 const ScrollableContainer = styled.div`
   overflow: auto;
+  max-width: 450px;
   max-height: 450px;
+  margin: auto;
 `;
 
 export default function AdressInformation(): JSX.Element {
   const dispatch = useDispatch();
   const [editMode, setEditMode] = useState(false);
   const [editedData, setEditedData] = useState<AdressData | null>(null);
+  const [editedPaymentPaypalData, setEditedPaymentPaypalData] =
+    useState<PaypalData | null>(null);
+  const [editedPaymentLastschriftData, setEditedPaymentLastschriftData] =
+    useState<LastschriftData | null>(null);
   const [cookies, setCookie] = useCookies([KUNDEN_ID]);
   const adressInformation = useSelector(
     (state: { adress: AdressDataState }) => state.adress.AdressData
@@ -52,6 +65,7 @@ export default function AdressInformation(): JSX.Element {
   );
   const [selectedPayments, setSelectedPayments] = useState<string[]>([]);
   const [showFields, setShowFields] = useState(false);
+  const [showPaymentFields, setShowPaymentFields] = useState(false);
   const uniqueAdressInformation = adressInformation.filter(
     (adress, index, self) =>
       index ===
@@ -105,6 +119,10 @@ export default function AdressInformation(): JSX.Element {
     setShowFields(true);
   };
 
+  const handleOpenPayment = () => {
+    setShowPaymentFields(true);
+  };
+
   const handleAddAdress = async (data: AdressData) => {
     console.log(data, "data");
     // Überprüfen, ob die Felder leer sind
@@ -136,14 +154,15 @@ export default function AdressInformation(): JSX.Element {
     console.log(adress, "adress Simon");
   };
 
-  const handleCancel = () => {
-    setEditedData(null);
-    setEditMode(false);
-  };
-
   const handleCancelAdress = () => {
     setEditedData(null);
     setShowFields(false);
+  };
+
+  const handleCancelPayment = () => {
+    setEditedPaymentPaypalData(null);
+    setEditedPaymentLastschriftData(null);
+    setShowPaymentFields(false);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -153,19 +172,29 @@ export default function AdressInformation(): JSX.Element {
 
     const paymentData: PaymentData = {
       kundenId: cookies.kundenId,
-      paypalEmail: data.get("paypalEmail") as string,
-      bankname: data.get("bankName") as string,
-      bic: data.get("bic") as string,
-      iban: data.get("iban") as string,
+      laufendeZahlungsId: paymentInformation.laufendeZahlungsId,
     };
-    if (paymentData.paypalEmail && !paymentData.paypalEmail.includes("@")) {
+    const paypalData: PaypalData = {
+      kundenId: cookies.kundenId,
+      paypalEmail: data.get("paypalEmail") as string,
+    };
+    const lastschriftData: LastschriftData = {
+      kundenId: cookies.kundenId,
+      bankname: data.get("bankName") as string,
+      iban: data.get("iban") as string,
+      bic: data.get("bic") as string,
+    };
+
+    if (paypalData.paypalEmail && !paypalData.paypalEmail.includes("@")) {
       CustomToast.error("Bitte gebe eine gültige E-Mail-Adresse ein");
       return;
     }
     if (
       !(
-        paymentData.paypalEmail ||
-        (paymentData.bankname && paymentData.bic && paymentData.iban)
+        paypalData.paypalEmail ||
+        (lastschriftData.bankname &&
+          lastschriftData.bic &&
+          lastschriftData.iban)
       )
     ) {
       CustomToast.error(
@@ -175,9 +204,30 @@ export default function AdressInformation(): JSX.Element {
     }
 
     try {
+      // PUT request to update the payment data
       const putPaymentData = await sendPutRequest("/zahlung", paymentData);
 
+      // POST request to add PayPal data
+      if (paypalData.paypalEmail) {
+        const postPaypalData = await sendPostRequest("/zahlung", paypalData);
+        dispatch(addPaypal(postPaypalData));
+      }
+
+      // POST request to add bank data
+      if (
+        lastschriftData.bankname &&
+        lastschriftData.bic &&
+        lastschriftData.iban
+      ) {
+        const postLastschriftData = await sendPostRequest(
+          "/zahlung",
+          lastschriftData
+        );
+        dispatch(addLastschrift(postLastschriftData));
+      }
+
       dispatch(addPayment(putPaymentData));
+
       setEditedData(null);
       setEditMode(false);
     } catch (error) {
@@ -430,172 +480,163 @@ export default function AdressInformation(): JSX.Element {
       <Container>
         <Card>
           <Title>Zahlungsmöglichkeiten: </Title>
+          <Grid container justifyContent={"center"}>
+            <Grid item xs={6}>
+              <Title>
+                <FaPaypal size={30} />
+              </Title>
+              {showPaymentFields && (
+                <form onSubmit={e => handleSubmit(e)}>
+                  <FormControl component="fieldset">
+                    <FormGroup>
+                      <Grid item xs={12}>
+                        <TextField
+                          fullWidth
+                          id="paypalEmail"
+                          label="PayPal Email"
+                          name="paypalEmail"
+                          inputProps={{
+                            maxLength: 100,
+                            style: {
+                              color: `${colors.black}`,
+                              textAlign: "left",
+                            },
+                          }}
+                          InputLabelProps={{
+                            sx: {
+                              backgroundColor: `${colors.primarycolor}`,
+                              color: colors.companycolor,
+                            },
+                          }}
+                          onChange={e => {
+                            e.target.value = e.target.value.trim();
+                          }}
+                        />
+                      </Grid>
+                      <Button
+                        style={{ color: colors.companycolor }}
+                        type="submit"
+                      >
+                        PayPal-Information hinzufügen
+                      </Button>
+                      <Button
+                        style={{ color: colors.companycolor }}
+                        onClick={handleCancelPayment}
+                      >
+                        Abbrechen
+                      </Button>
+                    </FormGroup>
+                  </FormControl>
+                </form>
+              )}
+            </Grid>
 
-          {editMode ? (
-            <form onSubmit={e => handleSubmit(e)}>
-              <Grid item xs={12}>
-                <FormControl component="fieldset">
-                  <FormGroup>
-                    <Title>
-                      <FaPaypal size={30} />
-                    </Title>
-
-                    <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        id="paypalEmail"
-                        label="PayPal Email"
-                        name="paypalEmail"
-                        defaultValue={paymentInformation.paypalEmail}
-                        inputProps={{
-                          maxLength: 100,
-                          style: {
-                            color: `${colors.black}`,
-                            textAlign: "left",
-                          },
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            backgroundColor: `${colors.primarycolor}`,
-                            color: colors.companycolor,
-                          },
-                        }}
-                        onChange={e => {
-                          e.target.value = e.target.value.trim();
-                        }}
-                      />
-                    </Grid>
-                    <Title>
-                      <Bank size={30} />
-                    </Title>
-                    <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        id="bankName"
-                        label="Bankname"
-                        name="bankName"
-                        defaultValue={paymentInformation.bankname}
-                        inputProps={{
-                          maxLength: 50,
-                          style: {
-                            color: `${colors.black}`,
-                            textAlign: "left",
-                          },
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            backgroundColor: `${colors.primarycolor}`,
-                            color: colors.companycolor,
-                          },
-                        }}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        id="bic"
-                        label="BIC"
-                        name="bic"
-                        defaultValue={paymentInformation.bic}
-                        inputProps={{
-                          maxLength: 50,
-                          style: {
-                            color: `${colors.black}`,
-                            textAlign: "left",
-                          },
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            backgroundColor: `${colors.primarycolor}`,
-                            color: colors.companycolor,
-                          },
-                        }}
-                        onChange={e => {
-                          e.target.value = e.target.value.trim();
-                        }}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        id="iban"
-                        label="IBAN"
-                        name="iban"
-                        defaultValue={paymentInformation.iban}
-                        inputProps={{
-                          maxLength: 50,
-                          style: {
-                            color: `${colors.black}`,
-                            textAlign: "left",
-                          },
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            backgroundColor: `${colors.primarycolor}`,
-                            color: colors.companycolor,
-                          },
-                        }}
-                        onChange={e => {
-                          e.target.value = e.target.value.trim();
-                        }}
-                      />
-                    </Grid>
-                  </FormGroup>
-                </FormControl>
-              </Grid>
-
-              <Button style={{ color: colors.companycolor }} type="submit">
-                Speichern
-              </Button>
-
-              <Button
-                style={{ color: colors.companycolor }}
-                onClick={handleCancel}
-              >
-                Abbrechen
-              </Button>
-            </form>
-          ) : (
-            <div>
-              <Grid container gap={10} justifyContent={"center"}>
-                <Grid
-                  item
-                  alignItems={"center"}
-                  display={"flex"}
-                  justifyContent={"center"}
-                  flexDirection={"column"}
+            <Grid item xs={6}>
+              <Title>
+                <Bank size={30} />
+              </Title>
+              {showPaymentFields && (
+                <form onSubmit={e => handleSubmit(e)}>
+                  <FormControl component="fieldset">
+                    <FormGroup>
+                      <Grid item xs={12}>
+                        <TextField
+                          fullWidth
+                          id="bankName"
+                          label="Bankname"
+                          name="bankName"
+                          inputProps={{
+                            maxLength: 50,
+                            style: {
+                              color: `${colors.black}`,
+                              textAlign: "left",
+                            },
+                          }}
+                          InputLabelProps={{
+                            sx: {
+                              backgroundColor: `${colors.primarycolor}`,
+                              color: colors.companycolor,
+                            },
+                          }}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                          fullWidth
+                          id="bic"
+                          label="BIC"
+                          name="bic"
+                          inputProps={{
+                            maxLength: 50,
+                            style: {
+                              color: `${colors.black}`,
+                              textAlign: "left",
+                            },
+                          }}
+                          InputLabelProps={{
+                            sx: {
+                              backgroundColor: `${colors.primarycolor}`,
+                              color: colors.companycolor,
+                            },
+                          }}
+                          onChange={e => {
+                            e.target.value = e.target.value.trim();
+                          }}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                          fullWidth
+                          id="iban"
+                          label="IBAN"
+                          name="iban"
+                          inputProps={{
+                            maxLength: 50,
+                            style: {
+                              color: `${colors.black}`,
+                              textAlign: "left",
+                            },
+                          }}
+                          InputLabelProps={{
+                            sx: {
+                              backgroundColor: `${colors.primarycolor}`,
+                              color: colors.companycolor,
+                            },
+                          }}
+                          onChange={e => {
+                            e.target.value = e.target.value.trim();
+                          }}
+                        />
+                      </Grid>
+                      <Button
+                        style={{ color: colors.companycolor }}
+                        type="submit"
+                      >
+                        Bankinformation hinzufügen
+                      </Button>
+                      <Button
+                        style={{ color: colors.companycolor }}
+                        onClick={handleCancelPayment}
+                      >
+                        Abbrechen
+                      </Button>
+                    </FormGroup>
+                  </FormControl>
+                </form>
+              )}
+            </Grid>
+            {!showPaymentFields && (
+              <Grid>
+                <LogoutButton
+                  className="black-color white-orange "
+                  onClick={() => handleOpenPayment()}
                 >
-                  <Paragraph>
-                    <strong>Zahlungsart</strong>
-                  </Paragraph>
-                  <FaPaypal size={30} />
-                  <Paragraph>
-                    <strong>Paypal-Email:</strong>{" "}
-                    {paymentInformation.paypalEmail}
-                  </Paragraph>
-                  <Bank size={30} />
-                  <Paragraph>
-                    <strong>Bankname:</strong> {paymentInformation.bankname}
-                  </Paragraph>
-                  <Paragraph>
-                    <strong>BIC:</strong> {paymentInformation.bic}
-                  </Paragraph>
-                  <Paragraph>
-                    <strong>IBAN: </strong>
-                    {paymentInformation.iban}
-                  </Paragraph>
-                  <LogoutButton
-                    className="black-color white-orange "
-                    onClick={() =>
-                      handleEdit(paymentInformation as unknown as AdressData)
-                    }
-                  >
-                    <Pencil size={20} />
-                  </LogoutButton>
-                </Grid>
+                  {" "}
+                  Zahlung hinzufügen
+                </LogoutButton>
               </Grid>
-            </div>
-          )}
+            )}
+          </Grid>
         </Card>
       </Container>
     </div>

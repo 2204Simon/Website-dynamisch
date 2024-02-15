@@ -32,11 +32,22 @@ export interface AdressData {
 }
 
 export type PaymentData = {
-  kundenId?: string;
+  kundenId: string;
+  laufendeZahlungsId?: number;
+  paypalData?: PaypalData;
+  lastschriftData?: LastschriftData;
+};
+
+export type PaypalData = {
+  kundenId: string;
   paypalEmail?: string;
+};
+
+export type LastschriftData = {
+  kundenId: string;
   bankname?: string;
-  bic?: string;
   iban?: string;
+  bic?: string;
 };
 
 export type PaymentDataState = {
