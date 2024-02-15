@@ -15,9 +15,13 @@ const paymentSlice = createSlice({
     addPayment: (state, action: PayloadAction<PaymentData>) => {
       state.PaymentData = action.payload;
     },
+    setSelectedPayment: (state, action: PayloadAction<PaymentData>) => {
+      state.PaymentData = action.payload;
+    },
   },
 });
 
 export const { addPayment } = paymentSlice.actions;
+export const { setSelectedPayment } = paymentSlice.actions;
 
 export default paymentSlice.reducer;
