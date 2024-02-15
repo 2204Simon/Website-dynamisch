@@ -141,8 +141,8 @@ export default function AdressInformation(): JSX.Element {
 
     console.log(adressData, "adressData");
     try {
-      const putAdressData = await sendPutRequest("/adresse", adressData);
-      dispatch(addNewAdress(putAdressData));
+      const postAdressData = await sendPostRequest("/adresse", adressData);
+      dispatch(addNewAdress(postAdressData));
       setShowFields(false);
     } catch (error) {
       CustomToast.error("Fehler beim Hinzufügen der Adresse");
