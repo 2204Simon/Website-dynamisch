@@ -51,8 +51,7 @@ export type LastschriftData = {
 };
 
 export type PaymentDataState = {
-  PaymentData: PaymentData[];
-  selectedPayment: PaymentData | null;
+  PaymentData: PaymentData;
 };
 
 export enum ActionTypesAdressData {
