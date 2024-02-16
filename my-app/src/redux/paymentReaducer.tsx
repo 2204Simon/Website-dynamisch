@@ -1,23 +1,28 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { LastschriftData, PaymentData, PaypalData } from "./types";
+import { PaymentData, PaymentDataState } from "./types";
 
-const initialState = {
-  PaymentData: {
-    PaypalData: {} as PaypalData,
-    LastschriftData: {} as LastschriftData,
-  } as PaymentData,
+const initialState: PaymentDataState = {
+  PaymentData: [],
+  selectedPayments: null,
 };
 
 const paymentSlice = createSlice({
-  name: "adress",
+  name: "payment",
   initialState,
   reducers: {
     addPayment: (state, action: PayloadAction<PaymentData>) => {
+      state.PaymentData.push(action.payload);
+    },
+    loadPayment: (state, action: PayloadAction<PaymentData[]>) => {
       state.PaymentData = action.payload;
+    },
+    setSelectedPayment: (state, action: PayloadAction<PaymentData>) => {
+      state.selectedPayments = action.payload;
     },
   },
 });
 
-export const { addPayment } = paymentSlice.actions;
+export const { addPayment, loadPayment, setSelectedPayment } =
+  paymentSlice.actions;
 
 export default paymentSlice.reducer;

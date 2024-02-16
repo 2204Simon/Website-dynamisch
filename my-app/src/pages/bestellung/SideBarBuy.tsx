@@ -51,7 +51,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   maxDate.setMonth(maxDate.getMonth() + 6);
   const [selectedDate, setSelectedDate] = useState<Date>(minDate);
   const paymentInformation = useSelector(
-    (state: { payment: PaymentDataState }) => state.payment.PaymentData
+    (state: { payment: PaymentDataState }) => state.payment.selectedPayments
   );
 
   const handleBuyNow = () => {
@@ -75,19 +75,19 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   // Initialisieren Sie selectedPayments basierend auf den vorhandenen Zahlungsinformationen
   const [selectedPayments, setSelectedPayments] = useState(() => {
     if (
-      paymentInformation.paypalData?.paypalEmail &&
+      paymentInformation?.paypalData?.paypalEmail &&
       paymentInformation.lastschriftData?.bankname &&
       paymentInformation.lastschriftData?.bic &&
       paymentInformation.lastschriftData?.iban
     ) {
       return ["Paypal"];
     } else if (
-      paymentInformation.paypalData?.paypalEmail &&
+      paymentInformation?.paypalData?.paypalEmail &&
       !paymentInformation.lastschriftData?.bankname
     ) {
       return ["Paypal"];
     } else if (
-      paymentInformation.lastschriftData?.bankname &&
+      paymentInformation?.lastschriftData?.bankname &&
       paymentInformation.lastschriftData?.bic &&
       paymentInformation.lastschriftData?.iban &&
       !paymentInformation.paypalData?.paypalEmail
@@ -100,19 +100,19 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   useEffect(() => {
     // Überprüfen Sie die Zahlungsinformationen und aktualisieren Sie die Anzeige der Schaltflächen
     if (
-      paymentInformation.paypalData?.paypalEmail &&
+      paymentInformation?.paypalData?.paypalEmail &&
       paymentInformation.lastschriftData?.bankname &&
       paymentInformation.lastschriftData?.bic &&
       paymentInformation.lastschriftData?.iban
     ) {
       setSelectedPayments(["Paypal"]);
     } else if (
-      paymentInformation.paypalData?.paypalEmail &&
+      paymentInformation?.paypalData?.paypalEmail &&
       !paymentInformation.lastschriftData?.bankname
     ) {
       setSelectedPayments(["Paypal"]);
     } else if (
-      paymentInformation.lastschriftData?.bankname &&
+      paymentInformation?.lastschriftData?.bankname &&
       paymentInformation.lastschriftData?.bic &&
       paymentInformation.lastschriftData?.iban &&
       !paymentInformation.paypalData?.paypalEmail
@@ -271,7 +271,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
 
                 {
                   // Wenn PayPal-E-Mail und Bankinformationen vorhanden sind
-                  paymentInformation.paypalData?.paypalEmail &&
+                  paymentInformation?.paypalData?.paypalEmail &&
                   paymentInformation.lastschriftData?.bankname &&
                   paymentInformation.lastschriftData?.bic &&
                   paymentInformation.lastschriftData?.iban ? (
@@ -304,7 +304,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                   ) : null
                 }
                 {selectedPayments.includes("Lastschrift") ||
-                (paymentInformation.lastschriftData?.bankname &&
+                (paymentInformation?.lastschriftData?.bankname &&
                   paymentInformation.lastschriftData?.bic &&
                   paymentInformation.lastschriftData?.iban &&
                   !paymentInformation.paypalData?.paypalEmail) ? (
@@ -316,9 +316,9 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                   </Button>
                 ) : null}
                 {selectedPayments.includes("Paypal") ||
-                (paymentInformation.paypalData?.paypalEmail &&
+                (paymentInformation?.paypalData?.paypalEmail &&
                   !paymentInformation.lastschriftData?.bankname) ||
-                !paymentInformation.lastschriftData?.bic ||
+                !paymentInformation?.lastschriftData?.bic ||
                 !paymentInformation.lastschriftData?.iban ? (
                   <>
                     Kostenpflichtig Bestellen mit

@@ -33,9 +33,10 @@ import {
 import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
 import { CustomToast } from "../general/toast.style";
-import { addPayment } from "../../redux/paymentReaducer";
+import { addPayment, loadPayment } from "../../redux/paymentReaducer";
 import styled from "styled-components";
 import { setSelectedAdress } from "../../redux/adressDataReducer";
+import { setSelectedPayment } from "../../redux/paymentReaducer";
 
 const ScrollableContainer = styled.div`
   overflow: auto;
@@ -59,7 +60,6 @@ export default function AdressInformation(): JSX.Element {
   const paymentInformation = useSelector(
     (state: { payment: PaymentDataState }) => state.payment.PaymentData
   );
-  const [selectedPayments, setSelectedPayments] = useState<string[]>([]);
   const [showFields, setShowFields] = useState(false);
   const [showPaymentFields, setShowPaymentFields] = useState(false);
   const uniqueAdressInformation = adressInformation.filter(
@@ -71,6 +71,17 @@ export default function AdressInformation(): JSX.Element {
           t.ort === adress.ort &&
           t.strasse === adress.strasse &&
           t.hausnummer === adress.hausnummer
+      )
+  );
+  const uniquePaymentInformation = paymentInformation.filter(
+    (payment, index, self) =>
+      index ===
+      self.findIndex(
+        t =>
+          t.paypalData?.paypalEmail === payment.paypalData?.paypalEmail &&
+          t.lastschriftData?.iban === payment.lastschriftData?.iban &&
+          t.lastschriftData?.bic === payment.lastschriftData?.bic &&
+          t.lastschriftData?.bankname === payment.lastschriftData?.bankname
       )
   );
   useEffect(() => {
@@ -95,17 +106,6 @@ export default function AdressInformation(): JSX.Element {
     fetchData();
   }, []);
 
-  const handlePaymentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const paymentOption = event.target.value;
-
-    if (selectedPayments.includes(paymentOption)) {
-      setSelectedPayments(
-        selectedPayments.filter(option => option !== paymentOption)
-      );
-    } else {
-      setSelectedPayments([...selectedPayments, paymentOption]);
-    }
-  };
   const handleEdit = (data: AdressData) => {
     setEditMode(true);
     setEditedData(data);
@@ -117,6 +117,31 @@ export default function AdressInformation(): JSX.Element {
 
   const handleOpenPayment = () => {
     setShowPaymentFields(true);
+  };
+
+  const handleAddPayment = async (data: PaymentData) => {
+    console.log(data, "data");
+    if (!data.paypalData?.paypalEmail && !data.lastschriftData?.iban) {
+      CustomToast.error("Bitte füllen Sie alle erforderlichen Felder aus.");
+      return;
+    }
+    const paymentData: PaymentData = {
+      kundenId: cookies.kundenId,
+      paypalData: data.paypalData,
+      lastschriftData: data.lastschriftData,
+    };
+
+    console.log(paymentData, "paymentData");
+    try {
+      const postPaymentData = await sendPostRequest("/zahlung", paymentData);
+      dispatch(addPayment(postPaymentData));
+      setShowPaymentFields(
+        false
+      ); /* Wenn die Zahlungsmethode hinzugefügt wurde, wird das Feld geschlossen */
+    } catch (error) {
+      CustomToast.error("Fehler beim Hinzufügen der Zahlungsmethode");
+    }
+    console.log(paymentData, "paymentData");
   };
 
   const handleAddAdress = async (data: AdressData) => {
@@ -147,7 +172,6 @@ export default function AdressInformation(): JSX.Element {
 
   const handleSelectAdress = (adress: AdressData) => {
     dispatch(setSelectedAdress(adress));
-    console.log(adress, "adress Simon");
   };
 
   const handleCancelAdress = () => {
@@ -160,88 +184,10 @@ export default function AdressInformation(): JSX.Element {
     setEditedPaymentLastschriftData(null);
     setShowPaymentFields(false);
   };
+  const selectedPayment = useSelector(
+    (state: { payment: PaymentDataState }) => state.payment.selectedPayments
+  );
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    console.log("submit");
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-
-    const paymentData: PaymentData = {
-      kundenId: cookies.kundenId,
-      laufendeZahlungsId: paymentInformation.laufendeZahlungsId,
-      paypalData: {
-        kundenId: cookies.kundenId,
-        paypalEmail: data.get("paypalEmail") as string,
-      },
-      lastschriftData: {
-        kundenId: cookies.kundenId,
-        bankname: data.get("bankName") as string,
-        iban: data.get("iban") as string,
-        bic: data.get("bic") as string,
-      },
-    };
-
-    if (
-      paymentData.paypalData?.paypalEmail &&
-      !paymentData.paypalData?.paypalEmail.includes("@")
-    ) {
-      CustomToast.error("Bitte gebe eine gültige E-Mail-Adresse ein");
-      return;
-    }
-    if (
-      !(
-        paymentData.paypalData?.paypalEmail ||
-        (paymentData.lastschriftData?.bankname &&
-          paymentData.lastschriftData?.bic &&
-          paymentData.lastschriftData.iban)
-      )
-    ) {
-      CustomToast.error(
-        "Es muss mindestens PayPal oder Lastschrift ausgewählt sein"
-      );
-      return;
-    }
-
-    try {
-      // POST request to add PayPal data
-      if (paymentData.paypalData?.paypalEmail) {
-        const postPaymentData = {
-          ...paymentData,
-          paypalEmail: paymentData.paypalData.paypalEmail,
-        };
-        const postPaypalData = await sendPostRequest(
-          "/zahlung",
-          postPaymentData
-        );
-        dispatch(addPayment(postPaypalData));
-      }
-
-      // POST request to add bank data
-      if (
-        paymentData.lastschriftData?.bankname &&
-        paymentData.lastschriftData?.bic &&
-        paymentData.lastschriftData?.iban
-      ) {
-        const postPaymentData = {
-          ...paymentData,
-          bankname: paymentData.lastschriftData.bankname,
-          bic: paymentData.lastschriftData.bic,
-          iban: paymentData.lastschriftData.iban,
-        };
-        const postLastschriftData = await sendPostRequest(
-          "/zahlung",
-          postPaymentData
-        );
-        dispatch(addPayment(postLastschriftData));
-      }
-
-      setEditedData(null);
-      setEditMode(false);
-    } catch (error) {
-      CustomToast.error("Fehler beim Speichern der Daten");
-      console.log(error);
-    }
-  };
   const highestLaufendeAdressenId = Math.max(
     ...uniqueAdressInformation
       .map(adress => adress.laufendeAdressenId)
@@ -255,6 +201,19 @@ export default function AdressInformation(): JSX.Element {
       dispatch(setSelectedAdress(highestAdress));
     }
   }, [highestLaufendeAdressenId, uniqueAdressInformation, dispatch]);
+  const highestLaufendeZahlungsId = Math.max(
+    ...uniquePaymentInformation
+      .map(payment => payment.laufendeZahlungsId)
+      .filter((id): id is number => id !== undefined)
+  );
+  useEffect(() => {
+    const highestPayment = paymentInformation.find(
+      payment => payment.laufendeZahlungsId === highestLaufendeZahlungsId
+    );
+    if (highestPayment) {
+      dispatch(setSelectedPayment(highestPayment));
+    }
+  }, [highestLaufendeZahlungsId, paymentInformation, dispatch]);
 
   return (
     <div>
@@ -488,65 +447,66 @@ export default function AdressInformation(): JSX.Element {
         <Card>
           <Title>Zahlungsmöglichkeiten: </Title>
           <Grid container justifyContent={"center"}>
-            <Grid item xs={6}>
-              <Title>
-                <FaPaypal size={30} />
-              </Title>
-              {showPaymentFields && (
-                <form onSubmit={e => handleSubmit(e)}>
-                  <FormControl component="fieldset">
-                    <FormGroup>
-                      <Grid item xs={12}>
-                        <TextField
-                          fullWidth
-                          id="paypalEmail"
-                          label="PayPal Email"
-                          name="paypalEmail"
-                          inputProps={{
-                            maxLength: 100,
-                            style: {
-                              color: `${colors.black}`,
-                              textAlign: "left",
-                            },
-                          }}
-                          InputLabelProps={{
-                            sx: {
-                              backgroundColor: `${colors.primarycolor}`,
-                              color: colors.companycolor,
-                            },
-                          }}
-                          onChange={e => {
-                            e.target.value = e.target.value.trim();
-                          }}
-                        />
-                      </Grid>
-                      <Button
-                        style={{ color: colors.companycolor }}
-                        type="submit"
-                      >
-                        PayPal-Information hinzufügen
-                      </Button>
-                      <Button
-                        style={{ color: colors.companycolor }}
-                        onClick={handleCancelPayment}
-                      >
-                        Abbrechen
-                      </Button>
-                    </FormGroup>
-                  </FormControl>
-                </form>
-              )}
+            <Grid item xs={12} sm={showPaymentFields ? 6 : 12}>
+              <ScrollableContainer>
+                {paymentInformation.map((payment, index) => (
+                  <div key={index}>
+                    <input
+                      type="radio"
+                      id={`Zahlung${index}`}
+                      name="Zahlung"
+                      value={`Zahlung${index}`}
+                      defaultChecked={
+                        payment.laufendeZahlungsId === highestLaufendeZahlungsId
+                      }
+                      onChange={() => {
+                        dispatch(setSelectedPayment(payment));
+                      }}
+                    />
+                    <Paragraph>
+                      <strong>PayPal Email: </strong>
+                      {payment.paypalData?.paypalEmail}
+                    </Paragraph>
+                    <Paragraph>
+                      <strong>
+                        Bankname: {payment.lastschriftData?.bankname}
+                      </strong>
+                    </Paragraph>
+                    <Paragraph>
+                      <strong>BIC: {payment.lastschriftData?.bic}</strong>
+                    </Paragraph>
+                    <Paragraph>
+                      <strong>IBAN: {payment.lastschriftData?.iban}</strong>
+                    </Paragraph>
+                  </div>
+                ))}
+              </ScrollableContainer>
             </Grid>
 
             <Grid item xs={6}>
-              <Title>
-                <Bank size={30} />
-              </Title>
               {showPaymentFields && (
-                <form onSubmit={e => handleSubmit(e)}>
+                <form
+                  onSubmit={e => {
+                    e.preventDefault();
+                    const formData = new FormData(e.target as HTMLFormElement);
+                    const paymentData: PaymentData = {
+                      kundenId: cookies.kundenId,
+                      lastschriftData: {
+                        bankname: formData.get("bankName") as string,
+                        bic: formData.get("bic") as string,
+                        iban: formData.get("iban") as string,
+                        // Fügen Sie hier weitere Lastschrift-Daten hinzu, falls vorhanden
+                      },
+                    };
+                    handleAddPayment(paymentData);
+                  }}
+                >
                   <FormControl component="fieldset">
                     <FormGroup>
                       <Grid item xs={12}>
+                        <Title>
+                          <Bank size={30} />
+                        </Title>
                         <TextField
                           fullWidth
                           id="bankName"
@@ -631,9 +591,69 @@ export default function AdressInformation(): JSX.Element {
                   </FormControl>
                 </form>
               )}
+              {showPaymentFields && (
+                <form
+                  onSubmit={e => {
+                    e.preventDefault();
+                    const formData = new FormData(e.target as HTMLFormElement);
+                    const paymentData: PaymentData = {
+                      kundenId: cookies.kundenId,
+                      paypalData: {
+                        paypalEmail: formData.get("paypalEmail") as string,
+                        // Fügen Sie hier weitere PayPal-Daten hinzu, falls vorhanden
+                      },
+                    };
+                    handleAddPayment(paymentData);
+                  }}
+                >
+                  <FormControl component="fieldset">
+                    <FormGroup>
+                      <Grid item xs={12}>
+                        <Title>
+                          <FaPaypal size={30} />
+                        </Title>
+                        <TextField
+                          fullWidth
+                          id="paypalEmail"
+                          label="PayPal Email"
+                          name="paypalEmail"
+                          inputProps={{
+                            maxLength: 100,
+                            style: {
+                              color: `${colors.black}`,
+                              textAlign: "left",
+                            },
+                          }}
+                          InputLabelProps={{
+                            sx: {
+                              backgroundColor: `${colors.primarycolor}`,
+                              color: colors.companycolor,
+                            },
+                          }}
+                          onChange={e => {
+                            e.target.value = e.target.value.trim();
+                          }}
+                        />
+                      </Grid>
+                      <Button
+                        style={{ color: colors.companycolor }}
+                        type="submit"
+                      >
+                        PayPal-Information hinzufügen
+                      </Button>
+                      <Button
+                        style={{ color: colors.companycolor }}
+                        onClick={handleCancelPayment}
+                      >
+                        Abbrechen
+                      </Button>
+                    </FormGroup>
+                  </FormControl>
+                </form>
+              )}
             </Grid>
             {!showPaymentFields && (
-              <Grid>
+              <Grid container justifyContent="center" alignItems="center">
                 <LogoutButton
                   className="black-color white-orange "
                   onClick={() => handleOpenPayment()}
