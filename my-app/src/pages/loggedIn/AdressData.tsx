@@ -97,7 +97,7 @@ export default function AdressInformation(): JSX.Element {
         dispatch(loadAdressen(responseAdress));
 
         console.log(responsePayment, "responsePayment");
-        dispatch(addPayment(responsePayment));
+        dispatch(addPayment(responsePayment)); //Todo hier will ich eigentlich loadPayment machen, aber damit failed es dann
       } catch (error) {
         CustomToast.error("Fehler beim Laden der Daten");
       }
