@@ -133,15 +133,44 @@ export default function AdressInformation(): JSX.Element {
 
     console.log(paymentData, "paymentData");
     try {
-      const postPaymentData = await sendPostRequest("/zahlung", paymentData);
-      dispatch(addPayment(postPaymentData));
-      setShowPaymentFields(
-        false
-      ); /* Wenn die Zahlungsmethode hinzugefügt wurde, wird das Feld geschlossen */
+      // POST request to add PayPal data
+      if (paymentData.paypalData?.paypalEmail) {
+        const postPaymentData = {
+          ...paymentData,
+          paypalEmail: paymentData.paypalData.paypalEmail,
+        };
+        const postPaypalData = await sendPostRequest(
+          "/zahlung",
+          postPaymentData
+        );
+        dispatch(addPayment(postPaypalData));
+      }
+
+      // POST request to add bank data
+      if (
+        paymentData.lastschriftData?.bankname &&
+        paymentData.lastschriftData?.bic &&
+        paymentData.lastschriftData?.iban
+      ) {
+        const postPaymentData = {
+          ...paymentData,
+          bankname: paymentData.lastschriftData.bankname,
+          bic: paymentData.lastschriftData.bic,
+          iban: paymentData.lastschriftData.iban,
+        };
+        const postLastschriftData = await sendPostRequest(
+          "/zahlung",
+          postPaymentData
+        );
+        dispatch(addPayment(postLastschriftData));
+      }
+
+      setEditedData(null);
+      setEditMode(false);
     } catch (error) {
-      CustomToast.error("Fehler beim Hinzufügen der Zahlungsmethode");
+      CustomToast.error("Fehler beim Speichern der Daten");
+      console.log(error);
     }
-    console.log(paymentData, "paymentData");
   };
 
   const handleAddAdress = async (data: AdressData) => {
