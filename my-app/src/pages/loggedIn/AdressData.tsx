@@ -25,15 +25,14 @@ import { FaPaypal } from "react-icons/fa";
 import { colors } from "../general/constants";
 import { FormGroup } from "@mui/material";
 import { addNewAdress, loadAdressen } from "../../redux/adressDataReducer";
+import { addPayment, loadPayment } from "../../redux/paymentReaducer";
 import {
   getRequest,
   sendPostRequest,
-  sendPutRequest,
 } from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
 import { CustomToast } from "../general/toast.style";
-import { addPayment, loadPayment } from "../../redux/paymentReaducer";
 import styled from "styled-components";
 import { setSelectedAdress } from "../../redux/adressDataReducer";
 import { setSelectedPayment } from "../../redux/paymentReaducer";
@@ -90,14 +89,21 @@ export default function AdressInformation(): JSX.Element {
         const responsePayment = await getRequest(
           `/zahlung/${cookies.kundenId}`
         );
+        if (responsePayment.paypal) {
+          const paypalData: PaypalData[] = responsePayment.paypal;
+          dispatch(loadPayment(paypalData));
+        }
+
+        if (responsePayment.lastschrift) {
+          const lastschriftData: LastschriftData[] =
+            responsePayment.lastschrift;
+          dispatch(loadPayment(lastschriftData));
+        }
         const responseAdress = await getRequest(
           `/adressen/${cookies.kundenId}`
         );
         console.log(responseAdress, "responseAdress");
         dispatch(loadAdressen(responseAdress));
-
-        console.log(responsePayment, "responsePayment");
-        dispatch(addPayment(responsePayment)); //Todo hier will ich eigentlich loadPayment machen, aber damit failed es dann
       } catch (error) {
         CustomToast.error("Fehler beim Laden der Daten");
       }
@@ -203,6 +209,10 @@ export default function AdressInformation(): JSX.Element {
     dispatch(setSelectedAdress(adress));
   };
 
+  const handleSelectPayment = (payment: PaymentData) => {
+    dispatch(setSelectedPayment(payment));
+  };
+
   const handleCancelAdress = () => {
     setEditedData(null);
     setShowFields(false);
@@ -213,9 +223,6 @@ export default function AdressInformation(): JSX.Element {
     setEditedPaymentLastschriftData(null);
     setShowPaymentFields(false);
   };
-  const selectedPayment = useSelector(
-    (state: { payment: PaymentDataState }) => state.payment.selectedPayments
-  );
 
   const highestLaufendeAdressenId = Math.max(
     ...uniqueAdressInformation
@@ -489,7 +496,7 @@ export default function AdressInformation(): JSX.Element {
                         payment.laufendeZahlungsId === highestLaufendeZahlungsId
                       }
                       onChange={() => {
-                        dispatch(setSelectedPayment(payment));
+                        handleSelectPayment(payment);
                       }}
                     />
                     <Paragraph>
