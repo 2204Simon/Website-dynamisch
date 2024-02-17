@@ -480,37 +480,41 @@ export default function AdressInformation(): JSX.Element {
           <Grid container justifyContent={"center"}>
             <Grid item xs={12} sm={showPaymentFields ? 6 : 12}>
               <ScrollableContainer>
-                {paymentInformation.map((payment, index) => (
-                  <div key={index}>
-                    <input
-                      type="radio"
-                      id={`Zahlung${index}`}
-                      name="Zahlung"
-                      value={`Zahlung${index}`}
-                      defaultChecked={
-                        payment.laufendeZahlungsId === highestLaufendeZahlungsId
-                      }
-                      onChange={() => {
-                        handleSelectPayment(payment);
-                      }}
-                    />
-                    <Paragraph>
-                      <strong>PayPal Email: </strong>
-                      {payment.paypalData?.paypalEmail}
-                    </Paragraph>
-                    <Paragraph>
-                      <strong>
-                        Bankname: {payment.lastschriftData?.bankname}
-                      </strong>
-                    </Paragraph>
-                    <Paragraph>
-                      <strong>BIC: {payment.lastschriftData?.bic}</strong>
-                    </Paragraph>
-                    <Paragraph>
-                      <strong>IBAN: {payment.lastschriftData?.iban}</strong>
-                    </Paragraph>
-                  </div>
-                ))}
+                {uniquePaymentInformation
+                  .slice()
+                  .reverse()
+                  .map((payment, index) => (
+                    <div key={index}>
+                      <input
+                        type="radio"
+                        id={`Zahlung${index}`}
+                        name="Zahlung"
+                        value={`Zahlung${index}`}
+                        defaultChecked={
+                          payment.laufendeZahlungsId ===
+                          highestLaufendeZahlungsId
+                        }
+                        onChange={() => {
+                          handleSelectPayment(payment);
+                        }}
+                      />
+                      <Paragraph>
+                        <strong>PayPal Email: </strong>
+                        {payment.paypalData?.paypalEmail}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>
+                          Bankname: {payment.lastschriftData?.bankname}
+                        </strong>
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>BIC: {payment.lastschriftData?.bic}</strong>
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>IBAN: {payment.lastschriftData?.iban}</strong>
+                      </Paragraph>
+                    </div>
+                  ))}
               </ScrollableContainer>
             </Grid>
 
