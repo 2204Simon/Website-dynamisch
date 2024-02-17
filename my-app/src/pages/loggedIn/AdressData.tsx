@@ -112,11 +112,6 @@ export default function AdressInformation(): JSX.Element {
     fetchData();
   }, []);
 
-  const handleEdit = (data: AdressData) => {
-    setEditMode(true);
-    setEditedData(data);
-  };
-
   const handleOpenAdress = () => {
     setShowFields(true);
   };
