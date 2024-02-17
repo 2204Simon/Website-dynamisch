@@ -79,8 +79,8 @@ export default function AdressInformation(): JSX.Element {
         t =>
           t.paypalData?.paypalEmail === payment.paypalData?.paypalEmail &&
           t.lastschriftData?.iban === payment.lastschriftData?.iban &&
-          t.lastschriftData?.bic === payment.lastschriftData?.bic &&
-          t.lastschriftData?.bankname === payment.lastschriftData?.bankname
+          t.lastschriftData?.bankname === payment.lastschriftData?.bankname &&
+          t.lastschriftData?.bic === payment.lastschriftData?.bic
       )
   );
   useEffect(() => {
@@ -89,6 +89,7 @@ export default function AdressInformation(): JSX.Element {
         const responsePayment = await getRequest(
           `/zahlung/${cookies.kundenId}`
         );
+        console.log(responsePayment, "responsePayment");
         if (responsePayment.paypal) {
           const paypalData: PaypalData[] = responsePayment.paypal;
           dispatch(loadPayment(paypalData));
@@ -238,13 +239,13 @@ export default function AdressInformation(): JSX.Element {
       .filter((id): id is number => id !== undefined)
   );
   useEffect(() => {
-    const highestPayment = paymentInformation.find(
+    const highestPayment = uniquePaymentInformation.find(
       payment => payment.laufendeZahlungsId === highestLaufendeZahlungsId
     );
     if (highestPayment) {
       dispatch(setSelectedPayment(highestPayment));
     }
-  }, [highestLaufendeZahlungsId, paymentInformation, dispatch]);
+  }, [highestLaufendeZahlungsId, uniquePaymentInformation, dispatch]);
 
   return (
     <div>
@@ -502,6 +503,7 @@ export default function AdressInformation(): JSX.Element {
                         <strong>PayPal Email: </strong>
                         {payment.paypalData?.paypalEmail}
                       </Paragraph>
+
                       <Paragraph>
                         <strong>
                           Bankname: {payment.lastschriftData?.bankname}
