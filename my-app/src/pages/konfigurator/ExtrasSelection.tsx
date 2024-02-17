@@ -51,7 +51,7 @@ const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
   onNextStage,
 }) => {
   const [selectedExtras, setSelectedExtras] = useState<Array<Ingredient>>([]);
-  const [extras, setExtras] = useState<Array<any>>([]); // Hier speichern wir die vom Server geholten Getränke
+  const [extras, setExtras] = useState<any[]>([]); // Hier speichern wir die vom Server geholten Extras
   const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
 
   const handleMinus = (extra: string) => {
@@ -76,7 +76,8 @@ const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
   };
 
   useEffect(() => {
-    fetch(`${baseUrl}/zutat/Topping`)
+    console.log("Fehler");
+    fetch(`${baseUrl}/zutat/Extra`)
       .then(response => response.json())
       .then(data =>
         Promise.all(
@@ -89,7 +90,8 @@ const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
         )
       )
       .then(extras => {
-        setExtras(extras); // Speichern der Daten im State
+        setExtras(extras);
+        console.log("Fehler"); // Speichern der Daten im State
       })
       .catch(error => {
         console.log("Fehler");
@@ -164,7 +166,7 @@ const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
                 displayNone={false}
                 key={extra.zutatsId}
                 // className={quantities[extra.zutatsId] > 0 ? "selected" : ""}
-                // onClick={() => handleExtraSelect(extra.zutatsId)}
+                onClick={() => handleExtraSelect(extra.zutatsId)}
               >
                 <ImageContainer>
                   <Image src={extra.zutatBild} alt={extra.zutatsname} />

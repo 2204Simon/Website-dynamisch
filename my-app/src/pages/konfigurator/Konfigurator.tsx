@@ -113,6 +113,15 @@ const Konfigurator: React.FC = () => {
                 </div>
               );
             })}
+            {selectedExtras.map(item => {
+              return (
+                <div>
+                  <h1>Extra</h1>
+                  <p>id: {item.id}</p>
+                  <p>Menge: {item.quantity}</p>
+                </div>
+              );
+            })}
             {/* {selectedIngredients.map(item => {
               selectedIngredients.concat(selectedBread, selectedToppings);
 
