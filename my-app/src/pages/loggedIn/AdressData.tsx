@@ -611,18 +611,6 @@ export default function AdressInformation(): JSX.Element {
                           }}
                         />
                       </Grid>
-                      <Button
-                        style={{ color: colors.companycolor }}
-                        type="submit"
-                      >
-                        Bankinformation hinzufügen
-                      </Button>
-                      <Button
-                        style={{ color: colors.companycolor }}
-                        onClick={handleCancelPayment}
-                      >
-                        Abbrechen
-                      </Button>
                     </FormGroup>
                   </FormControl>
                 </form>
@@ -675,7 +663,7 @@ export default function AdressInformation(): JSX.Element {
                         style={{ color: colors.companycolor }}
                         type="submit"
                       >
-                        PayPal-Information hinzufügen
+                        Zahlungsart hinzufügen
                       </Button>
                       <Button
                         style={{ color: colors.companycolor }}
