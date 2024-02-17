@@ -526,6 +526,10 @@ export default function AdressInformation(): JSX.Element {
                     const formData = new FormData(e.target as HTMLFormElement);
                     const paymentData: PaymentData = {
                       kundenId: cookies.kundenId,
+                      paypalData: {
+                        paypalEmail: formData.get("paypalEmail") as string,
+                        // Fügen Sie hier weitere PayPal-Daten hinzu, falls vorhanden
+                      },
                       lastschriftData: {
                         bankname: formData.get("bankName") as string,
                         bic: formData.get("bic") as string,
@@ -610,27 +614,6 @@ export default function AdressInformation(): JSX.Element {
                           }}
                         />
                       </Grid>
-                    </FormGroup>
-                  </FormControl>
-                </form>
-              )}
-              {showPaymentFields && (
-                <form
-                  onSubmit={e => {
-                    e.preventDefault();
-                    const formData = new FormData(e.target as HTMLFormElement);
-                    const paymentData: PaymentData = {
-                      kundenId: cookies.kundenId,
-                      paypalData: {
-                        paypalEmail: formData.get("paypalEmail") as string,
-                        // Fügen Sie hier weitere PayPal-Daten hinzu, falls vorhanden
-                      },
-                    };
-                    handleAddPayment(paymentData);
-                  }}
-                >
-                  <FormControl component="fieldset">
-                    <FormGroup>
                       <Grid item xs={12}>
                         <Title>
                           <FaPaypal size={30} />
