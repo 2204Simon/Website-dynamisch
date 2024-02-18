@@ -28,7 +28,6 @@ const Konfigurator: React.FC = () => {
 
     switch (currentStage) {
       case 1:
-        console.log(selectedIngredients);
         setSelectedBread(selectedProduct);
         break;
       case 2:

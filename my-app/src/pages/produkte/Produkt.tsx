@@ -211,7 +211,7 @@ function Produkt() {
         </p>
       )}
 
-      {/* <h3>Menüs</h3>
+      <h3>eigene Produkte TEST</h3>
       {isTouchpad ? (
         <div
           style={{
@@ -222,18 +222,18 @@ function Produkt() {
             msOverflowStyle: "none",
           }}
         >
-          {ShoppingCards("Menu")}
+          {ShoppingCards("KundenProdukt")}
         </div>
-      ) : existSparte("Menu") ? (
+      ) : existSparte("KundenProdukt") ? (
         <ScrollContainer scrollAmount={283}>
-          {ShoppingCards("Menu")}
+          {ShoppingCards("KundenProdukt")}
         </ScrollContainer>
       ) : (
         <p>
           Die Menüs konnten nicht geladen werden. Bitte wenden Sie sich an den
           Support.
         </p>
-      )} */}
+      )}
     </>
   );
 }
