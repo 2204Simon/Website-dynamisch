@@ -57,7 +57,7 @@ export default function AdressInformation(): JSX.Element {
     (state: { adress: AdressDataState }) => state.adress.AdressData
   );
   const paymentInformation = useSelector(
-    (state: { payment: PaymentDataState }) => state.payment.PaymentData
+    (state: { payment: PaymentDataState }) => state.payment
   );
   const [showFields, setShowFields] = useState(false);
   const [showPaymentFields, setShowPaymentFields] = useState(false);
@@ -72,7 +72,7 @@ export default function AdressInformation(): JSX.Element {
           t.hausnummer === adress.hausnummer
       )
   );
-  const uniquePaymentInformation = paymentInformation.filter(
+  const uniquePaymentInformation = paymentInformation.PaymentData.filter(
     (payment, index, self) =>
       index ===
       self.findIndex(
@@ -93,11 +93,13 @@ export default function AdressInformation(): JSX.Element {
         if (responsePayment.paypal) {
           const paypalData: PaypalData[] = responsePayment.paypal;
           dispatch(loadPayment(paypalData));
+          console.log(paypalData, "!!!!!!!!paypalData");
         }
 
         if (responsePayment.lastschrift) {
           const lastschriftData: LastschriftData[] =
             responsePayment.lastschrift;
+          console.log(paymentInformation, "!!!!!!!!!simon paymentInformation");
           dispatch(loadPayment(lastschriftData));
         }
         const responseAdress = await getRequest(
@@ -484,39 +486,50 @@ export default function AdressInformation(): JSX.Element {
                 {uniquePaymentInformation
                   .slice()
                   .reverse()
-                  .map((payment, index) => (
-                    <div key={index}>
-                      <input
-                        type="radio"
-                        id={`Zahlung${index}`}
-                        name="Zahlung"
-                        value={`Zahlung${index}`}
-                        defaultChecked={
-                          payment.laufendeZahlungsId ===
-                          highestLaufendeZahlungsId
-                        }
-                        onChange={() => {
-                          handleSelectPayment(payment);
-                        }}
-                      />
-                      <Paragraph>
-                        <strong>PayPal Email: </strong>
-                        {payment.paypalData?.paypalEmail}
-                      </Paragraph>
+                  .map(
+                    (payment, index) => (
+                      console.log("Simon paypal" + payment.paypalData),
+                      console.log("Simon bank" + payment.lastschriftData),
+                      (
+                        <div key={index}>
+                          <input
+                            type="radio"
+                            id={`Zahlung${index}`}
+                            name="Zahlung"
+                            value={`Zahlung${index}`}
+                            defaultChecked={
+                              payment.laufendeZahlungsId ===
+                              highestLaufendeZahlungsId
+                            }
+                            onChange={() => {
+                              handleSelectPayment(payment);
+                            }}
+                          />
+                          <Paragraph>
+                            <strong>PayPal Email: </strong>
+                            {
+                              paymentInformation.PaymentData[0].lastschriftData
+                                ?.bankname
+                            }
+                          </Paragraph>
 
-                      <Paragraph>
-                        <strong>
-                          Bankname: {payment.lastschriftData?.bankname}
-                        </strong>
-                      </Paragraph>
-                      <Paragraph>
-                        <strong>BIC: {payment.lastschriftData?.bic}</strong>
-                      </Paragraph>
-                      <Paragraph>
-                        <strong>IBAN: {payment.lastschriftData?.iban}</strong>
-                      </Paragraph>
-                    </div>
-                  ))}
+                          <Paragraph>
+                            <strong>
+                              Bankname: {payment.lastschriftData?.bankname}
+                            </strong>
+                          </Paragraph>
+                          <Paragraph>
+                            <strong>BIC: {payment.lastschriftData?.bic}</strong>
+                          </Paragraph>
+                          <Paragraph>
+                            <strong>
+                              IBAN: {payment.lastschriftData?.iban}
+                            </strong>
+                          </Paragraph>
+                        </div>
+                      )
+                    )
+                  )}
               </ScrollableContainer>
             </Grid>
 

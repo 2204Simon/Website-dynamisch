@@ -51,7 +51,8 @@ export type LastschriftData = {
 };
 
 export type PaymentDataState = {
-  PaymentData: PaymentData[];
+  paypalData: PaypalData | null;
+  lastschriftData: LastschriftData | null;
   selectedPayments: PaymentData | null;
 };
 
