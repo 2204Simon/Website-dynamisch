@@ -25,7 +25,12 @@ import { FaPaypal } from "react-icons/fa";
 import { colors } from "../general/constants";
 import { FormGroup } from "@mui/material";
 import { addNewAdress, loadAdressen } from "../../redux/adressDataReducer";
-import { addPayment, loadPayment } from "../../redux/paymentReaducer";
+import {
+  loadPaypal,
+  loadLastschrift,
+  addLastschriftData,
+  addPaypalData,
+} from "../../redux/paymentReaducer";
 import {
   getRequest,
   sendPostRequest,
@@ -72,17 +77,27 @@ export default function AdressInformation(): JSX.Element {
           t.hausnummer === adress.hausnummer
       )
   );
-  const uniquePaymentInformation = paymentInformation.PaymentData.filter(
+  const sortedLastschrift = paymentInformation.lastschriftData.filter(
     (payment, index, self) =>
       index ===
       self.findIndex(
         t =>
-          t.paypalData?.paypalEmail === payment.paypalData?.paypalEmail &&
-          t.lastschriftData?.iban === payment.lastschriftData?.iban &&
-          t.lastschriftData?.bankname === payment.lastschriftData?.bankname &&
-          t.lastschriftData?.bic === payment.lastschriftData?.bic
+          // t.paypalData?.paypalEmail === payment.paypalData?.paypalEmail &&
+          t?.iban === payment?.iban &&
+          t?.bankname === payment?.bankname &&
+          t?.bic === payment?.bic
       )
   );
+
+  const sortedPaypal = paymentInformation.paypalData.filter(
+    (payment, index, self) =>
+      index === self.findIndex(t => t?.paypalEmail === payment?.paypalEmail)
+  );
+
+  const uniquePaymentInformation = {
+    payPal: sortedPaypal,
+    lastschrift: sortedLastschrift,
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -92,7 +107,7 @@ export default function AdressInformation(): JSX.Element {
         console.log(responsePayment, "responsePayment");
         if (responsePayment.paypal) {
           const paypalData: PaypalData[] = responsePayment.paypal;
-          dispatch(loadPayment(paypalData));
+          dispatch(loadPaypal(paypalData));
           console.log(paypalData, "!!!!!!!!paypalData");
         }
 
@@ -100,7 +115,7 @@ export default function AdressInformation(): JSX.Element {
           const lastschriftData: LastschriftData[] =
             responsePayment.lastschrift;
           console.log(paymentInformation, "!!!!!!!!!simon paymentInformation");
-          dispatch(loadPayment(lastschriftData));
+          dispatch(loadLastschrift(lastschriftData));
         }
         const responseAdress = await getRequest(
           `/adressen/${cookies.kundenId}`
@@ -147,28 +162,18 @@ export default function AdressInformation(): JSX.Element {
           "/zahlung",
           postPaymentData
         );
-        dispatch(addPayment(postPaypalData));
-      }
+        if (postPaypalData.paypal) {
+          const paypalData: PaypalData = postPaypalData.paypal;
+          dispatch(addPaypalData(paypalData));
+          console.log(paypalData, "!!!!!!!!paypalData");
+        }
 
-      // POST request to add bank data
-      if (
-        paymentData.lastschriftData?.bankname &&
-        paymentData.lastschriftData?.bic &&
-        paymentData.lastschriftData?.iban
-      ) {
-        const postPaymentData = {
-          ...paymentData,
-          bankname: paymentData.lastschriftData.bankname,
-          bic: paymentData.lastschriftData.bic,
-          iban: paymentData.lastschriftData.iban,
-        };
-        const postLastschriftData = await sendPostRequest(
-          "/zahlung",
-          postPaymentData
-        );
-        dispatch(addPayment(postLastschriftData));
+        if (postPaypalData.lastschrift) {
+          const lastschriftData: LastschriftData = postPaypalData.lastschrift;
+          console.log(paymentInformation, "!!!!!!!!!simon paymentInformation");
+          dispatch(addLastschriftData(lastschriftData));
+        }
       }
-
       setEditedData(null);
       setEditMode(false);
     } catch (error) {
@@ -235,19 +240,20 @@ export default function AdressInformation(): JSX.Element {
       dispatch(setSelectedAdress(highestAdress));
     }
   }, [highestLaufendeAdressenId, uniqueAdressInformation, dispatch]);
-  const highestLaufendeZahlungsId = Math.max(
-    ...uniquePaymentInformation
-      .map(payment => payment.laufendeZahlungsId)
-      .filter((id): id is number => id !== undefined)
-  );
-  useEffect(() => {
-    const highestPayment = uniquePaymentInformation.find(
-      payment => payment.laufendeZahlungsId === highestLaufendeZahlungsId
-    );
-    if (highestPayment) {
-      dispatch(setSelectedPayment(highestPayment));
-    }
-  }, [highestLaufendeZahlungsId, uniquePaymentInformation, dispatch]);
+
+  // const highestLaufendeZahlungsId = Math.max(
+  //   ...uniquePaymentInformation
+  //     .map(payment => payment.laufendeZahlungsId)
+  //     .filter((id): id is number => id !== undefined)
+  // );
+  // useEffect(() => {
+  //   const highestPayment = uniquePaymentInformation.find(
+  //     payment => payment.laufendeZahlungsId === highestLaufendeZahlungsId
+  //   );
+  //   if (highestPayment) {
+  //     dispatch(setSelectedPayment(highestPayment));
+  //   }
+  // }, [highestLaufendeZahlungsId, uniquePaymentInformation, dispatch]);
 
   return (
     <div>
@@ -483,53 +489,63 @@ export default function AdressInformation(): JSX.Element {
           <Grid container justifyContent={"center"}>
             <Grid item xs={12} sm={showPaymentFields ? 6 : 12}>
               <ScrollableContainer>
-                {uniquePaymentInformation
+                {uniquePaymentInformation.lastschrift
                   .slice()
                   .reverse()
-                  .map(
-                    (payment, index) => (
-                      console.log("Simon paypal" + payment.paypalData),
-                      console.log("Simon bank" + payment.lastschriftData),
-                      (
-                        <div key={index}>
-                          <input
-                            type="radio"
-                            id={`Zahlung${index}`}
-                            name="Zahlung"
-                            value={`Zahlung${index}`}
-                            defaultChecked={
-                              payment.laufendeZahlungsId ===
-                              highestLaufendeZahlungsId
-                            }
-                            onChange={() => {
-                              handleSelectPayment(payment);
-                            }}
-                          />
-                          <Paragraph>
-                            <strong>PayPal Email: </strong>
-                            {
-                              paymentInformation.PaymentData[0].lastschriftData
-                                ?.bankname
-                            }
-                          </Paragraph>
-
-                          <Paragraph>
-                            <strong>
-                              Bankname: {payment.lastschriftData?.bankname}
-                            </strong>
-                          </Paragraph>
-                          <Paragraph>
-                            <strong>BIC: {payment.lastschriftData?.bic}</strong>
-                          </Paragraph>
-                          <Paragraph>
-                            <strong>
-                              IBAN: {payment.lastschriftData?.iban}
-                            </strong>
-                          </Paragraph>
-                        </div>
-                      )
-                    )
-                  )}
+                  .map((payment, index) => (
+                    <div key={index}>
+                      <input
+                        type="radio"
+                        id={`Zahlung${index}`}
+                        name="Zahlung"
+                        value={`Zahlung${index}`}
+                        // defaultChecked={
+                        //   payment.laufendeZahlungsId ===
+                        //   highestLaufendeZahlungsId
+                        // }
+                        onChange={() => {
+                          handleSelectPayment(payment);
+                        }}
+                      />
+                      <Paragraph>
+                        <strong>Bankname: </strong>
+                        {payment?.bankname}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>BIC: </strong>
+                        {payment?.bic}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>IBAN: </strong>
+                        {payment?.iban}
+                      </Paragraph>
+                    </div>
+                  ))}
+              </ScrollableContainer>
+              <ScrollableContainer>
+                {uniquePaymentInformation.payPal
+                  .reverse()
+                  .map((payment, index) => (
+                    <div key={index}>
+                      <input
+                        type="radio"
+                        id={`Zahlung${index}`}
+                        name="Zahlung"
+                        value={`Zahlung${index}`}
+                        // defaultChecked={
+                        //   payment.laufendeZahlungsId ===
+                        //   highestLaufendeZahlungsId
+                        // }
+                        onChange={() => {
+                          handleSelectPayment(payment);
+                        }}
+                      />
+                      <Paragraph>
+                        <strong>PayPal Email: </strong>
+                        {payment?.paypalEmail}
+                      </Paragraph>
+                    </div>
+                  ))}
               </ScrollableContainer>
             </Grid>
 
