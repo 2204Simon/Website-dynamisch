@@ -76,20 +76,20 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   const [selectedPayments, setSelectedPayments] = useState(() => {
     if (
       paymentInformation?.paypalData?.paypalEmail &&
-      paymentInformation.lastschriftData?.bankname &&
-      paymentInformation.lastschriftData?.bic &&
-      paymentInformation.lastschriftData?.iban
+      paymentInformation.lastschriftData?.Bankname &&
+      paymentInformation.lastschriftData?.BIC &&
+      paymentInformation.lastschriftData?.IBAN
     ) {
       return ["Paypal"];
     } else if (
       paymentInformation?.paypalData?.paypalEmail &&
-      !paymentInformation.lastschriftData?.bankname
+      !paymentInformation.lastschriftData?.Bankname
     ) {
       return ["Paypal"];
     } else if (
-      paymentInformation?.lastschriftData?.bankname &&
-      paymentInformation.lastschriftData?.bic &&
-      paymentInformation.lastschriftData?.iban &&
+      paymentInformation?.lastschriftData?.Bankname &&
+      paymentInformation.lastschriftData?.BIC &&
+      paymentInformation.lastschriftData?.IBAN &&
       !paymentInformation.paypalData?.paypalEmail
     ) {
       return ["Lastschrift"];
@@ -101,20 +101,20 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
     // Überprüfen Sie die Zahlungsinformationen und aktualisieren Sie die Anzeige der Schaltflächen
     if (
       paymentInformation?.paypalData?.paypalEmail &&
-      paymentInformation.lastschriftData?.bankname &&
-      paymentInformation.lastschriftData?.bic &&
-      paymentInformation.lastschriftData?.iban
+      paymentInformation.lastschriftData?.Bankname &&
+      paymentInformation.lastschriftData?.BIC &&
+      paymentInformation.lastschriftData?.IBAN
     ) {
       setSelectedPayments(["Paypal"]);
     } else if (
       paymentInformation?.paypalData?.paypalEmail &&
-      !paymentInformation.lastschriftData?.bankname
+      !paymentInformation.lastschriftData?.Bankname
     ) {
       setSelectedPayments(["Paypal"]);
     } else if (
-      paymentInformation?.lastschriftData?.bankname &&
-      paymentInformation.lastschriftData?.bic &&
-      paymentInformation.lastschriftData?.iban &&
+      paymentInformation?.lastschriftData?.Bankname &&
+      paymentInformation.lastschriftData?.BIC &&
+      paymentInformation.lastschriftData?.IBAN &&
       !paymentInformation.paypalData?.paypalEmail
     ) {
       setSelectedPayments(["Lastschrift"]);
@@ -272,9 +272,9 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                 {
                   // Wenn PayPal-E-Mail und Bankinformationen vorhanden sind
                   paymentInformation?.paypalData?.paypalEmail &&
-                  paymentInformation.lastschriftData?.bankname &&
-                  paymentInformation.lastschriftData?.bic &&
-                  paymentInformation.lastschriftData?.iban ? (
+                  paymentInformation.lastschriftData?.Bankname &&
+                  paymentInformation.lastschriftData?.BIC &&
+                  paymentInformation.lastschriftData?.IBAN ? (
                     // Radio Button für PayPal oder Bankinformationen
                     <div>
                       <input
@@ -304,9 +304,9 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                   ) : null
                 }
                 {selectedPayments.includes("Lastschrift") ||
-                (paymentInformation?.lastschriftData?.bankname &&
-                  paymentInformation.lastschriftData?.bic &&
-                  paymentInformation.lastschriftData?.iban &&
+                (paymentInformation?.lastschriftData?.Bankname &&
+                  paymentInformation.lastschriftData?.BIC &&
+                  paymentInformation.lastschriftData?.IBAN &&
                   !paymentInformation.paypalData?.paypalEmail) ? (
                   <Button
                     onClick={() => handleThankyouPopup()}
@@ -317,9 +317,9 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                 ) : null}
                 {selectedPayments.includes("Paypal") ||
                 (paymentInformation?.paypalData?.paypalEmail &&
-                  !paymentInformation.lastschriftData?.bankname) ||
-                !paymentInformation?.lastschriftData?.bic ||
-                !paymentInformation.lastschriftData?.iban ? (
+                  !paymentInformation.lastschriftData?.Bankname) ||
+                !paymentInformation?.lastschriftData?.BIC ||
+                !paymentInformation.lastschriftData?.IBAN ? (
                   <>
                     Kostenpflichtig Bestellen mit
                     <PayPalPayment

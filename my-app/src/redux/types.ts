@@ -45,9 +45,9 @@ export type PaypalData = {
 
 export type LastschriftData = {
   kundenId?: string;
-  bankname?: string;
-  iban?: string;
-  bic?: string;
+  Bankname?: string;
+  IBAN?: string;
+  BIC?: string;
 };
 
 export type PaymentDataState = {

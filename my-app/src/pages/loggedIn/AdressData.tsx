@@ -77,27 +77,7 @@ export default function AdressInformation(): JSX.Element {
           t.hausnummer === adress.hausnummer
       )
   );
-  const sortedLastschrift = paymentInformation.lastschriftData.filter(
-    (payment, index, self) =>
-      index ===
-      self.findIndex(
-        t =>
-          // t.paypalData?.paypalEmail === payment.paypalData?.paypalEmail &&
-          t?.iban === payment?.iban &&
-          t?.bankname === payment?.bankname &&
-          t?.bic === payment?.bic
-      )
-  );
 
-  const sortedPaypal = paymentInformation.paypalData.filter(
-    (payment, index, self) =>
-      index === self.findIndex(t => t?.paypalEmail === payment?.paypalEmail)
-  );
-
-  const uniquePaymentInformation = {
-    payPal: sortedPaypal,
-    lastschrift: sortedLastschrift,
-  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -137,7 +117,7 @@ export default function AdressInformation(): JSX.Element {
 
   const handleAddPayment = async (data: PaymentData) => {
     console.log(data, "data");
-    if (!data.paypalData?.paypalEmail && !data.lastschriftData?.iban) {
+    if (!data.paypalData?.paypalEmail && !data.lastschriftData?.IBAN) {
       CustomToast.error("Bitte füllen Sie alle erforderlichen Felder aus.");
       return;
     }
@@ -166,12 +146,12 @@ export default function AdressInformation(): JSX.Element {
           console.log(paypalData, "!!!!!!!!paypalData");
         }
       }
-      if (paymentData.lastschriftData?.iban) {
+      if (paymentData.lastschriftData?.IBAN) {
         const postPaymentData = {
           ...paymentData,
-          bankname: paymentData.lastschriftData.bankname,
-          iban: paymentData.lastschriftData.iban,
-          bic: paymentData.lastschriftData.bic,
+          bankname: paymentData.lastschriftData.Bankname,
+          iban: paymentData.lastschriftData.IBAN,
+          bic: paymentData.lastschriftData.BIC,
         };
         const postLastschriftData = await sendPostRequest(
           "/zahlung",
@@ -500,61 +480,52 @@ export default function AdressInformation(): JSX.Element {
           <Grid container justifyContent={"center"}>
             <Grid item xs={12} sm={showPaymentFields ? 6 : 12}>
               <ScrollableContainer>
-                {uniquePaymentInformation.lastschrift
-                  .reverse()
-                  .map((payment, index) => (
+                {paymentInformation.lastschriftData.map((payment, index) => {
+                  console.log(payment);
+                  return (
                     <div key={index}>
                       <input
                         type="radio"
                         id={`Zahlung${index}`}
                         name="Zahlung"
                         value={`Zahlung${index}`}
-                        // defaultChecked={
-                        //   payment.laufendeZahlungsId ===
-                        //   highestLaufendeZahlungsId
-                        // }
                         onChange={() => {
                           handleSelectPayment(payment);
                         }}
                       />
                       <Paragraph>
                         <strong>Bankname: </strong>
-                        {payment?.bankname}
+                        {payment?.Bankname}
                       </Paragraph>
                       <Paragraph>
                         <strong>BIC: </strong>
-                        {payment?.bic}
+                        {payment?.BIC}
                       </Paragraph>
                       <Paragraph>
                         <strong>IBAN: </strong>
-                        {payment?.iban}
+                        {payment.IBAN}
                       </Paragraph>
                     </div>
-                  ))}
+                  );
+                })}
 
-                {uniquePaymentInformation.payPal
-                  .reverse()
-                  .map((payment, index) => (
-                    <div key={index}>
-                      <input
-                        type="radio"
-                        id={`Zahlung${index}`}
-                        name="Zahlung"
-                        value={`Zahlung${index}`}
-                        // defaultChecked={
-                        //   payment.laufendeZahlungsId ===
-                        //   highestLaufendeZahlungsId
-                        // }
-                        onChange={() => {
-                          handleSelectPayment(payment);
-                        }}
-                      />
-                      <Paragraph>
-                        <strong>PayPal Email: </strong>
-                        {payment?.paypalEmail}
-                      </Paragraph>
-                    </div>
-                  ))}
+                {paymentInformation.paypalData.map((payment, index) => (
+                  <div key={index}>
+                    <input
+                      type="radio"
+                      id={`Zahlung${index}`}
+                      name="Zahlung"
+                      value={`Zahlung${index}`}
+                      onChange={() => {
+                        handleSelectPayment(payment);
+                      }}
+                    />
+                    <Paragraph>
+                      <strong>PayPal Email: </strong>
+                      {payment?.paypalEmail}
+                    </Paragraph>
+                  </div>
+                ))}
               </ScrollableContainer>
             </Grid>
 
@@ -571,9 +542,9 @@ export default function AdressInformation(): JSX.Element {
                         // Fügen Sie hier weitere PayPal-Daten hinzu, falls vorhanden
                       },
                       lastschriftData: {
-                        bankname: formData.get("bankName") as string,
-                        bic: formData.get("bic") as string,
-                        iban: formData.get("iban") as string,
+                        Bankname: formData.get("bankName") as string,
+                        BIC: formData.get("bic") as string,
+                        IBAN: formData.get("iban") as string,
                         // Fügen Sie hier weitere Lastschrift-Daten hinzu, falls vorhanden
                       },
                     };

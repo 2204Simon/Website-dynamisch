@@ -14,9 +14,9 @@ const initialState: PaymentDataState = {
   ],
   lastschriftData: [
     {
-      bankname: "",
-      iban: "",
-      bic: "",
+      Bankname: "",
+      IBAN: "",
+      BIC: "",
     },
   ],
 
