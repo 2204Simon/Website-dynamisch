@@ -7,22 +7,20 @@ import {
 } from "./types";
 
 const initialState: PaymentDataState = {
-  paypalData: [],
-  lastschriftData: [],
-  selectedPayments: {
-    kundenId: "",
-    laufendeZahlungsId: 0,
-    paypalData: {
-      kundenId: "",
+  paypalData: [
+    {
       paypalEmail: "",
     },
-    lastschriftData: {
-      kundenId: "",
+  ],
+  lastschriftData: [
+    {
       bankname: "",
       iban: "",
       bic: "",
     },
-  },
+  ],
+
+  selectedPayments: null,
 };
 
 const paymentSlice = createSlice({
