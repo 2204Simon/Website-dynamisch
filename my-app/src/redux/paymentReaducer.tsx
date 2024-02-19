@@ -2,14 +2,18 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PaymentData, PaymentDataState } from "./types";
 
 const initialState: PaymentDataState = {
-  paypalData: {
-    paypalEmail: "",
-  },
-  lastschriftData: {
-    bankname: "",
-    iban: "",
-    bic: "",
-  },
+  paypalData: [
+    {
+      paypalEmail: "",
+    },
+  ],
+  lastschriftData: [
+    {
+      bankname: "",
+      iban: "",
+      bic: "",
+    },
+  ],
 
   selectedPayments: null,
 };
