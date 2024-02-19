@@ -34,7 +34,7 @@ const paymentSlice = createSlice({
       state.paypalData.push(action.payload);
     },
     loadPaypal: (state, action: PayloadAction<Array<LastschriftData>>) => {
-      state.lastschriftData = action.payload;
+      state.paypalData = action.payload;
     },
     loadLastschrift: (state, action: PayloadAction<Array<LastschriftData>>) => {
       state.lastschriftData = action.payload;

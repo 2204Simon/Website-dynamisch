@@ -104,17 +104,14 @@ export default function AdressInformation(): JSX.Element {
         const responsePayment = await getRequest(
           `/zahlung/${cookies.kundenId}`
         );
-        console.log(responsePayment, "responsePayment");
+        console.log(responsePayment, "1234responsePayment");
         if (responsePayment.paypal) {
           const paypalData: PaypalData[] = responsePayment.paypal;
           dispatch(loadPaypal(paypalData));
-          console.log(paypalData, "!!!!!!!!paypalData");
         }
-
         if (responsePayment.lastschrift) {
           const lastschriftData: LastschriftData[] =
             responsePayment.lastschrift;
-          console.log(paymentInformation, "!!!!!!!!!simon paymentInformation");
           dispatch(loadLastschrift(lastschriftData));
         }
         const responseAdress = await getRequest(
@@ -158,6 +155,7 @@ export default function AdressInformation(): JSX.Element {
           ...paymentData,
           paypalEmail: paymentData.paypalData.paypalEmail,
         };
+
         const postPaypalData = await sendPostRequest(
           "/zahlung",
           postPaymentData
@@ -167,13 +165,26 @@ export default function AdressInformation(): JSX.Element {
           dispatch(addPaypalData(paypalData));
           console.log(paypalData, "!!!!!!!!paypalData");
         }
-
-        if (postPaypalData.lastschrift) {
-          const lastschriftData: LastschriftData = postPaypalData.lastschrift;
+      }
+      if (paymentData.lastschriftData?.iban) {
+        const postPaymentData = {
+          ...paymentData,
+          bankname: paymentData.lastschriftData.bankname,
+          iban: paymentData.lastschriftData.iban,
+          bic: paymentData.lastschriftData.bic,
+        };
+        const postLastschriftData = await sendPostRequest(
+          "/zahlung",
+          postPaymentData
+        );
+        if (postLastschriftData.lastschrift) {
+          const lastschriftData: LastschriftData =
+            postLastschriftData.lastschrift;
           console.log(paymentInformation, "!!!!!!!!!simon paymentInformation");
           dispatch(addLastschriftData(lastschriftData));
         }
       }
+
       setEditedData(null);
       setEditMode(false);
     } catch (error) {
@@ -490,7 +501,6 @@ export default function AdressInformation(): JSX.Element {
             <Grid item xs={12} sm={showPaymentFields ? 6 : 12}>
               <ScrollableContainer>
                 {uniquePaymentInformation.lastschrift
-                  .slice()
                   .reverse()
                   .map((payment, index) => (
                     <div key={index}>
@@ -521,8 +531,7 @@ export default function AdressInformation(): JSX.Element {
                       </Paragraph>
                     </div>
                   ))}
-              </ScrollableContainer>
-              <ScrollableContainer>
+
                 {uniquePaymentInformation.payPal
                   .reverse()
                   .map((payment, index) => (
