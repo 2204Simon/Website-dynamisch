@@ -480,52 +480,69 @@ export default function AdressInformation(): JSX.Element {
           <Grid container justifyContent={"center"}>
             <Grid item xs={12} sm={showPaymentFields ? 6 : 12}>
               <ScrollableContainer>
-                {paymentInformation.lastschriftData.map((payment, index) => {
-                  console.log(payment);
-                  return (
-                    <div key={index}>
-                      <input
-                        type="radio"
-                        id={`Zahlung${index}`}
-                        name="Zahlung"
-                        value={`Zahlung${index}`}
-                        onChange={() => {
-                          handleSelectPayment(payment);
-                        }}
-                      />
-                      <Paragraph>
-                        <strong>Bankname: </strong>
-                        {payment?.Bankname}
-                      </Paragraph>
-                      <Paragraph>
-                        <strong>BIC: </strong>
-                        {payment?.BIC}
-                      </Paragraph>
-                      <Paragraph>
-                        <strong>IBAN: </strong>
-                        {payment.IBAN}
-                      </Paragraph>
-                    </div>
-                  );
-                })}
-
-                {paymentInformation.paypalData.map((payment, index) => (
-                  <div key={index}>
-                    <input
-                      type="radio"
-                      id={`Zahlung${index}`}
-                      name="Zahlung"
-                      value={`Zahlung${index}`}
-                      onChange={() => {
-                        handleSelectPayment(payment);
-                      }}
-                    />
-                    <Paragraph>
-                      <strong>PayPal Email: </strong>
-                      {payment?.paypalEmail}
-                    </Paragraph>
-                  </div>
-                ))}
+                {
+                  // Zusammenführen der beiden Arrays und Sortieren nach der laufenden ZahlungsID
+                  [
+                    ...paymentInformation.lastschriftData,
+                    ...paymentInformation.paypalData,
+                  ]
+                    .sort(
+                      (a, b) =>
+                        (a.laufendeZahlungsId || 0) -
+                        (b.laufendeZahlungsId || 0)
+                    )
+                    .map((payment, index) => {
+                      if ("paypalEmail" in payment) {
+                        // Dies ist ein Paypal-Zahlungsobjekt
+                        return (
+                          <div key={index}>
+                            <input
+                              type="radio"
+                              id={`Zahlung${index}`}
+                              name="Zahlung"
+                              value={`Zahlung${index}`}
+                              onChange={() => {
+                                handleSelectPayment(payment);
+                              }}
+                            />
+                            <Paragraph>
+                              <strong>PayPal Email: </strong>
+                              {payment.paypalEmail}
+                            </Paragraph>
+                          </div>
+                        );
+                      } else {
+                        // Dies ist ein Lastschrift-Zahlungsobjekt
+                        if ("Bankname" in payment) {
+                          return (
+                            <div key={index}>
+                              <input
+                                type="radio"
+                                id={`Zahlung${index}`}
+                                name="Zahlung"
+                                value={`Zahlung${index}`}
+                                onChange={() => {
+                                  handleSelectPayment(payment);
+                                }}
+                              />
+                              <Paragraph>
+                                <strong>Bankname: </strong>
+                                {payment.Bankname}
+                              </Paragraph>
+                              <Paragraph>
+                                <strong>BIC: </strong>
+                                {payment.BIC}
+                              </Paragraph>
+                              <Paragraph>
+                                <strong>IBAN: </strong>
+                                {payment.IBAN}
+                              </Paragraph>
+                            </div>
+                          );
+                        }
+                      }
+                    })
+                }
               </ScrollableContainer>
             </Grid>
 
