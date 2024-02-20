@@ -232,19 +232,29 @@ export default function AdressInformation(): JSX.Element {
     }
   }, [highestLaufendeAdressenId, uniqueAdressInformation, dispatch]);
 
-  // const highestLaufendeZahlungsId = Math.max(
-  //   ...uniquePaymentInformation
-  //     .map(payment => payment.laufendeZahlungsId)
-  //     .filter((id): id is number => id !== undefined)
-  // );
-  // useEffect(() => {
-  //   const highestPayment = uniquePaymentInformation.find(
-  //     payment => payment.laufendeZahlungsId === highestLaufendeZahlungsId
-  //   );
-  //   if (highestPayment) {
-  //     dispatch(setSelectedPayment(highestPayment));
-  //   }
-  // }, [highestLaufendeZahlungsId, uniquePaymentInformation, dispatch]);
+  const highestLaufendeZahlungsId = Math.max(
+    ...paymentInformation.lastschriftData
+      .map(payment => payment.laufendeZahlungsId)
+      .filter((id): id is number => id !== undefined),
+    ...paymentInformation.paypalData
+      .map(payment => payment.laufendeZahlungsId)
+      .filter((id): id is number => id !== undefined)
+  );
+
+  useEffect(() => {
+    const highestLastschriftPayment = paymentInformation.lastschriftData.find(
+      payment => payment.laufendeZahlungsId === highestLaufendeZahlungsId
+    );
+    const highestPaypalPayment = paymentInformation.paypalData.find(
+      payment => payment.laufendeZahlungsId === highestLaufendeZahlungsId
+    );
+
+    const highestPayment = highestLastschriftPayment || highestPaypalPayment;
+
+    if (highestPayment) {
+      dispatch(setSelectedPayment(highestPayment));
+    }
+  }, [highestLaufendeZahlungsId, paymentInformation, dispatch]);
 
   return (
     <div>
@@ -492,7 +502,10 @@ export default function AdressInformation(): JSX.Element {
                         (b.laufendeZahlungsId || 0)
                     )
                     .reverse()
-                    .map((payment, index) => {
+                    .map((payment, index, array) => {
+                      // Höchste laufendeZahlungsId ermitteln
+                      const highestId = array[0].laufendeZahlungsId;
+
                       if ("paypalEmail" in payment) {
                         // Dies ist ein Paypal-Zahlungsobjekt
                         return (
@@ -505,6 +518,11 @@ export default function AdressInformation(): JSX.Element {
                               onChange={() => {
                                 handleSelectPayment(payment);
                               }}
+                              // Setzen Sie das Kontrollkästchen auf "checked", wenn die laufendeZahlungsId die höchste ist
+                              checked={
+                                payment.laufendeZahlungsId ===
+                                highestLaufendeZahlungsId
+                              }
                             />
                             <Paragraph>
                               <strong>PayPal Email: </strong>
@@ -525,6 +543,11 @@ export default function AdressInformation(): JSX.Element {
                                 onChange={() => {
                                   handleSelectPayment(payment);
                                 }}
+                                // Setzen Sie das Kontrollkästchen auf "checked", wenn die laufendeZahlungsId die höchste ist
+                                checked={
+                                  payment.laufendeZahlungsId ===
+                                  highestLaufendeZahlungsId
+                                }
                               />
                               <Paragraph>
                                 <strong>Bankname: </strong>
