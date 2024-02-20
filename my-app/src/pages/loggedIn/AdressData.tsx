@@ -491,6 +491,7 @@ export default function AdressInformation(): JSX.Element {
                         (a.laufendeZahlungsId || 0) -
                         (b.laufendeZahlungsId || 0)
                     )
+                    .reverse()
                     .map((payment, index) => {
                       if ("paypalEmail" in payment) {
                         // Dies ist ein Paypal-Zahlungsobjekt
