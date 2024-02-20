@@ -66,6 +66,9 @@ export default function AdressInformation(): JSX.Element {
   );
   const [showFields, setShowFields] = useState(false);
   const [showPaymentFields, setShowPaymentFields] = useState(false);
+  const selectedPayment = useSelector(
+    (state: { payment: PaymentDataState }) => state.payment.selectedPayments
+  );
   const uniqueAdressInformation = adressInformation.filter(
     (adress, index, self) =>
       index ===
@@ -204,6 +207,8 @@ export default function AdressInformation(): JSX.Element {
   };
 
   const handleSelectPayment = (payment: PaymentData) => {
+    console.log(payment, "selectedpayment aufgerufen");
+
     dispatch(setSelectedPayment(payment));
   };
 
@@ -519,10 +524,6 @@ export default function AdressInformation(): JSX.Element {
                                 handleSelectPayment(payment);
                               }}
                               // Setzen Sie das Kontrollkästchen auf "checked", wenn die laufendeZahlungsId die höchste ist
-                              checked={
-                                payment.laufendeZahlungsId ===
-                                highestLaufendeZahlungsId
-                              }
                             />
                             <Paragraph>
                               <strong>PayPal Email: </strong>
@@ -544,7 +545,8 @@ export default function AdressInformation(): JSX.Element {
                                   handleSelectPayment(payment);
                                 }}
                                 // Setzen Sie das Kontrollkästchen auf "checked", wenn die laufendeZahlungsId die höchste ist
-                                checked={
+
+                                defaultChecked={
                                   payment.laufendeZahlungsId ===
                                   highestLaufendeZahlungsId
                                 }
