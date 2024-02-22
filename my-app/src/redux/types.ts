@@ -33,14 +33,29 @@ export interface AdressData {
 
 export type PaymentData = {
   kundenId?: string;
+  laufendeZahlungsId?: number;
+  paypalData?: PaypalData;
+  lastschriftData?: LastschriftData;
+};
+
+export type PaypalData = {
+  kundenId?: string;
+  laufendeZahlungsId?: number;
   paypalEmail?: string;
-  bankname?: string;
-  bic?: string;
-  iban?: string;
+};
+
+export type LastschriftData = {
+  kundenId?: string;
+  laufendeZahlungsId?: number;
+  Bankname?: string;
+  IBAN?: string;
+  BIC?: string;
 };
 
 export type PaymentDataState = {
-  PaymentData: PaymentData;
+  paypalData: Array<PaypalData>;
+  lastschriftData: Array<LastschriftData>;
+  selectedPayments: PaymentData;
 };
 
 export enum ActionTypesAdressData {

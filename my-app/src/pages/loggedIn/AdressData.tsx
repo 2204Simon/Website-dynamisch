@@ -6,6 +6,8 @@ import {
   PaymentData,
   PaymentDataState,
   AddressenInformation,
+  PaypalData,
+  LastschriftData,
 } from "../../redux/types";
 import {
   Card,
@@ -24,34 +26,49 @@ import { colors } from "../general/constants";
 import { FormGroup } from "@mui/material";
 import { addNewAdress, loadAdressen } from "../../redux/adressDataReducer";
 import {
+  loadPaypal,
+  loadLastschrift,
+  addLastschriftData,
+  addPaypalData,
+} from "../../redux/paymentReaducer";
+import {
   getRequest,
-  sendPutRequest,
+  sendPostRequest,
 } from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
 import { CustomToast } from "../general/toast.style";
-import { addPayment } from "../../redux/paymentReaducer";
 import styled from "styled-components";
 import { setSelectedAdress } from "../../redux/adressDataReducer";
+import { setSelectedPayment } from "../../redux/paymentReaducer";
 
 const ScrollableContainer = styled.div`
   overflow: auto;
+  max-width: 450px;
   max-height: 450px;
+  margin: auto;
 `;
 
 export default function AdressInformation(): JSX.Element {
   const dispatch = useDispatch();
   const [editMode, setEditMode] = useState(false);
   const [editedData, setEditedData] = useState<AdressData | null>(null);
+  const [editedPaymentPaypalData, setEditedPaymentPaypalData] =
+    useState<PaypalData | null>(null);
+  const [editedPaymentLastschriftData, setEditedPaymentLastschriftData] =
+    useState<LastschriftData | null>(null);
   const [cookies, setCookie] = useCookies([KUNDEN_ID]);
   const adressInformation = useSelector(
     (state: { adress: AdressDataState }) => state.adress.AdressData
   );
   const paymentInformation = useSelector(
-    (state: { payment: PaymentDataState }) => state.payment.PaymentData
+    (state: { payment: PaymentDataState }) => state.payment
   );
-  const [selectedPayments, setSelectedPayments] = useState<string[]>([]);
   const [showFields, setShowFields] = useState(false);
+  const [showPaymentFields, setShowPaymentFields] = useState(false);
+  const selectedPayment = useSelector(
+    (state: { payment: PaymentDataState }) => state.payment.selectedPayments
+  );
   const uniqueAdressInformation = adressInformation.filter(
     (adress, index, self) =>
       index ===
@@ -63,20 +80,28 @@ export default function AdressInformation(): JSX.Element {
           t.hausnummer === adress.hausnummer
       )
   );
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const responsePayment = await getRequest(
           `/zahlung/${cookies.kundenId}`
         );
+        console.log(responsePayment, "1234responsePayment");
+        if (responsePayment.paypal) {
+          const paypalData: PaypalData[] = responsePayment.paypal;
+          dispatch(loadPaypal(paypalData));
+        }
+        if (responsePayment.lastschrift) {
+          const lastschriftData: LastschriftData[] =
+            responsePayment.lastschrift;
+          dispatch(loadLastschrift(lastschriftData));
+        }
         const responseAdress = await getRequest(
           `/adressen/${cookies.kundenId}`
         );
         console.log(responseAdress, "responseAdress");
         dispatch(loadAdressen(responseAdress));
-
-        console.log(responsePayment, "responsePayment");
-        dispatch(addPayment(responsePayment));
       } catch (error) {
         CustomToast.error("Fehler beim Laden der Daten");
       }
@@ -85,24 +110,70 @@ export default function AdressInformation(): JSX.Element {
     fetchData();
   }, []);
 
-  const handlePaymentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const paymentOption = event.target.value;
-
-    if (selectedPayments.includes(paymentOption)) {
-      setSelectedPayments(
-        selectedPayments.filter(option => option !== paymentOption)
-      );
-    } else {
-      setSelectedPayments([...selectedPayments, paymentOption]);
-    }
-  };
-  const handleEdit = (data: AdressData) => {
-    setEditMode(true);
-    setEditedData(data);
-  };
-
   const handleOpenAdress = () => {
     setShowFields(true);
+  };
+
+  const handleOpenPayment = () => {
+    setShowPaymentFields(true);
+  };
+
+  const handleAddPayment = async (data: PaymentData) => {
+    console.log(data, "data");
+    if (!data.paypalData?.paypalEmail && !data.lastschriftData?.IBAN) {
+      CustomToast.error("Bitte füllen Sie alle erforderlichen Felder aus.");
+      return;
+    }
+    const paymentData: PaymentData = {
+      kundenId: cookies.kundenId,
+      paypalData: data.paypalData,
+      lastschriftData: data.lastschriftData,
+    };
+
+    console.log(paymentData, "paymentData");
+    try {
+      // POST request to add PayPal data
+      if (paymentData.paypalData?.paypalEmail) {
+        const postPaymentData = {
+          ...paymentData,
+          paypalEmail: paymentData.paypalData.paypalEmail,
+        };
+
+        const postPaypalData = await sendPostRequest(
+          "/zahlung",
+          postPaymentData
+        );
+        if (postPaypalData.paypal) {
+          const paypalData: PaypalData = postPaypalData.paypal;
+          dispatch(addPaypalData(paypalData));
+          console.log(paypalData, "!!!!!!!!paypalData");
+        }
+      }
+      if (paymentData.lastschriftData?.IBAN) {
+        const postPaymentData = {
+          ...paymentData,
+          bankname: paymentData.lastschriftData.Bankname,
+          iban: paymentData.lastschriftData.IBAN,
+          bic: paymentData.lastschriftData.BIC,
+        };
+        const postLastschriftData = await sendPostRequest(
+          "/zahlung",
+          postPaymentData
+        );
+        if (postLastschriftData.lastschrift) {
+          const lastschriftData: LastschriftData =
+            postLastschriftData.lastschrift;
+          console.log(paymentInformation, "!!!!!!!!!simon paymentInformation");
+          dispatch(addLastschriftData(lastschriftData));
+        }
+      }
+
+      setEditedData(null);
+      setEditMode(false);
+    } catch (error) {
+      CustomToast.error("Fehler beim Speichern der Daten");
+      console.log(error);
+    }
   };
 
   const handleAddAdress = async (data: AdressData) => {
@@ -123,8 +194,8 @@ export default function AdressInformation(): JSX.Element {
 
     console.log(adressData, "adressData");
     try {
-      const putAdressData = await sendPutRequest("/adresse", adressData);
-      dispatch(addNewAdress(putAdressData));
+      const postAdressData = await sendPostRequest("/adresse", adressData);
+      dispatch(addNewAdress(postAdressData));
       setShowFields(false);
     } catch (error) {
       CustomToast.error("Fehler beim Hinzufügen der Adresse");
@@ -133,12 +204,12 @@ export default function AdressInformation(): JSX.Element {
 
   const handleSelectAdress = (adress: AdressData) => {
     dispatch(setSelectedAdress(adress));
-    console.log(adress, "adress Simon");
   };
 
-  const handleCancel = () => {
-    setEditedData(null);
-    setEditMode(false);
+  const handleSelectPayment = (payment: PaymentData) => {
+    console.log(payment, "selectedpayment aufgerufen");
+
+    dispatch(setSelectedPayment(payment));
   };
 
   const handleCancelAdress = () => {
@@ -146,45 +217,12 @@ export default function AdressInformation(): JSX.Element {
     setShowFields(false);
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    console.log("submit");
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-
-    const paymentData: PaymentData = {
-      kundenId: cookies.kundenId,
-      paypalEmail: data.get("paypalEmail") as string,
-      bankname: data.get("bankName") as string,
-      bic: data.get("bic") as string,
-      iban: data.get("iban") as string,
-    };
-    if (paymentData.paypalEmail && !paymentData.paypalEmail.includes("@")) {
-      CustomToast.error("Bitte gebe eine gültige E-Mail-Adresse ein");
-      return;
-    }
-    if (
-      !(
-        paymentData.paypalEmail ||
-        (paymentData.bankname && paymentData.bic && paymentData.iban)
-      )
-    ) {
-      CustomToast.error(
-        "Es muss mindestens PayPal oder Lastschrift ausgewählt sein"
-      );
-      return;
-    }
-
-    try {
-      const putPaymentData = await sendPutRequest("/zahlung", paymentData);
-
-      dispatch(addPayment(putPaymentData));
-      setEditedData(null);
-      setEditMode(false);
-    } catch (error) {
-      CustomToast.error("Fehler beim Speichern der Daten");
-      console.log(error);
-    }
+  const handleCancelPayment = () => {
+    setEditedPaymentPaypalData(null);
+    setEditedPaymentLastschriftData(null);
+    setShowPaymentFields(false);
   };
+
   const highestLaufendeAdressenId = Math.max(
     ...uniqueAdressInformation
       .map(adress => adress.laufendeAdressenId)
@@ -198,6 +236,30 @@ export default function AdressInformation(): JSX.Element {
       dispatch(setSelectedAdress(highestAdress));
     }
   }, [highestLaufendeAdressenId, uniqueAdressInformation, dispatch]);
+
+  const highestLaufendeZahlungsId = Math.max(
+    ...paymentInformation.lastschriftData
+      .map(payment => payment.laufendeZahlungsId)
+      .filter((id): id is number => id !== undefined),
+    ...paymentInformation.paypalData
+      .map(payment => payment.laufendeZahlungsId)
+      .filter((id): id is number => id !== undefined)
+  );
+
+  useEffect(() => {
+    const highestLastschriftPayment = paymentInformation.lastschriftData.find(
+      payment => payment.laufendeZahlungsId === highestLaufendeZahlungsId
+    );
+    const highestPaypalPayment = paymentInformation.paypalData.find(
+      payment => payment.laufendeZahlungsId === highestLaufendeZahlungsId
+    );
+
+    const highestPayment = highestLastschriftPayment || highestPaypalPayment;
+
+    if (highestPayment) {
+      dispatch(setSelectedPayment(highestPayment));
+    }
+  }, [highestLaufendeZahlungsId, paymentInformation, dispatch]);
 
   return (
     <div>
@@ -430,172 +492,238 @@ export default function AdressInformation(): JSX.Element {
       <Container>
         <Card>
           <Title>Zahlungsmöglichkeiten: </Title>
+          <Grid container justifyContent={"center"}>
+            <Grid item xs={12} sm={showPaymentFields ? 6 : 12}>
+              <ScrollableContainer>
+                {
+                  // Zusammenführen der beiden Arrays und Sortieren nach der laufenden ZahlungsID
+                  [
+                    ...paymentInformation.lastschriftData,
+                    ...paymentInformation.paypalData,
+                  ]
+                    .sort(
+                      (a, b) =>
+                        (a.laufendeZahlungsId || 0) -
+                        (b.laufendeZahlungsId || 0)
+                    )
+                    .reverse()
+                    .map((payment, index, array) => {
+                      // Höchste laufendeZahlungsId ermitteln
+                      const highestId = array[0].laufendeZahlungsId;
 
-          {editMode ? (
-            <form onSubmit={e => handleSubmit(e)}>
-              <Grid item xs={12}>
-                <FormControl component="fieldset">
-                  <FormGroup>
-                    <Title>
-                      <FaPaypal size={30} />
-                    </Title>
+                      if ("paypalEmail" in payment) {
+                        // Dies ist ein Paypal-Zahlungsobjekt
+                        return (
+                          <div key={index}>
+                            <input
+                              type="radio"
+                              id={`Zahlung${index}`}
+                              name="Zahlung"
+                              value={`Zahlung${index}`}
+                              onChange={() => {
+                                handleSelectPayment(payment);
+                              }}
+                              // Setzen Sie das Kontrollkästchen auf "checked", wenn die laufendeZahlungsId die höchste ist
+                            />
+                            <Paragraph>
+                              <strong>PayPal Email: </strong>
+                              {payment.paypalEmail}
+                            </Paragraph>
+                          </div>
+                        );
+                      } else {
+                        // Dies ist ein Lastschrift-Zahlungsobjekt
+                        if ("Bankname" in payment) {
+                          return (
+                            <div key={index}>
+                              <input
+                                type="radio"
+                                id={`Zahlung${index}`}
+                                name="Zahlung"
+                                value={`Zahlung${index}`}
+                                onChange={() => {
+                                  handleSelectPayment(payment);
+                                }}
+                                // Setzen Sie das Kontrollkästchen auf "checked", wenn die laufendeZahlungsId die höchste ist
 
-                    <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        id="paypalEmail"
-                        label="PayPal Email"
-                        name="paypalEmail"
-                        defaultValue={paymentInformation.paypalEmail}
-                        inputProps={{
-                          maxLength: 100,
-                          style: {
-                            color: `${colors.black}`,
-                            textAlign: "left",
-                          },
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            backgroundColor: `${colors.primarycolor}`,
-                            color: colors.companycolor,
-                          },
-                        }}
-                        onChange={e => {
-                          e.target.value = e.target.value.trim();
-                        }}
-                      />
-                    </Grid>
-                    <Title>
-                      <Bank size={30} />
-                    </Title>
-                    <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        id="bankName"
-                        label="Bankname"
-                        name="bankName"
-                        defaultValue={paymentInformation.bankname}
-                        inputProps={{
-                          maxLength: 50,
-                          style: {
-                            color: `${colors.black}`,
-                            textAlign: "left",
-                          },
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            backgroundColor: `${colors.primarycolor}`,
-                            color: colors.companycolor,
-                          },
-                        }}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        id="bic"
-                        label="BIC"
-                        name="bic"
-                        defaultValue={paymentInformation.bic}
-                        inputProps={{
-                          maxLength: 50,
-                          style: {
-                            color: `${colors.black}`,
-                            textAlign: "left",
-                          },
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            backgroundColor: `${colors.primarycolor}`,
-                            color: colors.companycolor,
-                          },
-                        }}
-                        onChange={e => {
-                          e.target.value = e.target.value.trim();
-                        }}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        id="iban"
-                        label="IBAN"
-                        name="iban"
-                        defaultValue={paymentInformation.iban}
-                        inputProps={{
-                          maxLength: 50,
-                          style: {
-                            color: `${colors.black}`,
-                            textAlign: "left",
-                          },
-                        }}
-                        InputLabelProps={{
-                          sx: {
-                            backgroundColor: `${colors.primarycolor}`,
-                            color: colors.companycolor,
-                          },
-                        }}
-                        onChange={e => {
-                          e.target.value = e.target.value.trim();
-                        }}
-                      />
-                    </Grid>
-                  </FormGroup>
-                </FormControl>
-              </Grid>
+                                defaultChecked={
+                                  payment.laufendeZahlungsId ===
+                                  highestLaufendeZahlungsId
+                                }
+                              />
+                              <Paragraph>
+                                <strong>Bankname: </strong>
+                                {payment.Bankname}
+                              </Paragraph>
+                              <Paragraph>
+                                <strong>BIC: </strong>
+                                {payment.BIC}
+                              </Paragraph>
+                              <Paragraph>
+                                <strong>IBAN: </strong>
+                                {payment.IBAN}
+                              </Paragraph>
+                            </div>
+                          );
+                        }
+                      }
+                    })
+                }
+              </ScrollableContainer>
+            </Grid>
 
-              <Button style={{ color: colors.companycolor }} type="submit">
-                Speichern
-              </Button>
-
-              <Button
-                style={{ color: colors.companycolor }}
-                onClick={handleCancel}
-              >
-                Abbrechen
-              </Button>
-            </form>
-          ) : (
-            <div>
-              <Grid container gap={10} justifyContent={"center"}>
-                <Grid
-                  item
-                  alignItems={"center"}
-                  display={"flex"}
-                  justifyContent={"center"}
-                  flexDirection={"column"}
+            <Grid item xs={6}>
+              {showPaymentFields && (
+                <form
+                  onSubmit={e => {
+                    e.preventDefault();
+                    const formData = new FormData(e.target as HTMLFormElement);
+                    const paymentData: PaymentData = {
+                      kundenId: cookies.kundenId,
+                      paypalData: {
+                        paypalEmail: formData.get("paypalEmail") as string,
+                        // Fügen Sie hier weitere PayPal-Daten hinzu, falls vorhanden
+                      },
+                      lastschriftData: {
+                        Bankname: formData.get("bankName") as string,
+                        BIC: formData.get("bic") as string,
+                        IBAN: formData.get("iban") as string,
+                        // Fügen Sie hier weitere Lastschrift-Daten hinzu, falls vorhanden
+                      },
+                    };
+                    handleAddPayment(paymentData);
+                  }}
                 >
-                  <Paragraph>
-                    <strong>Zahlungsart</strong>
-                  </Paragraph>
-                  <FaPaypal size={30} />
-                  <Paragraph>
-                    <strong>Paypal-Email:</strong>{" "}
-                    {paymentInformation.paypalEmail}
-                  </Paragraph>
-                  <Bank size={30} />
-                  <Paragraph>
-                    <strong>Bankname:</strong> {paymentInformation.bankname}
-                  </Paragraph>
-                  <Paragraph>
-                    <strong>BIC:</strong> {paymentInformation.bic}
-                  </Paragraph>
-                  <Paragraph>
-                    <strong>IBAN: </strong>
-                    {paymentInformation.iban}
-                  </Paragraph>
-                  <LogoutButton
-                    className="black-color white-orange "
-                    onClick={() =>
-                      handleEdit(paymentInformation as unknown as AdressData)
-                    }
-                  >
-                    <Pencil size={20} />
-                  </LogoutButton>
-                </Grid>
+                  <FormControl component="fieldset">
+                    <FormGroup>
+                      <Grid item xs={12}>
+                        <Title>
+                          <Bank size={30} />
+                        </Title>
+                        <TextField
+                          fullWidth
+                          id="bankName"
+                          label="Bankname"
+                          name="bankName"
+                          inputProps={{
+                            maxLength: 50,
+                            style: {
+                              color: `${colors.black}`,
+                              textAlign: "left",
+                            },
+                          }}
+                          InputLabelProps={{
+                            sx: {
+                              backgroundColor: `${colors.primarycolor}`,
+                              color: colors.companycolor,
+                            },
+                          }}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                          fullWidth
+                          id="bic"
+                          label="BIC"
+                          name="bic"
+                          inputProps={{
+                            maxLength: 50,
+                            style: {
+                              color: `${colors.black}`,
+                              textAlign: "left",
+                            },
+                          }}
+                          InputLabelProps={{
+                            sx: {
+                              backgroundColor: `${colors.primarycolor}`,
+                              color: colors.companycolor,
+                            },
+                          }}
+                          onChange={e => {
+                            e.target.value = e.target.value.trim();
+                          }}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                          fullWidth
+                          id="iban"
+                          label="IBAN"
+                          name="iban"
+                          inputProps={{
+                            maxLength: 50,
+                            style: {
+                              color: `${colors.black}`,
+                              textAlign: "left",
+                            },
+                          }}
+                          InputLabelProps={{
+                            sx: {
+                              backgroundColor: `${colors.primarycolor}`,
+                              color: colors.companycolor,
+                            },
+                          }}
+                          onChange={e => {
+                            e.target.value = e.target.value.trim();
+                          }}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Title>
+                          <FaPaypal size={30} />
+                        </Title>
+                        <TextField
+                          fullWidth
+                          id="paypalEmail"
+                          label="PayPal Email"
+                          name="paypalEmail"
+                          inputProps={{
+                            maxLength: 100,
+                            style: {
+                              color: `${colors.black}`,
+                              textAlign: "left",
+                            },
+                          }}
+                          InputLabelProps={{
+                            sx: {
+                              backgroundColor: `${colors.primarycolor}`,
+                              color: colors.companycolor,
+                            },
+                          }}
+                          onChange={e => {
+                            e.target.value = e.target.value.trim();
+                          }}
+                        />
+                      </Grid>
+                      <Button
+                        style={{ color: colors.companycolor }}
+                        type="submit"
+                      >
+                        Zahlungsart hinzufügen
+                      </Button>
+                      <Button
+                        style={{ color: colors.companycolor }}
+                        onClick={handleCancelPayment}
+                      >
+                        Abbrechen
+                      </Button>
+                    </FormGroup>
+                  </FormControl>
+                </form>
+              )}
+            </Grid>
+            {!showPaymentFields && (
+              <Grid container justifyContent="center" alignItems="center">
+                <LogoutButton
+                  className="black-color white-orange "
+                  onClick={() => handleOpenPayment()}
+                >
+                  {" "}
+                  Zahlung hinzufügen
+                </LogoutButton>
               </Grid>
-            </div>
-          )}
+            )}
+          </Grid>
         </Card>
       </Container>
     </div>
