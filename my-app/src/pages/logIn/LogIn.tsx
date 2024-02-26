@@ -17,6 +17,7 @@ import { ToastContainer } from "react-toastify";
 import { useLoggedIn } from "../../globalVariables/loggedin";
 import { colors } from "../general/constants";
 import { baseUrl } from "../../globalVariables/global";
+import { useCookies } from "react-cookie";
 
 function Copyright(props: any) {
   return (
@@ -32,6 +33,8 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function SignIn() {
+  const [cookies, setCookie] = useCookies(["kundenId"]);
+
   const userInformation = useSelector(
     (state: { user: UserDataState }) => state.user.LogInData
   );
@@ -63,6 +66,7 @@ export default function SignIn() {
       // Überprüfe die Antwort des Backends
       if (response.ok) {
         console.log("Erfolgreicher Login");
+        setCookie("kundenId", (await response.json()).kundenId);
         navigate("/loggedIn");
         changeLoggedIn();
       } else {
