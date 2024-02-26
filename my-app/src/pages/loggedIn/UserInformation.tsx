@@ -66,12 +66,14 @@ export default function UserInformation(): JSX.Element {
         >
           Ausloggen
         </LogoutButton>
-        <LogoutButton
-          className="black-color white-orange "
-          onClick={handleAdminPageClick}
-        >
-          AdminPage
-        </LogoutButton>
+        {userInformation.LogInData.istAdmin ? (
+          <LogoutButton
+            className="black-color white-orange "
+            onClick={handleAdminPageClick}
+          >
+            AdminPage
+          </LogoutButton>
+        ) : null}
       </Card>
     </Container>
   );
