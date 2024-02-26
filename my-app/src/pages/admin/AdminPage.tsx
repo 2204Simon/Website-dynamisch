@@ -5,8 +5,8 @@ import ZutatenBlock from "./ZutatenBlock";
 export function AdminPage() {
   return (
     <AdminPageWrapper>
-      <ZutatenBlock />
       <AdminBestellungsblock />
+      <ZutatenBlock />
     </AdminPageWrapper>
   );
 }
