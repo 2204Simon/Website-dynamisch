@@ -46,6 +46,9 @@ export default function UserInformation(): JSX.Element {
     navigate("/SignUp");
   };
 
+  const handleAdminPageClick = (): void => {
+    navigate("/admin");
+  };
   return (
     <Container>
       <Card>
@@ -62,6 +65,12 @@ export default function UserInformation(): JSX.Element {
           onClick={handleClick}
         >
           Ausloggen
+        </LogoutButton>
+        <LogoutButton
+          className="black-color white-orange "
+          onClick={handleAdminPageClick}
+        >
+          AdminPage
         </LogoutButton>
       </Card>
     </Container>
