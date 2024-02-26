@@ -108,7 +108,7 @@ export default function AdressInformation(): JSX.Element {
     };
 
     fetchData();
-  }, []);
+  }, [dispatch, cookies.kundenId]);
 
   const handleOpenAdress = () => {
     setShowFields(true);
@@ -143,11 +143,8 @@ export default function AdressInformation(): JSX.Element {
           "/zahlung",
           postPaymentData
         );
-        if (postPaypalData.paypal) {
-          const paypalData: PaypalData = postPaypalData.paypal;
-          dispatch(addPaypalData(paypalData));
-          console.log(paypalData, "!!!!!!!!paypalData");
-        }
+        dispatch(addPaypalData(postPaypalData));
+        setShowPaymentFields(false);
       }
       if (paymentData.lastschriftData?.IBAN) {
         const postPaymentData = {
@@ -160,12 +157,8 @@ export default function AdressInformation(): JSX.Element {
           "/zahlung",
           postPaymentData
         );
-        if (postLastschriftData.lastschrift) {
-          const lastschriftData: LastschriftData =
-            postLastschriftData.lastschrift;
-          console.log(paymentInformation, "!!!!!!!!!simon paymentInformation");
-          dispatch(addLastschriftData(lastschriftData));
-        }
+        dispatch(addLastschriftData(postLastschriftData));
+        setShowPaymentFields(false);
       }
 
       setEditedData(null);
