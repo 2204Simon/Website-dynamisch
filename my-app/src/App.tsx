@@ -20,6 +20,9 @@ import { useCookies } from "react-cookie";
 import { CookieBanner } from "./CookieBanner"; // Import the CookieBanner component
 import EinzelBestellung from "./pages/loggedIn/einzelBestellung/einzelbestellung";
 import { AdminPage } from "./pages/admin/AdminPage";
+import { useSelector } from "react-redux";
+import { UserDataState } from "./redux/types";
+import { AdminRoute } from "./AdminRoute";
 
 const DatenschutzerklaerungLazy = lazy(
   () => import("./pages/Datenschutzerklaerung")
@@ -27,7 +30,10 @@ const DatenschutzerklaerungLazy = lazy(
 
 export default function App(): JSX.Element {
   const [cookies, setCookie] = useCookies(["cookiesAccepted"]);
-
+  const isAdmin = useSelector(
+    (state: UserDataState) => state.LogInData?.istAdmin
+  );
+  console.log("isAdmin:", isAdmin); // Hier ist der console.log
   const handleAccept = () => {
     setCookie("cookiesAccepted", "true", { path: "/" });
   };
@@ -35,7 +41,6 @@ export default function App(): JSX.Element {
   const handleDecline = () => {
     setCookie("cookiesAccepted", "false", { path: "/" });
   };
-
   return (
     <React.StrictMode>
       <LoggedInProvider>
@@ -57,7 +62,7 @@ export default function App(): JSX.Element {
               <Route path="LoggedIn" element={<DeinKonto />} />
               <Route path="Impressum" element={<Impressum />} />
               <Route path="Bestellung/:id" element={<EinzelBestellung />} />
-              <Route path="Admin" element={<AdminPage />} />
+              <Route path="Admin" element={<AdminRoute />} />
               <Route
                 path="Datenschutzerklaerung"
                 element={

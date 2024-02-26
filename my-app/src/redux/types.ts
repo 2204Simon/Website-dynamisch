@@ -9,6 +9,7 @@ export interface LogInData {
   passwort: string;
   telefonnummer: string;
   zeitungsaboablaufdatum?: Date;
+  istAdmin?: boolean;
 }
 
 export enum ActionTypesUser {

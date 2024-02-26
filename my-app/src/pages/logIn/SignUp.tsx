@@ -14,14 +14,7 @@ import { useLoggedIn } from "../../globalVariables/loggedin";
 import { AdressData, LogInData } from "../../redux/types";
 import { useDispatch } from "react-redux";
 import { colors } from "../general/constants";
-import {
-  FormControl,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  Checkbox,
-  FormGroup,
-} from "@mui/material";
+import { FormControl, FormGroup } from "@mui/material";
 import { FaPaypal } from "react-icons/fa";
 import { Title } from "../loggedIn/UserInformation.styles";
 import { CustomToast } from "../general/toast.style";
