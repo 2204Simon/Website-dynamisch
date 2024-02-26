@@ -69,6 +69,9 @@ export default function AdressInformation(): JSX.Element {
   const selectedPayment = useSelector(
     (state: { payment: PaymentDataState }) => state.payment.selectedPayments
   );
+  const selectedAdress = useSelector(
+    (state: { adress: AdressDataState }) => state.adress.selectedAdress
+  );
   const uniqueAdressInformation = adressInformation.filter(
     (adress, index, self) =>
       index ===
@@ -91,17 +94,20 @@ export default function AdressInformation(): JSX.Element {
         if (responsePayment.paypal) {
           const paypalData: PaypalData[] = responsePayment.paypal;
           dispatch(loadPaypal(paypalData));
+          handleSelectPayment(selectedPayment as PaymentData);
         }
         if (responsePayment.lastschrift) {
           const lastschriftData: LastschriftData[] =
             responsePayment.lastschrift;
           dispatch(loadLastschrift(lastschriftData));
+          handleSelectPayment(selectedPayment as PaymentData);
         }
         const responseAdress = await getRequest(
           `/adressen/${cookies.kundenId}`
         );
         console.log(responseAdress, "responseAdress");
         dispatch(loadAdressen(responseAdress));
+        handleSelectAdress(selectedAdress as AdressData);
       } catch (error) {
         CustomToast.error("Fehler beim Laden der Daten");
       }
@@ -144,6 +150,7 @@ export default function AdressInformation(): JSX.Element {
           postPaymentData
         );
         dispatch(addPaypalData(postPaypalData));
+        handleSelectPayment(postPaypalData);
         setShowPaymentFields(false);
       }
       if (paymentData.lastschriftData?.IBAN) {
@@ -158,6 +165,7 @@ export default function AdressInformation(): JSX.Element {
           postPaymentData
         );
         dispatch(addLastschriftData(postLastschriftData));
+        handleSelectPayment(postLastschriftData);
         setShowPaymentFields(false);
       }
 
@@ -189,6 +197,7 @@ export default function AdressInformation(): JSX.Element {
     try {
       const postAdressData = await sendPostRequest("/adresse", adressData);
       dispatch(addNewAdress(postAdressData));
+      handleSelectAdress(postAdressData);
       setShowFields(false);
     } catch (error) {
       CustomToast.error("Fehler beim Hinzufügen der Adresse");
@@ -216,44 +225,6 @@ export default function AdressInformation(): JSX.Element {
     setShowPaymentFields(false);
   };
 
-  const highestLaufendeAdressenId = Math.max(
-    ...uniqueAdressInformation
-      .map(adress => adress.laufendeAdressenId)
-      .filter((id): id is number => id !== undefined)
-  );
-  useEffect(() => {
-    const highestAdress = uniqueAdressInformation.find(
-      adress => adress.laufendeAdressenId === highestLaufendeAdressenId
-    );
-    if (highestAdress) {
-      dispatch(setSelectedAdress(highestAdress));
-    }
-  }, [highestLaufendeAdressenId, uniqueAdressInformation, dispatch]);
-
-  const highestLaufendeZahlungsId = Math.max(
-    ...paymentInformation.lastschriftData
-      .map(payment => payment.laufendeZahlungsId)
-      .filter((id): id is number => id !== undefined),
-    ...paymentInformation.paypalData
-      .map(payment => payment.laufendeZahlungsId)
-      .filter((id): id is number => id !== undefined)
-  );
-
-  useEffect(() => {
-    const highestLastschriftPayment = paymentInformation.lastschriftData.find(
-      payment => payment.laufendeZahlungsId === highestLaufendeZahlungsId
-    );
-    const highestPaypalPayment = paymentInformation.paypalData.find(
-      payment => payment.laufendeZahlungsId === highestLaufendeZahlungsId
-    );
-
-    const highestPayment = highestLastschriftPayment || highestPaypalPayment;
-
-    if (highestPayment) {
-      dispatch(setSelectedPayment(highestPayment));
-    }
-  }, [highestLaufendeZahlungsId, paymentInformation, dispatch]);
-
   return (
     <div>
       <Container>
@@ -275,7 +246,7 @@ export default function AdressInformation(): JSX.Element {
                           value={`Adresse${index}`}
                           defaultChecked={
                             adress.laufendeAdressenId ===
-                            highestLaufendeAdressenId
+                            selectedAdress?.laufendeAdressenId
                           }
                           onChange={() => {
                             handleSelectAdress(adress);
@@ -501,9 +472,6 @@ export default function AdressInformation(): JSX.Element {
                     )
                     .reverse()
                     .map((payment, index, array) => {
-                      // Höchste laufendeZahlungsId ermitteln
-                      const highestId = array[0].laufendeZahlungsId;
-
                       if ("paypalEmail" in payment) {
                         // Dies ist ein Paypal-Zahlungsobjekt
                         return (
@@ -516,6 +484,11 @@ export default function AdressInformation(): JSX.Element {
                               onChange={() => {
                                 handleSelectPayment(payment);
                               }}
+                              defaultChecked={
+                                payment.laufendeZahlungsId ===
+                                paymentInformation.lastschriftData[0]
+                                  .laufendeZahlungsId
+                              }
                               // Setzen Sie das Kontrollkästchen auf "checked", wenn die laufendeZahlungsId die höchste ist
                             />
                             <Paragraph>
@@ -541,7 +514,8 @@ export default function AdressInformation(): JSX.Element {
 
                                 defaultChecked={
                                   payment.laufendeZahlungsId ===
-                                  highestLaufendeZahlungsId
+                                  paymentInformation.paypalData[0]
+                                    .laufendeZahlungsId
                                 }
                               />
                               <Paragraph>

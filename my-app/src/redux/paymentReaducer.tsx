@@ -20,7 +20,7 @@ const initialState: PaymentDataState = {
     },
   ],
 
-  selectedPayments: {},
+  selectedPayments: null,
 };
 
 const paymentSlice = createSlice({

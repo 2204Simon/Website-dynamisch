@@ -4,7 +4,7 @@ import { AdressData, AdressDataState } from "./types";
 // Fügen Sie selectedAdress zum initialen Zustand hinzu
 const initialState: AdressDataState = {
   AdressData: [],
-  selectedAdress: null, // oder ein geeigneter Standardwert
+  selectedAdress: null,
 };
 
 const adressDataSlice = createSlice({

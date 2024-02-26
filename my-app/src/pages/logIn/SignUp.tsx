@@ -28,10 +28,11 @@ import { CustomToast } from "../general/toast.style";
 import { useState } from "react";
 import { Bank } from "phosphor-react";
 import { addNewUser } from "../../redux/userReducer";
-import { addNewAdress } from "../../redux/adressDataReducer";
+import { addNewAdress, setSelectedAdress } from "../../redux/adressDataReducer";
 import { sendPostRequest } from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
+import { setSelectedPayment } from "../../redux/paymentReaducer";
 
 function Copyright(props: any) {
   return (
@@ -121,6 +122,8 @@ export default function SignUp() {
       // console.log(cookies.kundenId);
       dispatch(addNewUser(kundenData));
       dispatch(addNewAdress(adressData));
+      dispatch(setSelectedAdress(adressData));
+      dispatch(setSelectedPayment(paymentData));
       navigate("/LoggedIn");
       changeLoggedIn();
     } catch (error) {

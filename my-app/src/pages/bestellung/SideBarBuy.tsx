@@ -218,17 +218,17 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                     AGBs
                   </a>{" "}
                 </p>
-                {/* Todo selected Payment überprüfen, dass richtig übergeben 
-                {selectedPayment?.lastschriftData?.IBAN && (*/}
-                <>
-                  <Button
-                    onClick={() => handleThankyouPopup()}
-                    className="black-color white-orange"
-                  >
-                    Kostenpflichtig Bestellen
-                  </Button>
-                </>
-                {/* )} */}
+
+                {selectedPayment?.lastschriftData?.IBAN && (
+                  <>
+                    <Button
+                      onClick={() => handleThankyouPopup()}
+                      className="black-color white-orange"
+                    >
+                      Kostenpflichtig Bestellen
+                    </Button>
+                  </>
+                )}
 
                 {selectedPayment?.paypalData?.paypalEmail && (
                   <>
