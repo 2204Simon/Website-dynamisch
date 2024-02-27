@@ -484,11 +484,10 @@ export default function AdressInformation(): JSX.Element {
                               onChange={() => {
                                 handleSelectPayment(payment);
                               }}
-                              defaultChecked={
-                                payment.laufendeZahlungsId ===
-                                paymentInformation.lastschriftData[0]
-                                  .laufendeZahlungsId
-                              }
+                              // defaultChecked={
+                              //   payment.laufendeZahlungsId ===
+                              //   paymentInformation.lastschriftData[0].laufendeZahlungsId
+                              // }
                               // Setzen Sie das Kontrollkästchen auf "checked", wenn die laufendeZahlungsId die höchste ist
                             />
                             <Paragraph>
@@ -512,11 +511,10 @@ export default function AdressInformation(): JSX.Element {
                                 }}
                                 // Setzen Sie das Kontrollkästchen auf "checked", wenn die laufendeZahlungsId die höchste ist
 
-                                defaultChecked={
-                                  payment.laufendeZahlungsId ===
-                                  paymentInformation.paypalData[0]
-                                    .laufendeZahlungsId
-                                }
+                                // defaultChecked={
+                                //   payment.laufendeZahlungsId ===
+                                //   paymentInformation.paypalData[0].laufendeZahlungsId
+                                // }
                               />
                               <Paragraph>
                                 <strong>Bankname: </strong>
