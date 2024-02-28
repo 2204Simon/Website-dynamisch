@@ -4,6 +4,7 @@ import { CustomToast } from "../pages/general/toast.style";
 export async function sendPostRequest(url: string, data: any) {
   const response = await fetch(baseUrl + url, {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -20,6 +21,7 @@ export async function sendPostRequest(url: string, data: any) {
 export async function getRequest(url: string) {
   const response = await fetch(baseUrl + url, {
     method: "GET",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -38,6 +40,7 @@ export async function getRequest(url: string) {
 export async function sendPutRequest(url: string, data: any) {
   const response = await fetch(baseUrl + url, {
     method: "PUT",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -54,6 +57,7 @@ export async function sendPutRequest(url: string, data: any) {
 export async function sendDeleteRequest(url: string) {
   const response = await fetch(baseUrl + url, {
     method: "DELETE",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },

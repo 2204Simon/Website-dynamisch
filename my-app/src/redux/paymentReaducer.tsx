@@ -20,20 +20,20 @@ const initialState: PaymentDataState = {
     },
   ],
 
-  selectedPayments: {},
+  selectedPayments: null,
 };
 
 const paymentSlice = createSlice({
   name: "payment",
   initialState,
   reducers: {
-    addLastschriftData: (state, action: PayloadAction<PaypalData>) => {
+    addLastschriftData: (state, action: PayloadAction<LastschriftData>) => {
       state.lastschriftData.push(action.payload);
     },
     addPaypalData: (state, action: PayloadAction<PaypalData>) => {
       state.paypalData.push(action.payload);
     },
-    loadPaypal: (state, action: PayloadAction<Array<LastschriftData>>) => {
+    loadPaypal: (state, action: PayloadAction<Array<PaypalData>>) => {
       state.paypalData = action.payload;
     },
     loadLastschrift: (state, action: PayloadAction<Array<LastschriftData>>) => {

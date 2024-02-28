@@ -14,24 +14,18 @@ import { useLoggedIn } from "../../globalVariables/loggedin";
 import { AdressData, LogInData } from "../../redux/types";
 import { useDispatch } from "react-redux";
 import { colors } from "../general/constants";
-import {
-  FormControl,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  Checkbox,
-  FormGroup,
-} from "@mui/material";
+import { FormControl, FormGroup } from "@mui/material";
 import { FaPaypal } from "react-icons/fa";
 import { Title } from "../loggedIn/UserInformation.styles";
 import { CustomToast } from "../general/toast.style";
 import { useState } from "react";
 import { Bank } from "phosphor-react";
 import { addNewUser } from "../../redux/userReducer";
-import { addNewAdress } from "../../redux/adressDataReducer";
+import { addNewAdress, setSelectedAdress } from "../../redux/adressDataReducer";
 import { sendPostRequest } from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
+import { setSelectedPayment } from "../../redux/paymentReaducer";
 
 function Copyright(props: any) {
   return (
@@ -121,6 +115,8 @@ export default function SignUp() {
       // console.log(cookies.kundenId);
       dispatch(addNewUser(kundenData));
       dispatch(addNewAdress(adressData));
+      dispatch(setSelectedAdress(adressData));
+      dispatch(setSelectedPayment(paymentData));
       navigate("/LoggedIn");
       changeLoggedIn();
     } catch (error) {
