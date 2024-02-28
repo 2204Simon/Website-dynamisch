@@ -42,6 +42,16 @@ const paymentSlice = createSlice({
     setSelectedPayment: (state, action: PayloadAction<PaymentData>) => {
       state.selectedPayments = action.payload;
     },
+    removePaypalData: (state, action: PayloadAction<PaypalData>) => {
+      state.paypalData = state.paypalData.filter(
+        item => item.laufendeZahlungsId !== action.payload.laufendeZahlungsId
+      );
+    },
+    removeLastschriftData: (state, action: PayloadAction<LastschriftData>) => {
+      state.lastschriftData = state.lastschriftData.filter(
+        item => item.laufendeZahlungsId !== action.payload.laufendeZahlungsId
+      );
+    },
   },
 });
 
@@ -51,6 +61,8 @@ export const {
   loadPaypal,
   loadLastschrift,
   setSelectedPayment,
+  removePaypalData,
+  removeLastschriftData,
 } = paymentSlice.actions;
 
 export default paymentSlice.reducer;

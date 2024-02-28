@@ -30,6 +30,8 @@ import {
   loadLastschrift,
   addLastschriftData,
   addPaypalData,
+  removePaypalData,
+  removeLastschriftData,
 } from "../../redux/paymentReaducer";
 import {
   getRequest,
@@ -52,6 +54,7 @@ const ScrollableContainer = styled.div`
 
 export default function AdressInformation(): JSX.Element {
   const dispatch = useDispatch();
+
   const [editMode, setEditMode] = useState(false);
   const [editedData, setEditedData] = useState<AdressData | null>(null);
   const [editedPaymentPaypalData, setEditedPaymentPaypalData] =
@@ -120,13 +123,12 @@ export default function AdressInformation(): JSX.Element {
   const handleDeactivatePayment = async (payment: PaymentData) => {
     try {
       const response = await sendPutRequest("/zahlung", payment);
-      if (response.status === 200) {
-        console.log(response.data, "response");
-      } else {
-        throw new Error(response.statusText);
-      }
+
+      dispatch(removePaypalData(payment));
+
+      dispatch(removeLastschriftData(payment));
     } catch (error) {
-      CustomToast.error("Fehler beim Deaktivieren der Zahlung");
+      CustomToast.error("Fehler beim Löschen der Daten");
     }
   };
 
