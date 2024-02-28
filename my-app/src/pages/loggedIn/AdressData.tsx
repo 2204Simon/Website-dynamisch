@@ -498,10 +498,11 @@ export default function AdressInformation(): JSX.Element {
                               onChange={() => {
                                 handleSelectPayment(payment);
                               }}
-                              // defaultChecked={
-                              //   payment.laufendeZahlungsId ===
-                              //   paymentInformation.lastschriftData[0].laufendeZahlungsId
-                              // }
+                              defaultChecked={
+                                payment.laufendeZahlungsId ===
+                                paymentInformation.paypalData[0]
+                                  .laufendeZahlungsId
+                              }
                               // Setzen Sie das Kontrollkästchen auf "checked", wenn die laufendeZahlungsId die höchste ist
 
                               size={50}
@@ -510,7 +511,6 @@ export default function AdressInformation(): JSX.Element {
                                 marginTop: "60px",
                                 marginBottom: "0px",
                               }}
-
                             />
                             <button
                               onClick={() => handleDeactivatePayment(payment)}
@@ -539,7 +539,6 @@ export default function AdressInformation(): JSX.Element {
                                 onChange={() => {
                                   handleSelectPayment(payment);
                                 }}
-                         
                                 size={50}
                                 style={{
                                   marginRight: "300px",
@@ -548,9 +547,9 @@ export default function AdressInformation(): JSX.Element {
                                 }}
                                 defaultChecked={
                                   payment.laufendeZahlungsId ===
-                                  highestLaufendeZahlungsId
+                                  paymentInformation.lastschriftData[0]
+                                    .laufendeZahlungsId
                                 }
-
                               />
                               <button
                                 onClick={() => handleDeactivatePayment(payment)}
