@@ -218,27 +218,40 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                     AGBs
                   </a>{" "}
                 </p>
-
-                {selectedPayment?.lastschriftData?.IBAN && (
-                  <>
-                    <Button
-                      onClick={() => handleThankyouPopup()}
-                      className="black-color white-orange"
-                    >
-                      Kostenpflichtig Bestellen
-                    </Button>
-                  </>
-                )}
-
-                {selectedPayment?.paypalData?.paypalEmail && (
+                {/* selectionState aus Cookies ToDo */}
+                {selectedPayment?.paypalData?.paypalEmail ? (
                   <>
                     Kostenpflichtig Bestellen mit
+                    <br />
                     <PayPalPayment
                       price={price}
                       handleThankyouPopup={handleThankyouPopup}
                       agbChecked={agbChecked}
                     />
                   </>
+                ) : selectedPayment?.lastschriftData?.IBAN ? (
+                  <Button
+                    onClick={() => handleThankyouPopup()}
+                    className="black-color white-orange"
+                  >
+                    Kostenpflichtig Bestellen
+                  </Button>
+                ) : (
+                  // <>
+                  //   Kostenpflichtig Bestellen mit
+                  //   <br />
+                  //   <PayPalPayment
+                  //     price={price}
+                  //     handleThankyouPopup={handleThankyouPopup}
+                  //     agbChecked={agbChecked}
+                  //   />
+                  // </>
+                  <Button
+                    onClick={() => handleThankyouPopup()}
+                    className="black-color white-orange"
+                  >
+                    Kostenpflichtig Bestellen
+                  </Button>
                 )}
 
                 <Button
