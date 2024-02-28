@@ -1,13 +1,36 @@
 import { useState, useEffect } from "react";
-import { BestellungsInformation } from "../../redux/types";
-import { getRequest } from "../../serverFunctions/generelAPICalls";
 import { CustomToast } from "../general/toast.style";
 import { useCookies } from "react-cookie";
-import { KUNDEN_ID } from "../../globalVariables/global";
-import { formatGermanDate } from "../../DateUtils";
+import { KUNDEN_ID, baseUrl } from "../../globalVariables/global";
 
-//TODO Not Working Currently
-function AboDurationCalculator() {
+interface AboDurationCalculatorProps {
+  endDate: string;
+}
+
+function AboDurationCalculator(input: AboDurationCalculatorProps) {
+  const { endDate } = input;
+  const [cookies] = useCookies([KUNDEN_ID]);
+
+  function dateTransformer(date: string): string {
+    const parts = date.split("-");
+    const year = parts[0];
+    const month = parts[1];
+    const day = parts[2];
+    const formattedDate = `${day}.${month}.${year}`;
+
+    return formattedDate;
+  }
+
+  return (
+    <p>
+      {endDate !== ""
+        ? "Dein Abonnement läuft ab am " + dateTransformer(endDate)
+        : "Kein Abonnement gefunden"}
+    </p>
+  );
+}
+export default AboDurationCalculator;
+/*
   interface ProductInformation {
     produktId: string;
     titel: string;
@@ -57,17 +80,11 @@ function AboDurationCalculator() {
 
   useEffect(() => {
     if (bestellungen !== null) {
-      console.log(bestellungen);
       const newspaperArray = getAllNewspaperOrders(bestellungen);
-      console.log(newspaperArray);
       const intervals = Intervals(newspaperArray);
-      console.log(millisekundenZuDatum(intervals));
       const sortedintervals = IntervalSorter(intervals);
-      console.log(millisekundenZuDatum(sortedintervals));
       const endDate = EndDate(sortedintervals);
-      console.log(endDate);
       setDate(endDate);
-      console.log(date);
     }
   }, [bestellungen]);
 
@@ -95,8 +112,6 @@ function AboDurationCalculator() {
     const intervals: Array<Intervall> = [];
     subscriptions.forEach(subscription => {
       const createdAt = new Date(subscription.createdAt);
-      console.log("Hier", createdAt);
-      console.log("Hier2", subscription.createdAt);
       createdAt.setDate(createdAt.getDate() + 1); //Damit das Abo nicht am selben Bestelltag gilt, sondern erst ab den nächsten Tag das Abo startet
       const orderDay = createdAt.getTime();
       const duration = new Date(
@@ -137,13 +152,13 @@ function AboDurationCalculator() {
             intervals[j].end = 0;
           }
         }*/
-      }
-      //Alle entschärften Intervalle entfernen
-      /*for (let k = intervals.length - 1; k >= 0; k--) {
+
+//Alle entschärften Intervalle entfernen
+/*for (let k = intervals.length - 1; k >= 0; k--) {
         if (intervals[k].start === 0 && intervals[k].end === 0) {
           intervals.splice(k, 1);
         }
-      }*/
+      }
     }
     return intervals;
   }
@@ -168,12 +183,12 @@ function AboDurationCalculator() {
     }
   }
 
-  /*       if (today < currentInterval.end) {
+  /*     if (today < currentInterval.end) {
           durationMs = currentInterval.end - today;
         }
 
     
-  } */
+  } 
   return (
     <p>
       {date !== null
@@ -182,6 +197,4 @@ function AboDurationCalculator() {
       .
     </p>
   );
-}
-
-export default AboDurationCalculator;
+} */

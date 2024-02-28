@@ -1,12 +1,8 @@
 import React, { useState, ChangeEvent, useRef, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux"; // Import der useDispatch-Hook
-// Import der addToCart-Action aus deiner Redux-Komponente
+import { useDispatch, useSelector } from "react-redux";
 import { BlackColorButton } from "../general/button";
 import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
-import { Calendar, Popper, StyledDatePicker } from "../bestellung/Calendar";
-import { de } from "date-fns/locale";
-import { MonthsToDays, formatNumber } from "../general/constants";
 import {
   BannerContainer,
   BannerContent,
@@ -16,11 +12,10 @@ import {
   XCircleWrapper,
 } from "./styles/NewspaperBanner.styles";
 import { XCircle } from "phosphor-react";
-import { BestellungsInformation, CartItem, CartState } from "../../redux/types";
+import { CartItem, CartState } from "../../redux/types";
 import { useCookies } from "react-cookie";
-import { KUNDEN_ID } from "../../globalVariables/global";
+import { KUNDEN_ID, baseUrl } from "../../globalVariables/global";
 import {
-  getRequest,
   sendPostRequest,
   sendPutRequest,
 } from "../../serverFunctions/generelAPICalls";
@@ -43,20 +38,60 @@ const NewspaperBanner: React.FC<ShoppingCardProps> = ({
   back,
   produktId,
 }) => {
-  const [load, setLoad] = useState(true);
+  const [aboEndDate, setAboEndDate] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(0);
   const minDate = new Date();
   minDate.setDate(minDate.getDate() + 1);
   const maxDate = new Date();
   maxDate.setMonth(maxDate.getMonth() + 12);
-  const [selectedDays, setSelectedDays] = useState(1);
   const [price, setPrice] = useState(basePrice);
   const [cookies] = useCookies([KUNDEN_ID]);
   const cartItems = useSelector(
     (state: { cart: CartState }) => state.cart.cartItems
   );
-  const dispatch = useDispatch(); // Initialisierung der useDispatch-Hook
-  const [cookie, setCookie] = useCookies([KUNDEN_ID]); // Initialisierung der useDispatch-Hook
+  const dispatch = useDispatch();
+  const [cookie, setCookie] = useCookies([KUNDEN_ID]);
+
+  const LoadAbonnement = async (): Promise<void> => {
+    try {
+      if (cookies.kundenId) {
+        const request = await fetch(
+          `${baseUrl}/kundeEndDate/${cookies.kundenId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json; charset=UTF-8",
+            },
+          }
+        );
+        const endDate = await request.json();
+        if (!request.ok) throw new Error(endDate.message);
+        setAboEndDate(endDate);
+      }
+    } catch (error) {
+      CustomToast.error("Fehler beim Laden der Daten");
+    }
+  };
+
+  useEffect(() => {
+    LoadAbonnement();
+  }, []);
+
+  function MonthsToDays(months: number): number {
+    let currentDate;
+    if (aboEndDate) {
+      currentDate = new Date(aboEndDate);
+    } else {
+      currentDate = new Date();
+    }
+    currentDate.setHours(0, 0, 0, 0); //Zeit reseten, damit sauber dazugezählt wird
+    const futureDate = new Date();
+    futureDate.setFullYear(currentDate.getFullYear()); //Jahr auf current Jahr setzen, damit keine - Tage entstehen
+    futureDate.setMonth(currentDate.getMonth() + months);
+    const timeDifference = futureDate.getTime() - currentDate.getTime();
+    const days = Math.ceil(timeDifference / (1000 * 3600 * 24));
+    return days;
+  }
 
   const addProduct = async () => {
     const item: CartItem = {
@@ -73,9 +108,7 @@ const NewspaperBanner: React.FC<ShoppingCardProps> = ({
         kundenId: cookie.kundenId,
       };
       await sendPutRequest("/warenkorb", itemObjekt);
-      //CustomToast.success("Dein Produkt ist im Warenkorb!");
-      const amount = item.anzahl;
-      dispatch(increaseQuantity({ item, amount: MonthsToDays(quantity) })); // Dispatch der addToCart-Action mit dem erstellten Item
+      dispatch(increaseQuantity({ item, amount: MonthsToDays(quantity) }));
     } catch (error) {
       CustomToast.error("Fehler hinzufügen (Serververbindung))");
     }
@@ -111,7 +144,7 @@ const NewspaperBanner: React.FC<ShoppingCardProps> = ({
 
         CustomToast.success(`Es wurde  ${quantity} ${title} hinzugefügt!`);
 
-        dispatch(addToCart(item as CartItem)); // Dispatch der addToCart-Action mit dem erstellten Item
+        dispatch(addToCart(item as CartItem));
         setQuantity(0);
       } catch (error) {
         CustomToast.error("Fehler hinzufügen (Serververbindung))");
@@ -122,25 +155,6 @@ const NewspaperBanner: React.FC<ShoppingCardProps> = ({
   useEffect(() => {
     setPrice(basePrice * MonthsToDays(quantity));
   }, [quantity]);
-
-  /*  const handleDateChange = (date: Date) => {
-    setSelectedDate(date);
-    const selectedDateMidnight = new Date(
-      date.getFullYear(),
-      date.getMonth(),
-      date.getDate()
-    );
-    const minDateMidnight = new Date(
-      minDate.getFullYear(),
-      minDate.getMonth(),
-      minDate.getDate()
-    );
-    const days = Math.ceil(
-      (selectedDateMidnight.getTime() - minDateMidnight.getTime()) /
-        (1000 * 60 * 60 * 24)
-    );
-    setSelectedDays(days + 1);
-  }; */
 
   return (
     <>
@@ -155,7 +169,7 @@ const NewspaperBanner: React.FC<ShoppingCardProps> = ({
         <BannerImage src={image} alt="Newspaper" />
         <BannerContent>
           <BannerTitle>{title}</BannerTitle>
-          <AboDurationCalculator />
+          <AboDurationCalculator endDate={aboEndDate} />
           <p>Wähle aus, wie viele Monate du abonnieren möchtest:</p>
           <PickDay quantity={quantity} setQuantity={setQuantity} />
           <p>
