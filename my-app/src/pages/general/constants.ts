@@ -26,3 +26,7 @@ export function formatNumber(number: number): string {
     maximumFractionDigits: 2,
   });
 }
+
+export function DaysToMonths(months: number): number {
+  return Math.round(months / 30);
+}

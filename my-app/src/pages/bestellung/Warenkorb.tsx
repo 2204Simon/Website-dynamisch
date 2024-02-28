@@ -9,7 +9,7 @@ import {
   TotalPrice,
 } from "./stylesBestellung/Warenkorb.styles";
 import { Trash } from "phosphor-react";
-import { colors, formatNumber } from "../general/constants";
+import { DaysToMonths, colors, formatNumber } from "../general/constants";
 interface WarenkorbProps {
   image: string;
   productName: string;
@@ -34,8 +34,9 @@ export default function Warenkorb({
       <ContentContainer>
         <div>
           <Count>
-            {count}
-            {productName === "Zeitung" ? " Tage" : "x"}
+            {productName === "Zeitung"
+              ? `${DaysToMonths(count)} Monate, pro`
+              : `${count}x`}
           </Count>
           <ProductName>{productName}</ProductName>
           <Price>{formatNumber(price)}€</Price>
