@@ -209,7 +209,8 @@ export default function AdressInformation(): JSX.Element {
 
     console.log(adressData, "adressData");
     try {
-      const postAdressData = await sendPostRequest("/adresse", adressData);
+      const postAdressData = await sendPutRequest("/adresse", adressData);
+      console.log(postAdressData, "postAdressData");
       dispatch(addNewAdress(postAdressData));
       handleSelectAdress(postAdressData);
       setShowFields(false);
