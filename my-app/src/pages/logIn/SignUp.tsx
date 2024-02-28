@@ -25,7 +25,11 @@ import { addNewAdress, setSelectedAdress } from "../../redux/adressDataReducer";
 import { sendPostRequest } from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
-import { setSelectedPayment } from "../../redux/paymentReaducer";
+import {
+  addLastschriftData,
+  addPaypalData,
+  setSelectedPayment,
+} from "../../redux/paymentReaducer";
 
 function Copyright(props: any) {
   return (
@@ -100,23 +104,37 @@ export default function SignUp() {
         hausnummer: hausnummer,
         hausnummerzusatz: hausnummerzusatz,
       };
-      const paymentFormData = {
+      const paymentLastschriftFormData = {
         kundenId: kundenData.kundenId,
         bankname: bankName,
         bic: bic,
         iban: iban,
+      };
+      const paymentPaypalFormData = {
+        kundenId: kundenData.kundenId,
         paypalEmail: paypalEmail,
       };
+
       const adressData = await sendPostRequest("/adresse", adressDataFormData);
 
-      const paymentData = await sendPostRequest("/zahlung", paymentFormData);
+      const paymentLastschriftData = await sendPostRequest(
+        "/zahlung",
+        paymentLastschriftFormData
+      );
+      const paymentPaypalData = await sendPostRequest(
+        "/zahlung",
+        paymentPaypalFormData
+      );
       // const response eventuel season token
       setCookie(KUNDEN_ID, kundenData.kundenId, { path: "/" });
       // console.log(cookies.kundenId);
       dispatch(addNewUser(kundenData));
       dispatch(addNewAdress(adressData));
       dispatch(setSelectedAdress(adressData));
-      dispatch(setSelectedPayment(paymentData));
+      dispatch(addPaypalData(paymentPaypalData));
+      dispatch(addLastschriftData(paymentLastschriftData));
+      dispatch(setSelectedPayment(paymentLastschriftData));
+      dispatch(setSelectedPayment(paymentPaypalData));
       navigate("/LoggedIn");
       changeLoggedIn();
     } catch (error) {
