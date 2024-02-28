@@ -10,20 +10,31 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../general/button.styles";
 import { baseUrl } from "../../globalVariables/global";
 
-interface A1 {
+export interface Ingredient {
   id: string;
   quantity: number;
 }
 
+export interface KonfiguratorCardProps {
+  zutatsId: string;
+  zutatBild: string;
+  zutatsname: string;
+  zutatspreis: number;
+}
+
 const Konfigurator: React.FC = () => {
-  const [selectedIngredients, setSelectedIngredients] = useState<Array<A1>>([]);
+  const [selectedIngredients, setSelectedIngredients] = useState<
+    Array<Ingredient>
+  >([]);
   const [currentStage, setCurrentStage] = useState<number>(1);
-  const [selectedBread, setSelectedBread] = useState<Array<A1>>([]);
-  const [selectedToppings, setSelectedToppings] = useState<Array<A1>>([]);
-  const [selectedExtras, setSelectedExtras] = useState<Array<A1>>([]);
+  const [selectedBread, setSelectedBread] = useState<Array<Ingredient>>([]);
+  const [selectedToppings, setSelectedToppings] = useState<Array<Ingredient>>(
+    []
+  );
+  const [selectedExtras, setSelectedExtras] = useState<Array<Ingredient>>([]);
   const { loggedIn } = useLoggedIn();
   const navigate = useNavigate();
-  const handleNextStage = (selectedProduct: Array<A1>) => {
+  const handleNextStage = (selectedProduct: Array<Ingredient>) => {
     setCurrentStage(currentStage + 1);
 
     switch (currentStage) {
