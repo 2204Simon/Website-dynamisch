@@ -11,6 +11,7 @@ import { Button } from "../general/button.styles";
 import { baseUrl } from "../../globalVariables/global";
 import KonfiguratorCard from "./KonfiguratorCard";
 import { Ingredient, KonfiguratorCardProps } from "./Konfigurator";
+import { CustomToast } from "../general/toast.style";
 
 interface ToppingsSelectionProps {
   onNextStage: (selectedToppingsID: Array<Ingredient>) => void;
@@ -57,8 +58,11 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
     const lclToppings = selectedToppings;
     if (!lclToppings.some(topping => topping.id === toppingID)) {
       lclToppings.push({ id: toppingID, quantity: quantity });
+      setSelectedToppings(lclToppings);
+      CustomToast.success(
+        `Es wurde  ${toppingID} in der Menge von ${quantity} hinzugefügt!`
+      );
     }
-    setSelectedToppings(lclToppings);
   };
 
   const handlePrev = () => {
@@ -75,6 +79,7 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
       image: product.zutatBild,
       title: product.zutatsname,
       price: product.zutatspreis,
+      type: product.zutatseinheit,
     }));
 
     return productsToRender.map(product => (
@@ -84,6 +89,7 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
         image={product.image}
         title={product.title}
         price={product.price}
+        type={product.type}
         handleSelect={handleToppingSelect}
       />
     ));

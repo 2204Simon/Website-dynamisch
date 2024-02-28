@@ -11,6 +11,7 @@ import { Button } from "../general/button.styles";
 import { baseUrl } from "../../globalVariables/global";
 import { Ingredient, KonfiguratorCardProps } from "./Konfigurator";
 import KonfiguratorCard from "./KonfiguratorCard";
+import { CustomToast } from "../general/toast.style";
 
 interface ExtrasSelectionProps {
   onPrevStage: () => void;
@@ -56,8 +57,12 @@ const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
     const lclToppings = selectedExtras;
     if (!lclToppings.some(extras => extras.id === extraID)) {
       lclToppings.push({ id: extraID, quantity: quantity });
+
+      CustomToast.success(
+        `Es wurde  ${extraID} in der Menge von ${quantity} hinzugefügt!`
+      );
+      setSelectedExtras(selectedExtras);
     }
-    setSelectedExtras(selectedExtras);
   };
 
   const handlePrev = () => {
@@ -74,6 +79,7 @@ const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
       image: product.zutatBild,
       title: product.zutatsname,
       price: product.zutatspreis,
+      type: product.zutatseinheit,
     }));
 
     return productsToRender.map(product => (
@@ -83,6 +89,7 @@ const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
         image={product.image}
         title={product.title}
         price={product.price}
+        type={product.type}
         handleSelect={handleExtraSelect}
       />
     ));

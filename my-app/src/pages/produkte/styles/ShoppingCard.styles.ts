@@ -131,6 +131,11 @@ export const Price = styled.p`
   font-size: 1.2rem;
 `;
 
+export const Type = styled.p`
+  margin: 0;
+  font-size: 1rem;
+`;
+
 export const Quantity = styled.div`
   display: flex;
   align-items: center;

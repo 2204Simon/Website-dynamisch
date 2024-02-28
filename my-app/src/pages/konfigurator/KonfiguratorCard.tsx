@@ -24,6 +24,7 @@ import {
   Details,
   ImageContainer,
   Price,
+  Type,
   Quantity,
   QuantityInput,
   Title,
@@ -38,6 +39,7 @@ export interface ShoppingCardProps {
   image: string;
   title: string;
   price: number;
+  type: string;
   handleSelect: Function;
 }
 
@@ -46,6 +48,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
   title,
   price,
   produktId,
+  type,
   handleSelect,
 }) => {
   const [displayNone, setDisplayNone] = useState(false);
@@ -100,7 +103,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
 
   const handlePlus = (quantity: number) => {
     quantity += 1;
-    if (quantity === 100) {
+    if (quantity === 6) {
       CustomToast.error("Die maximale Anzahl wurde erreicht!");
     } else {
       setQuantity(Number(quantity));
@@ -124,6 +127,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
         <Details>
           <Title style={{ paddingLeft: "0px" }}>{title}</Title>
           <Price>Preis: {formatNumber(price)} €</Price>
+          <Type>Einheit: {type}</Type>
 
           <Quantity>
             <MinusQuantity onClick={() => handleMinus(quantity)}>
