@@ -9,6 +9,7 @@ const initialState: UserDataState = {
     passwort: "",
     telefonnummer: "",
     zeitungsaboablaufdatum: undefined,
+    istAdmin: false,
   },
 };
 

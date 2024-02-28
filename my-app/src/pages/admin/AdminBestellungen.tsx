@@ -12,8 +12,10 @@ export default function AdminBestellungsblock() {
   async function getAllBestellungenComponent() {
     console.log("muss noch implementiert werden");
     const bestellungen: Array<BestellungsInformation> = await getRequest(
-      "/allBestellungen"
+      "/admin/todayDeliveries"
     );
+    console.log(bestellungen);
+
     setOptionalComponent(
       <>
         <p>get bestellung muss noch implementiert werden</p>

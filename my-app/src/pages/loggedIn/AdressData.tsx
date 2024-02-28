@@ -30,6 +30,8 @@ import {
   loadLastschrift,
   addLastschriftData,
   addPaypalData,
+  removePaypalData,
+  removeLastschriftData,
 } from "../../redux/paymentReaducer";
 import {
   getRequest,
@@ -52,6 +54,7 @@ const ScrollableContainer = styled.div`
 
 export default function AdressInformation(): JSX.Element {
   const dispatch = useDispatch();
+
   const [editMode, setEditMode] = useState(false);
   const [editedData, setEditedData] = useState<AdressData | null>(null);
   const [editedPaymentPaypalData, setEditedPaymentPaypalData] =
@@ -69,6 +72,9 @@ export default function AdressInformation(): JSX.Element {
   const [showPaymentFields, setShowPaymentFields] = useState(false);
   const selectedPayment = useSelector(
     (state: { payment: PaymentDataState }) => state.payment.selectedPayments
+  );
+  const selectedAdress = useSelector(
+    (state: { adress: AdressDataState }) => state.adress.selectedAdress
   );
   const uniqueAdressInformation = adressInformation.filter(
     (adress, index, self) =>
@@ -92,35 +98,37 @@ export default function AdressInformation(): JSX.Element {
         if (responsePayment.paypal) {
           const paypalData: PaypalData[] = responsePayment.paypal;
           dispatch(loadPaypal(paypalData));
+          handleSelectPayment(selectedPayment as PaymentData);
         }
         if (responsePayment.lastschrift) {
           const lastschriftData: LastschriftData[] =
             responsePayment.lastschrift;
           dispatch(loadLastschrift(lastschriftData));
+          handleSelectPayment(selectedPayment as PaymentData);
         }
         const responseAdress = await getRequest(
           `/adressen/${cookies.kundenId}`
         );
         console.log(responseAdress, "responseAdress");
         dispatch(loadAdressen(responseAdress));
+        handleSelectAdress(selectedAdress as AdressData);
       } catch (error) {
         CustomToast.error("Fehler beim Laden der Daten");
       }
     };
 
     fetchData();
-  }, []);
+  }, [dispatch, cookies.kundenId]);
 
   const handleDeactivatePayment = async (payment: PaymentData) => {
     try {
       const response = await sendPutRequest("/zahlung", payment);
-      if (response.status === 200) {
-        console.log(response.data, "response");
-      } else {
-        throw new Error(response.statusText);
-      }
+
+      dispatch(removePaypalData(payment));
+
+      dispatch(removeLastschriftData(payment));
     } catch (error) {
-      CustomToast.error("Fehler beim Deaktivieren der Zahlung");
+      CustomToast.error("Fehler beim Löschen der Daten");
     }
   };
 
@@ -157,11 +165,9 @@ export default function AdressInformation(): JSX.Element {
           "/zahlung",
           postPaymentData
         );
-        if (postPaypalData.paypal) {
-          const paypalData: PaypalData = postPaypalData.paypal;
-          dispatch(addPaypalData(paypalData));
-          console.log(paypalData, "!!!!!!!!paypalData");
-        }
+        dispatch(addPaypalData(postPaypalData));
+        handleSelectPayment(postPaypalData);
+        setShowPaymentFields(false);
       }
       if (paymentData.lastschriftData?.IBAN) {
         const postPaymentData = {
@@ -174,12 +180,9 @@ export default function AdressInformation(): JSX.Element {
           "/zahlung",
           postPaymentData
         );
-        if (postLastschriftData.lastschrift) {
-          const lastschriftData: LastschriftData =
-            postLastschriftData.lastschrift;
-          console.log(paymentInformation, "!!!!!!!!!simon paymentInformation");
-          dispatch(addLastschriftData(lastschriftData));
-        }
+        dispatch(addLastschriftData(postLastschriftData));
+        handleSelectPayment(postLastschriftData);
+        setShowPaymentFields(false);
       }
 
       setEditedData(null);
@@ -208,8 +211,10 @@ export default function AdressInformation(): JSX.Element {
 
     console.log(adressData, "adressData");
     try {
-      const postAdressData = await sendPostRequest("/adresse", adressData);
+      const postAdressData = await sendPutRequest("/adresse", adressData);
+      console.log(postAdressData, "postAdressData");
       dispatch(addNewAdress(postAdressData));
+      handleSelectAdress(postAdressData);
       setShowFields(false);
     } catch (error) {
       CustomToast.error("Fehler beim Hinzufügen der Adresse");
@@ -237,44 +242,6 @@ export default function AdressInformation(): JSX.Element {
     setShowPaymentFields(false);
   };
 
-  const highestLaufendeAdressenId = Math.max(
-    ...uniqueAdressInformation
-      .map(adress => adress.laufendeAdressenId)
-      .filter((id): id is number => id !== undefined)
-  );
-  useEffect(() => {
-    const highestAdress = uniqueAdressInformation.find(
-      adress => adress.laufendeAdressenId === highestLaufendeAdressenId
-    );
-    if (highestAdress) {
-      dispatch(setSelectedAdress(highestAdress));
-    }
-  }, [highestLaufendeAdressenId, uniqueAdressInformation, dispatch]);
-
-  const highestLaufendeZahlungsId = Math.max(
-    ...paymentInformation.lastschriftData
-      .map(payment => payment.laufendeZahlungsId)
-      .filter((id): id is number => id !== undefined),
-    ...paymentInformation.paypalData
-      .map(payment => payment.laufendeZahlungsId)
-      .filter((id): id is number => id !== undefined)
-  );
-
-  useEffect(() => {
-    const highestLastschriftPayment = paymentInformation.lastschriftData.find(
-      payment => payment.laufendeZahlungsId === highestLaufendeZahlungsId
-    );
-    const highestPaypalPayment = paymentInformation.paypalData.find(
-      payment => payment.laufendeZahlungsId === highestLaufendeZahlungsId
-    );
-
-    const highestPayment = highestLastschriftPayment || highestPaypalPayment;
-
-    if (highestPayment) {
-      dispatch(setSelectedPayment(highestPayment));
-    }
-  }, [highestLaufendeZahlungsId, paymentInformation, dispatch]);
-
   return (
     <div>
       <Container>
@@ -296,7 +263,7 @@ export default function AdressInformation(): JSX.Element {
                           value={`Adresse${index}`}
                           defaultChecked={
                             adress.laufendeAdressenId ===
-                            highestLaufendeAdressenId
+                            selectedAdress?.laufendeAdressenId
                           }
                           onChange={() => {
                             handleSelectAdress(adress);
@@ -522,9 +489,6 @@ export default function AdressInformation(): JSX.Element {
                     )
                     .reverse()
                     .map((payment, index, array) => {
-                      // Höchste laufendeZahlungsId ermitteln
-                      const highestId = array[0].laufendeZahlungsId;
-
                       if ("paypalEmail" in payment) {
                         // Dies ist ein Paypal-Zahlungsobjekt
                         return (
@@ -537,6 +501,13 @@ export default function AdressInformation(): JSX.Element {
                               onChange={() => {
                                 handleSelectPayment(payment);
                               }}
+                              defaultChecked={
+                                payment.laufendeZahlungsId ===
+                                paymentInformation.paypalData[0]
+                                  .laufendeZahlungsId
+                              }
+                              // Setzen Sie das Kontrollkästchen auf "checked", wenn die laufendeZahlungsId die höchste ist
+
                               size={50}
                               style={{
                                 marginRight: "300px",
@@ -579,7 +550,8 @@ export default function AdressInformation(): JSX.Element {
                                 }}
                                 defaultChecked={
                                   payment.laufendeZahlungsId ===
-                                  highestLaufendeZahlungsId
+                                  paymentInformation.lastschriftData[0]
+                                    .laufendeZahlungsId
                                 }
                               />
                               <button

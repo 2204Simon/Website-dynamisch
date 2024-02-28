@@ -9,6 +9,7 @@ export interface LogInData {
   passwort: string;
   telefonnummer: string;
   zeitungsaboablaufdatum?: Date;
+  istAdmin?: boolean;
 }
 
 export enum ActionTypesUser {
@@ -55,7 +56,7 @@ export type LastschriftData = {
 export type PaymentDataState = {
   paypalData: Array<PaypalData>;
   lastschriftData: Array<LastschriftData>;
-  selectedPayments: PaymentData;
+  selectedPayments: PaymentData | null;
 };
 
 export enum ActionTypesAdressData {
