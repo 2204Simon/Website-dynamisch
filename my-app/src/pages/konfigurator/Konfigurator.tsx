@@ -28,7 +28,6 @@ const Konfigurator: React.FC = () => {
 
     switch (currentStage) {
       case 1:
-        console.log(selectedIngredients);
         setSelectedBread(selectedProduct);
         break;
       case 2:
@@ -108,6 +107,15 @@ const Konfigurator: React.FC = () => {
               return (
                 <div>
                   <h1>Topping</h1>
+                  <p>id: {item.id}</p>
+                  <p>Menge: {item.quantity}</p>
+                </div>
+              );
+            })}
+            {selectedExtras.map(item => {
+              return (
+                <div>
+                  <h1>Extra</h1>
                   <p>id: {item.id}</p>
                   <p>Menge: {item.quantity}</p>
                 </div>

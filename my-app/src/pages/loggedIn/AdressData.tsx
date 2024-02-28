@@ -16,7 +16,7 @@ import {
   Paragraph,
   Title,
 } from "./UserInformation.styles";
-import { Bank, Pencil, RadioButton } from "phosphor-react";
+import { Bank, Pencil, RadioButton, Trash } from "phosphor-react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
@@ -34,6 +34,7 @@ import {
 import {
   getRequest,
   sendPostRequest,
+  sendPutRequest,
 } from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
@@ -115,6 +116,19 @@ export default function AdressInformation(): JSX.Element {
 
     fetchData();
   }, [dispatch, cookies.kundenId]);
+
+  const handleDeactivatePayment = async (payment: PaymentData) => {
+    try {
+      const response = await sendPutRequest("/zahlung", payment);
+      if (response.status === 200) {
+        console.log(response.data, "response");
+      } else {
+        throw new Error(response.statusText);
+      }
+    } catch (error) {
+      CustomToast.error("Fehler beim Deaktivieren der Zahlung");
+    }
+  };
 
   const handleOpenAdress = () => {
     setShowFields(true);
@@ -475,7 +489,7 @@ export default function AdressInformation(): JSX.Element {
                       if ("paypalEmail" in payment) {
                         // Dies ist ein Paypal-Zahlungsobjekt
                         return (
-                          <div key={index}>
+                          <div key={index} style={{ verticalAlign: "middle" }}>
                             <input
                               type="radio"
                               id={`Zahlung${index}`}
@@ -489,7 +503,20 @@ export default function AdressInformation(): JSX.Element {
                               //   paymentInformation.lastschriftData[0].laufendeZahlungsId
                               // }
                               // Setzen Sie das Kontrollkästchen auf "checked", wenn die laufendeZahlungsId die höchste ist
+
+                              size={50}
+                              style={{
+                                marginRight: "300px",
+                                marginTop: "60px",
+                                marginBottom: "0px",
+                              }}
+
                             />
+                            <button
+                              onClick={() => handleDeactivatePayment(payment)}
+                            >
+                              <Trash size={20} />
+                            </button>
                             <Paragraph>
                               <strong>PayPal Email: </strong>
                               {payment.paypalEmail}
@@ -500,7 +527,10 @@ export default function AdressInformation(): JSX.Element {
                         // Dies ist ein Lastschrift-Zahlungsobjekt
                         if ("Bankname" in payment) {
                           return (
-                            <div key={index}>
+                            <div
+                              key={index}
+                              style={{ verticalAlign: "middle" }}
+                            >
                               <input
                                 type="radio"
                                 id={`Zahlung${index}`}
@@ -509,15 +539,27 @@ export default function AdressInformation(): JSX.Element {
                                 onChange={() => {
                                   handleSelectPayment(payment);
                                 }}
-                                // Setzen Sie das Kontrollkästchen auf "checked", wenn die laufendeZahlungsId die höchste ist
+                         
+                                size={50}
+                                style={{
+                                  marginRight: "300px",
+                                  marginTop: "60px",
+                                  marginBottom: "0px",
+                                }}
+                                defaultChecked={
+                                  payment.laufendeZahlungsId ===
+                                  highestLaufendeZahlungsId
+                                }
 
-                                // defaultChecked={
-                                //   payment.laufendeZahlungsId ===
-                                //   paymentInformation.paypalData[0].laufendeZahlungsId
-                                // }
                               />
+                              <button
+                                onClick={() => handleDeactivatePayment(payment)}
+                              >
+                                <Trash size={20} />
+                              </button>
                               <Paragraph>
                                 <strong>Bankname: </strong>
+
                                 {payment.Bankname}
                               </Paragraph>
                               <Paragraph>

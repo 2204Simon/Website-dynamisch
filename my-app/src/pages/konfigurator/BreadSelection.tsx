@@ -108,31 +108,28 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
           (
             bread // Anzeigen der Brote aus dem State
           ) => (
-            console.log(bread),
-            (
-              <Container flipped={false}>
-                <ContainerFront
-                  flipped={false}
-                  displayNone={false}
-                  key={bread.zutatsId}
-                  className={
-                    selectedBread && selectedBread.id === bread.zutatsId
-                      ? "selected"
-                      : ""
-                  }
-                  onClick={() => handleBreadSelect(bread.zutatsId)}
-                >
-                  <ImageContainer>
-                    <Image src={bread.zutatBild} alt={bread.zutatsname} />
-                  </ImageContainer>
-                  <Details>
-                    <Title>{bread.zutatsname}</Title>
+            <Container flipped={false}>
+              <ContainerFront
+                flipped={false}
+                displayNone={false}
+                key={bread.zutatsId}
+                className={
+                  selectedBread && selectedBread.id === bread.zutatsId
+                    ? "selected"
+                    : ""
+                }
+                onClick={() => handleBreadSelect(bread.zutatsId)}
+              >
+                <ImageContainer>
+                  <Image src={bread.zutatBild} alt={bread.zutatsname} />
+                </ImageContainer>
+                <Details>
+                  <Title>{bread.zutatsname}</Title>
 
-                    <Price>Preis: {bread.zutatspreis} €</Price>
-                  </Details>
-                </ContainerFront>
-              </Container>
-            )
+                  <Price>Preis: {bread.zutatspreis} €</Price>
+                </Details>
+              </ContainerFront>
+            </Container>
           )
         )}
       </SelectionContainer>
