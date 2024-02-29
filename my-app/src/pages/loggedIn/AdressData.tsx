@@ -252,7 +252,10 @@ export default function AdressInformation(): JSX.Element {
               <ScrollableContainer>
                 {uniqueAdressInformation
                   .slice()
-                  .reverse()
+                  .sort(
+                    (a, b) =>
+                      (b.laufendeAdressenId || 0) - (a.laufendeAdressenId || 0)
+                  )
                   .map((adress, index) => (
                     <div key={index}>
                       <Grid>
@@ -261,10 +264,7 @@ export default function AdressInformation(): JSX.Element {
                           id={`Adresse${index}`}
                           name="Adresse"
                           value={`Adresse${index}`}
-                          defaultChecked={
-                            adress.laufendeAdressenId ===
-                            selectedAdress?.laufendeAdressenId
-                          }
+                          defaultChecked={index === 0}
                           onChange={() => {
                             handleSelectAdress(adress);
                           }}
@@ -484,10 +484,9 @@ export default function AdressInformation(): JSX.Element {
                   ]
                     .sort(
                       (a, b) =>
-                        (a.laufendeZahlungsId || 0) -
-                        (b.laufendeZahlungsId || 0)
+                        (b.laufendeZahlungsId || 0) -
+                        (a.laufendeZahlungsId || 0)
                     )
-                    .reverse()
                     .map((payment, index, array) => {
                       if ("paypalEmail" in payment) {
                         // Dies ist ein Paypal-Zahlungsobjekt
@@ -501,13 +500,7 @@ export default function AdressInformation(): JSX.Element {
                               onChange={() => {
                                 handleSelectPayment(payment);
                               }}
-                              defaultChecked={
-                                payment.laufendeZahlungsId ===
-                                paymentInformation.paypalData[0]
-                                  .laufendeZahlungsId
-                              }
-                              // Setzen Sie das Kontrollkästchen auf "checked", wenn die laufendeZahlungsId die höchste ist
-
+                              defaultChecked={index === 0}
                               size={50}
                               style={{
                                 marginRight: "300px",
@@ -548,11 +541,7 @@ export default function AdressInformation(): JSX.Element {
                                   marginTop: "60px",
                                   marginBottom: "0px",
                                 }}
-                                defaultChecked={
-                                  payment.laufendeZahlungsId ===
-                                  paymentInformation.lastschriftData[0]
-                                    .laufendeZahlungsId
-                                }
+                                defaultChecked={index === 0}
                               />
                               <button
                                 onClick={() => handleDeactivatePayment(payment)}
@@ -561,7 +550,6 @@ export default function AdressInformation(): JSX.Element {
                               </button>
                               <Paragraph>
                                 <strong>Bankname: </strong>
-
                                 {payment.Bankname}
                               </Paragraph>
                               <Paragraph>
