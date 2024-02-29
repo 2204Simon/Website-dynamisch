@@ -1,24 +1,7 @@
 import React, { useState, ChangeEvent, useRef } from "react";
 import { useDispatch } from "react-redux"; // Import der useDispatch-Hook
 // Import der addToCart-Action aus deiner Redux-Komponente
-import {
-  Container,
-  Details,
-  ImageContainer,
-  Price,
-  Quantity,
-  QuantityInput,
-  Title,
-  Image,
-  PlusQuantity,
-  MinusQuantity,
-  ContainerBack,
-  ContainerFront,
-  Title2,
-  Top,
-  MiniH,
-  ListContainer,
-} from "./styles/Konfigurator.styles";
+
 import { BlackColorButton } from "../general/button";
 import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
@@ -35,27 +18,39 @@ import {
 } from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
+import { colors } from "../general/constants";
+import {
+  Container,
+  Details,
+  ImageContainer,
+  Price,
+  Type,
+  Quantity,
+  QuantityInput,
+  Title,
+  Image,
+  PlusQuantity,
+  MinusQuantity,
+  ContainerFront,
+} from "../produkte/styles/ShoppingCard.styles";
 
-interface ShoppingCardProps {
+export interface ShoppingCardProps {
   produktId: string;
   image: string;
   title: string;
   price: number;
-  content: string[];
-  allergy: string[];
-  veggie: boolean;
+  type: string;
+  handleSelect: Function;
 }
 
 const ShoppingCard: React.FC<ShoppingCardProps> = ({
   image,
   title,
   price,
-  content,
-  allergy,
-  veggie,
   produktId,
+  type,
+  handleSelect,
 }) => {
-  const [isFlipped, setIsFlipped] = useState<boolean>(false);
   const [displayNone, setDisplayNone] = useState(false);
   const [quantity, setQuantity] = useState<number>(0);
   const dispatch = useDispatch(); // Initialisierung der useDispatch-Hook
@@ -96,7 +91,6 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
       };
       console.log(itemObjekt);
       const addedProdukt = await sendPutRequest("/warenkorb", itemObjekt);
-      CustomToast.success("Dein Produkt ist im Warenkorb!");
       const amount = item.anzahl;
       dispatch(increaseQuantity({ item, amount: quantity2 })); // Dispatch der addToCart-Action mit dem erstellten Item
     } catch (error) {
@@ -104,44 +98,12 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
     }
     dispatch(increaseQuantity({ item, amount: quantity2 }));
     CustomToast.success(`Es wurde  ${quantity} ${title} hinzugefügt!`);
-  };
-
-  const handleAddToCart = async () => {
-    if (quantity === 0) {
-      CustomToast.error("Bitte erhöhe die Menge!");
-    } else {
-      for (let i = 0; i < cartItems.length; i++) {
-        if (cartItems[i].titel === title) {
-          addProduct(quantity);
-          return;
-        }
-      }
-      const item = {
-        produktId: produktId,
-        titel: title,
-        bild: image,
-        preis: price,
-        anzahl: quantity,
-      };
-      try {
-        const itemObjekt = {
-          produktId: item.produktId,
-          produktMenge: item.anzahl,
-          kundenId: cookie.kundenId,
-        };
-        console.log(itemObjekt);
-        const addedProdukt = await sendPostRequest("/warenkorb", itemObjekt);
-        CustomToast.success("Dein Produkt ist im Warenkorb!");
-        dispatch(addToCart(item as CartItem)); // Dispatch der addToCart-Action mit dem erstellten Item
-      } catch (error) {
-        CustomToast.error("Fehler hinzufügen (Serververbindung))");
-      }
-    }
+    setQuantity(0);
   };
 
   const handlePlus = (quantity: number) => {
     quantity += 1;
-    if (quantity === 100) {
+    if (quantity === 6) {
       CustomToast.error("Die maximale Anzahl wurde erreicht!");
     } else {
       setQuantity(Number(quantity));
@@ -156,32 +118,37 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
     }
   };
 
-  const isProcessingRef = useRef(false);
-
-  const handleDetailsClick = () => {
-    if (!isProcessingRef.current) {
-      isProcessingRef.current = true; // Markiere den Klick als in Bearbeitung
-
-      setIsFlipped(!isFlipped); // 2. Zustand ändern
-
-      setTimeout(() => {
-        setDisplayNone(!displayNone);
-        isProcessingRef.current = false; // Markiere den Klick als abgeschlossen
-      }, 500); // 0,5 Sekunden Verzögerung
-    }
-  };
-
   return (
-    <Container flipped={isFlipped}>
-      <ContainerFront flipped={isFlipped} displayNone={displayNone}>
+    <Container flipped={false}>
+      <ContainerFront flipped={false} displayNone={displayNone}>
         <ImageContainer>
           <Image src={image} alt="product" />
         </ImageContainer>
         <Details>
           <Title style={{ paddingLeft: "0px" }}>{title}</Title>
           <Price>Preis: {formatNumber(price)} €</Price>
+          <Type>Einheit: {type}</Type>
+
+          <Quantity>
+            <MinusQuantity onClick={() => handleMinus(quantity)}>
+              <Minus color={colors.black} />
+            </MinusQuantity>
+            <QuantityInput
+              type="text"
+              id="quantity"
+              name="quantity"
+              pattern="[0-9]*"
+              value={quantity}
+              onChange={handleQuantityChange}
+              inputMode="numeric"
+            />
+            <PlusQuantity onClick={() => handlePlus(quantity)}>
+              <Plus color={colors.black} />
+            </PlusQuantity>
+          </Quantity>
+
           <BlackColorButton
-            onClick={handleAddToCart}
+            onClick={() => handleSelect(produktId, quantity)}
             caption="Zur Konfiguration hinzufügen"
           />
         </Details>
