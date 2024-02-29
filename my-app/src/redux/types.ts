@@ -56,7 +56,22 @@ export type LastschriftData = {
 export type PaymentDataState = {
   paypalData: Array<PaypalData>;
   lastschriftData: Array<LastschriftData>;
-  selectedPayments: PaymentData | null;
+  selectedPayments: SelectedPaymentData | null;
+};
+
+export type SelectedPaymentData = {
+  paypalEmail?: string;
+  kundenId?: string;
+  laufendeZahlungsId?: number;
+  Bankname?: string;
+  IBAN?: string;
+  BIC?: string;
+};
+
+export type SelectedLastschriftData = {
+  Bankname: string;
+  IBAN: string;
+  BIC: string;
 };
 
 export enum ActionTypesAdressData {

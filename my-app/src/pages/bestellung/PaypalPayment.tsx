@@ -5,6 +5,7 @@ import {
   AddressenInformation,
   AdressData,
   AdressDataState,
+  PaymentDataState,
   UserDataState,
 } from "../../redux/types";
 import { useEffect, useState } from "react";
@@ -15,6 +16,9 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
   );
   const selectedAdress = useSelector(
     (state: { adress: AdressDataState }) => state.adress.selectedAdress
+  );
+  const selectedPayment = useSelector(
+    (state: { payment: PaymentDataState }) => state.payment
   );
   console.log("selectedAdresse von Simon" + selectedAdress);
 
@@ -62,7 +66,7 @@ export function PayPalPayment({ price, handleThankyouPopup, agbChecked }: any) {
               },
             ],
             payer: {
-              email_address: `${userInformation.LogInData.email}`, // Ersetzen Sie dies durch die tatsächliche E-Mail-Adresse
+              email_address: `${selectedPayment.selectedPayments?.paypalEmail}`, // Ersetzen Sie dies durch die tatsächliche E-Mail-Adresse
             },
           });
         }}

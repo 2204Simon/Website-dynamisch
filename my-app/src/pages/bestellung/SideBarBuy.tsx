@@ -18,7 +18,14 @@ import { de } from "date-fns/locale";
 import { colors, formatNumber } from "../general/constants";
 import { CustomToast } from "../general/toast.style";
 import { useDispatch, useSelector } from "react-redux";
-import { CartState, PaymentDataState } from "../../redux/types";
+import {
+  CartState,
+  LastschriftData,
+  PaymentData,
+  PaymentDataState,
+  PaypalData,
+  Zahlungsinformation,
+} from "../../redux/types";
 import { clearCart } from "../../redux/cartReducer";
 import { PayPalPayment } from "./PaypalPayment";
 import {
@@ -51,7 +58,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   maxDate.setMonth(maxDate.getMonth() + 6);
   const [selectedDate, setSelectedDate] = useState<Date>(minDate);
   const selectedPayment = useSelector(
-    (state: { payment: PaymentDataState }) => state.payment.selectedPayments
+    (state: { payment: PaymentDataState }) => state.payment
   );
 
   const handleBuyNow = () => {
@@ -218,8 +225,8 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                     AGBs
                   </a>{" "}
                 </p>
-                {/* selectionState aus Cookies ToDo */}
-                {selectedPayment?.paypalData?.paypalEmail ? (
+                .{console.log("willy bester mann", selectedPayment)}
+                {selectedPayment.selectedPayments?.paypalEmail ? (
                   <>
                     Kostenpflichtig Bestellen mit
                     <br />
@@ -229,23 +236,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                       agbChecked={agbChecked}
                     />
                   </>
-                ) : selectedPayment?.lastschriftData?.IBAN ? (
-                  <Button
-                    onClick={() => handleThankyouPopup()}
-                    className="black-color white-orange"
-                  >
-                    Kostenpflichtig Bestellen
-                  </Button>
                 ) : (
-                  // <>
-                  //   Kostenpflichtig Bestellen mit
-                  //   <br />
-                  //   <PayPalPayment
-                  //     price={price}
-                  //     handleThankyouPopup={handleThankyouPopup}
-                  //     agbChecked={agbChecked}
-                  //   />
-                  // </>
                   <Button
                     onClick={() => handleThankyouPopup()}
                     className="black-color white-orange"
@@ -253,7 +244,6 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                     Kostenpflichtig Bestellen
                   </Button>
                 )}
-
                 <Button
                   className="black-color white-orange"
                   onClick={() => handleClosePopup()}
