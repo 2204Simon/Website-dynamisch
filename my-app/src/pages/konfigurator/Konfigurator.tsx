@@ -9,7 +9,7 @@ import { useLoggedIn } from "../../globalVariables/loggedin";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../general/button.styles";
 import { baseUrl } from "../../globalVariables/global";
-import KonfiguratorCard from "./KonfiguratorCard";
+import ReviewCard from "./Reviewcard";
 
 export interface Ingredient {
   id: string;
@@ -31,6 +31,13 @@ const Konfigurator: React.FC = () => {
     []
   );
   const [selectedExtras, setSelectedExtras] = useState<Array<Ingredient>>([]);
+  const [bread, setbread] = useState<KonfiguratorCardProps>({
+    zutatsId: "",
+    zutatBild: "",
+    zutatsname: "",
+    zutatspreis: 0,
+    zutatseinheit: "",
+  }); // Hier speichern wir die vom Server geholten Toppings
   const { loggedIn } = useLoggedIn();
   const navigate = useNavigate();
   const handleNextStage = (selectedProduct: Array<Ingredient>) => {
@@ -56,6 +63,25 @@ const Konfigurator: React.FC = () => {
     setCurrentStage(currentStage - 1);
   };
 
+  const loadBread = (id: string) => {
+    fetch(`${baseUrl}/ZutatById/${id}`)
+      .then(response => response.json())
+      .then(zutat =>
+        loadImage(zutat.zutatBild).then(image => ({
+          ...zutat,
+          zutatBild: image,
+        }))
+      )
+
+      .then(product => {
+        setbread(product);
+      });
+  };
+  async function loadImage(path: string): Promise<string> {
+    const image = await import(`../../img/Ingredients/Breads/${path}`);
+    return image.default; //Wegen ES6 mit default
+  }
+
   return (
     <div>
       {currentStage === 1 && <BreadSelection onNextStage={handleNextStage} />}
@@ -79,12 +105,17 @@ const Konfigurator: React.FC = () => {
           <h2>Zusammenfassung</h2>
 
           {selectedBread.map(item => {
+            loadBread(item.id);
             return (
-              <div>
-                <h1>Bread</h1>
-                <p>id: {item.id}</p>
-                <p>Menge: {item.quantity}</p>
-              </div>
+              <ReviewCard
+                produktId={bread.zutatsId}
+                key={bread.zutatsId}
+                image={bread.zutatBild}
+                title={bread.zutatsname}
+                price={bread.zutatspreis}
+                type={bread.zutatseinheit}
+                quantity={item.quantity}
+              />
             );
           })}
           {selectedToppings.map(item => {
