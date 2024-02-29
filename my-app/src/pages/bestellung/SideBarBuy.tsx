@@ -225,7 +225,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                     AGBs
                   </a>{" "}
                 </p>
-                .{console.log("willy bester mann", selectedPayment)}
+                {console.log("willy bester mann", selectedPayment)}
                 {selectedPayment.selectedPayments?.paypalEmail ? (
                   <>
                     Kostenpflichtig Bestellen mit
