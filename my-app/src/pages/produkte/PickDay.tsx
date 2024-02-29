@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
 import { CustomToast } from "../general/toast.style";
+import { QuantityInput } from "./styles/NewspaperBanner.styles";
 
 interface PickDayProps {
   quantity: number;
@@ -24,7 +25,7 @@ const PickDay: React.FC<PickDayProps> = ({ quantity, setQuantity }) => {
   };
 
   return (
-    <input
+    <QuantityInput
       type="text"
       id="inputField"
       value={quantity}

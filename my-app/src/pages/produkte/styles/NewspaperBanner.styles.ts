@@ -69,3 +69,16 @@ export const CenteredContainer = styled.div`
   align-items: center;
   height: 100%;
 `;
+
+export const QuantityInput = styled.input`
+  width: 6rem;
+  padding: 0.5rem;
+  border: 1px solid #aaa;
+  font-size: 1.2rem;
+  text-align: center;
+  appearance: textfield;
+  border-radius: 5px;
+  height: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+`;
