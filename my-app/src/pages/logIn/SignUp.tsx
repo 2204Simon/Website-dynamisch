@@ -116,25 +116,32 @@ export default function SignUp() {
       };
 
       const adressData = await sendPostRequest("/adresse", adressDataFormData);
-
-      const paymentLastschriftData = await sendPostRequest(
-        "/zahlung",
-        paymentLastschriftFormData
-      );
-      const paymentPaypalData = await sendPostRequest(
-        "/zahlung",
-        paymentPaypalFormData
-      );
+      if (
+        paymentLastschriftFormData.bankname &&
+        paymentLastschriftFormData.bic &&
+        paymentLastschriftFormData.iban
+      ) {
+        const paymentLastschriftData = await sendPostRequest(
+          "/zahlung",
+          paymentLastschriftFormData
+        );
+        dispatch(addLastschriftData(paymentLastschriftData));
+        dispatch(setSelectedPayment(paymentLastschriftData));
+      }
+      if (paymentPaypalFormData.paypalEmail) {
+        const paymentPaypalData = await sendPostRequest(
+          "/zahlung",
+          paymentPaypalFormData
+        );
+        dispatch(addPaypalData(paymentPaypalData));
+        dispatch(setSelectedPayment(paymentPaypalData));
+      }
       // const response eventuel season token
       setCookie(KUNDEN_ID, kundenData.kundenId, { path: "/" });
       // console.log(cookies.kundenId);
       dispatch(addNewUser(kundenData));
       dispatch(addNewAdress(adressData));
       dispatch(setSelectedAdress(adressData));
-      dispatch(addPaypalData(paymentPaypalData));
-      dispatch(addLastschriftData(paymentLastschriftData));
-      dispatch(setSelectedPayment(paymentLastschriftData));
-      dispatch(setSelectedPayment(paymentPaypalData));
       navigate("/LoggedIn");
       changeLoggedIn();
     } catch (error) {
