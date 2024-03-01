@@ -144,8 +144,14 @@ export default function SignUp() {
       dispatch(setSelectedAdress(adressData));
       navigate("/LoggedIn");
       changeLoggedIn();
-    } catch (error) {
-      CustomToast.error("error");
+    } catch (error: any) {
+      console.log(error);
+      if (error.message.includes("409")) {
+        CustomToast.error("Die E-Mail-Adresse ist bereits vorhanden");
+      } else {
+        console.log(error);
+        CustomToast.error("Ein unbekannter Fehler ist aufgetreten");
+      }
     }
   };
   function validateEmail(email: string): boolean {
