@@ -89,10 +89,11 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
       const bodyForBestellung = {
         kundenId: cookies.kundenId,
         laufendeZahlungsId:
+          //Todo noch undefined noch checken!!!!!!
           selectedPayment.selectedPayments?.laufendeZahlungsId,
         gewünschtesLieferdatum: selectedDate,
       };
-      console.log(bodyForBestellung);
+      console.log("body", bodyForBestellung);
       await sendPostRequest(`/bestellung`, bodyForBestellung);
       setShowPopup(false);
       setShowThankyouPopup(true);
@@ -242,7 +243,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                     AGBs
                   </a>{" "}
                 </p>
-                {console.log("willy bester mann", selectedPayment)}
+
                 {selectedPayment.selectedPayments?.paypalEmail ? (
                   <>
                     Kostenpflichtig Bestellen mit

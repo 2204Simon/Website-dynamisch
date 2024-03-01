@@ -500,7 +500,16 @@ export default function AdressInformation(): JSX.Element {
                               onChange={() => {
                                 handleSelectPayment(payment);
                               }}
-                              defaultChecked={index === 0}
+                              defaultChecked={
+                                selectedPayment === null
+                                  ? index === 0
+                                  : index ===
+                                    array.findIndex(
+                                      (payment: PaymentData) =>
+                                        payment.laufendeZahlungsId ===
+                                        selectedPayment.laufendeZahlungsId
+                                    )
+                              }
                               size={50}
                               style={{
                                 marginRight: "300px",
@@ -541,7 +550,16 @@ export default function AdressInformation(): JSX.Element {
                                   marginTop: "60px",
                                   marginBottom: "0px",
                                 }}
-                                defaultChecked={index === 0}
+                                defaultChecked={
+                                  selectedPayment === null
+                                    ? index === 0
+                                    : index ===
+                                      array.findIndex(
+                                        (payment: PaymentData) =>
+                                          payment.laufendeZahlungsId ===
+                                          selectedPayment.laufendeZahlungsId
+                                      )
+                                }
                               />
                               <button
                                 onClick={() => handleDeactivatePayment(payment)}
