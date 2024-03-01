@@ -80,7 +80,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
     setShowThankyouPopup(false);
   };
 
-  const handleThankyouPopup = async () => {
+  const handleThankyouPopupLastschrift = async () => {
     if (!agbChecked) {
       CustomToast.error("Bitte akzeptiere die AGBs");
       return;
@@ -88,8 +88,25 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
     try {
       const bodyForBestellung = {
         kundenId: cookies.kundenId,
-        //Todo checken ob paypal ausgewählt ist
-        isPaypal: true,
+        laufendeZahlungsId:
+          selectedPayment.selectedPayments?.laufendeZahlungsId,
+        gewünschtesLieferdatum: selectedDate,
+      };
+      console.log(bodyForBestellung);
+      await sendPostRequest(`/bestellung`, bodyForBestellung);
+      setShowPopup(false);
+      setShowThankyouPopup(true);
+    } catch (error) {
+      CustomToast.error("Fehler beim Bestellen");
+    }
+  };
+
+  const handleThankyouPopup = async () => {
+    try {
+      const bodyForBestellung = {
+        kundenId: cookies.kundenId,
+        laufendeZahlungsId:
+          selectedPayment.selectedPayments?.laufendeZahlungsId,
         gewünschtesLieferdatum: selectedDate,
       };
       console.log(bodyForBestellung);
@@ -238,7 +255,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                   </>
                 ) : (
                   <Button
-                    onClick={() => handleThankyouPopup()}
+                    onClick={() => handleThankyouPopupLastschrift()}
                     className="black-color white-orange"
                   >
                     Kostenpflichtig Bestellen
