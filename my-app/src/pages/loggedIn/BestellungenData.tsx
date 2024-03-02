@@ -1,22 +1,11 @@
 import { useEffect, useState } from "react";
-import {
-  Card,
-  Container,
-  LogoutButton,
-  Paragraph,
-  Title,
-} from "./UserInformation.styles";
+import { Card, Container, Paragraph, Title } from "./UserInformation.styles";
 import { getRequest } from "../../serverFunctions/generelAPICalls";
 import { KUNDEN_ID } from "../../globalVariables/global";
 import { useCookies } from "react-cookie";
 import { CustomToast } from "../general/toast.style";
 import { BestellungsInformation } from "../../redux/types";
-import {
-  ScrollableYContainer,
-  MetaDataDiv,
-  MetaDataItem,
-  SingleBestellungWrapper,
-} from "./Bestellungen.styles";
+import { ScrollableYContainer } from "./Bestellungen.styles";
 import { Package, Truck } from "phosphor-react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -25,7 +14,6 @@ import {
   CRUDCardsGridWrapper,
 } from "../admin/Admin.styles";
 import { formatGermanDate } from "../../DateUtils";
-import { BlackButton, OrangeButton } from "../general/button";
 import { Button } from "../general/button.styles";
 export default function BestellungsData(): JSX.Element {
   const [cookies] = useCookies([KUNDEN_ID]);
@@ -65,7 +53,10 @@ export default function BestellungsData(): JSX.Element {
         {bestellungen === null ? (
           <Card>
             <Title>Du hast noch keine Bestellungen</Title>
-            <Paragraph>Dann ist es höchste Zeit, dass Du unsere frisch zubereiteten Produkte probierst!</Paragraph>
+            <Paragraph>
+              Dann ist es höchste Zeit, dass Du unsere frisch zubereiteten
+              Produkte probierst!
+            </Paragraph>
             <Link to="/Produkte">
               <Button className="black-color white-orange ">
                 Zu unseren Produkten
