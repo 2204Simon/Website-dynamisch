@@ -271,7 +271,12 @@ export default function AdressInformation(): JSX.Element {
                           id={`Adresse${index}`}
                           name="Adresse"
                           value={`Adresse${index}`}
-                          defaultChecked={index === 0}
+                          defaultChecked={
+                            selectedAdress === null
+                              ? index === 0
+                              : adress.laufendeAdressenId ===
+                                selectedAdress.laufendeAdressenId
+                          }
                           onChange={() => {
                             handleSelectAdress(adress);
                           }}
