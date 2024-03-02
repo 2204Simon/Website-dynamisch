@@ -81,7 +81,7 @@ function WarenkorbSeite(): JSX.Element {
   const handleRemoveItem = async (item: CartItem) => {
     try {
       await sendDeleteRequest(
-        `Warenkorb/${cookies.kundenId}/${item.produktId}`
+        `/warenkorb/${cookies.kundenId}/${item.produktId}`
       );
       dispatch(removeFromCart(item));
     } catch (error) {

@@ -1,4 +1,6 @@
 import React, { createContext, useState, useContext, ReactNode } from "react";
+import { useCookies } from "react-cookie";
+import { KUNDEN_ID } from "./global";
 
 // Schnittstelle für den globalen Zustand
 interface LoggedInState {
@@ -26,7 +28,9 @@ export const useLoggedIn = (): LoggedInState => {
 export const LoggedInProvider: React.FC<{ children?: ReactNode }> = ({
   children,
 }) => {
-  const [loggedIn, setLoggedIn] = useState<boolean>(false); // Initialer Wert für den globalen Zustand
+  const cookies = useCookies([KUNDEN_ID]);
+  const [loggedIn, setLoggedIn] = useState<boolean>(!!cookies[0][KUNDEN_ID]);
+  // const [loggedIn, setLoggedIn] = useState<boolean>(false); // Initialer Wert für den globalen Zustand
 
   // Funktion, um den globalen Zustand zu ändern
   const changeLoggedIn = (): void => {
