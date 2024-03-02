@@ -21,7 +21,7 @@ export const ThemeContext = createContext({
 
 // Step 2: Create a ThemeProvider component
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
   useEffect(() => {
     const root = document.documentElement;
 
