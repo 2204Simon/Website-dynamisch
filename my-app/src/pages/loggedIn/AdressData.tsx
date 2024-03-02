@@ -121,7 +121,7 @@ export default function AdressInformation(): JSX.Element {
   }, [dispatch, cookies.kundenId]);
 
   const handleDeactivatePayment = async (payment: PaymentData) => {
-    if (selectedPayment === payment) {
+    if (selectedPayment?.laufendeZahlungsId === payment.laufendeZahlungsId) {
       CustomToast.error(
         "Das ausgewählte Zahlungsmittel kann nicht deaktiviert werden"
       );

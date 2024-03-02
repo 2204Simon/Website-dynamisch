@@ -58,7 +58,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   maxDate.setMonth(maxDate.getMonth() + 6);
   const [selectedDate, setSelectedDate] = useState<Date>(minDate);
   const selectedPayment = useSelector(
-    (state: { payment: PaymentDataState }) => state.payment
+    (state: { payment: PaymentDataState }) => state.payment.selectedPayments
   );
 
   const handleBuyNow = () => {
@@ -90,7 +90,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
         kundenId: cookies.kundenId,
         laufendeZahlungsId:
           //Todo noch undefined noch checken!!!!!!
-          selectedPayment.selectedPayments?.laufendeZahlungsId,
+          selectedPayment?.laufendeZahlungsId,
         gewünschtesLieferdatum: selectedDate,
       };
       console.log("body", bodyForBestellung);
@@ -106,8 +106,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
     try {
       const bodyForBestellung = {
         kundenId: cookies.kundenId,
-        laufendeZahlungsId:
-          selectedPayment.selectedPayments?.laufendeZahlungsId,
+        laufendeZahlungsId: selectedPayment?.laufendeZahlungsId,
         gewünschtesLieferdatum: selectedDate,
       };
       console.log(bodyForBestellung);
@@ -244,7 +243,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
                   </a>{" "}
                 </p>
 
-                {selectedPayment.selectedPayments?.paypalEmail ? (
+                {selectedPayment?.paypalEmail ? (
                   <>
                     Kostenpflichtig Bestellen mit
                     <br />
