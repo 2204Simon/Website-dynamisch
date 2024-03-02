@@ -37,6 +37,8 @@ import {
 import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
 import { colors } from "../general/constants";
+import { useLoggedIn } from "../../globalVariables/loggedin";
+import { useNavigate } from "react-router-dom";
 
 interface ShoppingCardProps {
   produktId: string;
@@ -57,6 +59,8 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
   veggie,
   produktId,
 }) => {
+  const { loggedIn } = useLoggedIn();
+  const navigate = useNavigate();
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
   const [displayNone, setDisplayNone] = useState(false);
   const [quantity, setQuantity] = useState<number>(0);
@@ -203,11 +207,17 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
               <Plus color={colors.black} />
             </PlusQuantity>
           </Quantity>
-
-          <BlackColorButton
-            onClick={handleAddToCart}
-            caption="Zum Warenkorb hinzufügen"
-          />
+          {loggedIn ? (
+            <BlackColorButton
+              onClick={handleAddToCart}
+              caption="Zum Warenkorb hinzufügen"
+            />
+          ) : (
+            <BlackColorButton
+              onClick={() => navigate("/login")}
+              caption="Anmelden um zu bestellen"
+            />
+          )}
         </Details>
       </ContainerFront>
       <ContainerBack flipped={isFlipped} displayNone={displayNone}>
