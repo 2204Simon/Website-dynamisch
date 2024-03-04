@@ -75,9 +75,10 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
   const handleNext = () => {
     // const selectedBreadData: { [key: string]: number }[] = Object.keys(selectedBread).map(key => ({ [key]: selectedBread[key] }));
     //.map(topping => selectedBread.find(t => t.zutatsId === topping));
-
     if (selectedBread) {
       onNextStage([selectedBread]);
+    } else {
+      CustomToast.error("Bitte wählen Sie ein Brot aus");
     }
   };
 
