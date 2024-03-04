@@ -19,6 +19,7 @@ import { colors, formatNumber } from "../general/constants";
 import { CustomToast } from "../general/toast.style";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  AdressDataState,
   CartState,
   LastschriftData,
   PaymentData,
@@ -60,6 +61,9 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
   const selectedPayment = useSelector(
     (state: { payment: PaymentDataState }) => state.payment.selectedPayments
   );
+  const selectedAdress = useSelector(
+    (state: { adress: AdressDataState }) => state.adress.selectedAdress
+  );
 
   const handleBuyNow = () => {
     setShowPopup(true);
@@ -88,10 +92,9 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
     try {
       const bodyForBestellung = {
         kundenId: cookies.kundenId,
-        laufendeZahlungsId:
-          //Todo noch undefined noch checken!!!!!!
-          selectedPayment?.laufendeZahlungsId,
+        laufendeZahlungsId: selectedPayment?.laufendeZahlungsId,
         gewünschtesLieferdatum: selectedDate,
+        laufendeAdressId: selectedAdress?.laufendeAdressenId,
       };
       console.log("body", bodyForBestellung);
       await sendPostRequest(`/bestellung`, bodyForBestellung);
