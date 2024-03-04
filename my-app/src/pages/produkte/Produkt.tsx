@@ -35,6 +35,7 @@ export type Product = {
 function Produkt() {
   const isTouchpad = matchMedia("(pointer: coarse)").matches;
   const [products, setProducts] = useState<Array<Product>>([]);
+  const [customerProducts, setCustomerProducts] = useState<Array<Product>>([]);
 
   const existSparte = (sparte: string): boolean => {
     return products.some(product => product.sparte === sparte);
@@ -62,8 +63,34 @@ function Produkt() {
       setProducts([]);
     }
   };
+
+  const loadCustomnerProducts = async (): Promise<void> => {
+    try {
+      const id = "a842bab0-da48-11ee-b25c-0b61d09fdd95"; //übergangsweise hard gecoded bis zur Implementierung der KundenId aus den Cookies
+      const request = await fetch(`${baseUrl}/CustomerProducts/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      });
+      const product = await request.json();
+      if (!request.ok) throw new Error(product.message);
+      const loadedProducts = await Promise.all(
+        product.map(async (product: Product) => {
+          const image = await loadImage(product.bild);
+          return { ...product, bild: image };
+        })
+      );
+      setCustomerProducts(loadedProducts);
+    } catch (error) {
+      console.error(error);
+      setCustomerProducts([]);
+    }
+  };
+
   useEffect(() => {
     loadProducts();
+    loadCustomnerProducts();
   }, []);
 
   function zutatsname(zutaten: Array<Zutat>) {
@@ -92,6 +119,31 @@ function Produkt() {
         allergy: [],
         veggie: zutatseigenschaft(product.Zutaten),
       }));
+
+    return productsToRender.map(product => (
+      <ShoppingCard
+        produktId={product.produktId}
+        key={product.title}
+        image={product.image}
+        title={product.title}
+        price={product.price}
+        content={product.content}
+        allergy={product.allergy}
+        veggie={product.veggie}
+      />
+    ));
+  };
+
+  const ShoppingCardsCustomerProducts = () => {
+    const productsToRender = customerProducts.map((product: Product) => ({
+      produktId: product.produktId,
+      image: product.bild,
+      title: product.titel,
+      price: product.preis,
+      content: zutatsname(product.Zutaten),
+      allergy: [],
+      veggie: zutatseigenschaft(product.Zutaten),
+    }));
 
     return productsToRender.map(product => (
       <ShoppingCard
@@ -159,10 +211,10 @@ function Produkt() {
       ) : existSparte("Food") ? (
         <div
           style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            marginBottom: "auto",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))",
+            alignItems: "center",
+            margin: "auto",
           }}
         >
           {ShoppingCards("Food")}
@@ -222,16 +274,17 @@ function Produkt() {
             msOverflowStyle: "none",
           }}
         >
-          {ShoppingCards("KundenProdukt")}
+          {ShoppingCardsCustomerProducts()}
         </div>
-      ) : existSparte("KundenProdukt") ? (
-        <ScrollContainer scrollAmount={283}>
-          {ShoppingCards("KundenProdukt")}
-        </ScrollContainer>
       ) : (
+        // ) : existSparte("KundenProdukt") ? (
+        //   <ScrollContainer scrollAmount={283}>
+        //     {ShoppingCards("KundenProdukt")}
+        //   </ScrollContainer>
+        // ) : (
         <p>
-          Die Menüs konnten nicht geladen werden. Bitte wenden Sie sich an den
-          Support.
+          Die eigenen Konfiguratorprodukte konnten nicht geladen werden. Bitte
+          wenden Sie sich an den Support.
         </p>
       )}
     </>
