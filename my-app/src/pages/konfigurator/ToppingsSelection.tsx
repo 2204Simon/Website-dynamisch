@@ -56,8 +56,8 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
 
   const handleToppingSelect = (toppingID: string, quantity: number) => {
     const lclToppings = selectedToppings;
-    if (!lclToppings.some(topping => topping.id === toppingID)) {
-      lclToppings.push({ id: toppingID, quantity: quantity });
+    if (!lclToppings.some(topping => topping.zutatsId === toppingID)) {
+      lclToppings.push({ zutatsId: toppingID, zutatenMenge: quantity });
       setSelectedToppings(lclToppings);
       CustomToast.success(
         `Es wurde  ${toppingID} in der Menge von ${quantity} hinzugefügt!`

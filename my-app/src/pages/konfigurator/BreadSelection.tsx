@@ -29,11 +29,7 @@ import { ArrowForward } from "@mui/icons-material";
 import { CustomToast } from "../general/toast.style";
 import { Button } from "../general/button.styles";
 import { baseUrl } from "../../globalVariables/global";
-
-interface Ingredient {
-  id: string;
-  quantity: number;
-}
+import { Ingredient } from "./Konfigurator";
 
 interface BreadSelectionProps {
   onNextStage: (breadselection: Array<Ingredient>) => void;
@@ -67,7 +63,7 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
   }, []);
 
   const handleBreadSelect = (breadID: string) => {
-    setSelectedBread({ id: breadID, quantity: 1 });
+    setSelectedBread({ zutatsId: breadID, zutatenMenge: 1 });
   };
 
   async function loadImage(path: string): Promise<string> {
@@ -114,7 +110,7 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
                 displayNone={false}
                 key={bread.zutatsId}
                 className={
-                  selectedBread && selectedBread.id === bread.zutatsId
+                  selectedBread && selectedBread.zutatsId === bread.zutatsId
                     ? "selected"
                     : ""
                 }

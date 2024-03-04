@@ -55,8 +55,8 @@ const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
 
   const handleExtraSelect = (extraID: string, quantity: number) => {
     const lclToppings = selectedExtras;
-    if (!lclToppings.some(extras => extras.id === extraID)) {
-      lclToppings.push({ id: extraID, quantity: quantity });
+    if (!lclToppings.some(extras => extras.zutatsId === extraID)) {
+      lclToppings.push({ zutatsId: extraID, zutatenMenge: quantity });
 
       CustomToast.success(
         `Es wurde  ${extraID} in der Menge von ${quantity} hinzugefügt!`
