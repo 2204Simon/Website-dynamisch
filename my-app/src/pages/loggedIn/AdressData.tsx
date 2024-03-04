@@ -98,20 +98,20 @@ export default function AdressInformation(): JSX.Element {
         if (responsePayment.paypal) {
           const paypalData: PaypalData[] = responsePayment.paypal;
           dispatch(loadPaypal(paypalData));
-          handleSelectPayment(selectedPayment as PaymentData);
+          handleSelectPayment(responsePayment.paypal[0] as PaymentData);
         }
         if (responsePayment.lastschrift) {
           const lastschriftData: LastschriftData[] =
             responsePayment.lastschrift;
           dispatch(loadLastschrift(lastschriftData));
-          handleSelectPayment(selectedPayment as PaymentData);
+          handleSelectPayment(responsePayment.paypal[0] as PaymentData);
         }
         const responseAdress = await getRequest(
           `/adressen/${cookies.kundenId}`
         );
         console.log(responseAdress, "responseAdress");
         dispatch(loadAdressen(responseAdress));
-        handleSelectAdress(selectedAdress as AdressData);
+        handleSelectAdress(responseAdress[0] as AdressData);
       } catch (error) {
         CustomToast.error("Fehler beim Laden der Daten");
       }
@@ -230,12 +230,12 @@ export default function AdressInformation(): JSX.Element {
 
   const handleSelectAdress = (adress: AdressData) => {
     dispatch(setSelectedAdress(adress));
+    console.log(adress, "selectedadress aufgerufen");
   };
 
   const handleSelectPayment = (payment: PaymentData) => {
-    console.log(payment, "selectedpayment aufgerufen");
-
     dispatch(setSelectedPayment(payment));
+    console.log(payment, "selectedpayment aufgerufen");
   };
 
   const handleCancelAdress = () => {
