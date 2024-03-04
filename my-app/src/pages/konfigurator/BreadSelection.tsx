@@ -30,6 +30,7 @@ import { CustomToast } from "../general/toast.style";
 import { Button } from "../general/button.styles";
 import { baseUrl } from "../../globalVariables/global";
 import { Ingredient } from "./Konfigurator";
+import { BlackColorButton } from "../general/button";
 
 interface BreadSelectionProps {
   onNextStage: (breadselection: Array<Ingredient>) => void;
@@ -123,6 +124,11 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
                   <Title>{bread.zutatsname}</Title>
 
                   <Price>Preis: {bread.zutatspreis} €</Price>
+
+                  <BlackColorButton
+                    onClick={() => handleBreadSelect(bread.zutatsId)}
+                    caption="Zur Konfiguration hinzufügen"
+                  />
                 </Details>
               </ContainerFront>
             </Container>

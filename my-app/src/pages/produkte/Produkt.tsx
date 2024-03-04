@@ -41,6 +41,10 @@ function Produkt() {
     return products.some(product => product.sparte === sparte);
   };
 
+  const existCustomerProducts = (): boolean => {
+    return customerProducts.length > 0;
+  };
+
   const loadProducts = async (): Promise<void> => {
     try {
       const request = await fetch(`${baseUrl}/generalProdukts`, {
@@ -62,17 +66,21 @@ function Produkt() {
       console.error(error);
       setProducts([]);
     }
+    console.log(products);
   };
 
-  const loadCustomnerProducts = async (): Promise<void> => {
+  const loadCustomerProducts = async (): Promise<void> => {
     try {
       const id = "a842bab0-da48-11ee-b25c-0b61d09fdd95"; //übergangsweise hard gecoded bis zur Implementierung der KundenId aus den Cookies
-      const request = await fetch(`${baseUrl}/CustomerProducts/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json; charset=UTF-8",
-        },
-      });
+      const request = await fetch(
+        `${baseUrl}/CustomerProducts/a842bab0-da48-11ee-b25c-0b61d09fdd95`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json; charset=UTF-8",
+          },
+        }
+      );
       const product = await request.json();
       if (!request.ok) throw new Error(product.message);
       const loadedProducts = await Promise.all(
@@ -86,11 +94,12 @@ function Produkt() {
       console.error(error);
       setCustomerProducts([]);
     }
+    console.log(customerProducts);
   };
 
   useEffect(() => {
     loadProducts();
-    loadCustomnerProducts();
+    loadCustomerProducts();
   }, []);
 
   function zutatsname(zutaten: Array<Zutat>) {
@@ -144,7 +153,7 @@ function Produkt() {
       allergy: [],
       veggie: zutatseigenschaft(product.Zutaten),
     }));
-
+    console.log(productsToRender);
     return productsToRender.map(product => (
       <ShoppingCard
         produktId={product.produktId}
@@ -220,9 +229,6 @@ function Produkt() {
           {ShoppingCards("Food")}
         </div>
       ) : (
-        // <ScrollContainer scrollAmount={283}>
-        //   {ShoppingCards("Food")}
-        // </ScrollContainer>
         <p>
           Die Speisen konnten nicht geladen werden. Bitte wenden Sie sich an den
           Support.
@@ -254,16 +260,13 @@ function Produkt() {
           {ShoppingCards("Drink")}
         </div>
       ) : (
-        // <ScrollContainer scrollAmount={283}>
-        //   {ShoppingCards("Drink")}
-        // </ScrollContainer>
         <p>
           Die Getränke konnten nicht geladen werden. Bitte wenden Sie sich an
           den Support.
         </p>
       )}
 
-      <h3>eigene Produkte TEST</h3>
+      <h3>Konfigurierte Produkte</h3>
       {isTouchpad ? (
         <div
           style={{
@@ -276,12 +279,18 @@ function Produkt() {
         >
           {ShoppingCardsCustomerProducts()}
         </div>
+      ) : existCustomerProducts() ? (
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))",
+            alignItems: "center",
+            margin: "auto",
+          }}
+        >
+          {ShoppingCardsCustomerProducts()}
+        </div>
       ) : (
-        // ) : existSparte("KundenProdukt") ? (
-        //   <ScrollContainer scrollAmount={283}>
-        //     {ShoppingCards("KundenProdukt")}
-        //   </ScrollContainer>
-        // ) : (
         <p>
           Die eigenen Konfiguratorprodukte konnten nicht geladen werden. Bitte
           wenden Sie sich an den Support.

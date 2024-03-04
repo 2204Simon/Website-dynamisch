@@ -55,13 +55,19 @@ const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
 
   const handleExtraSelect = (extraID: string, quantity: number) => {
     const lclToppings = selectedExtras;
-    if (!lclToppings.some(extras => extras.zutatsId === extraID)) {
+    //if (!lclToppings.some(extras => extras.zutatsId === extraID)) {
+    if (quantity > 0) {
       lclToppings.push({ zutatsId: extraID, zutatenMenge: quantity });
 
       CustomToast.success(
         `Es wurde  ${extraID} in der Menge von ${quantity} hinzugefügt!`
       );
-      setSelectedExtras(selectedExtras);
+      //setSelectedExtras(selectedExtras); //warum selectedExtras???
+      setSelectedExtras(lclToppings);
+    } else {
+      CustomToast.error(
+        `Du musst mindestens eine Menge von 1 Einheit auswählen!`
+      );
     }
   };
 

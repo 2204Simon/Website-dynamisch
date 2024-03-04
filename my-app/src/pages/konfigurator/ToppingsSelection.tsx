@@ -54,13 +54,20 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
     return image.default; //Wegen ES6 mit default
   }
 
-  const handleToppingSelect = (toppingID: string, quantity: number) => {
+  const handleToppingSelect = (toppingId: string, quantity: number) => {
     const lclToppings = selectedToppings;
-    if (!lclToppings.some(topping => topping.zutatsId === toppingID)) {
-      lclToppings.push({ zutatsId: toppingID, zutatenMenge: quantity });
-      setSelectedToppings(lclToppings);
+    //if (!lclToppings.some(topping => topping.zutatsId === toppingID))
+
+    if (quantity > 0) {
+      lclToppings.push({ zutatsId: toppingId, zutatenMenge: quantity });
+
       CustomToast.success(
-        `Es wurde  ${toppingID} in der Menge von ${quantity} hinzugefügt!`
+        `Es wurde  ${toppingId} in der Menge von ${quantity} hinzugefügt!`
+      );
+      setSelectedToppings(lclToppings);
+    } else {
+      CustomToast.error(
+        `Du musst mindestens eine Menge von 1 Einheit auswählen!`
       );
     }
   };
