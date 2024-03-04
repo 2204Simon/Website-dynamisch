@@ -484,7 +484,7 @@ export default function AdressInformation(): JSX.Element {
               /> */}
       <Container>
         <Card>
-          <Title>Zahlungsmöglichkeiten: </Title>
+          <Title>Zahlungsmöglichkeiten </Title>
           <Grid container justifyContent={"center"}>
             <Grid item xs={12} sm={showPaymentFields ? 6 : 12}>
               <ScrollableContainer>

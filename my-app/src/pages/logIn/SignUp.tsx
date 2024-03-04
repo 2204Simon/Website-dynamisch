@@ -411,8 +411,8 @@ export default function SignUp() {
                   }}
                 />
               </Grid>
+              <Title>Zahlungsmöglichkeiten </Title>
               <Grid item xs={12}>
-                <Title>Zahlungsmöglichkeiten: </Title>
                 <FormControl component="fieldset">
                   <FormGroup>
                     <Title>
