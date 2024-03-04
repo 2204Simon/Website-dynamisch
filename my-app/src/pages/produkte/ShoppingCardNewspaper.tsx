@@ -86,6 +86,7 @@ const NewspaperBanner: React.FC<ShoppingCardProps> = ({
     }
     currentDate.setHours(0, 0, 0, 0); //Zeit reseten, damit sauber dazugezählt wird
     const futureDate = new Date();
+    futureDate.setHours(0, 0, 0, 0);
     futureDate.setFullYear(currentDate.getFullYear()); //Jahr auf current Jahr setzen, damit keine - Tage entstehen
     futureDate.setMonth(currentDate.getMonth() + months);
     const timeDifference = futureDate.getTime() - currentDate.getTime();
