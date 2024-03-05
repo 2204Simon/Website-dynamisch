@@ -9,7 +9,7 @@ import {
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { Button } from "../general/button.styles";
 import { baseUrl } from "../../globalVariables/global";
-import { Ingredient, KonfiguratorCardProps } from "./Konfigurator";
+import { Ingredient } from "./Konfigurator";
 import KonfiguratorCard from "./KonfiguratorCard";
 import { CustomToast } from "../general/toast.style";
 
@@ -53,16 +53,22 @@ const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
     return image.default; //Wegen ES6 mit default
   }
 
-  const handleExtraSelect = (extraID: string, quantity: number) => {
+  const handleExtraSelect = (topping: any, quantity: number) => {
     const lclToppings = selectedExtras;
-    //if (!lclToppings.some(extras => extras.zutatsId === extraID)) {
     if (quantity > 0) {
-      lclToppings.push({ zutatsId: extraID, zutatenMenge: quantity });
+      lclToppings.push({
+        zutatsId: topping.zutatsId,
+        zutatBild: topping.zutatBild,
+        zutatsname: topping.zutatsname,
+        zutatspreis: topping.zutatspreis,
+        zutatseinheit: topping.zutatseinheit,
+        zutatsmenge: quantity,
+      });
 
       CustomToast.success(
-        `Es wurde  ${extraID} in der Menge von ${quantity} hinzugefügt!`
+        `Es wurde  ${topping.zutatsId} in der Menge von ${quantity} hinzugefügt!`
       );
-      //setSelectedExtras(selectedExtras); //warum selectedExtras???
+      console.log(lclToppings);
       setSelectedExtras(lclToppings);
     } else {
       CustomToast.error(
@@ -80,24 +86,8 @@ const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
   };
 
   const KonfiguratorCards = () => {
-    const productsToRender = extras.map((product: KonfiguratorCardProps) => ({
-      produktId: product.zutatsId,
-      image: product.zutatBild,
-      title: product.zutatsname,
-      price: product.zutatspreis,
-      type: product.zutatseinheit,
-    }));
-
-    return productsToRender.map(product => (
-      <KonfiguratorCard
-        produktId={product.produktId}
-        key={product.title}
-        image={product.image}
-        title={product.title}
-        price={product.price}
-        type={product.type}
-        handleSelect={handleExtraSelect}
-      />
+    return extras.map(product => (
+      <KonfiguratorCard topping={product} handleSelect={handleExtraSelect} />
     ));
   };
 

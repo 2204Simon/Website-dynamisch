@@ -3,7 +3,10 @@ import React, { useState } from "react";
 import BreadSelection from "./BreadSelection";
 import ToppingsSelection from "./ToppingsSelection";
 import ExtraSelection from "./ExtrasSelection";
-import { NavigationIcon } from "./styles/Konfigurator.styles";
+import {
+  NavigationIcon,
+  SelectionContainer,
+} from "./styles/Konfigurator.styles";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { useLoggedIn } from "../../globalVariables/loggedin";
 import { useNavigate } from "react-router-dom";
@@ -14,11 +17,6 @@ import { sendPostRequest } from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
 
 export interface Ingredient {
-  zutatsId: string;
-  zutatenMenge: number;
-}
-
-export interface KonfiguratorCardProps {
   zutatsId: string;
   zutatBild: string;
   zutatsname: string;
@@ -35,7 +33,7 @@ const Konfigurator: React.FC = () => {
   );
   const [cookies] = useCookies(["kundenId"]);
   const [selectedExtras, setSelectedExtras] = useState<Array<Ingredient>>([]);
-  const [bread, setbread] = useState<KonfiguratorCardProps>({
+  const [bread, setbread] = useState<Ingredient>({
     zutatsId: "",
     zutatBild: "",
     zutatsname: "",
@@ -45,7 +43,7 @@ const Konfigurator: React.FC = () => {
   }); // Hier speichern wir die vom Server geholten Toppings
   const [allIngredients, setallIngredients] = useState<Array<Ingredient>>([]);
   const [allDisplayedIngredients, setallDisplayedIngredients] = useState<
-    Array<KonfiguratorCardProps>
+    Array<Ingredient>
   >([]);
   const [productName, setProductName] = useState("");
   const { loggedIn } = useLoggedIn();
@@ -62,12 +60,6 @@ const Konfigurator: React.FC = () => {
         break;
       case 3:
         setSelectedExtras(selectedProduct);
-        // const allIngredients = selectedBread.concat(
-        //   selectedExtras,
-        //   selectedToppings
-        // );
-        // setallDisplayedIngredients(allIngredients);
-
         break;
       default:
         break;
@@ -142,7 +134,22 @@ const Konfigurator: React.FC = () => {
 
   return (
     <div>
-      {currentStage === 1 && <BreadSelection onNextStage={handleNextStage} />}
+      {currentStage === 1 && loggedIn && (
+        <BreadSelection onNextStage={handleNextStage} />
+      )}
+      {!loggedIn && (
+        <div>
+          <h1>
+            Du musst dich anmelden, um dein perfektes Frühstück zu bestellen!
+          </h1>
+          <Button
+            className="black-color white-orange"
+            onClick={() => navigate("/LogIn")}
+          >
+            Zur Anmeldung
+          </Button>
+        </div>
+      )}
       {currentStage === 2 && (
         <ToppingsSelection
           onNextStage={handleNextStage}
@@ -161,50 +168,36 @@ const Konfigurator: React.FC = () => {
             <ArrowBack />
           </NavigationIcon>
           <h2>Zusammenfassung</h2>
-          <h1>Bread</h1>
-          {selectedBread.map(item => {
-            return (
-              <div>
-                <p>id: {item.zutatsId}</p>
-                <p>Menge: {item.zutatenMenge}</p>
-              </div>
-            );
-          })}
-          <h1>Topping</h1>
+          <h3>Das ist Deine fertige Konfiguration:</h3>
+          <SelectionContainer>
+            {selectedBread &&
+              selectedBread.map(item => {
+                return ReviewCard(item);
+              })}
+            {selectedToppings &&
+              selectedToppings.map(item => {
+                return ReviewCard(item);
+              })}
 
-          {selectedToppings.map(item => {
-            return (
-              <div>
-                <p>id: {item.zutatsId}</p>
-                <p>Menge: {item.zutatenMenge}</p>
-              </div>
-            );
-          })}
-          <h1>Extra</h1>
+            {/* {selectedToppings &&
+            selectedExtras.map(item => {
+              return (
+                <>
+                  <p> Bild: {item.zutatBild} </p>
+                  <p> Produktname: {item.zutatsname}</p>
+                  <p> Preis: {item.zutatspreis} €</p>
+                  <p> Einheit: {item.zutatseinheit}</p>
+                  <p> Menge: {item.zutatsmenge}</p>
+                </>
+              );
+            })} */}
 
-          {selectedExtras.map(item => {
-            return (
-              <div>
-                <p>id: {item.zutatsId}</p>
-                <p>Menge: {item.zutatenMenge}</p>
-              </div>
-            );
-          })}
+            {selectedExtras &&
+              selectedExtras.map(item => {
+                return ReviewCard(item);
+              })}
+          </SelectionContainer>
 
-          {/* {!loggedIn && (
-            <div>
-              <h1>
-                Du musst dich anmelden, um dein perfektes Frühstück zu
-                bestellen!
-              </h1>
-              <Button
-                className="black-color white-orange"
-                onClick={() => navigate("/LogIn")}
-              >
-                Zur Anmeldung
-              </Button>
-            </div>
-          )} loggedIn &&*/}
           {currentStage === 4 && (
             <div>
               {/* <Button
@@ -213,20 +206,25 @@ const Konfigurator: React.FC = () => {
               >
                 Auswahl laden
               </Button> */}
-              <label htmlFor="productName">Produktname:</label>
-              <input
-                type="string"
-                id="productName"
-                name="productName"
-                value={productName}
-                onChange={event => setProductName(event.target.value)}
-              />
-              <Button
-                className="black-color white-orange"
-                onClick={() => addPersonalizedProduct(productName)}
-              >
-                Produkt speichern
-              </Button>
+              <div>
+                <label htmlFor="productName">Produktname:</label>
+
+                <input
+                  type="string"
+                  id="productName"
+                  name="productName"
+                  value={productName}
+                  onChange={event => setProductName(event.target.value)}
+                />
+              </div>
+              <NavigationIcon>
+                <Button
+                  className="black-color white-orange"
+                  onClick={() => addPersonalizedProduct(productName)}
+                >
+                  Produkt speichern
+                </Button>
+              </NavigationIcon>
             </div>
           )}
         </div>

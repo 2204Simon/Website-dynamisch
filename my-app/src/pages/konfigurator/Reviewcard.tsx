@@ -2,15 +2,6 @@ import React, { useState, ChangeEvent, useRef } from "react";
 import { useDispatch } from "react-redux"; // Import der useDispatch-Hook
 // Import der addToCart-Action aus deiner Redux-Komponente
 
-import { BlackColorButton } from "../general/button";
-import "react-toastify/dist/ReactToastify.css";
-import { CustomToast } from "../general/toast.style";
-
-import { CartItem, CartState } from "../../redux/types";
-import { Plus, XCircle, Minus } from "phosphor-react";
-import { FaSeedling } from "react-icons/fa";
-import { useSelector } from "react-redux";
-import { formatNumber } from "../general/constants";
 import {
   Container,
   Details,
@@ -21,41 +12,20 @@ import {
   Image,
   ContainerFront,
 } from "../produkte/styles/ShoppingCard.styles";
+import { Ingredient } from "./Konfigurator";
 
-export interface ShoppingCardProps {
-  produktId: string;
-  image: string;
-  title: string;
-  price: number;
-  quantity: number;
-  type: string;
-}
-
-const Reviewcard: React.FC<ShoppingCardProps> = ({
-  image,
-  title,
-  price,
-  produktId,
-  quantity,
-  type,
-}) => {
-  const [displayNone, setDisplayNone] = useState(false);
-
-  const cartItems = useSelector(
-    (state: { cart: CartState }) => state.cart.cartItems
-  );
-
+const Reviewcard: React.FC<Ingredient> = (topping: Ingredient) => {
   return (
     <Container flipped={false}>
-      <ContainerFront flipped={false} displayNone={displayNone}>
+      <ContainerFront flipped={false} displayNone={false}>
         <ImageContainer>
-          <Image src={image} alt="product" />
+          <Image src={topping.zutatBild} alt="product" />
         </ImageContainer>
         <Details>
-          <Title style={{ paddingLeft: "0px" }}>{title}</Title>
-          <Price>Preis: {formatNumber(price)} €</Price>
-          <Type>Einheit: {type}</Type>
-          <Type>Menge: {quantity}</Type>
+          <Title style={{ paddingLeft: "0px" }}>{topping.zutatsname}</Title>
+          <Price>Preis: {topping.zutatspreis} €</Price>
+          <Type>Einheit: {topping.zutatseinheit}</Type>
+          <Type>Menge: {topping.zutatsmenge}</Type>
         </Details>
       </ContainerFront>
     </Container>

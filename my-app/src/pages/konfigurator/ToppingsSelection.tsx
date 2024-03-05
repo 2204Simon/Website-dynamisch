@@ -10,7 +10,7 @@ import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { Button } from "../general/button.styles";
 import { baseUrl } from "../../globalVariables/global";
 import KonfiguratorCard from "./KonfiguratorCard";
-import { Ingredient, KonfiguratorCardProps } from "./Konfigurator";
+import { Ingredient } from "./Konfigurator";
 import { CustomToast } from "../general/toast.style";
 
 interface ToppingsSelectionProps {
@@ -25,7 +25,7 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
   const [selectedToppings, setSelectedToppings] = useState<Array<Ingredient>>(
     []
   );
-  const [toppings, setToppings] = useState<Array<KonfiguratorCardProps>>([]); // Hier speichern wir die vom Server geholten Toppings
+  const [toppings, setToppings] = useState<Array<Ingredient>>([]); // Hier speichern wir die vom Server geholten Toppings
 
   useEffect(() => {
     fetch(`${baseUrl}/zutat/Topping`)
@@ -54,15 +54,21 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
     return image.default; //Wegen ES6 mit default
   }
 
-  const handleToppingSelect = (toppingId: string, quantity: number) => {
+  function handleSelect(topping: Ingredient, quantity: number) {
     const lclToppings = selectedToppings;
-    //if (!lclToppings.some(topping => topping.zutatsId === toppingID))
 
     if (quantity > 0) {
-      lclToppings.push({ zutatsId: toppingId, zutatenMenge: quantity });
+      lclToppings.push({
+        zutatsId: topping.zutatsId,
+        zutatBild: topping.zutatBild,
+        zutatsname: topping.zutatsname,
+        zutatspreis: topping.zutatspreis,
+        zutatseinheit: topping.zutatseinheit,
+        zutatsmenge: quantity,
+      });
 
       CustomToast.success(
-        `Es wurde  ${toppingId} in der Menge von ${quantity} hinzugefügt!`
+        `Es wurde  ${topping.zutatsId} in der Menge von ${quantity} hinzugefügt!`
       );
       setSelectedToppings(lclToppings);
     } else {
@@ -70,7 +76,7 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
         `Du musst mindestens eine Menge von 1 Einheit auswählen!`
       );
     }
-  };
+  }
 
   const handlePrev = () => {
     onPrevStage();
@@ -81,24 +87,8 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
   };
 
   const KonfiguratorCards = () => {
-    const productsToRender = toppings.map((product: KonfiguratorCardProps) => ({
-      produktId: product.zutatsId,
-      image: product.zutatBild,
-      title: product.zutatsname,
-      price: product.zutatspreis,
-      type: product.zutatseinheit,
-    }));
-
-    return productsToRender.map(product => (
-      <KonfiguratorCard
-        produktId={product.produktId}
-        key={product.title}
-        image={product.image}
-        title={product.title}
-        price={product.price}
-        type={product.type}
-        handleSelect={handleToppingSelect}
-      />
+    return toppings.map(product => (
+      <KonfiguratorCard topping={product} handleSelect={handleSelect} />
     ));
   };
 

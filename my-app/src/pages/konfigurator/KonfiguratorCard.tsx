@@ -1,21 +1,12 @@
 import React, { useState, ChangeEvent, useRef } from "react";
 import { useDispatch } from "react-redux"; // Import der useDispatch-Hook
 // Import der addToCart-Action aus deiner Redux-Komponente
-
 import { BlackColorButton } from "../general/button";
 import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
-
-import { CartItem, CartState } from "../../redux/types";
-import { Plus, XCircle, Minus } from "phosphor-react";
-import { FaSeedling } from "react-icons/fa";
+import { CartState } from "../../redux/types";
+import { Plus, Minus } from "phosphor-react";
 import { useSelector } from "react-redux";
-import { formatNumber } from "../general/constants";
-import { addToCart, increaseQuantity } from "../../redux/cartReducer";
-import {
-  sendPostRequest,
-  sendPutRequest,
-} from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
 import { colors } from "../general/constants";
@@ -33,24 +24,20 @@ import {
   MinusQuantity,
   ContainerFront,
 } from "../produkte/styles/ShoppingCard.styles";
+import { Ingredient } from "./Konfigurator";
 
 export interface ShoppingCardProps {
-  produktId: string;
-  image: string;
-  title: string;
-  price: number;
-  type: string;
+  // produktId: string;
+  // image: string;
+  // title: string;
+  // price: number;
+  // type: string;
+  // handleSelect: Function;
+  topping: Ingredient;
   handleSelect: Function;
 }
 
-const ShoppingCard: React.FC<ShoppingCardProps> = ({
-  image,
-  title,
-  price,
-  produktId,
-  type,
-  handleSelect,
-}) => {
+const ShoppingCard: React.FC<ShoppingCardProps> = input => {
   const [displayNone, setDisplayNone] = useState(false);
   const [quantity, setQuantity] = useState<number>(0);
   const dispatch = useDispatch(); // Initialisierung der useDispatch-Hook
@@ -75,32 +62,6 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
     }
   };
 
-  const addProduct = async (quantity2: number) => {
-    const item: CartItem = {
-      produktId: produktId,
-      titel: title,
-      bild: image,
-      preis: price,
-      anzahl: quantity,
-    };
-    try {
-      const itemObjekt = {
-        produktId: item.produktId,
-        produktMenge: item.anzahl,
-        kundenId: cookie.kundenId,
-      };
-      console.log(itemObjekt);
-      const addedProdukt = await sendPutRequest("/warenkorb", itemObjekt);
-      const amount = item.anzahl;
-      dispatch(increaseQuantity({ item, amount: quantity2 })); // Dispatch der addToCart-Action mit dem erstellten Item
-    } catch (error) {
-      CustomToast.error("Fehler hinzufügen (Serververbindung))");
-    }
-    dispatch(increaseQuantity({ item, amount: quantity2 }));
-    CustomToast.success(`Es wurde  ${quantity} ${title} hinzugefügt!`);
-    setQuantity(0);
-  };
-
   const handlePlus = (quantity: number) => {
     quantity += 1;
     if (quantity === 6) {
@@ -118,16 +79,23 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
     }
   };
 
+  const handleButtonClick = () => {
+    input.handleSelect(input.topping, quantity);
+    setQuantity(0);
+  };
+
   return (
     <Container flipped={false}>
       <ContainerFront flipped={false} displayNone={displayNone}>
         <ImageContainer>
-          <Image src={image} alt="product" />
+          <Image src={input.topping.zutatBild} alt="product" />
         </ImageContainer>
         <Details>
-          <Title style={{ paddingLeft: "0px" }}>{title}</Title>
-          <Price>Preis: {formatNumber(price)} €</Price>
-          <Type>Einheit: {type}</Type>
+          <Title style={{ paddingLeft: "0px" }}>
+            {input.topping.zutatsname}
+          </Title>
+          <Price>Preis: {input.topping.zutatspreis} €</Price>
+          <Type>Einheit: {input.topping.zutatseinheit}</Type>
 
           <Quantity>
             <MinusQuantity onClick={() => handleMinus(quantity)}>
@@ -148,7 +116,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
           </Quantity>
 
           <BlackColorButton
-            onClick={() => handleSelect(produktId, quantity)}
+            onClick={() => handleButtonClick()}
             caption="Zur Konfiguration hinzufügen"
           />
         </Details>

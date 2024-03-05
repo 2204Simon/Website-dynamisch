@@ -3,27 +3,15 @@ import React, { useState, useEffect } from "react";
 import {
   Stage,
   StageHeader,
-  ProductImage,
   SelectionContainer,
-  SelectionList,
-  SelectionItem,
   NavigationIcon,
   Container,
   Details,
   ImageContainer,
   Price,
-  Quantity,
-  QuantityInput,
   Title,
   Image,
-  PlusQuantity,
-  MinusQuantity,
-  ContainerBack,
   ContainerFront,
-  Title2,
-  Top,
-  MiniH,
-  ListContainer,
 } from "./styles/Konfigurator.styles";
 import { ArrowForward } from "@mui/icons-material";
 import { CustomToast } from "../general/toast.style";
@@ -63,18 +51,23 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
       });
   }, []);
 
-  const handleBreadSelect = (breadID: string) => {
-    setSelectedBread({ zutatsId: breadID, zutatenMenge: 1 });
-  };
-
   async function loadImage(path: string): Promise<string> {
     const image = await import(`../../img/Ingredients/Breads/${path}`);
     return image.default; //Wegen ES6 mit default
   }
 
+  const handleBreadSelect = (topping: any) => {
+    setSelectedBread({
+      zutatsId: topping.zutatsId,
+      zutatBild: topping.zutatBild,
+      zutatsname: topping.zutatsname,
+      zutatspreis: topping.zutatspreis,
+      zutatseinheit: topping.zutatseinheit,
+      zutatsmenge: 1,
+    });
+  };
+
   const handleNext = () => {
-    // const selectedBreadData: { [key: string]: number }[] = Object.keys(selectedBread).map(key => ({ [key]: selectedBread[key] }));
-    //.map(topping => selectedBread.find(t => t.zutatsId === topping));
     if (selectedBread) {
       onNextStage([selectedBread]);
     } else {
@@ -116,7 +109,7 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
                     ? "selected"
                     : ""
                 }
-                onClick={() => handleBreadSelect(bread.zutatsId)}
+                onClick={() => handleBreadSelect(bread)}
               >
                 <ImageContainer>
                   <Image src={bread.zutatBild} alt={bread.zutatsname} />
@@ -127,7 +120,7 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
                   <Price>Preis: {bread.zutatspreis} €</Price>
 
                   <BlackColorButton
-                    onClick={() => handleBreadSelect(bread.zutatsId)}
+                    onClick={() => handleBreadSelect(bread)}
                     caption="Zur Konfiguration hinzufügen"
                   />
                 </Details>
@@ -145,64 +138,5 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
     </Stage>
   );
 };
-
-/*
-
-
-    /{selectedBread && (
-        <div>
-          <p>Ausgewähltes Produkt: {selectedBread}</p>
-          <p>Bestätige die Auswahl mit dem Vorwärtspfeil</p>
-        </div>
-      )}
-
-
-
-return (
-    <Stage>
-      <StageHeader>
-        Wähle dein Brot
-        <NavigationIcon onClick={handleNext}>
-          <ArrowForward />
-        </NavigationIcon>
-      </StageHeader>
-      <SelectionContainer>
-        <SelectionList>
-          {breads.map(
-            (
-              bread // Anzeigen der Brote aus dem State
-            ) => (
-              console.log(bread),
-              (
-                <SelectionItem
-                  key={bread.zutatsId}
-                  className={
-                    selectedBread === bread.zutatsname ? "selected" : ""
-                  }
-                  onClick={() =>
-                    handleBreadSelect(bread.zutatsname, bread.zutatBild)
-                  }
-                >
-                  <ImageContainer>
-                    <Image src={bread.zutatBild} alt={bread.zutatsname} />
-                  </ImageContainer> 
-                  {bread.zutatsname} <br />
-                  {bread.zutatspreis} €{} <br />
-                  {bread.zutatsID}
-                </SelectionItem>
-              )
-            )
-          )}
-        </SelectionList>
-      </SelectionContainer>
-      {selectedBread && (
-        <div>
-          <p>Ausgewähltes Produkt: {selectedBread}</p>
-          <p>Bestätige die Auswahl mit dem Vorwärtspfeil</p>
-        </div>
-      )}
-    </Stage>
-  );
-};*/
 
 export default BreadSelection;
