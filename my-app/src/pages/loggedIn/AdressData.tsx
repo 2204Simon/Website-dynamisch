@@ -98,13 +98,15 @@ export default function AdressInformation(): JSX.Element {
         if (responsePayment.paypal) {
           const paypalData: PaypalData[] = responsePayment.paypal;
           dispatch(loadPaypal(paypalData));
+          dispatch(setSelectedPayment(responsePayment.paypal[0]));
           handleSelectPayment(responsePayment.paypal[0] as PaymentData);
         }
         if (responsePayment.lastschrift) {
           const lastschriftData: LastschriftData[] =
             responsePayment.lastschrift;
           dispatch(loadLastschrift(lastschriftData));
-          handleSelectPayment(responsePayment.paypal[0] as PaymentData);
+          dispatch(setSelectedPayment(responsePayment.lastschrift[0]));
+          handleSelectPayment(responsePayment.lastschrift[0] as PaymentData);
         }
         const responseAdress = await getRequest(
           `/adressen/${cookies.kundenId}`
