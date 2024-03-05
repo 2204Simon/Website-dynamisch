@@ -22,6 +22,8 @@ import {
 import { addToCart, increaseQuantity } from "../../redux/cartReducer";
 import PickDay from "./PickDay";
 import AboDurationCalculator from "./AboDurationCalculater";
+import { useLoggedIn } from "../../globalVariables/loggedin";
+import { useNavigate } from "react-router-dom";
 
 interface ShoppingCardProps {
   image: string;
@@ -39,6 +41,8 @@ const NewspaperBanner: React.FC<ShoppingCardProps> = ({
   produktId,
 }) => {
   const [aboEndDate, setAboEndDate] = useState<string>("");
+  const { loggedIn } = useLoggedIn();
+  const navigate = useNavigate();
   const [quantity, setQuantity] = useState<number>(0);
   const minDate = new Date();
   minDate.setDate(minDate.getDate() + 1);
@@ -178,10 +182,17 @@ const NewspaperBanner: React.FC<ShoppingCardProps> = ({
           </p>
         </BannerContent>
         <BannerRight>
-          <BlackColorButton
-            onClick={handleAddToCart}
-            caption="Zum Warenkorb hinzufügen"
-          />
+          {loggedIn ? (
+            <BlackColorButton
+              onClick={handleAddToCart}
+              caption="Zum Warenkorb hinzufügen"
+            />
+          ) : (
+            <BlackColorButton
+              onClick={() => navigate("/login")}
+              caption="Anmelden um zu bestellen"
+            />
+          )}
         </BannerRight>
       </BannerContainer>
     </>

@@ -100,7 +100,6 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
         produktMenge: item.anzahl,
         kundenId: cookie.kundenId,
       };
-      console.log(itemObjekt);
       const addedProdukt = await sendPutRequest("/warenkorb", itemObjekt);
       const amount = item.anzahl;
       dispatch(increaseQuantity({ item, amount: quantity2 })); // Dispatch der addToCart-Action mit dem erstellten Item
