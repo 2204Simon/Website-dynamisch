@@ -48,7 +48,6 @@ const Konfigurator: React.FC = () => {
     Array<KonfiguratorCardProps>
   >([]);
   const [productName, setProductName] = useState("");
-  const [cookied, useCookie] = useState(false); //TODO-Jonas: Cookie-Handling für KundenId
   const { loggedIn } = useLoggedIn();
   const navigate = useNavigate();
   const handleNextStage = (selectedProduct: Array<Ingredient>) => {
