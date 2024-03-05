@@ -11,6 +11,7 @@ import { Button } from "../general/button.styles";
 import { baseUrl } from "../../globalVariables/global";
 import ReviewCard from "./Reviewcard";
 import { sendPostRequest } from "../../serverFunctions/generelAPICalls";
+import { useCookies } from "react-cookie";
 
 export interface Ingredient {
   zutatsId: string;
@@ -32,6 +33,7 @@ const Konfigurator: React.FC = () => {
   const [selectedToppings, setSelectedToppings] = useState<Array<Ingredient>>(
     []
   );
+  const [cookies] = useCookies(["kundenId"]);
   const [selectedExtras, setSelectedExtras] = useState<Array<Ingredient>>([]);
   const [bread, setbread] = useState<KonfiguratorCardProps>({
     zutatsId: "",
@@ -132,7 +134,7 @@ const Konfigurator: React.FC = () => {
     );
     const itemObjekt = {
       titel: productName,
-      kundenId: "a842bab0-da48-11ee-b25c-0b61d09fdd95",
+      kundenId: cookies.kundenId,
       zutat: allIngredients,
     };
     console.log(itemObjekt);
