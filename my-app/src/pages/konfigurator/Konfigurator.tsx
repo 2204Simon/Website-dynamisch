@@ -6,6 +6,8 @@ import ExtraSelection from "./ExtrasSelection";
 import {
   NavigationIcon,
   SelectionContainer,
+  Stage,
+  StageHeader,
 } from "./styles/Konfigurator.styles";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { useLoggedIn } from "../../globalVariables/loggedin";
@@ -15,6 +17,10 @@ import { baseUrl } from "../../globalVariables/global";
 import ReviewCard from "./Reviewcard";
 import { sendPostRequest } from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
+import TextField from "@mui/material/TextField";
+import { colors } from "../general/constants";
+import FormLabel from "@mui/material/FormLabel";
+import { FormInput } from "../kontakt/styles/Kontakt.styles";
 
 export interface Ingredient {
   zutatsId: string;
@@ -33,18 +39,6 @@ const Konfigurator: React.FC = () => {
   );
   const [cookies] = useCookies(["kundenId"]);
   const [selectedExtras, setSelectedExtras] = useState<Array<Ingredient>>([]);
-  const [bread, setbread] = useState<Ingredient>({
-    zutatsId: "",
-    zutatBild: "",
-    zutatsname: "",
-    zutatspreis: 0,
-    zutatseinheit: "",
-    zutatsmenge: 0,
-  }); // Hier speichern wir die vom Server geholten Toppings
-  const [allIngredients, setallIngredients] = useState<Array<Ingredient>>([]);
-  const [allDisplayedIngredients, setallDisplayedIngredients] = useState<
-    Array<Ingredient>
-  >([]);
   const [productName, setProductName] = useState("");
   const { loggedIn } = useLoggedIn();
   const navigate = useNavigate();
@@ -70,37 +64,6 @@ const Konfigurator: React.FC = () => {
     setCurrentStage(currentStage - 1);
   };
 
-  // const loadAllSelectedIngredients = (id: string) => {
-
-  //   fetch(`${baseUrl}/ZutatById/${id}`)
-  //     .then(response => response.json())
-  //     .then(zutat =>
-  //       loadImage(zutat.zutatBild, zutat.zutatensparte).then(image => ({
-  //         ...zutat,
-  //         zutatBild: image,
-  //       }))
-  //     )
-  //     .then(zutat => ({
-  //       ...zutat,
-  //       zutatsMenge: zutat.zutatenMenge,
-  //     }))
-
-  //     .then(zutat => {
-  //       setallDisplayedIngredients(zutat);
-  //     });
-
-  //     .then(zutat => { return (
-  //       <ReviewCard
-  //         produktId={zutat.zutatsId}
-  //         key={item.zutatsId}
-  //         image={item.zutatBild}
-  //         title={item.zutatsname}
-  //         price={item.zutatspreis}
-  //         type={item.zutatseinheit}
-  //         quantity={item.zutatsmenge}
-  //       />
-  //     ); });
-  // };
   async function loadImage(path: string, zutatensparte: string) {
     let sparte = "";
     switch (zutatensparte) {
@@ -123,6 +86,9 @@ const Konfigurator: React.FC = () => {
       selectedExtras,
       selectedToppings
     );
+
+    //Umformatierung Zutatenformat!
+
     const itemObjekt = {
       titel: productName,
       kundenId: cookies.kundenId,
@@ -164,22 +130,66 @@ const Konfigurator: React.FC = () => {
       )}
       {currentStage === 4 && (
         <div>
-          <NavigationIcon onClick={handlePrevStage}>
-            <ArrowBack />
-          </NavigationIcon>
-          <h2>Zusammenfassung</h2>
-          <h3>Das ist Deine fertige Konfiguration:</h3>
-          <SelectionContainer>
-            {selectedBread &&
-              selectedBread.map(item => {
-                return ReviewCard(item);
-              })}
-            {selectedToppings &&
-              selectedToppings.map(item => {
-                return ReviewCard(item);
-              })}
+          <Stage>
+            <StageHeader>
+              <NavigationIcon onClick={handlePrevStage}>
+                <ArrowBack />
+              </NavigationIcon>
+              Konfiguration
+            </StageHeader>
+            <h3>Das ist Deine fertige Konfiguration:</h3>
+            <SelectionContainer>
+              {selectedBread &&
+                selectedBread.map(item => {
+                  return ReviewCard(item);
+                })}
+              {selectedToppings &&
+                selectedToppings.map(item => {
+                  return ReviewCard(item);
+                })}
 
-            {/* {selectedToppings &&
+              {selectedExtras &&
+                selectedExtras.map(item => {
+                  return ReviewCard(item);
+                })}
+            </SelectionContainer>
+
+            <div>
+              <p>
+                Gib Deiner Konfiguration einen Namen, sodass Du diese unter
+                Deinen persönlichen Proukten sowie im Warenkorb wieder findest.
+              </p>
+              <FormLabel>
+                Name der Konfiguration:
+                <FormInput
+                  type="email"
+                  value={productName}
+                  onChange={event => setProductName(event.target.value)}
+                  maxLength={50}
+                  required
+                />
+              </FormLabel>
+              <NavigationIcon>
+                <Button
+                  className="black-color white-orange"
+                  onClick={() => addPersonalizedProduct(productName)}
+                >
+                  Produkt speichern
+                </Button>
+              </NavigationIcon>
+            </div>
+          </Stage>
+        </div>
+      )}
+      ;
+    </div>
+  );
+};
+
+export default Konfigurator;
+
+{
+  /* {selectedToppings &&
             selectedExtras.map(item => {
               return (
                 <>
@@ -190,48 +200,5 @@ const Konfigurator: React.FC = () => {
                   <p> Menge: {item.zutatsmenge}</p>
                 </>
               );
-            })} */}
-
-            {selectedExtras &&
-              selectedExtras.map(item => {
-                return ReviewCard(item);
-              })}
-          </SelectionContainer>
-
-          {currentStage === 4 && (
-            <div>
-              {/* <Button
-                className="black-color white-orange"
-                onClick={() => loadAllSelectedIngredients()}
-              >
-                Auswahl laden
-              </Button> */}
-              <div>
-                <label htmlFor="productName">Produktname:</label>
-
-                <input
-                  type="string"
-                  id="productName"
-                  name="productName"
-                  value={productName}
-                  onChange={event => setProductName(event.target.value)}
-                />
-              </div>
-              <NavigationIcon>
-                <Button
-                  className="black-color white-orange"
-                  onClick={() => addPersonalizedProduct(productName)}
-                >
-                  Produkt speichern
-                </Button>
-              </NavigationIcon>
-            </div>
-          )}
-        </div>
-      )}
-      ;
-    </div>
-  );
-};
-
-export default Konfigurator;
+            })} */
+}
