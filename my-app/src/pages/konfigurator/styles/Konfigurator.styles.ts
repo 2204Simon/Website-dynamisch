@@ -37,6 +37,19 @@ export const SelectionContainer = styled.div`
   border-radius: 10px;
 `;
 
+export const AbschlussKonfigurator = styled.div`
+  width: 70vw;
+  display: grid;
+  grid-template-columns: repeat(1fr, 1fr);
+  grid-gap: 1px;
+  //box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  padding: 10px;
+  justify-items: center; // Elemente horizontal zentrieren
+  align-items: center; // Elemente vertikal zentrieren
+  border-radius: 10px;
+`;
+
 export const StageHeader = styled.h2`
   font-size: 1.5rem;
   color: ${colors.companycolor};
@@ -298,7 +311,6 @@ export const MinusQuantity = styled.div`
   border: 1px solid #aaa;
   margin-left: 5px;
 `;
-
 
 export const Label = styled.label`
   color: ${colors.black}; // Farbe des Textes ändern

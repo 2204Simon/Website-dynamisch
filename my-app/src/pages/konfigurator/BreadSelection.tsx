@@ -130,11 +130,9 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
         )}
       </SelectionContainer>
 
-      <NavigationIcon onClick={handleNext}>
-        <Button className="black-color white-orange" onClick={handleNext}>
-          Weiter zum Belag
-        </Button>
-      </NavigationIcon>
+      <Button className="black-color white-orange" onClick={handleNext}>
+        Weiter zum Belag
+      </Button>
     </Stage>
   );
 };

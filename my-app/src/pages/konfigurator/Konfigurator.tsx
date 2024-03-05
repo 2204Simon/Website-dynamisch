@@ -4,6 +4,7 @@ import BreadSelection from "./BreadSelection";
 import ToppingsSelection from "./ToppingsSelection";
 import ExtraSelection from "./ExtrasSelection";
 import {
+  AbschlussKonfigurator,
   NavigationIcon,
   SelectionContainer,
   Stage,
@@ -18,9 +19,18 @@ import ReviewCard from "./Reviewcard";
 import { sendPostRequest } from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
 import TextField from "@mui/material/TextField";
-import { colors } from "../general/constants";
+import { colors, formatNumber } from "../general/constants";
 import FormLabel from "@mui/material/FormLabel";
 import { FormInput } from "../kontakt/styles/Kontakt.styles";
+import Container from "@mui/material/Container";
+import { Trash } from "phosphor-react";
+import {
+  ContentContainer,
+  ProductName,
+  TotalPrice,
+  RemoveButton,
+} from "../bestellung/stylesBestellung/Warenkorb.styles";
+import { alignProperty } from "@mui/material/styles/cssUtils";
 
 export interface Ingredient {
   zutatsId: string;
@@ -29,6 +39,11 @@ export interface Ingredient {
   zutatspreis: number;
   zutatseinheit: string;
   zutatsmenge: number;
+}
+
+interface AusgewählteZutat {
+  zutatsId: string;
+  zutatenMenge: string;
 }
 
 const Konfigurator: React.FC = () => {
@@ -88,15 +103,37 @@ const Konfigurator: React.FC = () => {
     );
 
     //Umformatierung Zutatenformat!
+    let allFormattedIngredients = allIngredients.map(item => {
+      return {
+        zutatsId: item.zutatsId,
+        zutatenMenge: item.zutatsmenge.toString(),
+      };
+    });
+
+    console.log(allFormattedIngredients);
 
     const itemObjekt = {
       titel: productName,
       kundenId: cookies.kundenId,
-      zutat: allIngredients,
+      zutat: allFormattedIngredients,
     };
     console.log(itemObjekt);
     await sendPostRequest("/KundenProdukt", itemObjekt);
   }
+
+  const calcPrice = (): number => {
+    let price: any = 0;
+    selectedBread.forEach(item => {
+      price += item.zutatspreis * item.zutatsmenge;
+    });
+    selectedToppings.forEach(item => {
+      price += item.zutatspreis * item.zutatsmenge;
+    });
+    selectedExtras.forEach(item => {
+      price += item.zutatspreis * item.zutatsmenge;
+    });
+    return price.toFixed(2);
+  };
 
   return (
     <div>
@@ -154,30 +191,67 @@ const Konfigurator: React.FC = () => {
                 })}
             </SelectionContainer>
 
-            <div>
-              <p>
-                Gib Deiner Konfiguration einen Namen, sodass Du diese unter
-                Deinen persönlichen Proukten sowie im Warenkorb wieder findest.
-              </p>
-              <FormLabel>
-                Name der Konfiguration:
-                <FormInput
-                  type="email"
-                  value={productName}
-                  onChange={event => setProductName(event.target.value)}
-                  maxLength={50}
-                  required
-                />
-              </FormLabel>
-              <NavigationIcon>
-                <Button
-                  className="black-color white-orange"
-                  onClick={() => addPersonalizedProduct(productName)}
+            <AbschlussKonfigurator>
+              <div>
+                <h2>Gesamtpreis: {calcPrice()} €</h2>
+              </div>
+
+              <div>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <p
+                    style={{
+                      textAlign: "center",
+                      width: "50vh",
+                    }}
+                  >
+                    Gib Deiner Konfiguration einen Namen, sodass Du diese unter
+                    Deinen persönlichen Proukten sowie im Warenkorb wieder
+                    findest.
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "80vh",
+                  }}
                 >
-                  Produkt speichern
-                </Button>
-              </NavigationIcon>
-            </div>
+                  <FormLabel>
+                    Name der Konfiguration:
+                    <FormInput
+                      type="email"
+                      value={productName}
+                      onChange={event => setProductName(event.target.value)}
+                      maxLength={50}
+                      required
+                    />
+                  </FormLabel>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Button
+                    className="black-color white-orange"
+                    onClick={() => addPersonalizedProduct(productName)}
+                  >
+                    Produkt speichern
+                  </Button>
+                  <Button
+                    className="black-color white-orange"
+                    onClick={() => addPersonalizedProduct(productName)}
+                    style={{ paddingTop: "10px" }}
+                  >
+                    Produkt speichern und zum Warenkorb hinzufügen
+                  </Button>
+                </div>
+              </div>
+            </AbschlussKonfigurator>
           </Stage>
         </div>
       )}

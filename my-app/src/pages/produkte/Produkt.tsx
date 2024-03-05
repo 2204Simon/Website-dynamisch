@@ -5,6 +5,7 @@ import { CustomToast } from "../general/toast.style";
 import NewspaperAbo from "./Newspaper";
 import { colors, grid2Classes } from "@mui/material";
 import { baseUrl } from "../../globalVariables/global";
+import { useCookies } from "react-cookie";
 
 export async function loadImage(path: string): Promise<string> {
   try {
@@ -36,6 +37,7 @@ function Produkt() {
   const isTouchpad = matchMedia("(pointer: coarse)").matches;
   const [products, setProducts] = useState<Array<Product>>([]);
   const [customerProducts, setCustomerProducts] = useState<Array<Product>>([]);
+  const [cookies] = useCookies(["kundenId"]);
 
   const existSparte = (sparte: string): boolean => {
     return products.some(product => product.sparte === sparte);
@@ -71,16 +73,13 @@ function Produkt() {
 
   const loadCustomerProducts = async (): Promise<void> => {
     try {
-      const id = "a842bab0-da48-11ee-b25c-0b61d09fdd95"; //übergangsweise hard gecoded bis zur Implementierung der KundenId aus den Cookies
-      const request = await fetch(
-        `${baseUrl}/CustomerProducts/a842bab0-da48-11ee-b25c-0b61d09fdd95`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json; charset=UTF-8",
-          },
-        }
-      );
+      const id = cookies.kundenId; //übergangsweise hard gecoded bis zur Implementierung der KundenId aus den Cookies
+      const request = await fetch(`${baseUrl}/CustomerProducts/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      });
       const product = await request.json();
       if (!request.ok) throw new Error(product.message);
       const loadedProducts = await Promise.all(
@@ -89,12 +88,12 @@ function Produkt() {
           return { ...product, bild: image };
         })
       );
+      console.log(loadedProducts);
       setCustomerProducts(loadedProducts);
     } catch (error) {
       console.error(error);
       setCustomerProducts([]);
     }
-    console.log(customerProducts);
   };
 
   useEffect(() => {
@@ -153,7 +152,6 @@ function Produkt() {
       allergy: [],
       veggie: zutatseigenschaft(product.Zutaten),
     }));
-    console.log(productsToRender);
     return productsToRender.map(product => (
       <ShoppingCard
         produktId={product.produktId}
