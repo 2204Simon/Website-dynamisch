@@ -87,7 +87,6 @@ export default function AdressInformation(): JSX.Element {
           t.hausnummer === adress.hausnummer
       )
   );
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -95,25 +94,29 @@ export default function AdressInformation(): JSX.Element {
           `/zahlung/${cookies.kundenId}`
         );
         console.log(responsePayment, "1234responsePayment");
-        if (responsePayment.paypal) {
+        if (responsePayment.paypal && responsePayment.paypal.length > 0) {
           const paypalData: PaypalData[] = responsePayment.paypal;
           dispatch(loadPaypal(paypalData));
-          handleSelectPayment(responsePayment.paypal[0] as PaymentData);
         }
-        if (responsePayment.lastschrift) {
+        if (
+          responsePayment.lastschrift &&
+          responsePayment.lastschrift.length > 0
+        ) {
           const lastschriftData: LastschriftData[] =
             responsePayment.lastschrift;
           dispatch(loadLastschrift(lastschriftData));
-          handleSelectPayment(responsePayment.paypal[0] as PaymentData);
         }
+
         const responseAdress = await getRequest(
           `/adressen/${cookies.kundenId}`
         );
         console.log(responseAdress, "responseAdress");
-        dispatch(loadAdressen(responseAdress));
-        handleSelectAdress(responseAdress[0] as AdressData);
+        if (responseAdress && responseAdress.length > 0) {
+          dispatch(loadAdressen(responseAdress));
+          handleSelectAdress(responseAdress[0] as AdressData);
+        }
       } catch (error) {
-        CustomToast.error("Fehler beim Laden der Daten");
+        console.error(error);
       }
     };
 
@@ -494,6 +497,7 @@ export default function AdressInformation(): JSX.Element {
                     ...paymentInformation.lastschriftData,
                     ...paymentInformation.paypalData,
                   ]
+                    .slice()
                     .sort(
                       (a, b) =>
                         (b.laufendeZahlungsId || 0) -
@@ -501,6 +505,9 @@ export default function AdressInformation(): JSX.Element {
                     )
                     .map((payment, index, array) => {
                       if ("paypalEmail" in payment) {
+                        if (payment.paypalEmail === "") {
+                          return null;
+                        }
                         // Dies ist ein Paypal-Zahlungsobjekt
                         return (
                           <div key={index} style={{ verticalAlign: "middle" }}>
@@ -543,6 +550,9 @@ export default function AdressInformation(): JSX.Element {
                       } else {
                         // Dies ist ein Lastschrift-Zahlungsobjekt
                         if ("Bankname" in payment) {
+                          if (payment.Bankname === "") {
+                            return null;
+                          }
                           return (
                             <div
                               key={index}
