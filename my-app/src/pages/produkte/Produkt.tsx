@@ -6,6 +6,9 @@ import NewspaperAbo from "./Newspaper";
 import { colors, grid2Classes } from "@mui/material";
 import { baseUrl } from "../../globalVariables/global";
 import { useCookies } from "react-cookie";
+import { BlackColorButton, LandingPageButton } from "../general/button";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export async function loadImage(path: string): Promise<string> {
   try {
@@ -38,6 +41,7 @@ function Produkt() {
   const [products, setProducts] = useState<Array<Product>>([]);
   const [customerProducts, setCustomerProducts] = useState<Array<Product>>([]);
   const [cookies] = useCookies(["kundenId"]);
+  const navigate = useNavigate();
 
   const existSparte = (sparte: string): boolean => {
     return products.some(product => product.sparte === sparte);
@@ -286,16 +290,28 @@ function Produkt() {
             margin: "auto",
           }}
         >
+          {" "}
           {ShoppingCardsCustomerProducts()}
         </div>
       ) : (
-        <p>
-          Die eigenen Konfiguratorprodukte konnten nicht geladen werden. Bitte
-          wenden Sie sich an den Support.
-        </p>
+        <div>
+          <p>
+            Die eigenen Konfiguratorprodukte konnten nicht geladen werden. Bitte
+            wenden Sie sich an den Support.
+          </p>
+          <div
+            style={{
+              paddingLeft: "20px",
+              marginBottom: "50px",
+            }}
+          >
+            <Link to="/Konfigurator">
+              <BlackColorButton caption={"zum Konfigurator"}></BlackColorButton>
+            </Link>
+          </div>
+        </div>
       )}
     </>
   );
 }
-
 export default Produkt;

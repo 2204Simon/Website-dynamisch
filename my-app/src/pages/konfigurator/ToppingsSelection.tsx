@@ -98,7 +98,7 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
         <NavigationIcon onClick={handlePrev}>
           <ArrowBack />
         </NavigationIcon>
-        Wähle deine Beläge
+        Wähle Deine Beläge
         <NavigationIcon onClick={handleNext}>
           <ArrowForward />
         </NavigationIcon>
