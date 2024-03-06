@@ -9,6 +9,7 @@ import {
   SelectionContainer,
   Stage,
   StageHeader,
+  signedIn,
 } from "./styles/Konfigurator.styles";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { useLoggedIn } from "../../globalVariables/loggedin";
@@ -156,10 +157,19 @@ const Konfigurator: React.FC = () => {
         <BreadSelection onNextStage={handleNextStage} />
       )}
       {!loggedIn && (
-        <div>
-          <h1>
-            Du musst dich anmelden, um dein perfektes Frühstück zu bestellen!
-          </h1>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+          }}
+        >
+          <h2>
+            Du musst dich anmelden, um dein perfektes Frühstück zu
+            konfigurieren!
+          </h2>
           <Button
             className="black-color white-orange"
             onClick={() => navigate("/LogIn")}
@@ -189,7 +199,7 @@ const Konfigurator: React.FC = () => {
               </NavigationIcon>
               Konfiguration
             </StageHeader>
-            <h3>Das ist Deine fertige Konfiguration:</h3>
+            <h3>Das ist deine fertige Konfiguration:</h3>
             <SelectionContainer>
               {selectedBread &&
                 selectedBread.map(item => {
@@ -219,8 +229,8 @@ const Konfigurator: React.FC = () => {
                       width: "50vh",
                     }}
                   >
-                    Gib Deiner Konfiguration einen Namen, sodass Du diese unter
-                    Deinen persönlichen Proukten sowie im Warenkorb wieder
+                    Gib deiner Konfiguration einen Namen, sodass Du diese unter
+                    deinen persönlichen Proukten sowie im Warenkorb wieder
                     findest.
                   </p>
                 </div>
@@ -262,7 +272,7 @@ const Konfigurator: React.FC = () => {
                     onClick={() => addPersonalizedProductToBasket(productName)}
                     style={{ paddingTop: "10px" }}
                   >
-                    zum Warenkorb hinzufügen
+                    Zum Warenkorb hinzufügen
                   </Button>
                 </div>
               </div>
@@ -270,24 +280,8 @@ const Konfigurator: React.FC = () => {
           </Stage>
         </div>
       )}
-      ;
     </div>
   );
 };
 
 export default Konfigurator;
-
-{
-  /* {selectedToppings &&
-            selectedExtras.map(item => {
-              return (
-                <>
-                  <p> Bild: {item.zutatBild} </p>
-                  <p> Produktname: {item.zutatsname}</p>
-                  <p> Preis: {item.zutatspreis} €</p>
-                  <p> Einheit: {item.zutatseinheit}</p>
-                  <p> Menge: {item.zutatsmenge}</p>
-                </>
-              );
-            })} */
-}

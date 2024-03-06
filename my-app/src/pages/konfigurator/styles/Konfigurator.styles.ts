@@ -315,3 +315,10 @@ export const MinusQuantity = styled.div`
 export const Label = styled.label`
   color: ${colors.black}; // Farbe des Textes ändern
 `;
+
+export const signedIn = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+`;
