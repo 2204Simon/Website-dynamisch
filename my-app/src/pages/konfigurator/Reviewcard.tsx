@@ -1,7 +1,4 @@
-import React, { useState, ChangeEvent, useRef } from "react";
-import { useDispatch } from "react-redux"; // Import der useDispatch-Hook
-// Import der addToCart-Action aus deiner Redux-Komponente
-
+import React from "react";
 import {
   Container,
   Details,

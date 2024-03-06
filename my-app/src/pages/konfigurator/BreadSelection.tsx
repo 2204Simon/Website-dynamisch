@@ -94,7 +94,7 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
   return (
     <Stage>
       <StageHeader>
-        Wähle dein Gebäck
+        Wähle Dein Gebäck
         <NavigationIcon onClick={handleNext}>
           <ArrowForward />
         </NavigationIcon>
@@ -106,7 +106,7 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
       </p>
       {backendError && (
         <p>
-          Die Brote konnten nicht geladen werden. Bitte wenden Sie sich an den
+          Die Brote konnten nicht geladen werden. Bitte wende Dich an den
           Support.
         </p>
       )}

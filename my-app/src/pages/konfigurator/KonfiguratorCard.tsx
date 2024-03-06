@@ -1,14 +1,8 @@
-import React, { useState, ChangeEvent, useRef } from "react";
-import { useDispatch } from "react-redux"; // Import der useDispatch-Hook
-// Import der addToCart-Action aus deiner Redux-Komponente
+import React, { useState, ChangeEvent } from "react";
 import { BlackColorButton } from "../general/button";
 import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
-import { CartState } from "../../redux/types";
 import { Plus, Minus } from "phosphor-react";
-import { useSelector } from "react-redux";
-import { useCookies } from "react-cookie";
-import { KUNDEN_ID } from "../../globalVariables/global";
 import { colors, formatNumber } from "../general/constants";
 import {
   Container,
@@ -27,12 +21,6 @@ import {
 import { Ingredient } from "./Konfigurator";
 
 export interface ShoppingCardProps {
-  // produktId: string;
-  // image: string;
-  // title: string;
-  // price: number;
-  // type: string;
-  // handleSelect: Function;
   topping: Ingredient;
   handleSelect: Function;
 }
@@ -40,11 +28,6 @@ export interface ShoppingCardProps {
 const ShoppingCard: React.FC<ShoppingCardProps> = input => {
   const [displayNone, setDisplayNone] = useState(false);
   const [quantity, setQuantity] = useState<number>(0);
-  const dispatch = useDispatch(); // Initialisierung der useDispatch-Hook
-  const [cookie, setCookie] = useCookies([KUNDEN_ID]); // Initialisierung der useDispatch-Hook
-  const cartItems = useSelector(
-    (state: { cart: CartState }) => state.cart.cartItems
-  );
 
   const handleQuantityChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value.replace(/^0+/, ""); // entfernt führende Nullen

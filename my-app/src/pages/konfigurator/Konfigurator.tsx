@@ -210,8 +210,8 @@ const Konfigurator: React.FC = () => {
                       width: "50vh",
                     }}
                   >
-                    Gib deiner Konfiguration einen Namen, sodass Du diese unter
-                    deinen persönlichen Proukten sowie im Warenkorb wieder
+                    Gib Deiner Konfiguration einen Namen, sodass Du diese unter
+                    Deinen persönlichen Proukten sowie im Warenkorb wieder
                     findest.
                   </p>
                 </div>
