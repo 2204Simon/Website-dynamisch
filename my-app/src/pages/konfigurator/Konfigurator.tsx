@@ -33,6 +33,8 @@ import {
 } from "../bestellung/stylesBestellung/Warenkorb.styles";
 import { alignProperty } from "@mui/material/styles/cssUtils";
 import { CustomToast } from "../general/toast.style";
+import { addToCart } from "../../redux/cartReducer";
+import { useDispatch } from "react-redux";
 
 export interface Ingredient {
   zutatsId: string;
@@ -59,6 +61,8 @@ const Konfigurator: React.FC = () => {
   const [productName, setProductName] = useState("");
   const { loggedIn } = useLoggedIn();
   const navigate = useNavigate();
+  const dispatch = useDispatch(); // Initialisierung der useDispatch-Hook
+  const [productId, setProductId] = useState<string>("");
   const handleNextStage = (selectedProduct: Array<Ingredient>) => {
     setCurrentStage(currentStage + 1);
 
@@ -81,23 +85,6 @@ const Konfigurator: React.FC = () => {
     setCurrentStage(currentStage - 1);
   };
 
-  async function loadImage(path: string, zutatensparte: string) {
-    let sparte = "";
-    switch (zutatensparte) {
-      case "Brot":
-        sparte = `Breads`;
-        break;
-      case "Topping":
-        sparte = `Toppings`;
-        break;
-      case "Extra":
-        sparte = `Extras`;
-        break;
-    }
-    const image = await import(`../../img/Ingredients/${sparte}/${path}`);
-    return image.default; //Wegen ES6 mit default
-  }
-
   async function createPersonalizedProduct(productName: string) {
     const allIngredients = selectedBread.concat(
       selectedExtras,
@@ -118,7 +105,9 @@ const Konfigurator: React.FC = () => {
       zutat: allFormattedIngredients,
     };
     console.log(itemObjekt);
-    await sendPostRequest("/KundenProdukt", itemObjekt);
+    let response = await sendPostRequest("/KundenProdukt", itemObjekt);
+    setProductId(response);
+    return response;
   }
 
   async function addPersonalizedProduct(productName: string) {
@@ -130,12 +119,25 @@ const Konfigurator: React.FC = () => {
   }
 
   async function addPersonalizedProductToBasket(productName: string) {
-    await createPersonalizedProduct(productName);
-
-    //TODO Mattis: Erstellung Eintrag in Warenkorb und globale Variable aktualisieren
-    CustomToast.success(`${productName} wurde zum Warenkorb hinzugefügt!`);
+    const id = await createPersonalizedProduct(productName);
+    await handleAddToCart(id, productName);
     navigate("/Bestellung");
   }
+
+  const handleAddToCart = async (productId: string, productName: string) => {
+    try {
+      const itemObjekt = {
+        produktId: productId,
+        produktMenge: 1,
+        kundenId: cookies.kundenId,
+      };
+      console.log(itemObjekt);
+      await sendPostRequest("/warenkorb", itemObjekt);
+      CustomToast.success(`${productName} wurde zum Warenkorb hinzugefügt!`);
+    } catch (error) {
+      CustomToast.error("Fehler hinzufügen (Serververbindung))");
+    }
+  };
 
   const calcPrice = (): number => {
     let price: any = 0;
@@ -246,7 +248,7 @@ const Konfigurator: React.FC = () => {
                   <FormLabel>
                     Name der Konfiguration:
                     <FormInput
-                      type="email"
+                      type="string"
                       value={productName}
                       onChange={event => setProductName(event.target.value)}
                       maxLength={50}
