@@ -69,14 +69,17 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
       zutatseinheit: topping.zutatseinheit,
       zutatsmenge: 1,
     });
-    if (alteAuswahl && alteAuswahl.zutatsId !== topping.zutatsid) {
-      CustomToast.success(
-        `Deine vorherige Auswahl ${alteAuswahl.zutatsname} wurde aus der Konfiguration entfernt`
-      );
+    if (alteAuswahl) {
+      if (alteAuswahl.zutatsname === topping.zutatsname) {
+        CustomToast.info(`Du hast bereits ${topping.zutatsname} ausgewählt!`);
+      } else {
+        CustomToast.success(
+          `${alteAuswahl.zutatsname} wurde ersetzt durch ${topping.zutatsname}!`
+        );
+      }
+    } else {
+      CustomToast.success(`Es wurde ${topping.zutatsname} hinzugefügt!`);
     }
-    CustomToast.success(
-      `Es wurde ${topping.zutatsname} in der Menge von 1 Stück hinzugefügt!`
-    );
   };
 
   const handleNext = () => {
