@@ -9,32 +9,17 @@ import {
   SelectionContainer,
   Stage,
   StageHeader,
-  signedIn,
 } from "./styles/Konfigurator.styles";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import { ArrowBack } from "@mui/icons-material";
 import { useLoggedIn } from "../../globalVariables/loggedin";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../general/button.styles";
-import { baseUrl } from "../../globalVariables/global";
 import ReviewCard from "./Reviewcard";
 import { sendPostRequest } from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
-import TextField from "@mui/material/TextField";
-import { colors, formatNumber } from "../general/constants";
 import FormLabel from "@mui/material/FormLabel";
 import { FormInput } from "../kontakt/styles/Kontakt.styles";
-import Container from "@mui/material/Container";
-import { Trash } from "phosphor-react";
-import {
-  ContentContainer,
-  ProductName,
-  TotalPrice,
-  RemoveButton,
-} from "../bestellung/stylesBestellung/Warenkorb.styles";
-import { alignProperty } from "@mui/material/styles/cssUtils";
 import { CustomToast } from "../general/toast.style";
-import { addToCart } from "../../redux/cartReducer";
-import { useDispatch } from "react-redux";
 
 export interface Ingredient {
   zutatsId: string;
@@ -43,11 +28,6 @@ export interface Ingredient {
   zutatspreis: number;
   zutatseinheit: string;
   zutatsmenge: number;
-}
-
-interface AusgewählteZutat {
-  zutatsId: string;
-  zutatenMenge: string;
 }
 
 const Konfigurator: React.FC = () => {
@@ -61,7 +41,6 @@ const Konfigurator: React.FC = () => {
   const [productName, setProductName] = useState("");
   const { loggedIn } = useLoggedIn();
   const navigate = useNavigate();
-  const dispatch = useDispatch(); // Initialisierung der useDispatch-Hook
   const [productId, setProductId] = useState<string>("");
   const handleNextStage = (selectedProduct: Array<Ingredient>) => {
     setCurrentStage(currentStage + 1);
