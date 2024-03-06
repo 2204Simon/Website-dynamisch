@@ -31,6 +31,7 @@ import {
   RemoveButton,
 } from "../bestellung/stylesBestellung/Warenkorb.styles";
 import { alignProperty } from "@mui/material/styles/cssUtils";
+import { CustomToast } from "../general/toast.style";
 
 export interface Ingredient {
   zutatsId: string;
@@ -121,6 +122,9 @@ const Konfigurator: React.FC = () => {
 
   async function addPersonalizedProduct(productName: string) {
     await createPersonalizedProduct(productName);
+    CustomToast.success(
+      `${productName} wurde gespeichert und kann unter Produkte eingesehen werden!`
+    );
     navigate("/Produkte");
   }
 
@@ -128,7 +132,7 @@ const Konfigurator: React.FC = () => {
     await createPersonalizedProduct(productName);
 
     //TODO Mattis: Erstellung Eintrag in Warenkorb und globale Variable aktualisieren
-
+    CustomToast.success(`${productName} wurde zum Warenkorb hinzugefügt!`);
     navigate("/Bestellung");
   }
 

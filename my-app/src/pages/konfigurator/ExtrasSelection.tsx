@@ -111,7 +111,7 @@ const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
 
       <NavigationIcon onClick={handleNext}>
         <Button className="black-color white-orange" onClick={handleNext}>
-          Weiter zur Zusammenfassung
+          Zur Zusammenfassung
         </Button>
       </NavigationIcon>
     </Stage>

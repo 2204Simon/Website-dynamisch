@@ -111,7 +111,7 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
 
       <NavigationIcon onClick={handleNext}>
         <Button className="black-color white-orange" onClick={handleNext}>
-          Weiter
+          Weiter zu den Extras
         </Button>
       </NavigationIcon>
     </Stage>
