@@ -87,7 +87,6 @@ export default function AdressInformation(): JSX.Element {
           t.hausnummer === adress.hausnummer
       )
   );
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -95,27 +94,29 @@ export default function AdressInformation(): JSX.Element {
           `/zahlung/${cookies.kundenId}`
         );
         console.log(responsePayment, "1234responsePayment");
-        if (responsePayment.paypal) {
+        if (responsePayment.paypal && responsePayment.paypal.length > 0) {
           const paypalData: PaypalData[] = responsePayment.paypal;
           dispatch(loadPaypal(paypalData));
-          dispatch(setSelectedPayment(responsePayment.paypal[0]));
-          handleSelectPayment(responsePayment.paypal[0] as PaymentData);
         }
-        if (responsePayment.lastschrift) {
+        if (
+          responsePayment.lastschrift &&
+          responsePayment.lastschrift.length > 0
+        ) {
           const lastschriftData: LastschriftData[] =
             responsePayment.lastschrift;
           dispatch(loadLastschrift(lastschriftData));
-          dispatch(setSelectedPayment(responsePayment.lastschrift[0]));
-          handleSelectPayment(responsePayment.lastschrift[0] as PaymentData);
         }
+
         const responseAdress = await getRequest(
           `/adressen/${cookies.kundenId}`
         );
         console.log(responseAdress, "responseAdress");
-        dispatch(loadAdressen(responseAdress));
-        handleSelectAdress(responseAdress[0] as AdressData);
+        if (responseAdress && responseAdress.length > 0) {
+          dispatch(loadAdressen(responseAdress));
+          handleSelectAdress(responseAdress[0] as AdressData);
+        }
       } catch (error) {
-        CustomToast.error("Fehler beim Laden der Daten");
+        console.error(error);
       }
     };
 
@@ -496,6 +497,7 @@ export default function AdressInformation(): JSX.Element {
                     ...paymentInformation.lastschriftData,
                     ...paymentInformation.paypalData,
                   ]
+                    .slice()
                     .sort(
                       (a, b) =>
                         (b.laufendeZahlungsId || 0) -
