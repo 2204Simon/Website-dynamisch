@@ -66,7 +66,7 @@ const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
       });
 
       CustomToast.success(
-        `Es wurde  ${topping.zutatsname} in der Menge von ${quantity} hinzugefügt!`
+        `Es wurde(n) ${quantity} ${topping.zutatseinheit} ${topping.zutatsname} hinzugefügt!`
       );
       console.log(lclToppings);
       setSelectedExtras(lclToppings);

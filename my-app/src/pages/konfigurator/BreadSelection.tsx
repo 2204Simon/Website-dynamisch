@@ -22,6 +22,7 @@ import { Button } from "../general/button.styles";
 import { baseUrl } from "../../globalVariables/global";
 import { Ingredient } from "./Konfigurator";
 import { BlackColorButton } from "../general/button";
+import { formatNumber } from "../general/constants";
 
 interface BreadSelectionProps {
   onNextStage: (breadselection: Array<Ingredient>) => void;
@@ -101,7 +102,7 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
 
       <p>
         Durch Anklicken der Produktkarte kannst Du das gewünschte Gebäck zur
-        Konfiguration hinzufügen.
+        Konfiguration hinzufügen. Du kannst nur ein Gebäck auswählen.
       </p>
       {backendError && (
         <p>
@@ -127,7 +128,7 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
                   <Title style={{ paddingLeft: "0px" }}>
                     {bread.zutatsname}
                   </Title>
-                  <Price>Preis: {bread.zutatspreis} €</Price>
+                  <Price>Preis: {formatNumber(bread.zutatspreis)} €</Price>
                   <p> 1 Stück </p>
                   <BlackColorButton
                     onClick={() => handleBreadSelect(bread)}

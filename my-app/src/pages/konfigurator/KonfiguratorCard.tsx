@@ -9,7 +9,7 @@ import { Plus, Minus } from "phosphor-react";
 import { useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import { KUNDEN_ID } from "../../globalVariables/global";
-import { colors } from "../general/constants";
+import { colors, formatNumber } from "../general/constants";
 import {
   Container,
   Details,
@@ -94,7 +94,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = input => {
           <Title style={{ paddingLeft: "0px" }}>
             {input.topping.zutatsname}
           </Title>
-          <Price>Preis: {input.topping.zutatspreis} €</Price>
+          <Price>Preis: {formatNumber(input.topping.zutatspreis)} €</Price>
           <Type>Einheit: {input.topping.zutatseinheit}</Type>
 
           <Quantity>

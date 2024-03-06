@@ -96,7 +96,7 @@ const Konfigurator: React.FC = () => {
     return image.default; //Wegen ES6 mit default
   }
 
-  async function addPersonalizedProduct(productName: string) {
+  async function createPersonalizedProduct(productName: string) {
     const allIngredients = selectedBread.concat(
       selectedExtras,
       selectedToppings
@@ -110,8 +110,6 @@ const Konfigurator: React.FC = () => {
       };
     });
 
-    console.log(allFormattedIngredients);
-
     const itemObjekt = {
       titel: productName,
       kundenId: cookies.kundenId,
@@ -119,6 +117,19 @@ const Konfigurator: React.FC = () => {
     };
     console.log(itemObjekt);
     await sendPostRequest("/KundenProdukt", itemObjekt);
+  }
+
+  async function addPersonalizedProduct(productName: string) {
+    await createPersonalizedProduct(productName);
+    navigate("/Produkte");
+  }
+
+  async function addPersonalizedProductToBasket(productName: string) {
+    await createPersonalizedProduct(productName);
+
+    //TODO Mattis: Erstellung Eintrag in Warenkorb und globale Variable aktualisieren
+
+    navigate("/Bestellung");
   }
 
   const calcPrice = (): number => {
@@ -244,10 +255,10 @@ const Konfigurator: React.FC = () => {
                   </Button>
                   <Button
                     className="black-color white-orange"
-                    onClick={() => addPersonalizedProduct(productName)}
+                    onClick={() => addPersonalizedProductToBasket(productName)}
                     style={{ paddingTop: "10px" }}
                   >
-                    Produkt speichern und zum Warenkorb hinzufügen
+                    zum Warenkorb hinzufügen
                   </Button>
                 </div>
               </div>
