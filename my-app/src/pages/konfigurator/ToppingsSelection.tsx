@@ -68,7 +68,7 @@ const ToppingsSelection: React.FC<ToppingsSelectionProps> = ({
       });
 
       CustomToast.success(
-        `Es wurde  ${topping.zutatsId} in der Menge von ${quantity} hinzugefügt!`
+        `Es wurde  ${topping.zutatsname} in der Menge von ${quantity} hinzugefügt!`
       );
       setSelectedToppings(lclToppings);
     } else {

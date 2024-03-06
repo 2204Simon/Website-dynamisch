@@ -1,10 +1,6 @@
 // BreadSelection.tsx
 import React, { useState, useEffect } from "react";
 import {
-  Stage,
-  StageHeader,
-  SelectionContainer,
-  NavigationIcon,
   Container,
   Details,
   ImageContainer,
@@ -12,7 +8,14 @@ import {
   Title,
   Image,
   ContainerFront,
+} from "../produkte/styles/ShoppingCard.styles";
+import {
+  Stage,
+  StageHeader,
+  NavigationIcon,
+  SelectionContainer,
 } from "./styles/Konfigurator.styles";
+
 import { ArrowForward } from "@mui/icons-material";
 import { CustomToast } from "../general/toast.style";
 import { Button } from "../general/button.styles";
@@ -57,6 +60,7 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
   }
 
   const handleBreadSelect = (topping: any) => {
+    const alteAuswahl = selectedBread;
     setSelectedBread({
       zutatsId: topping.zutatsId,
       zutatBild: topping.zutatBild,
@@ -65,6 +69,14 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
       zutatseinheit: topping.zutatseinheit,
       zutatsmenge: 1,
     });
+    if (alteAuswahl && alteAuswahl.zutatsId !== topping.zutatsid) {
+      CustomToast.success(
+        `Deine vorherige Auswahl ${alteAuswahl.zutatsname} wurde aus der Konfiguration entfernt`
+      );
+    }
+    CustomToast.success(
+      `Es wurde ${topping.zutatsname} in der Menge von 1 Stück hinzugefügt!`
+    );
   };
 
   const handleNext = () => {
@@ -78,14 +90,14 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
   return (
     <Stage>
       <StageHeader>
-        Wähle dein Brot
+        Wähle dein Gebäck
         <NavigationIcon onClick={handleNext}>
           <ArrowForward />
         </NavigationIcon>
       </StageHeader>
 
       <p>
-        Durch Anklicken der Produktkarte kannst Du das gewünschte Brot zur
+        Durch Anklicken der Produktkarte kannst Du das gewünschte Gebäck zur
         Konfiguration hinzufügen.
       </p>
       {backendError && (
@@ -104,21 +116,16 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
                 flipped={false}
                 displayNone={false}
                 key={bread.zutatsId}
-                className={
-                  selectedBread && selectedBread.zutatsId === bread.zutatsId
-                    ? "selected"
-                    : ""
-                }
-                onClick={() => handleBreadSelect(bread)}
               >
                 <ImageContainer>
                   <Image src={bread.zutatBild} alt={bread.zutatsname} />
                 </ImageContainer>
                 <Details>
-                  <Title>{bread.zutatsname}</Title>
-
+                  <Title style={{ paddingLeft: "0px" }}>
+                    {bread.zutatsname}
+                  </Title>
                   <Price>Preis: {bread.zutatspreis} €</Price>
-
+                  <p> 1 Stück </p>
                   <BlackColorButton
                     onClick={() => handleBreadSelect(bread)}
                     caption="Zur Konfiguration hinzufügen"
