@@ -505,6 +505,9 @@ export default function AdressInformation(): JSX.Element {
                     )
                     .map((payment, index, array) => {
                       if ("paypalEmail" in payment) {
+                        if (payment.paypalEmail === "") {
+                          return null;
+                        }
                         // Dies ist ein Paypal-Zahlungsobjekt
                         return (
                           <div key={index} style={{ verticalAlign: "middle" }}>
@@ -547,6 +550,9 @@ export default function AdressInformation(): JSX.Element {
                       } else {
                         // Dies ist ein Lastschrift-Zahlungsobjekt
                         if ("Bankname" in payment) {
+                          if (payment.Bankname === "") {
+                            return null;
+                          }
                           return (
                             <div
                               key={index}
