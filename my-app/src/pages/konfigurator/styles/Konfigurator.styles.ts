@@ -29,25 +29,71 @@ export const SelectionContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 1px;
-  //box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
   padding: 10px;
-  justify-items: center; // Elemente horizontal zentrieren
-  align-items: center; // Elemente vertikal zentrieren
+  justify-items: center;
+  align-items: center;
   border-radius: 10px;
 `;
 
 export const AbschlussKonfigurator = styled.div`
-  width: 70vw;
-  display: grid;
-  grid-template-columns: repeat(1fr, 1fr);
-  grid-gap: 1px;
-  //box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 60vh;
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
   padding: 10px;
-  justify-items: center; // Elemente horizontal zentrieren
-  align-items: center; // Elemente vertikal zentrieren
+  justify-items: center;
+  align-items: center;
   border-radius: 10px;
+  justify-content: center;
+
+  @media (min-width: 768px) {
+    width: 70%;
+  }
+
+  @media (min-width: 1024px) {
+    width: 60vh;
+  }
+
+  p {
+    text-align: center;
+    padding: 0px;
+  }
+
+  h2 {
+    text-align: center;
+    padding: 0px;
+  }
+`;
+
+export const ButtonContainer = styled.div`
+  width: 90%; //  kleine Bildschirme
+  max-width: 60vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 10px;
+  justify-items: center;
+  align-items: center;
+  border-radius: 10px;
+  justify-content: center;
+
+  @media (min-width: 1024px) {
+    //große Bildscgirme
+    width: 60vh;
+    flex-direction: row;
+  }
+`;
+
+export const FormInput = styled.input`
+  padding: 0.5rem;
+  border: 1px solid ${colors.companycolor};
+  border-radius: 10px;
+  font-size: 1rem;
+  width: 90%;
+  color: var(--black-color);
+  background-color: var(--primary-color);
 `;
 
 export const StageHeader = styled.h2`

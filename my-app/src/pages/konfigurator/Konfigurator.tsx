@@ -9,6 +9,8 @@ import {
   SelectionContainer,
   Stage,
   StageHeader,
+  ButtonContainer,
+  FormInput,
 } from "./styles/Konfigurator.styles";
 import { ArrowBack } from "@mui/icons-material";
 import { useLoggedIn } from "../../globalVariables/loggedin";
@@ -18,7 +20,6 @@ import ReviewCard from "./Reviewcard";
 import { sendPostRequest } from "../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
 import FormLabel from "@mui/material/FormLabel";
-import { FormInput } from "../kontakt/styles/Kontakt.styles";
 import { CustomToast } from "../general/toast.style";
 
 export interface Ingredient {
@@ -198,77 +199,50 @@ const Konfigurator: React.FC = () => {
             </SelectionContainer>
 
             <AbschlussKonfigurator>
-              <div>
-                <h2>Gesamtpreis: {calcPrice()} €</h2>
-              </div>
+              <h2>Gesamtpreis: {calcPrice()} €</h2>
+              <p>
+                Gib Deiner Konfiguration einen Namen, sodass Du diese unter
+                Deinen persönlichen Proukten sowie im Warenkorb wieder findest.
+              </p>
 
-              <div>
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <p
-                    style={{
-                      textAlign: "center",
-                      width: "50vh",
-                    }}
-                  >
-                    Gib Deiner Konfiguration einen Namen, sodass Du diese unter
-                    Deinen persönlichen Proukten sowie im Warenkorb wieder
-                    findest.
-                  </p>
-                </div>
+              <FormLabel>
+                Name der Konfiguration:
+                <FormInput
+                  type="string"
+                  value={productName}
+                  onChange={event => setProductName(event.target.value)}
+                  maxLength={50}
+                  required
+                />
+              </FormLabel>
 
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "80vh",
+              <ButtonContainer>
+                <Button
+                  className="black-color white-orange"
+                  onClick={() => {
+                    if (!productName) {
+                      CustomToast.error("Bitte gib einen Produktnamen ein!");
+                    } else {
+                      addPersonalizedProduct(productName);
+                    }
                   }}
                 >
-                  <FormLabel>
-                    Name der Konfiguration:
-                    <FormInput
-                      type="string"
-                      value={productName}
-                      onChange={event => setProductName(event.target.value)}
-                      maxLength={50}
-                      required
-                    />
-                  </FormLabel>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
+                  Produkt speichern
+                </Button>
+                <Button
+                  className="black-color white-orange"
+                  onClick={() => {
+                    if (!productName) {
+                      CustomToast.error("Bitte gib einen Produktnamen ein!");
+                    } else {
+                      addPersonalizedProductToBasket(productName);
+                    }
                   }}
+                  style={{ paddingTop: "10px" }}
                 >
-                  <Button
-                    className="black-color white-orange"
-                    onClick={() => {
-                      if (!productName) {
-                        CustomToast.error("Bitte gib einen Produktnamen ein!");
-                      } else {
-                        addPersonalizedProduct(productName);
-                      }
-                    }}
-                  >
-                    Produkt speichern
-                  </Button>
-                  <Button
-                    className="black-color white-orange"
-                    onClick={() => {
-                      if (!productName) {
-                        CustomToast.error("Bitte gib einen Produktnamen ein!");
-                      } else {
-                        addPersonalizedProductToBasket(productName);
-                      }
-                    }}
-                    style={{ paddingTop: "10px" }}
-                  >
-                    Zum Warenkorb hinzufügen
-                  </Button>
-                </div>
-              </div>
+                  Zum Warenkorb hinzufügen
+                </Button>
+              </ButtonContainer>
             </AbschlussKonfigurator>
           </Stage>
         </div>
