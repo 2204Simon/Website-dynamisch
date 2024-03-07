@@ -97,6 +97,9 @@ export default function AdressInformation(): JSX.Element {
         if (responsePayment.paypal && responsePayment.paypal.length > 0) {
           const paypalData: PaypalData[] = responsePayment.paypal;
           dispatch(loadPaypal(paypalData));
+          if (selectedPayment === null && paypalData.length > 0) {
+            handleSelectPayment(paypalData[0] as PaymentData);
+          }
         }
         if (
           responsePayment.lastschrift &&
@@ -105,6 +108,9 @@ export default function AdressInformation(): JSX.Element {
           const lastschriftData: LastschriftData[] =
             responsePayment.lastschrift;
           dispatch(loadLastschrift(lastschriftData));
+          if (selectedPayment === null && lastschriftData.length > 0) {
+            handleSelectPayment(lastschriftData[0] as PaymentData);
+          }
         }
 
         const responseAdress = await getRequest(
@@ -154,6 +160,17 @@ export default function AdressInformation(): JSX.Element {
     console.log(data, "data");
     if (!data.paypalData?.paypalEmail && !data.lastschriftData?.IBAN) {
       CustomToast.error("Bitte füllen Sie alle erforderlichen Felder aus.");
+      return;
+    }
+    // E-Mail-Validierung
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (
+      data.paypalData?.paypalEmail &&
+      !emailRegex.test(data.paypalData.paypalEmail)
+    ) {
+      CustomToast.error(
+        "Bitte geben Sie eine gültige Paypal E-Mail-Adresse ein."
+      );
       return;
     }
     const paymentData: PaymentData = {
