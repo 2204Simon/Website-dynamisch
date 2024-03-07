@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import { colors, mediaQueries } from "../general/constants";
 
+interface AdminListWrapperProps {
+  adminPage?: boolean;
+  hover?: boolean;
+}
+
 export const AdminPageWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -61,8 +66,8 @@ export const CRUDCardPText = styled.p`
   text-align: center;
 `;
 
-export const AdminListWrapper = styled.div`
-  /* width: 100%; */
+export const AdminListWrapper = styled.div<AdminListWrapperProps>`
+  width: 90%;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -70,7 +75,21 @@ export const AdminListWrapper = styled.div`
   background-color: ${colors.primarycolor};
   border-radius: 4px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.24);
-
+  flex-wrap: wrap;
+  ${props =>
+    props.adminPage &&
+    `
+    justify-content: space-between;
+  `}
+  ${props =>
+    props.hover &&
+    `
+    :hover {
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+      background-color: ${colors.companycolor};
+      cursor: pointer;
+    }
+  `}
   @media (max-width: ${mediaQueries.large}) {
     flex-direction: column;
     gap: 0;

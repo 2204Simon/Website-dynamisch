@@ -1,25 +1,35 @@
 import { useEffect, useState } from "react";
-import { getRequest } from "../../serverFunctions/generelAPICalls";
-import { BestellungsInformation } from "../../redux/types";
-import { AdminListWrapper } from "./Admin.styles";
+import { Calendar, Popper, StyledDatePicker } from "../bestellung/Calendar";
+import { de } from "date-fns/locale";
 import { useNavigate } from "react-router-dom";
+import { BestellungsInformation } from "../../redux/types";
+import { getRequest } from "../../serverFunctions/generelAPICalls";
+import { AdminListWrapper } from "./Admin.styles";
 import { Paragraph } from "../loggedIn/UserInformation.styles";
 
-function DeliverToday() {
+function BestellungToSpecificDate() {
+  const today = new Date();
+  today.setDate(today.getDate() + 1);
+  const [selectedDate, setSelectedDate] = useState<Date>(today);
+  const DatepickerInput = ({ ...props }) => (
+    <input type="text" {...props} readOnly />
+  );
+
   const [bestellungen, setBestellungen] = useState<BestellungsInformation[]>(
     []
   );
   const navigate = useNavigate();
   useEffect(() => {
+    console.log("fetchedBestellungen", selectedDate);
     const fetchData = async () => {
       const fetchedBestellungen: Array<BestellungsInformation> =
-        await getRequest("/admin/todayDeliveries");
+        await getRequest(`/admin/sumLieferdatum/${selectedDate}`);
       setBestellungen(fetchedBestellungen);
       console.log(fetchedBestellungen);
       console.log(bestellungen);
     };
     fetchData();
-  }, []);
+  }, [selectedDate]);
 
   return (
     <div
@@ -32,6 +42,19 @@ function DeliverToday() {
         width: "100%",
       }}
     >
+      <div style={{ marginTop: "5px", marginBottom: "5px" }}>
+        <StyledDatePicker
+          selected={selectedDate}
+          onChange={(date: Date) => setSelectedDate(date)}
+          dateFormat={"dd.MM.yyyy"}
+          locale={de}
+          popperPlacement={"top"}
+          onFocus={() => {}}
+          calendarContainer={Calendar}
+          popperContainer={Popper}
+          customInput={<DatepickerInput />}
+        />
+      </div>
       {bestellungen.map(bestellung => (
         <AdminListWrapper
           hover
@@ -52,4 +75,4 @@ function DeliverToday() {
   );
 }
 
-export default DeliverToday;
+export default BestellungToSpecificDate;

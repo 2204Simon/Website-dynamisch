@@ -162,6 +162,17 @@ export default function AdressInformation(): JSX.Element {
       CustomToast.error("Bitte füllen Sie alle erforderlichen Felder aus.");
       return;
     }
+    // E-Mail-Validierung
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (
+      data.paypalData?.paypalEmail &&
+      !emailRegex.test(data.paypalData.paypalEmail)
+    ) {
+      CustomToast.error(
+        "Bitte geben Sie eine gültige Paypal E-Mail-Adresse ein."
+      );
+      return;
+    }
     const paymentData: PaymentData = {
       kundenId: cookies.kundenId,
       paypalData: data.paypalData,

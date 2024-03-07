@@ -149,7 +149,7 @@ export type BestellungsInformation = {
   gewünschtesLieferdatum: Date;
   bestellungsId: string;
   zahlungsinformation: Zahlungsinformation;
-  adressenInformation: AddressenInformation;
+  addressenInformation: AddressenInformation;
   produktInformationen: ProduktInformationen[];
 };
 
