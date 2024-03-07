@@ -12,7 +12,7 @@ interface AdminListProps {
 
 export function AdminList(props: AdminListProps) {
   return (
-    <AdminListWrapper>
+    <AdminListWrapper adminPage>
       {props.children}
       {props.editable ? (
         <RemoveButton onClick={props.onEdit}>

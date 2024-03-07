@@ -18,20 +18,10 @@ export default function AdminBestellungsblock() {
     );
     console.log(bestellungen);
 
-    setOptionalComponent(
-      <>
-        <BestellungToSpecificDate />
-      </>
-    );
+    setOptionalComponent(<BestellungToSpecificDate />);
   }
   async function getBestellungsLieferungComponent() {
     setOptionalComponent(<DeliverToday />);
-  }
-  async function putBestellungsLieferungComponent() {
-    setOptionalComponent(<p>Bestellung abschließen</p>);
-  }
-  async function deleteBestellungComponent() {
-    setOptionalComponent(<p>delete</p>);
   }
   return (
     <Card>
@@ -44,15 +34,7 @@ export default function AdminBestellungsblock() {
         </CRUDCardWrappper>
         <CRUDCardWrappper onClick={() => getBestellungsLieferungComponent()}>
           <MagnifyingGlass size={50} />
-          <Paragraph>heutige Lieferungen suchen</Paragraph>
-        </CRUDCardWrappper>
-        <CRUDCardWrappper onClick={() => putBestellungsLieferungComponent()}>
-          <Pencil size={50} />
-          <Paragraph>Bestellung abschließen</Paragraph>
-        </CRUDCardWrappper>
-        <CRUDCardWrappper onClick={() => deleteBestellungComponent()}>
-          <Trash size={50} />
-          <Paragraph>Bestellung löschen</Paragraph>
+          <Paragraph>heutige Lieferungen suchen und liefern</Paragraph>
         </CRUDCardWrappper>
       </CRUDCardsGridWrapper>
       <div

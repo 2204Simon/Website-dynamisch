@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { BestellungsInformation } from "../../redux/types";
 import { getRequest } from "../../serverFunctions/generelAPICalls";
 import { AdminListWrapper } from "./Admin.styles";
+import { Paragraph } from "../loggedIn/UserInformation.styles";
 
 function BestellungToSpecificDate() {
   const today = new Date();
@@ -31,29 +32,46 @@ function BestellungToSpecificDate() {
   }, [selectedDate]);
 
   return (
-    <>
-      <div>BestellungToSpecificDate</div>
-      <StyledDatePicker
-        selected={selectedDate}
-        onChange={(date: Date) => setSelectedDate(date)}
-        dateFormat={"dd.MM.yyyy"}
-        locale={de}
-        popperPlacement={"top"}
-        onFocus={() => {}}
-        calendarContainer={Calendar}
-        popperContainer={Popper}
-        customInput={<DatepickerInput />}
-      />
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "10px",
+        width: "100%",
+      }}
+    >
+      <div style={{ marginTop: "5px", marginBottom: "5px" }}>
+        <StyledDatePicker
+          selected={selectedDate}
+          onChange={(date: Date) => setSelectedDate(date)}
+          dateFormat={"dd.MM.yyyy"}
+          locale={de}
+          popperPlacement={"top"}
+          onFocus={() => {}}
+          calendarContainer={Calendar}
+          popperContainer={Popper}
+          customInput={<DatepickerInput />}
+        />
+      </div>
       {bestellungen.map(bestellung => (
         <AdminListWrapper
+          hover
+          adminPage
           key={bestellung.bestellungsId}
           onClick={() => navigate(`Bestellung/${bestellung.bestellungsId}`)}
         >
-          <div>{bestellung.kunde?.email}</div>
-          <div>{bestellung.gesamtpreis}</div>
+          <Paragraph>{bestellung.kunde?.nachname}</Paragraph>
+          <Paragraph>{bestellung.kunde?.vorname}</Paragraph>
+          <Paragraph>{bestellung.addressenInformation?.ort}</Paragraph>
+          <Paragraph>{bestellung.addressenInformation?.postleitzahl}</Paragraph>
+          <Paragraph>{bestellung.addressenInformation?.strasse}</Paragraph>
+          <Paragraph>{bestellung.addressenInformation?.hausnummer}</Paragraph>
+          <Paragraph>Preis: {bestellung.gesamtpreis}</Paragraph>
         </AdminListWrapper>
       ))}
-    </>
+    </div>
   );
 }
 
