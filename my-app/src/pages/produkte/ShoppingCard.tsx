@@ -214,7 +214,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
           ) : (
             <BlackColorButton
               onClick={() => navigate("/login")}
-              caption="Anmelden um zu bestellen"
+              caption="Zum Bestellen anmelden"
             />
           )}
         </Details>

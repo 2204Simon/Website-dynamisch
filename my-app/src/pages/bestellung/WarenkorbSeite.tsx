@@ -68,7 +68,7 @@ function WarenkorbSeite(): JSX.Element {
       } catch (error) {
         const notFound = errorHandlerNotfound(
           error,
-          "Fehler beim Laden der Daten"
+          "Fehler beim Laden der Warenkorbdaten"
         );
         if (notFound) {
           dispatch(clearCart());

@@ -43,7 +43,7 @@ export const DesktopMenu: React.FC = () => {
       } catch (error) {
         const notFound = errorHandlerNotfound(
           error,
-          "Fehler beim Laden der Daten"
+          "Fehler beim Laden der Daten - Desktopmenü"
         );
         if (notFound) {
           dispatch(clearCart());

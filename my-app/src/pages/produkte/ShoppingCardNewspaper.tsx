@@ -73,7 +73,7 @@ const NewspaperBanner: React.FC<ShoppingCardProps> = ({
         setAboEndDate(endDate);
       }
     } catch (error) {
-      CustomToast.error("Fehler beim Laden der Daten");
+      CustomToast.error("Fehler beim Laden der Zeitungsdaten");
     }
   };
 

@@ -22,6 +22,7 @@ const ZutatSelection: React.FC<any> = ({}) => {
   const [extras, setExtras] = useState<any[]>([]); // Hier speichern wir die vom Server geholten Extras
   const [productName, setProductName] = useState("");
   const [productId, setProductId] = useState<string>("");
+  const [productPicture, setProductPicture] = useState<string>("");
   const [productSparte, setProductSparte] = useState<string>("");
 
   useEffect(() => {
@@ -106,6 +107,7 @@ const ZutatSelection: React.FC<any> = ({}) => {
       kundenId: null,
       zutat: allFormattedIngredients,
       sparte: productSparte,
+      bild: productPicture,
     };
     console.log(itemObjekt);
     let response = await sendPostRequest("/produkt", itemObjekt);
@@ -141,8 +143,27 @@ const ZutatSelection: React.FC<any> = ({}) => {
           addPersonalizedProduct(productName);
           setProductName("");
           setProductSparte("");
+          setProductPicture("");
         }}
       >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "80vh",
+          }}
+        >
+          <FormLabel>
+            Dateiname des Bildes: (optional)
+            <FormInput
+              type="string"
+              value={productPicture}
+              onChange={event => setProductPicture(event.target.value)}
+              maxLength={50}
+            />
+          </FormLabel>
+        </div>
         <div
           style={{
             display: "flex",

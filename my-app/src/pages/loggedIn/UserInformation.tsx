@@ -32,7 +32,7 @@ export default function UserInformation(): JSX.Element {
         const responsekunde = await getRequest(`/kunde?id=${cookies.kundenId}`);
         dispatch(addNewUser(responsekunde));
       } catch (error) {
-        CustomToast.error("Fehler beim Laden der Daten");
+        CustomToast.error("Fehler beim Laden der Userdaten");
       }
     };
 

@@ -16,7 +16,8 @@ export async function loadImage(path: string): Promise<string> {
     return image.default;
   } catch (error) {
     console.error(`Error loading image at path ${path}:`, error);
-    return "";
+    const image = await import(`../../img/Logo.webp`);
+    return image.default;
   }
 }
 export type Zutat = {

@@ -48,7 +48,7 @@ export default function EinzelBestellung({
 
         setBestellungen(loadedServerBestellung);
       } catch (error) {
-        CustomToast.error("Fehler beim Laden der Daten");
+        CustomToast.error("Fehler beim Laden der Bestellungsdaten");
       }
     };
 
