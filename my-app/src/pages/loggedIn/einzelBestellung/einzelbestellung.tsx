@@ -1,11 +1,11 @@
-import { useCookies } from "react-cookie";
 import { useNavigate, useParams } from "react-router-dom";
-import { KUNDEN_ID } from "../../../globalVariables/global";
 import { useEffect, useState } from "react";
 import { BestellungsInformation } from "../../../redux/types";
-import { getRequest } from "../../../serverFunctions/generelAPICalls";
+import {
+  getRequest,
+  sendPutRequest,
+} from "../../../serverFunctions/generelAPICalls";
 import { CustomToast } from "../../general/toast.style";
-import SideBarBuy from "../../bestellung/SideBarBuy";
 import Warenkorb from "../../bestellung/Warenkorb";
 import {
   WarenkorbWrapper,
@@ -13,7 +13,17 @@ import {
 } from "../../bestellung/stylesBestellung/Bestellung.styles";
 import { loadImage } from "../../produkte/Produkt";
 import { formatGermanDate } from "../../../DateUtils";
-export default function EinzelBestellung() {
+import { ArrowCircleLeft, CheckCircle, CheckSquare } from "phosphor-react";
+import { colors } from "../../general/constants";
+import { BlackColorButton, OrangeButton } from "../../general/button";
+
+type BestellungsInformationProps = {
+  admin?: boolean;
+  deliverFunction?: () => void;
+};
+export default function EinzelBestellung({
+  admin,
+}: BestellungsInformationProps) {
   const { id } = useParams();
   const [bestellungen, setBestellungen] =
     useState<BestellungsInformation | null>(null);
@@ -44,14 +54,51 @@ export default function EinzelBestellung() {
 
     fetchData();
   }, []);
+
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1);
+  };
+  async function deliverFunction() {
+    const response = await sendPutRequest(`/admin/deliver/${id}`);
+    if (response) {
+      CustomToast.success("Lieferung erfolgreich abgeschlossen");
+      navigate(-1);
+    } else {
+      CustomToast.error("Fehler beim Abschließen der Lieferung");
+    }
+  }
   return !bestellungen ? (
     <div>loading</div>
   ) : (
     <div>
-      <h1>
-        Deine Bestellung vom{" "}
-        {formatGermanDate(bestellungen.bestellDatum.toLocaleString())}
-      </h1>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between", // verteilt die Elemente gleichmäßig im Container
+          alignItems: "center",
+        }}
+      >
+        <ArrowCircleLeft size={50} color={colors.black} onClick={goBack} />
+        <h1 style={{ textAlign: "center", flex: 1 }}>
+          {" "}
+          {/* flex: 1 hinzufügen */}
+          Bestellung vom{" "}
+          {formatGermanDate(bestellungen.bestellDatum.toLocaleString())}
+        </h1>
+        <div></div>
+      </div>
+      {admin ? (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <BlackColorButton
+            caption={"Lieferung abschließen"}
+            onClick={deliverFunction}
+          />
+        </div>
+      ) : null}
+
       <WarenkorbWrapper>
         <BestellungsWrapper>
           {bestellungen.produktInformationen.map((item, index) => (

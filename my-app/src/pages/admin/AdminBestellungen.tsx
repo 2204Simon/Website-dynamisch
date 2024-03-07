@@ -4,7 +4,8 @@ import { CRUDCardWrappper, CRUDCardsGridWrapper } from "./Admin.styles";
 import { ScrollableYContainer } from "../loggedIn/Bestellungen.styles";
 import { useState } from "react";
 import { getRequest } from "../../serverFunctions/generelAPICalls";
-import { BestellungsInformation, ZutatApiType } from "../../redux/types";
+import { BestellungsInformation } from "../../redux/types";
+import DeliverToday from "./DeliverToday";
 
 export default function AdminBestellungsblock() {
   const [optionalComponent, setOptionalComponent] =
@@ -23,7 +24,7 @@ export default function AdminBestellungsblock() {
     );
   }
   async function getBestellungsLieferungComponent() {
-    setOptionalComponent(<p>alle heutigen Bestellungen</p>);
+    setOptionalComponent(<DeliverToday />);
   }
   async function putBestellungsLieferungComponent() {
     setOptionalComponent(<p>Bestellung abschließen</p>);

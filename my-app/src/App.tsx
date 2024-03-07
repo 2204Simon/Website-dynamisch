@@ -62,6 +62,10 @@ export default function App(): JSX.Element {
               <Route path="LoggedIn" element={<DeinKonto />} />
               <Route path="Impressum" element={<Impressum />} />
               <Route path="Bestellung/:id" element={<EinzelBestellung />} />
+              <Route
+                path="Admin/Bestellung/:id"
+                element={<EinzelBestellung admin />}
+              />
               <Route path="Admin" element={<AdminRoute />} />
               <Route
                 path="Datenschutzerklaerung"

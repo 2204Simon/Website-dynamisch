@@ -142,6 +142,7 @@ export type Zahlungsinformation = {
 };
 
 export type BestellungsInformation = {
+  kunde?: LogInData;
   gesamtpreis: number;
   lieferDatum: Date;
   bestellDatum: string;

@@ -37,7 +37,7 @@ export async function getRequest(url: string) {
   return await response.json();
 }
 
-export async function sendPutRequest(url: string, data: any) {
+export async function sendPutRequest(url: string, data?: any) {
   const response = await fetch(baseUrl + url, {
     method: "PUT",
     credentials: "include",
