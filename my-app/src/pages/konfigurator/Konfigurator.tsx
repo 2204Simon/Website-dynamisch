@@ -244,13 +244,25 @@ const Konfigurator: React.FC = () => {
                 >
                   <Button
                     className="black-color white-orange"
-                    onClick={() => addPersonalizedProduct(productName)}
+                    onClick={() => {
+                      if (!productName) {
+                        CustomToast.error("Bitte gib einen Produktnamen ein!");
+                      } else {
+                        addPersonalizedProduct(productName);
+                      }
+                    }}
                   >
                     Produkt speichern
                   </Button>
                   <Button
                     className="black-color white-orange"
-                    onClick={() => addPersonalizedProductToBasket(productName)}
+                    onClick={() => {
+                      if (!productName) {
+                        CustomToast.error("Bitte gib einen Produktnamen ein!");
+                      } else {
+                        addPersonalizedProductToBasket(productName);
+                      }
+                    }}
                     style={{ paddingTop: "10px" }}
                   >
                     Zum Warenkorb hinzufügen

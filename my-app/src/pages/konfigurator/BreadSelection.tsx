@@ -87,7 +87,7 @@ const BreadSelection: React.FC<BreadSelectionProps> = ({ onNextStage }) => {
     if (selectedBread) {
       onNextStage([selectedBread]);
     } else {
-      CustomToast.error("Bitte wählen Sie ein Brot aus");
+      CustomToast.error("Bitte wähle ein Gebäck aus!");
     }
   };
 

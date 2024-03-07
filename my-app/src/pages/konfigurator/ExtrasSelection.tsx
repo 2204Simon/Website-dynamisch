@@ -55,21 +55,32 @@ const ExtraSelection: React.FC<ExtrasSelectionProps> = ({
 
   const handleExtraSelect = (topping: any, quantity: number) => {
     const lclToppings = selectedExtras;
-    if (quantity > 0) {
-      lclToppings.push({
-        zutatsId: topping.zutatsId,
-        zutatBild: topping.zutatBild,
-        zutatsname: topping.zutatsname,
-        zutatspreis: topping.zutatspreis,
-        zutatseinheit: topping.zutatseinheit,
-        zutatsmenge: quantity,
-      });
+    const toppingId = lclToppings.findIndex(
+      t => t.zutatsId === topping.zutatsId
+    );
 
+    if (quantity > 0) {
+      // if (lclToppings.includes(topping)) {
+      if (toppingId !== -1) {
+        //Zutat existiert bereits im Auswahlarray
+        lclToppings[toppingId] = {
+          ...lclToppings[toppingId],
+          zutatsmenge: lclToppings[toppingId].zutatsmenge + quantity,
+        };
+      } else {
+        //Zutat existiert noch nicht im Auswahlarray
+        lclToppings.push({
+          zutatsId: topping.zutatsId,
+          zutatBild: topping.zutatBild,
+          zutatsname: topping.zutatsname,
+          zutatspreis: topping.zutatspreis,
+          zutatseinheit: topping.zutatseinheit,
+          zutatsmenge: quantity,
+        });
+      }
       CustomToast.success(
         `Es wurde(n) ${quantity} ${topping.zutatseinheit} ${topping.zutatsname} hinzugefügt!`
       );
-      console.log(lclToppings);
-      setSelectedExtras(lclToppings);
     } else {
       CustomToast.error(
         `Du musst mindestens eine Menge von 1 Einheit auswählen!`

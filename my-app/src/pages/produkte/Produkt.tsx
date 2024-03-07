@@ -296,8 +296,8 @@ function Produkt() {
       ) : (
         <div>
           <p>
-            Die eigenen Konfiguratorprodukte konnten nicht geladen werden. Bitte
-            wenden Sie sich an den Support.
+            Du hast noch keine selbstkonfigurierten Produkte. Konfiguriere jetzt
+            Dein erstes eigenes Produkt!
           </p>
           <div
             style={{
