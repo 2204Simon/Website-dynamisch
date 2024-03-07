@@ -178,8 +178,8 @@ const ZutatSelection: React.FC<any> = ({}) => {
               required
             >
               <option value="">Auswahl</option>
-              <option value="Sparte1">Food</option>
-              <option value="Sparte2">Drink</option>
+              <option value="Food">Speisen</option>
+              <option value="Drink">Getränke</option>
             </select>
           </FormLabel>
         </div>
