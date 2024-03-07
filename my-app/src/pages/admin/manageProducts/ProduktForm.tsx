@@ -114,10 +114,15 @@ const ZutatSelection: React.FC<any> = ({}) => {
   }
 
   async function addPersonalizedProduct(productName: string) {
-    await createPersonalizedProduct(productName);
-    CustomToast.success(
-      `${productName} wurde gespeichert und kann unter Produkte eingesehen werden!`
-    );
+    if (selectedExtras.length > 0) {
+      await createPersonalizedProduct(productName);
+      CustomToast.success(
+        `${productName} wurde gespeichert und kann unter Produkte eingesehen werden!`
+      );
+      setSelectedExtras([]);
+    } else {
+      CustomToast.error(`Du musst mindestens eine Zutat auswählen!`);
+    }
   }
 
   return (
@@ -130,49 +135,12 @@ const ZutatSelection: React.FC<any> = ({}) => {
 
       <SelectionContainer>{KonfiguratorCards()}</SelectionContainer>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "80vh",
-        }}
-      >
-        <FormLabel>
-          Name der Konfiguration:
-          <FormInput
-            type="string"
-            value={productName}
-            onChange={event => setProductName(event.target.value)}
-            maxLength={50}
-            required
-          />
-        </FormLabel>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "80vh",
-        }}
-      >
-        <FormLabel>
-          Name der Sparte:
-          <FormInput
-            type="string"
-            value={productSparte}
-            onChange={event => setProductSparte(event.target.value)}
-            maxLength={50}
-            required
-          />
-        </FormLabel>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+      <form
+        onSubmit={event => {
+          event.preventDefault();
+          addPersonalizedProduct(productName);
+          setProductName("");
+          setProductSparte("");
         }}
       >
         <div
@@ -180,16 +148,53 @@ const ZutatSelection: React.FC<any> = ({}) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            width: "80vh",
           }}
         >
-          <Button
-            className="black-color white-orange"
-            onClick={() => addPersonalizedProduct(productName)}
-          >
+          <FormLabel>
+            Name der Konfiguration:
+            <FormInput
+              type="string"
+              value={productName}
+              onChange={event => setProductName(event.target.value)}
+              maxLength={50}
+              required
+            />
+          </FormLabel>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "80vh",
+          }}
+        >
+          <FormLabel>
+            Name der Sparte:
+            <select
+              value={productSparte}
+              onChange={event => setProductSparte(event.target.value)}
+              required
+            >
+              <option value="">Auswahl</option>
+              <option value="Sparte1">Food</option>
+              <option value="Sparte2">Drink</option>
+            </select>
+          </FormLabel>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Button className="black-color white-orange" type="submit">
             Produkt speichern
           </Button>
         </div>
-      </div>
+      </form>
     </Stage>
   );
 };

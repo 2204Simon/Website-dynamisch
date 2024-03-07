@@ -130,10 +130,10 @@ export default function ProduktBlock() {
           width: "100%",
         }}
       >
-        <div style={{ marginTop: "50px", width: "100%", height: "100vh" }}>
-          <ScrollableYContainer style={{ width: "100%", height: "100vh" }}>
-            {optionalComponent}
-          </ScrollableYContainer>
+        <div style={{ marginTop: "50px", width: "100%" }}>
+          {/* <ScrollableYContainer style={{ width: "100%", height: "100vh" }}> */}
+          {optionalComponent}
+          {/* </ScrollableYContainer> */}
         </div>
         {optionalComponent && (
           <X
