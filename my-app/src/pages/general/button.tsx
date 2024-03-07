@@ -23,7 +23,11 @@ export const BlackColorButton: React.FC<ButtonProps> = ({
   onClick,
 }) => {
   return (
-    <Button className="black-color white-orange" onClick={onClick}>
+    <Button
+      className="black-color white-orange"
+      style={{ whiteSpace: "nowrap" }}
+      onClick={onClick}
+    >
       {caption}
     </Button>
   );
