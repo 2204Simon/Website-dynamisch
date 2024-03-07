@@ -83,7 +83,7 @@ export default function SignUp() {
         );
         return;
       }
-      if (!validateEmail(paypalEmail)) {
+      if (paypalEmail && !validateEmail(paypalEmail)) {
         CustomToast.error("Bitte gebe eine gültige PayPal E-Mail-Adresse ein");
         return;
       }
