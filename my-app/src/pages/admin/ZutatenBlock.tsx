@@ -3,83 +3,84 @@ import { Card, Paragraph, Title } from "../loggedIn/UserInformation.styles";
 import { CRUDCardWrappper, CRUDCardsGridWrapper } from "./Admin.styles";
 import { ScrollableYContainer } from "../loggedIn/Bestellungen.styles";
 import { useState } from "react";
-import { getRequest } from "../../serverFunctions/generelAPICalls";
+import {
+  getRequest,
+  sendPutRequest,
+} from "../../serverFunctions/generelAPICalls";
 import { ZutatApiType } from "../../redux/types";
 import Warenkorb from "../bestellung/Warenkorb";
 import { loadImage } from "../produkte/Produkt";
 import { AdminList } from "./AdminList";
 import { Zutatsform } from "./ZutatsForm";
 import { FaCross } from "react-icons/fa";
+import { ProduktCard, ZutatCard } from "./manageProducts/CreateProductCard";
+import { ZutatenSelectionContainer } from "./manageProducts/manageProducts.styles";
+import { Stage } from "../konfigurator/styles/Konfigurator.styles";
+import { CustomToast } from "../general/toast.style";
 export default function ZutatenBlock() {
   const [optionalComponent, setOptionalComponent] =
     useState<JSX.Element | null>(null);
 
-  function handleEditChange(zuatat: ZutatApiType) {
-    console.log("muss noch implementiert werden");
+  function handleEditZutat(ID: string) {
     setOptionalComponent(<p>Abfrage muss noch implementiert werden</p>);
   }
 
-  async function getZutatenComponent() {
-    console.log("muss noch implementiert werden");
-    const zutaten: Array<ZutatApiType> = await getRequest("/zutat");
-    const loadedZutaten: Array<ZutatApiType> = await Promise.all(
-      zutaten.map((zutat: any) =>
-        loadImage(zutat.zutatBild).then(image => ({
-          ...zutat,
-          zutatBild: image,
-        }))
-      )
-    );
-    setOptionalComponent(
-      <>
-        {loadedZutaten.map(zutat => (
-          <AdminList
-            key={zutat.zutatsId}
-            editable
-            deletable
-            onEdit={() => zutatsPutKomponent(zutat)}
-            onRemove={() => deleteZutatenComponent()} // Item an handleRemoveItem übergeben
-            children={
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  width: "100%",
-                }}
-              >
-                {/* <Paragraph>{zutat.zutatsId}</Paragraph> */}
-                <Paragraph>{zutat.zutatsname}</Paragraph>
-                <Paragraph>{zutat.zutatensparte}</Paragraph>
-                <Paragraph>{zutat.zutatseigenschaft}</Paragraph>
-                <Paragraph>{zutat.zutatspreis}</Paragraph>
-                <Paragraph>{zutat.zutatseinheit}</Paragraph>
-              </div>
-            }
-          />
-        ))}
-      </>
-    );
+  async function handleDeleteZutat(Id: string) {
+    const status = await sendPutRequest("/zutat/loeschen", {
+      zutatsId: Id,
+    });
+    if (status === true) {
+      CustomToast.success("Zutat wurde gelöscht");
+    } else {
+      CustomToast.error("Zutat konnte nicht gelöscht werden");
+    }
   }
 
-  async function zutatsPutKomponent(zutat?: ZutatApiType) {
-    setOptionalComponent(
-      <Zutatsform
-        onSubmit={handleEditChange}
-        defaultValue={zutat}
-        newZutat={false}
+  const KonfiguratorCards = (zutaten: Array<ZutatApiType>) => {
+    return zutaten.map(product => (
+      <ZutatCard
+        topping={product}
+        handleEdit={handleEditZutat}
+        handleDelete={handleDeleteZutat}
       />
-    );
-  }
+    ));
+  };
 
-  async function zutatsPostKomponent() {
+  async function getZutatenComponent() {
+    const zutaten: Array<ZutatApiType> = await getRequest("/zutat");
+    // const loadedZutaten: Array<ZutatApiType> = await Promise.all(
+    //   zutaten.map((zutat: ZutatApiType) =>
+    //     loadImage(zutat.zutatBild).then(image => ({
+    //       ...zutat,
+    //       zutatBild: image,
+    //     }))
+    //   )
+    // );
     setOptionalComponent(
-      <Zutatsform onSubmit={handleEditChange} newZutat={true} />
+      <Stage>
+        <ZutatenSelectionContainer>
+          {KonfiguratorCards(zutaten)}
+        </ZutatenSelectionContainer>
+      </Stage>
     );
   }
 
-  async function deleteZutatenComponent() {
-    setOptionalComponent(<p> Muss noch implementiert werden</p>);
-  }
+  // async function zutatsPutKomponent(zutat?: ZutatApiType) {
+  //   setOptionalComponent(
+  //     <Zutatsform
+  //       onSubmit={handleEditChange}
+  //       defaultValue={zutat}
+  //       newZutat={false}
+  //     />
+  //   );
+  // }
+
+  // async function zutatsPostKomponent() {
+  //   setOptionalComponent(
+  //     <Zutatsform onSubmit={handleEditChange} newZutat={true} />
+  //   );
+  // }
+
   return (
     <Card>
       <Title>Zutaten</Title>
@@ -87,9 +88,9 @@ export default function ZutatenBlock() {
       <CRUDCardsGridWrapper>
         <CRUDCardWrappper onClick={() => getZutatenComponent()}>
           <MagnifyingGlass size={50} />
-          <Paragraph>Zutaten suchen</Paragraph>
+          <Paragraph>Zutaten anzeigen</Paragraph>
         </CRUDCardWrappper>
-        <CRUDCardWrappper onClick={() => zutatsPutKomponent()}>
+        {/* <CRUDCardWrappper onClick={() => zutatsPutKomponent()}>
           <Pencil size={50} />
           <Paragraph>Zutaten bearbeiten</Paragraph>
         </CRUDCardWrappper>
@@ -97,10 +98,10 @@ export default function ZutatenBlock() {
           <Plus size={50} />
           <Paragraph>Zutaten hinzufügen</Paragraph>
         </CRUDCardWrappper>
-        <CRUDCardWrappper onClick={() => deleteZutatenComponent()}>
+        <CRUDCardWrappper onClick={() => ()}>
           <Trash size={50} />
           <Paragraph>Zutaten löschen</Paragraph>
-        </CRUDCardWrappper>
+        </CRUDCardWrappper>*/}
       </CRUDCardsGridWrapper>
       <div
         style={{

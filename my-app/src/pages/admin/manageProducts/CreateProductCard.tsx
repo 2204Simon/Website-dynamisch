@@ -17,14 +17,46 @@ import {
   MinusQuantity,
 } from "../../produkte/styles/ShoppingCard.styles";
 import { Ingredient } from "../../konfigurator/Konfigurator";
-import { Container, ContainerFront } from "./manageProducts.styles";
+import {
+  Container,
+  ContainerFront,
+  ProduktContainer,
+  ProduktContainerFront,
+  ZutatenContainer,
+  ZutatenContainerFront,
+} from "./manageProducts.styles";
+import Produkt, { Zutat } from "../../produkte/Produkt";
+import { ZutatApiType } from "../ZutatsForm";
 
 export interface ShoppingCardProps {
   topping: Ingredient;
   handleSelect: Function;
 }
+export interface Produkt {
+  produktId: string;
+  titel: string;
+  preis: number;
+  bild: string;
+  sparte: string;
+  kundenId: string | null;
+  createdAt: string;
+  updatedAt: string;
+  Zutaten: Array<Zutat>;
+}
 
-const ShoppingCard: React.FC<ShoppingCardProps> = input => {
+export interface ProductCardProps {
+  topping: Produkt;
+  handleEdit: Function;
+  handleDelete: Function;
+}
+
+export interface ZutatCardProps {
+  topping: ZutatApiType;
+  handleEdit: Function;
+  handleDelete: Function;
+}
+
+export const ProduktCard: React.FC<ShoppingCardProps> = input => {
   const [displayNone, setDisplayNone] = useState(false);
   const [quantity, setQuantity] = useState<number>(0);
 
@@ -36,8 +68,8 @@ const ShoppingCard: React.FC<ShoppingCardProps> = input => {
       setQuantity(0); // wenn der Wert NaN ist, wird der Wert auf 0 gesetzt
       CustomToast.error("Ungültige Eingabe");
     } else {
-      if (parsedValue > 99) {
-        setQuantity(99);
+      if (parsedValue > 500) {
+        setQuantity(500);
       } else {
         setQuantity(parsedValue);
       }
@@ -46,7 +78,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = input => {
 
   const handlePlus = (quantity: number) => {
     quantity += 1;
-    if (quantity === 6) {
+    if (quantity === 501) {
       CustomToast.error("Die maximale Anzahl wurde erreicht!");
     } else {
       setQuantity(Number(quantity));
@@ -87,7 +119,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = input => {
               type="text"
               id="quantity"
               name="quantity"
-              pattern="[0-9]*"
+              pattern="[0-9]**"
               value={quantity}
               onChange={handleQuantityChange}
               inputMode="numeric"
@@ -107,4 +139,84 @@ const ShoppingCard: React.FC<ShoppingCardProps> = input => {
   );
 };
 
-export default ShoppingCard;
+export const ZutatCard: React.FC<ZutatCardProps> = input => {
+  const handleButtonEdit = () => {
+    input.handleEdit(input.topping.zutatsId);
+  };
+  const handleButtonDelete = () => {
+    input.handleDelete(input.topping.zutatsId);
+  };
+  return (
+    <ZutatenContainer flipped={false}>
+      <ZutatenContainerFront>
+        {/* <ImageContainer>
+          <Image src={input.topping.zutatBild} alt="product" />
+        </ImageContainer> */}
+        <Details>
+          <Title style={{ paddingLeft: "0px" }}>
+            {input.topping.zutatsname}
+          </Title>
+          <Price>Preis: {formatNumber(input.topping.zutatspreis)} €</Price>
+          <Type>Id: </Type>
+          <Type>{input.topping.zutatsId}</Type>
+          <Type>Einheit: {input.topping.zutatseinheit}</Type>
+          <Type>Eigenschaft: {input.topping.zutatseigenschaft}</Type>
+          <Type>Sparte: {input.topping.zutatensparte}</Type>
+          <Type>Bild: {input.topping.zutatBild}</Type>
+
+          <BlackColorButton
+            onClick={() => handleButtonEdit()}
+            caption="Ändern"
+          />
+          <BlackColorButton
+            onClick={() => handleButtonDelete()}
+            caption="Löschen"
+          />
+        </Details>
+      </ZutatenContainerFront>
+    </ZutatenContainer>
+  );
+};
+
+export const ProduktInfosCard: React.FC<ProductCardProps> = input => {
+  const [displayNone, setDisplayNone] = useState(false);
+  const [quantity, setQuantity] = useState<number>(0);
+
+  const handleButtonEdit = () => {
+    input.handleEdit(input.topping.produktId);
+  };
+  const handleButtonDelete = () => {
+    input.handleDelete(input.topping.produktId);
+  };
+
+  return (
+    <ProduktContainer flipped={false}>
+      <ProduktContainerFront>
+        {/* <ImageContainer>
+          <Image src={input.topping.zutatBild} alt="product" />
+        </ImageContainer> */}
+
+        <Title style={{ paddingLeft: "0px" }}>{input.topping.titel}</Title>
+        <Price>Preis: {formatNumber(input.topping.preis)} €</Price>
+        <Type>Id:</Type>
+        <Type>{input.topping.produktId}</Type>
+        <Type>Sparte: {input.topping.sparte}</Type>
+        <Type>KundenID: {input.topping.kundenId}</Type>
+        <Type>Bild: {input.topping.bild}</Type>
+        <Type>Erstellt: {input.topping.createdAt}</Type>
+        <Type>Geändert: {input.topping.updatedAt}</Type>
+        <Type> Zutaten:</Type>
+        {input.topping.Zutaten.map(item => {
+          return (
+            <>
+              <Type>- {item.zutatsname}</Type>
+            </>
+          );
+        })}
+
+        <BlackColorButton onClick={handleButtonEdit} caption="Ändern" />
+        <BlackColorButton onClick={handleButtonDelete} caption="Löschen" />
+      </ProduktContainerFront>
+    </ProduktContainer>
+  );
+};

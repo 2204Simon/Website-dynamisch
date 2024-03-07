@@ -9,7 +9,7 @@ import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { Button } from "../../general/button.styles";
 import { baseUrl } from "../../../globalVariables/global";
 import { Ingredient } from "../../konfigurator/Konfigurator";
-import KonfiguratorCard from "./CreateProductCard";
+import { ProduktCard } from "./CreateProductCard";
 import { CustomToast } from "../../general/toast.style";
 import { sendPostRequest } from "../../../serverFunctions/generelAPICalls";
 import { useCookies } from "react-cookie";
@@ -89,7 +89,7 @@ const ZutatSelection: React.FC<any> = ({}) => {
 
   const KonfiguratorCards = () => {
     return extras.map(product => (
-      <KonfiguratorCard topping={product} handleSelect={handleExtraSelect} />
+      <ProduktCard topping={product} handleSelect={handleExtraSelect} />
     ));
   };
 

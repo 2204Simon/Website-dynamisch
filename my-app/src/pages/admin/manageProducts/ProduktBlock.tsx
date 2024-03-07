@@ -3,13 +3,24 @@ import { Card, Paragraph, Title } from "../../loggedIn/UserInformation.styles";
 import { CRUDCardWrappper, CRUDCardsGridWrapper } from "../Admin.styles";
 import { ScrollableYContainer } from "../../loggedIn/Bestellungen.styles";
 import { useState } from "react";
-import { getRequest } from "../../../serverFunctions/generelAPICalls";
+import {
+  getRequest,
+  sendPostRequest,
+  sendPutRequest,
+} from "../../../serverFunctions/generelAPICalls";
 import { ZutatApiType, ProduktApiType } from "../../../redux/types";
 import Warenkorb from "../../bestellung/Warenkorb";
 import { loadImage } from "../../produkte/Produkt";
 import { AdminList } from "../AdminList";
 import ZutatSelection from "./ProduktForm";
 import { FaCross } from "react-icons/fa";
+import { CustomToast } from "../../general/toast.style";
+import { Stage } from "../../konfigurator/styles/Konfigurator.styles";
+import {
+  ProduktSelectionContainer,
+  ZutatenSelectionContainer,
+} from "./manageProducts.styles";
+import { ProduktInfosCard } from "./CreateProductCard";
 
 export interface Zutat {
   zutatsId: string;
@@ -44,48 +55,56 @@ export default function ProduktBlock() {
     setOptionalComponent(<p>Abfrage muss noch implementiert werden</p>);
   }
 
+  const KonfiguratorCards = (zutaten: Array<Produkt>) => {
+    return zutaten.map(product => (
+      <ProduktInfosCard
+        topping={product}
+        handleEdit={handleDeleteProduct}
+        handleDelete={handleDeleteProduct}
+      />
+    ));
+  };
+
   async function getProductComponent() {
-    console.log("muss noch implementiert werden");
     const produkte: Array<Produkt> = await getRequest("/produkt");
-    const loadedProdukte: Array<Produkt> = await Promise.all(
-      produkte.map((zutat: any) =>
-        loadImage(zutat.zutatBild).then(image => ({
-          ...zutat,
-          zutatBild: image,
-        }))
-      )
-    );
     setOptionalComponent(
-      <>
-        {loadedProdukte.map(zutat => (
-          <AdminList
-            key={zutat.produktId}
-            editable
-            deletable
-            onEdit={() => productPutKomponent(zutat)}
-            onRemove={() => deleteProductComponent()} // Item an handleRemoveItem übergeben
-            children={
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  width: "100%",
-                }}
-              >
-                <Paragraph>{zutat.produktId}</Paragraph>
-                <Paragraph>{zutat.titel}</Paragraph>
-                <Paragraph>{zutat.preis}</Paragraph>
-                <Paragraph>{zutat.bild}</Paragraph>
-                <Paragraph>{zutat.sparte}</Paragraph>
-                <Paragraph>{zutat.kundenId}</Paragraph>
-                <Paragraph>{zutat.createdAt}</Paragraph>
-                <Paragraph>{zutat.updatedAt}</Paragraph>
-              </div>
-            }
-          />
-        ))}
-      </>
+      <Stage>
+        <ProduktSelectionContainer>
+          {KonfiguratorCards(produkte)}
+        </ProduktSelectionContainer>
+      </Stage>
     );
+    // setOptionalComponent(
+    //   <>
+    //     {loadedProdukte.map(zutat => (
+    //       <AdminList
+    //         key={zutat.produktId}
+    //         editable
+    //         deletable
+    //         onEdit={() => productPutKomponent(zutat)}
+    //         onRemove={() => deleteProductComponent(zutat.produktId)} // Item an handleRemoveItem übergeben
+    //         children={
+    //           <div
+    //             style={{
+    //               display: "flex",
+    //               justifyContent: "center",
+    //               width: "100%",
+    //             }}
+    //           >
+    //             <Paragraph>{zutat.produktId}</Paragraph>
+    //             <Paragraph>{zutat.titel}</Paragraph>
+    //             <Paragraph>{zutat.preis}</Paragraph>
+    //             <Paragraph>{zutat.bild}</Paragraph>
+    //             <Paragraph>{zutat.sparte}</Paragraph>
+    //             <Paragraph>{zutat.kundenId}</Paragraph>
+    //             <Paragraph>{zutat.createdAt}</Paragraph>
+    //             <Paragraph>{zutat.updatedAt}</Paragraph>
+    //           </div>
+    //         }
+    //       />
+    //     ))}
+    //   </>
+    // );
   }
 
   async function productPutKomponent(zutat?: Produkt) {
@@ -97,9 +116,18 @@ export default function ProduktBlock() {
     setOptionalComponent(<ZutatSelection />);
   }
 
-  async function deleteProductComponent() {
-    setOptionalComponent(<p> Muss noch implementiert werden</p>);
+  async function handleDeleteProduct(Id: string) {
+    const status = await sendPutRequest("/produkt/loeschen", {
+      produktId: Id,
+    });
+
+    if (status === true) {
+      CustomToast.success("Produkt wurde gelöscht");
+    } else {
+      CustomToast.error("Produkt konnte nicht gelöscht werden");
+    }
   }
+
   return (
     <Card>
       <Title>Produkte</Title>
@@ -107,7 +135,7 @@ export default function ProduktBlock() {
       <CRUDCardsGridWrapper>
         <CRUDCardWrappper onClick={() => getProductComponent()}>
           <MagnifyingGlass size={50} />
-          <Paragraph>Produkt suchen</Paragraph>
+          <Paragraph>Produkte anzeigen</Paragraph>
         </CRUDCardWrappper>
         <CRUDCardWrappper onClick={() => productPutKomponent()}>
           <Pencil size={50} />
@@ -117,10 +145,10 @@ export default function ProduktBlock() {
           <Plus size={50} />
           <Paragraph>Produkt hinzufügen</Paragraph>
         </CRUDCardWrappper>
-        <CRUDCardWrappper onClick={() => deleteProductComponent()}>
+        {/* <CRUDCardWrappper onClick={() => deleteProductComponent()}>
           <Trash size={50} />
-          <Paragraph>Produkt löschen</Paragraph>
-        </CRUDCardWrappper>
+          <Paragraph>Produkt löschen</Paragraph> 
+        </CRUDCardWrappper>*/}
       </CRUDCardsGridWrapper>
       <div
         style={{
