@@ -79,6 +79,7 @@ export const ZutatenContainerFront = styled.div<{}>`
   cursor: pointer;
   backface-visibility: hidden;
   transform: rotateY(0deg);
+  justify-content: left;
 `;
 
 export const ProduktSelectionContainer = styled.div`
@@ -122,6 +123,12 @@ export const ProduktContainerFront = styled.div<{}>`
   cursor: pointer;
   backface-visibility: hidden;
   transform: rotateY(0deg);
+  /* align-items: center; */
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   align-items: center;
 `;
 
