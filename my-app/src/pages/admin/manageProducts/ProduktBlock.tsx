@@ -53,13 +53,17 @@ export default function ProduktBlock() {
   const [produkte, setProdukte] = useState<Array<Produkt>>([]);
 
   const KonfiguratorCards = (zutaten: Array<Produkt>) => {
-    return zutaten.map(product => (
-      <ProduktInfosCard
-        topping={product}
-        handleEdit={handleDeleteProduct}
-        handleDelete={handleDeleteProduct}
-      />
-    ));
+    if (zutaten.length === 0) {
+      return <h2>Keine Produkte vorhanden</h2>;
+    } else {
+      return zutaten.map(product => (
+        <ProduktInfosCard
+          topping={product}
+          handleEdit={handleDeleteProduct}
+          handleDelete={handleDeleteProduct}
+        />
+      ));
+    }
   };
 
   async function getProductComponent() {
