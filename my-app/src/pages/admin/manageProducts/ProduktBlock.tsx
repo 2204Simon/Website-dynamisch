@@ -22,6 +22,7 @@ import {
 } from "./manageProducts.styles";
 import { ProduktInfosCard } from "./CreateProductCard";
 import ZutatCreation from "../ZutatsForm";
+import { colors } from "../../general/constants";
 
 export interface Zutat {
   zutatsId: string;
@@ -119,19 +120,19 @@ export default function ProduktBlock() {
       <CRUDCardsGridWrapper>
         <CRUDCardWrappper onClick={() => getProductComponent()}>
           {/* <MagnifyingGlass size={50} /> */}
-          <Pencil size={50} />
+          <Pencil size={50} style={{ color: colors.black }} />
           <Paragraph>Produkte verwalten</Paragraph>
         </CRUDCardWrappper>
         {/* <CRUDCardWrappper onClick={() => productPutKomponent()}>
-          <Pencil size={50} />
+          <Pencil size={50} style={{ color: colors.black}}/>
           <Paragraph>Produkt bearbeiten</Paragraph>
         </CRUDCardWrappper> */}
         <CRUDCardWrappper onClick={() => productPostKomponent()}>
-          <Plus size={50} />
+          <Plus size={50} style={{ color: colors.black }} />
           <Paragraph>Produkt hinzufügen</Paragraph>
         </CRUDCardWrappper>
         {/* <CRUDCardWrappper onClick={() => deleteProductComponent()}>
-          <Trash size={50} />
+          <Trash size={50} style={{ color: colors.black}} />
           <Paragraph>Produkt löschen</Paragraph> 
         </CRUDCardWrappper>*/}
       </CRUDCardsGridWrapper>
@@ -153,6 +154,7 @@ export default function ProduktBlock() {
             size={40}
             cursor={"pointer"}
             onClick={() => setOptionalComponent(null)}
+            style={{ color: colors.black }}
           />
         )}
       </div>

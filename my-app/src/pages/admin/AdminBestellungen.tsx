@@ -7,6 +7,7 @@ import { getRequest } from "../../serverFunctions/generelAPICalls";
 import { BestellungsInformation } from "../../redux/types";
 import DeliverToday from "./DeliverToday";
 import BestellungToSpecificDate from "./BestellungToSpecificDate";
+import { colors } from "../general/constants";
 
 export default function AdminBestellungsblock() {
   const [optionalComponent, setOptionalComponent] =
@@ -29,11 +30,11 @@ export default function AdminBestellungsblock() {
 
       <CRUDCardsGridWrapper>
         <CRUDCardWrappper onClick={() => getAllBestellungenComponent()}>
-          <MagnifyingGlass size={50} />
+          <MagnifyingGlass size={50} style={{ color: colors.black }} />
           <Paragraph>Alle Bestellungen suchen</Paragraph>
         </CRUDCardWrappper>
         <CRUDCardWrappper onClick={() => getBestellungsLieferungComponent()}>
-          <MagnifyingGlass size={50} />
+          <MagnifyingGlass size={50} style={{ color: colors.black }} />
           <Paragraph>heutige Lieferungen suchen und liefern</Paragraph>
         </CRUDCardWrappper>
       </CRUDCardsGridWrapper>

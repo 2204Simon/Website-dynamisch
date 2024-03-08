@@ -227,6 +227,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
               onClick={() => {
                 handleDeleteProduct(produktId);
               }}
+              style={{ color: colors.black }}
             />
           ) : null}
         </Details>
