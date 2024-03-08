@@ -25,7 +25,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../general/toast.style";
 
 import { CartItem, CartState } from "../../redux/types";
-import { Plus, XCircle, Minus } from "phosphor-react";
+import { Plus, XCircle, Minus, Trash } from "phosphor-react";
 import { FaSeedling } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { formatNumber } from "../general/constants";
@@ -222,11 +222,11 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
             />
           )}
           {kundenId !== null ? (
-            <BlackColorButton
+            <Trash
+              size={30}
               onClick={() => {
                 handleDeleteProduct(produktId);
               }}
-              caption="Konfiguration löschen"
             />
           ) : null}
         </Details>

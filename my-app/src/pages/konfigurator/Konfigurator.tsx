@@ -85,9 +85,13 @@ const Konfigurator: React.FC = () => {
       zutat: allFormattedIngredients,
     };
     console.log(itemObjekt);
-    let response = await sendPostRequest("/KundenProdukt", itemObjekt);
-    setProductId(response);
-    return response;
+    const response = await sendPostRequest("/KundenProdukt", itemObjekt);
+    if (response === "ProduktID ist leer!") {
+      CustomToast.error("Fehler beim Speichern des Produktes");
+    } else {
+      setProductId(response);
+      return response;
+    }
   }
 
   async function addPersonalizedProduct(productName: string) {
