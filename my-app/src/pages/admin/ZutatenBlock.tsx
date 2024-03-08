@@ -11,7 +11,7 @@ import { ZutatApiType } from "../../redux/types";
 import Warenkorb from "../bestellung/Warenkorb";
 import { loadImage } from "../produkte/Produkt";
 import { AdminList } from "./AdminList";
-import { Zutatsform } from "./ZutatsForm";
+import ZutatCreation from "./ZutatsForm";
 import { FaCross } from "react-icons/fa";
 import { ProduktCard, ZutatCard } from "./manageProducts/CreateProductCard";
 import { ZutatenSelectionContainer } from "./manageProducts/manageProducts.styles";
@@ -67,6 +67,7 @@ export default function ZutatenBlock() {
       );
     }
   }, [zutaten]);
+
   // async function zutatsPutKomponent(zutat?: ZutatApiType) {
   //   setOptionalComponent(
   //     <Zutatsform
@@ -77,11 +78,9 @@ export default function ZutatenBlock() {
   //   );
   // }
 
-  // async function zutatsPostKomponent() {
-  //   setOptionalComponent(
-  //     <Zutatsform onSubmit={handleEditChange} newZutat={true} />
-  //   );
-  // }
+  async function zutatsPostKomponent() {
+    setOptionalComponent(<ZutatCreation />);
+  }
 
   return (
     <Card>
@@ -89,22 +88,23 @@ export default function ZutatenBlock() {
 
       <CRUDCardsGridWrapper>
         <CRUDCardWrappper onClick={() => getZutatenComponent()}>
-          <MagnifyingGlass size={50} />
-          <Paragraph>Zutaten anzeigen</Paragraph>
+          <Pencil size={50} />
+          <Paragraph>Zutaten verwalten</Paragraph>
         </CRUDCardWrappper>
         {/* <CRUDCardWrappper onClick={() => zutatsPutKomponent()}>
           <Pencil size={50} />
           <Paragraph>Zutaten bearbeiten</Paragraph>
-        </CRUDCardWrappper>
+        </CRUDCardWrappper> */}
         <CRUDCardWrappper onClick={() => zutatsPostKomponent()}>
           <Plus size={50} />
           <Paragraph>Zutaten hinzufügen</Paragraph>
         </CRUDCardWrappper>
-        <CRUDCardWrappper onClick={() => ()}>
+        {/* <CRUDCardWrappper onClick={() => ()}>
           <Trash size={50} />
           <Paragraph>Zutaten löschen</Paragraph>
-        </CRUDCardWrappper>*/}
+        </CRUDCardWrappper> */}
       </CRUDCardsGridWrapper>
+
       <div
         style={{
           marginTop: "50px",

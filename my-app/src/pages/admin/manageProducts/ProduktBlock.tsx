@@ -21,6 +21,7 @@ import {
   ZutatenSelectionContainer,
 } from "./manageProducts.styles";
 import { ProduktInfosCard } from "./CreateProductCard";
+import ZutatCreation from "../ZutatsForm";
 
 export interface Zutat {
   zutatsId: string;
@@ -51,11 +52,6 @@ export default function ProduktBlock() {
     useState<JSX.Element | null>(null);
   const [produkte, setProdukte] = useState<Array<Produkt>>([]);
 
-  function handleEditChange(zuatat: ZutatApiType) {
-    console.log("muss noch implementiert werden");
-    setOptionalComponent(<p>Abfrage muss noch implementiert werden</p>);
-  }
-
   const KonfiguratorCards = (zutaten: Array<Produkt>) => {
     return zutaten.map(product => (
       <ProduktInfosCard
@@ -68,6 +64,7 @@ export default function ProduktBlock() {
 
   async function getProductComponent() {
     setProdukte(await getRequest("/produkt"));
+    console.log(produkte);
     setOptionalComponent(
       <Stage>
         <ProduktSelectionContainer>
@@ -75,41 +72,9 @@ export default function ProduktBlock() {
         </ProduktSelectionContainer>
       </Stage>
     );
-    // setOptionalComponent(
-    //   <>
-    //     {loadedProdukte.map(zutat => (
-    //       <AdminList
-    //         key={zutat.produktId}
-    //         editable
-    //         deletable
-    //         onEdit={() => productPutKomponent(zutat)}
-    //         onRemove={() => deleteProductComponent(zutat.produktId)} // Item an handleRemoveItem übergeben
-    //         children={
-    //           <div
-    //             style={{
-    //               display: "flex",
-    //               justifyContent: "center",
-    //               width: "100%",
-    //             }}
-    //           >
-    //             <Paragraph>{zutat.produktId}</Paragraph>
-    //             <Paragraph>{zutat.titel}</Paragraph>
-    //             <Paragraph>{zutat.preis}</Paragraph>
-    //             <Paragraph>{zutat.bild}</Paragraph>
-    //             <Paragraph>{zutat.sparte}</Paragraph>
-    //             <Paragraph>{zutat.kundenId}</Paragraph>
-    //             <Paragraph>{zutat.createdAt}</Paragraph>
-    //             <Paragraph>{zutat.updatedAt}</Paragraph>
-    //           </div>
-    //         }
-    //       />
-    //     ))}
-    //   </>
-    // );
   }
 
   async function productPutKomponent(zutat?: Produkt) {
-    //setOptionalComponent(<ZutatSelection />);
     setOptionalComponent(<p> Muss noch implementiert werden</p>);
   }
 
@@ -135,9 +100,9 @@ export default function ProduktBlock() {
     if (produkte) {
       setOptionalComponent(
         <Stage>
-          <ZutatenSelectionContainer>
+          <ProduktSelectionContainer>
             {KonfiguratorCards(produkte)}
-          </ZutatenSelectionContainer>
+          </ProduktSelectionContainer>
         </Stage>
       );
     }
@@ -149,13 +114,14 @@ export default function ProduktBlock() {
 
       <CRUDCardsGridWrapper>
         <CRUDCardWrappper onClick={() => getProductComponent()}>
-          <MagnifyingGlass size={50} />
-          <Paragraph>Produkte anzeigen</Paragraph>
+          {/* <MagnifyingGlass size={50} /> */}
+          <Pencil size={50} />
+          <Paragraph>Produkte verwalten</Paragraph>
         </CRUDCardWrappper>
-        <CRUDCardWrappper onClick={() => productPutKomponent()}>
+        {/* <CRUDCardWrappper onClick={() => productPutKomponent()}>
           <Pencil size={50} />
           <Paragraph>Produkt bearbeiten</Paragraph>
-        </CRUDCardWrappper>
+        </CRUDCardWrappper> */}
         <CRUDCardWrappper onClick={() => productPostKomponent()}>
           <Plus size={50} />
           <Paragraph>Produkt hinzufügen</Paragraph>
@@ -180,7 +146,7 @@ export default function ProduktBlock() {
         </div>
         {optionalComponent && (
           <X
-            size={10}
+            size={40}
             cursor={"pointer"}
             onClick={() => setOptionalComponent(null)}
           />

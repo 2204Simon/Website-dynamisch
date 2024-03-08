@@ -99,8 +99,10 @@ export const AdminListWrapper = styled.div<AdminListWrapperProps>`
 `;
 
 export const FormWrapper = styled.form`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
+  display: flex;
+  flex-direction: column;
   column-gap: 50px;
   row-gap: 20px;
   justify-items: center;
@@ -111,6 +113,7 @@ export const FormWrapper = styled.form`
   transition: box-shadow 0.3s ease, background-color 0.3s ease;
   margin: 0 auto; // Zentriert das Formular horizontal
   max-width: 90%; // Begrenzt die maximale Breite des Formulars auf 90% des umgebenden Elements
+  align-items: center;
 `;
 
 export const FormInput = styled.input`

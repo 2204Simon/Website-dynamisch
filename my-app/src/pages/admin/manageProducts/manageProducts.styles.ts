@@ -49,8 +49,8 @@ export const ZutatenSelectionContainer = styled.div`
   //box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
   padding: 10px;
-  justify-items: center; // Elemente horizontal zentrieren
-  align-items: center; // Elemente vertikal zentrieren
+  /* justify-items: center; // Elemente horizontal zentrieren
+  align-items: center; // Elemente vertikal zentrieren */
   border-radius: 10px;
 `;
 
@@ -89,8 +89,8 @@ export const ProduktSelectionContainer = styled.div`
   //box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
   padding: 10px;
-  justify-items: center; // Elemente horizontal zentrieren
-  align-items: center; // Elemente vertikal zentrieren
+  /* justify-items: center; // Elemente horizontal zentrieren
+  align-items: center; // Elemente vertikal zentrieren */
   border-radius: 10px;
 `;
 
@@ -123,4 +123,10 @@ export const ProduktContainerFront = styled.div<{}>`
   backface-visibility: hidden;
   transform: rotateY(0deg);
   align-items: center;
+`;
+
+export const Type = styled.p`
+  margin: 0;
+  font-size: 1rem;
+  text-align: left;
 `;

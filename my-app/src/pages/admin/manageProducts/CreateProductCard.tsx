@@ -8,7 +8,6 @@ import {
   Details,
   ImageContainer,
   Price,
-  Type,
   Quantity,
   QuantityInput,
   Title,
@@ -24,6 +23,7 @@ import {
   ProduktContainerFront,
   ZutatenContainer,
   ZutatenContainerFront,
+  Type,
 } from "./manageProducts.styles";
 import Produkt, { Zutat } from "../../produkte/Produkt";
 import { ZutatApiType } from "../ZutatsForm";
@@ -201,7 +201,8 @@ export const ProduktInfosCard: React.FC<ProductCardProps> = input => {
         <Type>Id:</Type>
         <Type>{input.topping.produktId}</Type>
         <Type>Sparte: {input.topping.sparte}</Type>
-        <Type>KundenID: {input.topping.kundenId}</Type>
+        <Type>KundenID: </Type>
+        <Type> {input.topping.kundenId}</Type>
         <Type>Bild: {input.topping.bild}</Type>
         <Type>Erstellt: {input.topping.createdAt}</Type>
         <Type>Geändert: {input.topping.updatedAt}</Type>
