@@ -327,7 +327,7 @@ function Produkt() {
             }}
           >
             <Link to="/Konfigurator">
-              <BlackColorButton caption={"zum Konfigurator"}></BlackColorButton>
+              <BlackColorButton caption={"Zum Konfigurator"}></BlackColorButton>
             </Link>
           </div>
         </div>

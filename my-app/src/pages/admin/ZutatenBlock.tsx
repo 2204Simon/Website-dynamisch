@@ -28,7 +28,7 @@ export default function ZutatenBlock() {
   }
 
   async function handleDeleteZutat(Id: string) {
-    const status = await sendPutRequest("/zutat/loeschen", {
+    const status = await sendPutRequest("/admin/zutatenloeschen", {
       zutatsId: Id,
     });
     if (status === true) {
@@ -42,13 +42,17 @@ export default function ZutatenBlock() {
   }
 
   const KonfiguratorCards = (zutaten: Array<ZutatApiType>) => {
-    return zutaten.map(product => (
-      <ZutatCard
-        topping={product}
-        handleEdit={handleEditZutat}
-        handleDelete={handleDeleteZutat}
-      />
-    ));
+    if (zutaten.length === 0) {
+      return <h2>Keine Zutaten vorhanden</h2>;
+    } else {
+      return zutaten.map(product => (
+        <ZutatCard
+          topping={product}
+          handleEdit={handleEditZutat}
+          handleDelete={handleDeleteZutat}
+        />
+      ));
+    }
   };
 
   async function getZutatenComponent() {
