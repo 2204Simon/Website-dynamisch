@@ -24,6 +24,7 @@ import {
   ZutatenContainer,
   ZutatenContainerFront,
   Type,
+  ButtonContainer,
 } from "./manageProducts.styles";
 import Produkt, { Zutat } from "../../produkte/Produkt";
 import { ZutatApiType } from "../ZutatsForm";
@@ -149,21 +150,14 @@ export const ZutatCard: React.FC<ZutatCardProps> = input => {
   return (
     <ZutatenContainer flipped={false}>
       <ZutatenContainerFront>
-        {/* <ImageContainer>
-          <Image src={input.topping.zutatBild} alt="product" />
-        </ImageContainer> */}
-        <Details>
-          <Title style={{ paddingLeft: "0px" }}>
-            {input.topping.zutatsname}
-          </Title>
-          <Price>Preis: {formatNumber(input.topping.zutatspreis)} €</Price>
-          <Type>Id: </Type>
-          <Type>{input.topping.zutatsId}</Type>
-          <Type>Einheit: {input.topping.zutatseinheit}</Type>
-          <Type>Eigenschaft: {input.topping.zutatseigenschaft}</Type>
-          <Type>Sparte: {input.topping.zutatensparte}</Type>
-          <Type>Bild: {input.topping.zutatBild}</Type>
-
+        <Title style={{ paddingLeft: "0px" }}>{input.topping.zutatsname}</Title>
+        <Price>Preis: {formatNumber(input.topping.zutatspreis)} €</Price>
+        <Type>Id: {input.topping.zutatsId}</Type>
+        <Type>Einheit: {input.topping.zutatseinheit}</Type>
+        <Type>Eigenschaft: {input.topping.zutatseigenschaft}</Type>
+        <Type>Sparte: {input.topping.zutatensparte}</Type>
+        <Type>Bild: {input.topping.zutatBild}</Type>
+        <ButtonContainer>
           <BlackColorButton
             onClick={() => handleButtonEdit()}
             caption="Ändern"
@@ -172,7 +166,7 @@ export const ZutatCard: React.FC<ZutatCardProps> = input => {
             onClick={() => handleButtonDelete()}
             caption="Löschen"
           />
-        </Details>
+        </ButtonContainer>
       </ZutatenContainerFront>
     </ZutatenContainer>
   );
@@ -198,11 +192,9 @@ export const ProduktInfosCard: React.FC<ProductCardProps> = input => {
 
         <Title style={{ paddingLeft: "0px" }}>{input.topping.titel}</Title>
         <Price>Preis: {formatNumber(input.topping.preis)} €</Price>
-        <Type>Id:</Type>
-        <Type>{input.topping.produktId}</Type>
+        <Type>Id: {input.topping.produktId}</Type>
         <Type>Sparte: {input.topping.sparte}</Type>
-        <Type>KundenID: </Type>
-        <Type> {input.topping.kundenId}</Type>
+        <Type>KundenID: {input.topping.kundenId}</Type>
         <Type>Bild: {input.topping.bild}</Type>
         <Type>Erstellt: {input.topping.createdAt}</Type>
         <Type>Geändert: {input.topping.updatedAt}</Type>
@@ -214,9 +206,10 @@ export const ProduktInfosCard: React.FC<ProductCardProps> = input => {
             </>
           );
         })}
-
-        <BlackColorButton onClick={handleButtonEdit} caption="Ändern" />
-        <BlackColorButton onClick={handleButtonDelete} caption="Löschen" />
+        <ButtonContainer>
+          <BlackColorButton onClick={handleButtonEdit} caption="Ändern" />
+          <BlackColorButton onClick={handleButtonDelete} caption="Löschen" />
+        </ButtonContainer>
       </ProduktContainerFront>
     </ProduktContainer>
   );
