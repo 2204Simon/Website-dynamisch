@@ -9,6 +9,7 @@ import { useCookies } from "react-cookie";
 import { BlackColorButton, LandingPageButton } from "../general/button";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { sendPutRequest } from "../../serverFunctions/generelAPICalls";
 
 export async function loadImage(path: string): Promise<string> {
   try {
@@ -120,6 +121,21 @@ function Produkt() {
     return false;
   }
 
+  async function handleDeleteProduct(Id: string) {
+    const status = await sendPutRequest("/produkt/loeschen", {
+      produktId: Id,
+    });
+
+    if (status === true) {
+      CustomToast.success("Produkt wurde gelöscht");
+      setCustomerProducts(prevProducts =>
+        prevProducts.filter(product => product.produktId !== Id)
+      );
+    } else {
+      CustomToast.error("Produkt konnte nicht gelöscht werden");
+    }
+  }
+
   const ShoppingCards = (sparte: string) => {
     const productsToRender = products
       .filter((product: Product) => product.sparte === sparte)
@@ -143,6 +159,8 @@ function Produkt() {
         content={product.content}
         allergy={product.allergy}
         veggie={product.veggie}
+        kundenId={null}
+        handleDeleteProduct={handleDeleteProduct}
       />
     ));
   };
@@ -167,6 +185,8 @@ function Produkt() {
         content={product.content}
         allergy={product.allergy}
         veggie={product.veggie}
+        kundenId={cookies.kundenId}
+        handleDeleteProduct={handleDeleteProduct}
       />
     ));
   };

@@ -48,6 +48,8 @@ interface ShoppingCardProps {
   content: string[] | undefined;
   allergy: string[];
   veggie: boolean;
+  kundenId: string | null;
+  handleDeleteProduct: Function;
 }
 
 const ShoppingCard: React.FC<ShoppingCardProps> = ({
@@ -58,6 +60,8 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
   allergy,
   veggie,
   produktId,
+  kundenId,
+  handleDeleteProduct,
 }) => {
   const { loggedIn } = useLoggedIn();
   const navigate = useNavigate();
@@ -217,6 +221,14 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
               caption="Zum Bestellen anmelden"
             />
           )}
+          {kundenId !== null ? (
+            <BlackColorButton
+              onClick={() => {
+                handleDeleteProduct(produktId);
+              }}
+              caption="Konfiguration löschen"
+            />
+          ) : null}
         </Details>
       </ContainerFront>
       <ContainerBack flipped={isFlipped} displayNone={displayNone}>
