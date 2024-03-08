@@ -2,7 +2,7 @@ import { MagnifyingGlass, Pencil, Plus, Trash, X } from "phosphor-react";
 import { Card, Paragraph, Title } from "../loggedIn/UserInformation.styles";
 import { CRUDCardWrappper, CRUDCardsGridWrapper } from "./Admin.styles";
 import { ScrollableYContainer } from "../loggedIn/Bestellungen.styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   getRequest,
   sendPutRequest,
@@ -17,9 +17,11 @@ import { ProduktCard, ZutatCard } from "./manageProducts/CreateProductCard";
 import { ZutatenSelectionContainer } from "./manageProducts/manageProducts.styles";
 import { Stage } from "../konfigurator/styles/Konfigurator.styles";
 import { CustomToast } from "../general/toast.style";
+
 export default function ZutatenBlock() {
   const [optionalComponent, setOptionalComponent] =
     useState<JSX.Element | null>(null);
+  const [zutaten, setZutaten] = useState<Array<ZutatApiType>>([]);
 
   function handleEditZutat(ID: string) {
     setOptionalComponent(<p>Abfrage muss noch implementiert werden</p>);
@@ -31,6 +33,9 @@ export default function ZutatenBlock() {
     });
     if (status === true) {
       CustomToast.success("Zutat wurde gelöscht");
+      setZutaten(prevZutaten =>
+        prevZutaten.filter(zutat => zutat.zutatsId !== Id)
+      );
     } else {
       CustomToast.error("Zutat konnte nicht gelöscht werden");
     }
@@ -47,24 +52,21 @@ export default function ZutatenBlock() {
   };
 
   async function getZutatenComponent() {
-    const zutaten: Array<ZutatApiType> = await getRequest("/zutat");
-    // const loadedZutaten: Array<ZutatApiType> = await Promise.all(
-    //   zutaten.map((zutat: ZutatApiType) =>
-    //     loadImage(zutat.zutatBild).then(image => ({
-    //       ...zutat,
-    //       zutatBild: image,
-    //     }))
-    //   )
-    // );
-    setOptionalComponent(
-      <Stage>
-        <ZutatenSelectionContainer>
-          {KonfiguratorCards(zutaten)}
-        </ZutatenSelectionContainer>
-      </Stage>
-    );
+    const fetchedZutaten = await getRequest("/zutat");
+    setZutaten(fetchedZutaten);
   }
 
+  useEffect(() => {
+    if (zutaten) {
+      setOptionalComponent(
+        <Stage>
+          <ZutatenSelectionContainer>
+            {KonfiguratorCards(zutaten)}
+          </ZutatenSelectionContainer>
+        </Stage>
+      );
+    }
+  }, [zutaten]);
   // async function zutatsPutKomponent(zutat?: ZutatApiType) {
   //   setOptionalComponent(
   //     <Zutatsform

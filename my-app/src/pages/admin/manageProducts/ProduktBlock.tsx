@@ -2,7 +2,7 @@ import { MagnifyingGlass, Pencil, Plus, Trash, X } from "phosphor-react";
 import { Card, Paragraph, Title } from "../../loggedIn/UserInformation.styles";
 import { CRUDCardWrappper, CRUDCardsGridWrapper } from "../Admin.styles";
 import { ScrollableYContainer } from "../../loggedIn/Bestellungen.styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   getRequest,
   sendPostRequest,
@@ -49,6 +49,7 @@ export interface Produkt {
 export default function ProduktBlock() {
   const [optionalComponent, setOptionalComponent] =
     useState<JSX.Element | null>(null);
+  const [produkte, setProdukte] = useState<Array<Produkt>>([]);
 
   function handleEditChange(zuatat: ZutatApiType) {
     console.log("muss noch implementiert werden");
@@ -66,7 +67,7 @@ export default function ProduktBlock() {
   };
 
   async function getProductComponent() {
-    const produkte: Array<Produkt> = await getRequest("/produkt");
+    setProdukte(await getRequest("/produkt"));
     setOptionalComponent(
       <Stage>
         <ProduktSelectionContainer>
@@ -123,10 +124,24 @@ export default function ProduktBlock() {
 
     if (status === true) {
       CustomToast.success("Produkt wurde gelöscht");
+      setProdukte(prevProdukte =>
+        prevProdukte.filter(produkt => produkt.produktId !== Id)
+      );
     } else {
       CustomToast.error("Produkt konnte nicht gelöscht werden");
     }
   }
+  useEffect(() => {
+    if (produkte) {
+      setOptionalComponent(
+        <Stage>
+          <ZutatenSelectionContainer>
+            {KonfiguratorCards(produkte)}
+          </ZutatenSelectionContainer>
+        </Stage>
+      );
+    }
+  }, [produkte]);
 
   return (
     <Card>
