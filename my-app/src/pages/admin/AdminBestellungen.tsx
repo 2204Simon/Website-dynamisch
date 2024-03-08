@@ -56,6 +56,7 @@ export default function AdminBestellungsblock() {
             size={40}
             cursor={"pointer"}
             onClick={() => setOptionalComponent(null)}
+            style={{ color: colors.black }}
           />
         )}
       </div>
