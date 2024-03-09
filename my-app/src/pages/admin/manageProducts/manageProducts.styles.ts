@@ -44,7 +44,7 @@ export const ContainerFront = styled.div<{}>`
 export const ZutatenSelectionContainer = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
   grid-gap: 1px;
   //box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
@@ -55,8 +55,8 @@ export const ZutatenSelectionContainer = styled.div`
 `;
 
 export const ZutatenContainer = styled.div<{ flipped: boolean }>`
-  width: 450px;
-  height: 500px;
+  width: 440px;
+  height: 300px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -85,7 +85,7 @@ export const ZutatenContainerFront = styled.div<{}>`
 export const ProduktSelectionContainer = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(510px, 1fr));
   grid-gap: 1px;
   //box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
@@ -96,7 +96,7 @@ export const ProduktSelectionContainer = styled.div`
 `;
 
 export const ProduktContainer = styled.div<{ flipped: boolean }>`
-  width: 500px;
+  width: 480px;
   /* height: 500px; */
 
   display: flex;
@@ -127,6 +127,7 @@ export const ProduktContainerFront = styled.div<{}>`
 `;
 
 export const ButtonContainer = styled.div`
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;

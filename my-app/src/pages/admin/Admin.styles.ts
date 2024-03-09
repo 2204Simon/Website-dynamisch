@@ -12,7 +12,7 @@ export const AdminPageWrapper = styled.div`
   align-items: center;
   gap: 50px;
   justify-content: flex-start;
-  background-color: ${colors.primarycolor};
+  background-color: ${colors.white};
   width: 100vw;
   height: fit-content;
   padding-bottom: 50px;

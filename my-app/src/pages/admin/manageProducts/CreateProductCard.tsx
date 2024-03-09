@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent } from "react";
 import { BlackColorButton } from "../../general/button";
 import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../../general/toast.style";
-import { Plus, Minus } from "phosphor-react";
+import { Plus, Minus, Trash } from "phosphor-react";
 import { colors, formatNumber } from "../../general/constants";
 import {
   Details,
@@ -141,9 +141,6 @@ export const ProduktCard: React.FC<ShoppingCardProps> = input => {
 };
 
 export const ZutatCard: React.FC<ZutatCardProps> = input => {
-  const handleButtonEdit = () => {
-    input.handleEdit(input.topping.zutatsId);
-  };
   const handleButtonDelete = () => {
     input.handleDelete(input.topping.zutatsId);
   };
@@ -151,20 +148,19 @@ export const ZutatCard: React.FC<ZutatCardProps> = input => {
     <ZutatenContainer flipped={false}>
       <ZutatenContainerFront>
         <Title style={{ paddingLeft: "0px" }}>{input.topping.zutatsname}</Title>
-        <Price>Preis: {formatNumber(input.topping.zutatspreis)} €</Price>
+        <Type>Preis: {formatNumber(input.topping.zutatspreis)} €</Type>
         <Type>Id: {input.topping.zutatsId}</Type>
         <Type>Einheit: {input.topping.zutatseinheit}</Type>
         <Type>Eigenschaft: {input.topping.zutatseigenschaft}</Type>
         <Type>Sparte: {input.topping.zutatensparte}</Type>
         <Type>Bild: {input.topping.zutatBild}</Type>
         <ButtonContainer>
-          <BlackColorButton
-            onClick={() => handleButtonEdit()}
-            caption="Ändern"
-          />
-          <BlackColorButton
-            onClick={() => handleButtonDelete()}
-            caption="Löschen"
+          <Trash
+            size={30}
+            onClick={() => {
+              handleButtonDelete();
+            }}
+            style={{ color: colors.black }}
           />
         </ButtonContainer>
       </ZutatenContainerFront>
@@ -176,9 +172,6 @@ export const ProduktInfosCard: React.FC<ProductCardProps> = input => {
   const [displayNone, setDisplayNone] = useState(false);
   const [quantity, setQuantity] = useState<number>(0);
 
-  const handleButtonEdit = () => {
-    input.handleEdit(input.topping.produktId);
-  };
   const handleButtonDelete = () => {
     input.handleDelete(input.topping.produktId);
   };
@@ -207,8 +200,13 @@ export const ProduktInfosCard: React.FC<ProductCardProps> = input => {
           );
         })}
         <ButtonContainer>
-          <BlackColorButton onClick={handleButtonEdit} caption="Ändern" />
-          <BlackColorButton onClick={handleButtonDelete} caption="Löschen" />
+          <Trash
+            size={30}
+            onClick={() => {
+              handleButtonDelete();
+            }}
+            style={{ color: colors.black }}
+          />
         </ButtonContainer>
       </ProduktContainerFront>
     </ProduktContainer>
