@@ -70,11 +70,10 @@ export default function SignIn() {
         navigate("/loggedIn");
         changeLoggedIn();
       } else {
-        const responseBody = await response.json();
-        if (responseBody.error === "User not found") {
+        if (response.status === 404) {
           CustomToast.error("Benutzer nicht gefunden");
         } else {
-          CustomToast.error("Falsches Passwort oder E-Mail");
+          CustomToast.error("Falsches Passwort");
         }
       }
     } catch (error) {
