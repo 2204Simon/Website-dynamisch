@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent } from "react";
 import { BlackColorButton } from "../../general/button";
 import "react-toastify/dist/ReactToastify.css";
 import { CustomToast } from "../../general/toast.style";
-import { Plus, Minus } from "phosphor-react";
+import { Plus, Minus, Trash } from "phosphor-react";
 import { colors, formatNumber } from "../../general/constants";
 import {
   Details,
@@ -155,9 +155,11 @@ export const ZutatCard: React.FC<ZutatCardProps> = input => {
         <Type>Sparte: {input.topping.zutatensparte}</Type>
         <Type>Bild: {input.topping.zutatBild}</Type>
         <ButtonContainer>
-          <BlackColorButton
-            onClick={() => handleButtonDelete()}
-            caption="Löschen"
+          <Trash
+            size={30}
+            onClick={() => {
+              handleButtonDelete();
+            }}
           />
         </ButtonContainer>
       </ZutatenContainerFront>
@@ -197,6 +199,12 @@ export const ProduktInfosCard: React.FC<ProductCardProps> = input => {
           );
         })}
         <ButtonContainer>
+          <Trash
+            size={30}
+            onClick={() => {
+              handleButtonDelete();
+            }}
+          />
           <BlackColorButton onClick={handleButtonDelete} caption="Löschen" />
         </ButtonContainer>
       </ProduktContainerFront>
