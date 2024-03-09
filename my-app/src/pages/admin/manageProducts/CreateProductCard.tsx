@@ -141,9 +141,6 @@ export const ProduktCard: React.FC<ShoppingCardProps> = input => {
 };
 
 export const ZutatCard: React.FC<ZutatCardProps> = input => {
-  const handleButtonEdit = () => {
-    input.handleEdit(input.topping.zutatsId);
-  };
   const handleButtonDelete = () => {
     input.handleDelete(input.topping.zutatsId);
   };
@@ -159,10 +156,6 @@ export const ZutatCard: React.FC<ZutatCardProps> = input => {
         <Type>Bild: {input.topping.zutatBild}</Type>
         <ButtonContainer>
           <BlackColorButton
-            onClick={() => handleButtonEdit()}
-            caption="Ändern"
-          />
-          <BlackColorButton
             onClick={() => handleButtonDelete()}
             caption="Löschen"
           />
@@ -176,9 +169,6 @@ export const ProduktInfosCard: React.FC<ProductCardProps> = input => {
   const [displayNone, setDisplayNone] = useState(false);
   const [quantity, setQuantity] = useState<number>(0);
 
-  const handleButtonEdit = () => {
-    input.handleEdit(input.topping.produktId);
-  };
   const handleButtonDelete = () => {
     input.handleDelete(input.topping.produktId);
   };
@@ -207,7 +197,6 @@ export const ProduktInfosCard: React.FC<ProductCardProps> = input => {
           );
         })}
         <ButtonContainer>
-          <BlackColorButton onClick={handleButtonEdit} caption="Ändern" />
           <BlackColorButton onClick={handleButtonDelete} caption="Löschen" />
         </ButtonContainer>
       </ProduktContainerFront>
