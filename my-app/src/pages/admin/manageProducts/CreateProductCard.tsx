@@ -205,7 +205,6 @@ export const ProduktInfosCard: React.FC<ProductCardProps> = input => {
               handleButtonDelete();
             }}
           />
-          <BlackColorButton onClick={handleButtonDelete} caption="Löschen" />
         </ButtonContainer>
       </ProduktContainerFront>
     </ProduktContainer>

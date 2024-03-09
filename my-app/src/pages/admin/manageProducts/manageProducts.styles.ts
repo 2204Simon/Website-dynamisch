@@ -56,7 +56,7 @@ export const ZutatenSelectionContainer = styled.div`
 
 export const ZutatenContainer = styled.div<{ flipped: boolean }>`
   width: 440px;
-  height: 330px;
+  height: 300px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -96,7 +96,7 @@ export const ProduktSelectionContainer = styled.div`
 `;
 
 export const ProduktContainer = styled.div<{ flipped: boolean }>`
-  width: 500px;
+  width: 480px;
   /* height: 500px; */
 
   display: flex;
@@ -127,6 +127,7 @@ export const ProduktContainerFront = styled.div<{}>`
 `;
 
 export const ButtonContainer = styled.div`
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
