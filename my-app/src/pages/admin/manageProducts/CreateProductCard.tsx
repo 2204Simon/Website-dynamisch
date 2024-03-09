@@ -148,7 +148,7 @@ export const ZutatCard: React.FC<ZutatCardProps> = input => {
     <ZutatenContainer flipped={false}>
       <ZutatenContainerFront>
         <Title style={{ paddingLeft: "0px" }}>{input.topping.zutatsname}</Title>
-        <Price>Preis: {formatNumber(input.topping.zutatspreis)} €</Price>
+        <Type>Preis: {formatNumber(input.topping.zutatspreis)} €</Type>
         <Type>Id: {input.topping.zutatsId}</Type>
         <Type>Einheit: {input.topping.zutatseinheit}</Type>
         <Type>Eigenschaft: {input.topping.zutatseigenschaft}</Type>
