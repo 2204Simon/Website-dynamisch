@@ -141,9 +141,6 @@ export const ProduktCard: React.FC<ShoppingCardProps> = input => {
 };
 
 export const ZutatCard: React.FC<ZutatCardProps> = input => {
-  const handleButtonEdit = () => {
-    input.handleEdit(input.topping.zutatsId);
-  };
   const handleButtonDelete = () => {
     input.handleDelete(input.topping.zutatsId);
   };
@@ -158,14 +155,6 @@ export const ZutatCard: React.FC<ZutatCardProps> = input => {
         <Type>Sparte: {input.topping.zutatensparte}</Type>
         <Type>Bild: {input.topping.zutatBild}</Type>
         <ButtonContainer>
-          <BlackColorButton
-            onClick={() => handleButtonEdit()}
-            caption="Ändern"
-          />
-          {/* <BlackColorButton
-            onClick={() => handleButtonDelete()}
-            caption="Löschen"
-          /> */}
           <Trash
             size={30}
             onClick={() => {
@@ -182,9 +171,6 @@ export const ProduktInfosCard: React.FC<ProductCardProps> = input => {
   const [displayNone, setDisplayNone] = useState(false);
   const [quantity, setQuantity] = useState<number>(0);
 
-  const handleButtonEdit = () => {
-    input.handleEdit(input.topping.produktId);
-  };
   const handleButtonDelete = () => {
     input.handleDelete(input.topping.produktId);
   };
@@ -213,14 +199,13 @@ export const ProduktInfosCard: React.FC<ProductCardProps> = input => {
           );
         })}
         <ButtonContainer>
-          <BlackColorButton onClick={handleButtonEdit} caption="Ändern" />
-          {/* <BlackColorButton onClick={handleButtonDelete} caption="Löschen" /> */}
           <Trash
             size={30}
             onClick={() => {
               handleButtonDelete();
             }}
           />
+          <BlackColorButton onClick={handleButtonDelete} caption="Löschen" />
         </ButtonContainer>
       </ProduktContainerFront>
     </ProduktContainer>

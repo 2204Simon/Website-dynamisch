@@ -155,7 +155,7 @@ const ZutatSelection: React.FC<any> = ({}) => {
           }}
         >
           <FormLabel>
-            Dateiname des Bildes: (optional)
+            <p>Dateiname des Bildes: (optional)</p>
             <FormInput
               type="string"
               value={productPicture}
@@ -173,7 +173,7 @@ const ZutatSelection: React.FC<any> = ({}) => {
           }}
         >
           <FormLabel>
-            Name der Konfiguration:
+            <p>Name der Konfiguration:</p>
             <FormInput
               type="string"
               value={productName}
@@ -192,16 +192,18 @@ const ZutatSelection: React.FC<any> = ({}) => {
           }}
         >
           <FormLabel>
-            Name der Sparte:
-            <select
-              value={productSparte}
-              onChange={event => setProductSparte(event.target.value)}
-              required
-            >
-              <option value="">Auswahl</option>
-              <option value="Food">Speisen</option>
-              <option value="Drink">Getränke</option>
-            </select>
+            <p>
+              Name der Sparte:
+              <select
+                value={productSparte}
+                onChange={event => setProductSparte(event.target.value)}
+                required
+              >
+                <option value="">Auswahl</option>
+                <option value="Food">Speisen</option>
+                <option value="Drink">Getränke</option>
+              </select>
+            </p>
           </FormLabel>
         </div>
         <div

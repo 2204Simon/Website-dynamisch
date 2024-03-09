@@ -17,6 +17,7 @@ import { ProduktCard, ZutatCard } from "./manageProducts/CreateProductCard";
 import { ZutatenSelectionContainer } from "./manageProducts/manageProducts.styles";
 import { Stage } from "../konfigurator/styles/Konfigurator.styles";
 import { CustomToast } from "../general/toast.style";
+import { colors } from "../general/constants";
 
 export default function ZutatenBlock() {
   const [optionalComponent, setOptionalComponent] =
@@ -92,19 +93,19 @@ export default function ZutatenBlock() {
 
       <CRUDCardsGridWrapper>
         <CRUDCardWrappper onClick={() => getZutatenComponent()}>
-          <Pencil size={50} />
+          <Pencil size={50} style={{ color: colors.black }} />
           <Paragraph>Zutaten verwalten</Paragraph>
         </CRUDCardWrappper>
         {/* <CRUDCardWrappper onClick={() => zutatsPutKomponent()}>
-          <Pencil size={50} />
+          <Pencil size={50} style={{ color: colors.black}} />
           <Paragraph>Zutaten bearbeiten</Paragraph>
         </CRUDCardWrappper> */}
         <CRUDCardWrappper onClick={() => zutatsPostKomponent()}>
-          <Plus size={50} />
+          <Plus size={50} style={{ color: colors.black }} />
           <Paragraph>Zutaten hinzufügen</Paragraph>
         </CRUDCardWrappper>
         {/* <CRUDCardWrappper onClick={() => ()}>
-          <Trash size={50} />
+          <Trash size={50} style={{ color: colors.black}}/>
           <Paragraph>Zutaten löschen</Paragraph>
         </CRUDCardWrappper> */}
       </CRUDCardsGridWrapper>
@@ -127,6 +128,7 @@ export default function ZutatenBlock() {
             size={40}
             cursor={"pointer"}
             onClick={() => setOptionalComponent(null)}
+            style={{ color: colors.black }}
           />
         )}
       </div>
