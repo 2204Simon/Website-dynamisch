@@ -22,6 +22,7 @@ export const Card = styled.div`
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   /* max-width: 600px; */
   width: 80%;
+  margin: 10px;
 `;
 export const Title = styled.h1`
   color: ${colors.black};

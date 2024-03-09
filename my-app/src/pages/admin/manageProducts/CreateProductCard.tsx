@@ -160,6 +160,7 @@ export const ZutatCard: React.FC<ZutatCardProps> = input => {
             onClick={() => {
               handleButtonDelete();
             }}
+            style={{ color: colors.black }}
           />
         </ButtonContainer>
       </ZutatenContainerFront>
@@ -204,6 +205,7 @@ export const ProduktInfosCard: React.FC<ProductCardProps> = input => {
             onClick={() => {
               handleButtonDelete();
             }}
+            style={{ color: colors.black }}
           />
         </ButtonContainer>
       </ProduktContainerFront>
