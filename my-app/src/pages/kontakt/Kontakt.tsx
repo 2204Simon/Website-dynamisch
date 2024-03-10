@@ -65,34 +65,6 @@ function Kontakt(): JSX.Element {
           <div>Du musst die Cookies akzeptieren, um die Karte zu sehen.</div>
         )}
         <hr />
-        <ContactContainer>
-          <h2>Newsletter abonnieren</h2>
-          <p>
-            Melde Dich für unseren Newsletter an, um keine neuen Frühstücksmenüs
-            zu verpassen:
-          </p>
-          <form onSubmit={handleSubmit}>
-            <FormLabel>
-              E-Mail-Adresse:
-              <FormInput
-                type="email"
-                value={email}
-                onChange={handleEmailChange}
-                maxLength={50}
-                required
-              />
-            </FormLabel>
-            <FormLabel>
-              Nachricht:
-              <FormTextArea
-                value={message}
-                onChange={handleMessageChange}
-                maxLength={300}
-              />
-            </FormLabel>
-            <BlackColorButton caption={"Anmelden"}></BlackColorButton>
-          </form>
-        </ContactContainer>
       </MainContainer>
     </>
   );
