@@ -74,9 +74,10 @@ export default function BestellungsData(): JSX.Element {
                 return (
                   <CRUDCardWrappper
                     key={bestellung.bestellungsId}
-                    onClick={() =>
-                      navigate(`/bestellung/${bestellung.bestellungsId}`)
-                    }
+                    onClick={() => {
+                      navigate(`/bestellung/${bestellung.bestellungsId}`);
+                      window.scrollTo(0, 0);
+                    }}
                   >
                     {deliverd ? (
                       <div>
