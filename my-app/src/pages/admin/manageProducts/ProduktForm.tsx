@@ -110,7 +110,7 @@ const ZutatSelection: React.FC<any> = ({}) => {
       bild: productPicture,
     };
     console.log(itemObjekt);
-    let response = await sendPostRequest("/produkt", itemObjekt);
+    let response = await sendPostRequest("/admin/createProduct", itemObjekt);
     setProductId(response);
     return response;
   }
