@@ -144,7 +144,7 @@ export type Zahlungsinformation = {
 export type BestellungsInformation = {
   kunde?: LogInData;
   gesamtpreis: number;
-  lieferDatum: Date;
+  lieferdatum: Date;
   bestellDatum: string;
   gewünschtesLieferdatum: Date;
   bestellungsId: string;
