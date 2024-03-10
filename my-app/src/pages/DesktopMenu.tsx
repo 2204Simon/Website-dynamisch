@@ -41,13 +41,11 @@ export const DesktopMenu: React.FC = () => {
         dispatch(clearCart());
         dispatch(addMultipleToCart(serverCartItems));
       } catch (error) {
-        const notFound = errorHandlerNotfound(
-          error,
-          "Fehler beim Laden der Daten - Desktopmenü"
-        );
+        const notFound = errorHandlerNotfound(error);
         if (notFound) {
           dispatch(clearCart());
         }
+        console.log(error);
       }
     };
 

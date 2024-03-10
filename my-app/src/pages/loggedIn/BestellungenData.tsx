@@ -68,7 +68,7 @@ export default function BestellungsData(): JSX.Element {
             <CRUDCardsGridWrapper>
               {bestellungen.map(bestellung => {
                 let deliverd = true;
-                if (!bestellung.lieferDatum) {
+                if (!bestellung.lieferdatum) {
                   deliverd = false;
                 }
                 return (
@@ -84,7 +84,7 @@ export default function BestellungsData(): JSX.Element {
                         <Package size={50} />
                         <CRUDCardPText>geliefert am</CRUDCardPText>
                         <CRUDCardPText>
-                          {formatGermanDate(bestellung.lieferDatum.toString())}
+                          {formatGermanDate(bestellung.lieferdatum.toString())}
                         </CRUDCardPText>
                       </div>
                     ) : (
