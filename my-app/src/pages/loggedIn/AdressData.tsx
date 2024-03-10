@@ -173,6 +173,20 @@ export default function AdressInformation(): JSX.Element {
       );
       return;
     }
+    // iban länge von 22
+    if (data.lastschriftData?.IBAN && data.lastschriftData.IBAN.length !== 22) {
+      CustomToast.error("Bitte geben Sie eine gültige IBAN ein.");
+      return;
+    }
+    // bic länge von 8 oder 11
+    if (
+      data.lastschriftData?.BIC &&
+      data.lastschriftData.BIC.length !== 8 &&
+      data.lastschriftData.BIC.length !== 11
+    ) {
+      CustomToast.error("Bitte geben Sie eine gültige BIC ein.");
+      return;
+    }
     const paymentData: PaymentData = {
       kundenId: cookies.kundenId,
       paypalData: data.paypalData,
@@ -227,6 +241,12 @@ export default function AdressInformation(): JSX.Element {
       CustomToast.error("Bitte füllen Sie alle erforderlichen Felder aus.");
       return;
     }
+
+    if (data.postleitzahl.length !== 5) {
+      CustomToast.error("Bitte geben Sie eine gültige Postleitzahl ein.");
+      return;
+    }
+
     const adressData: AdressData = {
       kundenId: cookies.kundenId,
       postleitzahl: data.postleitzahl,
