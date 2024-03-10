@@ -80,13 +80,13 @@ export default function BestellungsData(): JSX.Element {
                     }}
                   >
                     {deliverd ? (
-                      <div>
+                      <>
                         <Package size={50} />
                         <CRUDCardPText>geliefert am</CRUDCardPText>
                         <CRUDCardPText>
                           {formatGermanDate(bestellung.lieferdatum.toString())}
                         </CRUDCardPText>
-                      </div>
+                      </>
                     ) : (
                       <>
                         <Truck size={50} />
