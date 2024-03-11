@@ -70,13 +70,9 @@ export async function sendDeleteRequest(url: string) {
   return await response.json();
 }
 
-export const errorHandlerNotfound = (
-  error: any,
-  message?: string
-): string | undefined => {
+export const errorHandlerNotfound = (error: any): boolean => {
   if (error.message === "404") {
-    return "404";
+    return true;
   }
-  CustomToast.error(message ? message : "Something went wrong");
-  return;
+  return false;
 };

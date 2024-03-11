@@ -66,10 +66,7 @@ function WarenkorbSeite(): JSX.Element {
         dispatch(clearCart());
         dispatch(addMultipleToCart(updatedCartItems));
       } catch (error) {
-        const notFound = errorHandlerNotfound(
-          error,
-          "Fehler beim Laden der Warenkorbdaten"
-        );
+        const notFound = errorHandlerNotfound(error);
         if (notFound) {
           dispatch(clearCart());
         }
