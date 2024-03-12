@@ -111,6 +111,7 @@ export default function SideBarBuy({ price }: SideBarProps): JSX.Element {
         kundenId: cookies.kundenId,
         laufendeZahlungsId: selectedPayment?.laufendeZahlungsId,
         gewünschtesLieferdatum: selectedDate,
+        laufendeAdressenId: selectedAdress?.laufendeAdressenId,
       };
       console.log(bodyForBestellung);
       await sendPostRequest(`/bestellung`, bodyForBestellung);
