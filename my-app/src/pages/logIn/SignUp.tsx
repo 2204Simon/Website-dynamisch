@@ -89,12 +89,12 @@ export default function SignUp() {
         return;
       }
 
-      if (iban.length !== 22) {
+      if (iban.length !== 22 && iban) {
         CustomToast.error("Die IBAN muss 22-stellig sein");
         return;
       }
 
-      if (bic.length !== 8 && bic.length !== 11) {
+      if (bic.length !== 8 && bic.length !== 11 && bic) {
         CustomToast.error("Die BIC muss 8 oder 11-stellig sein");
         return;
       }
