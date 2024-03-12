@@ -138,7 +138,11 @@ export default function AdressInformation(): JSX.Element {
     }
 
     try {
-      const response = await sendPutRequest("/zahlung", payment);
+      const bodyforDeactivate = {
+        kundenId: cookies.kundenId,
+        laufendeZahlungsId: payment.laufendeZahlungsId,
+      };
+      const response = await sendPutRequest("/zahlung", bodyforDeactivate);
 
       dispatch(removePaypalData(payment));
 
