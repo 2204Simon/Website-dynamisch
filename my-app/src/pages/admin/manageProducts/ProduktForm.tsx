@@ -24,6 +24,7 @@ const ZutatSelection: React.FC<any> = ({}) => {
   const [productId, setProductId] = useState<string>("");
   const [productPicture, setProductPicture] = useState<string>("");
   const [productSparte, setProductSparte] = useState<string>("");
+  const [price, setPrice] = useState<number>();
 
   useEffect(() => {
     fetch(`${baseUrl}/zutat`)
@@ -70,7 +71,7 @@ const ZutatSelection: React.FC<any> = ({}) => {
       CustomToast.success(
         `Es wurde(n) ${quantity} ${topping.zutatseinheit} ${topping.zutatsname} hinzugefügt!`
       );
-      console.log(lclToppings);
+
       setSelectedExtras(lclToppings);
     } else {
       CustomToast.error(
@@ -78,14 +79,6 @@ const ZutatSelection: React.FC<any> = ({}) => {
       );
     }
   };
-
-  //   const handlePrev = () => {
-  //     onPrevStage();
-  //   };
-
-  //   const handleNext = () => {
-  //     onNextStage(selectedExtras);
-  //   };
 
   const KonfiguratorCards = () => {
     return extras.map(product => (
@@ -108,8 +101,8 @@ const ZutatSelection: React.FC<any> = ({}) => {
       zutat: allFormattedIngredients,
       sparte: productSparte,
       bild: productPicture,
+      preis: price,
     };
-    console.log(itemObjekt);
     let response = await sendPostRequest("/admin/createProduct", itemObjekt);
     setProductId(response);
     return response;
@@ -144,6 +137,7 @@ const ZutatSelection: React.FC<any> = ({}) => {
           setProductName("");
           setProductSparte("");
           setProductPicture("");
+          setPrice(0);
         }}
       >
         <div
@@ -178,6 +172,29 @@ const ZutatSelection: React.FC<any> = ({}) => {
               type="string"
               value={productName}
               onChange={event => setProductName(event.target.value)}
+              maxLength={50}
+              required
+            />
+          </FormLabel>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "80vh",
+          }}
+        >
+          <FormLabel>
+            <p>Preis:</p>
+            <FormInput
+              type="number"
+              step="0.01"
+              min={0}
+              value={price}
+              onChange={event =>
+                setPrice(parseFloat(parseFloat(event.target.value).toFixed(2)))
+              }
               maxLength={50}
               required
             />

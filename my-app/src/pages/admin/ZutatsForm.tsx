@@ -15,20 +15,9 @@ export type ZutatApiType = {
   zutatensparte: string;
 };
 
-interface ZutatsformProps {
-  defaultValue?: ZutatApiType;
-  onSubmit: (values: ZutatApiType) => void;
-  newZutat?: boolean;
-}
-
 const ZutatCreation: React.FC<any> = ({}) => {
   const [values, setValues] = useState<ZutatApiType>({} as ZutatApiType);
-
-  // useEffect(() => {
-  //   if (defaultValue) {
-  //     setValues(defaultValue);
-  //   }
-  // }, [defaultValue]);
+  const [price, setPrice] = useState<number>();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues({
@@ -52,7 +41,7 @@ const ZutatCreation: React.FC<any> = ({}) => {
     const itemObjekt = {
       zutatsname: values.zutatsname,
       zutatseigenschaft: values.zutatseigenschaft,
-      zutatspreis: values.zutatspreis,
+      zutatspreis: price,
       zutatseinheit: values.zutatseinheit,
       zutatBild: values.zutatBild,
       zutatensparte: values.zutatensparte,
@@ -76,6 +65,7 @@ const ZutatCreation: React.FC<any> = ({}) => {
           zutatBild: "",
           zutatensparte: "",
         });
+        setPrice(0);
       }}
     >
       <FormInput
@@ -95,10 +85,14 @@ const ZutatCreation: React.FC<any> = ({}) => {
       <FormInput
         name="zutatspreis"
         type="number"
+        step="0.01"
         min={0}
         required
-        value={values.zutatspreis}
-        onChange={handleChange}
+        value={price}
+        // onChange={event => handlePriceChange(event.target.value)}
+        onChange={event =>
+          setPrice(parseFloat(parseFloat(event.target.value).toFixed(2)))
+        }
         placeholder="Geben Sie den Zutatspreis ein" // Placeholder hinzugefügt
       />
       <FormInput
