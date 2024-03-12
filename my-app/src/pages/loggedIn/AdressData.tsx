@@ -298,6 +298,7 @@ export default function AdressInformation(): JSX.Element {
             <Grid item xs={12} sm={showFields ? 6 : 12}>
               <ScrollableContainer>
                 {uniqueAdressInformation
+
                   .slice()
                   .sort(
                     (a, b) =>
@@ -314,8 +315,7 @@ export default function AdressInformation(): JSX.Element {
                           defaultChecked={
                             selectedAdress === null
                               ? index === 0
-                              : adress.laufendeAdressenId ===
-                                selectedAdress.laufendeAdressenId
+                              : adress.laufendeAdressenId === 1
                           }
                           onChange={() => {
                             handleSelectAdress(adress);
