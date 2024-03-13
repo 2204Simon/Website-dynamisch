@@ -24,7 +24,6 @@ import PickDay from "./PickDay";
 import AboDurationCalculator from "./AboDurationCalculater";
 import { useLoggedIn } from "../../globalVariables/loggedin";
 import { useNavigate } from "react-router-dom";
-import { current } from "@reduxjs/toolkit";
 
 interface ShoppingCardProps {
   image: string;
@@ -122,7 +121,7 @@ const NewspaperBanner: React.FC<ShoppingCardProps> = ({
       CustomToast.error("Fehler hinzufügen (Serververbindung))");
     }
     dispatch(increaseQuantity({ item, amount: MonthsToDays(quantity) }));
-    CustomToast.success(`Es wurde(n) ${quantity} ${title}(en) abonniert!`);
+    CustomToast.success(`Es wurde ${quantity} Monat(e) ${title} abonniert!`);
     setQuantity(0);
   };
 
@@ -152,7 +151,7 @@ const NewspaperBanner: React.FC<ShoppingCardProps> = ({
         await sendPostRequest("/warenkorb", itemObjekt);
 
         CustomToast.success(
-          `Es wurde(n) ${quantity} ${title}(en) hinzugefügt!`
+          `Es wurde ${quantity} Monat(e) ${title} abonniert!`
         );
 
         dispatch(addToCart(item as CartItem));
