@@ -560,7 +560,7 @@ export default function AdressInformation(): JSX.Element {
                               onChange={() => {
                                 handleSelectPayment(payment);
                               }}
-                              defaultChecked={
+                              checked={
                                 selectedPayment === null
                                   ? index === 0
                                   : index ===
