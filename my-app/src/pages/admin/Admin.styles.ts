@@ -79,7 +79,8 @@ export const AdminListWrapper = styled.div<AdminListWrapperProps>`
   ${props =>
     props.adminPage &&
     `
-    justify-content: space-between;
+    justify-content: space-around;
+
   `}
   ${props =>
     props.hover &&

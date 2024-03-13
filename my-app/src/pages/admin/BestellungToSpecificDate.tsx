@@ -6,6 +6,7 @@ import { BestellungsInformation } from "../../redux/types";
 import { getRequest } from "../../serverFunctions/generelAPICalls";
 import { AdminListWrapper } from "./Admin.styles";
 import { Paragraph } from "../loggedIn/UserInformation.styles";
+import { Package, Truck } from "phosphor-react";
 
 function BestellungToSpecificDate() {
   const today = new Date();
@@ -69,6 +70,11 @@ function BestellungToSpecificDate() {
           <Paragraph>{bestellung.addressenInformation?.strasse}</Paragraph>
           <Paragraph>{bestellung.addressenInformation?.hausnummer}</Paragraph>
           <Paragraph>Preis: {bestellung.gesamtpreis}</Paragraph>
+          {bestellung.lieferdatum !== null ? (
+            <Package size={30} />
+          ) : (
+            <Truck size={30} />
+          )}
         </AdminListWrapper>
       ))}
     </div>
