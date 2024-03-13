@@ -118,7 +118,7 @@ const NewspaperBanner: React.FC<ShoppingCardProps> = ({
       CustomToast.error("Fehler hinzufügen (Serververbindung))");
     }
     dispatch(increaseQuantity({ item, amount: MonthsToDays(quantity) }));
-    CustomToast.success(`Es wurde  ${quantity} ${title} abonniert!`);
+    CustomToast.success(`Es wurde(n) ${quantity} ${title}(en) abonniert!`);
     setQuantity(0);
   };
 
@@ -147,7 +147,9 @@ const NewspaperBanner: React.FC<ShoppingCardProps> = ({
         };
         await sendPostRequest("/warenkorb", itemObjekt);
 
-        CustomToast.success(`Es wurde  ${quantity} ${title} hinzugefügt!`);
+        CustomToast.success(
+          `Es wurde(n) ${quantity} ${title}(en) hinzugefügt!`
+        );
 
         dispatch(addToCart(item as CartItem));
         setQuantity(0);

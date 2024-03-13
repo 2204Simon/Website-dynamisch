@@ -22,7 +22,17 @@ import { colors } from "../general/constants";
 export default function ZutatenBlock() {
   const [optionalComponent, setOptionalComponent] =
     useState<JSX.Element | null>(null);
-  const [zutaten, setZutaten] = useState<Array<ZutatApiType>>([]);
+  const [zutaten, setZutaten] = useState<Array<ZutatApiType>>([
+    {
+      zutatsId: "0",
+      zutatBild: "",
+      zutatsname: "",
+      zutatspreis: 0,
+      zutatseinheit: "",
+      zutatseigenschaft: "",
+      zutatensparte: "",
+    },
+  ]);
 
   function handleEditZutat(ID: string) {
     setOptionalComponent(<p>Abfrage muss noch implementiert werden</p>);
@@ -46,19 +56,18 @@ export default function ZutatenBlock() {
     if (zutaten.length === 0) {
       return <h2>Keine Zutaten vorhanden</h2>;
     } else {
-      return zutaten.map(product => (
-        <ZutatCard
-          topping={product}
-          handleEdit={handleEditZutat}
-          handleDelete={handleDeleteZutat}
-        />
-      ));
+      if (zutaten[0].zutatsId === "0") {
+        return;
+      } else {
+        return zutaten.map(product => (
+          <ZutatCard topping={product} handleDelete={handleDeleteZutat} />
+        ));
+      }
     }
   };
 
   async function getZutatenComponent() {
-    const fetchedZutaten = await getRequest("/zutat");
-    setZutaten(fetchedZutaten);
+    setZutaten(await getRequest("/zutat"));
   }
 
   useEffect(() => {
@@ -73,16 +82,6 @@ export default function ZutatenBlock() {
     }
   }, [zutaten]);
 
-  // async function zutatsPutKomponent(zutat?: ZutatApiType) {
-  //   setOptionalComponent(
-  //     <Zutatsform
-  //       onSubmit={handleEditChange}
-  //       defaultValue={zutat}
-  //       newZutat={false}
-  //     />
-  //   );
-  // }
-
   async function zutatsPostKomponent() {
     setOptionalComponent(<ZutatCreation />);
   }
@@ -96,18 +95,10 @@ export default function ZutatenBlock() {
           <Pencil size={50} style={{ color: colors.black }} />
           <Paragraph>Zutaten verwalten</Paragraph>
         </CRUDCardWrappper>
-        {/* <CRUDCardWrappper onClick={() => zutatsPutKomponent()}>
-          <Pencil size={50} style={{ color: colors.black}} />
-          <Paragraph>Zutaten bearbeiten</Paragraph>
-        </CRUDCardWrappper> */}
         <CRUDCardWrappper onClick={() => zutatsPostKomponent()}>
           <Plus size={50} style={{ color: colors.black }} />
           <Paragraph>Zutaten hinzufügen</Paragraph>
         </CRUDCardWrappper>
-        {/* <CRUDCardWrappper onClick={() => ()}>
-          <Trash size={50} style={{ color: colors.black}}/>
-          <Paragraph>Zutaten löschen</Paragraph>
-        </CRUDCardWrappper> */}
       </CRUDCardsGridWrapper>
 
       <div

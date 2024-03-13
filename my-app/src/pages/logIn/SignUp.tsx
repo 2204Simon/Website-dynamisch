@@ -83,6 +83,21 @@ export default function SignUp() {
         );
         return;
       }
+
+      if (plz.length !== 5) {
+        CustomToast.error("Die Postleitzahl muss 5-stellig sein");
+        return;
+      }
+
+      if (iban.length !== 22 && iban) {
+        CustomToast.error("Die IBAN muss 22-stellig sein");
+        return;
+      }
+
+      if (bic.length !== 8 && bic.length !== 11 && bic) {
+        CustomToast.error("Die BIC muss 8 oder 11-stellig sein");
+        return;
+      }
       if (paypalEmail && !validateEmail(paypalEmail)) {
         CustomToast.error("Bitte gebe eine gültige PayPal E-Mail-Adresse ein");
         return;

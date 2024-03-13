@@ -47,13 +47,11 @@ export interface Produkt {
 
 export interface ProductCardProps {
   topping: Produkt;
-  handleEdit: Function;
   handleDelete: Function;
 }
 
 export interface ZutatCardProps {
   topping: ZutatApiType;
-  handleEdit: Function;
   handleDelete: Function;
 }
 
@@ -109,7 +107,7 @@ export const ProduktCard: React.FC<ShoppingCardProps> = input => {
           <Title style={{ paddingLeft: "0px" }}>
             {input.topping.zutatsname}
           </Title>
-          <Price>Preis: {formatNumber(input.topping.zutatspreis)} €</Price>
+          {/* <Price>Preis: {formatNumber(input.topping.zutatspreis)} €</Price> */}
           <Type>Einheit: {input.topping.zutatseinheit}</Type>
 
           <Quantity>

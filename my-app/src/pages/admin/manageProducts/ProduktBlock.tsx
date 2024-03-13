@@ -51,32 +51,54 @@ export interface Produkt {
 export default function ProduktBlock() {
   const [optionalComponent, setOptionalComponent] =
     useState<JSX.Element | null>(null);
-  const [produkte, setProdukte] = useState<Array<Produkt>>([]);
+  const [produkte, setProdukte] = useState<Array<Produkt>>([
+    {
+      produktId: "0",
+      titel: "",
+      preis: 0,
+      bild: "",
+      sparte: "",
+      kundenId: "",
+      createdAt: "",
+      updatedAt: "",
+      Zutaten: [
+        {
+          zutatsId: "0",
+          zutatsname: "",
+          zutatseigenschaft: "",
+          zutatspreis: 0,
+          zutatseinheit: "",
+          zutatBild: "",
+          zutatensparte: "",
+          createdAt: "",
+          updatedAt: "",
+        },
+      ],
+    },
+  ]);
 
   const KonfiguratorCards = (zutaten: Array<Produkt>) => {
     if (zutaten.length === 0) {
       return <h2>Keine Produkte vorhanden</h2>;
     } else {
-      return zutaten.map(product => (
-        <ProduktInfosCard
-          topping={product}
-          handleEdit={handleDeleteProduct}
-          handleDelete={handleDeleteProduct}
-        />
-      ));
+      if (zutaten[0].produktId === "0") {
+        return;
+      } else {
+        const filteredProducts = zutaten.filter(
+          product => product.sparte !== null
+        );
+        return filteredProducts.map(product => (
+          <ProduktInfosCard
+            topping={product}
+            handleDelete={handleDeleteProduct}
+          />
+        ));
+      }
     }
   };
 
   async function getProductComponent() {
     setProdukte(await getRequest("/produkt"));
-    console.log(produkte);
-    setOptionalComponent(
-      <Stage>
-        <ProduktSelectionContainer>
-          {KonfiguratorCards(produkte)}
-        </ProduktSelectionContainer>
-      </Stage>
-    );
   }
 
   async function productPutKomponent(zutat?: Produkt) {

@@ -138,7 +138,11 @@ export default function AdressInformation(): JSX.Element {
     }
 
     try {
-      const response = await sendPutRequest("/zahlung", payment);
+      const bodyforDeactivate = {
+        kundenId: cookies.kundenId,
+        laufendeZahlungsId: payment.laufendeZahlungsId,
+      };
+      const response = await sendPutRequest("/zahlung", bodyforDeactivate);
 
       dispatch(removePaypalData(payment));
 
@@ -171,6 +175,20 @@ export default function AdressInformation(): JSX.Element {
       CustomToast.error(
         "Bitte geben Sie eine gültige Paypal E-Mail-Adresse ein."
       );
+      return;
+    }
+    // iban länge von 22
+    if (data.lastschriftData?.IBAN && data.lastschriftData.IBAN.length !== 22) {
+      CustomToast.error("Bitte geben Sie eine gültige IBAN ein.");
+      return;
+    }
+    // bic länge von 8 oder 11
+    if (
+      data.lastschriftData?.BIC &&
+      data.lastschriftData.BIC.length !== 8 &&
+      data.lastschriftData.BIC.length !== 11
+    ) {
+      CustomToast.error("Bitte geben Sie eine gültige BIC ein.");
       return;
     }
     const paymentData: PaymentData = {
@@ -227,6 +245,12 @@ export default function AdressInformation(): JSX.Element {
       CustomToast.error("Bitte füllen Sie alle erforderlichen Felder aus.");
       return;
     }
+
+    if (data.postleitzahl.length !== 5) {
+      CustomToast.error("Bitte geben Sie eine gültige Postleitzahl ein.");
+      return;
+    }
+
     const adressData: AdressData = {
       kundenId: cookies.kundenId,
       postleitzahl: data.postleitzahl,
@@ -278,6 +302,7 @@ export default function AdressInformation(): JSX.Element {
             <Grid item xs={12} sm={showFields ? 6 : 12}>
               <ScrollableContainer>
                 {uniqueAdressInformation
+
                   .slice()
                   .sort(
                     (a, b) =>
@@ -294,8 +319,7 @@ export default function AdressInformation(): JSX.Element {
                           defaultChecked={
                             selectedAdress === null
                               ? index === 0
-                              : adress.laufendeAdressenId ===
-                                selectedAdress.laufendeAdressenId
+                              : adress.laufendeAdressenId === 1
                           }
                           onChange={() => {
                             handleSelectAdress(adress);
@@ -536,7 +560,7 @@ export default function AdressInformation(): JSX.Element {
                               onChange={() => {
                                 handleSelectPayment(payment);
                               }}
-                              defaultChecked={
+                              checked={
                                 selectedPayment === null
                                   ? index === 0
                                   : index ===
