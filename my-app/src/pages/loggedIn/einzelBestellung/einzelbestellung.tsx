@@ -90,7 +90,7 @@ export default function EinzelBestellung({
         </h1>
         <div></div>
       </div>
-      {admin ? (
+      {admin && bestellungen.lieferdatum === null ? (
         <div style={{ display: "flex", justifyContent: "center" }}>
           <BlackColorButton
             caption={"Lieferung abschließen"}
