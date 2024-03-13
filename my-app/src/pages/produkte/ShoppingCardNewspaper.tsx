@@ -24,6 +24,7 @@ import PickDay from "./PickDay";
 import AboDurationCalculator from "./AboDurationCalculater";
 import { useLoggedIn } from "../../globalVariables/loggedin";
 import { useNavigate } from "react-router-dom";
+import { current } from "@reduxjs/toolkit";
 
 interface ShoppingCardProps {
   image: string;
@@ -82,8 +83,11 @@ const NewspaperBanner: React.FC<ShoppingCardProps> = ({
   }, []);
 
   function MonthsToDays(months: number): number {
-    let currentDate;
-    if (aboEndDate) {
+    let currentDate = new Date();
+    let lastAboEndDate = new Date(aboEndDate);
+    currentDate.setHours(0, 0, 0, 0);
+    lastAboEndDate.setHours(0, 0, 0, 0);
+    if (aboEndDate && lastAboEndDate > currentDate) {
       currentDate = new Date(aboEndDate);
     } else {
       currentDate = new Date();

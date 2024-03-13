@@ -21,11 +21,18 @@ function AboDurationCalculator(input: AboDurationCalculatorProps) {
     return formattedDate;
   }
 
+  const currentDate = new Date();
+  const formattedCurrentDate = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    currentDate.getDate()
+  );
+
   return (
     <p>
-      {endDate !== ""
+      {endDate !== "" && new Date(endDate) >= formattedCurrentDate
         ? "Dein Abonnement läuft ab am " + dateTransformer(endDate)
-        : "Kein Abonnement gefunden"}
+        : "Kein laufendes Abonnement gefunden"}
     </p>
   );
 }
