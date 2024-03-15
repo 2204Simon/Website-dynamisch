@@ -86,15 +86,16 @@ const NewspaperBanner: React.FC<ShoppingCardProps> = ({
     let lastAboEndDate = new Date(aboEndDate);
     currentDate.setHours(0, 0, 0, 0);
     lastAboEndDate.setHours(0, 0, 0, 0);
-    if (aboEndDate && lastAboEndDate > currentDate) {
+    if (aboEndDate && lastAboEndDate.getTime() > currentDate.getTime()) {
       currentDate = new Date(aboEndDate);
     } else {
       currentDate = new Date();
     }
-    currentDate.setHours(0, 0, 0, 0); //Zeit reseten, damit sauber dazugezählt wird
+    //currentDate.setHours(0, 0, 0, 0); //Zeit reseten, damit sauber dazugezählt wird
     const futureDate = new Date();
     futureDate.setHours(0, 0, 0, 0);
     futureDate.setFullYear(currentDate.getFullYear()); //Jahr auf current Jahr setzen, damit keine - Tage entstehen
+    futureDate.setDate(currentDate.getDate());
     futureDate.setMonth(currentDate.getMonth() + months);
     const timeDifference = futureDate.getTime() - currentDate.getTime();
     const days = Math.ceil(timeDifference / (1000 * 3600 * 24));
