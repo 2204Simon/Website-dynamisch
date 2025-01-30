@@ -126,43 +126,43 @@ const BurgerMenu: React.FC = () => {
           <StyledCloseIcon onClick={handleBurgerClick} />
           <StyledList>
             <StyledListItem>
-              <StyledLink to="/" onClick={closeMenu}>
+              <StyledLink to="/beta/" onClick={closeMenu}>
                 Home
               </StyledLink>
             </StyledListItem>
             <StyledListItem>
-              <StyledLink to="/Produkte" onClick={closeMenu}>
+              <StyledLink to="/beta/Produkte" onClick={closeMenu}>
                 Produkte
               </StyledLink>
             </StyledListItem>
             <StyledListItem>
-              <StyledLink to="/Konzept" onClick={closeMenu}>
+              <StyledLink to="/beta/Konzept" onClick={closeMenu}>
                 Konzept
               </StyledLink>
             </StyledListItem>
             <StyledListItem>
-              <StyledLink to="/Kontakt" onClick={closeMenu}>
+              <StyledLink to="/beta/Kontakt" onClick={closeMenu}>
                 Kontakt
               </StyledLink>
             </StyledListItem>
             <StyledListItem>
-              <StyledLink to="/Konfigurator" onClick={closeMenu}>
+              <StyledLink to="/beta/Konfigurator" onClick={closeMenu}>
                 Breakfast Builder
               </StyledLink>
             </StyledListItem>
             <StyledListItem>
-              <StyledLink to="/Bestellung" onClick={closeMenu}>
+              <StyledLink to="/beta/Bestellung" onClick={closeMenu}>
                 <ShoppingCart size={30} />
                 <Badge badgeContent={cartLength} color="error" />
               </StyledLink>
             </StyledListItem>
             <StyledListItem>
               {loggedIn ? (
-                <StyledLink to="/LoggedIn" onClick={closeMenu}>
+                <StyledLink to="/beta/LoggedIn" onClick={closeMenu}>
                   <User size={30} />
                 </StyledLink>
               ) : (
-                <StyledLink to="/SignUp" onClick={closeMenu}>
+                <StyledLink to="/beta/SignUp" onClick={closeMenu}>
                   <SignIn size={30} />
                 </StyledLink>
               )}

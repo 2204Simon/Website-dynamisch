@@ -70,33 +70,33 @@ export const DesktopMenu: React.FC = () => {
       </Logo>
       <Menu>
         <MenuItem>
-          <StyledLink to="/">Home</StyledLink>
+          <StyledLink to="/beta/">Home</StyledLink>
         </MenuItem>
         <MenuItem>
-          <StyledLink to="/Produkte">Produkte</StyledLink>
+          <StyledLink to="/beta/Produkte">Produkte</StyledLink>
         </MenuItem>
         <MenuItem>
-          <StyledLink to="/Konzept">Konzept</StyledLink>
+          <StyledLink to="/beta/Konzept">Konzept</StyledLink>
         </MenuItem>
         <MenuItem>
-          <StyledLink to="/Kontakt">Kontakt</StyledLink>
+          <StyledLink to="/beta/Kontakt">Kontakt</StyledLink>
         </MenuItem>
         <MenuItem>
-          <StyledLink to="/Konfigurator">Breakfast Builder</StyledLink>
+          <StyledLink to="/beta/Konfigurator">Breakfast Builder</StyledLink>
         </MenuItem>
         <MenuItem>
-          <StyledLink to="/Bestellung" aria-label="Link zu Bestellung">
+          <StyledLink to="/beta/Bestellung" aria-label="Link zu Bestellung">
             <ShoppingCart size={40} />
             <Badge badgeContent={cartLength} color="error" />
           </StyledLink>
         </MenuItem>
         <MenuItem>
           {loggedIn ? (
-            <StyledLink to="/LoggedIn" aria-label="Link zu LoggedIn">
+            <StyledLink to="/beta/LoggedIn" aria-label="Link zu LoggedIn">
               <User size={40} />
             </StyledLink>
           ) : (
-            <StyledLink to="/SignUp" aria-label="Link zu SignUp">
+            <StyledLink to="/beta/SignUp" aria-label="Link zu SignUp">
               <SignIn size={40} />
             </StyledLink>
           )}

@@ -52,7 +52,7 @@ function BottomNavBar(): JSX.Element {
             <ul className="menu">
               <li>
                 <Link
-                  to="/"
+                  to="/beta/"
                   onClick={() => window.scrollTo(0, 0)}
                   aria-label="Link zu Home"
                 >
@@ -61,7 +61,7 @@ function BottomNavBar(): JSX.Element {
               </li>
               <li>
                 <Link
-                  to="/Produkte"
+                  to="/beta/Produkte"
                   onClick={() => window.scrollTo(0, 0)}
                   aria-label="Link zu Produkte"
                 >
@@ -70,7 +70,7 @@ function BottomNavBar(): JSX.Element {
               </li>
               <li>
                 <Link
-                  to="/Bestellung"
+                  to="/beta/Bestellung"
                   onClick={() => window.scrollTo(0, 0)}
                   aria-label="Link zu Bestellung"
                 >
@@ -81,7 +81,7 @@ function BottomNavBar(): JSX.Element {
               <li>
                 {loggedIn ? (
                   <Link
-                    to="/LoggedIn"
+                    to="/beta/LoggedIn"
                     onClick={() => window.scrollTo(0, 0)}
                     aria-label="Link zu LoggedIn"
                   >
@@ -89,7 +89,7 @@ function BottomNavBar(): JSX.Element {
                   </Link>
                 ) : (
                   <Link
-                    to="/SignUp"
+                    to="/beta/SignUp"
                     onClick={() => window.scrollTo(0, 0)}
                     aria-label="Link zu SignUp"
                   >

@@ -1,6 +1,6 @@
 {
   "name": "my-app",
-  "homepage": "http://delivery-breakfast.projekt.dhbw-heidenheim.de",
+  "homepage": "http://delivery-breakfast.projekt.dhbw-heidenheim.de/beta",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

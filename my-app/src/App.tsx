@@ -5,7 +5,6 @@ import Layout from "./pages/Layout";
 import Home from "./pages/home/Home";
 import Kontakt from "./pages/kontakt/Kontakt";
 import Produkte from "./pages/produkte/Produkt";
-import NoPage from "./pages/NoPage";
 import Bestellung from "./pages/bestellung/WarenkorbSeite";
 import "./App.css";
 import Footer from "./pages/Footer";
@@ -50,25 +49,25 @@ export default function App(): JSX.Element {
             <CookieBanner onAccept={handleAccept} onDecline={handleDecline} />
           )}
           <Routes>
-            <Route path="/" element={<Layout />}>
+            <Route path="/beta/" element={<Layout />}>
               <Route index element={<Home />} />
-              <Route path="Produkte" element={<Produkte />} />
-              <Route path="Bestellung" element={<Bestellung />} />
-              <Route path="Konzept" element={<Konzept />} />
-              <Route path="Kontakt" element={<Kontakt />} />
-              <Route path="LogIn" element={<LoginForm />} />
-              <Route path="Konfigurator" element={<Konfigurator />} />
-              <Route path="SignUp" element={<SignUp />} />
-              <Route path="LoggedIn" element={<DeinKonto />} />
-              <Route path="Impressum" element={<Impressum />} />
-              <Route path="Bestellung/:id" element={<EinzelBestellung />} />
+              <Route path="/beta/Produkte" element={<Produkte />} />
+              <Route path="/beta/Bestellung" element={<Bestellung />} />
+              <Route path="/beta/Konzept" element={<Konzept />} />
+              <Route path="/beta/Kontakt" element={<Kontakt />} />
+              <Route path="/beta/LogIn" element={<LoginForm />} />
+              <Route path="/beta/Konfigurator" element={<Konfigurator />} />
+              <Route path="/beta/SignUp" element={<SignUp />} />
+              <Route path="/beta/LoggedIn" element={<DeinKonto />} />
+              <Route path="/beta/Impressum" element={<Impressum />} />
+              <Route path="/beta/Bestellung/:id" element={<EinzelBestellung />} />
               <Route
-                path="Admin/Bestellung/:id"
+                path="/beta/Admin/Bestellung/:id"
                 element={<EinzelBestellung admin />}
               />
-              <Route path="Admin" element={<AdminRoute />} />
+              <Route path="/beta/Admin" element={<AdminRoute />} />
               <Route
-                path="Datenschutzerklaerung"
+                path="/beta/Datenschutzerklaerung"
                 element={
                   <Suspense
                     fallback={
@@ -79,7 +78,6 @@ export default function App(): JSX.Element {
                   </Suspense>
                 }
               />
-              <Route path="*" element={<NoPage />} />
             </Route>
           </Routes>
           <Footer />
