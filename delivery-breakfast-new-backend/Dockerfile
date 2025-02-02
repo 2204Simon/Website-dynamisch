@@ -15,7 +15,7 @@ RUN npm run build
 # Führe die Tests aus
 RUN npm test
 # Exponiere den Port, auf dem die Anwendung läuft
-EXPOSE 3001:3001
+EXPOSE 3002:3002
 
 # Starte die Anwendung
 
