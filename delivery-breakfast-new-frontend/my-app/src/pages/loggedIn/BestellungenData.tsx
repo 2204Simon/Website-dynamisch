@@ -1,0 +1,112 @@
+import { useEffect, useState } from "react";
+import { Card, Container, Paragraph, Title } from "./UserInformation.styles";
+import { getRequest } from "../../serverFunctions/generelAPICalls";
+import { KUNDEN_ID } from "../../globalVariables/global";
+import { useCookies } from "react-cookie";
+import { CustomToast } from "../general/toast.style";
+import { BestellungsInformation } from "../../redux/types";
+import { ScrollableYContainer } from "./Bestellungen.styles";
+import { Package, Truck } from "phosphor-react";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  CRUDCardPText,
+  CRUDCardWrappper,
+  CRUDCardsGridWrapper,
+} from "../admin/Admin.styles";
+import { formatGermanDate } from "../../DateUtils";
+import { Button } from "../general/button.styles";
+export default function BestellungsData(): JSX.Element {
+  const [cookies] = useCookies([KUNDEN_ID]);
+  const [bestellungen, setBestellungen] =
+    useState<Array<BestellungsInformation> | null>([]);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const serverBestellungen = await getRequest(
+          `/Bestellungen/${cookies.kundenId}`
+        );
+
+        console.log(serverBestellungen);
+        if (!serverBestellungen) {
+          throw new Error("Keine Daten gefunden");
+        }
+        setBestellungen(serverBestellungen);
+      } catch (error) {
+        if (error instanceof Error && error.message === "404") {
+          setBestellungen(null);
+          return;
+        }
+        CustomToast.error("Fehler beim Laden der Daten");
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return (
+    <Container>
+      <Card>
+        <Title>Bestellungen</Title>
+        {bestellungen === null ? (
+          <Card>
+            <Title>Du hast noch keine Bestellungen</Title>
+            <Paragraph>
+              Dann ist es höchste Zeit, dass Du unsere frisch zubereiteten
+              Produkte probierst!
+            </Paragraph>
+            <Link to="/Produkte">
+              <Button className="black-color white-orange ">
+                Zu unseren Produkten
+              </Button>
+            </Link>
+          </Card>
+        ) : (
+          <ScrollableYContainer>
+            <CRUDCardsGridWrapper>
+              {bestellungen.map(bestellung => {
+                let deliverd = true;
+                if (!bestellung.lieferdatum) {
+                  deliverd = false;
+                }
+                return (
+                  <CRUDCardWrappper
+                    key={bestellung.bestellungsId}
+                    onClick={() => {
+                      navigate(`/bestellung/${bestellung.bestellungsId}`);
+                      window.scrollTo(0, 0);
+                    }}
+                  >
+                    {deliverd ? (
+                      <>
+                        <Package size={50} />
+                        <CRUDCardPText>geliefert am</CRUDCardPText>
+                        <CRUDCardPText>
+                          {formatGermanDate(bestellung.lieferdatum.toString())}
+                        </CRUDCardPText>
+                      </>
+                    ) : (
+                      <>
+                        <Truck size={50} />
+                        <CRUDCardPText>
+                          vorraussichtliche Lieferung
+                        </CRUDCardPText>
+                        <CRUDCardPText>
+                          {formatGermanDate(
+                            bestellung.gewünschtesLieferdatum.toString()
+                          )}
+                        </CRUDCardPText>
+                      </>
+                    )}
+                  </CRUDCardWrappper>
+                );
+              })}
+            </CRUDCardsGridWrapper>
+          </ScrollableYContainer>
+        )}
+      </Card>
+    </Container>
+  );
+}

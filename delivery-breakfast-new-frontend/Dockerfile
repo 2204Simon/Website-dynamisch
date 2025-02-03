@@ -11,7 +11,7 @@ COPY my-app/package.json my-app/package-lock.json ./
 RUN npm install
 
 # Kopiere den restlichen Code
-COPY my-app/ .
+COPY my-app/ ./
 
 # Baue die React-App
 RUN npm run build
