@@ -19,7 +19,7 @@ const port = 3002;
 app.use(
   cors({
     origin: [
-      "http://localhost:3000",
+      "http://localhost:4002",
       "http://delivery-breakfast.projekt.dhbw-heidenheim.de",
       "*"
     ], // replace with your client-side domain

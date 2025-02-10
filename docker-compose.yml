@@ -47,7 +47,7 @@ services:
       dockerfile: Dockerfile
     container_name: delivery-frontend-old
     ports:
-      - "4001:4001"
+      - "4001:80"
     depends_on:
       - backend-old
 
@@ -57,6 +57,6 @@ services:
       dockerfile: Dockerfile
     container_name: delivery-frontend-new
     ports:
-      - "4002:4002"
+      - "4002:80"
     depends_on:
       - backend-new

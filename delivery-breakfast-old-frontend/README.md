@@ -12,4 +12,4 @@
 1. Wechseln ins richtige Verzeichnis "my-app" in unserem Fall mit `cd my-app`.
 2. In dem Verzeichnis, die aktuellsten notwendigen Komponenten installieren mit `npm i`. 
 2. Wenn die Paketinstallationen fertig installiert sind, dann die Anwendung starten mit `npm start`.
-2. Website läuft auf "localhost 3000" müsste sich automatisch öffnen, wenn nicht manuell öffnen mit `http://localhost:3000/`. 
+2. Website läuft auf "localhost 4001" müsste sich automatisch öffnen, wenn nicht manuell öffnen mit `http://localhost:4001/`. 
