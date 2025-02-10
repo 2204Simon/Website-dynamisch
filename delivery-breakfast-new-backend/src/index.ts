@@ -13,7 +13,7 @@ import { ZutatenPositionController } from "./controller/konfiguriertesProduktCon
 import { AdminController } from "./controller/adminController";
 
 const app = express();
-const port = 3001;
+const port = 3002;
 
 // app.use(cors());
 app.use(
