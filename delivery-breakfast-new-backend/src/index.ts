@@ -20,6 +20,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:4002",
+      "http://localhost:4001",
       "http://delivery-breakfast.projekt.dhbw-heidenheim.de",
       "*"
     ], // replace with your client-side domain
